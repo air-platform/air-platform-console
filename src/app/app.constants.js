@@ -10,7 +10,8 @@
             debugMode: false,
             logLevel: 100000,//控制log显示的级别（0不显示,1显示）,从左到右每位分别代表[error,warn,info,debug,log]
             // apiHost:'http://10.71.86.222:8888/iot/api/v1/',
-            apiHost_ONLINE:'http://223.202.32.52/stage/iot/api/v1/',
+            //apiHost_ONLINE:'http://223.202.32.52/stage/iot/api/v1/',
+            //apiHost_DEV:'http://223.202.32.52/stage/iot/api/v1/',
             apiHost_DEV:'http://127.0.0.1:8080/iot/api/v1/',
             apiHost_OFFLINE:'http://10.71.86.222:8888/iot/api/v1/',
 			tenant:'hna-tenant',

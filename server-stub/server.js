@@ -55,13 +55,59 @@ app.use(function(req, res, next) {
 // user
 app.post('/iot/api/v1/account/auth', function (req, res) {
   //res.send('Hello World!');
-  res.json({ token: 'eyJraWQiOiJJT1RfU0VDVVJFS0VZIiwiYWxnIjoiUlMyNTYifQ.eyJpc3MiOiJJT1RfUExBVEZPUk1fSVNTVUVSIiwiYXVkIjoiSU9UX1BMQVRGT1JNX0FVRElFTkNFIiwiZXhwIjoxNzgwMDc0MTU1LCJqdGkiOiJjcTFDMC10RVBXUEk1XzN2Z1FsQ2RBIiwiaWF0IjoxNDY5MDM0MTU1LCJzdWIiOiJhZG1pbiIsImNsYWltLnJvbGVzIjpbIkFETUlOIl19.pzXQDv82gPrpNVas_2DHt8mihoNhqw8mnAMlDwnCC-Jkj5xodi_UBTVG8thOLaNSSLpflOqhJ8eJMstZTEJI9Nsoy1axBIun-U47NGpeZF76GUI9vh7wf_9EpwKVs0UDyK5amAVrzyiO6nQEjtMPPbGX_fWfUasB_JP5H34O2pqTl5cb6irSoJxB-_MB7lxZYJ4V9u0W9XRuFbaQtdG5YSiib7-WHHEhOIQ6X3Xg7y9josfUf41BfD9cOs2U_k3WZjiiosZVajy8DatMxF96BZuGVRh4VxozvczuiThyLAcsXW2TjYen4bgGJcH2AG7ip002NDrPxpaE2STcJwtxBQ' });
+    //admin and user token
+    //res.json({ token: 'eyJraWQiOiJJT1RfU0VDVVJFS0VZIiwiYWxnIjoiUlMyNTYifQ.eyJpc3MiOiJJT1RfUExBVEZPUk1fSVNTVUVSIiwiYXVkIjoiSU9UX1BMQVRGT1JNX0FVRElFTkNFIiwiZXhwIjoxNzgwMDc0MTU1LCJqdGkiOiJjcTFDMC10RVBXUEk1XzN2Z1FsQ2RBIiwiaWF0IjoxNDY5MDM0MTU1LCJzdWIiOiJhZG1pbiIsImNsYWltLnJvbGVzIjpbIkFETUlOIl19.pzXQDv82gPrpNVas_2DHt8mihoNhqw8mnAMlDwnCC-Jkj5xodi_UBTVG8thOLaNSSLpflOqhJ8eJMstZTEJI9Nsoy1axBIun-U47NGpeZF76GUI9vh7wf_9EpwKVs0UDyK5amAVrzyiO6nQEjtMPPbGX_fWfUasB_JP5H34O2pqTl5cb6irSoJxB-_MB7lxZYJ4V9u0W9XRuFbaQtdG5YSiib7-WHHEhOIQ6X3Xg7y9josfUf41BfD9cOs2U_k3WZjiiosZVajy8DatMxF96BZuGVRh4VxozvczuiThyLAcsXW2TjYen4bgGJcH2AG7ip002NDrPxpaE2STcJwtxBQ' });
+    res.json({ token: 'eyJraWQiOiJJT1RfUExBVEZPUk1fS0VZIiwiYWxnIjoiUlMyNTYifQ.eyJpc3MiOiJJT1RfUExBVEZPUk1fSVNTVUVSIiwiYXVkIjoiSU9UX1BMQVRGT1JNX0FVRElFTkNFIiwiZXhwIjozNjY3MDIyNjE4LCJqdGkiOiJMRFF0WHNWY0MxMnc3LWVVT203eFZnIiwiaWF0IjoxNDg5NzQyNjE4LCJzdWIiOiJkZW1vIiwiY2xhaW0ucm9sZXMiOlsiVEVOQU5UIl19.AosBEEcLV-legs-007x3VwgKerPOCqDitmtm5kBA2X8202yLjJ1dQXCIqkzswkUy9G6JpMRIBHVCWpKAmxeEIhIRF1gQjOQVDa5TukEYbnpG53maLgcWm3gsMn5y5yCHbOk0YR8KFGQZvDxAaP7-crpGS1zRwGRfMxdgqteBDPNmHq9W8IkhSTLsB0n6PXjLV3UbUZHeYQ5jyadYJZXTOoCxLFMWYdp6wM7c_7O7MLTkJRk4r_IRfyDinLEA-kOReuVIoqKmq2oBlH5EeHPXTp9Ygdlp0A23HkX9Fip0f4dwr2YKjizUntqtSGPGB0b0IuSbF_HY_6LxalcQ8igRlQ'});
+
+
 });
 app.get('/iot/api/v1/account/profile', function (req, res) {
     //res.send('Hello World!');
-    res.json({ 'type': 'ADMIN', 'roles':['TENANT','ADMIN'], 'nickName':'nickName-otherplayer',
+   /* res.json({ 'type': 'ADMIN', 'roles':['TENANT','ADMIN'], 'nickName':'nickName-otherplayer',
     'email':'devuser@demoproject.org',
-    'creationDate':'2016-06-25','enabled':true,'username':'username-le'});
+    'creationDate':'2016-06-25','enabled':true,'username':'username-le'});*/
+
+   //admin and tenant
+   /*res.json(
+       {
+           "type": "ADMIN",
+           "roles": [
+               "TENANT",
+               "ADMIN"
+           ],
+           "nickName": "nickName-otherplayer",
+           "email": "devuser@demoproject.org",
+           "creationDate": "2016-06-25",
+           "enabled": true,
+           "username": "username-le"
+       }
+
+
+   );*/
+
+    res.json(
+    {
+        "id": 3,
+        "username": "demo",
+        "email": "demo@demo.com",
+        "nickName": "测试",
+        "enabled": true,
+        "type": "tenant",
+        "creationDate": "2017-03-07",
+        "roles": [
+        "TENANT"
+    ],
+        "admin": false,
+        "route": "account/profile",
+        "reqParams": null,
+        "restangularized": true,
+        "fromServer": true,
+        "parentResource": null,
+        "restangularCollection": false
+    }
+    );
+
+
 });
 app.post('/iot/api/v1/account/password/change', function (req, res) {
     //res.send('Hello World!');
