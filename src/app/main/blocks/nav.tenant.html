@@ -1,0 +1,73 @@
+<!-- list -->
+<ul class="nav" style="position:fixed; width:199px;">
+    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+        <span translate="">导航菜单</span>
+    </li>
+
+    <!-- KUEUE -->
+    <li ui-sref-active="active">
+        <a ui-sref="app.dashboard">
+            <!--<b class="badge bg-info pull-right">9</b>-->
+            <!-- glyphicon glyphicon-stats -->
+            <i class="fa fa-dashboard icon text-info-lter"></i>
+            <span class="font-bold" translate="">仪表盘</span>
+            <div><span class="font-thin" style="padding-left: 35px;font-size:10px;" translate="">Dashboard</span></div>
+        </a>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.product">
+            <!--<b class="badge bg-info pull-right">9</b>-->
+            <!-- glyphicon glyphicon-stats -->
+            <i class="fa icon-social-dropbox icon text-info-lter"></i>
+            <span class="font-bold" translate="">云服务管理</span>
+            <div><span class="font-thin" style="padding-left: 35px;font-size:10px;" translate="">Product Manager</span></div>
+        </a>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.application">
+            <!--<b class="badge bg-info pull-right">9</b>-->
+            <!-- glyphicon glyphicon-stats -->
+            <i class="glyphicon glyphicon-th-large icon text-info-lter"></i>
+            <span class="font-bold" translate="">应用管理</span>
+            <div><span class="font-thin" style="padding-left: 35px;font-size:10px;" translate="">Application Manager</span></div>
+        </a>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.event">
+            <!--<b class="badge bg-info pull-right">9</b>-->
+            <!-- glyphicon glyphicon-stats -->
+            <i class="fa icon-equalizer icon text-info-lter"></i>
+            <span class="font-bold" translate="">其他</span>
+            <div><span class="font-thin" style="padding-left: 35px;font-size:10px;" translate="">Event Manager</span></div>
+        </a>
+    </li>
+    <li>
+        <a ui-sref="app.devicemanager" class="auto">
+            <span class="pull-right text-muted">
+             <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+            </span>
+            <i class="fa icon-screen-desktop icon text-info-lter"></i>
+            <span class="font-bold" translate="">设置</span>
+            <div><span class="font-thin" style="padding-left: 35px;font-size:10px;" translate="">Device Manager</span></div>
+        </a>
+        <ul class="nav nav-sub dk">
+            <li ui-sref-active="active">
+                <a ui-sref="app.devicemanager">
+                    <!--<span>设备 <em>device</em></span>-->
+                    <span>设备</span>
+                    <div><span class="font-thin" style="font-size:7px;" translate="">Device</span></div>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.credential">
+                    <!--<span>证书 <em>credential</em></span>-->
+                    <span>证书</span>
+                    <div><span class="font-thin" style="font-size:7px;" translate="">Credential</span></div>
+                </a>
+            </li>
+        </ul>
+    </li>
+
+</ul>
+<!-- / list -->

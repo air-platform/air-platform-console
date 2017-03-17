@@ -1,0 +1,107 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="LoggingController as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+  ">
+    <!-- main -->
+    <div class="col">
+        <!-- main header -->
+        <div class="bg-light lter b-b wrapper-md" ng-hide="isRoleAdmin">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="m-n font-thin h3 text-black">Logging</h1>
+                    <small class="text-muted">HNA EcoTech Internet of Things</small>
+                </div>
+                <!--<div class="col-sm-6 text-right hidden-xs">-->
+                <!--<div class="inline m-r text-left">-->
+                <!--<div class="m-b-xs">1290 <span class="text-muted">items</span></div>-->
+                <!--<div ng-init="data1=[ 106,108,110,105,110,109,105,104,107,109,105,100,105,102,101,99,98 ]"-->
+                <!--ui-jq="sparkline"-->
+                <!--ui-options="{{data1}}, {type:'bar', height:20, barWidth:5, barSpacing:1, barColor:'#dce5ec'}"-->
+                <!--class="sparkline inline">loading...-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="inline text-left">-->
+                <!--<div class="m-b-xs">$30,000 <span class="text-muted">revenue</span></div>-->
+                <!--<div ng-init="data2=[ 105,102,106,107,105,104,101,99,98,109,105,100,108,110,105,110,109 ]"-->
+                <!--ui-jq="sparkline"-->
+                <!--ui-options="{{data2}}, {type:'bar', height:20, barWidth:5, barSpacing:1, barColor:'#dce5ec'}"-->
+                <!--class="sparkline inline">loading...-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+            </div>
+        </div>
+
+        <!--<div>-->
+            <!--<ul class="breadcrumb bg-white b-a">-->
+                <!--<li ng-if="vm.pages[0]"><a ng-click="vm.changePage(0)">首页</a></li>-->
+                <!--<li ng-if="vm.pages[1]"><a ng-click="vm.changePage(1)">电脑</a></li>-->
+                <!--<li ng-if="vm.pages[2]"><a ng-click="vm.changePage(2)">打印机</a></li>-->
+                <!--<li ng-if="vm.pages[3]"><a ng-click="vm.changePage(3)">其他</a></li>-->
+            <!--</ul>-->
+        <!--</div>-->
+
+
+
+        <!--<div class="row">-->
+
+            <!--&lt;!&ndash; COLUMN ONE NAMED VIEW &ndash;&gt;-->
+            <!--<div class="col-sm-12" ng-if="vm.pages[0]">-->
+                <!--<div ui-view="columnOne"></div>-->
+            <!--</div>-->
+
+            <!--&lt;!&ndash; COLUMN TWO NAMED VIEW &ndash;&gt;-->
+            <!--<div class="col-sm-12" ng-if="vm.pages[1]">-->
+                <!--<div ui-view="columnTwo"></div>-->
+            <!--</div>-->
+
+            <!--&lt;!&ndash; COLUMN THREE NAMED VIEW &ndash;&gt;-->
+            <!--<div class="col-sm-12" ng-if="vm.pages[2]">-->
+                <!--<div ui-view="columnThree"></div>-->
+            <!--</div>-->
+
+            <!--&lt;!&ndash; COLUMN FOUR NAMED VIEW &ndash;&gt;-->
+            <!--<div class="col-sm-12" ng-if="vm.pages[3]">-->
+                <!--<div ui-view="columnFour"></div>-->
+            <!--</div>-->
+
+        <!--</div>-->
+
+        <!--<div ng-view></div>-->
+
+
+
+        <!--<script>-->
+            <!--angular.module('iot',['ngRoute'])-->
+                    <!--.config(['$routeProvider', function($routeProvider){-->
+                        <!--console.log($routeProvider);-->
+                        <!--$routeProvider-->
+                                <!--.when('/',{template:'这是首页页面'})-->
+                                <!--.when('/computers',{template:'这是电脑分类页面'})-->
+                                <!--.when('/printers',{template:'这是打印机页面'})-->
+                                <!--.otherwise({redirectTo:''});-->
+                    <!--}]);-->
+        <!--</script>-->
+
+
+
+
+    </div>
+
+    <!-- breadcrumb -->
+
+    <!-- / breadcrumb -->
+
+
+        <!-- / service -->
+
+        <!-- tasks -->
+
+        <!-- / tasks -->
+
+        <!-- tasks -->
+        <!-- / tasks -->
+    </div>
+</div>
+
+

@@ -1,0 +1,83 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="AddMappingApplicationController as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+  ">
+    <!-- main -->
+    <div class="col">
+        <!-- main header -->
+        <div class="bg-light lter b-b wrapper-md">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="m-n font-thin h3 text-black">{{'product.ADDEVENTMAPPING' | translate}}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="m-l m-r m-t panel panel-default">
+            <div class="panel-body wrapper-md">
+                <div class="col-md-12 m-t">
+                    <!-- <div class="panel-heading font-bold">{{'product.EVENTGROUP' | translate}}</div> -->
+                    <div class="table-responsive">
+                        <table class="table m-b-none table-bordered text-center">
+                            <tbody class="">
+                                <tr style="border-bottom:1px dashed #eee">
+                                    <td class="text-right col-md-1 font-bold" style="vertical-align: middle;border:none;">{{'product.NAME' | translate}}</td>
+                                    <td class="col-md-10" style="border:none;">
+                                        
+                                        <select class="form-control" style="width:50%;" ng-model="vm.selectedValue" ng-options="(s.displayName ? s.displayName : s.name) for s in vm.infos" ng-change="vm.selectedFamilyChanged()" required></select>
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom:1px dashed #eee">
+                                    <td class="text-right col-md-1 font-bold" style="vertical-align: middle;border:none;">{{'product.VERSION' | translate}}</td>
+                                    <td class="col-md-10" style="border:none;">
+                                        <select class="form-control" style="width:50%;" ng-model="vm.selectedVersion" ng-options="s.version for s in vm.schemaVersions" ng-change="vm.selectedVersionChanged()" required></select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                    </div>
+                </div>
+                
+                <div class="col-md-12 m-t">
+                    <div class="panel-heading font-bold">{{'product.EVENTMAPPING' | translate}}</div>
+                    <div class="table-responsive">
+                        <table class="table m-b-none table-striped table-bordered table-hover text-center" data-filter="#filter" data-page-size="5">
+                            <thead class="table-striped table-bordered">
+                            <tr>
+                                <th class="col-sm" style="text-align: center; vertical-align: middle;">FQN</th>
+                                <th class="col-sm" style="text-align: center; vertical-align: middle;">{{'product.TYPE' | translate}}</th>
+                                <th class="col-sm" style="text-align: center; vertical-align: middle;">{{'product.SUPPORTOPERATE' | translate}}</th>
+                                <th class="col-sm" style="text-align: center; vertical-align: middle;">{{'product.OPERATE' | translate}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in vm.items">
+                                <td style="vertical-align:middle;" ng-bind="item.fqn"></td>
+                                <td style="vertical-align:middle;">{{vm.shouldUpperCase(item.type)}}</td>
+                                <td>
+                                    <select class="form-control" ng-model="item.tmpAction" ng-options="s.title for s in vm.itemsOption" ng-change="vm.selectedActionChanged($index)"></select>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-danger btn-addon" ng-click="vm.openAlert('sm',item)"><i class="fa fa-trash-o"></i>{{'product.DELETE' | translate}}</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <div class="col-sm-3" style="padding-left: 0 !important;">
+                            <button class="btn btn-sm btn-default btn-addon form-inline bg-light" ng-click="vm.cancelAction()"><i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}}</button>
+                            <button class="btn btn-sm btn-info btn-addon" type="submit" ng-click="vm.submitAction()" ng-disabled='form.$invalid||!vm.isSelectValid'><i class="fa fa-plus"></i>{{'product.ADD' | translate}}</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+

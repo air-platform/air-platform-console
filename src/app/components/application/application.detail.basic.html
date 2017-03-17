@@ -1,0 +1,84 @@
+<div role="tabpanel" class="tab-pane panel col-sm-12 active">
+    <br>
+    <form name="form" class="form-horizontal form-validation" style="border:1px solid #eee;" role="form">
+        <br/>
+        <div class="form-group">
+            <label class="font-bold m-l-lg col-sm-1 control-label">{{'product.NAME' | translate}}</label>
+            <div class="col-sm-3">
+                <label class="control-label">{{vm.info.name}}</label>
+            </div>
+        </div>
+        <div class="line line-dashed b-b line-lg"></div>
+        <div class="form-group">
+            <label class="font-bold m-l-lg col-sm-1 control-label">{{'application.ONLYINDEX' | translate}}</label>
+            <div class="col-sm-3">
+                <label class="control-label">{{vm.info.token}}</label>
+            </div>
+        </div>
+        <div class="line line-dashed b-b line-lg"></div>
+        <!--<div class="form-group">-->
+            <!--<label class="font-bold col-sm-1 control-label">凭据:</label>-->
+            <!--<div class="col-sm-3">-->
+                <!--<label class="control-label">{{vm.info.credentialsProvider}}</label>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <div class="form-group">
+            <label class="font-bold m-l-lg col-sm-1 control-label">{{'product.CREATEDDATE' | translate}}</label>
+            <div class="col-sm-5">
+                <label class="control-label">{{vm.info.createdDate | date:"yyyy-MM-dd"}}</label>
+            </div>
+        </div>
+        <div class="line line-dashed b-b line-lg"></div>
+        <!-- <div class="form-group">
+            <label class="font-bold col-sm-1 control-label">{{'application.VERIFYNAME' | translate}}:</label>
+            <div class="col-sm-3">
+                <label class="control-label">{{vm.info.name}}</label>
+            </div>
+        </div> -->
+        <div class="form-group">
+            <label class="font-bold m-l-lg col-sm-1 control-label">{{'product.SHOWEDNAME' | translate}}</label>
+            <div class="col-sm-5">
+                <input class="form-control" ng-model="vm.info.displayName" /> 
+            </div>
+        </div>
+        <div class="line line-dashed b-b line-lg"></div>
+        <div class="form-group">
+            <label class="font-bold m-l-lg col-sm-1 control-label">{{'product.CHECK' | translate}}</label>
+            <div class="col-sm-5">
+                <!-- <input class="form-control" ng-model="vm.info.checkWay" /> -->
+                <select class="form-control" ng-model="vm.choosedVerify.val" ng-options="opt.val as opt.displayName for opt in vm.checkWays" ng-change="vm.change()"></select>
+            </div>
+        </div>
+        <div class="line line-dashed b-b line-lg"></div>
+        <div class="form-group">
+            <label class="font-bold m-l-lg col-sm-1 control-label">{{'product.DESCRIPTION' | translate}}</label>
+            <div class="col-sm-5">
+                <textarea class="form-control" ng-model="vm.info.description" placeholder="{{product.DESCRIPTION | translate}}" style="resize:none;"></textarea>
+            </div>
+        </div>
+        <div class="line line-dashed b-b line-lg"></div>
+        <div class="form-group">
+            <label class="font-bold m-l-lg col-sm-1 control-label">SDK</label>
+            <div class="col-sm-2">
+                <select class="form-control" ng-model="vm.platform" ng-options="opt.value as opt.name for opt in vm.downLoadOptions">
+                 </select>
+             </div>
+                <button class="btn btn-sm btn-success btn-addon form-inline" ng-click="vm.downloadSDK(vm.platform)"><i class="fa fa-download"></i>{{'product.DOWNLOADSDK' | translate}}</button>
+                
+                <!-- <button class="btn btn-sm btn-success btn-addon form-inline" ng-click="vm.downloadSDK('android')"><i class="fa fa-download"></i>{{'application.ANDROIDSDKDOWNLOAD' | translate}}</button>
+                <button class="btn btn-sm btn-success btn-addon form-inline" ng-click="vm.downloadSDK('objc')"><i class="fa fa-download"></i>{{'application.IOSSDKDOWNLOAD' | translate}}</button>
+                <button class="btn btn-sm btn-success btn-addon form-inline" ng-click="vm.downloadSDK('java')"><i class="fa fa-download"></i>{{'application.DESKSDKDOWNLOAD' | translate}}</button> -->
+            
+        </div>
+        <div class="line line-dashed b-b line-lg"></div>
+        <div class="form-group">
+            <label class="font-bold m-l-lg col-sm-1 control-label"></label>
+            <div class="col-sm-5">
+                <button ng-click="vm.backAction()" class="btn btn-sm btn-default form-inline btn-addon bg-light"><i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}}</button>
+                <button class="btn btn-sm btn-info form-inline btn-addon" ng-if="!vm.isAdd" type="submit" ng-click="vm.submitAction()" ng-disabled='form.$invalid'> <i class="fa fa-save"></i>{{'product.SAVE' | translate}}</button>
+            </div>
+        </div>
+    </form>
+    <br/>
+</div>

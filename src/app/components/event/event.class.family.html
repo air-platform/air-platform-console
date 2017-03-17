@@ -1,0 +1,131 @@
+<div ng-controller="EventAndEventClassCtrl as vm" class="hbox hbox-auto-xs hbox-auto-sm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+">
+	<!-- main -->
+	<div class="col" style="background-color: #fff;">
+		<!-- main header -->
+		<!-- <div class="bg-light lter b-b wrapper-md" ng-hide="isRoleAdmin">
+			<div class="row">
+				<div class="col-sm-6 col-xs-12">
+					<h1 class="m-n font-thin h3 text-black">{{'event.EVENTEDIT' | translate}}</h1>
+					<small class="text-muted">HNA EcoTech Internet of Things</small>
+				</div>
+				<div class="col-sm-4 col-xs-6 col-md-6">
+                	<ul style="border-bottom: none;" class="nav nav-tabs col-md-12" role="tablist">
+                        <button ng-click="vm.cancelAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-right"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
+                	</ul>
+                </div>
+			</div>
+		</div> -->
+
+
+		<div style="margin: 20px; overflow: hidden;" class="panel panel-default">
+			<br>
+			<div class="col-sm-12">
+            	<ul style="border-bottom: none;" class="nav nav-tabs col-md-12" role="tablist">
+                    <button ng-click="vm.cancelAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-right"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
+            	</ul>
+            </div>
+			<div class="panel-body">
+				<div class="lter b-b">
+					<table class="table table-bordered bg-white text-center" style="margin: 0!important;">
+						<thead>
+							<tr>
+								<th colspan="2">
+									<button ng-click="vm.updateAction()" class="btn btn-sm btn-info btn-addon" type="submit"><i class="fa fa-save"></i>{{'product.SAVE' | translate}}</button>
+								</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr style="border-bottom:1px dashed #ddd">
+								<td style="border: none; text-align: right;vertical-align: middle;" class="col-sm-1 font-bold">{{'product.NAME' | translate}}</td>
+								<td class="col-md-10" style="border: none;">
+									<input style="width: 50%;" ng-model="vm.info.name" type="text" class="form-control" placeholder="{{'product.NAME' | translate}}" disabled required>
+								</td>
+							</tr>
+							<tr style="border-bottom:1px dashed #ddd">
+								<td style="border: none; text-align: right;vertical-align: middle;" class="col-sm-1 font-bold">{{'product.SHOWEDNAME' | translate}}</td>
+								<td class="col-md-10" style="border: none;">
+									<input style="width: 50%;" ng-model="vm.info.displayName" type="text" class="form-control" placeholder="{{'product.SHOWEDNAME' | translate}}" required>
+								</td>
+							</tr>
+							<tr style="border-bottom:1px dashed #ddd">
+								<td style="border: none; text-align: right;vertical-align: middle;" class="col-sm-1 font-bold">{{'event.CLASSNAME' | translate}}</td>
+								<td class="col-md-10" style="border: none;">
+									<input style="width: 50%;" ng-model="vm.info.className" type="text" class="form-control" placeholder="{{'event.CLASSNAME' | translate}}" disabled required>
+								</td>
+							</tr>
+							<tr style="border-bottom:1px dashed #ddd">
+								<td style="border: none; text-align: right;vertical-align: middle;" class="col-sm-1 font-bold">{{'product.CREATEDBY' | translate}}</td>
+								<td class="col-md-10" style="border: none;">
+									<input style="width: 50%;" ng-model="vm.info.createdBy" type="text" class="form-control" placeholder="{{'product.CREATEDBY' | translate}}" disabled required>
+								</td>
+							</tr>
+							<tr style="border-bottom:1px dashed #ddd">
+								<td style="border: none; text-align: right;vertical-align: middle;" class="col-sm-1 font-bold">{{'product.CREATEDDATE' | translate}}</td>
+								<td class="col-md-10" style="border: none;">
+									<input style="width: 50%;" value='{{vm.info.createdDate | date:"yyyy-MM-dd"}}' type="text" class="form-control" placeholder="{{'product.CREATEDDATE' | translate}}" disabled required>
+								</td>
+							</tr>
+							<tr>
+								<td style="border: none; text-align: right;vertical-align: middle;" class="col-sm-1 font-bold">{{'product.DESCRIPTION' | translate}}</td>
+								<td class="col-md-10" style="border: none;">
+									<textarea style="width: 50%;resize:none" ng-model="vm.info.description" class="form-control" rows="5" cols=""></textarea>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<br>
+				<br>
+
+
+
+
+
+				<div class="col-sm-12" style="margin-bottom: 10px; overflow-y: auto;">
+
+					<div style="padding: 20px 0 15px 0!important; border: 1px solid #ddd;" class="row padder-lg" ng-hide="vm.isAddModel">
+						<h5 class="col-sm-1 col-sm-offset-8 text-right">{{'product.VERSION' | translate}}</h5>
+						<div class="col-sm-3">
+							<select class="form-control" ng-model="vm.selectedVersion"  ng-options="s.version for s in vm.schemaVersions" ng-change="vm.selectedVersionChanged()"></select>
+						</div>
+					</div>
+					<div style="padding: 0 0 15px 0!important; border: 1px solid #ddd;" class="row padder-lg">
+						<div>
+							<ul style="border-radius: 0!important;" class="breadcrumb bg-light">
+								<li ng-repeat="title in vm.navStepTitles">
+									<a ng-click="vm.changeStepTo(title)">{{title.name}}</a>
+								</li>
+							</ul>
+						</div>
+
+						<div class="col-sm-12" style="padding-left:0;">
+							<div ui-view></div>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-sm-12" ng-hide="vm.hidenSubmitBtn">
+					<br/>
+					<!-- <button class="btn btn-sm btn-default btn-addon bg-light" ng-click="vm.cancelAction()"><i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}}</button> -->
+					<!-- <button class="btn btn-sm btn-info btn-addon" ng-click="vm.submitAction()"><i class="fa fa-save"></i>{{'event.SUBMIT' | translate}}</button> -->
+					<br/>
+					<br/>
+				</div>
+
+
+			</div>
+
+		</div>
+
+
+
+	</div>
+</div>
+
+<script type="text/ng-template" id="myModalContent.html">
+	<div ng-include="'app/components/core/modal.html'"></div>
+</script>

@@ -1,0 +1,68 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="AddFormCtrlPro as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+  ">
+    <div class="col">
+        <!-- main-header -->
+        <div class="bg-light lter b-b wrapper-md">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="m-n h3 text-black" ng-bind="vm.title"></h1>
+                </div>
+                <!-- button -->
+            </div>
+        </div>
+        <!-- main -->
+
+
+
+        <div class="panel panel-default m-l m-r m-t">
+            <br/>
+            <form name="form" class="form-horizontal form-validation" role="form">
+
+                <div class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'product.PRODUCTNAME' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" ng-pattern="/^[a-z][a-z0-9_]{2,19}$/" ng-model="vm.newProInfo.name" placeholder="{{'product.INPUTPRODUCTNAME' | translate}}" required />
+                    </div>
+                    <p><i style="color:red; font-size: 20px; padding-right: 4px;">*</i><i style="color:#cfdadd; font-style: normal;">开头字母为小写，其他部分是小写字母和数字组成，字符长度3-20位</i></p>
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'product.CHECKWAY' | translate}}</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" ng-model="vm.credentialsProviderValue" ng-options="s.value as s.title for s in vm.userVerifier"></select>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'product.SHOWEDNAME' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" ng-model="vm.newProInfo.displayName" placeholder="{{'product.SHOWEDNAME' | translate}}" />
+                    </div>
+                    <!-- <span style="color:red; font-size:20px;">*</span> -->
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'product.DESCRIPTION' | translate}}</label>
+                    <div class="col-sm-4">
+                        <textarea class="form-control" ng-model="vm.newProInfo.description" rows="4" placeholder="{{'product.INPUTPRODUCTDESCRIPTION' | translate}}" style="resize: none;"></textarea>
+                    </div>
+                </div>
+
+                <div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-3">
+                        <button class="btn btn-default btn-sm m-l-lg btn-addon bg-light" ng-click="vm.backToPro()"><i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}}</button>
+                        <button class="btn btn-sm btn-info btn-addon" type="submit" ng-click="vm.saveInfo()" ng-disabled="!(vm.newProInfo.name)"><i class="fa fa-plus"></i>{{'product.ADD' | translate}}</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+
+
+
+    </div>
+</div>

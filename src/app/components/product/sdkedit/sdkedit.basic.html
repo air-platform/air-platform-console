@@ -1,0 +1,54 @@
+<div class="panel" ng-controller="SdkEditBasicCtrl as vm">
+	<div role="tabpanel" class="tab-pane panel active col-sm-12">
+		<div class="panel-body wrapper-md">
+            <form name="form" class="form-validation">
+                <div class="form-group row">
+                    <label class="col-md-1 text-right font-bold">{{'product.NAME' | translate}}</label>
+                    <div class="col-md-11">
+                        <div class="col-md-5">
+                            <input class="form-control"  ng-model="vm.sdkInfo.name" disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group row">
+                    <label class="col-md-1 text-right font-bold">{{'product.DESCRIPTION' | translate}}</label>
+                    <div class="col-md-11">
+                        <div class="col-md-5">
+                            <textarea class="form-control" ng-model="vm.sdkInfo.description" rows="6" style="resize: none"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group row">
+                    <label class="col-md-1 text-right font-bold">{{'product.CHOOSEEVENT' | translate}}</label>
+                    <div class="col-md-11">
+                        <div class="col-md-5">
+                            <select style="height: 150px;" class="col-sm-12 wrapper-md form-control" multiple="multiple" id="select1" ng-model="vm.selected1" ng-options="opt.id as opt.displayName for opt in vm.evtFamiliesOptsShowedLeft" ng-change="vm.change()"></select>
+                        </div>
+                        <div style="padding: 0!important;" class="col-md-1">
+                            <div style="vertical-align: middle; position:relative;top:50%;transform:translateY(50%);">
+                                <span id="add"><button type="button" style="width: 80px;" class="btn btn-sm btn-info btn-addon" ng-click="vm.addEvs()" ng-disabled="!vm.selected1"><i class="fa fa-plus"></i>{{'product.ADD' | translate}}</button type="button">
+                                </span>
+                                <span id="remove"><button type="button" style="margin-top:10px;width: 80px;" class="btn m-b-xs btn-sm btn-danger btn-addon" ng-click="vm.removeEvs()" ng-disabled="!vm.selected2"><i class="fa fa-trash-o"></i>{{'product.REMOVE' | translate}}</button type="button">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <select style="height: 150px;" class="col-sm-12 wrapper-md form-control" multiple="multiple" id="select2" ng-model="vm.selected2" ng-options="opt.id as opt.displayName for opt in vm.evtFamiliesOptsSended"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group row">
+                    <label class="col-md-1"></label>
+                    <div class="col-md-11">
+                        <div class="col-md-5">
+                            <button type='submit' ng-click="vm.addEventClassFamilies()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left" ><i class="fa fa-save"></i>{{'product.SAVE' | translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+		</div>
+	</div>
+</div>

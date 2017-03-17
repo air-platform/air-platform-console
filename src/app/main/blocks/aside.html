@@ -1,0 +1,12 @@
+
+<div class="aside-wrap" ng-controller="LoginController as vm">
+  <!-- if you want to use a custom scroll when aside fixed, use the slimScroll
+    <div class="navi-wrap" ui-jq="slimScroll" ui-options="{height:'100%', size:'8px'}">
+  -->
+  <div class="navi-wrap">
+
+    <nav ng-if="!vm.getUserRole()" ui-nav class="navi clearfix" ng-include="'app/main/blocks/nav.tenant.html'"></nav>
+    <nav ng-if="vm.getUserRole()" ui-nav class="navi clearfix" ng-include="'app/main/blocks/nav.admin.html'"></nav>
+
+  </div>
+</div>

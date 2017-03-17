@@ -1,0 +1,87 @@
+
+
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="ApplicationEditController as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+">
+	<!-- main -->
+	<div class="col">
+		<!-- main header -->
+		<!-- <div class="bg-light lter b-b wrapper-md" ng-hide="isRoleAdmin">
+			<div class="row">
+				<div class="col-sm-6 col-xs-12 col-md-6">
+					<h1 class="m-n font-thin h3 text-black">{{vm.userTitle}}</h1>
+					<small class="text-muted">HNA EcoTech Internet of Things</small>
+				</div>
+				<div class="col-sm-4 col-xs-6 col-md-6" ng-show="vm.shouldShowBackAction">
+					<button ng-click="vm.back()" class="btn m-b-xs btn-sm btn-info btn-addon pull-right"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
+				</div>
+			</div>
+		</div>
+ -->
+		<br/>
+		<div class="panel panel-default m-l m-r">
+			<!--<div class="panel-heading">-->
+			<!--<div style="margin:0 0 0 10px;" class="row">-->
+			<!--<h4 class="modal-title">璁惧</h4>-->
+			<!--</div>-->
+			<!--</div>-->
+			<form name="form" class="form-horizontal form-validation" role="form">
+				<br/>
+				<div class="form-group">
+					<label class="col-sm-1 m-l-lg font-bold control-label">{{'product.NAME' | translate}}</label>
+					<div class="col-sm-4">
+						<input class="form-control" type="text"
+							   placeholder="{{'product.NAME' | translate}}"  ng-pattern="/^[a-z][a-z0-9_]{2,19}$/" ng-disabled="!vm.isAdd" ng-model="vm.info.name" required>
+					</div>
+					<!--<span class="no-border">
+                        <i style="font-size:20px;color:red;">*</i>&nbsp;&nbsp;
+                    </span>-->
+                    <p><i style="color:red; font-size: 20px; padding-right: 4px;">*</i><i style="color:#cfdadd; font-size: 12px; font-style: normal;">开头字母为小写，其他部分是小写字母和数字组成，字符长度3-20位</i></p>
+				</div>
+				<div class="line line-dashed b-b line-lg"></div>
+				<div class="form-group">
+					<label class="col-sm-1 m-l-lg font-bold control-label">{{'product.SHOWEDNAME' | translate}}</label>
+					<div class="col-sm-4">
+						<input class="form-control" type="text"
+							   placeholder="展示名称" ng-disabled="!vm.isAdd" ng-model="vm.info.displayName" >
+					</div>
+					<!--<span class="no-border">
+                        <i style="font-size:20px;color:red;">*</i>&nbsp;&nbsp;
+                    </span>-->
+				</div>
+				<div class="line line-dashed b-b line-lg"></div>
+				<!--<div class="form-group">-->
+					<!--<label class="col-sm-2 control-label">验证方式</label>-->
+					<!--<div class="col-sm-4">-->
+						<!--<select class="form-control" ng-model="vm.credentialsProvider" ng-options="s.title for s in vm.userVerifier" ng-change="vm.selectedUVChanged()"></select>-->
+						<!--&lt;!&ndash;<input class="form-control" type="text"&ndash;&gt;-->
+							   <!--&lt;!&ndash;placeholder="credentialsProvider" ng-model="vm.info.credentialsProvider" required>&ndash;&gt;-->
+					<!--</div>-->
+				<!--</div>-->
+				<div class="form-group">
+					<label class="col-sm-1 m-l-lg font-bold control-label">{{'product.DESCRIPTION' | translate}}</label>
+					<div class="col-sm-4">
+						<textarea class="form-control" type="text"
+							   placeholder="{{'product.DESCRIPTION' | translate}}" rows="5" ng-model="vm.info.description" 
+							   style="resize:none;">
+						</textarea>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg"></div>
+				<div class="form-group">
+					<div class="col-sm-offset-1 col-sm-3">
+						<button class="btn btn-sm btn-default btn-addon form-inline bg-light m-l-lg" ng-click="vm.back()"><i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}}</button>
+						<button class="btn btn-sm btn-info form-inline btn-addon" ng-if="vm.isAdd" type="submit" ng-click="vm.submitAction()" ng-disabled='form.$invalid'> <i class="fa fa-plus"></i>{{'product.ADD' | translate}}</button>
+						<button class="btn btn-sm btn-info form-inline btn-addon" ng-if="!vm.isAdd" type="submit" ng-click="vm.submitAction()" ng-disabled='form.$invalid'> <i class="fa fa-edit"></i>{{'event.SUBMIT' | translate}}</button>
+					</div>
+				</div>
+				<br/>
+
+			</form>
+		</div>
+
+
+		<!-- / tasks -->
+	</div>
+</div>

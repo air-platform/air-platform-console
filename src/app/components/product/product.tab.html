@@ -1,0 +1,23 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm wrapper-md" ng-controller="productTabCtrl as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+">
+	<!-- tablist -->
+	<ul class="nav nav-tabs col-md-12" role="tablist" style="padding-right:0;">
+		<li sdk role="presentation" class="active"><a ng-click="vm.goSdk()" aria-controls="SDK" role="tab" data-toggle="tab">{{'product.PROFILE' | translate}}</a></li>
+		<li sdk role="presentation"><a ng-click="vm.goTopic()" aria-controls="Topic" role="tab" data-toggle="tab">{{'product.TOPIC' | translate}}</a></li>
+		<li sdk role="presentation"><a ng-click="vm.goEventMapping()" aria-controls="EventMapping" role="tab" data-toggle="tab">{{'product.EVENTMAPPING' | translate}}</a></li>
+		<!-- <li role="presentation"><a ng-click="vm.goConfiguration()" aria-controls="Configuration" role="tab" data-toggle="tab">Configurations</a></li> -->
+		<li sdk role="presentation"><a ng-click="vm.goNotificationTopic()" aria-controls="NotificationTopic" role="tab" data-toggle="tab">{{'product.NOTIFICATION' | translate}}</a></li>
+		<!-- <li role="presentation"><a ng-click="vm.goDeviceGroup()" aria-controls="NotificationTopic" role="tab" data-toggle="tab">Device Group</a></li>	 -->	
+		<!-- <button  class="btn btn-outline-inverse bg-info pull-right" ng-click="vm.backToProductList()">{{'product.BACK' | translate}}</button> -->
+		<button ng-click="vm.backToProductList()" class="btn m-b-xs btn-sm btn-info btn-addon pull-right"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
+	</ul>
+	
+	<!-- content -->
+	<div class="panel container col-md-12" ui-view="sdkContent"></div>
+	
+</div>
+
+
+

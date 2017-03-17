@@ -1,0 +1,39 @@
+
+<div class="m-t panel panel-default" ng-controller="productTopicCtrl as vm">
+    <table class="table table-hover table-striped table-bordered text-center">
+        <thead class="table-striped table-bordered">
+            <tr>
+                <th colspan="5">
+                    <button ng-click="vm.addTopic()" class="btn m-b-xs btn-sm btn-info btn-addon"><i class="fa fa-plus"></i>{{'product.ADD' | translate}}</button>
+                </th>
+            </tr>
+            <tr class="bg-light">
+                <th class="text-center col-md-2">{{'product.NAME' | translate}}</th>
+                <th class="text-center col-md-2">{{'product.TYPE' | translate}}</th>
+                <!-- <th class="text-center col-md-2">{{'product.CREATEDBY' | translate}}</th> -->
+                <th class="text-center col-md-2">{{'product.CREATEDDATE' | translate}}</th>
+                <th class="text-center col-md-2">{{'product.DESCRIPTION' | translate}}</th>
+                <!-- <th class="text-center">发送</th> -->
+                <th class="text-center col-md-4">{{'product.OPERATE' | translate}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in vm.TopicDatas">
+                <td ng-click="vm.editTopic($index)" ng-bind="item.name" style="vertical-align: middle;"></td>
+                <td ng-click="vm.editTopic($index)" style="vertical-align: middle;">{{item.type | isMandatory}}</td>
+                <!-- <td ng-click="vm.editTopic($index)" ng-bind="item.createdBy" style="vertical-align: middle;"></td> -->
+                <td ng-click="vm.editTopic($index)" style="vertical-align: middle;">{{item.createdDate | date:"yyyy-MM-dd"}}</td>
+                <td ng-click="vm.editTopic($index)" style="vertical-align: middle;">{{item.description}}</td>
+                <td style="vertical-align: middle;">
+                    <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.editTopic($index)"><i class="fa fa-edit"></i>{{'product.EDIT' | translate}}</button>
+                    <button class="btn btn-sm btn-info btn-addon" ng-click="vm.sendTopicEmail($index)"><i class="fa fa-send"></i>{{'product.SEND' | translate}}</button>
+                    <button class="btn btn-sm btn-danger btn-addon" ng-click="vm.removeTopic('',$index)"><i class="fa fa-trash-o"></i>{{'product.DELETE' | translate}}</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div ng-include="'app/components/core/modal.html'"></div>
+</script>

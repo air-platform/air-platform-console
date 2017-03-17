@@ -1,0 +1,62 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="ApplicationDetailController as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+  ">
+    <!-- main -->
+    <div class="col">
+        <!-- main header -->
+        <!-- <div class="bg-light lter b-b wrapper-md" ng-hide="isRoleAdmin">
+            <div class="row"> -->
+                <!-- <div class="col-sm-6 col-xs-12">
+                    <h1 class="m-n font-thin h3 text-black">{{'application.APPLICATIONDETAIL' | translate}}</h1>
+                    <small class="text-muted">HNA EcoTech Internet of Things</small>
+                </div> -->
+                <!-- <div class="">
+                	<ul style="border-bottom: none;" class="nav nav-tabs col-md-12" role="tablist"> -->
+                    	<!-- <button  class="btn btn-outline-inverse bg-info glyphicon glyphicon-arrow-left pull-right" ng-click="vm.backAction()">{{'product.BACK' | translate}}</button> -->
+                    <!--     <button ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-right"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
+                	</ul>
+                </div> -->
+            <!-- </div>
+        </div> -->
+
+        <!-- / service -->
+
+        <!-- tasks -->
+        <br/>
+
+
+        <uib-tabset class="m-l m-r control" active="vm.tabSelectedIndex">
+            <uib-tab ng-repeat="tab in vm.tabs" heading="{{tab.title}}" ng-click="vm.tapAction(tab.fun)"></uib-tab>
+            <button ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-right"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
+        </uib-tabset>
+
+
+        <!--<ul class="nav nav-tabs m-l m-r control" role="tablist">-->
+            <!--<li role="presentation" ui-sref="app.applicationDetail.basic({applicationName:vm.applicationName})"><a ui-sref-active="active">基本信息</a></li>-->
+            <!--<li role="presentation" ui-sref="app.applicationDetail.event({applicationName:vm.applicationName})"><a ui-sref-active="active">事件</a></li>-->
+        <!--</ul>-->
+
+
+        <div class="tab-content panel m-l m-r">
+            <div ui-view></div>
+
+            <br/>
+        </div>
+
+        <!-- / tasks -->
+
+        <!-- tasks -->
+        <!-- / tasks -->
+    </div>
+
+</div>
+<!--<script>-->
+    <!--$('li[role] a').click(function (e) {-->
+        <!--e.preventDefault()-->
+        <!--$(this).tab('show')-->
+    <!--})-->
+<!--</script>-->
+
+
+

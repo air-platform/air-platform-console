@@ -1,0 +1,105 @@
+
+
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="ProductSdkListCtrl as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+    app.settings.container = false;
+  ">
+    <!-- main -->
+    <div class="row panel" style="margin-bottom:0;">
+    	<!-- main header -->
+        <div class="lter wrapper-md">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="m-n font-thin h4 text-black">{{'product.PRODUCTDETAIL' | translate}}</h1>
+                </div>
+            </div>
+        </div>
+        <!-- task -->
+		<div class="wrapper-md">
+			<table class="table table-bordered bg-white text-center">
+	           
+	            <tbody class="font-bold">
+	            	<tr style="border-bottom:1px dashed #ddd">
+		                <td colspan="2">
+		                    <button ng-click="vm.UpdataProduct()" ng-disabled="!vm.isDataChanged" class="btn btn-sm btn-info btn-addon pull-left"><i class="fa fa-save"></i>{{'product.SAVE' | translate}}</button>
+		                </td>
+		            </tr>
+	            	<tr style="border-bottom:1px dashed #ddd">
+		                <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.NAME' | translate}}</td>
+		                <td class="col-md-10" style="border:none;">
+		                	<input style="width: 50%;" ng-model="vm.modifiedProductInfo.name" type="text" class="form-control pull-left font-thin" required disabled>
+		                </td>
+		            </tr>
+		            <tr style="border-bottom:1px dashed #ddd">
+		                <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.SHOWEDNAME' | translate}}</td>
+		                <td class="col-md-10" style="border:none;">
+		                	<input style="width: 50%;" ng-model="vm.modifiedProductInfo.displayName" type="text" class="form-control pull-left font-thin" required >
+		                </td>
+		            </tr>
+		            <tr style="border-bottom:1px dashed #ddd">
+		            	<td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.DESCRIPTION' | translate}}</td>
+		                <td class="col-md-10" style="border:none;">
+		                	<!-- <input style="width: 50%;" ng-model="vm.modifiedProductInfo.description" type="text" class="form-control pull-left font-thin" required> -->
+		                	<textarea style="width: 50%;resize:none" ng-model="vm.modifiedProductInfo.description" class="form-control font-thin pull-left" rows="3" cols="" required></textarea>
+		                </td>
+		            </tr>
+					<tr>
+						<td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.CHECKWAY' | translate}}</td>
+						<td class="col-md-10" style="border:none;">
+							<select style="width: 50%;" class="form-control font-thin" ng-model="vm.modifiedProductInfo.credentialsProvider" ng-options="s.value as s.title for s in vm.userVerifier" ng-change="vm.selectedUVChanged()"></select>
+						</td>
+					</tr>
+	            </tbody>
+	        </table>
+		</div>
+    </div>
+    <!-- sdk -->
+    <div class="row panel">
+        <div class="lter wrapper-md">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="m-n font-thin h4 text-black">{{'product.SDKDETAIL' | translate}}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper-md">
+			<table st-table="vm.displayedCollection" st-safe-src="vm.infos" class="table table-bordered table-striped table-hover bg-white text-center">
+	            <thead>
+		            <tr>
+		                <th colspan="6">
+		                    <button ng-click="vm.addSdk()" class="btn btn-sm btn-info btn-addon"><i class="fa fa-plus"></i>{{'product.ADD' | translate}}</button>
+		                </th>
+		            </tr>
+		            <tr class="font-bold bg-light">
+		                <th class="text-center col-md-1">{{'product.VERSION' | translate}}</th>
+		                <th class="text-center col-md-1">{{'product.NAME' | translate}}</th>
+		                <!-- <th class="text-center col-md-1">{{'product.CREATEDBY' | translate}}</th> -->
+		                <th class="text-center col-md-2">{{'product.CREATEDDATE' | translate}}</th>
+		                <th class="text-center col-md-2">{{'product.PLATFORM' | translate}}</th>
+		                <th class="text-center col-md-2">{{'product.DESCRIPTION' | translate}}</th>
+		                <th class="text-center col-md-4">{{'product.OPERATE' | translate}}</th>
+		            </tr>
+	            </thead>
+	            <tbody class="font-thin">
+		            <tr ng-repeat="item in vm.sdks">
+		            	<td ng-bind="item.version" style="vertical-align: middle;"></td>
+		                <td ng-bind="item.name" style="vertical-align: middle;"></td>
+		                <!-- <td ng-bind="item.createdBy" style="vertical-align: middle;"></td> -->
+		                <td style="vertical-align: middle;">{{item.createdDate | date:"yyyy-MM-dd"}}</td>
+		                <td style="vertical-align: middle;">
+		                	<select class="form-control" ng-model="item.plat" ng-options="opt.val as opt.name for opt in vm.platOptions.plat"></select>
+		                </td>
+		                <td style="vertical-align: middle;">{{item.description}}</td>
+		                <td style="vertical-align: middle;">
+		                	<button class="btn btn-sm btn-info btn-addon" ng-click="vm.editDetail($index)"><i class="fa fa-edit"></i>{{'product.EDIT' | translate}}</button>
+		                	<button ng-click="vm.downLoadSdk($index)" class="btn btn-sm btn-success btn-addon" href=""><i class="fa fa-download"></i>{{'product.DOWNLOADSDK' | translate}}</button>
+		                    <button class="btn btn-sm btn-danger btn-addon" ng-click="vm.delSdk('',$index)"><i class="fa fa-trash-o"></i>{{'product.DELETE' | translate}}</button>
+		                </td>
+		            </tr>				
+	            </tbody>
+	        </table>
+		</div>
+    </div>
+
+</div>

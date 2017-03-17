@@ -1,0 +1,89 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="DeviceManagerController as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+">
+
+    <!-- main -->
+    <div class="col">
+        <!-- main header -->
+        <!-- <div class="bg-light lter b-b wrapper-md" ng-hide="isRoleAdmin">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="m-n font-thin h3 text-black">{{'device.DEVICEMANAGER' | translate}}</h1>
+                    <small class="text-muted">HNA EcoTech Internet of Things</small>
+                </div>
+                <div class="col-sm-4 col-xs-6 col-md-6" ng-show="vm.shouldShowBackAction">
+                    <button ng-click="vm.back()" class="btn m-b-xs btn-sm btn-info btn-addon pull-right"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
+                </div>
+            </div>
+        </div> -->
+        <!-- tasks -->
+
+        <div class="m-l m-r m-t panel panel-default">
+        <table st-table="vm.displayedCollectionArr" st-safe-src="vm.displayedCollection" class="table table-bordered table-striped table-hover bg-white text-center">
+            <thead>
+            <tr>
+                <th colspan="6">
+                    <form class="form-inline" role="form">
+                        <span class="form-group">
+                            <label class="sr-only">{{'device.PRODUCT' | translate}}</label>
+                            <select style="min-width:80px!important;" class="form-control" ng-model="vm.productOption" ng-options="p.name for p in vm.products" ng-change="vm.productSelectedChanged()"></select>
+                        </span>
+                        <span class="form-group">
+                            <label class="sr-only" for="exampleInputPassword2">SN</label>
+                            <input type="text" class="form-control" id="exampleInputPassword2" ng-model="vm.user" placeholder="SN">
+                        </span>
+                        <span class="form-group">
+                            <button class="btn btn-default btn-addon" ng-click="vm.searchAction()"><i class="fa fa-search"></i>{{'device.SEARCH' | translate}}</button>
+                        </span>
+                    </form>
+                </th>
+            </tr>
+            <tr>
+                <th colspan="6">
+                    <button ng-hide="true" ng-click="vm.goAddItem()" class="btn btn-sm btn-info btn-addon"><i class="fa fa-plus"></i>{{'product.ADD' | translate}}</button>
+                    <input st-search="" class="form-control pull-right m-b-xs w-md" placeholder="{{'product.SEARCH' | translate}}" type="text"/>
+                </th>
+            </tr>
+            <tr class="bg-light">
+                <th class="text-center">{{'device.SERIALNUMBER' | translate}}</th>
+                <th class="text-center">{{'product.NAME' | translate}}</th>
+                <th class="text-center">{{'device.SYSTEMTYPE' | translate}}</th>
+                <th class="text-center">{{'device.NETWORKTYPE' | translate}}</th>
+                <th class="text-center">{{'device.TOPICSUBSCRIBE' | translate}}</th>
+                <th class="text-center">{{'product.DESCRIPTION' | translate}}</th>
+                <!-- <th class="text-center">服务端版本</th> -->
+            </tr>
+
+            </thead>
+            <tbody>
+
+            <tr ng-repeat="item in vm.displayedCollectionArr">
+                <td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.serialNumber}}</td>
+                <td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.name}}</td>
+                <td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.os}}</td>
+                <td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.networkType}}</td>
+                <td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.subscriptions}}</td>
+                <td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.description}}</td>
+                <!-- <td ng-click="vm.goDetail(item)">{{item.serverProfileVersion}}</td> -->
+            </tr>
+
+            </tbody>
+        </table>
+        </div>
+
+
+        <div class="btn-group pagination pull-right padder-lg">
+            <button type="button" class="btn btn-default" ng-click="vm.preAction()" ng-disabled= !vm.pagePreEnabled>{{ 'page.pre' | translate }}</button>
+            <button type="button" class="btn btn-default" ng-repeat="page in vm.pages" ng-click="vm.goPage(page)" ng-disabled= vm.pageCurrentState(page)>{{page}}</button>
+            <button type="button" class="btn btn-default" ng-click="vm.nextAction()" ng-disabled= !vm.pageNextEnabled>{{ 'page.next' | translate }}</button>
+        </div>
+
+        <!-- / tasks -->
+    </div>
+</div>
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div ng-include="'app/components/core/modal.html'"></div>
+</script>
+

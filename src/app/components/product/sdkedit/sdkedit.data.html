@@ -1,0 +1,29 @@
+
+<div class="panel" ng-controller="SdkEditDataCtrl as vm">
+	<div role="tabpanel" class="tab-pane panel active col-sm-12">
+		<div class="m-t panel panel-default" style="min-height: 600px">
+			<!-- <table class="table table-hover table-striped table-bordered text-center" data-filter="#filter" data-page-size="5">
+				<thead>
+					<tr>
+			            <th colspan="5">
+							<button ng-click="vm.saveData()"class="btn btn-sm btn-info form-inline btn-addon"><i class="fa fa-save"></i>{{'product.SAVE' | translate}}</button>
+			            </th>
+			        </tr>
+				</thead>
+			</table>
+			<div onselectstart="javascript:/*IE8 hack*/return false" id="gfx_holder_data" style="width:100%; min-height:800px; ">
+			</div> -->
+			<div class="wrap">
+				<button type="button" class="btn btn-info" style="margin:10px;background:#1DAEEF" id="btn">提交</button><!--<div id="dd"> dddd</div>  -->
+				<div class="box" id="box">
+					<canvas id="cvs"  width="1073" height="1088"></canvas>
+					<div class="Recordchild draFting" id="left">
+					</div>
+				</div>	
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/ng-template" id="myModalContent.html">
+	<div ng-include="'app/components/core/modal.html'"></div>
+</script>
