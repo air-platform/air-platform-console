@@ -1,6 +1,7 @@
 #Cloud platform 
 ## Install
 * Go into your repository directory.
+
 ```
   npm install
   npm install -g bower
