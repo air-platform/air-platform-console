@@ -6,3 +6,5 @@ public/
 .vagrant
 tmp/
 lint/
+npm-debug.log
+server-stub/node_modules/

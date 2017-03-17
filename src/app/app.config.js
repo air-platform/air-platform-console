@@ -18,7 +18,7 @@
         // Enable log
         $logProvider.debugEnabled(true);
 
-        var BASE_API_URL = constdata.apiHost_ONLINE;
+        var BASE_API_URL = constdata.apiHost_DEV;
         if (constdata.debugMode){
             BASE_API_URL = constdata.apiHost_OFFLINE;
         }

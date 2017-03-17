@@ -134,8 +134,20 @@ app.get('/iot/api/v1/applications/application1', function (req, res) {
 
 
 
+//metric
 
 
+
+app.get('/iot/api/v1/metrics', function (req, res) {
+    res.json(
+        {
+            "applicationsCount" : 25,
+            "productsCount" : 16,
+            "devicesCount" : 5,
+            "eventClassFamiliesCount" : 3
+        }
+    );
+});
 //product
 //post
 app.post('/iot/api/v1/products', function (req, res) {
@@ -145,24 +157,50 @@ app.post('/iot/api/v1/products', function (req, res) {
 //get all
 app.get('/iot/api/v1/products', function (req, res) {
     res.json(
-        [
-            {
-                "productName": "computer1",
-                "type": "office1",
-                "creatDate": "2013.12.12"
-            },
-            {
-                "productName": "computer2",
-                "type": "office2",
-                "creatDate": "2013.12.12"
-            },
-            {
-                "productName": "computer3",
-                "type": "office3",
-                "creatDate": "2013.12.12"
-            }
 
-        ]
+        {
+            "page" : 1,
+            "pageSize" : 10,
+            "totalRecords" : 1,
+            "content" : [ {
+                "createdBy" : "demo",
+                "createdDate" : "2017-03-07T07:24:29+0000",
+                "lastModifiedBy" : "demo",
+                "lastModifiedDate" : "2017-03-07T07:24:29+0000",
+                "id" : 1,
+                "name" : "test",
+                "displayName" : "测试产品1",
+                "allowAutoRegister" : false,
+                "active" : true,
+                "credentialsProvider" : "trustful",
+                "description" : "",
+                "owner" : "demo"
+            },
+                {
+                    "createdBy" : "demo",
+                    "createdDate" : "2017-03-07T07:24:29+0000",
+                    "lastModifiedBy" : "demo",
+                    "lastModifiedDate" : "2017-03-07T07:24:29+0000",
+                    "id" : 1,
+                    "name" : "test",
+                    "displayName" : "测试产品22",
+                    "allowAutoRegister" : false,
+                    "active" : true,
+                    "credentialsProvider" : "trustful",
+                    "description" : "",
+                    "owner" : "demo"
+                }
+
+
+            ],
+            "records" : 1,
+            "hasPreviousPage" : false,
+            "isFirstPage" : true,
+            "hasNextPage" : false,
+            "isLastPage" : true,
+            "hasContent" : true,
+            "totalPages" : 1
+        }
     );
 });
 //get one pro by id

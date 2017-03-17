@@ -3,6 +3,7 @@
 * Go into your repository directory.
 ```
   npm install
+  npm install --prefix server-stub
   npm install -g bower
   npm install -g gulp 
   bower install

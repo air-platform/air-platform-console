@@ -63,6 +63,23 @@ gulp.task('reload:inject', ['dev'], function() {
     browserSync.reload();
 });
 
+var exec = require('child_process').exec;
+
+gulp.task('startDevServer', function (cb) {
+
+  exec('npm start --prefix server-stub', function (err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
+})
+
+
+/*gulp.task('startDevServer', function() {
+  npm start --prefix server-stub
+});
+*/
+
 gulp.task('watch', ['dev'], function () {
   gulp.watch([path.join(conf.paths.src, '/*.html'), 'bower.json'], ['reload:inject']);
 
@@ -96,6 +113,14 @@ gulp.task('watch', ['dev'], function () {
  * Run server with dev
  */
 gulp.task('run:dev', ['watch'], function () {
+
+  exec('npm start --prefix server-stub', function (err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
+
+
   browserSyncInit([path.join(conf.paths.tmp, '/serve'), conf.paths.src, path.join(conf.paths.src, '/assets')]);
 });
 gulp.task('run', ['watch'], function () {
