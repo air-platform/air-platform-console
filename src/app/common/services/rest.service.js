@@ -218,6 +218,51 @@
      }
 
 
+     /** RegisterService */
+     angular
+         .module('iot')
+         .factory('RegisterService', RegisterService);
+
+     /** @ngInject */
+     function RegisterService(RestService,StorageService,constdata) {
+
+         var service = {
+             post: post,
+         };
+
+         return service;
+
+         ////////////
+
+         function post(path,body,successHandler,failedHandler) {
+             var account = RestService.one(path);
+             account.customPOST(body).then(
+                 successHandler,function (response) {
+                     failedResponse(response,failedHandler,path);
+                 }
+             );
+         };
+
+         function failedResponse(response,failedHandler,path) {
+             if (constdata.debugMode){
+                 console.log('failed----' + path);
+                 console.log(response);
+             }
+             var newResponse = {};
+             newResponse.status = response.status;
+             if (response.data && response.data.message){
+                 newResponse.statusText = response.data.message;
+             }else{
+                 newResponse.statusText = '服务器连接错误';
+             }
+             if (failedHandler){
+                 failedHandler(newResponse);
+             }
+         }
+
+     }
+
+
     /** StorageService */
     angular
         .module('iot')

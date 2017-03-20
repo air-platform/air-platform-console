@@ -497,6 +497,12 @@
                   controller: 'LoginController',
                   controllerAs: 'vm'
               })
+              .state('access.register', {
+                  url: '/register',
+                  templateUrl: 'app/components/register/register.html',
+                  controller: 'RegisterController',
+                  controllerAs: 'vm'
+              })
               .state('access.changepsd', {
                   url: '/forgotpassword',
                   templateUrl: 'app/components/changepwd/change.password.html'

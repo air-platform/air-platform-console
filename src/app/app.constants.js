@@ -19,6 +19,8 @@
             api:{ "token":{"refresh":"/iot/api/v1/account/token/refresh"},
                     "login":
                         {"authPath":"/iot/api/v1/account/auth", "profilePath":"/iot/api/v1/account/profile", "changePSDPath":"/iot/api/v1/account/password/change","updatePath":"/iot/api/v1/account/profile"},
+                    "register":
+                        {"registerPath":"ua/v1/register"},
                     "tenant":
                         {"listAllPath":"/iot/api/v1/tenants","updatePath":"/iot/api/v1/tenants","deletePath":"/iot/api/v1/tenants","tenantInfoPath":"/iot/api/v1/tenants","addPath":"/iot/api/v1/tenants","lockPath":"/iot/api/v1/tenants"},
                     "device":
