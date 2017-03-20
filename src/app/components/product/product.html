@@ -55,6 +55,75 @@
             </table>
         </div>
 
+
+
+        <div>
+
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="clearfix text-center m-t">
+                            <div class="inline">
+                                <div ui-jq="easyPieChart" ui-options="{
+                    percent: 75,
+                    lineWidth: 5,
+                    trackColor: '#e8eff0',
+                    barColor: '#23b7e5',
+                    scaleColor: false,
+                    color: '#3a3f51',
+                    size: 134,
+                    lineCap: 'butt',
+                    rotate: -90,
+                    animate: 1000
+                  }">
+                                    <div class="thumb-xl">
+                                        <img src="img/a8.jpg" class="img-circle" alt="...">
+                                    </div>
+                                </div>
+                                <div class="h4 m-t m-b-xs">John.Smith</div>
+                                <small class="text-muted m-b">Art director</small>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="panel-footer bg-info text-center no-padder">
+                        <div class="row no-gutter">
+                            <div class="col-xs-4">
+                                <div class="wrapper">
+                                    <span class="m-b-xs h3 block text-white">245</span>
+                                    <small class="text-muted">Followers</small>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 dk">
+                                <div class="wrapper">
+                                    <span class="m-b-xs h3 block text-white">55</span>
+                                    <small class="text-muted">Following</small>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="wrapper">
+                                    <span class="m-b-xs h3 block text-white">2,035</span>
+                                    <small class="text-muted">Tweets</small>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+
         <div class="btn-group pagination pull-right padder-lg">
             <button type="button" class="btn btn-default" ng-click="vm.preAction()" ng-disabled= !vm.pagePreEnabled>{{ 'page.pre' | translate }}</button>
             <button type="button" class="btn btn-default" ng-repeat="page in vm.pages" ng-click="vm.goPage(page)" ng-disabled= vm.pageCurrentState(page)>{{page}}</button>

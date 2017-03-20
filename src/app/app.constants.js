@@ -12,29 +12,31 @@
             // apiHost:'http://10.71.86.222:8888/iot/api/v1/',
             //apiHost_ONLINE:'http://223.202.32.52/stage/iot/api/v1/',
             //apiHost_DEV:'http://223.202.32.52/stage/iot/api/v1/',
-            apiHost_DEV:'http://127.0.0.1:8080/iot/api/v1/',
+            //apiHost_DEV:'http://127.0.0.1:8080/iot/api/v1/',
+            apiHost_DEV:'http://localhost:9000',
             apiHost_OFFLINE:'http://10.71.86.222:8888/iot/api/v1/',
 			tenant:'hna-tenant',
-            api:{ "token":{"refresh":"account/token/refresh"},
+            api:{ "token":{"refresh":"/iot/api/v1/account/token/refresh"},
                     "login":
-                        {"authPath":"account/auth", "profilePath":"account/profile", "changePSDPath":"account/password/change","updatePath":"account/profile"},
+                        {"authPath":"/iot/api/v1/account/auth", "profilePath":"/iot/api/v1/account/profile", "changePSDPath":"/iot/api/v1/account/password/change","updatePath":"/iot/api/v1/account/profile"},
                     "tenant":
-                        {"listAllPath":"tenants","updatePath":"tenants","deletePath":"tenants","tenantInfoPath":"tenants","addPath":"tenants","lockPath":"tenants"},
+                        {"listAllPath":"/iot/api/v1/tenants","updatePath":"/iot/api/v1/tenants","deletePath":"/iot/api/v1/tenants","tenantInfoPath":"/iot/api/v1/tenants","addPath":"/iot/api/v1/tenants","lockPath":"/iot/api/v1/tenants"},
                     "device":
-                        {"listAllPath":"devices","updatePath":"devices/device1","deletePath":"devices/device1","deviceInfoPath":"devices/id","addPath":"devices"},
+                        {"listAllPath":"/iot/api/v1/devices","updatePath":"/iot/api/v1/devices/device1","deletePath":"/iot/api/v1/devices/device1","deviceInfoPath":"/iot/api/v1/devices/id","addPath":"/iot/api/v1/devices"},
                     "product":
-                        {"listAllPath":"products","updatePath":"products","deletePath":"products","productInfoPath":"products","addPath":"products",
-                            "addSdkPath":"products","deleteSdkPath":"products","addTopicPath":"products","topicListAllPath":"products","topicUpdatePath":"products","topicDeletePath":"products" , 
-                            "getdevicegroup":"products","productPath":"products","profileInfoPath":"products","profileDeletePath":"products","profileUpdatePath":"products","configInfoPath":"products",
-                            "configUpdatePath":"products","sendNotiTopicPath":"notifications/broadcast?product=",
-                            "notificationInfoPath":"products","notificationUpdatePath":"products","dataInfoPath":"products","dataUpdatePath":"products","downLoadSdkPath":"products",
+                        {"listAllPath":"/iot/api/v1/products","updatePath":"/iot/api/v1/products","deletePath":"/iot/api/v1/products","productInfoPath":"/iot/api/v1/products","addPath":"/iot/api/v1/products",
+
+                            "addSdkPath":"/iot/api/v1/products","deleteSdkPath":"/iot/api/v1/products","addTopicPath":"/iot/api/v1/products","topicListAllPath":"/iot/api/v1/products","topicUpdatePath":"/iot/api/v1/products","topicDeletePath":"/iot/api/v1/products" ,
+                            "getdevicegroup":"/iot/api/v1/products","productPath":"/iot/api/v1/products","profileInfoPath":"/iot/api/v1/products","profileDeletePath":"/iot/api/v1/products","/iot/api/v1/profileUpdatePath":"/iot/api/v1/products","configInfoPath":"/iot/api/v1/products",
+                            "configUpdatePath":"/iot/api/v1/products","sendNotiTopicPath":"/iot/api/v1/notifications/broadcast?product=",
+                            "notificationInfoPath":"/iot/api/v1/products","notificationUpdatePath":"/iot/api/v1/products","dataInfoPath":"/iot/api/v1/products","dataUpdatePath":"/iot/api/v1/products","downLoadSdkPath":"/iot/api/v1/products",
                         },
                     "application":
-                        {"appsPath":"apps"},
+                        {"appsPath":"/iot/api/v1/apps"},
                     "event":
-                        {"eventPath":"events"},
-                    "plugin":"plugin/",
-                    "dashboard":{"metrics":"metrics"}
+                        {"eventPath":"/iot/api/v1/events"},
+                    "plugin":"/iot/api/v1/plugin/",
+                    "dashboard":{"metrics":"/iot/api/v1/metrics"}
             },
             routeName:{
                 "appprofile":"个人中心",
