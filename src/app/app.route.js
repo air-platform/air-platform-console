@@ -493,7 +493,7 @@
               })
               .state('access.signin', {
                   url: '/signin',
-                  templateUrl: 'signin.html',
+                  templateUrl: 'app/components/login/signin.html',
                   controller: 'LoginController',
                   controllerAs: 'vm'
               })
