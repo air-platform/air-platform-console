@@ -152,12 +152,12 @@
             
             if (infos && infos.type.toUpperCase() == 'ADMIN'){
                 // console.log('出来吧孙猴子');
-                vm.isNavShow = true;
+                vm.isNavShow = false;
             } else {
               vm.isNavShow = false;
             }
         }
-        getUserRole();
+        //getUserRole();
         vm.pageRoutes = $rootScope.pageRoutes;
         vm.goSeperateState = function(index,item) {
             if(index == -1) {
