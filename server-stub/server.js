@@ -127,6 +127,14 @@ app.put('/iot/api/v1/account/profile', function (req, res){
     res.json();
 });
 
+//register
+app.post('/iot/api/v1/ua/v1/register', function (req, res) {
+    //res.send('add');
+    res.json({
+        "code":0,
+        "info":"Success"
+    });
+});
 
 // Tenant
 app.get('/iot/api/v1/tenants', function (req, res) {
