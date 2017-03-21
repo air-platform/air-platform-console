@@ -224,7 +224,7 @@
          .factory('RegisterService', RegisterService);
 
      /** @ngInject */
-     function RegisterService(RestService,StorageService,constdata) {
+     function RegisterService(RestService,StorageService,constdata,$http) {
 
          var service = {
              post: post,
@@ -235,12 +235,21 @@
          ////////////
 
          function post(path,body,successHandler,failedHandler) {
-             var account = RestService.one(path);
-             account.customPOST(body).then(
-                 successHandler,function (response) {
-                     failedResponse(response,failedHandler,path);
-                 }
-             );
+             var formdata = new FormData();
+             formdata.append('email',body.email);
+             formdata.append('phone',body.phone);
+             formdata.append('name',body.name);
+             formdata.append('password',body.password);
+             $http({
+                 url: path,
+                 method: 'POST',
+                 data: formdata,
+                 //assign content-type as undefined, the browser
+                 //will assign the correct boundary for us
+                 headers: { 'Content-Type': undefined},
+                 //prevents serializing payload.  don't do it.
+                 transformRequest: angular.identity
+             }).then(successHandler).catch(failedHandler);;
          };
 
          function failedResponse(response,failedHandler,path) {

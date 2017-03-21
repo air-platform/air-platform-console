@@ -8,7 +8,26 @@
 		<form role="form" name="registerForm" ng-submit="vm.register()">
 			<div class="body bg-gray">
 				<div class="text-center text-danger" ng-show="vm.registerError">
-					<h5>注册失败（{{register.registerError}})</h5>
+					<h2>注册失败（{{register.registerError}})</h2>
+				</div>
+
+				<div style="color:#00A600" class="text-center" ng-show="vm.result!== undefined && vm.result === 0" >
+					<h2>
+					<span class="icon-success"><span class="fa"
+										 ng-class="{'fa-check-circle-o': vm.result == 0, 'fa-close': vm.result != 0}"></span></span>
+					<span class="success-text" ng-bind="vm.message"></span>
+					</h2>
+					<!--<a ui-sref="login" target="_blank" class="bg-primary run-btn">立即登录</a>-->
+				</div>
+
+				<div class="text-center text-danger" ng-show="vm.result!== undefined && vm.result !== 0" >
+					<h2>
+					<span class="icon-success"><span class="fa"
+										 ng-class="{'fa-check-circle-o': vm.result == 0, 'fa-close': vm.result != 0}"></span></span>
+					<span class="success-text" ng-bind="vm.message">
+					</span>
+					</h2>
+					<!--<a ui-sref="login" target="_blank" class="bg-primary run-btn">立即登录</a>-->
 				</div>
 
 				<div class="form-group">
@@ -102,19 +121,19 @@
 		</form>
 	</div>
 
-	<div class="login-box success-box" ng-show="vm.result!== undefined && vm.result === 0" >
-		<span class="icon-success"><span class="fa"
-									  ng-class="{'fa-check-circle-o': vm.result == 0, 'fa-close': vm.result != 0}"></span></span>
-		<span class="success-text" ng-bind="vm.message"></span>
-		<!--<a ui-sref="login" target="_blank" class="bg-primary run-btn">立即登录</a>-->
-	</div>
+	<!--<div class="login-box success-box" ng-show="vm.result!== undefined && vm.result === 0" >-->
+		<!--<span class="icon-success"><span class="fa"-->
+									  <!--ng-class="{'fa-check-circle-o': vm.result == 0, 'fa-close': vm.result != 0}"></span></span>-->
+		<!--<span class="success-text" ng-bind="vm.message"></span>-->
+		<!--&lt;!&ndash;<a ui-sref="login" target="_blank" class="bg-primary run-btn">立即登录</a>&ndash;&gt;-->
+	<!--</div>-->
 
-	<div class="login-box fail-box" ng-show="vm.result!== undefined && vm.result !== 0" >
-		<span class="icon-success"><span class="fa"
-										 ng-class="{'fa-check-circle-o': vm.result == 0, 'fa-close': vm.result != 0}"></span></span>
-		<span class="success-text" ng-bind="vm.message"></span>
-		<!--<a ui-sref="login" target="_blank" class="bg-primary run-btn">立即登录</a>-->
-	</div>
+	<!--<div class="login-box fail-box" ng-show="vm.result!== undefined && vm.result !== 0" >-->
+		<!--<span class="icon-success"><span class="fa"-->
+										 <!--ng-class="{'fa-check-circle-o': vm.result == 0, 'fa-close': vm.result != 0}"></span></span>-->
+		<!--<span class="success-text" ng-bind="vm.message"></span>-->
+		<!--&lt;!&ndash;<a ui-sref="login" target="_blank" class="bg-primary run-btn">立即登录</a>&ndash;&gt;-->
+	<!--</div>-->
 
 	<div class="register">
 		<p class="copyright">Copyright © 2017 海航科技物流集团</p>

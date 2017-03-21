@@ -14,7 +14,7 @@ var gutil = require('gulp-util');
 var pkg = require("../package.json");
 
 exports.server={
-    port: 9000
+    port: 9005
 }
 exports.pkg = pkg;
 exports.module='iot';
