@@ -224,7 +224,7 @@
          .factory('RegisterService', RegisterService);
 
      /** @ngInject */
-     function RegisterService(RestService,StorageService,constdata,$http) {
+     function RegisterService(RestService,StorageService,constdata) {
 
          var service = {
              post: post,
@@ -251,8 +251,6 @@
                  transformRequest: angular.identity
              }).then(successHandler).catch(failedHandler);;*/
 
-             alert(JSON.stringify(formdata));
-             console.log(formdata);
              var reg = RestService.one(path);
              reg.customPOST(formdata, undefined, undefined, { 'Content-Type': undefined }).then(
                  successHandler,function (response) {
