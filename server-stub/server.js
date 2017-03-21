@@ -296,7 +296,7 @@ app.get('/iot/api/v1/products', function (req, res) {
                 "credentialsProvider" : "trustful",
                 "description" : "",
                 "owner" : "demo",
-                "avatarUrl":"/images/iot.jpeg"
+                "avatarUrl":"/images/iot.png"
             },
                 {
                     "createdBy" : "demo",
@@ -312,6 +312,21 @@ app.get('/iot/api/v1/products', function (req, res) {
                     "description" : "",
                     "owner" : "demo",
                     "avatarUrl":"/images/news.jpeg"
+                },
+                {
+                    "createdBy" : "demo",
+                    "createdDate" : "2017-03-07T07:24:29+0000",
+                    "lastModifiedBy" : "demo",
+                    "lastModifiedDate" : "2017-03-07T07:24:29+0000",
+                    "id" : 1,
+                    "name" : "人工智能",
+                    "displayName" : "个人智能助手",
+                    "allowAutoRegister" : false,
+                    "active" : true,
+                    "credentialsProvider" : "trustful",
+                    "description" : "",
+                    "owner" : "demo",
+                    "avatarUrl":"/images/ai.jpeg"
                 }
 
 
