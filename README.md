@@ -1,4 +1,4 @@
-#Cloud platform 
+# Cloud platform
 ## Install
 * Go into your repository directory.
 ```
@@ -10,5 +10,15 @@
   gulp run:dev
 ```
 
+
 * You can visit http://localhost:9000
+
+
+
+## Distribute
+
+
+```
+ sudo gulp dist
+```
 

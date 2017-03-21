@@ -172,14 +172,15 @@ gulp.task('build:fonts', function () {
  */
 gulp.task('build:images', function () {
     return gulp.src([
-        path.join(conf.paths.src, '/assets/images/*.{png,jpg,gif,ico}')
+        path.join(conf.paths.src, '/assets/images/*.{png,jpeg,jpg,gif,ico}')
     ])
-        .pipe($.imagemin({
-            optimizationLevel: 5, //type：Number  defaults：3,  optimization level between [0 - 7 ]
-            progressive: true, //type：Boolean defaults：false, Lossless conversion to progressive(jpg)
-            interlaced: true, //type：Boolean defaults：false, Interlace gif for progressive rendering(gif)
-            multipass: true //type：Boolean defaults：false, Optimize svg multiple times until it's fully optimized(svg)
-        }))
+        /*.pipe($.imagemin({
+         optimizationLevel: 5, //type：Number  defaults：3,  optimization level between [0 - 7 ]
+         progressive: true, //type：Boolean defaults：false, Lossless conversion to progressive(jpg)
+         interlaced: true, //type：Boolean defaults：false, Interlace gif for progressive rendering(gif)
+         multipass: true //type：Boolean defaults：false, Optimize svg multiple times until it's fully optimized(svg)
+         }))*/
+        .pipe($.imagemin())
         .pipe(gulp.dest(path.join(conf.paths.build, '/images')));
 });
 /**
@@ -266,7 +267,7 @@ gulp.task('gz', function () {
 gulp.task('dist', ['build:clean', 'build'], function () {
     var date = new Date().toISOString().replace(/[^0-9]/g, '');
     return gulp.src(path.join(conf.paths.build, '/**/*'))
-        .pipe($.zip(conf.pkg.name + "-" + conf.pkg.version + "-BUILD" + date + ".zip"))
+        .pipe($.zip(conf.pkg.name + "-" + conf.pkg.version + "-Release-" + date + ".zip"))
         .pipe(gulp.dest(conf.paths.dist));
 });
 
