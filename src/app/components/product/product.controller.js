@@ -4,7 +4,7 @@
     angular.module('iot').controller('MyProductController', MyProductController);
 
     /** @ngInject */
-    function MyProductController($rootScope, $timeout, StorageService,$state, $uibModal, UserInfoServer, $log, NetworkService, constdata, toastr, i18n, delmodaltip) {
+    function MyProductController($rootScope, $scope, $timeout, StorageService,$state, $uibModal, UserInfoServer, $log, NetworkService, constdata, toastr, i18n, delmodaltip) {
         /* jshint validthis: true */
         var vm = this;
         
@@ -22,8 +22,12 @@
         
         getDatas();
 
-        vm.displayedCollection = [].concat(vm.infos);
-        
+
+
+
+       // console.log(vm.infos);
+
+       // console.log(vm.displayedCollection);
         //edit products
         vm.editPros = function(index) {
             var editedProName = vm.infos[index].name;
@@ -73,7 +77,9 @@
         function getDatas() {
             NetworkService.get(constdata.api.product.listAllPath,null,function (response) {
                 vm.infos = response.data.content;
-               // console.log( vm.infos)
+               // console.log( vm.infos);
+                vm.displayedCollection = [].concat(vm.infos);
+                $scope.sc = [].concat(vm.infos);
              // console.log(response.data.content);
             },function (response) {
                 toastr.error(response.statusText);

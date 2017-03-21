@@ -289,13 +289,14 @@ app.get('/iot/api/v1/products', function (req, res) {
                 "lastModifiedBy" : "demo",
                 "lastModifiedDate" : "2017-03-07T07:24:29+0000",
                 "id" : 1,
-                "name" : "test",
-                "displayName" : "测试产品1",
+                "name" : "物联网服务",
+                "displayName" : "让万物智联",
                 "allowAutoRegister" : false,
                 "active" : true,
                 "credentialsProvider" : "trustful",
                 "description" : "",
-                "owner" : "demo"
+                "owner" : "demo",
+                "avatarUrl":"/images/iot.jpeg"
             },
                 {
                     "createdBy" : "demo",
@@ -303,13 +304,14 @@ app.get('/iot/api/v1/products', function (req, res) {
                     "lastModifiedBy" : "demo",
                     "lastModifiedDate" : "2017-03-07T07:24:29+0000",
                     "id" : 1,
-                    "name" : "test",
-                    "displayName" : "测试产品22",
+                    "name" : "舆情服务",
+                    "displayName" : "获取专属定制信息",
                     "allowAutoRegister" : false,
                     "active" : true,
                     "credentialsProvider" : "trustful",
                     "description" : "",
-                    "owner" : "demo"
+                    "owner" : "demo",
+                    "avatarUrl":"/images/news.jpeg"
                 }
 
 
