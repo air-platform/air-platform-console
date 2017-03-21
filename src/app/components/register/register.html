@@ -33,7 +33,7 @@
 				<div class="form-group">
 					<label for="email" translate="register.EMAIL">Email</label>
 					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+						<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
 							<input ng-disabled="vm.isRegistering" id="email" class="form-control" type='email'  name="email" ng-model="vm.user.email" placeholder="{{'register.EMAIL_PROMPT' | translate}}" required>
 							<span class="inline input-error"
 							  ng-show="registerForm.email.$dirty && registerForm.email.$invalid">
@@ -47,7 +47,7 @@
 				<div class="form-group">
 					<label for="phone" translate="register.PHONE">Phone</label>
 					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
+						<span class="input-group-addon"><i class="fa fa-phone"></i></span>
 						<input ng-disabled="vm.isRegistering" id="phone" type='text' name="phone" class="form-control" ng-pattern="/^1(3|4|5|7|8)\d{9}$/"
 							   ng-model="vm.user.phone" placeholder="{{'register.PHONE_PROMPT' | translate}}" required>
 						<span class="inline input-error"
@@ -135,9 +135,9 @@
 		<!--&lt;!&ndash;<a ui-sref="login" target="_blank" class="bg-primary run-btn">立即登录</a>&ndash;&gt;-->
 	<!--</div>-->
 
-	<div class="register">
-		<p class="copyright">Copyright © 2017 海航科技物流集团</p>
-	</div>
+	<!--<div class="register">-->
+		<!--<p class="copyright">Copyright © 2017 海航科技物流集团</p>-->
+	<!--</div>-->
 
 	<div class="text-center" ng-include="'app/blocks/page.footer.html'">
 		{% include 'app/blocks/page.footer.html' %}

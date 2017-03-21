@@ -57,12 +57,10 @@
 
                         var timer=$timeout(function(){
                             vm.$state.go('access.signin');
-                        },3000);   //该函数延迟2秒执行
+                        },3000);   //该函数延迟3秒执行
 
                         timer.then(function(){ console.log('创建成功')},
                             function(){ console.log('创建不成功')});
-
-            //            vm.$state.go('access.signin');
                     }else{
                         vm.result = response.data.code;
                         vm.message = '注册失败！';
@@ -94,6 +92,7 @@
         }
         function stopRegister() {
             $interval.cancel(engine);
+            $timeout.cancel(timer);
             register.isRegistering = false;
             register.registerText = i18n.t('register.REGISTER');;
         }
