@@ -13,7 +13,7 @@
             //apiHost_ONLINE:'http://223.202.32.52/stage/iot/api/v1/',
             //apiHost_DEV:'http://223.202.32.52/stage/iot/api/v1/',
             //apiHost_DEV:'http://127.0.0.1:8080/iot/api/v1/',
-            apiHost_DEV:'http://localhost:9000',
+            apiHost_DEV:'http://localhost:9005',
             apiHost_OFFLINE:'http://10.71.86.222:8888/iot/api/v1/',
 			tenant:'hna-tenant',
             api:{ "token":{"refresh":"/iot/api/v1/account/token/refresh"},

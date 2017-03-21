@@ -46,15 +46,21 @@
 
         function register(){
             /* 注册 */
-      //      startRegister();
+            startRegister();
 
             RegisterService.post(constdata.api.register.registerPath,vm.user,function(response) {
-                //console.log("code:"+ response.data.code);
+                console.log("code:"+ response.data.code);
                     if (response.data.code == 0){
                         console.log("code:" + response.data.code);
                         vm.result = response.data.code;
                         vm.message = '恭喜您注册成功！';
-                        vm.$state.go('access.signin');
+
+                        var timer=$timeout(function(){
+                            vm.$state.go('access.signin');
+                        },3000);   //该函数延迟3秒执行
+
+                        timer.then(function(){ console.log('创建成功')},
+                            function(){ console.log('创建不成功')});
                     }else{
                         vm.result = response.data.code;
                         vm.message = '注册失败！';
@@ -86,6 +92,7 @@
         }
         function stopRegister() {
             $interval.cancel(engine);
+            $timeout.cancel(timer);
             register.isRegistering = false;
             register.registerText = i18n.t('register.REGISTER');;
         }
