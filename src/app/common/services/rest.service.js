@@ -240,7 +240,7 @@
              formdata.append('phone',body.phone);
              formdata.append('name',body.name);
              formdata.append('password',body.password);
-             $http({
+            /* $http({
                  url: path,
                  method: 'POST',
                  data: formdata,
@@ -249,7 +249,20 @@
                  headers: { 'Content-Type': undefined},
                  //prevents serializing payload.  don't do it.
                  transformRequest: angular.identity
-             }).then(successHandler).catch(failedHandler);;
+             }).then(successHandler).catch(failedHandler);;*/
+
+             alert(JSON.stringify(formdata));
+             console.log(formdata);
+             var reg = RestService.one(path);
+             reg.customPOST(formdata, undefined, undefined, { 'Content-Type': undefined }).then(
+                 successHandler,function (response) {
+                     failedResponse(response,failedHandler,path);
+                 }
+             );
+
+
+
+
          };
 
          function failedResponse(response,failedHandler,path) {
