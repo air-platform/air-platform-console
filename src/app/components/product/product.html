@@ -15,67 +15,45 @@
             </div>
         </div> -->
 
-        <!-- tasks -->
 
-        <div class="m-l m-r m-t panel panel-default">
-            <table  st-table="vm.displayedCollection" st-safe-src="vm.infos" class="table table-bordered table-striped table-hover bg-white text-center">
-                <thead>
-                <tr>
-                    <th colspan="7">
-                        <button ng-click="vm.addInfo()" class="btn btn-sm btn-info btn-addon"><i class="fa fa-plus"></i>{{'product.ADD' | translate}}</button>
-                        <input st-search="" class="form-control pull-right m-b-xs w-md" placeholder="{{'product.SEARCH' | translate}}" type="text"/>
-                    </th>
-                </tr>
-   <!--             <tr class="font-bold bg-light">
-                    <th class="text-center">{{'product.PRODUCTNAME' | translate}}</th>
-                    <th class="text-center">{{'product.SHOWEDNAME' | translate}}</th>
-                    <th class="text-center">{{'product.CHECKWAY' | translate}}</th>
-                    <th class="text-center">{{'product.CREATEDDATE' | translate}}</th>
-                    <th class="text-center">{{'product.DESCRIPTION' | translate}}</th>
-                    <th class="text-center">{{'product.OPERATE' | translate}}</th>
-                </tr>-->
 
-                </thead>
- <!--               <tbody class="">
 
-                <tr ng-repeat="item in vm.displayedCollection track by $index">
-                    <td ng-click="vm.goProTab($index)" style="vertical-align: middle;">{{item.name}}</td>
-                    <td ng-click="vm.goProTab($index)" style="vertical-align: middle;" >{{item.displayName}}</td> 
-                    <td ng-click="vm.goProTab($index)" style="vertical-align: middle;" ng-bind="item.credentialsProvider == 'default' ? '验证' : '信任'" translate="{{item.credentialsProvider == 'default' ? ('product.CHECK' | translate) : ('product.TRUSTFUL' | translate) }}">&lt;!&ndash; {{item.credentialsProvider == 'default' ? '默认' : '信任'}}&ndash;&gt;</td>
-                    <td ng-click="vm.goProTab($index)" style="vertical-align: middle;">{{item.createdDate | date:"yyyy-MM-dd"}}</td>
-                    <td ng-click="vm.goProTab($index)" style="vertical-align: middle;">{{item.description}}</td>
-                    <td style="vertical-align: middle;">
-                        &lt;!&ndash; <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.editPros($index)"><i class="fa fa-edit"></i>编辑</button> &ndash;&gt;
-                        <button class="btn btn-sm btn-info btn-addon" ng-click="vm.goProTab($index)"><i class="fa fa-edit"></i>{{'product.EDIT' | translate}}</button>
-                        <button class="btn btn-sm btn-danger btn-addon" ng-click="vm.openAlert('sm',$index)"><i class="fa fa-trash-o"></i>{{'product.DELETE' | translate}}</button>   
-                    </td>
-                </tr>
-
-                </tbody>-->
-            </table>
-        </div>
 
 
 
         <div>
 
+
+
+
+
+
+            <div class="col-lg-4">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="clearfix  m-t">
+                                        <div class="inline">
+                                            <div>
+                                               <div class="thumb-xl">
+                                                   <img src="images/iot.jpeg"  alt="...">
+                                               </div>
+                                            </div>
+                                            <div class="h4 m-t m-b-xs">物联网服务</div>
+                                            <small class="text-muted m-b ">物联网连接万物 [详情..]</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
             <div class="col-lg-4">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="clearfix  m-t">
                             <div class="inline">
-                                <div ui-jq="easyPieChart" ui-options="{
-                    percent: 75,
-                    lineWidth: 5,
-                    trackColor: '#e8eff0',
-                    barColor: '#23b7e5',
-                    scaleColor: false,
-                    color: '#3a3f51',
-                    size: 134,
-                    lineCap: 'butt',
-                    rotate: -90,
-                    animate: 1000
-                  }">
+                                <div>
                                     <div class="thumb-xl">
                                         <img src="images/iot.jpeg"  alt="...">
                                     </div>
@@ -95,18 +73,7 @@
                     <div class="panel-body">
                         <div class="clearfix  m-t">
                             <div class="inline">
-                                <div ui-jq="easyPieChart" ui-options="{
-                    percent: 75,
-                    lineWidth: 5,
-                    trackColor: '#e8eff0',
-                    barColor: '#23b7e5',
-                    scaleColor: false,
-                    color: '#3a3f51',
-                    size: 134,
-                    lineCap: 'butt',
-                    rotate: -90,
-                    animate: 1000
-                  }">
+                                <div>
                                     <div class="thumb-xl">
                                         <img src="images/iot.jpeg"  alt="...">
                                     </div>
@@ -121,58 +88,12 @@
             </div>
 
 
-
             <div class="col-lg-4">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="clearfix  m-t">
                             <div class="inline">
-                                <div ui-jq="easyPieChart" ui-options="{
-                    percent: 75,
-                    lineWidth: 5,
-                    trackColor: '#e8eff0',
-                    barColor: '#23b7e5',
-                    scaleColor: false,
-                    color: '#3a3f51',
-                    size: 134,
-                    lineCap: 'butt',
-                    rotate: -90,
-                    animate: 1000
-                  }">
-                                    <div class="thumb-xl">
-                                        <img src="images/iot.jpeg"  alt="...">
-                                    </div>
-                                </div>
-                                <div class="h4 m-t m-b-xs">物联网服务</div>
-                                <small class="text-muted m-b ">物联网连接万物 [详情..]</small>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-
-
-
-
-            <div class="col-lg-4">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="clearfix  m-t">
-                            <div class="inline">
-                                <div ui-jq="easyPieChart" ui-options="{
-                    percent: 75,
-                    lineWidth: 5,
-                    trackColor: '#e8eff0',
-                    barColor: '#23b7e5',
-                    scaleColor: false,
-                    color: '#3a3f51',
-                    size: 134,
-                    lineCap: 'butt',
-                    rotate: -90,
-                    animate: 1000
-                  }">
+                                <div>
                                     <div class="thumb-xl">
                                         <img src="images/iot.jpeg"  alt="...">
                                     </div>
@@ -193,18 +114,7 @@
                     <div class="panel-body">
                         <div class="clearfix  m-t">
                             <div class="inline">
-                                <div ui-jq="easyPieChart" ui-options="{
-                    percent: 75,
-                    lineWidth: 5,
-                    trackColor: '#e8eff0',
-                    barColor: '#23b7e5',
-                    scaleColor: false,
-                    color: '#3a3f51',
-                    size: 134,
-                    lineCap: 'butt',
-                    rotate: -90,
-                    animate: 1000
-                  }">
+                                <div>
                                     <div class="thumb-xl">
                                         <img src="images/iot.jpeg"  alt="...">
                                     </div>
@@ -225,18 +135,7 @@
                     <div class="panel-body">
                         <div class="clearfix  m-t">
                             <div class="inline">
-                                <div ui-jq="easyPieChart" ui-options="{
-                    percent: 75,
-                    lineWidth: 5,
-                    trackColor: '#e8eff0',
-                    barColor: '#23b7e5',
-                    scaleColor: false,
-                    color: '#3a3f51',
-                    size: 134,
-                    lineCap: 'butt',
-                    rotate: -90,
-                    animate: 1000
-                  }">
+                                <div>
                                     <div class="thumb-xl">
                                         <img src="images/iot.jpeg"  alt="...">
                                     </div>
@@ -249,6 +148,14 @@
 
                 </div>
             </div>
+
+
+
+
+
+
+
+
 
 
         </div>
@@ -260,14 +167,17 @@
 
 
 
-<!--
-        <div class="btn-group pagination pull-right padder-lg">
-            <button type="button" class="btn btn-default" ng-click="vm.preAction()" ng-disabled= !vm.pagePreEnabled>{{ 'page.pre' | translate }}</button>
-            <button type="button" class="btn btn-default" ng-repeat="page in vm.pages" ng-click="vm.goPage(page)" ng-disabled= vm.pageCurrentState(page)>{{page}}</button>
-            <button type="button" class="btn btn-default" ng-click="vm.nextAction()" ng-disabled= !vm.pageNextEnabled>{{ 'page.next' | translate }}</button>
-        </div>-->
 
-        <!-- / tasks -->
+
+
+
+
+
+
+
+
+
+
     </div>
 </div>
 <script type="text/ng-template" id="myModalContent.html">
