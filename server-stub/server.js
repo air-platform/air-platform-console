@@ -294,9 +294,11 @@ app.get('/iot/api/v1/products', function (req, res) {
                 "allowAutoRegister" : false,
                 "active" : true,
                 "credentialsProvider" : "trustful",
-                "description" : "",
+                "description" : "让万物智联",
                 "owner" : "demo",
-                "avatarUrl":"/images/iot.png"
+                "avatarUrl":"/images/iot.png",
+                "accessUrl":"/cloud/iot",
+                "accessToken":"eyJraWQiOiJJT1RfUExBVEZPUk1fS0VZIiwiYWxnIjoiUlM"
             },
                 {
                     "createdBy" : "demo",
@@ -309,9 +311,11 @@ app.get('/iot/api/v1/products', function (req, res) {
                     "allowAutoRegister" : false,
                     "active" : true,
                     "credentialsProvider" : "trustful",
-                    "description" : "",
+                    "description" : "获取专属定制信息",
                     "owner" : "demo",
-                    "avatarUrl":"/images/news.jpeg"
+                    "avatarUrl":"/images/news.jpeg",
+                    "accessUrl":"/cloud/news",
+                    "accessToken":"eyJraWQiOiJJT1RfUExBVEZPUk1fS0VZIiwiYWxnIjoiUlM"
                 },
                 {
                     "createdBy" : "demo",
@@ -324,9 +328,11 @@ app.get('/iot/api/v1/products', function (req, res) {
                     "allowAutoRegister" : false,
                     "active" : true,
                     "credentialsProvider" : "trustful",
-                    "description" : "",
+                    "description" : "个人智能助手",
                     "owner" : "demo",
-                    "avatarUrl":"/images/ai.jpeg"
+                    "avatarUrl":"/images/ai.jpeg",
+                    "accessUrl":"/cloud/ai",
+                    "accessToken":"eyJraWQiOiJJT1RfUExBVEZPUk1fS0VZIiwiYWxnIjoiUlM"
                 }
 
 

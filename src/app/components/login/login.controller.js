@@ -70,7 +70,7 @@
                         
                         stopLogin();
                         vm.user = response.data.user;
-                        vm.user.type = 'user';
+                        vm.user.type = 'tenant';
                         StorageService.put(hnaInfo,vm.user,24 * 3 * 60 * 60);
                         $rootScope.$on('$locationChangeSuccess',function(){//返回前页时，刷新前页
                             parent.location.reload();

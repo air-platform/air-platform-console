@@ -35,7 +35,8 @@
         }
         //edit info one by one
         vm.goProTab = function(index) {
-            var selectedProduct = vm.infos[index];
+            var selectedProduct = index;//vm.infos[index];
+            //console.log(index);
             $state.go('app.productTab',{HNATenantName:UserInfoServer.tenantName(),args : selectedProduct});
         };
         //delete info by name

@@ -22,28 +22,49 @@
 	            <tbody class="font-bold">
 	            	<tr style="border-bottom:1px dashed #ddd">
 		                <td colspan="2">
-		                    <button ng-click="vm.UpdataProduct()" ng-disabled="!vm.isDataChanged" class="btn btn-sm btn-info btn-addon pull-left"><i class="fa fa-save"></i>{{'product.SAVE' | translate}}</button>
+		                    <button ng-click="vm.UpdataProduct()"  class="btn btn-sm btn-info btn-addon pull-left"><i class="fa fa-openid"></i>{{vm.buttonEnable}}</button>
 		                </td>
-		            </tr>
+		            	</tr>
+
+
 	            	<tr style="border-bottom:1px dashed #ddd">
 		                <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.NAME' | translate}}</td>
 		                <td class="col-md-10" style="border:none;">
 		                	<input style="width: 50%;" ng-model="vm.modifiedProductInfo.name" type="text" class="form-control pull-left font-thin" required disabled>
 		                </td>
 		            </tr>
-		            <tr style="border-bottom:1px dashed #ddd">
+		            <!--<tr style="border-bottom:1px dashed #ddd">
 		                <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.SHOWEDNAME' | translate}}</td>
 		                <td class="col-md-10" style="border:none;">
-		                	<input style="width: 50%;" ng-model="vm.modifiedProductInfo.displayName" type="text" class="form-control pull-left font-thin" required >
+		                	<input style="width: 50%;" ng-model="vm.modifiedProductInfo.displayName" type="text" class="form-control pull-left font-thin" required disabled>
 		                </td>
-		            </tr>
+		            </tr>-->
 		            <tr style="border-bottom:1px dashed #ddd">
 		            	<td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.DESCRIPTION' | translate}}</td>
 		                <td class="col-md-10" style="border:none;">
 		                	<!-- <input style="width: 50%;" ng-model="vm.modifiedProductInfo.description" type="text" class="form-control pull-left font-thin" required> -->
-		                	<textarea style="width: 50%;resize:none" ng-model="vm.modifiedProductInfo.description" class="form-control font-thin pull-left" rows="3" cols="" required></textarea>
+		                	<textarea style="width: 50%;resize:none" ng-model="vm.modifiedProductInfo.description" class="form-control font-thin pull-left" rows="3" cols="" required disabled></textarea>
 		                </td>
 		            </tr>
+
+
+
+
+					<tr style="border-bottom:1px dashed #ddd">
+						<td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.ACCESSURL' | translate}}</td>
+						<td class="col-md-10" style="border:none;">
+							<input style="width: 50%;" ng-model="vm.modifiedProductInfo.accessUrl" type="text" class="form-control pull-left font-thin" required disabled>
+						</td>
+					</tr>
+
+					<tr style="border-bottom:1px dashed #ddd">
+						<td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.ACCESSTOKEN' | translate}}</td>
+						<td class="col-md-10" style="border:none;">
+							<input style="width: 50%;" ng-model="vm.modifiedProductInfo.accessToken" type="text" class="form-control pull-left font-thin" required disabled>
+						</td>
+					</tr>
+
+
 					<tr>
 						<td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.CHECKWAY' | translate}}</td>
 						<td class="col-md-10" style="border:none;">
@@ -54,7 +75,16 @@
 	        </table>
 		</div>
     </div>
-    <!-- sdk -->
+
+
+
+
+
+
+
+
+	<!--
+
     <div class="row panel">
         <div class="lter wrapper-md">
             <div class="row">
@@ -74,7 +104,7 @@
 		            <tr class="font-bold bg-light">
 		                <th class="text-center col-md-1">{{'product.VERSION' | translate}}</th>
 		                <th class="text-center col-md-1">{{'product.NAME' | translate}}</th>
-		                <!-- <th class="text-center col-md-1">{{'product.CREATEDBY' | translate}}</th> -->
+
 		                <th class="text-center col-md-2">{{'product.CREATEDDATE' | translate}}</th>
 		                <th class="text-center col-md-2">{{'product.PLATFORM' | translate}}</th>
 		                <th class="text-center col-md-2">{{'product.DESCRIPTION' | translate}}</th>
@@ -85,7 +115,7 @@
 		            <tr ng-repeat="item in vm.sdks">
 		            	<td ng-bind="item.version" style="vertical-align: middle;"></td>
 		                <td ng-bind="item.name" style="vertical-align: middle;"></td>
-		                <!-- <td ng-bind="item.createdBy" style="vertical-align: middle;"></td> -->
+
 		                <td style="vertical-align: middle;">{{item.createdDate | date:"yyyy-MM-dd"}}</td>
 		                <td style="vertical-align: middle;">
 		                	<select class="form-control" ng-model="item.plat" ng-options="opt.val as opt.name for opt in vm.platOptions.plat"></select>
@@ -101,5 +131,8 @@
 	        </table>
 		</div>
     </div>
+
+
+	-->
 
 </div>

@@ -12,7 +12,10 @@
 
         var receivedCheck = vm.argsProduct.credentialsProvider;
         var receivedDesc = vm.argsProduct.description;
+        var benc = '启用云服务';
+        var bdis ='禁用云服务';
 
+        vm.buttonEnable = benc;//'启用云服务'
         vm.tipsInfo = delmodaltip;
         vm.userVerifier = [
             {
@@ -34,15 +37,18 @@
         };
         vm.platforms = [];
         vm.isDataChanged = false;
-
+        console.log(vm.argsProduct);
         //更新产品信息
         vm.modifiedProductInfo = {
             name : vm.argsProduct.name,
             displayName : vm.argsProduct.displayName,
+            accessUrl:vm.argsProduct.accessUrl,
+            accessToken:vm.argsProduct.accessToken,
             credentialsProvider:receivedCheck,
             description : receivedDesc
         }
-        
+
+
         //监听模型变化
         var watcherName = $scope.$watch('vm.modifiedProductInfo.name',function(newName, oldName) {
             if(newName!==oldName) {
@@ -78,7 +84,16 @@
         });
 
         vm.UpdataProduct = function() {
-            if(($stateParams.args.displayName == vm.modifiedProductInfo.displayName)&&($stateParams.args.description == vm.modifiedProductInfo.description)&&(receivedCheck==vm.modifiedProductInfo.credentialsProvider)) {
+
+            if(vm.buttonEnable == benc){
+                vm.buttonEnable = bdis;
+                toastr.success(benc + ' 成功!');
+            }else{
+                vm.buttonEnable = benc;
+                toastr.success(bdis + ' 成功!');
+            }
+
+           /* if(($stateParams.args.displayName == vm.modifiedProductInfo.displayName)&&($stateParams.args.description == vm.modifiedProductInfo.description)&&(receivedCheck==vm.modifiedProductInfo.credentialsProvider)) {
                 toastr.error('内容没发生变化，请修改后再提交!');
                 vm.isDataChanged = false;
             } else {
@@ -91,7 +106,7 @@
                     console.log(response.status);
                     // console.log('Status' + response.status);
                 });
-            }   
+            } */
         }
 
         vm.selectedUVChanged = function () {
