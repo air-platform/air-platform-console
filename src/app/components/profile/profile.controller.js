@@ -29,8 +29,10 @@
 
         function getProfile () {
             var token = StorageService.get('iot.hnair.cloud.access_token');
-            LoginService.get(constdata.api.login.profilePath,null,token,function (response) {
-                vm.userinfo = response.data;
+            var hnaInfo = StorageService.get('iot.hnair.cloud.information');
+            var path = constdata.api.login.profilePath + hnaInfo.name;
+            LoginService.get(path,null,token,function (response) {
+                vm.userinfo = response.data.user;
             },function (response) {
                 vm.authError = i18n.t('login.LOGIN_FAILED');
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + ' ' + response.statusText);
@@ -44,8 +46,8 @@
 
         function doneEditing(){
             vm.editing = false;
-            LoginService.put(constdata.api.login.updatePath,{nickName:vm.userinfo.nickName},function (response) {
-                $rootScope.savedNickName = vm.userinfo.nickName;
+            LoginService.put(constdata.api.login.updatePath,{nickName:vm.userinfo.name},function (response) {
+                $rootScope.savedNickName = vm.userinfo.name;
                 toastr.success(i18n.t('u.UPDATE_SUC'));
             },function (response) {
                 vm.authError = i18n.t('login.LOGIN_FAILED');

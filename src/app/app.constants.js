@@ -18,7 +18,7 @@
 			tenant:'hna-tenant',
             api:{ "token":{"refresh":"/iot/api/v1/account/token/refresh"},
                     "login":
-                        {"authPath":"/iot/api/v1/account/auth", "profilePath":"/iot/api/v1/account/profile", "changePSDPath":"/iot/api/v1/account/password/change","updatePath":"/iot/api/v1/account/profile"},
+                        {"authPath":"/cp-ua/v1/user/login", "profilePath":"/cp-ua/v1/user/", "logoutPath":"/cp-ua/v1/user/logout","changePSDPath":"/iot/api/v1/account/password/change","updatePath":"/iot/api/v1/account/profile"},
                     "register":
                         {"registerPath":"/cp-ua/v1/user/register"},
                     "tenant":

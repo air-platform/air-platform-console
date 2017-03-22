@@ -49,9 +49,8 @@
             startRegister();
 
             RegisterService.post(constdata.api.register.registerPath,vm.user,function(response) {
-                console.log("code:"+ response.data.code);
+
                     if (response.data.code == 0){
-                        console.log("code:" + response.data.code);
                         vm.result = response.data.code;
                         vm.message = '恭喜您注册成功！';
 

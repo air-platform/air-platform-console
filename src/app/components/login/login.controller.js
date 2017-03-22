@@ -61,29 +61,26 @@
             }
 
             startLogin();
-            LoginService.post(constdata.api.login.authPath,vm.user,function(response) {
-                
 
-                if (response.data.token){
-
-
-                    var tokenValue = response.data.token;
-                    // tokenValue = encodeURIComponent(tokenValue);
-                    StorageService.put(accessToken,tokenValue,24 * 3 * 60 * 60);//3 天过期
-                    LoginService.get(constdata.api.login.profilePath,null,tokenValue,function (response2) {
+            var action = '1';//登录动作
+            LoginService.post(constdata.api.login.authPath,vm.user,action,function(response) {
+                if (response.data.code == 0){
+                    StorageService.put(accessToken,vm.user.username,24 * 3 * 60 * 60);//3 天过期
+            //        LoginService.get(constdata.api.login.profilePath,null,vm.user.username,function (response2) {
                         
                         stopLogin();
-                        vm.user = response2.data;
+                        vm.user = response.data.user;
+                        vm.user.type = 'user';
                         StorageService.put(hnaInfo,vm.user,24 * 3 * 60 * 60);
                         $rootScope.$on('$locationChangeSuccess',function(){//返回前页时，刷新前页
                             parent.location.reload();
                         });
                         $state.go('app.dashboard');
 
-                    },function (response) {
-                        stopLogin();
-                        vm.authError = response.statusText + ' ' + response.status;
-                    });
+                    // },function (response) {
+                         stopLogin();
+                    //     vm.authError = response.statusText + ' ' + response.status;
+                    // });
 
                 }else{
                     stopLogin();
@@ -150,12 +147,30 @@
         }
 
         function logout() {
-            $timeout(function () {
-                localStorage.removeItem(constdata.tenant);
-                StorageService.clear(accessToken);
-                StorageService.clear(hnaInfo);
-            },60);
-            $state.go('access.signin');
+            var action = '2';//登出动作
+            LoginService.post(constdata.api.login.logoutPath,vm.user,action,function(response) {
+                if (response.data.code == 0){
+                    $timeout(function () {
+                        localStorage.removeItem(constdata.tenant);
+                        StorageService.clear(accessToken);
+                        StorageService.clear(hnaInfo);
+                    },60);
+                    $state.go('access.signin');
+                }
+            },function (response) {
+                stopLogin();
+                console.log(response);
+                if(response.status == '-1'){
+                    vm.authError = i18n.t('login.LOGIN_ERROR_SERVER');
+                }else if(response.status == '401'){
+                    vm.authError = i18n.t('login.LOGIN_ERROR');
+                }else if(response.status == '404'){
+                    vm.authError = i18n.t('login.LOGIN_ERROR_NO_URER');
+                }else{
+                    vm.authError = i18n.t('login.LOGIN_FAILED');
+                }
+                // toastr.error(vm.authError);
+            });
         };
 
         // 设置登录信息
@@ -190,7 +205,8 @@
             return StorageService.get(hnaInfo);
         }
         if(StorageService.get(hnaInfo)) {
-            $rootScope.savedNickName = StorageService.get(hnaInfo).nickName;
+            $rootScope.savedNickName = StorageService.get(hnaInfo).name;
+         //   $rootScope.savedNickName = StorageService.get(hnaInfo).nickName;
         }
         function checkToken() {
 
@@ -199,13 +215,14 @@
         function getUserRole() {
             // "ADMIN"; "TENANT"; "USER";
             var info = StorageService.get(hnaInfo);
-            if (info && info.type.toUpperCase() == 'ADMIN'){
+
+            if (info && info.type.toUpperCase() == 'USER'){
                 return true;
             }
             return false;
         }
         // 
-        StorageService.get(hnaInfo) && (StorageService.get(hnaInfo).type == 'admin') ? $rootScope.isRoleAdmin = true : $rootScope.isRoleAdmin = false
+        StorageService.get(hnaInfo) && (StorageService.get(hnaInfo).type == 'user') ? $rootScope.isRoleAdmin = true : $rootScope.isRoleAdmin = false
         //切换语言
         userLanguage == 'zh-cn' ? vm.langChoosen = langChi : vm.langChoosen = langEng
         userLanguage == 'zh-cn' ? vm.langLeft = langEng : vm.langLeft = langChi

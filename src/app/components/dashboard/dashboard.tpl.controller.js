@@ -11,10 +11,10 @@
     function DashCtrl($stateParams,$state,StorageService,NetworkService,constdata,toastr,logger,i18n) {
         /* jshint validthis: true */
         var vm = this;
-
-        if($stateParams.args){
-            vm.nickname = $stateParams.args.nickname;
-            var params = {tenantId:vm.nickname,args:{showBack:true,CustomTenantController:{args:{nickname:$stateParams.args.nickname},tenantId:$stateParams.tenantId}}};
+        if($stateParams){
+            vm.hnaInfo = StorageService.get('iot.hnair.cloud.information');
+            vm.nickname = vm.hnaInfo.name;
+            var params = {tenantId:vm.nickname,args:{showBack:true,CustomTenantController:{args:{nickname:vm.hnaInfo.name},tenantId:$stateParams.tenantId}}};
 
             vm.gotoSubTenant = function (subTag) {
                 if (subTag == 'application'){
@@ -165,7 +165,7 @@
         function isAdminer() {
             // "ADMIN"; "TENANT"; "USER";
             var info = StorageService.get('iot.hnair.cloud.information');
-            if (info && info.type.toUpperCase() == 'ADMIN'){
+            if (info && info.type.toUpperCase() == 'USER'){
                 return true;
             }
             return false;

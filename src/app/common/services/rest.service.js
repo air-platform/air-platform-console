@@ -15,9 +15,9 @@
                 logger.debug(token);
                 // $http.defaults.headers.common['Authorization'] = token;
                 token = 'Bearer ' + token;
-                RestangularConfigurer.setDefaultHeaders({Authorization:token});
+                RestangularConfigurer.setDefaultHeaders({UserName:token});
             }else{
-                RestangularConfigurer.setDefaultHeaders({Authorization:null});
+                RestangularConfigurer.setDefaultHeaders({UserName:null});
             }
             RestangularConfigurer.setFullResponse(true);
         });
@@ -142,7 +142,7 @@
         function isAdminer() {
             // "ADMIN"; "TENANT"; "USER";
             var info = StorageService.get('iot.hnair.cloud.information');
-            if (info && info.type.toUpperCase() == 'ADMIN'){
+            if (info && info.type.toUpperCase() == 'USER'){
                 return true;
             }
             return false;
@@ -169,9 +169,17 @@
 
          ////////////
 
-         function post(path,body,successHandler,failedHandler) {
-             var account = RestService.one(path);
-             account.customPOST(body).then(
+         function post(path,body,action,successHandler,failedHandler) {
+             var formdata = new FormData();
+             if(action == '1') {
+                 formdata.append('name', body.username);
+                 formdata.append('password', body.password);
+             }else{
+                 formdata.append('name', body.username);
+             }
+
+             var reg = RestService.one(path);
+             reg.customPOST(formdata, undefined, undefined, { 'Content-Type': undefined }).then(
                  successHandler,function (response) {
                      failedResponse(response,failedHandler,path);
                  }
@@ -184,9 +192,8 @@
              }else{
                  token = StorageService.get('iot.hnair.cloud.access_token');
              }
-             
-             token = 'Bearer ' + token;
-             account.customGET("",param,{Authorization:token}).then(successHandler,function (response) {
+
+             account.customGET("",param,{UserName:token}).then(successHandler,function (response) {
                  failedResponse(response,failedHandler,path);
              });
          };
@@ -240,16 +247,6 @@
              formdata.append('phone',body.phone);
              formdata.append('name',body.name);
              formdata.append('password',body.password);
-            /* $http({
-                 url: path,
-                 method: 'POST',
-                 data: formdata,
-                 //assign content-type as undefined, the browser
-                 //will assign the correct boundary for us
-                 headers: { 'Content-Type': undefined},
-                 //prevents serializing payload.  don't do it.
-                 transformRequest: angular.identity
-             }).then(successHandler).catch(failedHandler);;*/
 
              var reg = RestService.one(path);
              reg.customPOST(formdata, undefined, undefined, { 'Content-Type': undefined }).then(
@@ -257,9 +254,6 @@
                      failedResponse(response,failedHandler,path);
                  }
              );
-
-
-
 
          };
 
@@ -292,6 +286,7 @@
     function StorageService() {
 
         this.put=function (key,value,exp) {
+            console.log("key",key);
             if(window.localStorage){
                 var curtime = new Date().getTime();//获取当前时间
                 if(!exp){
@@ -357,13 +352,14 @@
          this.username = function() {
              var val = localStorage.getItem('iot.hnair.cloud.information');
              if (val){
-                 var dataobj = JSON.parse(val);
-                 var role = dataobj.val.roles[0];
-                 if (role.toLowerCase() == 'admin'){
-                     return 'admin';
-                 }else{
-                     return 'tenant';
-                 }
+                 // var dataobj = JSON.parse(val);
+                 // var role = dataobj.val.roles[0];
+                 // if (role.toLowerCase() == 'admin'){
+                 //     return 'admin';
+                 // }else{
+                 //     return 'tenant';
+                 // }
+                 return 'user';
              }
              return '';
          };
