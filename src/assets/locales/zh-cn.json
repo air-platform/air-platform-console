@@ -64,7 +64,7 @@
     "socialLogin": "Social Login",
     "forgotPassword": "忘记密码?",
     "LOGIN": "登录",
-    "LOGIN_FAILED": "登录失败",
+    "LOGIN_FAILED": "用户名或密码错误",
     "LOGINING":"登录中...",
     "LOGINING2":"登录中..",
     "LOGINING1":"登录中.",
