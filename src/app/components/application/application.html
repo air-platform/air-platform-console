@@ -29,13 +29,15 @@
                     </th>
                 </tr>
                 <tr class="bg-light" style="vertical-align: middle;">
-                    <th class="text-center col-md-3" ng-bind="vm.infoTitle.name"></th>
+                    <th class="text-center col-md-1" ng-bind="vm.infoTitle.name"></th>
                     <!--<th class="text-center" ng-bind="vm.infoTitle.token"></th>-->
                     <!--<th class="text-center" ng-bind="vm.infoTitle.credentialsProvider"></th>-->
-                    <th class="text-center col-md-3" >{{'product.SHOWEDNAME' | translate}}</th>
+                    <th class="text-center col-md-2" >{{'product.DESCRIPTION' | translate}}</th>
                    <!-- <th class="text-center" ng-bind="vm.infoTitle.created"></th>-->
-                    <th class="text-center col-md-3">{{'product.CREATEDDATE' | translate}}</th>
-                    <th class="text-center col-md-3">{{'product.OPERATE' | translate}}</th>
+                    <th class="text-center col-md-2">{{'product.LANGUAGE' | translate}}</th>
+                    <th class="text-center col-md-2">{{'product.STATUS' | translate}}</th>
+                    <th class="text-center col-md-2">{{'product.CREATEDDATE' | translate}}</th>
+                    <th class="text-center col-md-4">{{'product.OPERATE' | translate}}</th>
                 </tr>
 
                 </thead>
@@ -45,7 +47,9 @@
                     <td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.name}}</td>
                     <!--<td ng-click="vm.goDetail(item)">{{item.token}}</td>-->
                     <!--<td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.credentialsProvider == 'default' ? '默认' : '信任'}}</td>-->
-                    <td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.displayName}}</td>
+                    <td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.description}}</td>
+                    <td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.lang}}</td>
+                    <td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.state}}</td>
                     <!--<td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.createdBy}}</td>-->
                     <td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.createdDate | date:"yyyy-MM-dd"}}</td>
 

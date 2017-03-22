@@ -37,8 +37,9 @@
 
 		function getDatas() {
             NetworkService.get(constdata.api.application.appsPath,{page:vm.pageCurrent},function (response) {
-				vm.infos = response.data.content;
-				// console.log(response.data);
+				vm.infos = response.data;
+				vm.displayedCollection = [].concat(vm.infos);
+				 //console.log(response.data);
 				updatePagination(response.data);
             },function (response) {
             	vm.authError = response.statusText + '(' + response.status + ')';
@@ -47,7 +48,7 @@
             });
         };
 
-		vm.displayedCollection = [].concat(vm.infos);
+
 		
 		//add info
 		function addNew() {

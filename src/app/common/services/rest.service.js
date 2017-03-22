@@ -14,7 +14,8 @@
             if (token){
                 logger.debug(token);
                 // $http.defaults.headers.common['Authorization'] = token;
-                token = 'Bearer ' + token;
+                //token = 'Bearer ' + token;
+
                 RestangularConfigurer.setDefaultHeaders({UserName:token});
             }else{
                 RestangularConfigurer.setDefaultHeaders({UserName:null});

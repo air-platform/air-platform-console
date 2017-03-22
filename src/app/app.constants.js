@@ -34,7 +34,7 @@
                             "notificationInfoPath":"/iot/api/v1/products","notificationUpdatePath":"/iot/api/v1/products","dataInfoPath":"/iot/api/v1/products","dataUpdatePath":"/iot/api/v1/products","downLoadSdkPath":"/iot/api/v1/products",
                         },
                     "application":
-                        {"appsPath":"/iot/api/v1/apps"},
+                        {"appsPath":"/appMng/v1/apps"},
                     "event":
                         {"eventPath":"/iot/api/v1/events"},
                     "plugin":"/iot/api/v1/plugin/",
@@ -65,7 +65,7 @@
                 "appproduct":"云服务管理",
                 "appproductTab":"云服务信息",
                 "appaddSdk":"添加SDK",
-                "appproductTabproductTopic":"API说明",
+                "appproductTabproductTopic":"使用说明",
                 "appeditTopic":"编辑主题",
                 "appaddTopic":"添加主题",
                 "appproductTabproductEventMapping":"事件映射",
