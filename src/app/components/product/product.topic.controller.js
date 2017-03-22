@@ -14,7 +14,7 @@
 
         isBrowserBackBtn();
 
-        getTopics();
+        //getTopics();
 
         vm.addTopic = function(topicId) {
             $state.go('app.addTopic',{args: argsProduct})
