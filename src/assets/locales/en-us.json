@@ -238,7 +238,8 @@
     "NONE":"无",
     "REMOVE":"移除",
     "ENABLE_SERVICE":"Enable Service",
-    "DISABLE_SERVICE":"Disable Service"
+    "DISABLE_SERVICE":"Disable Service",
+    "CODE_ADDR":"代码地址"
   },
   "event":{
     "EVENTMANAGER":"事件管理",

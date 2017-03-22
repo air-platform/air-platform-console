@@ -22,8 +22,8 @@
         vm.tabSelectedIndex = $stateParams.args.tabSelectedIndex;
         vm.selItem = $stateParams.args.selItem;
         vm.tapAction = tapAction;
-
-
+        vm.appId = vm.selItem.id;
+        //vm.info = vm.selItem;
 
         // var tenant = localStorage.getItem(constdata.tenant);
         // var prefix = '';
@@ -38,7 +38,7 @@
             }else if (vm.tabSelectedIndex == 2){
                 $state.go('app.applicationDetail.verify',{applicationName:vm.applicationName});
             }else{
-                $state.go('app.applicationDetail.basic',{applicationName:vm.applicationName});
+                $state.go('app.applicationDetail.basic',{applicationName:vm.applicationName, applicationId:vm.selItem.id});
             }
         }
 
@@ -58,8 +58,8 @@
 
         function getBasicDatas() {
 
-            NetworkService.get(constdata.api.application.appsPath + '/' + vm.applicationName,null,function (response) {
-                vm.info = response.data;
+            NetworkService.get(constdata.api.application.appsPath + '/' + vm.appId,null,function (response) {
+                vm.info = response.data.data;
                 vm.originDes = vm.info.description;
                 vm.choosedVerify.val = vm.info.verifierToken;
                 
@@ -97,7 +97,7 @@
                 toastr.error(vm.authError);
             });
         }
-        getAllVerifyInfo();
+        //getAllVerifyInfo();
         function getEventMappings() {
             NetworkService.get(constdata.api.application.appsPath + '/' + vm.applicationName + '/' + 'eventmappings',null,function (response) {
                 vm.emInfos = response.data;
@@ -131,7 +131,7 @@
         };
 
         getBasicDatas();
-        getEventMappings();
+       // getEventMappings();
 
         //add eventMapping
         vm.addEventMapping = function() {

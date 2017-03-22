@@ -188,7 +188,7 @@
           };
 
           $urlRouterProvider
-            .otherwise(prefix + 'dashboard');
+            .otherwise(prefix + 'access/signin');
           $stateProvider
               .state('app', {
                   //abstract: true,

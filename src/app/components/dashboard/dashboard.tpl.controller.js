@@ -13,6 +13,7 @@
         var vm = this;
         if($stateParams){
             vm.hnaInfo = StorageService.get('iot.hnair.cloud.information');
+
             vm.nickname = vm.hnaInfo.name;
             var params = {tenantId:vm.nickname,args:{showBack:true,CustomTenantController:{args:{nickname:vm.hnaInfo.name},tenantId:$stateParams.tenantId}}};
 

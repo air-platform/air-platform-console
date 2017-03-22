@@ -243,7 +243,8 @@
     "CHOOSEEVENT":"选择事件",
     "ISINDEXED":"是否索引",
     "NONE":"无",
-    "REMOVE":"移除"
+    "REMOVE":"移除",
+    "CODE_ADDR":"代码地址"
   },
   "event":{
     "EVENTMANAGER":"事件管理",

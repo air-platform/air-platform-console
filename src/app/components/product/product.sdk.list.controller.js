@@ -113,7 +113,7 @@
             vm.isDataChanged = true;
         }
 
-        getSdks();
+        //getSdks();
 
         //edit detail
         vm.editDetail = function(index) {
