@@ -75,7 +75,7 @@
 
 
        	function goDetail(item) {
-			$state.go('app.applicationDetail',{applicationName:item.name,HNATenantName:UserInfoServer.tenantName(),args:{tabSelectedIndex:0}});
+			$state.go('app.applicationDetail',{applicationName:item.name,HNATenantName:UserInfoServer.tenantName(),args:{tabSelectedIndex:0, selItem:item}});
 		};
 
 

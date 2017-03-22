@@ -51,11 +51,11 @@
                     <td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.lang}}</td>
                     <td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.state}}</td>
                     <!--<td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.createdBy}}</td>-->
-                    <td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.createdDate | date:"yyyy-MM-dd"}}</td>
+                    <td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.createdTime | date:"yyyy-MM-dd"}}</td>
 
                     <td style="vertical-align: middle;">
                         
-                        <button class="btn btn-sm btn-info btn-addon" ng-click="vm.goDetail(item)"><i class="fa fa-edit"></i>{{'product.EDIT' | translate}}</button>
+                        <button class="btn btn-sm btn-info btn-addon" ng-click="vm.goDetail(item)"><i class="fa fa-info-circle"></i>{{'product.DETAILS' | translate}}</button>
                         <button class="btn btn-sm btn-danger btn-addon" ng-click="vm.openAlert('sm',item)"><i class="fa fa-trash-o"></i>{{'product.DELETE' | translate}}</button>
                     </td>
                 </tr>

@@ -15,13 +15,14 @@
         vm.emInfos = [];
         vm.applicationName = $stateParams.applicationName;
         vm.tabs = [
-            {title:i18n.t('u.BASIC_INFO'),fun:'basic'},
-            {title:i18n.t('u.EVENT_MAP'),fun:'event'},
-            {title:i18n.t('u.USER_V'),fun:'verify'}
+            {title:i18n.t('u.APP_INFO'),fun:'basic'},
+           // {title:i18n.t('u.EVENT_MAP'),fun:'event'},
+            //{title:i18n.t('u.USER_V'),fun:'verify'}
         ];
         vm.tabSelectedIndex = $stateParams.args.tabSelectedIndex;
-
+        vm.selItem = $stateParams.args.selItem;
         vm.tapAction = tapAction;
+
 
 
         // var tenant = localStorage.getItem(constdata.tenant);

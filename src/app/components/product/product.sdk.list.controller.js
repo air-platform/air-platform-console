@@ -12,10 +12,10 @@
 
         var receivedCheck = vm.argsProduct.credentialsProvider;
         var receivedDesc = vm.argsProduct.description;
-        var benc = '启用云服务';
-        var bdis ='禁用云服务';
+        //var benc = i18n.t('product.ENABLE_SERVICE');//'启用云服务';
+        //var bdis = i18n.t('product.DISABLE_SERVICE');//'禁用云服务';
 
-        vm.buttonEnable = benc;//'启用云服务'
+        vm.buttonEnable = i18n.t('product.ENABLE_SERVICE');//'启用云服务'
         vm.tipsInfo = delmodaltip;
         vm.userVerifier = [
             {
@@ -85,12 +85,12 @@
 
         vm.UpdataProduct = function() {
 
-            if(vm.buttonEnable == benc){
-                vm.buttonEnable = bdis;
-                toastr.success(benc + ' 成功!');
+            if(vm.buttonEnable == i18n.t('product.ENABLE_SERVICE')){
+                vm.buttonEnable = i18n.t('product.DISABLE_SERVICE');
+                toastr.success(i18n.t('product.ENABLE_SERVICE') + ' 成功!');
             }else{
-                vm.buttonEnable = benc;
-                toastr.success(bdis + ' 成功!');
+                vm.buttonEnable = i18n.t('product.ENABLE_SERVICE');
+                toastr.success(i18n.t('product.DISABLE_SERVICE') + ' 成功!');
             }
 
            /* if(($stateParams.args.displayName == vm.modifiedProductInfo.displayName)&&($stateParams.args.description == vm.modifiedProductInfo.description)&&(receivedCheck==vm.modifiedProductInfo.credentialsProvider)) {

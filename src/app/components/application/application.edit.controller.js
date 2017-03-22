@@ -38,7 +38,7 @@
 
 		vm.getData = function() {
 
-			NetworkService.get(constdata.api.application.appsPath + '/' + applicationName,null,function (response) {
+			NetworkService.get(constdata.api.application.appsPath,null,function (response) {
 				vm.info = response.data;
 				// if (vm.info.credentialsProvider == 'default'){
 				// 	vm.credentialsProvider = vm.userVerifier[0];
