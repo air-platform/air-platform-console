@@ -76,8 +76,8 @@
         }
 
         function getDatas() {
-            NetworkService.get(constdata.api.product.listAllPath,null,function (response) {
-                vm.infos = response.data.content;
+            NetworkService.post(constdata.api.product.listAllPath,null,function (response) {
+                vm.infos = response.data[0].userServices;
                // console.log( vm.infos);
                 vm.displayedCollection = [].concat(vm.infos);
                 $scope.sc = [].concat(vm.infos);

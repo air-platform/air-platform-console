@@ -40,12 +40,13 @@
         console.log(vm.argsProduct);
         //更新产品信息
         vm.modifiedProductInfo = {
-            name : vm.argsProduct.name,
-            displayName : vm.argsProduct.displayName,
-            accessUrl:vm.argsProduct.accessUrl,
-            accessToken:vm.argsProduct.accessToken,
+            name : vm.argsProduct.service_name,
+            displayName : vm.argsProduct.service_desc,
+            accessUrl:vm.argsProduct.request_path,
+            accessToken:vm.argsProduct.access_key,
             credentialsProvider:receivedCheck,
-            description : receivedDesc
+            description : vm.argsProduct.service_desc,
+            srcUrl:vm.argsProduct.upstream_url
         }
 
 

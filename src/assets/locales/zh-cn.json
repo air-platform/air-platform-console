@@ -248,7 +248,8 @@
     "CODE_ADDR":"代码地址",
     "ENABLE_APP":"启用应用",
     "DISABLE_APP":"禁用应用",
-    "APPDETAIL":"应用详情"
+    "APPDETAIL":"应用详情",
+    "CLOUDSOURCE":"来源"
   },
   "event":{
     "EVENTMANAGER":"事件管理",

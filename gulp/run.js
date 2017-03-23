@@ -40,9 +40,10 @@ function browserSyncInit(baseDir, browser) {
    */
   var proxy_main = proxyMiddleware('/iot/api/v1/**', {target: 'http://localhost:8999', changeOrigin: true});
   var proxy_ua = proxyMiddleware('/cp-ua/v1/**', {target: 'http://223.202.32.60:8072', changeOrigin: true});
-  var proxy_app1 = proxyMiddleware('/appMng/v1/**', {target: 'http://172.16.5.119:8088', changeOrigin: true});
-  var proxy_app2 = proxyMiddleware('/swagger/**', {target: 'http://172.16.5.245:8080', changeOrigin: true});
-   server.middleware = [proxy_main, proxy_ua, proxy_app1, proxy_app2];//proxyMiddleware('/users', {target: 'http://jsonplaceholder.typicode.com', changeOrigin: true});
+  var proxy_gogs = proxyMiddleware('/appMng/v1/**', {target: 'http://172.16.5.119:8088', changeOrigin: true});
+  var proxy_k8s = proxyMiddleware('/swagger/**', {target: 'http://172.16.5.245:8080', changeOrigin: true});
+  var proxy_cloudservice = proxyMiddleware('/cp/v1/**', {target: 'http://172.16.5.240:8073', changeOrigin: true});
+   server.middleware = [proxy_main, proxy_ua, proxy_gogs, proxy_k8s,proxy_cloudservice];//proxyMiddleware('/users', {target: 'http://jsonplaceholder.typicode.com', changeOrigin: true});
   //http://127.0.0.1:8080/iot/api/v1/
   console.log(JSON.stringify(server));
   browserSync.instance = browserSync.init({

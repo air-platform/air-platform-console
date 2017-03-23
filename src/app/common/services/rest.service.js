@@ -57,7 +57,7 @@
             path = checkPath(path);
             var account = RestService.one(path);
             var token = StorageService.get('iot.hnair.cloud.access_token');
-            token = 'Bearer ' + token;
+            //token = 'Bearer ' + token;
             account.customGET("",param,{Authorization:token}).then(successHandler,function (response) {
                 failedResponse(response,failedHandler,path);
             });
