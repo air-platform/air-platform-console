@@ -230,6 +230,34 @@
     </div>
 
 
+
+            <div>
+                    <label class="font-bold m-l-lg col-sm-2 control-label">SDK</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" ng-model="vm.platform" ng-options="opt.value as opt.name for opt in vm.downLoadOptions">
+                         </select>
+                     </div>
+                        <button class="btn btn-sm btn-success btn-addon form-inline" ng-click="vm.downloadSDK(vm.platform)"><i class="fa fa-download"></i>{{'product.DOWNLOADSDK' | translate}}</button>
+                </div>
+
+
+
+    <div class="btn-group">
+        <button type="button" class="btn btn-danger">Action</button>
+        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+        </ul>
+    </div>
+
+
 </div>
 
 

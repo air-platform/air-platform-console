@@ -41,6 +41,7 @@
                 </tr>
 
                 </thead>
+
                 <tbody>
 
                 <tr ng-repeat="item in vm.displayedCollection">
@@ -55,8 +56,33 @@
 
                     <td style="vertical-align: middle;">
                         
-                        <button class="btn btn-sm btn-info btn-addon" ng-click="vm.goDetail(item)"><i class="fa fa-info-circle"></i>{{'product.DETAILS' | translate}}</button>
+                        <button class="btn btn-sm btn-info btn-addon" ng-click="vm.goDetail(item)"><i class="fa fa-info"></i>{{'product.DETAILS' | translate}}</button>
+<!--
                         <button class="btn btn-sm btn-danger btn-addon" ng-click="vm.openAlert('sm',item)"><i class="fa fa-trash-o"></i>{{'product.DELETE' | translate}}</button>
+-->
+
+
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-danger">操作</button>
+                            <button type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li ng-click="vm.goDetail(item)"><a><i class="fa fa-play m-r-sm"></i>开始</a></li>
+                                <li ng-click="vm.goDetail(item)"><a><i class="fa fa-stop m-r-sm"></i>停止</a></li>
+                                <li ng-click="vm.goDetail(item)"><a><i class="fa fa-repeat m-r-sm"></i>重启</a></li>
+                                <li ng-click="vm.goDetail(item)"><a><i class="fa fa-trash m-r-sm"></i>删除</a></li>
+                            </ul>
+                        </div>
+
+
+
+
+
+
+
+
                     </td>
                 </tr>
 
