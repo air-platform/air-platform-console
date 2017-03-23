@@ -32,6 +32,21 @@
         // }
 
 
+        vm.buttonEnable = i18n.t('product.ENABLE_APP');//'启用云服务'
+        vm.UpdataProduct = function() {
+
+            if(vm.buttonEnable == i18n.t('product.ENABLE_APP')){
+                vm.buttonEnable = i18n.t('product.DISABLE_APP');
+                toastr.success(i18n.t('product.ENABLE_APP') + ' 成功!');
+            }else{
+                vm.buttonEnable = i18n.t('product.ENABLE_APP');
+                toastr.success(i18n.t('product.DISABLE_APP') + ' 成功!');
+            }
+
+        }
+
+
+
         function chooseTab() {
             if (vm.tabSelectedIndex == 1){
                 $state.go('app.applicationDetail.event',{applicationName:vm.applicationName});

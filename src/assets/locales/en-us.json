@@ -172,6 +172,8 @@
     "CREATEDBY":"创建者",
     "CREATEDDATE":"创建日期",
     "DESCRIPTION":"描述",
+    "APP_SERVICES":"绑定服务",
+    "APP_IMAGES":"应用镜像",
     "OPERATE":"操作",
     "CHECK":"验证",
     "TRUSTFUL":"信任",
@@ -239,7 +241,10 @@
     "REMOVE":"移除",
     "ENABLE_SERVICE":"Enable Service",
     "DISABLE_SERVICE":"Disable Service",
-    "CODE_ADDR":"代码地址"
+    "CODE_ADDR":"代码地址",
+    "ENABLE_APP":"启用应用",
+    "DISABLE_APP":"禁用应用",
+    "APPDETAIL":"应用详情"
   },
   "event":{
     "EVENTMANAGER":"事件管理",

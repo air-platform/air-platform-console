@@ -1,35 +1,28 @@
+<!--
 <div role="tabpanel" class="tab-pane panel col-sm-12 active">
     <br>
     <form name="form" class="form-horizontal form-validation" style="border:1px solid #eee;" role="form">
         <br/>
+
+
+
+        <div class="form-group">
+            <label class="font-bold m-l-md col-sm-2 control-label">
+            <div>
+                <button ng-click="vm.UpdataProduct()"  class="btn btn-sm btn-info btn-addon pull-left"><i class="fa fa-openid"></i>{{vm.buttonEnable}}</button>
+
+            </div>
+            </label>
+        </div>
+
+
+
         <div class="form-group">
             <label class="font-bold m-l-lg col-sm-2 control-label">{{'product.NAME' | translate}}</label>
             <div class="col-sm-3">
                 <label class="control-label">{{vm.info.name}}</label>
             </div>
         </div>
-        <div class="line line-dashed b-b line-lg"></div>
-        <!--<div class="form-group">
-            <label class="font-bold m-l-lg col-sm-1 control-label">{{'application.ONLYINDEX' | translate}}</label>
-            <div class="col-sm-3">
-                <label class="control-label">{{vm.info.token}}</label>
-            </div>
-        </div>
-        <div class="line line-dashed b-b line-lg"></div>-->
-        <!--<div class="form-group">-->
-            <!--<label class="font-bold col-sm-1 control-label">凭据:</label>-->
-            <!--<div class="col-sm-3">-->
-                <!--<label class="control-label">{{vm.info.credentialsProvider}}</label>-->
-            <!--</div>-->
-        <!--</div>-->
-
-
-        <!-- <div class="form-group">
-            <label class="font-bold col-sm-1 control-label">{{'application.VERIFYNAME' | translate}}:</label>
-            <div class="col-sm-3">
-                <label class="control-label">{{vm.info.name}}</label>
-            </div>
-        </div> -->
 
         <div class="form-group">
             <label class="font-bold m-l-lg col-sm-2 control-label">{{'product.DESCRIPTION' | translate}}</label>
@@ -37,7 +30,6 @@
                 <textarea class="form-control" ng-model="vm.info.description" placeholder="{{product.DESCRIPTION | translate}}" style="resize:none;"></textarea>
             </div>
         </div>
-        <div class="line line-dashed b-b line-lg"></div>
 
 
 
@@ -88,37 +80,156 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
         <div class="form-group">
-            <label class="font-bold m-l-lg col-sm-2 control-label">SDK</label>
-            <div class="col-sm-2">
-                <select class="form-control" ng-model="vm.platform" ng-options="opt.value as opt.name for opt in vm.downLoadOptions">
-                 </select>
-             </div>
-                <button class="btn btn-sm btn-success btn-addon form-inline" ng-click="vm.downloadSDK(vm.platform)"><i class="fa fa-download"></i>{{'product.DOWNLOADSDK' | translate}}</button>
+            <label class="font-bold m-l-lg col-sm-2 control-label">{{'product.APP_SERVICES' | translate}}</label>
+            <div class="col-sm-3">
+                <label class="control-label">{{vm.info.services}}</label>
+            </div>
         </div>
         <div class="line line-dashed b-b line-lg"></div>
 
 
-
-
         <div class="form-group">
-            <label class="font-bold m-l-lg col-sm-2 control-label"></label>
-            <div class="col-sm-5">
-                <button ng-click="vm.backAction()" class="btn btn-sm btn-default form-inline btn-addon bg-light"><i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}}</button>
-                <button class="btn btn-sm btn-info form-inline btn-addon" ng-if="!vm.isAdd" type="submit" ng-click="vm.submitAction()" ng-disabled='form.$invalid'> <i class="fa fa-save"></i>{{'product.SAVE' | translate}}</button>
+            <label class="font-bold m-l-lg col-sm-2 control-label">{{'product.APP_IMAGES' | translate}}</label>
+            <div class="col-sm-3">
+                <label class="control-label">{{vm.info.images}}</label>
             </div>
         </div>
+        <div class="line line-dashed b-b line-lg"></div>
     </form>
     <br/>
 </div>
+
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="hbox hbox-auto-xs hbox-auto-md">
+
+    <div class="row panel" style="margin-bottom:0;">
+        <!-- main header -->
+        <div class="lter wrapper-md">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="m-n font-thin h4 text-black">{{'product.APPDETAIL' | translate}}</h1>
+                </div>
+            </div>
+        </div>
+        <!-- task -->
+        <div class="wrapper-md">
+            <table class="table table-bordered bg-white text-center">
+
+                <tbody class="font-bold">
+                <tr style="border-bottom:1px dashed #ddd">
+                    <td colspan="2">
+                        <button ng-click="vm.UpdataProduct()"  class="btn btn-sm btn-info btn-addon pull-left"><i class="fa fa-openid"></i>{{vm.buttonEnable}}</button>
+                    </td>
+                </tr>
+
+
+                <tr style="border-bottom:1px dashed #ddd">
+                    <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.NAME' | translate}}</td>
+                    <td class="col-md-10" style="border:none;">
+                        <input style="width: 50%;" ng-model="vm.info.name" type="text" class="form-control pull-left font-thin" required disabled>
+                    </td>
+                </tr>
+
+                <tr style="border-bottom:1px dashed #ddd">
+                    <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.DESCRIPTION' | translate}}</td>
+                    <td class="col-md-10" style="border:none;">
+                        <!-- <input style="width: 50%;" ng-model="vm.modifiedProductInfo.description" type="text" class="form-control pull-left font-thin" required> -->
+                        <textarea style="width: 50%;resize:none" ng-model="vm.info.description" class="form-control font-thin pull-left" rows="3" cols="" required disabled></textarea>
+                    </td>
+                </tr>
+
+
+
+                <tr style="border-bottom:1px dashed #ddd">
+                    <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.LANGUAGE' | translate}}</td>
+                    <td class="col-md-10" style="border:none;">
+                        <input style="width: 50%;" ng-model="vm.info.lang" type="text" class="form-control pull-left font-thin" required disabled>
+                    </td>
+                </tr>
+
+
+
+                <tr style="border-bottom:1px dashed #ddd">
+                    <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.CREATEDDATE' | translate}}</td>
+                    <td class="col-md-10" style="border:none;">
+                        <input style="width: 50%;" ng-model="vm.info.createdTime" type="text" class="form-control pull-left font-thin" required disabled>
+                    </td>
+                </tr>
+
+                <tr style="border-bottom:1px dashed #ddd">
+                    <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.CODE_ADDR' | translate}}</td>
+                    <td class="col-md-10" style="border:none;">
+                        <input style="width: 50%;" ng-model="vm.info.git" type="text" class="form-control pull-left font-thin" required disabled>
+                    </td>
+                </tr>
+
+
+                <tr style="border-bottom:1px dashed #ddd">
+                    <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.STATUS' | translate}}</td>
+                    <td class="col-md-10" style="border:none;">
+                        <input style="width: 50%;" ng-model="vm.info.state" type="text" class="form-control pull-left font-thin" required disabled>
+                    </td>
+                </tr>
+
+
+
+                <tr style="border-bottom:1px dashed #ddd">
+                    <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.APP_SERVICES' | translate}}</td>
+                    <td class="col-md-10" style="border:none;">
+                        <input style="width: 50%;" ng-model="vm.info.services" type="text" class="form-control pull-left font-thin" required disabled>
+                    </td>
+                </tr>
+
+
+                <tr style="border-bottom:1px dashed #ddd">
+                    <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.APP_IMAGES' | translate}}</td>
+                    <td class="col-md-10" style="border:none;">
+                        <input style="width: 50%;" ng-model="vm.info.images" type="text" class="form-control pull-left font-thin" required disabled>
+                    </td>
+                </tr>
+
+
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+
+
