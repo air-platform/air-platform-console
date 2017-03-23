@@ -148,7 +148,7 @@
 
         function logout() {
             var action = '2';//登出动作
-            LoginService.post(constdata.api.login.logoutPath,vm.user,action,function(response) {
+            LoginService.post(constdata.api.login.logoutPath,StorageService.get(hnaInfo),action,function(response) {
                 if (response.data.code == 0){
                     $timeout(function () {
                         localStorage.removeItem(constdata.tenant);

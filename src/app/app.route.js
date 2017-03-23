@@ -182,7 +182,7 @@
           var username =  unicornLauncherProvider.username();
           var prefix = username + '/';
           if (!username || username == 'undefined'){
-              prefix = '';
+              prefix = 'user/';
           }else{
               prefix = username + '/';
           };
