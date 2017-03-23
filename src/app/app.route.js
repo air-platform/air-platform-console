@@ -182,13 +182,14 @@
           var username =  unicornLauncherProvider.username();
           var prefix = username + '/';
           if (!username || username == 'undefined'){
-              prefix = '';
+              prefix = 'user/';
           }else{
               prefix = username + '/';
           };
 
+          console.log('prefix:' + prefix);
           $urlRouterProvider
-            .otherwise(prefix + 'access/signin');
+            .otherwise('access/signin');
           $stateProvider
               .state('app', {
                   //abstract: true,
