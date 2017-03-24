@@ -82,6 +82,24 @@
                 vm.authError = response.statusText + '(' + response.status + ')';
                 toastr.error(vm.authError);
             });
+
+
+
+
+            NetworkService.get(constdata.api.application.imgsAppPath + '/' + vm.appId + '/images',null,function (response) {
+                vm.info.imgInfo = response.data[0];
+               // vm.originDes = vm.info.description;
+                //vm.choosedVerify.val = vm.info.verifierToken;
+                console.log(vm.info.imgInfo);
+
+            },function (response) {
+                vm.authError = response.statusText + '(' + response.status + ')';
+                toastr.error(vm.authError);
+            });
+
+
+
+
         }
         //获取验证信息
        vm.choosedVerify =[ {
