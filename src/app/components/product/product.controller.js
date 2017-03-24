@@ -78,8 +78,10 @@
         function getDatas() {
             NetworkService.post(constdata.api.product.listAllPath,null,function (response) {
                 vm.infos = response.data[0].userServices;
+                vm.infosUser = response.data[1].userServices;
                // console.log( vm.infos);
                 vm.displayedCollection = [].concat(vm.infos);
+                vm.displayedUserCollection = [].concat(vm.infosUser);
                 $scope.sc = [].concat(vm.infos);
              // console.log(response.data.content);
             },function (response) {
