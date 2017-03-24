@@ -1,9 +1,9 @@
 (function () {
 	'use strict';
 	
-	angular.module('iot').controller('ApplicationEditController', ApplicationEditController);
-	
-	function ApplicationEditController($state,$stateParams,constdata,NetworkService,toastr,i18n) {
+	angular.module('iot').controller('ApplicationImageController', ApplicationImageController);
+	/** @ngInject */
+	function ApplicationImageController(NetworkService,constdata,$state,$stateParams,toastr,StorageService,$uibModal,$log,UserInfoServer,i18n, delmodaltip) {
 		
 		var vm = this;
 
@@ -15,11 +15,14 @@
 
 		var applicationName = $stateParams.applicationName;
         vm.applicationName = applicationName;
-		if (applicationName){
+		/*if (applicationName){
 			vm.userTitle = i18n.t('application.EDIT_APP');
 			vm.isAdd = false;
-		}
+		}*/
 
+
+		//console.log($stateParams);
+		//vm.selItem = $stateParams.selItem;
 		// vm.selectedUVChanged = function () {
 		// 	if (vm.credentialsProvider.title == '默认'){
 		// 		vm.info.credentialsProvider = 'default';
@@ -27,6 +30,9 @@
 		// 		vm.info.credentialsProvider = 'trustful';
 		// 	}
 		// }
+		//vm.info = vm.selItem;
+		vm.appId = applicationName;
+		console.log(vm.appId);
 
 		vm.amendUser = function(index) {
 			$state.go('app.application');
@@ -38,20 +44,20 @@
 
 		vm.getData = function() {
 
-			NetworkService.get(constdata.api.application.appsPath,null,function (response) {
-				vm.info = response.data;
+			NetworkService.get(constdata.api.application.appsPath + '/' + vm.appId,null,function (response) {
+				vm.info = response.data.data;
 				// if (vm.info.credentialsProvider == 'default'){
 				// 	vm.credentialsProvider = vm.userVerifier[0];
 				// }else{
 				// 	vm.credentialsProvider = vm.userVerifier[1];
 				// }
-				
+				//console.log(vm.info);
 			},function (response) {
 				vm.authError = response.statusText + '(' + response.status + ')';
 				toastr.error(i18n.t('application.GET_APP_INFO_FAILED'));
 			});
 		}
-
+		vm.getData();
 		function addItem() {
 			// vm.info = {
 			//   "name": "app1",
@@ -60,7 +66,7 @@
 			// }
 			vm.info.credentialsProvider = "default";
 			//console.log(vm.info);
-			NetworkService.post(constdata.api.application.appsPath,vm.info,function (response) {
+			NetworkService.post(constdata.api.application.imgsPath,vm.info,function (response) {
 				toastr.success(i18n.t('u.ADD_SUC'));
 				vm.backAction();
 			},function (response) {
@@ -94,9 +100,9 @@
 		}
 
 
-		if (!vm.isAdd){
-			vm.getData();
-		}
+		//if (!vm.isAdd){
+		//	vm.getData();
+		//}
 
 	}
 	

@@ -34,7 +34,8 @@
                             "notificationInfoPath":"/iot/api/v1/products","notificationUpdatePath":"/iot/api/v1/products","dataInfoPath":"/iot/api/v1/products","dataUpdatePath":"/iot/api/v1/products","downLoadSdkPath":"/iot/api/v1/products",
                         },
                     "application":
-                        {"appsPath":"/appMng/v1/apps"},
+                        {"appsPath":"/appMng/v1/apps",
+                         "imgsPath":"/appMng/v1/images"},
                     "event":
                         {"eventPath":"/iot/api/v1/events"},
                     "plugin":"/iot/api/v1/plugin/",
@@ -59,7 +60,9 @@
                 "appapplicationDetailevent":"事件映射",
                 "appapplicationDetailverify":"用户验证",
                 "appaddVerify":"添加验证",
-                "appapplicationedit":"编辑应用",
+                "appapplicationedit":"添加应用",
+                "appapplicationDeploy":"部署应用",
+                "appapplicationImage":"应用镜像",
                 "appaddMapping4Application":"添加事件映射",
                 "appamendForm":"修改应用",
                 "appproduct":"云服务管理",

@@ -30,7 +30,10 @@
 		vm.editItem = editItem;
 		vm.goDetail = goDetail;
 
+		vm.showOther = true;
+		vm.showDeploy = true;
 
+		vm.OperApp = OperApp;
 		getDatas();
 
 
@@ -79,6 +82,29 @@
 		};
 
 
+
+
+
+
+
+		//add info
+		function OperApp(index, item) {
+			if(index == 1){
+				//console.log(item);
+				$state.go('app.applicationImage', {applicationName:item.id, args:{selItem:item}});
+			}else if(index == 2){
+				$state.go('app.applicationDeploy', {selItem:item});
+
+			}else if(index == 3){
+				$state.go('app.applicationedit', {selItem:item});
+			}else if(index == 4){
+				$state.go('app.applicationedit', {selItem:item});
+			}else if(index == 5){
+				$state.go('app.applicationedit', {selItem:item});
+			}
+
+			//$state.go('app.applicationedit');
+		};
 
 		// 分页 Start
 

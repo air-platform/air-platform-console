@@ -105,7 +105,7 @@
     "MEM":"内存",
     "CPU":"CPU",
     "DISK":"磁盘",
-    "ACTIVE_DEVICE_NO":"活跃设备量",
+    "ACTIVE_DEVICE_NO":"每周",
     "ACTIVE_EVENT_NO":"活跃事件量",
     "SDK_STA":"SDK稳定性",
     "GENERALSITUATION":"概况",
@@ -245,7 +245,9 @@
     "ENABLE_APP":"启用应用",
     "DISABLE_APP":"禁用应用",
     "APPDETAIL":"应用详情",
-    "CLOUDSOURCE":"来源"
+    "CLOUDSOURCE":"来源",
+    "IMAGENAME":"镜像名称",
+    "IMAGETAG":"镜像标签"
   },
   "event":{
     "EVENTMANAGER":"事件管理",

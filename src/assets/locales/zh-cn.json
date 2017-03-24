@@ -102,19 +102,19 @@
   "dashboard" : {
     "DASHBOARD":"仪表盘",
     "TOTALAMOUNT":"总数",
-    "PRODUCT":"产品",
+    "PRODUCT":"云服务",
     "APPLICATION":"应用",
     "DEVICE":"设备",
     "EVENT":"事件",
     "MEM":"内存",
     "CPU":"CPU",
     "DISK":"磁盘",
-    "ACTIVE_DEVICE_NO":"活跃设备量",
-    "ACTIVE_EVENT_NO":"活跃事件量",
-    "SDK_STA":"SDK稳定性",
+    "ACTIVE_DEVICE_NO":"舆情分析",
+    "ACTIVE_EVENT_NO":"物联网",
+    "SDK_STA":"人工智能",
     "GENERALSITUATION":"概况",
     "EVENTSITUATION":"应用总数",
-    "DEVICESITUATION":"云服务总数",
+    "DEVICESITUATION":"云服务状态",
     "ACTIVEEVENTTREND":"活跃事件趋势",
     "DEVICEMAP":"全国主要城市云服务使用分布图"
   },
@@ -249,7 +249,9 @@
     "ENABLE_APP":"启用应用",
     "DISABLE_APP":"禁用应用",
     "APPDETAIL":"应用详情",
-    "CLOUDSOURCE":"来源"
+    "CLOUDSOURCE":"来源",
+    "IMAGENAME":"镜像名称",
+    "IMAGETAG":"镜像标签"
   },
   "event":{
     "EVENTMANAGER":"事件管理",

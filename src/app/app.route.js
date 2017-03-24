@@ -20,11 +20,13 @@
             $rootScope.previousState_params = fromParams;
             var stateText = toState.name.replace(/\./g,'');
             var myUrl = eval("constdata.routeName."+stateText);
+            //console.log(stateText);
             var routeObj = {
               url : myUrl,
               name : toState.name,
               params : fromParams
             }
+            //console.log(routeObj);
             $rootScope.pageRoutes.push(routeObj);
             var len = $rootScope.pageRoutes.length;
             //对后追加的两个routeName进行去重处理
@@ -261,6 +263,16 @@
               .state('app.applicationedit', {
                   url: prefix + '{t}/application/edit/:applicationName',
                   templateUrl: 'app/components/application/application.edit.html'
+              })
+              .state('app.applicationDeploy', {
+                  url: prefix + '{t}/application/deploy/:applicationName',
+                  params : {args : {}},
+                  templateUrl: 'app/components/application/application.deploy.html'
+              })
+              .state('app.applicationImage', {
+                  url: prefix + '{t}/application/image/:applicationName',
+                  params : {args : {}},
+                  templateUrl: 'app/components/application/application.image.html'
               })
               .state('app.addMapping4Application', {
                   url: prefix + ':HNATenantName/:targetName/addEventMapping',

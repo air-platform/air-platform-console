@@ -1,9 +1,9 @@
 (function () {
 	'use strict';
 	
-	angular.module('iot').controller('ApplicationEditController', ApplicationEditController);
+	angular.module('iot').controller('ApplicationDeployController', ApplicationDeployController);
 	
-	function ApplicationEditController($state,$stateParams,constdata,NetworkService,toastr,i18n) {
+	function ApplicationDeployController($state,$stateParams,constdata,NetworkService,toastr,i18n) {
 		
 		var vm = this;
 
@@ -59,7 +59,7 @@
 			//   "description": "My App Desc"
 			// }
 			vm.info.credentialsProvider = "default";
-			//console.log(vm.info);
+			console.log(vm.info);
 			NetworkService.post(constdata.api.application.appsPath,vm.info,function (response) {
 				toastr.success(i18n.t('u.ADD_SUC'));
 				vm.backAction();
