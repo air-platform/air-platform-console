@@ -89,7 +89,7 @@
                 "appcredential":"证书管理",
                 "appeditDeviceManager":"编辑设备",
                 "appeditCredential":"编辑证书",
-                "appevent":"事件管理",
+                "appevent":"设置",
                 "appaddEvent":"添加事件",
                 "appeditback":"事件管理",
                 "appeventclassfamily":"事件组",

@@ -23,7 +23,6 @@
         vm.pages = [];
 
 
-
         //初始化数据
 
         EventDataShareServer.eventId = '';
@@ -46,6 +45,10 @@
                 vm.authError = response.statusText + '(' + response.status + ')';
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
             });
+        }
+
+        vm.save = function () {
+            vm.saveButton = true;
         }
 
         vm.goAddItem = function () {
