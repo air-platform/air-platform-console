@@ -136,7 +136,7 @@
                     vm.argsProduct.service_desc = response.data.service.service_desc;
                     vm.argsProduct.request_path = response.data.service.request_path;
                     vm.argsProduct.upstream_url = response.data.service.upstream_url;
-                    vm.argsProduct.api_key = response.data.service.api_key;
+                    vm.modifiedProductInfo.accessToken = response.data.service.api_key;
                 }
                 else {
                     vm.buttonEnable = i18n.t('product.ENABLE_SERVICE');
@@ -151,28 +151,6 @@
 
         }
 
-        function updateForm(){
-            var path = constdata.api.product.queryServiceInfo + vm.argsProduct.service_id;
-       //
-            NetworkService.get(path,null,function (response) {
-                if (response.data.code == 0){
-                    // vm.modifiedProductInfo.name = response.data.service.serviceName;
-                    // vm.modifiedProductInfo.description = response.data.service.serviceDesc;
-                    // vm.modifiedProductInfo.accessUrl = response.data.service.callPath;
-                    // vm.modifiedProductInfo.srcUrl = response.data.service.upstreamUrl;
-                     = response.data.service.apiKey;
-                    console.log('name:' + vm.modifiedProductInfo.accessUrl)
-                }
-                else {
-                   // toastr.error('获取用户信息失败！');
-                }
-            },function (response) {
-                toastr.error(response.statusText);
-                console.log('Error');
-                console.log('Status' + response.status);
-            });
-        }
-
         vm.UpdataProduct = function() {
 
             if(vm.buttonEnable == i18n.t('product.ENABLE_SERVICE')){
@@ -180,11 +158,10 @@
 
                 NetworkService.postForm(constdata.api.product.serviceOpenPath,vm.argsProduct,function(response) {
                     console.log("service open:" + response.data.msg);
-                    if (response.data.code == 0){
+                    if (response.data.code == 0) {
                         toastr.success(i18n.t('product.ENABLE_SERVICE') + ' 成功!');
-                        updateForm();
-                    }
-                    else {
+                        updateServiceInfo();
+                    }else {
                         toastr.success(i18n.t('product.ENABLE_SERVICE') + ' 失败!');
                     }
                 },function (response) {
@@ -198,7 +175,7 @@
                     console.log("service open:" + response.data.msg);
                     if (response.data.code == 0){
                         toastr.success(i18n.t('product.DISABLE_SERVICE') + ' 成功!');
-                        updateForm();
+                        updateServiceInfo();
                     }else{
                         toastr.success(i18n.t('product.DISABLE_SERVICE') + ' 失败!');
                     }
