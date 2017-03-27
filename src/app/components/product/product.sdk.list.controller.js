@@ -9,7 +9,7 @@
         var vm = this;
         //判断是否为浏览器回退按钮加载的本页面
         isBrowserBackBtn();
-
+        vm.buttonEnable = i18n.t('product.ENABLE_SERVICE');//'启用云服务'
         status();
 
         updateForm();
@@ -19,7 +19,6 @@
         // var benc = i18n.t('product.ENABLE_SERVICE');//'启用云服务';
         // var bdis = i18n.t('product.DISABLE_SERVICE');//'禁用云服务';
 
-    //    vm.buttonEnable = i18n.t('product.ENABLE_SERVICE');//'启用云服务'
         vm.tipsInfo = delmodaltip;
         vm.userVerifier = [
             {
