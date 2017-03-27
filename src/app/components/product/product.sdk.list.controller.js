@@ -138,7 +138,7 @@
                     }
                 }
                 else {
-                    toastr.error('获取用户信息失败！');
+                    //toastr.error('获取用户信息失败！');
                 }
             },function (response) {
                 toastr.error(response.statusText);
@@ -160,7 +160,7 @@
                     console.log('name:' + vm.modifiedProductInfo.accessUrl)
                 }
                 else {
-                    toastr.error('获取用户信息失败！');
+                   // toastr.error('获取用户信息失败！');
                 }
             },function (response) {
                 toastr.error(response.statusText);
