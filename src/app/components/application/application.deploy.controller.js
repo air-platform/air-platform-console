@@ -14,7 +14,8 @@
 		vm.userTitle = i18n.t('application.ADD_APP');
 		// vm.userVerifier = [{title:'默认',value:'default'},{title:'信任',value:'trustful'}];
 		// vm.credentialsProvider = vm.userVerifier[0];
-
+		vm.imgArr = new Array();
+		vm.selImg = '';
 		var applicationName = $stateParams.applicationName;
         vm.applicationName = applicationName;
 		vm.appId = applicationName;
@@ -30,6 +31,53 @@
 		// 		vm.info.credentialsProvider = 'trustful';
 		// 	}
 		// }
+
+		vm.userVerifier = [
+			{
+				title:'验证',
+				value:'default'
+			},
+			{
+				title:'信任',
+				value:'trustful'
+			}
+		];
+		vm.platOptions = {
+			plat : [
+				{val:'android',name:'Android'},
+				{val:'objc',name:'iOS'},
+				{val:'java',name:'Java'},
+				{val:'c',name:'C'}
+			]
+		};
+
+
+
+
+
+		vm.platform = 'android';
+		vm.downLoadOptions = [
+			{
+				name : "Android",
+				value : 'android'
+			},
+			{
+				name : "iOS",
+				value : "objc"
+			},
+			{
+				name : i18n.t('application.DESKTOP'),
+				value : "java"
+			}
+		];
+
+
+		vm.downloadSDK = function(index) {
+			 console.log(index);
+			//var token = StorageService.get('iot.hnair.cloud.access_token');
+			//var downloadUrl = BASE_API_URL + 'products/' + vm.argsProduct.name + '/profiles/v' + vm.sdks[index].version + '/sdk?platform=' + vm.sdks[index].plat + '&token=' + token;
+			//downloadFile(downloadUrl);
+		}
 
 		vm.amendUser = function(index) {
 			$state.go('app.application');
@@ -74,11 +122,34 @@
 
 
 			NetworkService.get(constdata.api.application.imgsAppPath + '/' + vm.appId + '/images',null,function (response) {
-				//console.log(response.data);
-				vm.info.imgInfo = response.data[0];
+
+
+
+				console.log(response.data);
+				console.log(response.data.length);
+				vm.info.imgInfo = response.data[2];
 				// vm.originDes = vm.info.description;
 				//vm.choosedVerify.val = vm.info.verifierToken;
 				//console.log(vm.info.imgInfo);
+				console.log(vm.info.imgInfo);
+
+
+				for(var i = 0; i < response.data.length; i ++)
+				{
+					vm.imgArr.push(response.data[i].img);
+				}
+				console.log(vm.imgArr);
+				if(vm.imgArr.length > 0){
+					vm.selImg = vm.imgArr[0];
+				}
+
+				/*for (var x in vm.info.imgInfo)
+				{
+					//document.write(mycars[x] + "<br />")
+					vm.imgArr.push(x.img);
+				}
+
+				console.log(vm.imgArr);*/
 
 			},function (response) {
 				vm.authError = response.statusText + '(' + response.status + ')';
@@ -202,7 +273,8 @@
 			rcTmp.spec.template.metadata.labels.app = vm.info.name;
 			rcTmp.spec.template.spec.containers[0].name = vm.info.name;
 			rcTmp.spec.template.spec.containers[0].image = 'hub.c.163.com/allan1991/tomcat-app:v1';
-			//rcTmp.template.spec.containers[0].ports[0].containerPort = parseInt(vm.SvcInfo.ports);
+			rcTmp.spec.template.spec.containers[0].ports[0].containerPort = parseInt(vm.SvcInfo.ports);
+
 
 
 			console.log(rcTmp);
@@ -220,14 +292,14 @@
 
 
 
-			/*NetworkService.post(constdata.api.application.depPath+'/service',svcTmp,function (response) {
+			NetworkService.post(constdata.api.application.depPath+'/service',svcTmp,function (response) {
 				toastr.success(i18n.t('u.ADD_SUC'));
 				vm.backAction();
 			},function (response) {
 				vm.authError = response.statusText + '(' + response.status + ')';
 				console.log(vm.authError);
 				toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
-			});*/
+			});
 
 
 
