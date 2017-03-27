@@ -36,6 +36,7 @@
         vm.getUserRole = getUserRole;
         vm.getUserInfomation = getUserInfomation;
         vm.checkToken = checkToken;
+        vm.doRegister = doRegister;
 
         //语言
         var langChi = '中文';
@@ -211,6 +212,10 @@
         }
         function checkToken() {
 
+        }
+
+        function doRegister() {
+            $state.go('access.register');
         }
 
         function getUserRole() {
