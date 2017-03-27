@@ -9,7 +9,27 @@
     <!-- main -->
 
 
+    <div class="m-l m-r m-t panel panel-default">
+        <table  st-table="vm.displayedCollection" st-safe-src="vm.infos" class="table table-bordered table-striped table-hover bg-white text-center">
+            <thead>
+            <tr>
+                <th colspan="7">
+                    <button ng-click="vm.addInfo()" class="btn btn-sm btn-info btn-addon"><i class="fa fa-plus"></i>{{'product.ADD' | translate}}</button>
+                    <input st-search="" class="form-control pull-right m-b-xs w-md" placeholder="{{'product.SEARCH' | translate}}" type="text"/>
+                </th>
+            </tr>
+<!--            <tr class="font-bold bg-light">
+                <th class="text-center">{{'product.PRODUCTNAME' | translate}}</th>
+                <th class="text-center">{{'product.SHOWEDNAME' | translate}}</th>
+                <th class="text-center">{{'product.CHECKWAY' | translate}}</th>
+                <th class="text-center">{{'product.CREATEDDATE' | translate}}</th>
+                <th class="text-center">{{'product.DESCRIPTION' | translate}}</th>
+                <th class="text-center">{{'product.OPERATE' | translate}}</th>
+            </tr>-->
 
+            </thead>
+            </table>
+        </div>
 
 
     <div class="row m-l" >
