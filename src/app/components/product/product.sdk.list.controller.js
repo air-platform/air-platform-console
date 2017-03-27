@@ -10,12 +10,14 @@
         //判断是否为浏览器回退按钮加载的本页面
         isBrowserBackBtn();
 
+        status();
+
         var receivedCheck = vm.argsProduct.credentialsProvider;
         var receivedDesc = vm.argsProduct.description;
-        //var benc = i18n.t('product.ENABLE_SERVICE');//'启用云服务';
-        //var bdis = i18n.t('product.DISABLE_SERVICE');//'禁用云服务';
+        // var benc = i18n.t('product.ENABLE_SERVICE');//'启用云服务';
+        // var bdis = i18n.t('product.DISABLE_SERVICE');//'禁用云服务';
 
-        vm.buttonEnable = i18n.t('product.ENABLE_SERVICE');//'启用云服务'
+    //    vm.buttonEnable = i18n.t('product.ENABLE_SERVICE');//'启用云服务'
         vm.tipsInfo = delmodaltip;
         vm.userVerifier = [
             {
@@ -37,13 +39,13 @@
         };
         vm.platforms = [];
         vm.isDataChanged = false;
-        console.log(vm.argsProduct);
+console.log('api_key:' + vm.argsProduct.api_key)
         //更新产品信息
         vm.modifiedProductInfo = {
             name : vm.argsProduct.service_name,
             displayName : vm.argsProduct.service_desc,
             accessUrl:vm.argsProduct.request_path,
-            accessToken:vm.argsProduct.access_key,
+            accessToken:vm.argsProduct.api_key,
             credentialsProvider:receivedCheck,
             description : vm.argsProduct.service_desc,
             srcUrl:vm.argsProduct.upstream_url
@@ -84,14 +86,70 @@
             }
         });
 
+        function status() {
+            if (angular.isDefined(vm.argsProduct.api_key) == false  ) {
+                vm.buttonEnable == i18n.t('product.ENABLE_SERVICE');
+                console.log('buttonEnable' + vm.buttonEnable);
+            }else{
+                vm.buttonEnable = i18n.t('product.DISABLE_SERVICE');
+                console.log('buttonEnable1'+ vm.buttonEnable);
+                if (vm.argsProduct.api_key.length == 0){
+                    vm.buttonEnable == i18n.t('product.ENABLE_SERVICE');
+                    console.log('buttonEnable2'+ vm.buttonEnable);
+                }
+                else {
+                    vm.buttonEnable = i18n.t('product.DISABLE_SERVICE');
+                    console.log('buttonEnable3'+ vm.buttonEnable);
+                }
+                console.log('buttonEnable4'+ vm.buttonEnable);
+            }
+        }
+
+        function getApiKey() {
+            NetworkService.post(constdata.api.product.listAllPath,null,function (response) {
+                vm.infos = response.data[0].userServices;
+                // console.log( vm.infos);
+                vm.displayedCollection = [].concat(vm.infos);
+                $scope.sc = [].concat(vm.infos);
+                // console.log(response.data.content);
+            },function (response) {
+                toastr.error(response.statusText);
+                console.log('Error');
+                console.log('Status' + response.status);
+            });
+        }
+
         vm.UpdataProduct = function() {
 
             if(vm.buttonEnable == i18n.t('product.ENABLE_SERVICE')){
                 vm.buttonEnable = i18n.t('product.DISABLE_SERVICE');
-                toastr.success(i18n.t('product.ENABLE_SERVICE') + ' 成功!');
+
+                NetworkService.postForm(constdata.api.product.serviceOpenPath,vm.argsProduct,function(response) {
+                    console.log("service open:" + response.data.msg);
+                    if (response.data.code == 0){
+                        toastr.success(i18n.t('product.ENABLE_SERVICE') + ' 成功!');
+                    }
+                    else {
+                        toastr.success(i18n.t('product.ENABLE_SERVICE') + ' 失败!');
+                    }
+                },function (response) {
+                    toastr.success(i18n.t('product.ENABLE_SERVICE') + ' 失败!');
+                });
+
+
             }else{
                 vm.buttonEnable = i18n.t('product.ENABLE_SERVICE');
-                toastr.success(i18n.t('product.DISABLE_SERVICE') + ' 成功!');
+                NetworkService.postForm(constdata.api.product.serviceClosePath,vm.argsProduct,function(response) {
+                    console.log("service open:" + response.data.msg);
+                    if (response.data.code == 0){
+                        toastr.success(i18n.t('product.DISABLE_SERVICE') + ' 成功!');
+                    }else{
+                        toastr.success(i18n.t('product.DISABLE_SERVICE') + ' 失败!');
+                    }
+                },function (response) {
+                    toastr.success(i18n.t('product.DISABLE_SERVICE') + ' 失败!');
+                });
+
             }
 
            /* if(($stateParams.args.displayName == vm.modifiedProductInfo.displayName)&&($stateParams.args.description == vm.modifiedProductInfo.description)&&(receivedCheck==vm.modifiedProductInfo.credentialsProvider)) {

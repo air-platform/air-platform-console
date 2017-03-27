@@ -34,6 +34,7 @@
 
         var service = {
             post  : post,
+            postForm: postForm,
             get   : get,
             put   : put,
             delete: del
@@ -52,6 +53,21 @@
                 }
             );
         };
+
+        function postForm(path,body,successHandler,failedHandler) {
+            var formdata = new FormData();
+            formdata.append('serviceId',body.service_id);
+
+            var token = StorageService.get('iot.hnair.cloud.access_token');
+            var reg = RestService.one(path);
+            reg.customPOST(formdata, undefined, undefined, { 'Content-Type': undefined ,'Authorization':token}).then(
+                successHandler,function (response) {
+                    failedResponse(response,failedHandler,path);
+                }
+            );
+
+        };
+
 
         function get(path,param,successHandler,failedHandler) {
             path = checkPath(path);
@@ -275,7 +291,6 @@
          }
 
      }
-
 
     /** StorageService */
     angular

@@ -26,7 +26,7 @@
                     "device":
                         {"listAllPath":"/iot/api/v1/devices","updatePath":"/iot/api/v1/devices/device1","deletePath":"/iot/api/v1/devices/device1","deviceInfoPath":"/iot/api/v1/devices/id","addPath":"/iot/api/v1/devices"},
                     "product":
-                        {"listAllPath":"/cp/v1/relation/query","updatePath":"/iot/api/v1/products","deletePath":"/iot/api/v1/products","productInfoPath":"/iot/api/v1/products","addPath":"/iot/api/v1/products",
+                        {"listAllPath":"/cp/v1/relation/query","serviceOpenPath":"/cp/v1/relation/startup","serviceClosePath":"/cp/v1/relation/shutdown","productInfoPath":"/iot/api/v1/products","addPath":"/iot/api/v1/products",
 
                             "addSdkPath":"/iot/api/v1/products","deleteSdkPath":"/iot/api/v1/products","addTopicPath":"/iot/api/v1/products","topicListAllPath":"/iot/api/v1/products","topicUpdatePath":"/iot/api/v1/products","topicDeletePath":"/iot/api/v1/products" ,
                             "getdevicegroup":"/iot/api/v1/products","productPath":"/iot/api/v1/products","profileInfoPath":"/iot/api/v1/products","profileDeletePath":"/iot/api/v1/products","/iot/api/v1/profileUpdatePath":"/iot/api/v1/products","configInfoPath":"/iot/api/v1/products",
