@@ -247,7 +247,9 @@
     "APPDETAIL":"应用详情",
     "CLOUDSOURCE":"来源",
     "IMAGENAME":"镜像名称",
-    "IMAGETAG":"镜像标签"
+    "IMAGETAG":"镜像标签",
+    "DEPLOY":"部署",
+    "ACCESS_PORT":"访问端口"
   },
   "event":{
     "EVENTMANAGER":"事件管理",

@@ -36,7 +36,8 @@
                     "application":
                         {"appsPath":"/appMng/v1/apps",
                          "imgsPath":"/appMng/v1/images",
-                            "imgsAppPath":"/appMng/v1/apps"
+                            "imgsAppPath":"/appMng/v1/apps",
+                            "depPath":"/v1"
                         },
                     "event":
                         {"eventPath":"/iot/api/v1/events"},

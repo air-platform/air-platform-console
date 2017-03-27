@@ -25,7 +25,7 @@
 
 
 
-				<div class="form-group">
+				<!--<div class="form-group">
 					<label class="col-sm-1 m-l-lg font-bold control-label">{{'product.DESCRIPTION' | translate}}</label>
 					<div class="col-sm-4">
 						<textarea class="form-control" type="text"
@@ -61,7 +61,34 @@
 							   placeholder="绑定服务" ng-disabled="!vm.isAdd" ng-model="vm.info.services" >
 					</div>
 				</div>
+				<div class="line line-dashed b-b line-lg"></div>-->
+
+
+
+				<div class="form-group">
+					<label class="col-sm-1 m-l-lg font-bold control-label">{{'product.APP_IMAGES' | translate}}</label>
+					<div class="col-sm-4">
+						<input class="form-control" type="text"
+							   placeholder="{{'product.APP_IMAGES' | translate}}" ng-disabled="!vm.isAdd" ng-model="vm.info.imgInfo.img" >
+					</div>
+				</div>
 				<div class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+				<div class="form-group">
+					<label class="col-sm-1 m-l-lg font-bold control-label">{{'product.ACCESS_PORT' | translate}}</label>
+					<div class="col-sm-4">
+						<input class="form-control" type="text"
+							   placeholder="{{'product.ACCESS_PORT' | translate}}" ng-disabled="!vm.isAdd" ng-model="vm.SvcInfo.ports" >
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg"></div>
+
+
+
 
 
 
@@ -74,8 +101,8 @@
 				<div class="form-group">
 					<div class="col-sm-offset-1 col-sm-3">
 						<button class="btn btn-sm btn-default btn-addon form-inline bg-light m-l-lg" ng-click="vm.back()"><i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}}</button>
-						<button class="btn btn-sm btn-info form-inline btn-addon" ng-if="vm.isAdd" type="submit" ng-click="vm.submitAction()" ng-disabled='form.$invalid'> <i class="fa fa-plus"></i>{{'product.ADD' | translate}}</button>
-						<button class="btn btn-sm btn-info form-inline btn-addon" ng-if="!vm.isAdd" type="submit" ng-click="vm.submitAction()" ng-disabled='form.$invalid'> <i class="fa fa-edit"></i>{{'event.SUBMIT' | translate}}</button>
+						<button class="btn btn-sm btn-info form-inline btn-addon" ng-if="vm.isAdd" type="submit" ng-click="vm.submitAction()" ng-disabled='form.$invalid'> <i class="fa fa-plus"></i>{{'product.DEPLOY' | translate}}</button>
+						<button class="btn btn-sm btn-info form-inline btn-addon" ng-if="!vm.isAdd" type="submit" ng-click="vm.submitAction()" ng-disabled='form.$invalid'> <i class="fa fa-edit"></i>{{'product.SUBMIT' | translate}}</button>
 					</div>
 				</div>
 				<br/>

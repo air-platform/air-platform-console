@@ -8,6 +8,8 @@
 		var vm = this;
 
 		vm.info = {};
+		vm.SvcInfo = {};
+		vm.RcInfo = {};
 		vm.isAdd = true;
 		vm.userTitle = i18n.t('application.ADD_APP');
 		// vm.userVerifier = [{title:'默认',value:'default'},{title:'信任',value:'trustful'}];
@@ -15,10 +17,11 @@
 
 		var applicationName = $stateParams.applicationName;
         vm.applicationName = applicationName;
-		if (applicationName){
+		vm.appId = applicationName;
+		/*if (applicationName){
 			vm.userTitle = i18n.t('application.EDIT_APP');
 			vm.isAdd = false;
-		}
+		}*/
 
 		// vm.selectedUVChanged = function () {
 		// 	if (vm.credentialsProvider.title == '默认'){
@@ -36,7 +39,7 @@
 			$state.go('app.application');
 		}
 
-		vm.getData = function() {
+		/*vm.getData = function() {
 
 			NetworkService.get(constdata.api.application.appsPath,null,function (response) {
 				vm.info = response.data;
@@ -50,9 +53,46 @@
 				vm.authError = response.statusText + '(' + response.status + ')';
 				toastr.error(i18n.t('application.GET_APP_INFO_FAILED'));
 			});
-		}
+		}*/
 
-		function addItem() {
+		vm.getData = function() {
+
+			NetworkService.get(constdata.api.application.appsPath + '/' + vm.appId,null,function (response) {
+				vm.info = response.data.data;
+				// if (vm.info.credentialsProvider == 'default'){
+				// 	vm.credentialsProvider = vm.userVerifier[0];
+				// }else{
+				// 	vm.credentialsProvider = vm.userVerifier[1];
+				// }
+				console.log(vm.info);
+			},function (response) {
+				vm.authError = response.statusText + '(' + response.status + ')';
+				toastr.error(i18n.t('application.GET_APP_INFO_FAILED'));
+			});
+
+
+
+
+			NetworkService.get(constdata.api.application.imgsAppPath + '/' + vm.appId + '/images',null,function (response) {
+				//console.log(response.data);
+				vm.info.imgInfo = response.data[0];
+				// vm.originDes = vm.info.description;
+				//vm.choosedVerify.val = vm.info.verifierToken;
+				//console.log(vm.info.imgInfo);
+
+			},function (response) {
+				vm.authError = response.statusText + '(' + response.status + ')';
+				toastr.error(vm.authError);
+			});
+
+
+
+
+
+
+		}
+		vm.getData();
+		/*function addItem() {
 			// vm.info = {
 			//   "name": "app1",
 			//   "credentialsProvider": "default",
@@ -68,6 +108,137 @@
 				console.log(vm.authError);
 				toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
 			});
+		}*/
+
+
+
+
+		function addItem() {
+
+			//console.log(vm.info);
+
+			var svcTmp = {
+				"kind": "Service",
+				"apiVersion": "v1",
+				"metadata": {
+					"name": "myweb",
+					"namespace": "default"
+				},
+				"spec": {
+					"type": "NodePort",
+					"ports": [
+						{
+							"port": 8080
+						}
+					],
+					"selector": {
+						"app": "myweb"
+					}
+				}
+			};
+
+
+
+
+
+
+
+			var rcTmp = {
+				"kind": "ReplicationController",
+				"apiVersion": "v1",
+				"metadata": {
+				"name": "myweb",
+					"namespace": "default"
+				},
+				"spec": {
+				"replicas": 1,
+					"selector": {"app":"myweb"},
+				"template": {
+					"metadata": {
+						"labels": {"app":"myweb"}
+					},
+					"spec": {
+						"containers": [{
+							"name": "myweb",
+							"image": "hub.c.163.com/allan1991/tomcat-app:v1",
+							"ports": [{
+								"containerPort": 8080
+							}],
+							"env": [{
+								"name": "TEST_ENV",
+								"value": "123456"
+							}],
+							"imagePullPolicy": "IfNotPresent"
+						}],
+							"restartPolicy": "Always"
+					}
+				}
+				}
+			};
+
+
+
+
+
+
+
+
+
+
+
+
+			svcTmp.spec.ports[0].port = parseInt(vm.SvcInfo.ports);
+			svcTmp.spec.selector.app = vm.info.name;
+			svcTmp.metadata.name = vm.info.name;
+			svcTmp.metadata.namespace = vm.info.user;
+			console.log(svcTmp);
+
+
+
+			//rcTmp.spec.replicas = 1;
+			rcTmp.metadata.name = vm.info.name;
+			rcTmp.metadata.namespace = vm.info.user;
+			rcTmp.spec.selector.app = vm.info.name;
+			rcTmp.spec.template.metadata.labels.app = vm.info.name;
+			rcTmp.spec.template.spec.containers[0].name = vm.info.name;
+			rcTmp.spec.template.spec.containers[0].image = 'hub.c.163.com/allan1991/tomcat-app:v1';
+			//rcTmp.template.spec.containers[0].ports[0].containerPort = parseInt(vm.SvcInfo.ports);
+
+
+			console.log(rcTmp);
+
+
+						//return;
+			NetworkService.post(constdata.api.application.depPath+'/rc',rcTmp,function (response) {
+				toastr.success(i18n.t('u.ADD_SUC'));
+				vm.backAction();
+			},function (response) {
+				vm.authError = response.statusText + '(' + response.status + ')';
+				console.log(vm.authError);
+				toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+			});
+
+
+
+			/*NetworkService.post(constdata.api.application.depPath+'/service',svcTmp,function (response) {
+				toastr.success(i18n.t('u.ADD_SUC'));
+				vm.backAction();
+			},function (response) {
+				vm.authError = response.statusText + '(' + response.status + ')';
+				console.log(vm.authError);
+				toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+			});*/
+
+
+
+
+
+
+
+
+
+
+
 		}
 
 		function editItem() {
@@ -94,9 +265,9 @@
 		}
 
 
-		if (!vm.isAdd){
+		/*if (!vm.isAdd){
 			vm.getData();
-		}
+		}*/
 
 	}
 	

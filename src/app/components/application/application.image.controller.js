@@ -14,6 +14,8 @@
 		// vm.credentialsProvider = vm.userVerifier[0];
 
 		var applicationName = $stateParams.applicationName;
+		//console.log('ddddddd');
+		//console.log($stateParams.args.selItem);
         vm.applicationName = applicationName;
 		/*if (applicationName){
 			vm.userTitle = i18n.t('application.EDIT_APP');
