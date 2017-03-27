@@ -9,11 +9,7 @@
         var vm = this;
         //判断是否为浏览器回退按钮加载的本页面
         isBrowserBackBtn();
-        vm.buttonEnable = i18n.t('product.ENABLE_SERVICE');//'启用云服务'
-        status();
-
-        updateForm();
-
+        updateServiceInfo();
         var receivedCheck = vm.argsProduct.credentialsProvider;
         var receivedDesc = vm.argsProduct.description;
         // var benc = i18n.t('product.ENABLE_SERVICE');//'启用云服务';
@@ -50,7 +46,6 @@
             description : vm.argsProduct.service_desc,
             srcUrl:vm.argsProduct.upstream_url
         }
-
 
         //监听模型变化
         var watcherName = $scope.$watch('vm.modifiedProductInfo.name',function(newName, oldName) {
@@ -124,20 +119,28 @@
             }
         });
 
-        function status() {
+        function updateServiceInfo(){
             var path = constdata.api.product.queryServiceInfo + vm.argsProduct.service_id;
             console.log('path' + path);
             NetworkService.get(path,null,function (response) {
+                console.log('code:' + response.data.code);
                 if (response.data.code == 0){
-                    console.log('api key1: ' + response.data.service.apiKey);
-                    if (response.data.service.apiKey.length == 0){
+                    console.log('api key1: ' + response.data.service.api_key);
+                    if (response.data.service.api_key.length == 0){
                         vm.buttonEnable = i18n.t('product.ENABLE_SERVICE');
                     }
-                    else{
+                    else {
                         vm.buttonEnable = i18n.t('product.DISABLE_SERVICE');
                     }
+                    vm.argsProduct.service_name = response.data.service.service_name;
+                    vm.argsProduct.service_desc = response.data.service.service_desc;
+                    vm.argsProduct.request_path = response.data.service.request_path;
+                    vm.argsProduct.upstream_url = response.data.service.upstream_url;
+                    vm.argsProduct.api_key = response.data.service.api_key;
                 }
                 else {
+                    vm.buttonEnable = i18n.t('product.ENABLE_SERVICE');
+                    // console.log('botton1' + vm.buttonEnable);
                     //toastr.error('获取用户信息失败！');
                 }
             },function (response) {
@@ -145,18 +148,19 @@
                 console.log('Error');
                 console.log('Status' + response.status);
             });
+
         }
 
         function updateForm(){
             var path = constdata.api.product.queryServiceInfo + vm.argsProduct.service_id;
-            console.log('path' + path);
+       //
             NetworkService.get(path,null,function (response) {
                 if (response.data.code == 0){
                     // vm.modifiedProductInfo.name = response.data.service.serviceName;
                     // vm.modifiedProductInfo.description = response.data.service.serviceDesc;
                     // vm.modifiedProductInfo.accessUrl = response.data.service.callPath;
                     // vm.modifiedProductInfo.srcUrl = response.data.service.upstreamUrl;
-                    vm.modifiedProductInfo.accessToken = response.data.service.apiKey;
+                     = response.data.service.apiKey;
                     console.log('name:' + vm.modifiedProductInfo.accessUrl)
                 }
                 else {
