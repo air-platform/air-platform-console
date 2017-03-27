@@ -68,7 +68,26 @@
 			// }
 			vm.info.credentialsProvider = "default";
 			//console.log(vm.info);
-			NetworkService.post(constdata.api.application.imgsPath,vm.info,function (response) {
+
+			var img = {
+				"name": "testabc",
+				"tag": "1.0",
+				"appId": "app123456",
+				"lang": "go",
+				"git": "http://223.202.32.60:8071/gk-test/testapp6.git"
+			};
+
+
+			img.name = vm.info.imageName;
+			img.tag = vm.info.imageTag;
+			img.appId = vm.info.id;
+			img.lang = vm.info.lang;
+			img.git = vm.info.git;
+
+
+
+
+			NetworkService.post(constdata.api.application.imgsPath,img,function (response) {
 				toastr.success(i18n.t('u.ADD_SUC'));
 				vm.backAction();
 			},function (response) {
