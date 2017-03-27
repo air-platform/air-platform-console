@@ -122,7 +122,7 @@
             }
             var tenant = localStorage.getItem(constdata.tenant);
             if (tenant && tenant.length > 0){
-                var prefix = 'tenant-' + tenant;
+                var prefix = 'innovation-' + tenant;
                 var tp = toParams.hasOwnProperty('t');
                 if(tp){
                     var ourl = toState.url;
