@@ -31,7 +31,9 @@
         //     prefix = 'tenant-' + tenant;
         // }
 
-
+        vm.allService = [];
+        vm.allOpenService = [];
+        vm.servicesArr = [];
         vm.buttonEnable = i18n.t('product.ENABLE_APP');//'启用云服务'
         vm.UpdataProduct = function() {
 
@@ -77,6 +79,56 @@
                 vm.info = response.data.data;
                 vm.originDes = vm.info.description;
                 vm.choosedVerify.val = vm.info.verifierToken;
+                vm.servicesArr = vm.info.services.split(',');
+                console.log(vm.servicesArr);
+
+
+
+
+                NetworkService.post(constdata.api.product.listAllPath,null,function (response) {
+                    vm.infos = response.data[0].userServices;
+                    vm.infosUser = response.data[1].userServices;
+                    // console.log( vm.infos);
+                    vm.displayedCollection = [].concat(vm.infos);
+                    vm.displayedUserCollection = [].concat(vm.infosUser);
+                    //$scope.sc = [].concat(vm.infos);
+                    //console.log(vm.infos);
+
+                    console.log(vm.displayedCollection);
+                    console.log(vm.displayedUserCollection);
+                    for(var i = 0;  i < vm.displayedCollection.length; i ++){
+                        if( vm.displayedCollection[i].api_key != '' && vm.servicesArr.indexOf(vm.displayedCollection[i].api_id) > -1){
+                            vm.allOpenService.push(vm.displayedCollection[i]);
+                        }
+                    }
+                    for(var i = 0;  i < vm.displayedUserCollection.length; i ++){
+                        if( vm.displayedUserCollection[i].api_key != '' && vm.servicesArr.indexOf(vm.displayedUserCollection[i].api_id) > -1){
+                            vm.allOpenService.push(vm.displayedUserCollection[i]);
+                        }
+                    }
+                    console.log(vm.allOpenService);
+
+                },function (response) {
+                    toastr.error(response.statusText);
+                    console.log('Error');
+                    console.log('Status' + response.status);
+                });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
@@ -96,6 +148,14 @@
                 vm.authError = response.statusText + '(' + response.status + ')';
                 toastr.error(vm.authError);
             });
+
+
+
+
+
+
+
+
 
 
 
