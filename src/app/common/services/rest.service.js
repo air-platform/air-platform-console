@@ -292,6 +292,60 @@
 
      }
 
+     /** RegisterService */
+     angular
+         .module('iot')
+         .factory('CreatePsService', CreatePsService);
+
+     /** @ngInject */
+     function CreatePsService(RestService,StorageService,constdata) {
+
+         var service = {
+             post: post,
+         };
+
+         return service;
+
+         ////////////
+
+         function post(path,body,successHandler,failedHandler) {
+             var formdata = new FormData();
+             formdata.append('serviceName',body.serviceName);
+             formdata.append('servicePic',body.servicePic);
+             formdata.append('requestPath',body.requestPath);
+             formdata.append('provider',body.provider);
+             formdata.append('version',body.version);
+             formdata.append('serviceDesc',body.serviceDesc);
+             formdata.append('upstreamUrl',body.upstreamUrl);
+
+             var createPs = RestService.one(path);
+             createPs.customPOST(formdata, undefined, undefined, { 'Content-Type': undefined }).then(
+                 successHandler,function (response) {
+                     failedResponse(response,failedHandler,path);
+                 }
+             );
+
+         };
+
+         function failedResponse(response,failedHandler,path) {
+             if (constdata.debugMode){
+                 console.log('failed----' + path);
+                 console.log(response);
+             }
+             var newResponse = {};
+             newResponse.status = response.status;
+             if (response.data && response.data.message){
+                 newResponse.statusText = response.data.message;
+             }else{
+                 newResponse.statusText = '服务器连接错误';
+             }
+             if (failedHandler){
+                 failedHandler(newResponse);
+             }
+         }
+
+     }
+
     /** StorageService */
     angular
         .module('iot')
