@@ -43,6 +43,11 @@
 
         vm.OperApp = OperApp;
         console.log(vm.selItem);
+
+
+
+
+
         //add info
         function OperApp(index) {
             var item = vm.selItem;
@@ -105,6 +110,11 @@
 
            /* NetworkService.get(constdata.api.application.appsPath + '/' + vm.appId,null,function (response) {*/
                 vm.info = vm.selItem;//response.data.data;
+
+
+
+
+                vm.info.detailRunInfo.accessUrl = 'http://223.202.32.56:' + vm.info.detailRunInfo.service.spec.ports[0].nodePort;
                 vm.originDes = vm.info.description;
                 vm.choosedVerify.val = vm.info.verifierToken;
                 vm.servicesArr = vm.info.services.split(',');
