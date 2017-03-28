@@ -272,7 +272,7 @@
 			rcTmp.spec.selector.app = vm.info.name;
 			rcTmp.spec.template.metadata.labels.app = vm.info.name;
 			rcTmp.spec.template.spec.containers[0].name = vm.info.name;
-			rcTmp.spec.template.spec.containers[0].image = 'hub.c.163.com/allan1991/tomcat-app:v1';
+			rcTmp.spec.template.spec.containers[0].image = vm.selImg;//'hub.c.163.com/allan1991/tomcat-app:v1';
 			rcTmp.spec.template.spec.containers[0].ports[0].containerPort = parseInt(vm.SvcInfo.ports);
 
 

@@ -12,7 +12,8 @@
 		vm.userTitle = i18n.t('application.ADD_APP');
 		// vm.userVerifier = [{title:'默认',value:'default'},{title:'信任',value:'trustful'}];
 		// vm.credentialsProvider = vm.userVerifier[0];
-
+		vm.allEnableService = new Array();
+		vm.selService = '';
 		var applicationName = $stateParams.applicationName;
         vm.applicationName = applicationName;
 		if (applicationName){
@@ -28,6 +29,11 @@
 		// 	}
 		// }
 
+
+		vm.langOptions = ['Go', 'Javascript', 'Python'];
+		vm.info.lang = 'Go';
+		vm.info.servicesArr = [];//["cebdbdf9-c535-4fac-ac97-2ef8ac5f60a0", "d7332337-7b3e-4c4d-a03a-70802759b736"];
+		vm.info.services = '';
 		vm.amendUser = function(index) {
 			$state.go('app.application');
 		}
@@ -35,7 +41,11 @@
 		vm.back = function () {
 			$state.go('app.application');
 		}
+		vm.downloadSDK = function(index) {
+			vm.info.services = vm.info.servicesArr.toString();
+			console.log(vm.info.services);
 
+		}
 		vm.getData = function() {
 
 			NetworkService.get(constdata.api.application.appsPath,null,function (response) {
@@ -52,6 +62,35 @@
 			});
 		}
 
+		vm.getCloudService = function(){
+
+			NetworkService.post(constdata.api.product.listAllPath,null,function (response) {
+				vm.infos = response.data[0].userServices;
+				vm.infosUser = response.data[1].userServices;
+				// console.log( vm.infos);
+				vm.displayedCollection = [].concat(vm.infos);
+				vm.displayedUserCollection = [].concat(vm.infosUser);
+				//$scope.sc = [].concat(vm.infos);
+				//console.log(vm.infos);
+				for(var i = 0;  i < vm.displayedCollection.length; i ++){
+					if(vm.displayedCollection[i].api_key != ''){
+						vm.allEnableService.push(vm.displayedCollection[i]);
+					}
+				}
+				for(var i = 0;  i < vm.displayedUserCollection.length; i ++){
+					if(vm.displayedUserCollection[i].api_key != ''){
+						vm.allEnableService.push(vm.displayedUserCollection[i]);
+					}
+				}
+				console.log(vm.allEnableService);
+
+			},function (response) {
+				toastr.error(response.statusText);
+				console.log('Error');
+				console.log('Status' + response.status);
+			});
+
+		}
 		function addItem() {
 			// vm.info = {
 			//   "name": "app1",
@@ -60,6 +99,8 @@
 			// }
 			vm.info.credentialsProvider = "default";
 			//console.log(vm.info);
+			vm.info.services = vm.info.servicesArr.toString();
+			console.log(vm.info.services);
 			NetworkService.post(constdata.api.application.appsPath,vm.info,function (response) {
 				toastr.success(i18n.t('u.ADD_SUC'));
 				vm.backAction();
@@ -97,6 +138,7 @@
 		if (!vm.isAdd){
 			vm.getData();
 		}
+		vm.getCloudService();
 
 	}
 	

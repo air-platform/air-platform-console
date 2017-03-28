@@ -44,8 +44,11 @@
 				<div class="form-group">
 					<label class="col-sm-1 m-l-lg font-bold control-label">{{'product.LANGUAGE' | translate}}</label>
 					<div class="col-sm-4">
-						<input class="form-control" type="text"
-							   placeholder="开发语言" ng-disabled="!vm.isAdd" ng-model="vm.info.lang" >
+						<!--<input class="form-control" type="text"
+							   placeholder="开发语言" ng-disabled="!vm.isAdd" ng-model="vm.info.lang" >-->
+
+
+						<select class="form-control" ng-model="vm.info.lang" ng-options="o for o in vm.langOptions"></select>
 					</div>
 				</div>
 				<div class="line line-dashed b-b line-lg"></div>
@@ -57,15 +60,22 @@
 				<div class="form-group">
 					<label class="col-sm-1 m-l-lg font-bold control-label">{{'product.APP_SERVICES' | translate}}</label>
 					<div class="col-sm-4">
-						<input class="form-control" type="text"
-							   placeholder="绑定服务" ng-disabled="!vm.isAdd" ng-model="vm.info.services" >
+						<!--<input class="form-control" type="text"
+							   placeholder="绑定服务" ng-disabled="!vm.isAdd" ng-model="vm.info.services" >-->
+						<select class="form-control"  multiple ng-model="vm.info.servicesArr" ng-options="opt.api_id as opt.service_name for opt in vm.allEnableService"></select>
+
 					</div>
 				</div>
 				<div class="line line-dashed b-b line-lg"></div>
 
 
 
+				<!--			<div>
 
+                                <select class="form-control"  ng-model="vm.selService" ng-options="opt.api_id as opt.service_name for opt in vm.allEnableService"></select>
+
+					<button class="btn btn-sm btn-success btn-addon form-inline" ng-click="vm.downloadSDK(vm.info.servicesArr)"><i class="fa fa-download"></i>{{'product.DOWNLOADSDK' | translate}}</button>
+				</div>-->
 
 
 
