@@ -37,6 +37,32 @@
         vm.buttonEnable = i18n.t('product.ENABLE_APP');//'启用云服务'
         vm.imgArr = [];
         vm.imgArrStr = '';
+
+        vm.showOther = true;
+        vm.showDeploy = true;
+
+        vm.OperApp = OperApp;
+        console.log(vm.selItem);
+        //add info
+        function OperApp(index) {
+            var item = vm.selItem;
+            if(index == 1){
+                //console.log(item);
+                $state.go('app.applicationImage', {applicationName:item.id, args:{selItem:item}});
+            }else if(index == 2){
+                $state.go('app.applicationDeploy', {applicationName:item.id, args:{selItem:item}});
+
+            }else if(index == 3){
+                $state.go('app.applicationedit', {applicationName:item.id, args:{selItem:item}});
+            }else if(index == 4){
+                $state.go('app.applicationedit', {applicationName:item.id, args:{selItem:item}});
+            }else if(index == 5){
+                $state.go('app.applicationedit', {applicationName:item.id, args:{selItem:item}});
+            }
+
+            //$state.go('app.applicationedit');
+        };
+
         vm.UpdataProduct = function() {
 
             if(vm.buttonEnable == i18n.t('product.ENABLE_APP')){
