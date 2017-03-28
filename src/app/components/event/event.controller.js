@@ -7,7 +7,7 @@
     angular.module('iot').controller('EventController', EventController);
 
     /** @ngInject */
-    function EventController(NetworkService,constdata,$state,$uibModal,$log,toastr,$stateParams,i18n,EventDataShareServer,UserInfoServer, delmodaltip) {
+    function EventController(NetworkService,constdata,$timeout,$state,$uibModal,$log,toastr,$stateParams,i18n,EventDataShareServer,UserInfoServer, delmodaltip) {
         /* jshint validthis: true */
 //		var token = StorageService.get('iot.hnair.cloud.access_token');
 //		console.log(token);
@@ -21,7 +21,7 @@
         vm.pageNextEnabled = false;
         vm.totalPages = 12;
         vm.pages = [];
-
+        vm.dispear = false;
 
         //初始化数据
 
@@ -47,8 +47,16 @@
             // });
         }
 
+        function checkTime (){
+            var timer=$timeout(function(){
+                vm.dispear = true;
+            },3000);
+        }
+
         vm.save = function () {
+            vm.dispear = false;
             vm.saveButton = true;
+            checkTime();
         }
 
         vm.goAddItem = function () {

@@ -172,20 +172,20 @@
         </div>
 
 
-        <div style="color:#00A600" class="text-center" ng-show="vm.saveButton!== undefined && vm.saveButton === true" >
+        <div style="color:#00A600" class="text-center" ng-show="vm.saveButton!== undefined && vm.saveButton === true">
             <h2>
-					<span class="icon-success"><span class="fa"
+					<span class="icon-success" ng-if="!vm.dispear"><span class="fa"
                                                      ng-class="{'fa-check-circle-o': vm.saveButton === true, 'fa-close': vm.saveButton === false}"></span></span>
-                <span class="success-text" >修改成功</span>
+                <span class="success-text" ng-if="!vm.dispear">修改成功</span>
             </h2>
             <!--<a ui-sref="login" target="_blank" class="bg-primary run-btn">立即登录</a>-->
         </div>
 
         <div class="text-center text-danger" ng-show="vm.saveButton!== undefined && vm.saveButton === false" >
             <h2>
-					<span class="icon-success"><span class="fa"
+					<span class="icon-success" ng-if="!vm.dispear"><span class="fa"
                                                      ng-class="{'fa-check-circle-o': vm.saveButton === true, 'fa-close': vm.saveButton === false}"></span></span>
-                <span class="success-text">修改失败
+                <span class="success-text" ng-if="!vm.dispear">修改失败
 					</span>
             </h2>
             <!--<a ui-sref="login" target="_blank" class="bg-primary run-btn">立即登录</a>-->

@@ -13,6 +13,8 @@
         vm.pageNextEnabled = false;
         vm.pages = ['1'];
         vm.infos;
+        vm.checkOpen = true;
+        vm.checkClose = true;
         vm.pagingOptions = {
             pageSizes: [5, 10, 20],
             pageSize: 10,
@@ -20,7 +22,6 @@
         };
         vm.tipsInfo = delmodaltip;
         vm.scope = $scope;
-        vm.checkStatus = false;
         getDatas();
 
         var updateSelected = function(action,name,item){
@@ -31,6 +32,7 @@
             if(action == 'close'){
                 console.log('action1:' + action);
                 UpdataProduct(action,item);
+                vm.checkStatus(item);
                 // var idx = $scope.selected.indexOf(id);
                 // $scope.selected.splice(idx,1);
                 // $scope.selectedTags.splice(idx,1);
@@ -116,6 +118,24 @@
             if (action == 'open') {
                 NetworkService.postForm(constdata.api.product.serviceOpenPath, item, function (response) {
                     console.log("service open:" + response.data.msg);
+                    var path = constdata.api.product.queryServiceInfo + item.service_id;
+                    console.log('path' + path);
+                    NetworkService.get(path,null,function (response) {
+                        if (response.data.code == 0){
+                            if (response.data.service.api_key.length == 0){
+                                item.api_key = '';
+                                console.log('item.api_key' + item.api_key);
+                            }
+                            else {
+                                item.api_key = response.data.service.api_key;
+                                console.log('item.api_key' + item.api_key);
+                            }
+                        }
+                        else {
+
+                        }
+                    },function (response) {
+                    });
                     // if (response.data.code == 0) {
                     //     toastr.success(i18n.t('product.ENABLE_SERVICE') + ' 成功!');
                     //     updateServiceInfo();
@@ -131,6 +151,24 @@
             if (action == 'close') {
                 NetworkService.postForm(constdata.api.product.serviceClosePath, item, function (response) {
                     console.log("service close:" + response.data.msg);
+                    var path = constdata.api.product.queryServiceInfo + item.service_id;
+                    console.log('path' + path);
+                    NetworkService.get(path,null,function (response) {
+                        if (response.data.code == 0){
+                            if (response.data.service.api_key.length == 0){
+                                item.api_key = '';
+                                console.log('item.api_key' + item.api_key);
+                            }
+                            else {
+                                item.api_key = response.data.service.api_key;
+                                console.log('item.api_key' + item.api_key);
+                            }
+                        }
+                        else {
+
+                        }
+                    },function (response) {
+                    });
                     // if (response.data.code == 0){
                     //     toastr.success(i18n.t('product.DISABLE_SERVICE') + ' 成功!');
                     //     updateServiceInfo();
@@ -144,7 +182,7 @@
             }
         }
 
-         function updateServiceStatus (item){
+         vm.checkStatus = function (item){
             var path = constdata.api.product.queryServiceInfo + item.service_id;
             console.log('path' + path);
             NetworkService.get(path,null,function (response) {
@@ -157,10 +195,10 @@
                     }
                 }
                 else {
-                    vm.checkEnable = false;
+                    return false;
                 }
             },function (response) {
-                vm.checkEnable = false;
+                vm.checkEnable = '未启用';
             });
 
         }
