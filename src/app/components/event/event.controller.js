@@ -38,13 +38,13 @@
         vm.showItems = [];
 
         function getDatas() {
-            NetworkService.get(constdata.api.event.eventPath,{page:vm.pageCurrent},function (response) {
-                vm.items = response.data.content;
-                updatePagination(response.data);
-            },function (response) {
-                vm.authError = response.statusText + '(' + response.status + ')';
-                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
-            });
+            // NetworkService.get(constdata.api.event.eventPath,{page:vm.pageCurrent},function (response) {
+            //     vm.items = response.data.content;
+            //     updatePagination(response.data);
+            // },function (response) {
+            //     vm.authError = response.statusText + '(' + response.status + ')';
+            //     toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
+            // });
         }
 
         vm.save = function () {

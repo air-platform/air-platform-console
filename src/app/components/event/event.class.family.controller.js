@@ -79,13 +79,13 @@
 		
 
 		vm.updateAction = function() {
-			NetworkService.put(constdata.api.event.eventPath + '/' + eventId,vm.info, function(response) {
-				vm.info = response.data;
-				toastr.success(i18n.t('u.UPDATE_SUC'));
-			}, function(response) {
-				vm.authError = response.statusText + '(' + response.status + ')';
-				toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
-			});
+			// NetworkService.put(constdata.api.event.eventPath + '/' + eventId,vm.info, function(response) {
+			// 	vm.info = response.data;
+			// 	toastr.success(i18n.t('u.UPDATE_SUC'));
+			// }, function(response) {
+			// 	vm.authError = response.statusText + '(' + response.status + ')';
+			// 	toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+			// });
 		}
 
 		// vm.submitAction = function () {
