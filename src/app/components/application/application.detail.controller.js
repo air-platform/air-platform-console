@@ -36,6 +36,7 @@
         vm.servicesArr = [];
         vm.buttonEnable = i18n.t('product.ENABLE_APP');//'启用云服务'
         vm.imgArr = [];
+        vm.imgArrStr = '';
         vm.UpdataProduct = function() {
 
             if(vm.buttonEnable == i18n.t('product.ENABLE_APP')){
@@ -159,9 +160,9 @@
 
 
 
-
+                vm.imgArrStr = vm.imgArr.toString()
                 console.log(vm.info.imgInfo);
-                console.log(response.data);
+                console.log(vm.imgArrStr);
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
                 toastr.error(vm.authError);

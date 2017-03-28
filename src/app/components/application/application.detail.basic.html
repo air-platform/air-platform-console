@@ -220,7 +220,11 @@
                 <tr style="border-bottom:1px dashed #ddd">
                     <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.APP_IMAGES' | translate}}</td>
                     <td class="col-md-10" style="border:none;">
-                        <input style="width: 50%;" ng-model="vm.info.imgInfo.img" type="text" class="form-control pull-left font-thin" required disabled>
+<!--
+                        <input style="width: 50%;" ng-model="vm.imgArrStr" type="text" class="form-control pull-left font-thin" required disabled>
+-->
+                        <select class="form-control"  style="width: 50%;" multiple ng-model="vm.servicesArrd" ng-options="o for o in vm.imgArr" required disabled></select>
+
                     </td>
                 </tr>
 
