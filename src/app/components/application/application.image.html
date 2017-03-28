@@ -15,7 +15,7 @@
 					<label class="col-sm-1 m-l-lg font-bold control-label">{{'product.NAME' | translate}}</label>
 					<div class="col-sm-4">
 						<input class="form-control" type="text"
-							   placeholder="{{'product.NAME' | translate}}"  ng-pattern="/^[a-z][a-z0-9_]{2,19}$/" ng-disabled="!vm.isAdd" ng-model="vm.info.name" required>
+							   placeholder="{{'product.NAME' | translate}}"  ng-pattern="/^[a-z][a-z0-9_]{2,19}$/"  ng-model="vm.info.name"  required disabled>
 					</div>
                     <p><i style="color:red; font-size: 20px; padding-right: 4px;">*</i><i style="color:#cfdadd; font-size: 12px; font-style: normal;">开头字母为小写，其他部分是小写字母和数字组成，字符长度3-20位</i></p>
 				</div>
