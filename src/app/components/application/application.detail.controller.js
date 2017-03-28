@@ -35,6 +35,7 @@
         vm.allOpenService = [];
         vm.servicesArr = [];
         vm.buttonEnable = i18n.t('product.ENABLE_APP');//'启用云服务'
+        vm.imgArr = [];
         vm.UpdataProduct = function() {
 
             if(vm.buttonEnable == i18n.t('product.ENABLE_APP')){
@@ -129,6 +130,14 @@
 
 
 
+
+
+
+
+
+
+
+
                 
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
@@ -142,8 +151,17 @@
                 vm.info.imgInfo = response.data[0];
                // vm.originDes = vm.info.description;
                 //vm.choosedVerify.val = vm.info.verifierToken;
-                console.log(vm.info.imgInfo);
 
+                for(var i = 0; i < response.data.length; i ++)
+                {
+                    vm.imgArr.push(response.data[i].img);
+                }
+
+
+
+
+                console.log(vm.info.imgInfo);
+                console.log(response.data);
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
                 toastr.error(vm.authError);
