@@ -24,9 +24,10 @@
 
         vm.saveInfo = function() {
             if($stateParams.proName == '') {
-                if(vm.newProInfo.name == '') {
+                if(vm.newProInfo.serviceName == '') {
                     toastr.error(i18n.t('product.NOTCOMPLETE'));
                 } else {
+                    console.log("开始添加服务");
                     vm.newProInfo.credentialsProvider = vm.credentialsProviderValue;
                     logger.info(vm.newProInfo);
                     NetworkService.post(constdata.api.product.addPath,vm.newProInfo,function (response) {
