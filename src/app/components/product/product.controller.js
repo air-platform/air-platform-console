@@ -19,10 +19,30 @@
             currentPage: 1
         };
         vm.tipsInfo = delmodaltip;
-        
+        vm.scope = $scope;
+        vm.checkStatus = false;
         getDatas();
 
+        var updateSelected = function(action,name,item){
+            if(action == 'open'){
+                console.log('action:' + action);
+                UpdataProduct(action,item);
+            }
+            if(action == 'close'){
+                console.log('action1:' + action);
+                UpdataProduct(action,item);
+                // var idx = $scope.selected.indexOf(id);
+                // $scope.selected.splice(idx,1);
+                // $scope.selectedTags.splice(idx,1);
+            }
+        }
 
+        vm.updateSelection = $scope.updateSelection = function($event,item){
+            console.log(item.service_id);
+            var checkbox = $event.target;
+            var action = (checkbox.checked?'open':'close');
+            updateSelected(action,checkbox.name,item);
+        }
 
 
        // console.log(vm.infos);
@@ -91,6 +111,59 @@
             });
         }
 
+        function UpdataProduct(action,item) {
+
+            if (action == 'open') {
+                NetworkService.postForm(constdata.api.product.serviceOpenPath, item, function (response) {
+                    console.log("service open:" + response.data.msg);
+                    // if (response.data.code == 0) {
+                    //     toastr.success(i18n.t('product.ENABLE_SERVICE') + ' 成功!');
+                    //     updateServiceInfo();
+                    // }else {
+                    //     toastr.success(i18n.t('product.ENABLE_SERVICE') + ' 失败!');
+                    // }
+                }, function (response) {
+                    // toastr.success(i18n.t('product.ENABLE_SERVICE') + ' 失败!');
+                });
+
+
+            }
+            if (action == 'close') {
+                NetworkService.postForm(constdata.api.product.serviceClosePath, item, function (response) {
+                    console.log("service close:" + response.data.msg);
+                    // if (response.data.code == 0){
+                    //     toastr.success(i18n.t('product.DISABLE_SERVICE') + ' 成功!');
+                    //     updateServiceInfo();
+                    // }else{
+                    //     toastr.success(i18n.t('product.DISABLE_SERVICE') + ' 失败!');
+                    // }
+                }, function (response) {
+                    // toastr.success(i18n.t('product.DISABLE_SERVICE') + ' 失败!');
+                });
+
+            }
+        }
+
+         function updateServiceStatus (item){
+            var path = constdata.api.product.queryServiceInfo + item.service_id;
+            console.log('path' + path);
+            NetworkService.get(path,null,function (response) {
+                if (response.data.code == 0){
+                    if (response.data.service.api_key.length == 0){
+                        vm.checkEnable = false;
+                    }
+                    else {
+                        vm.checkEnable = true;
+                    }
+                }
+                else {
+                    vm.checkEnable = false;
+                }
+            },function (response) {
+                vm.checkEnable = false;
+            });
+
+        }
 
 
         // 分页 Start

@@ -51,14 +51,19 @@
                                 <small class="text-right">{{item.service_desc}}</small>
                                 <small class="coll" style="float:right; color:#0000ff;"  ng-click="vm.goProTab(item)">[详情..]</a></small>
                             </div>
-                            <div>
+                            <div ng-show="item.api_key!=''">
                                 <label class= "m-t-xs m-r">已启用</label>
                                     <label class="i-switch m-t-xs m-r">
-                                        <input type="checkbox" checked>
+                                        <input type="checkbox" checked ng-click="vm.updateSelection($event,item)">
                                         <i></i>
                                     </label>
-
-
+                            </div>
+                            <div ng-show="item.api_key==''">
+                                <label class= "m-t-xs m-r">未启用</label>
+                                <label class="i-switch m-t-xs m-r">
+                                    <input type="checkbox"  ng-click="vm.updateSelection($event,item)">
+                                    <i></i>
+                                </label>
                             </div>
                         </div>
                     </div>

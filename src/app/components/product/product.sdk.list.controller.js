@@ -123,9 +123,7 @@
             var path = constdata.api.product.queryServiceInfo + vm.argsProduct.service_id;
             console.log('path' + path);
             NetworkService.get(path,null,function (response) {
-                console.log('code:' + response.data.code);
                 if (response.data.code == 0){
-                    console.log('api key1: ' + response.data.service.api_key);
                     if (response.data.service.api_key.length == 0){
                         vm.buttonEnable = i18n.t('product.ENABLE_SERVICE');
                     }
@@ -182,7 +180,6 @@
                 },function (response) {
                     toastr.success(i18n.t('product.DISABLE_SERVICE') + ' 失败!');
                 });
-
             }
 
            /* if(($stateParams.args.displayName == vm.modifiedProductInfo.displayName)&&($stateParams.args.description == vm.modifiedProductInfo.description)&&(receivedCheck==vm.modifiedProductInfo.credentialsProvider)) {
