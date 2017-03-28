@@ -4,7 +4,7 @@
     angular.module('iot').controller('AddFormCtrlPro', AddFormCtrlPro);
 
     /** @ngInject */
-    function AddFormCtrlPro($state, $stateParams, NetworkService, constdata, toastr, i18n, logger) {
+    function AddFormCtrlPro($state, $stateParams, CreatePsService, constdata, toastr, i18n, logger) {
         /* jshint validthis: true */
         var vm = this;
 
@@ -30,7 +30,7 @@
                     console.log("开始添加服务");
                     vm.newProInfo.credentialsProvider = vm.credentialsProviderValue;
                     logger.info(vm.newProInfo);
-                    NetworkService.post(constdata.api.product.addPath,vm.newProInfo,function (response) {
+                    CreatePsService.post(constdata.api.product.addPath,vm.newProInfo,function (response) {
                         
                         toastr.success(i18n.t('u.ADD_SUC'));
                         $state.go('app.product');
