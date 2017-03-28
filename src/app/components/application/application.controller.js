@@ -35,20 +35,135 @@
 
 		vm.OperApp = OperApp;
 		getDatas();
-
-
-
+		vm.infos = [];
+		vm.runInfosBasic = [];
+		vm.runInfosDetail = [];
 		function getDatas() {
             NetworkService.get(constdata.api.application.appsPath,{page:vm.pageCurrent},function (response) {
 				vm.infos = response.data;
-				vm.displayedCollection = [].concat(vm.infos);
-				 //console.log(response.data);
+
+				//if get service , to get run info
+				if(vm.infos.length > 0){
+
+					//first get all running apps, then get detail info for an app.
+					NetworkService.get(constdata.api.application.depPath+'/app?namespace='+vm.infos[0].user,'', function (response) {
+						var runInfoTmp = response.data;
+						toastr.success(i18n.t('u.ADD_SUC'));
+						console.log(runInfoTmp);
+						if(runInfoTmp.length > 0) {
+							for (var i = 0; i < runInfoTmp.length; i++) {
+								vm.runInfosBasic.push(runInfoTmp[i]);
+
+								var curName = vm.runInfosBasic[i].name;
+								var curStatus = vm.runInfosBasic[i].status;
+								NetworkService.get(constdata.api.application.depPath + '/app/' + curName + '?namespace=' + vm.infos[0].user, '', function (response) {
+									var runInfoTmp = response.data;
+									toastr.success(i18n.t('u.ADD_SUC'));
+
+									/*if(runInfoTmp.length > 0) {
+									 for (var i = 0; i < runInfoTmp.length; i++) {
+									 vm.runInfosBasic.push(runInfoTmp[i]);
+									 }
+
+
+									 }*/
+
+
+									runInfoTmp.runStatus = curStatus
+									vm.runInfosDetail.push(runInfoTmp)
+									console.log(vm.runInfosDetail);
+									for(var i = 0; i < vm.infos.length; i ++){
+										if(runInfoTmp.service.metadata.name == vm.infos[i].name){
+											vm.infos[i].state = runInfoTmp.runStatus;
+											vm.infos[i].detailRunInfo = runInfoTmp;
+										}
+									}
+
+
+
+									vm.displayedCollection = [].concat(vm.infos);
+
+
+
+
+
+									//vm.backAction();
+								}, function (response) {
+									vm.authError = response.statusText + '(' + response.status + ')';
+									console.log(vm.authError);
+									toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+								});
+
+
+							}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+						}
+						console.log(vm.runInfosBasic);
+						//vm.backAction();
+					},function (response) {
+						vm.authError = response.statusText + '(' + response.status + ')';
+						console.log(vm.authError);
+						toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+					});
+
+
+
+
+
+
+
+
+
+
+
+				}
+
+
+
+
+
+
+				//vm.displayedCollection = [].concat(vm.infos);
+				// console.log(vm.displayedCollection);
 				updatePagination(response.data);
             },function (response) {
             	vm.authError = response.statusText + '(' + response.status + ')';
                 toastr.error(vm.authError);
                 console.log(response);
             });
+
+
+
+
+
+
         };
 
 

@@ -264,7 +264,8 @@
     "UPSTREAMURL":"服务路径",
     "INPUTUPSTREAMURL":"请输入您提供服务的访问地址",
     "SERVICEDESC":"服务描述",
-    "INPUTSERVICEDESC":"请输入服务描述"
+    "INPUTSERVICEDESC":"请输入服务描述",
+    "CUR_IMAGE":"当前镜像"
   },
   "event":{
     "EVENTMANAGER":"事件管理",

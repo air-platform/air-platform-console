@@ -103,8 +103,8 @@
 
         function getBasicDatas() {
 
-            NetworkService.get(constdata.api.application.appsPath + '/' + vm.appId,null,function (response) {
-                vm.info = response.data.data;
+           /* NetworkService.get(constdata.api.application.appsPath + '/' + vm.appId,null,function (response) {*/
+                vm.info = vm.selItem;//response.data.data;
                 vm.originDes = vm.info.description;
                 vm.choosedVerify.val = vm.info.verifierToken;
                 vm.servicesArr = vm.info.services.split(',');
@@ -166,12 +166,12 @@
 
 
                 
-            },function (response) {
+            /*},function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
                 toastr.error(vm.authError);
             });
 
-
+            */
 
 
             NetworkService.get(constdata.api.application.imgsAppPath + '/' + vm.appId + '/images',null,function (response) {

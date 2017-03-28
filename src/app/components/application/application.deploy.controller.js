@@ -127,11 +127,11 @@
 
 				console.log(response.data);
 				console.log(response.data.length);
-				vm.info.imgInfo = response.data[2];
+				//vm.info.imgInfo = response.data[2];
 				// vm.originDes = vm.info.description;
 				//vm.choosedVerify.val = vm.info.verifierToken;
 				//console.log(vm.info.imgInfo);
-				console.log(vm.info.imgInfo);
+				//console.log(vm.info.imgInfo);
 
 
 				for(var i = 0; i < response.data.length; i ++)
