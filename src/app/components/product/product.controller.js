@@ -7,7 +7,7 @@
     function MyProductController($rootScope, $scope, $timeout, StorageService,$state, $uibModal, UserInfoServer, $log, NetworkService, constdata, toastr, i18n, delmodaltip) {
         /* jshint validthis: true */
         var vm = this;
-        
+       // console.log('vm.api_key' + vm.api_key);
         vm.pageCurrent = 1;
         vm.pagePreEnabled = false;
         vm.pageNextEnabled = false;
@@ -24,26 +24,11 @@
         vm.scope = $scope;
         getDatas();
 
-        var updateSelected = function(action,name,item){
-            if(action == 'open'){
-                console.log('action:' + action);
-                UpdataProduct(action,item);
-            }
-            if(action == 'close'){
-                console.log('action1:' + action);
-                UpdataProduct(action,item);
-                vm.checkStatus(item);
-                // var idx = $scope.selected.indexOf(id);
-                // $scope.selected.splice(idx,1);
-                // $scope.selectedTags.splice(idx,1);
-            }
-        }
-
         vm.updateSelection = $scope.updateSelection = function($event,item){
             console.log(item.service_id);
             var checkbox = $event.target;
             var action = (checkbox.checked?'open':'close');
-            updateSelected(action,checkbox.name,item);
+            UpdataProduct(action,item);
         }
 
 
@@ -103,7 +88,26 @@
                 vm.infosUser = response.data[1].userServices;
                // console.log( vm.infos);
                 vm.displayedCollection = [].concat(vm.infos);
+                for (var i=0;i<vm.displayedCollection.length;i++)
+                {
+                    if (vm.displayedCollection[i].api_key.length == 0){
+                        vm.displayedCollection[i].service_switch = '未启用';
+                    }
+                    else {
+                        vm.displayedCollection[i].service_switch = '已启用';
+                    }
+                }
                 vm.displayedUserCollection = [].concat(vm.infosUser);
+                for (var i=0;i<vm.displayedUserCollection.length;i++)
+                {
+                    if (vm.displayedUserCollection[i].api_key.length == 0){
+                        vm.displayedUserCollection[i].service_switch = '未启用';
+                    }
+                    else {
+                        vm.displayedUserCollection[i].service_switch = '已启用';
+                    }
+                }
+
                 $scope.sc = [].concat(vm.infos);
              // console.log(response.data.content);
             },function (response) {
@@ -122,14 +126,9 @@
                     console.log('path' + path);
                     NetworkService.get(path,null,function (response) {
                         if (response.data.code == 0){
-                            if (response.data.service.api_key.length == 0){
-                                item.api_key = '';
-                                console.log('item.api_key' + item.api_key);
-                            }
-                            else {
-                                item.api_key = response.data.service.api_key;
-                                console.log('item.api_key' + item.api_key);
-                            }
+
+                                item.service_switch = '已启用';
+                                console.log('item.service_switch1' + item.service_switch);
                         }
                         else {
 
@@ -155,14 +154,8 @@
                     console.log('path' + path);
                     NetworkService.get(path,null,function (response) {
                         if (response.data.code == 0){
-                            if (response.data.service.api_key.length == 0){
-                                item.api_key = '';
-                                console.log('item.api_key' + item.api_key);
-                            }
-                            else {
-                                item.api_key = response.data.service.api_key;
-                                console.log('item.api_key' + item.api_key);
-                            }
+                            item.service_switch = '未启用';
+                            console.log('item.service_switch2' + item.service_switch);
                         }
                         else {
 
@@ -184,7 +177,6 @@
 
          vm.checkStatus = function (item){
             var path = constdata.api.product.queryServiceInfo + item.service_id;
-            console.log('path' + path);
             NetworkService.get(path,null,function (response) {
                 if (response.data.code == 0){
                     if (response.data.service.api_key.length == 0){
@@ -198,7 +190,7 @@
                     return false;
                 }
             },function (response) {
-                vm.checkEnable = '未启用';
+                return false;
             });
 
         }
