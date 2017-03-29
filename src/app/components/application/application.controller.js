@@ -214,6 +214,8 @@
 		function OperApp(index, item) {
 			if(index == 1){
 				//console.log(item);
+
+				//$('li#imageId').removeAttr('disabled');
 				$state.go('app.applicationImage', {applicationName:item.id, args:{selItem:item}});
 			}else if(index == 2){
 				$state.go('app.applicationDeploy', {applicationName:item.id, args:{selItem:item}});

@@ -92,7 +92,7 @@
         //百分百字体数组
         var $percentTextArr = $('span.text-info');
         if (isAdminer()){
-            vm.percent = {cpu:25,'mem':70,'disk':90};
+            vm.percent = {cpu:45,'mem':30,'disk':40};
             vm.applicationNum = 90;
             vm.productNum = 24;
             vm.eventNum = 200;
@@ -107,7 +107,7 @@
             $($percentTextArr[2]).css('color','#F5417E');
 
         }else{
-            vm.percent = {cpu:25,'mem':70,'disk':90};
+            vm.percent = {cpu:45,'mem':30,'disk':40};
             vm.applicationNum = 0;
             vm.productNum = 0;
             vm.eventNum = 0;
@@ -146,15 +146,20 @@
         }
 
         function getDatas() {
-            NetworkService.get(constdata.api.dashboard.metrics,null,function (response) {
-                vm.applicationNum = response.data.applicationsCount;
-                vm.productNum = response.data.productsCount;
+
+
+
+            vm.applicationNum = 72;//response.data.applicationsCount;
+            vm.productNum = 11;//response.data.productsCount;
+           /* NetworkService.get(constdata.api.dashboard.metrics,null,function (response) {
+                vm.applicationNum = 72;//response.data.applicationsCount;
+                vm.productNum = 11;//response.data.productsCount;
                 vm.eventNum = response.data.eventClassFamiliesCount;
                 vm.deviceNum = response.data.devicesCount;
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
-            });
+            });*/
         }
         //
         // if(!isAdminer()){
