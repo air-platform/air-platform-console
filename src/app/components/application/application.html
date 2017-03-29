@@ -19,7 +19,7 @@
         </div> -->
         <!-- tasks -->
 
-        <div class="m-l m-r m-t m-b-lg table-responsive panel panel-default">
+        <div class="m-l m-r m-t m-b-lg table-responsive panel panel-default" style="overflow:visible">
             <table  st-table="vm.displayedCollection" st-safe-src="vm.infos" class="table table-bordered table-striped table-hover bg-white text-center m-b-lg">
                 <thead>
                 <tr>
@@ -68,7 +68,7 @@
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu" style="overflow:visible; z-index:1010;">
                                 <li ng-click="vm.OperApp(1, item)" ng-show="vm.showDeploy"><a><i class="fa fa-play m-r-sm"></i>生成镜像</a></li>
                                 <li ng-click="vm.OperApp(2, item)" ng-show="vm.showDeploy"><a><i class="fa fa-play m-r-sm"></i>部署</a></li>
                                 <li ng-click="vm.OperApp(3, item)" ng-show="vm.showOther"><a><i class="fa fa-play m-r-sm"></i>开始</a></li>

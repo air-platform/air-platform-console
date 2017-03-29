@@ -112,9 +112,10 @@
                 vm.info = vm.selItem;//response.data.data;
 
 
+                if(vm.info.detailRunInfo != null) {
 
-
-                vm.info.detailRunInfo.accessUrl = 'http://223.202.32.56:' + vm.info.detailRunInfo.service.spec.ports[0].nodePort;
+                    vm.info.detailRunInfo.accessUrl = 'http://223.202.32.56:' + vm.info.detailRunInfo.service.spec.ports[0].nodePort;
+                }
                 vm.originDes = vm.info.description;
                 vm.choosedVerify.val = vm.info.verifierToken;
                 vm.servicesArr = vm.info.services.split(',');

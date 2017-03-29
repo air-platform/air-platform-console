@@ -41,15 +41,16 @@
 		function getDatas() {
             NetworkService.get(constdata.api.application.appsPath,{page:vm.pageCurrent},function (response) {
 				vm.infos = response.data;
-
+				console.log('get app  info success.');
 				//if get service , to get run info
 				if(vm.infos.length > 0){
 
 					//first get all running apps, then get detail info for an app.
 					NetworkService.get(constdata.api.application.depPath+'/app?namespace='+vm.infos[0].user,'', function (response) {
 						var runInfoTmp = response.data;
-						toastr.success(i18n.t('u.ADD_SUC'));
+						//toastr.success(i18n.t('u.ADD_SUC'));
 						console.log(runInfoTmp);
+						console.log('get basic run info success.');
 						if(runInfoTmp.length > 0) {
 							for (var i = 0; i < runInfoTmp.length; i++) {
 								vm.runInfosBasic.push(runInfoTmp[i]);
@@ -58,8 +59,9 @@
 								var curStatus = vm.runInfosBasic[i].status;
 								NetworkService.get(constdata.api.application.depPath + '/app/' + curName + '?namespace=' + vm.infos[0].user, '', function (response) {
 									var runInfoTmp = response.data;
-									toastr.success(i18n.t('u.ADD_SUC'));
-
+									//toastr.success(i18n.t('u.ADD_SUC'));
+									console.log('get detail run info success.');
+									//console.log
 									/*if(runInfoTmp.length > 0) {
 									 for (var i = 0; i < runInfoTmp.length; i++) {
 									 vm.runInfosBasic.push(runInfoTmp[i]);
@@ -87,11 +89,15 @@
 
 
 
+
+
+
 									//vm.backAction();
 								}, function (response) {
 									vm.authError = response.statusText + '(' + response.status + ')';
-									console.log(vm.authError);
-									toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+									//console.log(vm.authError);
+									//toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+									console.log('get detail run info fail.');
 								});
 
 
@@ -129,8 +135,9 @@
 						//vm.backAction();
 					},function (response) {
 						vm.authError = response.statusText + '(' + response.status + ')';
-						console.log(vm.authError);
-						toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+						//console.log(vm.authError);
+						//toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+						console.log('get basic run info fail.');
 					});
 
 
@@ -155,8 +162,9 @@
 				updatePagination(response.data);
             },function (response) {
             	vm.authError = response.statusText + '(' + response.status + ')';
-                toastr.error(vm.authError);
-                console.log(response);
+               // toastr.error(vm.authError);
+              //  console.log(response);
+				console.log('get app info fail.');
             });
 
 
