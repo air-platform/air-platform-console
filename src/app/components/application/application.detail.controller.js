@@ -58,12 +58,13 @@
                 $state.go('app.applicationDeploy', {applicationName:item.id, args:{selItem:item}});
 
             }else if(index == 3){
-                $state.go('app.applicationedit', {applicationName:item.id, args:{selItem:item}});
+                $state.go('app.application', {applicationName:item.id, args:{selItem:item}});
             }else if(index == 4){
-                $state.go('app.applicationedit', {applicationName:item.id, args:{selItem:item}});
+                $state.go('app.application', {applicationName:item.id, args:{selItem:item}});
             }else if(index == 5){
-                $state.go('app.applicationedit', {applicationName:item.id, args:{selItem:item}});
+                $state.go('app.application', {applicationName:item.id, args:{selItem:item}});
             }
+
 
             //$state.go('app.applicationedit');
         };
