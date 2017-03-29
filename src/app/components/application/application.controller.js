@@ -40,6 +40,7 @@
 		vm.runInfosBasicMap= {};
 		vm.runInfosDetail = [];
 		vm.userName = '';
+
 		function getDatas() {
 			vm.infos = [];
 			vm.runInfosBasic = [];
@@ -48,8 +49,55 @@
             NetworkService.get(constdata.api.application.appsPath,{page:vm.pageCurrent},function (response) {
 				vm.infos = response.data;
 				console.log('get app  info success.');
+
+
+
+
+
+
+
 				//if get service , to get run info
 				if(vm.infos.length > 0){
+
+
+
+
+
+
+
+					for(var i = 0; i < vm.infos.length; i ++){
+
+							if(vm.infos[i].state == 'created'){
+								vm.infos[i].isImageEnable = true;
+								vm.infos[i].isDeployEnable = true;
+								vm.infos[i].isStartEnable = false;
+								vm.infos[i].isStopEnable = false;
+								vm.infos[i].isRestartEnable = false;
+								vm.infos[i].isDeleteEnable = false;
+							}else if(vm.infos[i].state == 'Running'){
+								vm.infos[i].isImageEnable = true;
+								vm.infos[i].isDeployEnable = false;
+								vm.infos[i].isStartEnable = false;
+								vm.infos[i].isStopEnable = true;
+								vm.infos[i].isRestartEnable = true;
+								vm.infos[i].isDeleteEnable = true;
+							}else if(vm.infos[i].state == 'Stopped'){
+								vm.infos[i].isImageEnable = true;
+								vm.infos[i].isDeployEnable = false;
+								vm.infos[i].isStartEnable = true;
+								vm.infos[i].isStopEnable = false;
+								vm.infos[i].isRestartEnable = false;
+								vm.infos[i].isDeleteEnable = true;
+							}else if(vm.infos[i].state == 'Pending'){
+								vm.infos[i].isImageEnable = true;
+								vm.infos[i].isDeployEnable = false;
+								vm.infos[i].isStartEnable = false;
+								vm.infos[i].isStopEnable = false;
+								vm.infos[i].isRestartEnable = false;
+								vm.infos[i].isDeleteEnable = true;
+							}
+
+					}
 
 					//first get all running apps, then get detail info for an app.
 					NetworkService.get(constdata.api.application.depPath+'/app?namespace='+vm.infos[0].user,'', function (response) {
@@ -59,8 +107,27 @@
 						console.log('get basic run info success.');
 						if(runInfoTmp.length > 0) {
 
+
+
+
+
 							for (var i = 0; i < runInfoTmp.length; i++) {
 								vm.runInfosBasicMap[runInfoTmp[i].name]= runInfoTmp[i].status;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 							}
 
 
@@ -93,6 +160,35 @@
 										if(runInfoTmp.service.metadata.name == vm.infos[i].name){
 											vm.infos[i].state = runInfoTmp.runStatus;
 											vm.infos[i].detailRunInfo = runInfoTmp;
+											if(vm.infos[i].state == 'created'){
+												vm.infos[i].isImageEnable = true;
+												vm.infos[i].isDeployEnable = true;
+												vm.infos[i].isStartEnable = false;
+												vm.infos[i].isStopEnable = false;
+												vm.infos[i].isRestartEnable = false;
+												vm.infos[i].isDeleteEnable = false;
+											}else if(vm.infos[i].state == 'Running'){
+												vm.infos[i].isImageEnable = true;
+												vm.infos[i].isDeployEnable = false;
+												vm.infos[i].isStartEnable = false;
+												vm.infos[i].isStopEnable = true;
+												vm.infos[i].isRestartEnable = true;
+												vm.infos[i].isDeleteEnable = true;
+											}else if(vm.infos[i].state == 'Stopped'){
+												vm.infos[i].isImageEnable = true;
+												vm.infos[i].isDeployEnable = false;
+												vm.infos[i].isStartEnable = true;
+												vm.infos[i].isStopEnable = false;
+												vm.infos[i].isRestartEnable = false;
+												vm.infos[i].isDeleteEnable = true;
+											}else if(vm.infos[i].state == 'Pending'){
+												vm.infos[i].isImageEnable = true;
+												vm.infos[i].isDeployEnable = false;
+												vm.infos[i].isStartEnable = false;
+												vm.infos[i].isStopEnable = false;
+												vm.infos[i].isRestartEnable = false;
+												vm.infos[i].isDeleteEnable = true;
+											}
 										}
 									}
 
@@ -211,6 +307,7 @@
 			}else if(index == 5){
 				$state.go('app.application', {applicationName:item.id, args:{selItem:item}});
 			}else if(index == 6){
+				console.log('deleted');
 				$state.go('app.application', {applicationName:item.id, args:{selItem:item}});
 			}
 
