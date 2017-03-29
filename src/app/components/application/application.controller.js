@@ -37,8 +37,14 @@
 		getDatas();
 		vm.infos = [];
 		vm.runInfosBasic = [];
+		vm.runInfosBasicMap= {};
 		vm.runInfosDetail = [];
+		vm.userName = '';
 		function getDatas() {
+			vm.infos = [];
+			vm.runInfosBasic = [];
+			vm.runInfosBasicMap= {};
+			vm.runInfosDetail = [];
             NetworkService.get(constdata.api.application.appsPath,{page:vm.pageCurrent},function (response) {
 				vm.infos = response.data;
 				console.log('get app  info success.');
@@ -52,10 +58,17 @@
 						console.log(runInfoTmp);
 						console.log('get basic run info success.');
 						if(runInfoTmp.length > 0) {
+
+							for (var i = 0; i < runInfoTmp.length; i++) {
+								vm.runInfosBasicMap[runInfoTmp[i].name]= runInfoTmp[i].status;
+							}
+
+
 							for (var i = 0; i < runInfoTmp.length; i++) {
 								vm.runInfosBasic.push(runInfoTmp[i]);
 
 								var curName = vm.runInfosBasic[i].name;
+								vm.userName = vm.infos[0].user;
 								var curStatus = vm.runInfosBasic[i].status;
 								NetworkService.get(constdata.api.application.depPath + '/app/' + curName + '?namespace=' + vm.infos[0].user, '', function (response) {
 									var runInfoTmp = response.data;
@@ -70,9 +83,11 @@
 
 									 }*/
 
+									
 
-									runInfoTmp.runStatus = curStatus
-									vm.runInfosDetail.push(runInfoTmp)
+									runInfoTmp.runStatus = vm.runInfosBasicMap[runInfoTmp.service.metadata.name];
+									console.log(runInfoTmp.runStatus);
+									vm.runInfosDetail.push(runInfoTmp);
 									console.log(vm.runInfosDetail);
 									for(var i = 0; i < vm.infos.length; i ++){
 										if(runInfoTmp.service.metadata.name == vm.infos[i].name){
@@ -85,13 +100,6 @@
 
 									vm.displayedCollection = [].concat(vm.infos);
 
-
-
-
-
-
-
-
 									//vm.backAction();
 								}, function (response) {
 									vm.authError = response.statusText + '(' + response.status + ')';
@@ -102,31 +110,6 @@
 
 
 							}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -221,10 +204,13 @@
 				$state.go('app.applicationDeploy', {applicationName:item.id, args:{selItem:item}});
 
 			}else if(index == 3){
-				$state.go('app.application', {applicationName:item.id, args:{selItem:item}});
+				//$state.go('app.application', {applicationName:item.id, args:{selItem:item}});
+				OperK8s(item,3);
 			}else if(index == 4){
-				$state.go('app.application', {applicationName:item.id, args:{selItem:item}});
+				OperK8s(item,4);
 			}else if(index == 5){
+				$state.go('app.application', {applicationName:item.id, args:{selItem:item}});
+			}else if(index == 6){
 				$state.go('app.application', {applicationName:item.id, args:{selItem:item}});
 			}
 
@@ -233,7 +219,45 @@
 
 		// 分页 Start
 
+		function OperK8s(item, st){
+			console.log(item);
+			if(st == 3){
+				if(item.state == 'Running'){
+					toastr.error('应用已经启动');
+				}else{
+					NetworkService.post(constdata.api.application.depPath + '/app/' + item.name + '?namespace=' + vm.userName, '', function (response) {
+						var runInfoTmp = response.data;
+						//toastr.success(i18n.t('u.ADD_SUC'));
+						console.log('start app success.');
+					}, function (response) {
+						//vm.authError = response.statusText + '(' + response.status + ')';
+						//console.log(vm.authError);
+						//toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+						console.log('start app fail.');
+					});
 
+				}
+
+			}else if(st == 4){
+				if(item.state == 'Stopped'){
+					toastr.error('应用已经停止');
+				}else{
+					NetworkService.post(constdata.api.application.depPath + '/app/' + item.name + '?namespace=' + vm.userName, '', function (response) {
+						var runInfoTmp = response.data;
+						//toastr.success(i18n.t('u.ADD_SUC'));
+						console.log('stop app success.');
+					}, function (response) {
+						//vm.authError = response.statusText + '(' + response.status + ')';
+						//console.log(vm.authError);
+						//toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+						console.log('start app fail.');
+					});
+
+				}
+
+			}
+
+		}
 
 		vm.preAction = preAction;
 		vm.nextAction = nextAction;
