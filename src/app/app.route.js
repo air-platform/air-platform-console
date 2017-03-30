@@ -239,18 +239,25 @@
                       '':{templateUrl: 'app/components/application/application.detail.basic.html'}
                   }
               })
-              .state('app.applicationDetail.event', {
-                  url: '/event',
+              .state('app.applicationDetail.deploy', {
+                  url: '/deploy',
                   params : {args : {}},
                   views:{
-                      '':{templateUrl: 'app/components/application/application.detail.event.html'}
+                      '':{templateUrl: 'app/components/application/application.detail.deployInfo.html'}
                   }
               })
-              .state('app.applicationDetail.verify', {
-                  url: '/verify',
+              .state('app.applicationDetail.monitor', {
+                  url: '/monitor',
                   params : {args : {}},
                   views:{
-                      '':{templateUrl: 'app/components/application/application.detail.verify.html'}
+                      '':{templateUrl: 'app/components/application/application.detail.monitorInfo.html'}
+                  }
+              })
+              .state('app.applicationDetail.log', {
+                  url: '/log',
+                  params : {args : {}},
+                  views:{
+                      '':{templateUrl: 'app/components/application/application.detail.logInfo.html'}
                   }
               })
               .state('app.addVerify', {

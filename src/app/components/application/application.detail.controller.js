@@ -16,6 +16,9 @@
         vm.applicationName = $stateParams.applicationName;
         vm.tabs = [
             {title:i18n.t('u.APP_INFO'),fun:'basic'},
+            {title:i18n.t('u.APP_RUN_INFO'),fun:'run'},
+            {title:i18n.t('u.APP_MONITOR_INFO'),fun:'monitor'},
+            {title:i18n.t('u.APP_LOG_INFO'),fun:'log'}
            // {title:i18n.t('u.EVENT_MAP'),fun:'event'},
             //{title:i18n.t('u.USER_V'),fun:'verify'}
         ];
@@ -132,26 +135,38 @@
 
 
         function chooseTab() {
-            if (vm.tabSelectedIndex == 1){
-                $state.go('app.applicationDetail.event',{applicationName:vm.applicationName});
+            console.log('.....');
+            console.log(vm.tabSelectedIndex);
+            if (vm.tabSelectedIndex == 0){
+                $state.go('app.applicationDetail.basic',{applicationName:vm.applicationName, applicationId:vm.selItem.id});
+            }else if (vm.tabSelectedIndex == 1){
+                $state.go('app.applicationDetail.deploy',{applicationName:vm.applicationName, applicationId:vm.selItem.id});
             }else if (vm.tabSelectedIndex == 2){
-                $state.go('app.applicationDetail.verify',{applicationName:vm.applicationName});
+                $state.go('app.applicationDetail.monitor',{applicationName:vm.applicationName, applicationId:vm.selItem.id});
+            }else if (vm.tabSelectedIndex == 3){
+                $state.go('app.applicationDetail.log',{applicationName:vm.applicationName, applicationId:vm.selItem.id});
             }else{
+               // $state.go('app.applicationDetail.basic',{applicationName:vm.applicationName, applicationId:vm.selItem.id});
                 $state.go('app.applicationDetail.basic',{applicationName:vm.applicationName, applicationId:vm.selItem.id});
             }
         }
 
-        chooseTab();
+        //tapAction(vm.tabs[1])
 
         function tapAction(item) {
-            if (item == 'event'){
+            console.log(item);
+            if (item == 'basic'){
+                vm.tabSelectedIndex = 0;
+            }else if (item == 'run'){
                 vm.tabSelectedIndex = 1;
-            }else if (item == 'verify'){
+            }else if (item == 'monitor'){
                 vm.tabSelectedIndex = 2;
+            }else if (item == 'log'){
+                vm.tabSelectedIndex = 3;
             }else{
                 vm.tabSelectedIndex = 0;
             }
-
+            console.log(vm.tabSelectedIndex);
             chooseTab();
         }
 

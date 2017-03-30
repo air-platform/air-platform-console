@@ -28,8 +28,36 @@
 
         <uib-tabset class="m-l m-r control" active="vm.tabSelectedIndex">
             <uib-tab ng-repeat="tab in vm.tabs" heading="{{tab.title}}" ng-click="vm.tapAction(tab.fun)"></uib-tab>
+           <!-- <uib-tab heading="{{vm.tabs[0].title}}" ng-click="vm.tapAction(vm.tabs[0].fun)"></uib-tab>
+            <uib-tab heading="{{vm.tabs[1].title}}" ng-click="vm.tapAction(vm.tabs[1].fun)"></uib-tab>
+            <uib-tab heading="{{vm.tabs[2].title}}" ng-click="vm.tapAction(vm.tabs[2].fun)"></uib-tab>
+            <uib-tab heading="{{vm.tabs[3].title}}" ng-click="vm.tapAction(vm.tabs[3].fun)"></uib-tab>-->
+
             <button ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-right"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
         </uib-tabset>
+
+        <!--<ul class="nav nav-tabs col-md-12" role="tablist" style="padding-right:0;">
+            <li sdk role="presentation" class="active"><a ng-click="vm.goSdk()" aria-controls="SDK" role="tab" data-toggle="tab">{{'product.PROFILE' | translate}}</a></li>
+            <li sdk role="presentation"><a ng-click="vm.goTopic()" aria-controls="Topic" role="tab" data-toggle="tab">{{'product.TOPIC' | translate}}</a></li>
+            <button ng-click="vm.backToProductList()" class="btn m-b-xs btn-sm btn-info btn-addon pull-right"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
+        </ul>-->
+
+
+
+      <!--  <ul class="nav nav-tabs col-md-12" role="tablist" style="padding-right:0;">
+            <li ng-repeat="tab in vm.tabs" sdk role="presentation" ><a ng-click="vm.tapAction(tab.fun)" aria-controls="SDK" role="tab" data-toggle="tab">"{{'tab.title'}}"</a></li>
+            <button ng-click="vm.backToProductList()" class="btn m-b-xs btn-sm btn-info btn-addon pull-right"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
+        </ul>-->
+
+
+
+
+        <!-- content
+        <div class="panel container col-md-12" ui-view="sdkContent"></div>-->
+
+
+
+
 
 
         <!--<ul class="nav nav-tabs m-l m-r control" role="tablist">-->
