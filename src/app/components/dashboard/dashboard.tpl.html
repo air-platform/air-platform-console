@@ -7,14 +7,14 @@
 
         <div class="m-l m-r m-t" style="overflow:hidden;">
             <!-- stats -->
-            <div class="col-md-12" style="padding:0;">
+            <div class="col-md-12" style="padding:0;" >
                 <div style="overflow: hidden;">
                     <div class="col-md-6 col-sm-12" ng-style="vm.myPaddingStyle">
                         <div class="panel panel-default" style="overflow: hidden;">
                             <div class="panel-body col-sm-12">
                                 <span class="h3 font-bold">{{'dashboard.GENERALSITUATION' | translate}}</span>
                             </div>
-                            <div id="box1" class="panel-body text-center col-sm-12" style="margin-top: 5%;">
+                            <div class="panel-body text-center col-sm-12" style="margin-top: 3%; height: 225px;" >
                                 <div class="col-md-6 col-xs-12 padder-v item" style="border-right: 2px solid #EAE9EF;">
                                     <div class="h1 text-info m-b" style="color: #279BF6;">{{vm.productNum}}</div>
                                     <span class="h4 font-bold">{{'dashboard.PRODUCT' | translate}}{{'dashboard.TOTALAMOUNT' | translate}}</span>
@@ -40,7 +40,7 @@
                                 <span class="h3 font-bold">{{'dashboard.DEVICESITUATION' | translate}}</span>
                             </div>
                             <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-                            <div id="main" style="height:300px;"></div>
+                            <div id="main" style="height:240px;"></div>
                             <script type="text/javascript">
                                 // 基于准备好的dom，初始化echarts实例
                                 var myChart = echarts.init(document.getElementById('main'));
@@ -52,7 +52,7 @@
                                     },
                                     legend: {
                                         orient: 'vertical',
-                                        left: 'left',
+                                        x: 20,
                                         data: ['create','pending','stop','running']
                                     },
                                     series : [
@@ -123,9 +123,9 @@
                             <span class="h3 font-bold">{{'dashboard.DEVICEMAP' | translate}}</span>
                         </div>
                         <div class="panel-body">
-                            <div id="box2" class="panel-body col-sm-12" style="margin-top: 6%;">
+                            <div class="panel-body col-sm-12" style="margin-top: 6%;">
                                 <div class="col-md-4 col-sm-12 padder-v item" style="border-right: 2px solid #EAE9EF;">
-                                    <span class="h4 font-bold">最新更新应用</span>
+                                    <span class="h4 font-bold">热门应用</span>
                                     <br><br>
                                     <h4>
                                         <div class="block m-b" style="color: #279BF6;">1. 舆情</div>
@@ -133,12 +133,12 @@
                                         <div class="block m-b" style="color: #279BF6;">3. bimbolt</div>
                                         <div class="block m-b" style="color: #279BF6;">4. iot</div>
                                         <div class="block m-b" style="color: #279BF6;">5. 物联网</div>
-                                        <div class="block m-b" style="color: #279BF6;">6. ...</div>
+                                        <div class="block m-b" style="color: #279BF6;">......</div>
                                     </h4>
 
                                 </div>
                                 <div class="col-md-4 col-sm-12 block padder-v item" style="border-right: 2px solid #EAE9EF;">
-                                    <span class="h4 font-bold text-center">最新更新服务</span>
+                                    <span class="h4 font-bold text-center">热门服务</span>
                                     <br><br>
                                     <h4>
                                         <div class="block m-b" style="color: #279BF6;">1. 舆情</div>
@@ -146,12 +146,12 @@
                                         <div class="block m-b" style="color: #279BF6;">3. bimbolt</div>
                                         <div class="block m-b" style="color: #279BF6;">4. iot</div>
                                         <div class="block m-b" style="color: #279BF6;">5. 物联网</div>
-                                        <div class="block m-b" style="color: #279BF6;">6. ...</div>
+                                        <div class="block m-b" style="color: #279BF6;">......</div>
                                     </h4>
 
                                 </div>
                                 <div class="col-md-4 col-sm-12 block padder-v item" style="border-right: 2px solid #EAE9EF;">
-                                    <span class="h4 font-bold text-center">最新创建应用</span>
+                                    <span class="h4 font-bold text-center">最新更新应用</span>
                                     <br><br>
                                     <h4>
                                         <div class="block m-b" style="color: #279BF6;">1. 舆情</div>
@@ -159,7 +159,7 @@
                                         <div class="block m-b" style="color: #279BF6;">3. bimbolt</div>
                                         <div class="block m-b" style="color: #279BF6;">4. iot</div>
                                         <div class="block m-b" style="color: #279BF6;">5. 物联网</div>
-                                        <div class="block m-b" style="color: #279BF6;">6. ...</div>
+                                        <div class="block m-b" style="color: #279BF6;">......</div>
                                     </h4>
 
                                 </div>
