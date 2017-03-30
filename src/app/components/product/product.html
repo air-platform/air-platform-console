@@ -54,14 +54,14 @@
 
                             <div>
                                 <label class= "m-t-xs m-r" style="float:left;">{{item.service_switch}}</label>
-                                    <label class="i-switch m-t-xs m-r"  ng-show="item.api_key!=''">
-                                        <input type="checkbox" checked ng-click="vm.updateSelection($event,item)">
-                                        <i></i>
-                                    </label>
-                                <label class="i-switch m-t-xs m-r"  ng-show="item.api_key==''">
-                                    <input type="checkbox" ng-click="vm.updateSelection($event,item)">
+                                <label class="i-switch m-t-xs m-r" >
+                                    <input type="checkbox" ng-model="item.checked" ng-click="vm.updateSelection($event,item)">
                                     <i></i>
                                 </label>
+                                <!--<label class="i-switch m-t-xs m-r"  ng-show="item.api_key==''">
+                                    <input type="checkbox" ng-click="vm.updateSelection($event,item)">
+                                    <i></i>
+                                </label>-->
                             </div>
                             <!--<div ng-show="vm.api_key = item.api_key==''">-->
                                 <!--<label class= "m-t-xs m-r">未启用</label>-->
@@ -106,14 +106,14 @@
                         </div>
                         <div>
                             <label class= "m-t-xs m-r" style="float:left;">{{item.service_switch}}</label>
-                            <label class="i-switch m-t-xs m-r"  ng-show="item.api_key!=''">
-                                <input type="checkbox" checked ng-click="vm.updateSelection($event,item)">
+                            <label class="i-switch m-t-xs m-r">
+                                <input type="checkbox" ng-model="item.checked" ng-click="vm.updateSelection($event,item)">
                                 <i></i>
                             </label>
-                            <label class="i-switch m-t-xs m-r"  ng-show="item.api_key==''">
-                                <input type="checkbox" ng-click="vm.updateSelection($event,item)">
+                            <!--<label class="i-switch m-t-xs m-r"  ng-show="item.api_key==''">
+                                <input type="checkbox" ng-model="item.checked" ng-click="vm.updateSelection($event,item)">
                                 <i></i>
-                            </label>
+                            </label>-->
                         </div>
 
                     </div>

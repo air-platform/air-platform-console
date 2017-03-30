@@ -92,9 +92,11 @@
                 {
                     if (vm.displayedCollection[i].api_key.length == 0){
                         vm.displayedCollection[i].service_switch = '未启用';
+                        vm.displayedCollection[i].checked = false;
                     }
                     else {
                         vm.displayedCollection[i].service_switch = '已启用';
+                        vm.displayedCollection[i].checked = true;
                     }
                 }
                 vm.displayedUserCollection = [].concat(vm.infosUser);
@@ -102,9 +104,11 @@
                 {
                     if (vm.displayedUserCollection[i].api_key.length == 0){
                         vm.displayedUserCollection[i].service_switch = '未启用';
+                        vm.displayedUserCollection[i].checked = false;
                     }
                     else {
                         vm.displayedUserCollection[i].service_switch = '已启用';
+                        vm.displayedUserCollection[i].checked = true;
                     }
                 }
 
@@ -128,6 +132,7 @@
                         if (response.data.code == 0){
 
                                 item.service_switch = '已启用';
+                                item.checked = true;
                                 console.log('item.service_switch1' + item.service_switch);
                         }
                         else {
@@ -155,6 +160,7 @@
                     NetworkService.get(path,null,function (response) {
                         if (response.data.code == 0){
                             item.service_switch = '未启用';
+                            item.checked = false;
                             console.log('item.service_switch2' + item.service_switch);
                         }
                         else {
