@@ -270,7 +270,7 @@
     "INPUTSERVICEDESC":"请输入服务描述",
     "CUR_IMAGE":"当前镜像",
     "ACCESS_URL":"访问地址",
-    "DEPLOYINFO":"运行信息",
+    "DEPLOYINFO":"部署信息",
     "MONITORINFO":"应用监控",
     "LOGINFO":"应用日志"
   },

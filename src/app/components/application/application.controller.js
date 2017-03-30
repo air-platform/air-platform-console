@@ -105,7 +105,7 @@
 						//toastr.success(i18n.t('u.ADD_SUC'));
 						console.log(runInfoTmp);
 						console.log('get basic run info success.');
-						if(runInfoTmp.length > 0) {
+						if(runInfoTmp != null && runInfoTmp.length > 0) {
 
 
 

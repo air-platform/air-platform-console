@@ -463,6 +463,668 @@
             });
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+        var xTime = [];
+        var xTimeCpuUser = [],xTimeCpuSystem = [],xTimeCpuAll = [], xTimeMem=[], xTimeNetwork=[], xTimeDisk=[];
+        for(var i = 0; i < 30; i ++){
+            xTime[i] = '10:'+parseInt(i/10) +'' + i%10 + '';
+            xTimeCpuUser[i] = parseInt(Math.random()*30);
+            xTimeCpuSystem[i] = parseInt(Math.random()*10);
+            xTimeCpuAll[i] = xTimeCpuUser[i] + xTimeCpuSystem[i];
+            xTimeMem[i] = parseInt(Math.random()*1000);
+            xTimeNetwork[i] = parseInt(Math.random()*500);
+            xTimeDisk[i] = parseInt(Math.random()*300);
+        }
+
+        console.log(xTime);
+
+        /*vm.eventOption = {
+            title : {
+                // text: '事件情况',
+                subtext: '',
+                left: 'left',
+                textStyle: {
+                    color: '#666'
+                }
+            },
+            tooltip : {
+                trigger: 'axis',
+                // formatter: '({b})\n{a}: {c} k',
+                // backgroundColor: '#27c24c',
+                axisPointer: {
+                    /!*lineStyle:{
+                        type: 'solid',
+                        color: '#23b7e5',
+                        width: 2
+                    }*!/
+                },
+                textStyle:{
+                    color: '#dcf2f8'
+                }
+            },
+            legend: {
+                data:['CPU占用']
+            },
+            toolbox: {
+                show : false,
+                feature : {
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},
+                    magicType : {show: true, type: ['line', 'bar']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            calculable : true,
+            // symbol : null,
+            xAxis : [
+                {
+                    type : 'category',
+                    boundaryGap : false,
+                    data : xTime,//['10:10','10:15','10:20','10:25','10:30','10:35','10:40'],
+                    axisLine: {
+                        show: true,
+      /!*                  lineStyle: {
+                            color: '#23b7e5',
+                            width: 2
+                        }*!/
+                    },
+                    splitLine:{
+                        show: true,
+                       /!* lineStyle: {
+                            color: '#dcf2f8'
+                        }*!/
+                    }
+                }
+
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    axisLabel : {
+                        formatter: '{value} %'
+                    },
+                    axisLine: {
+                        show: true,
+                        /!*lineStyle: {
+                            color: '#23b7e5',
+                            width: 0.25
+                        }*!/
+                    },
+                    splitLine:{
+                        show: true,
+                        /!*lineStyle: {
+                            color: '#dcf2f8'
+                        }*!/
+                    }
+
+                }
+            ],
+            series : [
+                {
+                    name:'CPU占用',
+                    type:'line',
+                    //smooth:true,
+                    // symbol:'none',
+                    data:xTimeCpu, //[15, 20, 15, 25, 30, 10, 5],
+                    /!*itemStyle:{
+                        normal:{
+                            color:'#23b7e5',
+                            lineStyle:{
+                                color:'#4686CD',
+                                width: 4
+                            }
+                        }
+                    },*!/
+                    /!*markLine : {
+                        data : [
+                            {type : 'average', name : '日活跃量'}
+                        ],
+                        itemStyle:{
+                            normal:{
+                                lineStyle:{
+                                    color:'#4686CD'
+                                }
+                            }
+                        }
+                    }*!/
+                },
+
+            ]
+        };*/
+
+
+        vm.cpuOption = {
+            title : {
+                // text: '事件情况',
+                subtext: '',
+                left: 'left',
+                textStyle: {
+                    color: '#666'
+                }
+            },
+            tooltip : {
+                trigger: 'axis',
+                // formatter: '({b})\n{a}: {c} k',
+                // backgroundColor: '#27c24c',
+                axisPointer: {
+                    /*lineStyle:{
+                     type: 'solid',
+                     color: '#23b7e5',
+                     width: 2
+                     }*/
+                },
+                textStyle:{
+                    color: '#dcf2f8'
+                }
+            },
+            legend: {
+                data:['用户CPU','系统CPU','总CPU占用']
+            },
+            toolbox: {
+                show : false,
+                feature : {
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},
+                    magicType : {show: true, type: ['line', 'bar']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            calculable : true,
+            // symbol : null,
+            xAxis : [
+                {
+                    type : 'category',
+                    boundaryGap : false,
+                    data : xTime,//['10:10','10:15','10:20','10:25','10:30','10:35','10:40'],
+                    axisLine: {
+                        show: true,
+                        /*                  lineStyle: {
+                         color: '#23b7e5',
+                         width: 2
+                         }*/
+                    },
+                    splitLine:{
+                        show: true,
+                        /* lineStyle: {
+                         color: '#dcf2f8'
+                         }*/
+                    }
+                }
+
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    axisLabel : {
+                        formatter: '{value} %'
+                    },
+                    axisLine: {
+                        show: true,
+                        /*lineStyle: {
+                         color: '#23b7e5',
+                         width: 0.25
+                         }*/
+                    },
+                    splitLine:{
+                        show: true,
+                        /*lineStyle: {
+                         color: '#dcf2f8'
+                         }*/
+                    }
+
+                }
+            ],
+            series : [
+                {
+                    name:'用户CPU',
+                    type:'line',
+                    //smooth:true,
+                    // symbol:'none',
+                    data:xTimeCpuUser, //[15, 20, 15, 25, 30, 10, 5],
+                    /*itemStyle:{
+                     normal:{
+                     color:'#23b7e5',
+                     lineStyle:{
+                     color:'#4686CD',
+                     width: 4
+                     }
+                     }
+                     },*/
+                    /*markLine : {
+                     data : [
+                     {type : 'average', name : '日活跃量'}
+                     ],
+                     itemStyle:{
+                     normal:{
+                     lineStyle:{
+                     color:'#4686CD'
+                     }
+                     }
+                     }
+                     }*/
+                },
+                {
+                    name:'系统CPU',
+                    type:'line',
+                    //smooth:true,
+                    // symbol:'none',
+                    data:xTimeCpuSystem, //[15, 20, 15, 25, 30, 10, 5],
+                    /*itemStyle:{
+                     normal:{
+                     color:'#23b7e5',
+                     lineStyle:{
+                     color:'#4686CD',
+                     width: 4
+                     }
+                     }
+                     },*/
+                    /*markLine : {
+                     data : [
+                     {type : 'average', name : '日活跃量'}
+                     ],
+                     itemStyle:{
+                     normal:{
+                     lineStyle:{
+                     color:'#4686CD'
+                     }
+                     }
+                     }
+                     }*/
+                },
+                {
+                    name:'总CPU占用',
+                    type:'line',
+                    //smooth:true,
+                    // symbol:'none',
+                    data:xTimeCpuAll, //[15, 20, 15, 25, 30, 10, 5],
+                    /*itemStyle:{
+                     normal:{
+                     color:'#23b7e5',
+                     lineStyle:{
+                     color:'#4686CD',
+                     width: 4
+                     }
+                     }
+                     },*/
+                    /*markLine : {
+                     data : [
+                     {type : 'average', name : '日活跃量'}
+                     ],
+                     itemStyle:{
+                     normal:{
+                     lineStyle:{
+                     color:'#4686CD'
+                     }
+                     }
+                     }
+                     }*/
+                },
+
+            ]
+        };
+
+        vm.memOption = {
+            title : {
+                // text: '事件情况',
+                subtext: '',
+                left: 'left',
+                textStyle: {
+                    color: '#666'
+                }
+            },
+            tooltip : {
+                trigger: 'axis',
+                // formatter: '({b})\n{a}: {c} k',
+                // backgroundColor: '#27c24c',
+                axisPointer: {
+                    /*lineStyle:{
+                     type: 'solid',
+                     color: '#23b7e5',
+                     width: 2
+                     }*/
+                },
+                textStyle:{
+                    color: '#dcf2f8'
+                }
+            },
+            legend: {
+                data:['内存占用']
+            },
+            toolbox: {
+                show : false,
+                feature : {
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},
+                    magicType : {show: true, type: ['line', 'bar']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            calculable : true,
+            // symbol : null,
+            xAxis : [
+                {
+                    type : 'category',
+                    boundaryGap : false,
+                    data : xTime,//['10:10','10:15','10:20','10:25','10:30','10:35','10:40'],
+                    axisLine: {
+                        show: true,
+                        /*                  lineStyle: {
+                         color: '#23b7e5',
+                         width: 2
+                         }*/
+                    },
+                    splitLine:{
+                        show: true,
+                        /* lineStyle: {
+                         color: '#dcf2f8'
+                         }*/
+                    }
+                }
+
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    axisLabel : {
+                        formatter: '{value}M'
+                    },
+                    axisLine: {
+                        show: true,
+                        /*lineStyle: {
+                         color: '#23b7e5',
+                         width: 0.25
+                         }*/
+                    },
+                    splitLine:{
+                        show: true,
+                        /*lineStyle: {
+                         color: '#dcf2f8'
+                         }*/
+                    }
+
+                }
+            ],
+            series : [
+                {
+                    name:'内存占用',
+                    type:'line',
+                    //smooth:true,
+                    // symbol:'none',
+                    data:xTimeMem, //[15, 20, 15, 25, 30, 10, 5],
+                    /*itemStyle:{
+                     normal:{
+                     color:'#23b7e5',
+                     lineStyle:{
+                     color:'#4686CD',
+                     width: 4
+                     }
+                     }
+                     },*/
+                    /*markLine : {
+                     data : [
+                     {type : 'average', name : '日活跃量'}
+                     ],
+                     itemStyle:{
+                     normal:{
+                     lineStyle:{
+                     color:'#4686CD'
+                     }
+                     }
+                     }
+                     }*/
+                },
+
+            ]
+        };
+
+        vm.diskOption = {
+            title : {
+                // text: '事件情况',
+                subtext: '',
+                left: 'left',
+                textStyle: {
+                    color: '#666'
+                }
+            },
+            tooltip : {
+                trigger: 'axis',
+                // formatter: '({b})\n{a}: {c} k',
+                // backgroundColor: '#27c24c',
+                axisPointer: {
+                    /*lineStyle:{
+                     type: 'solid',
+                     color: '#23b7e5',
+                     width: 2
+                     }*/
+                },
+                textStyle:{
+                    color: '#dcf2f8'
+                }
+            },
+            legend: {
+                data:['磁盘IO']
+            },
+            toolbox: {
+                show : false,
+                feature : {
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},
+                    magicType : {show: true, type: ['line', 'bar']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            calculable : true,
+            // symbol : null,
+            xAxis : [
+                {
+                    type : 'category',
+                    boundaryGap : false,
+                    data : xTime,//['10:10','10:15','10:20','10:25','10:30','10:35','10:40'],
+                    axisLine: {
+                        show: true,
+                        /*                  lineStyle: {
+                         color: '#23b7e5',
+                         width: 2
+                         }*/
+                    },
+                    splitLine:{
+                        show: true,
+                        /* lineStyle: {
+                         color: '#dcf2f8'
+                         }*/
+                    }
+                }
+
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    axisLabel : {
+                        formatter: '{value} 次/秒'
+                    },
+                    axisLine: {
+                        show: true,
+                        /*lineStyle: {
+                         color: '#23b7e5',
+                         width: 0.25
+                         }*/
+                    },
+                    splitLine:{
+                        show: true,
+                        /*lineStyle: {
+                         color: '#dcf2f8'
+                         }*/
+                    }
+
+                }
+            ],
+            series : [
+                {
+                    name:'磁盘IO',
+                    type:'line',
+                    //smooth:true,
+                    // symbol:'none',
+                    data:xTimeDisk, //[15, 20, 15, 25, 30, 10, 5],
+                    /*itemStyle:{
+                     normal:{
+                     color:'#23b7e5',
+                     lineStyle:{
+                     color:'#4686CD',
+                     width: 4
+                     }
+                     }
+                     },*/
+                    /*markLine : {
+                     data : [
+                     {type : 'average', name : '日活跃量'}
+                     ],
+                     itemStyle:{
+                     normal:{
+                     lineStyle:{
+                     color:'#4686CD'
+                     }
+                     }
+                     }
+                     }*/
+                },
+
+            ]
+        };
+
+        vm.networkOption = {
+            title : {
+                // text: '事件情况',
+                subtext: '',
+                left: 'left',
+                textStyle: {
+                    color: '#666'
+                }
+            },
+            tooltip : {
+                trigger: 'axis',
+                // formatter: '({b})\n{a}: {c} k',
+                // backgroundColor: '#27c24c',
+                axisPointer: {
+                    /*lineStyle:{
+                     type: 'solid',
+                     color: '#23b7e5',
+                     width: 2
+                     }*/
+                },
+                textStyle:{
+                    color: '#dcf2f8'
+                }
+            },
+            legend: {
+                data:['网络流量']
+            },
+            toolbox: {
+                show : false,
+                feature : {
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},
+                    magicType : {show: true, type: ['line', 'bar']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            calculable : true,
+            // symbol : null,
+            xAxis : [
+                {
+                    type : 'category',
+                    boundaryGap : false,
+                    data : xTime,//['10:10','10:15','10:20','10:25','10:30','10:35','10:40'],
+                    axisLine: {
+                        show: true,
+                        /*                  lineStyle: {
+                         color: '#23b7e5',
+                         width: 2
+                         }*/
+                    },
+                    splitLine:{
+                        show: true,
+                        /* lineStyle: {
+                         color: '#dcf2f8'
+                         }*/
+                    }
+                }
+
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    axisLabel : {
+                        formatter: '{value} kbps'
+                    },
+                    axisLine: {
+                        show: true,
+                        /*lineStyle: {
+                         color: '#23b7e5',
+                         width: 0.25
+                         }*/
+                    },
+                    splitLine:{
+                        show: true,
+                        /*lineStyle: {
+                         color: '#dcf2f8'
+                         }*/
+                    }
+
+                }
+            ],
+            series : [
+                {
+                    name:'网络流量',
+                    type:'line',
+                    //smooth:true,
+                    // symbol:'none',
+                    data:xTimeNetwork, //[15, 20, 15, 25, 30, 10, 5],
+                    /*itemStyle:{
+                     normal:{
+                     color:'#23b7e5',
+                     lineStyle:{
+                     color:'#4686CD',
+                     width: 4
+                     }
+                     }
+                     },*/
+                    /*markLine : {
+                     data : [
+                     {type : 'average', name : '日活跃量'}
+                     ],
+                     itemStyle:{
+                     normal:{
+                     lineStyle:{
+                     color:'#4686CD'
+                     }
+                     }
+                     }
+                     }*/
+                },
+
+            ]
+        };
+
+
+
+
+
     }
 
 })();

@@ -234,6 +234,12 @@
                 </tr>
 
 
+
+
+
+
+
+<!--
                 <tr style="border-bottom:1px dashed #ddd">
                     <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.STATUS' | translate}}</td>
                     <td class="col-md-10" style="border:none;">
@@ -246,9 +252,6 @@
                 <tr style="border-bottom:1px dashed #ddd">
                     <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.APP_SERVICES' | translate}}</td>
                     <td class="col-md-10" style="border:none;">
-<!--
-                        <input style="width: 50%;" ng-model="vm.info.services" type="text" class="form-control pull-left font-thin" required disabled>
--->
                         <select class="form-control"  style="width: 50%;" multiple ng-model="vm.servicesArrd" ng-options="opt.api_id as opt.service_name for opt in vm.allOpenService" required disabled></select>
 
                     </td>
@@ -258,9 +261,6 @@
                 <tr style="border-bottom:1px dashed #ddd">
                     <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.APP_IMAGES' | translate}}</td>
                     <td class="col-md-10" style="border:none;">
-<!--
-                        <input style="width: 50%;" ng-model="vm.imgArrStr" type="text" class="form-control pull-left font-thin" required disabled>
--->
                         <select class="form-control"  style="width: 50%;" multiple ng-model="vm.servicesArrd" ng-options="o for o in vm.imgArr" required disabled></select>
 
                     </td>
@@ -280,6 +280,11 @@
                         <input style="width: 50%;" ng-model="vm.info.detailRunInfo.accessUrl" type="text" class="form-control pull-left font-thin" required disabled>
                     </td>
                 </tr>
+
+-->
+
+
+
 
 
                 </tbody>
