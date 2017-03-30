@@ -113,10 +113,10 @@
     "ACTIVE_EVENT_NO":"活跃事件量",
     "SDK_STA":"SDK稳定性",
     "GENERALSITUATION":"概况",
-    "EVENTSITUATION":"事件情况",
-    "DEVICESITUATION":"设备情况",
+    "EVENTSITUATION":"服务统计图",
+    "DEVICESITUATION":"应用统计图",
     "ACTIVEEVENTTREND":"活跃事件趋势",
-    "DEVICEMAP":"全国主要城市设备接入分布图"
+    "DEVICEMAP":"热门推荐"
   },
   "profile":{
     "PERSONALCENTER":"个人中心",

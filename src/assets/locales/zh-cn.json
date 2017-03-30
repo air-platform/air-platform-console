@@ -116,10 +116,10 @@
     "ACTIVE_EVENT_NO":"物联网",
     "SDK_STA":"人工智能",
     "GENERALSITUATION":"概况",
-    "EVENTSITUATION":"应用总数",
-    "DEVICESITUATION":"云服务状态",
+    "EVENTSITUATION":"服务统计图",
+    "DEVICESITUATION":"应用统计图",
     "ACTIVEEVENTTREND":"活跃事件趋势",
-    "DEVICEMAP":"全国主要城市云服务使用分布图"
+    "DEVICEMAP":"热门推荐"
   },
   "profile":{
     "PERSONALCENTER":"个人中心",
