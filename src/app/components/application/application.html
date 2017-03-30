@@ -74,16 +74,44 @@
                                 <li ng-class="{disabled: !item.isStartEnable}" ng-click="vm.OperApp(3, item)" ng-show="vm.showOther"><a><i class="fa fa-play m-r-sm"></i>开始</a></li>
                                 <li ng-class="{disabled: !item.isStopEnable}" ng-click="vm.OperApp(4, item)" ng-show="vm.showOther"><a><i class="fa fa-stop m-r-sm"></i>停止</a></li>
                                 <li ng-class="{disabled: !item.isRestartEnable}" ng-click="vm.OperApp(5, item)" ng-show="vm.showOther"><a><i class="fa fa-repeat m-r-sm"></i>重启</a></li>
-                                <li ng-class="{disabled: !item.isDeleteEnable}" ng-click="vm.OperApp(6, item)" ng-show="vm.showOther"><a><i class="fa fa-trash m-r-sm"></i>删除</a></li>
+<!--
+                                <li data-toggle="modal" data-target="#myModal" ng-class="{disabled: !item.isDeleteEnable}" ng-click="vm.OperApp(6, item)" ng-show="vm.showOther"><a><i class="fa fa-trash m-r-sm"></i>删除</a></li>
+-->
+
+<!--
+                                <button  class="btn btn-sm btn-danger btn-addon pull-left" data-toggle="modal" data-target="#myModal"><i class="fa fa-times-circle-o fa-2x"></i>{{vm.buttonEnable}}</button>
+-->
+                                <li data-toggle="modal" data-target="#myModal" ng-class="{disabled: !item.isDeleteEnable}"  ng-show="vm.showOther"><a><i class="fa fa-trash m-r-sm"></i>撤销部署</a></li>
+
                             </ul>
                         </div>
 
 
-
-
-
-
-
+                        <!-- 模态框（Modal） -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" style="width:300px;">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-hidden="true">×
+                                        </button>
+                                        <h4 class="modal-title" id="myModalLabel">
+                                            警告
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        您确定要撤销该部署？
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                                            取消
+                                        </button>
+                                        <button ng-click="vm.OperApp(6, item)" type="button" class="btn btn-danger"data-dismiss="modal" >确定
+                                        </button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
 
                     </td>
                 </tr>
