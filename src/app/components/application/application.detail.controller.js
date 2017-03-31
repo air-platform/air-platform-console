@@ -696,6 +696,7 @@
                     data:xTimeCpuUser, //[15, 20, 15, 25, 30, 10, 5],
                     itemStyle:{
                          normal:{
+                             color:'#ff0000',
                              lineStyle:{
                                 color:'#ff0000',
                              }
@@ -722,6 +723,7 @@
                     data:xTimeCpuSystem, //[15, 20, 15, 25, 30, 10, 5],
                     itemStyle:{
                         normal:{
+                            color:'#00ff00',
                             lineStyle:{
                                 color:'#00ff00',
                             }
@@ -757,6 +759,7 @@
                     data:xTimeCpuAll, //[15, 20, 15, 25, 30, 10, 5],
                     itemStyle:{
                         normal:{
+                            color:'#23B7E5',
                             lineStyle:{
                                 color:'#23B7E5',
                             }
@@ -879,6 +882,7 @@
                     data:xTimeMem, //[15, 20, 15, 25, 30, 10, 5],
                     itemStyle:{
                         normal:{
+                            color:'#23B7E5',
                             lineStyle:{
                                 color:'#23B7E5',
                             }
@@ -1001,6 +1005,7 @@
                     data:xTimeDisk, //[15, 20, 15, 25, 30, 10, 5],
                     itemStyle:{
                         normal:{
+                            color:'#23B7E5',
                             lineStyle:{
                                 color:'#23B7E5',
                             }
@@ -1123,6 +1128,7 @@
                     data:xTimeNetwork, //[15, 20, 15, 25, 30, 10, 5],
                     itemStyle:{
                         normal:{
+                            color:'#23B7E5',
                             lineStyle:{
                                 color:'#23B7E5',
                             }
