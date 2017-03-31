@@ -483,7 +483,7 @@
             xTimeCpuSystem[i] = parseInt(Math.random()*10);
             xTimeCpuAll[i] = xTimeCpuUser[i] + xTimeCpuSystem[i];
             xTimeMem[i] = parseInt(Math.random()*1000);
-            xTimeNetwork[i] = parseInt(Math.random()*500);
+            xTimeNetwork[i] = parseInt(Math.random()*50);
             xTimeDisk[i] = parseInt(Math.random()*300);
         }
 
@@ -694,15 +694,13 @@
                     //smooth:true,
                     // symbol:'none',
                     data:xTimeCpuUser, //[15, 20, 15, 25, 30, 10, 5],
-                    /*itemStyle:{
-                     normal:{
-                     color:'#23b7e5',
-                     lineStyle:{
-                     color:'#4686CD',
-                     width: 4
-                     }
-                     }
-                     },*/
+                    itemStyle:{
+                         normal:{
+                             lineStyle:{
+                                color:'#ff0000',
+                             }
+                         }
+                     },
                     /*markLine : {
                      data : [
                      {type : 'average', name : '日活跃量'}
@@ -722,6 +720,13 @@
                     //smooth:true,
                     // symbol:'none',
                     data:xTimeCpuSystem, //[15, 20, 15, 25, 30, 10, 5],
+                    itemStyle:{
+                        normal:{
+                            lineStyle:{
+                                color:'#00ff00',
+                            }
+                        }
+                    },
                     /*itemStyle:{
                      normal:{
                      color:'#23b7e5',
@@ -750,6 +755,13 @@
                     //smooth:true,
                     // symbol:'none',
                     data:xTimeCpuAll, //[15, 20, 15, 25, 30, 10, 5],
+                    itemStyle:{
+                        normal:{
+                            lineStyle:{
+                                color:'#23B7E5',
+                            }
+                        }
+                    },
                     /*itemStyle:{
                      normal:{
                      color:'#23b7e5',
@@ -865,6 +877,13 @@
                     //smooth:true,
                     // symbol:'none',
                     data:xTimeMem, //[15, 20, 15, 25, 30, 10, 5],
+                    itemStyle:{
+                        normal:{
+                            lineStyle:{
+                                color:'#23B7E5',
+                            }
+                        }
+                    },
                     /*itemStyle:{
                      normal:{
                      color:'#23b7e5',
@@ -955,7 +974,7 @@
                 {
                     type : 'value',
                     axisLabel : {
-                        formatter: '{value} 次/秒'
+                        formatter: '{value}iops'
                     },
                     axisLine: {
                         show: true,
@@ -980,6 +999,13 @@
                     //smooth:true,
                     // symbol:'none',
                     data:xTimeDisk, //[15, 20, 15, 25, 30, 10, 5],
+                    itemStyle:{
+                        normal:{
+                            lineStyle:{
+                                color:'#23B7E5',
+                            }
+                        }
+                    },
                     /*itemStyle:{
                      normal:{
                      color:'#23b7e5',
@@ -1070,7 +1096,7 @@
                 {
                     type : 'value',
                     axisLabel : {
-                        formatter: '{value} kbps'
+                        formatter: '{value}mbps'
                     },
                     axisLine: {
                         show: true,
@@ -1095,6 +1121,13 @@
                     //smooth:true,
                     // symbol:'none',
                     data:xTimeNetwork, //[15, 20, 15, 25, 30, 10, 5],
+                    itemStyle:{
+                        normal:{
+                            lineStyle:{
+                                color:'#23B7E5',
+                            }
+                        }
+                    },
                     /*itemStyle:{
                      normal:{
                      color:'#23b7e5',
