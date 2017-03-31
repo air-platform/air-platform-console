@@ -149,45 +149,11 @@
             <table class="table table-bordered bg-white text-center">
 
                 <tbody class="font-bold">
+
                 <tr style="border-bottom:1px dashed #ddd">
                     <td colspan="2">
-<!--
-                        <button ng-click="vm.UpdataProduct()"  class="btn btn-sm btn-info btn-addon pull-left"><i class="fa fa-openid"></i>{{vm.buttonEnable}}</button>
--->
-
-                        <div class="pull-left btn-group">
-                            <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-sliders"></i> 操作</button>
-                            <button type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="caret"></span>
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <!--<li ng-click="vm.OperApp(1)" ng-show="vm.showDeploy"><a><i class="fa fa-play m-r-sm"></i>生成镜像</a></li>
-                                <li ng-click="vm.OperApp(2)" ng-show="vm.showDeploy"><a><i class="fa fa-play m-r-sm"></i>部署</a></li>
-                                <li ng-click="vm.OperApp(3)" ng-show="vm.showOther"><a><i class="fa fa-play m-r-sm"></i>开始</a></li>
-                                <li ng-click="vm.OperApp(4)" ng-show="vm.showOther"><a><i class="fa fa-stop m-r-sm"></i>停止</a></li>
-                                <li ng-click="vm.OperApp(5)" ng-show="vm.showOther"><a><i class="fa fa-repeat m-r-sm"></i>重启</a></li>
-                                <li ng-click="vm.OperApp(6)" ng-show="vm.showOther"><a><i class="fa fa-trash m-r-sm"></i>删除</a></li>
-                            -->
-
-                                <li ng-class="{disabled: !vm.selItem.isImageEnable}" ng-click=" vm.OperApp(1)" ng-show="vm.showDeploy"><a><i class="fa fa-database m-r-sm"></i>镜像</a></li>
-                                <li ng-class="{disabled: !vm.selItem.isDeployEnable}" ng-click="vm.OperApp(2)" ng-show="vm.showDeploy"><a><i class="fa fa-building-o m-r-sm"></i>部署</a></li>
-                                <li ng-class="{disabled: !vm.selItem.isStartEnable}" ng-click="vm.OperApp(3)" ng-show="vm.showOther"><a><i class="fa fa-play m-r-sm"></i>开始</a></li>
-                                <li ng-class="{disabled: !vm.selItem.isStopEnable}" ng-click="vm.OperApp(4)" ng-show="vm.showOther"><a><i class="fa fa-stop m-r-sm"></i>停止</a></li>
-                                <li ng-class="{disabled: !vm.selItem.isRestartEnable}" ng-click="vm.OperApp(5)" ng-show="vm.showOther"><a><i class="fa fa-repeat m-r-sm"></i>重启</a></li>
-                                <li ng-class="{disabled: !vm.selItem.isDeleteEnable}" ng-click="vm.OperApp(6)" ng-show="vm.showOther"><a><i class="fa fa-trash m-r-sm"></i>删除</a></li>
-
-
-
-                            </ul>
-                        </div>
-
-
-
-
-
-
-
+                        <button ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-edit"></i>{{'product.EDIT' | translate}}</button>
+                        <button ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-danger btn-addon pull-left m-l"><i class="glyphicon glyphicon-trash"></i>{{'product.DELETE' | translate}}</button>
 
                     </td>
                 </tr>

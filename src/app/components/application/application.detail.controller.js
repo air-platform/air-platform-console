@@ -507,12 +507,12 @@
         var xTimeCpuUser = [],xTimeCpuSystem = [],xTimeCpuAll = [], xTimeMem=[], xTimeNetwork=[], xTimeDisk=[];
         for(var i = 0; i < 30; i ++){
             xTime[i] = '10:'+parseInt(i/10) +'' + i%10 + '';
-            xTimeCpuUser[i] = parseInt(Math.random()*30);
-            xTimeCpuSystem[i] = parseInt(Math.random()*10);
+            xTimeCpuUser[i] = parseInt(20 + Math.random()*5);
+            xTimeCpuSystem[i] = parseInt(0 + Math.random()*5);
             xTimeCpuAll[i] = xTimeCpuUser[i] + xTimeCpuSystem[i];
-            xTimeMem[i] = parseInt(Math.random()*1000);
-            xTimeNetwork[i] = parseInt(Math.random()*50);
-            xTimeDisk[i] = parseInt(Math.random()*300);
+            xTimeMem[i] = parseInt(100+Math.random()*10);
+            xTimeNetwork[i] = parseInt(40 + Math.random()*10);
+            xTimeDisk[i] = parseInt(100 + Math.random()*30);
         }
 
         console.log(xTime);
