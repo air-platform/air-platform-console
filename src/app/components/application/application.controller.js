@@ -103,7 +103,7 @@
 					NetworkService.get(constdata.api.application.depPath+'/app?namespace='+vm.infos[0].user,'', function (response) {
 						var runInfoTmp = response.data;
 						//toastr.success(i18n.t('u.ADD_SUC'));
-						console.log(runInfoTmp);
+						//console.log(runInfoTmp);
 						console.log('get basic run info success.');
 						if(runInfoTmp != null && runInfoTmp.length > 0) {
 
