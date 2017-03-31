@@ -291,6 +291,9 @@
 
 		//add info
 		function OperApp(index, item) {
+			//console.log(itemIndex);
+			//var item = vm.displayedCollection[itemIndex];
+
 			if(index == 1){
 				//console.log(item);
 
@@ -308,6 +311,7 @@
 				$state.go('app.application', {applicationName:item.id, args:{selItem:item}});
 			}else if(index == 6){
 				console.log('deleted');
+				//onsole.log(item);
 				OperK8s(item,6);
 				//$state.go('app.application', {applicationName:item.id, args:{selItem:item}});
 			}
@@ -318,6 +322,7 @@
 		// 分页 Start
 
 		function OperK8s(item, st){
+			//var item = vm.displayedCollection[itemIndex];
 			console.log(item);
 			if(st == 3){
 				if(item.state == 'Running' || item.state == 'Pending'){
@@ -326,7 +331,8 @@
 					NetworkService.post(constdata.api.application.depPath + '/app/' + item.name + '?namespace=' + vm.userName, '', function (response) {
 						var runInfoTmp = response.data;
 						//toastr.success(i18n.t('u.ADD_SUC'));
-						console.log('start app success.');
+						toastr.success('操作成功');
+						getDatas();
 					}, function (response) {
 						//vm.authError = response.statusText + '(' + response.status + ')';
 						//console.log(vm.authError);
@@ -343,7 +349,9 @@
 					NetworkService.post(constdata.api.application.depPath + '/app/' + item.name + '?namespace=' + vm.userName, '', function (response) {
 						var runInfoTmp = response.data;
 						//toastr.success(i18n.t('u.ADD_SUC'));
-						console.log('stop app success.');
+
+						toastr.success('操作成功');
+						getDatas();
 					}, function (response) {
 						//vm.authError = response.statusText + '(' + response.status + ')';
 						//console.log(vm.authError);
@@ -354,6 +362,7 @@
 				}
 
 			}else if(st == 6){
+
 				if(item.state == 'created'){
 					toastr.error('应用已经删除');
 				}else{
@@ -361,6 +370,7 @@
 						var runInfoTmp = response.data;
 						toastr.success('操作成功');
 						//console.log('stop app success.');
+						getDatas();
 					}, function (response) {
 						//vm.authError = response.statusText + '(' + response.status + ')';
 						//console.log(vm.authError);

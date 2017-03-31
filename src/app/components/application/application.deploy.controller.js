@@ -104,7 +104,7 @@
 		}*/
 
 		vm.getData = function() {
-
+			console.log(vm.appId);
 			NetworkService.get(constdata.api.application.appsPath + '/' + vm.appId,null,function (response) {
 				vm.info = response.data.data;
 				// if (vm.info.credentialsProvider == 'default'){
@@ -282,23 +282,26 @@
 
 						//return;
 			NetworkService.post(constdata.api.application.depPath+'/rc',rcTmp,function (response) {
-				toastr.success(i18n.t('u.ADD_SUC'));
-				vm.backAction();
+				//toastr.success(i18n.t('u.ADD_SUC'));
+				console.log('rc deploy success');
+				//vm.backAction();
 			},function (response) {
 				vm.authError = response.statusText + '(' + response.status + ')';
-				console.log(vm.authError);
-				toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+				//console.log(vm.authError);
+				//toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+				console.log('rc deploy fail');
 			});
 
 
 
 			NetworkService.post(constdata.api.application.depPath+'/service',svcTmp,function (response) {
-				toastr.success(i18n.t('u.ADD_SUC'));
+				toastr.success('操作成功');
 				vm.backAction();
 			},function (response) {
 				vm.authError = response.statusText + '(' + response.status + ')';
-				console.log(vm.authError);
-				toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+				//console.log(vm.authError);
+				console.log('service deploy fail');
+				//toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
 			});
 
 
