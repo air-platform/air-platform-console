@@ -4,66 +4,33 @@
   ">
     <!-- main -->
     <div class="col">
-        <!-- main header -->
-        <!-- <div class="bg-light lter b-b wrapper-md" ng-hide="isRoleAdmin">
-            <div class="row"> -->
-                <!-- <div class="col-sm-6 col-xs-12">
-                    <h1 class="m-n font-thin h3 text-black">{{'application.APPLICATIONDETAIL' | translate}}</h1>
-                    <small class="text-muted">HNA EcoTech Internet of Things</small>
-                </div> -->
-                <!-- <div class="">
-                	<ul style="border-bottom: none;" class="nav nav-tabs col-md-12" role="tablist"> -->
-                    	<!-- <button  class="btn btn-outline-inverse bg-info glyphicon glyphicon-arrow-left pull-right" ng-click="vm.backAction()">{{'product.BACK' | translate}}</button> -->
-                    <!--     <button ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-right"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
-                	</ul>
-                </div> -->
-            <!-- </div>
-        </div> -->
-
-        <!-- / service -->
-
-        <!-- tasks -->
         <br/>
 
 
         <uib-tabset class="m-l m-r control" active="vm.tabSelectedIndex">
             <uib-tab ng-repeat="tab in vm.tabs" heading="{{tab.title}}" ng-click="vm.tapAction(tab.fun)"></uib-tab>
-           <!-- <uib-tab heading="{{vm.tabs[0].title}}" ng-click="vm.tapAction(vm.tabs[0].fun)"></uib-tab>
-            <uib-tab heading="{{vm.tabs[1].title}}" ng-click="vm.tapAction(vm.tabs[1].fun)"></uib-tab>
-            <uib-tab heading="{{vm.tabs[2].title}}" ng-click="vm.tapAction(vm.tabs[2].fun)"></uib-tab>
-            <uib-tab heading="{{vm.tabs[3].title}}" ng-click="vm.tapAction(vm.tabs[3].fun)"></uib-tab>-->
-
             <button ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-right"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
         </uib-tabset>
 
-        <!--<ul class="nav nav-tabs col-md-12" role="tablist" style="padding-right:0;">
-            <li sdk role="presentation" class="active"><a ng-click="vm.goSdk()" aria-controls="SDK" role="tab" data-toggle="tab">{{'product.PROFILE' | translate}}</a></li>
-            <li sdk role="presentation"><a ng-click="vm.goTopic()" aria-controls="Topic" role="tab" data-toggle="tab">{{'product.TOPIC' | translate}}</a></li>
+
+
+
+       <!-- <ul class="nav nav-tabs col-md-12" role="tablist" style="padding-right:0;">
+            <li sdk role="presentation" class="active"><a ng-click="vm.tapAction(vm.tabs[0].fun)" aria-controls="SDK" role="tab" data-toggle="tab">{{'u.APP_INFO' | translate}}</a></li>
+            <li sdk role="presentation" ><a ng-click="vm.tapAction(vm.tabs[1].fun)" aria-controls="SDK" role="tab" data-toggle="tab">{{'u.APP_RUN_INFO' | translate}}</a></li>
+            <li sdk role="presentation" ><a ng-click="vm.tapAction(vm.tabs[2].fun)" aria-controls="SDK" role="tab" data-toggle="tab">{{'u.APP_MONITOR_INFO' | translate}}</a></li>
+            <li sdk role="presentation" ><a ng-click="vm.tapAction(vm.tabs[3].fun)" aria-controls="SDK" role="tab" data-toggle="tab">{{'u.APP_LOG_INFO' | translate}}</a></li>
+
             <button ng-click="vm.backToProductList()" class="btn m-b-xs btn-sm btn-info btn-addon pull-right"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
-        </ul>-->
-
-
-
-      <!--  <ul class="nav nav-tabs col-md-12" role="tablist" style="padding-right:0;">
-            <li ng-repeat="tab in vm.tabs" sdk role="presentation" ><a ng-click="vm.tapAction(tab.fun)" aria-controls="SDK" role="tab" data-toggle="tab">"{{'tab.title'}}"</a></li>
-            <button ng-click="vm.backToProductList()" class="btn m-b-xs btn-sm btn-info btn-addon pull-right"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
-        </ul>-->
-
-
-
-
-        <!-- content
-        <div class="panel container col-md-12" ui-view="sdkContent"></div>-->
+        </ul>
+-->
 
 
 
 
 
 
-        <!--<ul class="nav nav-tabs m-l m-r control" role="tablist">-->
-            <!--<li role="presentation" ui-sref="app.applicationDetail.basic({applicationName:vm.applicationName})"><a ui-sref-active="active">基本信息</a></li>-->
-            <!--<li role="presentation" ui-sref="app.applicationDetail.event({applicationName:vm.applicationName})"><a ui-sref-active="active">事件</a></li>-->
-        <!--</ul>-->
+
 
 
         <div class="tab-content panel m-l m-r">

@@ -470,7 +470,19 @@
 
 
 
+        vm.allLogs = [
 
+            'Mar 31 10:03:33 bogon system_installd[349]: PackageKit: Adding client PKInstallDaemonClient pid=536, uid=200 (/System/Library/CoreServices/Software Update.app/Contents/Resources/softwareupdated)',
+            'Mar 31 10:03:33 bogon softwareupdated[536]: PackageKit: Enqueuing install with default quality of service (background)',
+            'Mar 31 10:03:33 bogon system_installd[349]: PackageKit: Using background priority for staging request',
+            'Mar 31 10:03:33 bogon system_installd[349]: PackageKit: ----- Begin stage -----',
+            'Mar 31 10:03:33 bogon system_installd[349]: PackageKit: request=PKInstallRequest <5 packages, destination=/>',
+
+
+
+
+
+        ];
 
 
 

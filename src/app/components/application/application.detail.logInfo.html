@@ -194,92 +194,18 @@
 
 
                 <tr style="border-bottom:1px dashed #ddd">
-                    <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.NAME' | translate}}</td>
-                    <td class="col-md-10" style="border:none;">
-                        <input style="width: 50%;" ng-model="vm.info.name" type="text" class="form-control pull-left font-thin" required disabled>
-                    </td>
-                </tr>
-
-                <tr style="border-bottom:1px dashed #ddd">
-                    <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.DESCRIPTION' | translate}}</td>
-                    <td class="col-md-10" style="border:none;">
-                        <!-- <input style="width: 50%;" ng-model="vm.modifiedProductInfo.description" type="text" class="form-control pull-left font-thin" required> -->
-                        <textarea style="width: 50%;resize:none" ng-model="vm.info.description" class="form-control font-thin pull-left" rows="3" cols="" required disabled></textarea>
-                    </td>
-                </tr>
-
-
-
-                <tr style="border-bottom:1px dashed #ddd">
-                    <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.LANGUAGE' | translate}}</td>
-                    <td class="col-md-10" style="border:none;">
-                        <input style="width: 50%;" ng-model="vm.info.lang" type="text" class="form-control pull-left font-thin" required disabled>
-                    </td>
-                </tr>
-
-
-
-                <tr style="border-bottom:1px dashed #ddd">
-                    <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.CREATEDDATE' | translate}}</td>
-                    <td class="col-md-10" style="border:none;">
-                        <input style="width: 50%;" ng-model="vm.info.createdTime" type="text" class="form-control pull-left font-thin" required disabled>
-                    </td>
-                </tr>
-
-                <tr style="border-bottom:1px dashed #ddd">
-                    <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.CODE_ADDR' | translate}}</td>
-                    <td class="col-md-10" style="border:none;">
-                        <input style="width: 50%;" ng-model="vm.info.git" type="text" class="form-control pull-left font-thin" required disabled>
-                    </td>
-                </tr>
-
-
-                <tr style="border-bottom:1px dashed #ddd">
-                    <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.STATUS' | translate}}</td>
-                    <td class="col-md-10" style="border:none;">
-                        <input style="width: 50%;" ng-model="vm.info.state" type="text" class="form-control pull-left font-thin" required disabled>
-                    </td>
-                </tr>
-
-
-
-                <tr style="border-bottom:1px dashed #ddd">
-                    <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.APP_SERVICES' | translate}}</td>
-                    <td class="col-md-10" style="border:none;">
-<!--
-                        <input style="width: 50%;" ng-model="vm.info.services" type="text" class="form-control pull-left font-thin" required disabled>
--->
-                        <select class="form-control"  style="width: 50%;" multiple ng-model="vm.servicesArrd" ng-options="opt.api_id as opt.service_name for opt in vm.allOpenService" required disabled></select>
-
-                    </td>
-                </tr>
-
-
-                <tr style="border-bottom:1px dashed #ddd">
-                    <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.APP_IMAGES' | translate}}</td>
+                
                     <td class="col-md-10" style="border:none;">
 <!--
                         <input style="width: 50%;" ng-model="vm.imgArrStr" type="text" class="form-control pull-left font-thin" required disabled>
 -->
-                        <select class="form-control"  style="width: 50%;" multiple ng-model="vm.servicesArrd" ng-options="o for o in vm.imgArr" required disabled></select>
+                        <select class="form-control"  style="height:350px; width: 90%;" multiple ng-model="vm.servicesArrd" ng-options="o for o in vm.allLogs" ></select>
 
                     </td>
                 </tr>
 
 
-                <tr style="border-bottom:1px dashed #ddd">
-                    <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.CUR_IMAGE' | translate}}</td>
-                    <td class="col-md-10" style="border:none;">
-                        <input style="width: 50%;" ng-model="vm.info.detailRunInfo.replication_controller.spec.template.spec.containers[0].image" type="text" class="form-control pull-left font-thin" required disabled>
-                    </td>
-                </tr>
 
-                <tr style="border-bottom:1px dashed #ddd">
-                    <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.ACCESS_URL' | translate}}</td>
-                    <td class="col-md-10" style="border:none;">
-                        <input style="width: 50%;" ng-model="vm.info.detailRunInfo.accessUrl" type="text" class="form-control pull-left font-thin" required disabled>
-                    </td>
-                </tr>
 
 
                 </tbody>
