@@ -225,12 +225,12 @@
                 subtext: '',
                 left: 'left',
                 textStyle: {
-                    color: '#666'
+                    color: '#3399CC'
                 }
             },
             tooltip : {
                 trigger: 'axis',
-                // formatter: '({b})\n{a}: {c} k',
+                 formatter: '{a0}:{c0}万次,{a1}:{c1}h,{a2}:{c2}M',
                 // backgroundColor: '#27c24c',
                 axisPointer: {
                     lineStyle:{
@@ -283,7 +283,7 @@
                 {
                     type : 'value',
                     axisLabel : {
-                        formatter: '{value} k'
+                        formatter: '{value}'
                     },
                     axisLine: {
                         show: true,
@@ -310,7 +310,7 @@
                     data:[11, 11, 15, 13, 12, 13, 10],
                     itemStyle:{
                         normal:{
-                            color:'#23b7e5',
+                            color:'#4686CD',
                             lineStyle:{
                                 color:'#4686CD',
                                 width: 4
@@ -338,9 +338,9 @@
                     data:[2, 0.7, 4, 5, 3, 2, 1],
                     itemStyle:{
                         normal:{
-                            color:'#7266ba',
+                            color:'#9933CC',
                             lineStyle:{
-                                color:'#CC4594',
+                                color:'#9933CC',
                                 width: 4
                             }
                         }
@@ -352,7 +352,7 @@
                         itemStyle:{
                             normal:{
                                 lineStyle:{
-                                    color:'#CC4794'
+                                    color:'#9933CC'
                                 }
                             }
                         }
@@ -363,12 +363,12 @@
                     type:'line',
                     smooth:true,
                     // symbol:'none',
-                    data:[4, 4, 4, 7, 3, 2, 1],
+                    data:[4, 5, 6, 7, 4, 8, 1],
                     itemStyle:{
                         normal:{
-                            color:'#5266ba',
+                            color:'#66CC33',
                             lineStyle:{
-                                color:'#CC4594',
+                                color:'#66CC33',
                                 width: 4
                             }
                         }
@@ -380,7 +380,7 @@
                         itemStyle:{
                             normal:{
                                 lineStyle:{
-                                    color:'#CC4594'
+                                    color:'#66CC33'
                                 }
                             }
                         }
