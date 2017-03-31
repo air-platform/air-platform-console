@@ -79,7 +79,10 @@
 
 
 			img.name = vm.info.imageName;
-			img.tag = vm.info.imageTag;
+			img.tag = 'latest';
+			if(vm.info.imageTag != null && vm.info.imageTag != '') {
+				img.tag = vm.info.imageTag;
+			}
 			img.appId = vm.info.id;
 			img.lang = vm.info.lang;
 			img.git = vm.info.git;
