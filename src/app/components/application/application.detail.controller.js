@@ -70,8 +70,9 @@
             }else if(index == 5){
                 $state.go('app.application', {applicationName:item.id, args:{selItem:item}});
             }else if(index == 6){
-                console.log('deleted');
-                $state.go('app.application', {applicationName:item.id, args:{selItem:item}});
+                //console.log('deleted');
+                OperK8s(item,6);
+                //$state.go('app.application', {applicationName:item.id, args:{selItem:item}});
             }
 
             //$state.go('app.applicationedit');
@@ -83,7 +84,7 @@
         function OperK8s(item, st){
             console.log(item);
             if(st == 3){
-                if(item.state == 'Running'){
+                if(item.state == 'Running' || item.state == 'Pending'){
                     toastr.error('应用已经启动');
                 }else{
                     NetworkService.post(constdata.api.application.depPath + '/app/' + item.name + '?namespace=' + vm.userName, '', function (response) {
@@ -100,7 +101,7 @@
                 }
 
             }else if(st == 4){
-                if(item.state == 'Stopped'){
+                if(item.state == 'Stopped' || item.state == 'created'){
                     toastr.error('应用已经停止');
                 }else{
                     NetworkService.post(constdata.api.application.depPath + '/app/' + item.name + '?namespace=' + vm.userName, '', function (response) {
@@ -116,6 +117,21 @@
 
                 }
 
+            }else if(st == 6){
+                if(item.state == 'created'){
+                    toastr.error('应用已经删除');
+                }else{
+                    NetworkService.delete(constdata.api.application.depPath + '/app/' + item.name + '?namespace=' + vm.userName, '', function (response) {
+                        var runInfoTmp = response.data;
+                        toastr.success('操作成功');
+                        //console.log('stop app success.');
+                    }, function (response) {
+                        //vm.authError = response.statusText + '(' + response.status + ')';
+                        //console.log(vm.authError);
+                        //toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+                        console.log('delete app fail.');
+                    });
+                }
             }
 
         }
