@@ -8,7 +8,7 @@
     angular.module('iot').controller('DashCtrl', DashCtrl);
 
     /** @ngInject */
-    function DashCtrl($scope,$stateParams,$state,StorageService,NetworkService,constdata,toastr,logger,i18n) {
+    function DashCtrl($stateParams,$state,StorageService,NetworkService,constdata,toastr,logger,i18n) {
         /* jshint validthis: true */
         var vm = this;
         if($stateParams){
@@ -121,14 +121,6 @@
                 $(this).css('color', '#4F83E8');
             });
         }
-
-        $scope.d3 = [
-            { label: "iPhone5S", data: 40 },
-            { label: "iPad Mini", data: 10 },
-            { label: "iPad Mini Retina", data: 20 },
-            { label: "iPhone4S", data: 12 },
-            { label: "iPad Air", data: 18 }
-        ];
 
         //设置pie字体大小
         $('span.text-info').each(function() {
