@@ -14,6 +14,16 @@
 
         isBrowserBackBtn();
 
+        if (argsProduct.service_name == '人工智能'){
+            vm.descpath = 'app/service-intro/polly.html';
+        }
+        if (argsProduct.service_name == '大数据舆情'){
+            vm.descpath = 'app/service-intro/news.html';
+        }
+        if (argsProduct.service_name == '物联网'){
+            vm.descpath = 'app/service-intro/iot.html';
+        }
+
         //getTopics();
 
         vm.addTopic = function(topicId) {

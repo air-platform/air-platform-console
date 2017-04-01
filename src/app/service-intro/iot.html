@@ -1,0 +1,89 @@
+<h1 class="text-center" id="toc_0">物联网使用说明</h1>
+
+<h2 id="toc_1">01. Iot 平台认证</h2>
+
+<p>请求：</p>
+
+<div><pre><code class="language-none">POST /iot/api/v1/account/auth HTTP/1.1
+Host: 10.71.86.199:8080
+Content-Type: application/json
+
+{&quot;username&quot;:&quot;admin&quot;,&quot;password&quot;:&quot;p0o9i8u7&quot;}</code></pre></div>
+
+<p>响应：</p>
+
+<div><pre><code class="language-none">{
+    token：eyJraWQiOiJJT1RfUExBVEZPUk1fS0VZIiwiYWxnIjoiUlMyNTYifQ.eyJpc3MiOiJJT1RfUExBVEZPUk1fSVNTVUVSIiwiYXVkIjoiSU9UX1BMQVRGT1JNX0FVRElFTkNFIiwiZXhwIjozNjY2MTUyNjkxLCJqdGkiOiItQnJEdVZOWTUyVURta1NxUDhuNktBIiwiaWF0IjoxNDg4ODcyNjkxLCJzdWIiOiJkZW1vIiwiY2xhaW0ucm9sZXMiOlsiVEVOQU5UIl19.j1NpTM2N8QR6POS3qoGYlsFt5OxLG7nbaNpLHV0f8s7BNOA3eEEpoY4TRptisWHr_I0GiH9C4lvkdBkcDOFr3bfsU1lTTdPvTc1UjApB1eURdVJ5t5iaC4wKPIpPjrYietfS10BVO85ieiXC4w7wHRg0O35zXdLbCS8jaBd-VUNk4AG7j7cKWg1ADReNO0dOjBMzZiqfEJkA2IKuFTGVfKhwMC1fGK1sGhcelanYog-lqY7BZUbdXckCr5SXGyhMeoZh4wn76Gc4-eTGTzFvjvSscqkmOh914Ex0WIRP0Wym8i9TugKUqU_WbPVeAmka0Rh0_mwjuhRv3cmYyQagDw
+
+}</code></pre></div>
+
+<h2 id="toc_2">02. 获取用户信息</h2>
+
+<p>请求：</p>
+
+<div><pre><code class="language-none">GET /iot/api/v1/account/profile HTTP/1.1
+Host: localhost:8080
+Authorization: Bearer eyJraWQiOiJJT1RfU0VDVVJFS0VZIiwiYWxnIjoiUlMyNTYifQ.eyJpc3MiOiJJT1RfUExBVEZPUk1fSVNTVUVSIiwiYXVkIjoiSU9UX1BMQVRGT1JNX0FVRElFTkNFIiwiZXhwIjoxMTUwMDI2NDU3OTUsImp0aSI6ImZxX0VXZnp6U09Cd0ttaFMtcHhOR0EiLCJpYXQiOjE0NzMwNDM3NDcsInN1YiI6ImFkbWluIiwiY2xhaW0ucm9sZXMiOlsiQURNSU4iXX0.g8tP3KpcJDIxgKfbuSBhThI7HavEHvgkOFdxieVu_uBoGmAETTnO8_GFJzYHzBdz0d4_itK6grNusDF29CRQj73-7TLcvc6bnrGYfQ4E3EqI9e50qc9icUUZ99-R2txJLkUiHrP5_FBFqiYOiz2BP7xupqYNj0q_J47gbmS50dRmr_4V8ba0lQefavqDoZYvz-lhS-lwjW8hL-Gm49-s-VtvhPhMd5pQ0JB3R9ylf73frMO1XjNstVlKAezfCwX9RtdvZUmDzoLqrVj08pAi3FCmT2zRkD2tB66CnT6lk417QTfw2pRFOv6sXA4Id-LSa-Rf5GPQ2JhP8aQmsxw7WA</code></pre></div>
+
+<p>响应：Iot 总体信息</p>
+
+<h2 id="toc_3">03. Iot 添加app</h2>
+
+<p>请求：</p>
+
+<div><pre><code class="language-none">POST /iot/api/v1/apps HTTP/1.1
+Host: localhost:8080
+Authorization: Bearer eyJraWQiOiJJT1RfU0VDVVJFS0VZIiwiYWxnIjoiUlMyNTYifQ.eyJpc3MiOiJJT1RfUExBVEZPUk1fSVNTVUVSIiwiYXVkIjoiSU9UX1BMQVRGT1JNX0FVRElFTkNFIiwiZXhwIjoxNzgwMTMxMDM4LCJqdGkiOiJjZ2hBYkU5eGRtWnlPV1JhSXpSbWlRIiwiaWF0IjoxNDY5MDkxMDM4LCJzdWIiOiJ0ZW5hbnQxIiwiY2xhaW0ucm9sZXMiOlsiVEVOQU5UIl19.QBVtAfEwVFfVonQ2CDvpzAXOsBcM2vqjJZpgyexmbAB3VYlj3P5dPl6tGHdWAoji1ybrsWW9wM2LcYrorodz4cWWO191qjN4B2rlv3UCyHA_sdlATjTJyINerAnRSptJN98hm2WP9G_qdt95b9gFl31baotSmVF_NHnBQlSNnUx70-ltojMh5OR92D8ResjvyPD8qjTusPMGP7GzVCPy-O3S8yYFsokCqwyMCbMA3mVJa5GH95x-FmhibNCgpCJm6fBiqxvJdjmLQlGoFCzVa0JdnSTdZsR7GXbq71TynivZe36bAXoive6EitC98s3hp0UcPi_HLDvGkzA5g5aSNg
+Content-Type: application/json
+
+{
+  &quot;name&quot;: &quot;app1&quot;,
+  &quot;credentialsProvider&quot;: &quot;default&quot;,
+  &quot;description&quot;: &quot;My App Desc&quot;
+}</code></pre></div>
+
+<p>响应：返回成功或者失败 </p>
+
+<h2 id="toc_4">04. 获取app信息</h2>
+
+<p>请求：</p>
+
+<div><pre><code class="language-none">GET /iot/api/v1/admin/tenants/tenant1/apps HTTP/1.1
+Host: localhost:8080
+Authorization: Bearer eyJraWQiOiJJT1RfU0VDVVJFS0VZIiwiYWxnIjoiUlMyNTYifQ.eyJpc3MiOiJJT1RfUExBVEZPUk1fSVNTVUVSIiwiYXVkIjoiSU9UX1BMQVRGT1JNX0FVRElFTkNFIiwiZXhwIjoxMTUwMDI2NDU3OTUsImp0aSI6ImZxX0VXZnp6U09Cd0ttaFMtcHhOR0EiLCJpYXQiOjE0NzMwNDM3NDcsInN1YiI6ImFkbWluIiwiY2xhaW0ucm9sZXMiOlsiQURNSU4iXX0.g8tP3KpcJDIxgKfbuSBhThI7HavEHvgkOFdxieVu_uBoGmAETTnO8_GFJzYHzBdz0d4_itK6grNusDF29CRQj73-7TLcvc6bnrGYfQ4E3EqI9e50qc9icUUZ99-R2txJLkUiHrP5_FBFqiYOiz2BP7xupqYNj0q_J47gbmS50dRmr_4V8ba0lQefavqDoZYvz-lhS-lwjW8hL-Gm49-s-VtvhPhMd5pQ0JB3R9ylf73frMO1XjNstVlKAezfCwX9RtdvZUmDzoLqrVj08pAi3FCmT2zRkD2tB66CnT6lk417QTfw2pRFOv6sXA4Id-LSa-Rf5GPQ2JhP8aQmsxw7WA</code></pre></div>
+
+<p>响应：app信息列表</p>
+
+<h2 id="toc_5">05. 更新用户信息</h2>
+
+<p>请求：</p>
+
+<div><pre><code class="language-none">PUT /iot/api/v1/account/profile HTTP/1.1
+Host: localhost:8080
+Authorization: Bearer eyJraWQiOiJJT1RfU0VDVVJFS0VZIiwiYWxnIjoiUlMyNTYifQ.eyJpc3MiOiJJT1RfUExBVEZPUk1fSVNTVUVSIiwiYXVkIjoiSU9UX1BMQVRGT1JNX0FVRElFTkNFIiwiZXhwIjoxNzgwMDc0MTU1LCJqdGkiOiJjcTFDMC10RVBXUEk1XzN2Z1FsQ2RBIiwiaWF0IjoxNDY5MDM0MTU1LCJzdWIiOiJhZG1pbiIsImNsYWltLnJvbGVzIjpbIkFETUlOIl19.pzXQDv82gPrpNVas_2DHt8mihoNhqw8mnAMlDwnCC-Jkj5xodi_UBTVG8thOLaNSSLpflOqhJ8eJMstZTEJI9Nsoy1axBIun-U47NGpeZF76GUI9vh7wf_9EpwKVs0UDyK5amAVrzyiO6nQEjtMPPbGX_fWfUasB_JP5H34O2pqTl5cb6irSoJxB-_MB7lxZYJ4V9u0W9XRuFbaQtdG5YSiib7-WHHEhOIQ6X3Xg7y9josfUf41BfD9cOs2U_k3WZjiiosZVajy8DatMxF96BZuGVRh4VxozvczuiThyLAcsXW2TjYen4bgGJcH2AG7ip002NDrPxpaE2STcJwtxBQ
+Content-Type: application/json
+
+{&quot;nickName&quot;:&quot;Admin Hehe&quot;}</code></pre></div>
+
+<p>响应：更新成功或者失败</p>
+
+<h2 id="toc_6">06. 更新用户token</h2>
+
+<p>请求：</p>
+
+<div><pre><code class="language-none">POST /iot/api/v1/account/token/refresh HTTP/1.1
+Host: localhost:8080
+Authorization: Bearer eyJraWQiOiJJT1RfU0VDVVJFS0VZIiwiYWxnIjoiUlMyNTYifQ.eyJpc3MiOiJJT1RfUExBVEZPUk1fSVNTVUVSIiwiYXVkIjoiSU9UX1BMQVRGT1JNX0FVRElFTkNFIiwiZXhwIjoxNzgwMDc0MTU1LCJqdGkiOiJjcTFDMC10RVBXUEk1XzN2Z1FsQ2RBIiwiaWF0IjoxNDY5MDM0MTU1LCJzdWIiOiJhZG1pbiIsImNsYWltLnJvbGVzIjpbIkFETUlOIl19.pzXQDv82gPrpNVas_2DHt8mihoNhqw8mnAMlDwnCC-Jkj5xodi_UBTVG8thOLaNSSLpflOqhJ8eJMstZTEJI9Nsoy1axBIun-U47NGpeZF76GUI9vh7wf_9EpwKVs0UDyK5amAVrzyiO6nQEjtMPPbGX_fWfUasB_JP5H34O2pqTl5cb6irSoJxB-_MB7lxZYJ4V9u0W9XRuFbaQtdG5YSiib7-WHHEhOIQ6X3Xg7y9josfUf41BfD9cOs2U_k3WZjiiosZVajy8DatMxF96BZuGVRh4VxozvczuiThyLAcsXW2TjYen4bgGJcH2AG7ip002NDrPxpaE2STcJwtxBQ
+Content-Type: application/json</code></pre></div>
+
+<p>响应：返回新的token</p>
+
+<h2 id="toc_7">07. 删除 app</h2>
+
+<p>请求：</p>
+
+<div><pre><code class="language-none">DELETE /iot/api/v1/apps/app1 HTTP/1.1
+Host: localhost:8080
+Authorization: Bearer eyJraWQiOiJJT1RfU0VDVVJFS0VZIiwiYWxnIjoiUlMyNTYifQ.eyJpc3MiOiJJT1RfUExBVEZPUk1fSVNTVUVSIiwiYXVkIjoiSU9UX1BMQVRGT1JNX0FVRElFTkNFIiwiZXhwIjoxNzgwMTMxMDM4LCJqdGkiOiJjZ2hBYkU5eGRtWnlPV1JhSXpSbWlRIiwiaWF0IjoxNDY5MDkxMDM4LCJzdWIiOiJ0ZW5hbnQxIiwiY2xhaW0ucm9sZXMiOlsiVEVOQU5UIl19.QBVtAfEwVFfVonQ2CDvpzAXOsBcM2vqjJZpgyexmbAB3VYlj3P5dPl6tGHdWAoji1ybrsWW9wM2LcYrorodz4cWWO191qjN4B2rlv3UCyHA_sdlATjTJyINerAnRSptJN98hm2WP9G_qdt95b9gFl31baotSmVF_NHnBQlSNnUx70-ltojMh5OR92D8ResjvyPD8qjTusPMGP7GzVCPy-O3S8yYFsokCqwyMCbMA3mVJa5GH95x-FmhibNCgpCJm6fBiqxvJdjmLQlGoFCzVa0JdnSTdZsR7GXbq71TynivZe36bAXoive6EitC98s3hp0UcPi_HLDvGkzA5g5aSNg</code></pre></div>
+
+<p>响应： 删除成功或者失败</p>

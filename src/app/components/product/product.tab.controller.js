@@ -32,11 +32,11 @@
         }
 
         vm.goTopic = function() {
-            $state.go('app.productTab.productTopic',{args : argsProduct});
+            $state.go('app.productTab.productTopic',{HNATenantName:UserInfoServer.tenantName(),args : argsProduct});
         }
 
         vm.goApiDesc = function(){
-            $state.go('app.productTab.productApi',{args : argsProduct});
+            $state.go('app.productTab.productApi',{HNATenantName:UserInfoServer.tenantName(),args : argsProduct});
         }
 
         vm.goSdk = function() {
