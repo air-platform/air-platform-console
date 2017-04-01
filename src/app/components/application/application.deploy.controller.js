@@ -290,6 +290,8 @@
 				//console.log(vm.authError);
 				//toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
 				console.log('rc deploy fail');
+				toastr.error('操作失败');
+				vm.backAction();
 			});
 
 
@@ -301,6 +303,8 @@
 				vm.authError = response.statusText + '(' + response.status + ')';
 				//console.log(vm.authError);
 				console.log('service deploy fail');
+				toastr.error('操作失败');
+				vm.backAction();
 				//toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
 			});
 
