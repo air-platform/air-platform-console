@@ -110,10 +110,20 @@
 					</tr>
 
 
-					<tr>
+					<tr style="border-bottom:1px dashed #ddd">
 						<td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.CHECKWAY' | translate}}</td>
 						<td class="col-md-10" style="border:none;">
 							<select style="width: 50%;" class="form-control font-thin" ng-model="vm.modifiedProductInfo.credentialsProvider" ng-options="s.value as s.title for s in vm.userVerifier" ng-change="vm.selectedUVChanged()"></select>
+						</td>
+					</tr>
+
+
+
+					<tr style="border-bottom:1px dashed #ddd">
+						<td colspan="2">
+							<button ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-edit"></i>{{'product.EDIT' | translate}}</button>
+							<button ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-danger btn-addon pull-left m-l"><i class="glyphicon glyphicon-trash"></i>{{'product.DELETE' | translate}}</button>
+
 						</td>
 					</tr>
 	            </tbody>
