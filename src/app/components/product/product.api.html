@@ -1,0 +1,36 @@
+<div class="m-t panel panel-default" ng-controller="productApiCtrl as vm">
+    <table class="table table-hover table-striped table-bordered text-center">
+        <thead class="table-striped table-bordered">
+        <!--          <tr>
+                      <th colspan="5">
+                          <button ng-click="vm.addTopic()" class="btn m-b-xs btn-sm btn-info btn-addon"><i class="fa fa-plus"></i>{{'product.ADD' | translate}}</button>
+                      </th>
+                  </tr>-->
+        <tr class="bg-light">
+            <th class="text-center col-md-2">名称</th>
+            <th class="text-center col-md-2">方法</th>
+             <th class="text-center col-md-2">参数</th>
+            <th class="text-center col-md-2">描述</th>
+            <th class="text-center col-md-2">样例</th>
+            <!-- <th class="text-center">发送</th> -->
+            <!--<th class="text-center col-md-4">{{'product.OPERATE' | translate}}</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in vm.pollydata">
+            <!--<td ng-click="vm.editTopic($index)" ng-bind="item.name" style="vertical-align: middle;"></td>-->
+            <!--<td ng-click="vm.editTopic($index)" style="vertical-align: middle;">{{item.type | isMandatory}}</td>-->
+            <!-- <td ng-click="vm.editTopic($index)" ng-bind="item.createdBy" style="vertical-align: middle;"></td> -->
+            <td  style="vertical-align: middle;">{{item.name}}</td>
+            <td  style="vertical-align: middle;">{{item.option}}</td>
+            <td  style="vertical-align: middle;">{{item.parames}}</td>
+            <td  style="vertical-align: middle;">{{item.description}}</td>
+            <td  style="vertical-align: middle;">{{item.example}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div ng-include="'app/components/core/modal.html'"></div>
+</script>

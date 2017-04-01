@@ -322,6 +322,16 @@
                   params : {args : {}},
                   // cache: false
               })
+              .state('app.productTab.productApi', {
+                  url: prefix + '/topic',
+                  views: {
+                      'sdkContent@app.productTab' : {
+                          templateUrl: 'app/components/product/product.api.html'
+                      }
+                  },
+                  params : {args : {}},
+                  // cache: false
+              })
               .state('app.editTopic', {
                   url: prefix + 'edit-topic',
                   templateUrl: 'app/components/product/product.topic.edit.html',

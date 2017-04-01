@@ -194,6 +194,7 @@
     "INPUTPRODUCTDESCRIPTION":"请输入产品描述",
     "PROFILE":"云服务信息",
     "TOPIC":"使用说明",
+    "SERVICEAPI":"API说明",
     "EVENTMAPPING":"事件映射",
     "NOTIFICATION":"主题订阅",
     "BACK":"返回",

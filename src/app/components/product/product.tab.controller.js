@@ -35,6 +35,10 @@
             $state.go('app.productTab.productTopic',{args : argsProduct});
         }
 
+        vm.goApiDesc = function(){
+            $state.go('app.productTab.productApi',{args : argsProduct});
+        }
+
         vm.goSdk = function() {
             $state.go('app.productTab',{HNATenantName:UserInfoServer.tenantName(),args : argsProduct});
         }
