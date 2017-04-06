@@ -10,7 +10,7 @@
 
     // 'use strict';
 
-    angular.module('polly').run(runBlock);
+    angular.module('airs').run(runBlock);
 
     /** @ngInject */
     function runBlock($log,$rootScope) {

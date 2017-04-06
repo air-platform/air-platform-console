@@ -5,14 +5,14 @@
 (function () {
     'use strict';
 
-    angular.module('polly').controller('SigninController', SigninController);
+    angular.module('airs').controller('SigninController', SigninController);
 
     /** @ngInject */
     function SigninController(LoginServer,logger,toastr,StorageService,$timeout,$state,$rootScope,i18n,$translate) {
         /* jshint validthis: true */
         var vm = this;
-        var accessToken = 'polly_access_token';
-        var hnaInfo = 'polly.information';
+        var accessToken = 'airspc_access_token';
+        var hnaInfo = 'airspc.information';
         //语言
         var langChi = '中文';
         var langEng = 'English';
@@ -66,7 +66,7 @@
 
         }
         function username() {
-            var information = StorageService.get('polly.information');
+            var information = StorageService.get('airspc.information');
             return information.username;
         }
         

@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    angular.module('polly').controller('SignupController', SignupController);
+    angular.module('airs').controller('SignupController', SignupController);
 
     /** @ngInject */
     function SignupController($state) {

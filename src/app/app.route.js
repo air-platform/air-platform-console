@@ -3,7 +3,7 @@
 
     /** @ngInject */
     angular
-        .module('polly')
+        .module('airs')
         .config(routeConfig);
 
     function routeConfig($stateProvider, $urlRouterProvider) {

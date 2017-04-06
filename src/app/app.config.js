@@ -10,7 +10,7 @@
     'use strict';
 
     angular
-        .module('polly')
+        .module('airs')
         .config(config);
 
     /** @ngInject */

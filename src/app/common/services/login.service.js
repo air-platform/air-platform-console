@@ -13,7 +13,7 @@
  *
  */
 angular
-    .module('polly')
+    .module('airs')
     .factory('LoginServer', LoginServer);
 
 /** @ngInject */
@@ -38,15 +38,17 @@ function LoginServer(constdata,NetworkService,StorageService) {
         NetworkService.get(constdata.api.account.info,null,successHandler,failedHandler);
     }
     function isAuthed() {
-        var token = StorageService.get('polly_access_token');
+        return true;
+        var token = StorageService.get('airspc_access_token');
         if (token && token.length > 0){
             return true;
         }
         return false;
     }
     function isAdmin() {
+        return false;
         // "ADMIN"; "TENANT"; "USER";
-        var information = StorageService.get('polly.information');
+        var information = StorageService.get('airspc.information');
         if (information && information.type.toUpperCase() == 'ADMIN'){
             return true;
         } else {

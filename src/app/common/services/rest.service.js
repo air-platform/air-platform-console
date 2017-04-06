@@ -3,14 +3,14 @@
 
      /** RestService */
     angular
-        .module('polly')
+        .module('airs')
         .factory('RestService', RestService);
 
     // REST service based on Restangular  that uses setFullResponse
     /** @ngInject */
     function RestService(Restangular, StorageService,logger) {
         return Restangular.withConfig(function (RestangularConfigurer) {
-            var token = StorageService.get('polly_access_token');
+            var token = StorageService.get('airspc_access_token');
             if (token){
                 logger.debug(token);
                 // $http.defaults.headers.common['Authorization'] = token;
@@ -25,7 +25,7 @@
 
     /** NetworkService */
     angular
-        .module('polly')
+        .module('airs')
         .factory('NetworkService', NetworkService);
 
     /** @ngInject */
@@ -54,7 +54,7 @@
 
         function get(path,param,successHandler,failedHandler) {
             var account = RestService.one(path);
-            var token = StorageService.get('polly_access_token');
+            var token = StorageService.get('airspc_access_token');
             token = 'Bearer ' + token;
             account.customGET("",param,{Authorization:token}).then(successHandler,function (response) {
                 failedResponse(response,failedHandler,path);
@@ -110,7 +110,7 @@
 
     /** StorageService */
     angular
-        .module('polly')
+        .module('airs')
         .service('StorageService', StorageService);
 
     /** @ngInject */
@@ -184,7 +184,7 @@
       *
       */
      angular
-         .module('polly')
+         .module('airs')
          .factory('UserInfoServer', UserInfoServer);
 
      /** @ngInject */
@@ -206,7 +206,7 @@
              if (tenant && tenant.length > 0) {
                  prefix = 'tenant-' + tenant;
              } else {
-                 var information = StorageService.get('polly.information');
+                 var information = StorageService.get('airspc.information');
                  if (information && information.name) {
                      prefix = information.username;
                  }

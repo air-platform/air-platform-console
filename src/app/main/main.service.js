@@ -13,7 +13,7 @@
      *
      */
     angular
-        .module('polly')
+        .module('airs')
         .factory('MainServer', MainServer);
 
     /** @ngInject */

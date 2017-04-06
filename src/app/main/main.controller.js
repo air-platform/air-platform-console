@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    angular.module('polly').controller('MainController', MainController);
+    angular.module('airs').controller('MainController', MainController);
 
     /** @ngInject */
     function MainController($timeout,$translate,$location,LoginServer, $state, toastr,$scope) {
@@ -47,10 +47,10 @@
       // angular translate
       vm.lang = { isopen: false };
       vm.langs = {en:'English', de_DE:'German', it_IT:'Italian'};
-      vm.selectLang = vm.langs[$translate.proposedLanguage()] || "English";
+        $scope.selectLang = vm.langs[$translate.proposedLanguage()] || "English";
       vm.setLang = function(langKey, $event) {
         // set the current lang
-        vm.selectLang = vm.langs[langKey];
+          $scope.selectLang = vm.langs[langKey];
         // You can change the language during runtime
         $translate.use(langKey);
         vm.lang.isopen = !vm.lang.isopen;
@@ -66,6 +66,8 @@
             toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
             vm.classAnimation = '';
         }
+
+        $state.go('app.agents');
 
         if (LoginServer.isAuthed()){
 
@@ -90,32 +92,3 @@
 
     }
 })();
-
-(function () {
-    'use strict';
-
-    angular.module('polly').controller('MainChildAsideController', MainChildAsideController);
-
-    /** @ngInject */
-    function MainChildAsideController(AgentServer,$state,logger,$rootScope,toastr,i18n,constdata) {
-        /* jshint validthis: true */
-        var vm = this;
-
-    }
-})();
-
-(function () {
-    'use strict';
-
-    angular.module('polly').controller('MainChildHeaderController', MainChildHeaderController);
-
-    /** @ngInject */
-    function MainChildHeaderController() {
-        /* jshint validthis: true */
-        var vm = this;
-        
-
-
-    }
-})();
-

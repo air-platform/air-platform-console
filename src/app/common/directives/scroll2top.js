@@ -1,4 +1,4 @@
-angular.module('polly')
+angular.module('airs')
     .directive('uiScrollTo', ['$location', '$anchorScroll', function($location, $anchorScroll) {
         return {
             restrict: 'AC',

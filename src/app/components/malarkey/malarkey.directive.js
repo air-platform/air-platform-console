@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('polly')
+    .module('airs')
     .directive('acmeMalarkey', acmeMalarkey);
 
   /** @ngInject */

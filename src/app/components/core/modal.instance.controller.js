@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('polly')
+        .module('airs')
         .controller('ModalInstanceCtrl', ModalInstanceCtrl);
 
     /** @ngInject */

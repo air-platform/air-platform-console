@@ -145,7 +145,7 @@
   "hook":{
     "hook":"网络回调",
     "hooks":"网络回调",
-    "hook_tip":"你的web服务会收到来自Polly Bot的匹配用户查询意图的POST请求，请确定你的web服务满足网络回调要求。",
+    "hook_tip":"你的web服务会收到来自airspc Bot的匹配用户查询意图的POST请求，请确定你的web服务满足网络回调要求。",
     "URL": "地址 (URL)",
     "BASIC AUTH": "验证 (HTTP Basic)",
     "HEADERS": "头部 (HTTP Header)",
@@ -188,7 +188,7 @@
     }
   },
   "login" : {
-    "title": "HNA Polly Bot Platform",
+    "title": "HNA airspc Bot Platform",
     "username": "用户名",
     "username_tip": "请输入用户名",
     "password": "密码",

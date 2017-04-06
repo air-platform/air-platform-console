@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('polly').controller('TypeaheadDemoCtrl', TypeaheadDemoCtrl);
+    angular.module('airs').controller('TypeaheadDemoCtrl', TypeaheadDemoCtrl);
 
     /** @ngInject */
     function TypeaheadDemoCtrl($http) {

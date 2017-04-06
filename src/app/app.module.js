@@ -3,7 +3,7 @@
 
     // Declare app level module which depends on views, and components
     angular
-        .module('polly', [
+        .module('airs', [
             /* Angular Modules */
             'ngAnimate',
             'ngCookies',
@@ -24,7 +24,6 @@
             'monospaced.elastic',
             'ui.utils',
             'rzModule',
-            'ngFileUpload',
             'toastr',
             'pascalprecht.translate',
             'restangular',

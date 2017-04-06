@@ -9,7 +9,7 @@
      *
      */
     angular
-        .module('polly')
+        .module('airs')
         .filter('capitalize', capitalize);
 
     /** @ngInject */
@@ -23,7 +23,7 @@
 
 
     angular
-        .module('polly')
+        .module('airs')
         .filter('descTime', descTime);
 
         /** @ngInject */
@@ -84,7 +84,7 @@
      *
      */
     angular
-        .module('polly')
+        .module('airs')
         .filter('num', num);
 
     /** @ngInject */
@@ -98,7 +98,7 @@
 
 
     angular
-        .module('polly')
+        .module('airs')
         .factory('iotUtil', iotUtil);
 
     /** @ngInject */
@@ -134,9 +134,9 @@
             return re.test(str);
         }
         function pagesize() {
-            var hnaInfo = 'polly.information';
+            var hnaInfo = 'airspc.information';
             var infomation = StorageService.get(hnaInfo);
-            var pageSizeKey = 'polly.pagesize.' + infomation.username;
+            var pageSizeKey = 'airspc.pagesize.' + infomation.username;
             var tempPageSize = StorageService.get(pageSizeKey);
             if (tempPageSize && tempPageSize != 'undefined'){
                 return tempPageSize;
@@ -160,7 +160,7 @@
 
 
     angular
-        .module('polly')
+        .module('airs')
         .factory('deepcopy', deepcopy);
 
     /** @ngInject */
@@ -187,7 +187,7 @@
      *
      */
     angular
-        .module('polly')
+        .module('airs')
         .filter("T", T);
 
     /** @ngInject */
@@ -206,7 +206,7 @@
      *
      */
     angular
-        .module('polly')
+        .module('airs')
         .factory("i18n", i18n);
 
     /** @ngInject */
@@ -233,7 +233,7 @@
      *
      */
     angular
-        .module('polly')
+        .module('airs')
         .factory('logger', logger);
 
     /** @ngInject */
@@ -307,7 +307,7 @@
      *
      */
     angular
-        .module('polly')
+        .module('airs')
         .factory('matcher', matcher);
 
     /** @ngInject */
@@ -365,7 +365,7 @@
 
 
     angular
-        .module('polly')
+        .module('airs')
         .factory('delmodaltip', delmodaltip);
 
     /** @ngInject */
@@ -383,7 +383,7 @@
      *
      */
     angular
-        .module('polly')
+        .module('airs')
         .factory('TimezoneServer', TimezoneServer);
 
     /** @ngInject */

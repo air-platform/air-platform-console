@@ -54,7 +54,7 @@ module.exports = function(config) {
 
     ngHtml2JsPreprocessor: {
       stripPrefix: conf.paths.src + '/',
-      moduleName: 'aiWeb'
+      moduleName: 'airPlatformConsole'
     },
 
     logLevel: 'WARN',
