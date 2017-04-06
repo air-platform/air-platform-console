@@ -45,15 +45,15 @@
 
 
       // angular translate
-      vm.lang = { isopen: false };
-      vm.langs = {en:'English', de_DE:'German', it_IT:'Italian'};
-        $scope.selectLang = vm.langs[$translate.proposedLanguage()] || "English";
-      vm.setLang = function(langKey, $event) {
+        $scope.lang = { isopen: false };
+        $scope.langs = {en:'English', de_DE:'German', it_IT:'Italian'};
+        $scope.selectLang = $scope.langs[$translate.proposedLanguage()] || "English";
+        $scope.setLang = function(langKey, $event) {
         // set the current lang
-          $scope.selectLang = vm.langs[langKey];
+          $scope.selectLang = $scope.langs[langKey];
         // You can change the language during runtime
         $translate.use(langKey);
-        vm.lang.isopen = !vm.lang.isopen;
+            $scope.lang.isopen = !$scope.lang.isopen;
       };
 
         vm.awesomeThings = [];
