@@ -23,13 +23,10 @@
             'yaru22.angular-timeago',
             'monospaced.elastic',
             'ui.utils',
-            'rzModule',
             'toastr',
             'pascalprecht.translate',
             'restangular',
-            'smart-table',
             'base64',
-            'siyfion.sfTypeahead',
             'w5c.validator'
     ]);
 

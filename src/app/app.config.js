@@ -14,7 +14,7 @@
         .config(config);
 
     /** @ngInject */
-    function config($translateProvider,timeAgoSettings, $logProvider, toastrConfig, RestangularProvider,$provide,constdata) {
+    function config($translateProvider,timeAgoSettings, $logProvider, toastrConfig, RestangularProvider,constdata) {
         // Enable log
         $logProvider.debugEnabled(true);
 
@@ -57,21 +57,6 @@
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         });
-
-
-        $provide.decorator('$rootScope', [
-            '$delegate', function ($delegate) {
-                Object.defineProperty($delegate.constructor.prototype,
-                    '$bus', {
-                        value: postal,
-                        enumerable: false
-                    });
-
-                return $delegate;
-        }]);
-
-
-
 
 
     }
