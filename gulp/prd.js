@@ -89,7 +89,7 @@ gulp.task('build:html', ['inject:jscss', 'inject:partials'], function () {
     };
 
     return gulp.src(path.join(conf.paths.tmp, '/serve/*.html'))
-        .pipe($.useref({}, lazypipe().pipe($.sourcemaps.init, { loadMaps: true })))
+        .pipe($.useref({}, lazypipe().pipe($.sourcemaps.init, { loadMaps: false })))//此参数设置为false可以减少包的体积,不知会否对其它有什么影响
         .pipe(gulpIf('!*.html', $.rev()))
     //js
         .pipe(jsFilter)
