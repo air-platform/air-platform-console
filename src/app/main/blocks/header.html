@@ -31,7 +31,7 @@
 
 
     <!-- search form -->
-    <form class="navbar-form navbar-form-sm navbar-left shift" ui-shift="prependTo" target=".navbar-collapse" role="search" ng-controller="TypeaheadDemoCtrl">
+    <form class="navbar-form navbar-form-sm navbar-left shift" ui-shift="prependTo" target=".navbar-collapse" role="search">
         <div class="form-group">
             <div class="input-group">
                 <input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control input-sm bg-light no-border rounded padder" placeholder="Search projects...">
@@ -57,9 +57,9 @@
             </ul>
             <!-- / dropdown -->
         </li>
-        <li class="hidden-xs">
-            <a ui-fullscreen></a>
-        </li>
+        <!--<li class="hidden-xs">-->
+            <!--<a ui-fullscreen></a>-->
+        <!--</li>-->
         <li class="dropdown">
             <a href class="dropdown-toggle" data-toggle="dropdown" id="dropdownNoti">
                 <i class="icon-bell fa-fw"></i>
@@ -97,16 +97,16 @@
             </div>
             <!-- / dropdown -->
         </li>
-        <li class="dropdown" dropdown>
-            <a href class="dropdown-toggle clear" dropdown-toggle>
+        <li class="dropdown">
+            <a href class="dropdown-toggle clear" data-toggle="dropdown" id="dropdownProfile">
               <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
                 <img src="images/a0.jpg" alt="...">
                 <i class="on md b-white bottom"></i>
               </span>
-                <span class="hidden-sm hidden-md">John.Smith</span> <b class="caret"></b>
+              <span class="hidden-sm hidden-md">John.Smith</span> <b class="caret"></b>
             </a>
             <!-- dropdown -->
-            <ul class="dropdown-menu animated fadeInRight w">
+            <ul class="dropdown-menu animated fadeIn w">
                 <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
                     <div>
                         <p>300mb of 500mb used</p>

@@ -17,22 +17,22 @@
             </div>
 
             <div class="form-group">
-                <label for="username" >{{"login.username" | T}}</label>
+                <label for="username" >{{"login.username" | translate}}</label>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
                     <!-- fa-envelope -->
                     <input ng-disabled="vm.isLogining" id="username" name="username" type="text"
-                           class="form-control" placeholder="{{'login.username' | T}}"
+                           class="form-control" placeholder="{{'login.username' | translate}}"
                            ng-model="vm.user.username" ng-change="vm.usernameChanged()" required>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="password" >{{'login.password' | T}}</label>
+                <label for="password" >{{'login.password' | translate}}</label>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock"></i></span> <input ng-disabled="vm.isLogining"
                                                                                              id="password" name="password" type="password" class="form-control"
-                                                                                             placeholder="{{'login.password' | T}}" ng-model="vm.user.password" required>
+                                                                                             placeholder="{{'login.password' | translate}}" ng-model="vm.user.password" required>
                 </div>
             </div>
 
@@ -40,7 +40,7 @@
                 <button ng-disabled="vm.isLogining" ng-click="vm.login()" type="submit" class="btn btn-lg btn-block m-t-xl" style="background: #61a9eb;color: white;" ng-disabled='form.$invalid'>
                     <i class="fa fa-key"></i>
                     <!--<span>{{ 'login.LOGIN'| translate}}</span>-->
-                    {{"login.login" | T}}
+                    {{"login.login" | translate}}
                 </button>
             </div>
         </div>

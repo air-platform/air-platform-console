@@ -18,6 +18,8 @@
             'ui.bootstrap',
             'ui.select',
             'ui.bootstrap.accordion',
+            'ui.jq',
+            'ui.load',
             'yaru22.angular-timeago',
             'monospaced.elastic',
             'ui.utils',
