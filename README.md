@@ -20,25 +20,21 @@ air-platform-console
 ......locales/ * 国际化文件
 ......images/ * 图片
 
-
 ```
 
 
-###安装
+#### 安装
 ```
  npm install
  bower install
-
 ```
 
-###运行
+#### 运行
 ```
 gulp run:dev
-
 ```
-###发布
+#### 发布
 
 ```
 gulp dist
-
 ```
