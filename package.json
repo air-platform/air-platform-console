@@ -2,10 +2,8 @@
   "name": "airPlatformConsole",
   "version": "0.1.0",
   "dependencies": {
-    "angular-xeditable": "^0.2.0",
     "gulp-jshint-html-reporter": "^0.1.3",
     "lodash": "^4.15.0",
-    "ng-jsoneditor": "^1.0.0",
     "object-assign": "^4.1.0",
     "optional": "^0.1.3",
     "plur": "^2.1.2",
