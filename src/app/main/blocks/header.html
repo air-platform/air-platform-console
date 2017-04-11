@@ -1,0 +1,66 @@
+      <!-- navbar header -->
+      <div class="navbar-header {{main.app.settings.navbarHeaderColor}}">
+        <button class="pull-right visible-xs dk" ui-toggle-class="show" data-target=".navbar-collapse">
+          <i class="glyphicon glyphicon-cog"></i>
+        </button>
+        <button class="pull-right visible-xs" ui-toggle-class="off-screen" data-target=".app-aside" ui-scroll-to="app">
+          <i class="glyphicon glyphicon-align-justify"></i>
+        </button>
+        <!-- brand -->
+        <!--<a href="#/" class="navbar-brand text-lt">-->
+          <!--<i class="fa fa-btc"></i>-->
+          <!--<img src="images/logo.png" alt="." class="hide">-->
+          <!--<span class="hidden-folded m-l-xs">{{main.app.name}}</span>-->
+        <!--</a>-->
+
+        <a ui-sref="app.dashboard"> <img class="img-responsive" style="height: 60px;" src="images/logo.png"></a>
+
+        <!-- / brand -->
+      </div>
+      <!-- / navbar header -->
+
+
+      <!-- navbar collapse -->
+      <div class="collapse pos-rlt navbar-collapse box-shadow {{main.app.settings.navbarCollapseColor}}" ng-controller="LoginController as vm" style="background-color:#23B7E5;">
+        <div class="inline">
+            <h3 class="font-bold" ng-if="vm.getUserRole()"></h3>
+            <h3 class="font-bold" ng-if="!vm.getUserRole()" ></h3>
+        </div>
+        <div class="buttons pull-right inline">
+          <!-- toggle languages -->
+          <div class="dropdown inline">
+            <a style="background-color:#23B7E5; color:white;" type="button" class="btn dropdown-toggle bg-white header" data-toggle="dropdown" id="dropdownLang">
+              {{ vm.langChoosen }}
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu pull-right" role="menu" style="margin-top:13px;">
+              <li role="presentation">
+                <a role="menuitem" ng-click="vm.toggleLang(vm.langLeft)" ng-bind="vm.langLeft"></a>
+              </li>
+            </ul>
+          </div>
+          <!-- profile -->
+          <div class="dropdown inline">
+            <a style="background-color:#23B7E5; color:white;" type="button" class="btn dropdown-toggle bg-white header" id="dropdownMenu1"
+                    data-toggle="dropdown">{{savedNickName}}
+              <span class="caret"></span>
+              <span class="thumb-sm avatar">
+                <img src="images/a0.jpg" alt="...">
+              </span>
+            </a>
+            <ul class="dropdown-menu pull-right" role="menu" style="margin-top:3px;">
+              <li role="presentation">
+                <a role="menuitem" ui-sref="app.profile" translate="login.PINFO">个人信息</a>
+              </li>
+              <li role="presentation" class="divider"></li>
+              <li role="presentation">
+                <a role="menuitem" tabindex="-1" ng-click="vm.logout()" translate="login.LOGOUT">退出</a>
+              </li>
+            </ul>
+          </div>
+
+
+        </div>
+        
+      </div>
+      <!-- / navbar collapse -->

@@ -1,0 +1,136 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="ApplicationController as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+">
+
+    <!-- main -->
+    <div class="col m-b-lg">
+        <!-- main header -->
+        <!-- <div class="bg-light lter b-b wrapper-md" ng-hide="isRoleAdmin">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="m-n font-thin h3 text-black">{{'application.APPLICATIONMANAGER' | translate}}</h1>
+                    <small class="text-muted">HNA EcoTech Internet of Things</small>
+                </div>
+                <div class="col-sm-4 col-xs-6 col-md-6" ng-show="vm.shouldShowBackAction">
+                    <button ng-click="vm.back()" class="btn m-b-xs btn-sm btn-info btn-addon pull-right"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
+                </div>
+            </div>
+        </div> -->
+        <!-- tasks -->
+
+        <div class="m-l m-r m-t m-b-lg table-responsive panel panel-default" style="overflow:visible">
+            <table  st-table="vm.displayedCollection" st-safe-src="vm.infos" class="table table-bordered table-striped table-hover bg-white text-center m-b-lg">
+                <thead>
+                <tr>
+                    <th colspan="7">
+                        <button ng-click="vm.addNew()" class="btn btn-sm btn-info btn-addon"><i class="fa fa-plus"></i>{{'product.ADD' | T}}</button>
+                        <input st-search="" class="form-control pull-right m-b-xs w-md" placeholder="{{'product.SEARCH' | translate}}" type="text"/>
+                    </th>
+                </tr>
+                <tr class="bg-light" style="vertical-align: middle;">
+                    <th class="text-center col-md-1" ng-bind="vm.infoTitle.name"></th>
+                    <!--<th class="text-center" ng-bind="vm.infoTitle.token"></th>-->
+                    <!--<th class="text-center" ng-bind="vm.infoTitle.credentialsProvider"></th>-->
+                    <th class="text-center col-md-2" >{{'product.DESCRIPTION' | translate}}</th>
+                   <!-- <th class="text-center" ng-bind="vm.infoTitle.created"></th>-->
+                    <th class="text-center col-md-2">{{'product.LANGUAGE' | translate}}</th>
+                    <th class="text-center col-md-2">{{'product.STATUS' | translate}}</th>
+                    <th class="text-center col-md-2">{{'product.CREATEDDATE' | translate}}</th>
+                    <th class="text-center col-md-4">{{'product.OPERATE' | translate}}</th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                <tr ng-repeat="item in vm.displayedCollection">
+                    <td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.name}}</td>
+                    <!--<td ng-click="vm.goDetail(item)">{{item.token}}</td>-->
+                    <!--<td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.credentialsProvider == 'default' ? '默认' : '信任'}}</td>-->
+                    <td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.description}}</td>
+                    <td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.lang}}</td>
+                    <td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.state}}</td>
+                    <!--<td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.createdBy}}</td>-->
+                    <td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.createdTime | date:"yyyy-MM-dd"}}</td>
+
+                    <td style="vertical-align: middle;">
+                        
+                        <button class="btn btn-sm btn-info btn-addon" ng-click="vm.goDetail(item)"><i class="fa fa-info"></i>{{'product.DETAILS' | translate}}</button>
+<!--
+                        <button class="btn btn-sm btn-danger btn-addon" ng-click="vm.openAlert('sm',item)"><i class="fa fa-trash-o"></i>{{'product.DELETE' | translate}}</button>
+-->
+
+
+                        <div class="btn-group ">
+                            <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-sliders"></i>  操作</button>
+                            <button type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu" style="overflow:visible; z-index:1010;">
+                                <li ng-class="{disabled: !item.isImageEnable}" ng-click=" vm.OperApp(1, item)" ng-show="vm.showDeploy"><a><i class="fa fa-database m-r-sm"></i>镜像</a></li>
+                                <li ng-class="{disabled: !item.isDeployEnable}" ng-click="vm.OperApp(2, item)" ng-show="vm.showDeploy"><a><i class="fa fa-building-o m-r-sm"></i>部署</a></li>
+                                <li ng-class="{disabled: !item.isStartEnable}" ng-click="vm.OperApp(3, item)" ng-show="vm.showOther"><a><i class="fa fa-play m-r-sm"></i>开始</a></li>
+                                <li ng-class="{disabled: !item.isStopEnable}" ng-click="vm.OperApp(4, item)" ng-show="vm.showOther"><a><i class="fa fa-stop m-r-sm"></i>停止</a></li>
+                                <li ng-class="{disabled: !item.isRestartEnable}" ng-click="vm.OperApp(5, item)" ng-show="vm.showOther"><a><i class="fa fa-repeat m-r-sm"></i>重启</a></li>
+<!--
+                                <li data-toggle="modal" data-target="#myModal" ng-class="{disabled: !item.isDeleteEnable}" ng-click="vm.OperApp(6, item)" ng-show="vm.showOther"><a><i class="fa fa-trash m-r-sm"></i>删除</a></li>
+-->
+
+<!--
+                                <button  class="btn btn-sm btn-danger btn-addon pull-left" data-toggle="modal" data-target="#myModal"><i class="fa fa-times-circle-o fa-2x"></i>{{vm.buttonEnable}}</button>
+-->
+                                <li data-toggle="modal" data-target="#myModal" ng-class="{disabled: !item.isDeleteEnable}"  ng-show="vm.showOther"><a><i class="fa fa-trash m-r-sm"></i>撤销部署</a></li>
+
+                            </ul>
+                        </div>
+
+
+                        <!-- 模态框（Modal） -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" style="width:300px;">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-hidden="true">×
+                                        </button>
+                                        <h4 class="modal-title" id="myModalLabel">
+                                            警告
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        您确定要撤销该部署？
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                                            取消
+                                        </button>
+                                        <button ng-click="vm.OperApp(6, item)" type="button" class="btn btn-danger"data-dismiss="modal" >确定
+                                        </button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="btn-group pagination pull-right padder-lg">
+            <button type="button" class="btn btn-default" ng-click="vm.preAction()" ng-disabled= !vm.pagePreEnabled>{{ 'page.pre' | translate }}</button>
+            <button type="button" class="btn btn-default" ng-repeat="page in vm.pages" ng-click="vm.goPage(page)" ng-disabled= vm.pageCurrentState(page)>{{page}}</button>
+            <button type="button" class="btn btn-default" ng-click="vm.nextAction()" ng-disabled= !vm.pageNextEnabled>{{ 'page.next' | translate }}</button>
+        </div>
+
+        <!-- / tasks -->
+    </div>
+</div>
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div ng-include="'app/components/core/modal.html'"></div>
+</script>
+

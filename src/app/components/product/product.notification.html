@@ -1,0 +1,35 @@
+
+<div class="m-t panel panel-default" ng-controller="ProductNotiCtrl as vm">
+    <table class="table table-bordered table-striped table-hover bg-white text-center">
+        <thead class="table-striped table-bordered">
+            <tr>
+                <th colspan="3">
+                    <button ng-click="vm.openDgTopicAlert()" class="btn m-b-xs btn-sm btn-info btn-addon"><i class="fa fa-plus"></i>{{'product.ADD' | translate}}</button>
+                </th>
+            </tr>
+            <tr class="bg-light">
+                <th class="col-sm" style="text-align: center; vertical-align: middle;">{{'product.NAME' | translate}}</th>
+                <th class="col-sm" style="text-align: center; vertical-align: middle;">{{'product.TYPE' | translate}}</th>
+                <th class="col-sm" style="text-align: center; vertical-align: middle;">{{'product.OPERATE' | translate}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="info in vm.infos">
+                <td ng-bind="info.name" style="text-align: center; vertical-align: middle;"></td>
+                <td style="text-align: center; vertical-align: middle;">{{info.type | isMandatory}}</td>
+                <td style="white-space: nowrap; vertical-align: middle;">
+                    <div class="buttons">
+                        <button class="btn m-b-xs btn-sm btn-danger btn-addon" ng-click="vm.removeTopicAdded('',$index)"><i class="fa fa-trash-o"></i>{{'product.DELETE' | translate}}</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div ng-include="'app/components/core/modal.html'"></div>
+</script>
+<script type="text/ng-template" id="myAddTopicModal.html">
+    <div ng-include="'app/components/product/product.topic.add.modal.html'"></div>
+</script>

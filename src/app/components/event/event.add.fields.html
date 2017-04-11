@@ -1,0 +1,144 @@
+<div ng-controller="EventAndEventClassesCtrl as vm">
+	<div class="col-sm-12" style="padding: 0!important;">
+		<!-- <h3 class="m-t m-b">{{'event.EVENT' | translate}}</h3> -->
+			<form name="formInfo" class="form-horizontal form-validation" role="form">
+				<div class="col-sm-12 form-group pull-left">
+					<button class="btn btn-sm btn-default btn-addon bg-light" ng-click="vm.cancelAction()" style="margin-left:15px;"><i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}}</button>
+					<button class="btn btn-sm btn-info btn-addon" type="submit" ng-click="vm.submitAction()" ng-disabled='formInfo.$invalid'><i class="fa fa-save"></i>{{'product.SAVE' | translate}}</button>
+				</div>
+				<div class="line line-dashed b-b line-lg"></div>
+				<div class="form-group">
+					<label class="col-sm-1 m-l-lg font-bold control-label">{{'event.CLASSNAME' | translate}}</label>
+					<div class="col-sm-6">
+						<input ng-model="vm.eventInfo.name" find-params type="text" class="form-control" placeholder="{{'product.NAME' | translate}}" required>
+					</div>
+					<p><i style="color:red; font-size:20px; padding-right: 4px;">*</i></p>
+				</div>
+				<div class="line line-dashed b-b line-lg"></div>
+				<div class="form-group">
+					<label style="" class="col-sm-1 m-l-lg font-bold control-label">{{'product.DATATYPE' | translate}}</label>
+					<div class="col-sm-6">
+						<select style="margin-bottom: 0!important;" class="form-control m-b" ng-model="vm.selType" ng-options="s for s in vm.typeOptions" ng-change="vm.typeOptionChanged()"></select>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg"></div>
+				<div class="form-group">
+					<label style="" class="col-sm-1 m-l-lg font-bold control-label">{{'product.TYPE' | translate}}</label>
+					<div class="col-sm-6">
+						<select style="margin-bottom: 0!important;" class="form-control m-b" ng-model="vm.selClassType" ng-options="opt for opt in vm.typeClassOptions" ng-change="vm.typeClassOptionChanged()"></select>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg"></div>
+				<div class="form-group">
+					<label style="" class="col-sm-1 m-l-lg font-bold control-label">{{'product.DESCRIPTION' | translate}}</label>
+					<div class="col-sm-6">
+						<textarea ng-model="vm.eventInfo.description" type="text" class="form-control" placeholder="{{'product.DESCRIPTION' | translate}}" style="resize:none;"></textarea>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg"></div>
+				<div class="col-sm-12 m-b-lg" ng-show="!vm.defaultShowRecordType">
+					<table class="table table-bordered text-center">
+						<thead>
+						<tr>
+							<th colspan="7">
+								<h4 style="margin: 7px 20px 0 0!important;" class="pull-left">Symbols</h4>
+								<button ng-click="vm.fieldEnumAdd()" class="btn m-b-xs btn-sm btn-info btn-addon"><i class="fa fa-plus"></i>{{'product.ADD' | translate}}</button>
+							</th>
+						</tr>
+						<tr class="bg-light">
+							<th style="text-align: center; width: 80%;">{{'product.NAME' | translate}}</th>
+							<th style="text-align: center; width: 20%;">{{'product.OPERATE' | translate}}</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr ng-repeat="symbol in vm.eventInfo.symbols">
+							<td style="vertical-align: middle;">{{symbol}}</td>
+							<td>
+								<button class="btn btn-sm btn-danger btn-addon" ng-click="vm.fieldEnumDelete(symbol)"><i class="fa fa-trash-o"></i>{{'product.DELETE' | translate}}</button>
+							</td>
+						</tr>
+						<tr ng-show="vm.fieldModel">
+							<td><input type="text" class="form-control" ng-model="vm.symbol" /></td>
+							<td>
+								<button class="btn m-b-xs btn-sm btn-danger btn-addon bg-light" ng-click="vm.fieldEnumCancel()"><i class="fa fa-minus"></i>{{'product.CANCEL' | translate}}</button>
+								<button style="margin-right: 7px;" class="btn m-b-xs btn-sm btn-info btn-addon" ng-click="vm.fieldEnumSave()"><i class="fa fa-save"></i>{{'product.SAVE' | translate}}</button>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="col-sm-12 m-b-lg" ng-show="vm.defaultShowRecordType">
+					<table class="table table-bordered table-striped text-center">
+						<thead>
+						<tr>
+							<th colspan="6">
+								<!-- <h4 style="margin: 7px 20px 0 0!important;" class="pull-left">{{'event.FIELD' | translate}}</h4> -->
+								<button ng-click="vm.fieldAdd()" class="btn btn-sm btn-info btn-addon"><i class="fa fa-plus"></i>{{'product.ADD' | translate}}</button>
+								
+							</th>
+						</tr>
+						<tr class="bg-light">
+							<th style="text-align: center; width: 16%;">{{'product.SHOWEDNAME' | translate}}</th>
+							<th style="text-align: center; width: 16%;">{{'product.FIELDNAME' | translate}}</th>
+							<th style="text-align: center; width: 16%;">{{'product.TYPE' | translate}}</th>
+							<th style="text-align: center; width: 16%;">{{'event.ISCHOOSABLE' | translate}}</th>
+							<th style="text-align: center; width: 16%;">{{'product.DESCRIPTION' | translate}}</th>
+							<th style="text-align: center; width: 20%;">{{'product.OPERATE' | translate}}</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr ng-repeat="field in vm.eventInfo.fields">
+							<td>{{field.displayName}}</td>
+							<td>{{field.name}}</td>
+							<td>{{field.type.name ? vm.shouldUpperCase(field.type.name) : vm.shouldUpperCase(field.type)}}
+							<!--  data-title="field.type.name" -->
+								<i ng-if="field.type.name" class="fa fa-exclamation-circle" style="color:#DFDFDF;" popover-title="{{field.type.name}}"
+								   uib-popover="{{field.type.name ? field.type.symbols.join(',')
+								: field.type}}"></i>
+							</td>
+							<td>
+								<!--<input type="checkbox" disabled="disabled" ng-checked="field.optional">-->
+								<div class="checkbox">
+									<label class="i-checks">
+										<input type="checkbox" ng-checked="field.optional" disabled><i></i>
+									</label>
+								</div>
+							</td>
+							<td>{{field.description}}</td>
+							<td>
+								<button class="btn btn-sm btn-danger btn-addon" ng-click="vm.fieldDelete(field)"><i class="fa fa-trash-o"></i>{{'product.DELETE' | translate}}</button>
+							</td>
+						</tr>
+						<tr ng-show="vm.fieldModel">
+							<td><input type="text"  class="form-control"  ng-model="vm.fieldInfo.displayName" /></td>
+							<td><input find-word type="text"  class="form-control"  ng-model="vm.fieldInfo.name" /></td>
+							<td>
+								<select style="margin-bottom: 0!important;" class="form-control m-b" ng-model="vm.selFieldType" ng-options="opt.title for opt in vm.eventFieldOptions" ng-change="vm.typeFieldOptionChanged()"></select>
+								<input ng-hide="!vm.isEnum" type="text" placeholder="{{'product.INPUTENUMNAME' | translate}}" class="form-control m-t" ng-model="vm.symbolName"/>
+								<input ng-hide="!vm.isEnum" type="text" placeholder="{{'product.ENUMPROMPT' | translate}}" class="form-control m-t" ng-model="vm.symbolItemNames" />
+							</td>
+							<td>
+								<div class="checkbox">
+									<label class="i-checks">
+										<input type="checkbox" ng-checked="vm.fieldInfo.optional" ng-model="vm.fieldInfo.optional"><i></i>
+									</label>
+								</div>
+							</td>
+							<td><input type="text" class="form-control" ng-model="vm.fieldInfo.description"></td>
+							<td>
+								<button class="btn m-b-xs btn-sm btn-default btn-addon bg-light" ng-click="vm.fieldCancel()"><i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}}</button>
+								<button class="btn m-b-xs btn-sm btn-info btn-addon"  ng-click="vm.fieldSave()"><i class="fa fa-save"></i>{{'product.SAVE' | translate}}</button>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</form>
+	</div>
+</div>
+<!--<button class="btn btn-info pull-right btn-addon" ng-click="vm.changeStepsNext(0)"><i class="fa fa-reply"></i>返回</button>-->
+<script type="text/ng-template" id="myModalContent.html">
+	<div ng-include="'app/components/core/modal.html'"></div>
+</script>

@@ -1,0 +1,138 @@
+
+
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="ApplicationDeployController as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+">
+	<div class="col">
+
+		<br/>
+		<div class="panel panel-default m-l m-r">
+
+			<form name="form" class="form-horizontal form-validation" role="form">
+				<br/>
+				<div class="form-group">
+					<label class="col-sm-1 m-l-lg font-bold control-label">{{'product.NAME' | translate}}</label>
+					<div class="col-sm-4">
+						<input class="form-control" type="text"
+							   placeholder="{{'product.NAME' | translate}}"    ng-pattern="/^[a-z0-9]([-a-z0-9]*[a-z0-9])?$/"  ng-model="vm.info.name"  required disabled>
+					</div>
+					<p><i style="color:red; font-size: 20px; padding-right: 4px;">*</i><i style="color:#cfdadd; font-size: 12px; font-style: normal;">开头结尾字母为小写，其他部分是小写字母，数字和短横线组成，字符长度3-20位</i></p>
+
+				</div>
+				<div class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+				<!--<div class="form-group">
+					<label class="col-sm-1 m-l-lg font-bold control-label">{{'product.DESCRIPTION' | translate}}</label>
+					<div class="col-sm-4">
+						<textarea class="form-control" type="text"
+							   placeholder="{{'product.DESCRIPTION' | translate}}" rows="5" ng-model="vm.info.description" 
+							   style="resize:none;">
+						</textarea>
+					</div>
+				</div>
+
+				<div class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+				<div class="form-group">
+					<label class="col-sm-1 m-l-lg font-bold control-label">{{'product.LANGUAGE' | translate}}</label>
+					<div class="col-sm-4">
+						<input class="form-control" type="text"
+							   placeholder="开发语言" ng-disabled="!vm.isAdd" ng-model="vm.info.lang" >
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+				<div class="form-group">
+					<label class="col-sm-1 m-l-lg font-bold control-label">{{'product.APP_SERVICES' | translate}}</label>
+					<div class="col-sm-4">
+						<input class="form-control" type="text"
+							   placeholder="绑定服务" ng-disabled="!vm.isAdd" ng-model="vm.info.services" >
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg"></div>-->
+
+
+
+				<div class="form-group">
+					<label class="col-sm-1 m-l-lg font-bold control-label">{{'product.APP_IMAGES' | translate}}</label>
+					<div class="col-sm-4">
+						<!--<input class="form-control" type="text"
+							   placeholder="{{'product.APP_IMAGES' | translate}}" ng-disabled="!vm.isAdd" ng-model="vm.info.imgInfo.img" >-->
+						<select class="form-control" ng-model="vm.selImg" ng-options="o for o in vm.imgArr"></select>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+				<div class="form-group">
+					<label class="col-sm-1 m-l-lg font-bold control-label">{{'product.ACCESS_PORT' | translate}}</label>
+					<div class="col-sm-4">
+						<input class="form-control" type="text"
+							   placeholder="{{'product.ACCESS_PORT' | translate}}" ng-disabled="!vm.isAdd" ng-model="vm.SvcInfo.ports" >
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+				<div class="form-group">
+					<div class="col-sm-offset-1 col-sm-3">
+						<button class="btn btn-sm btn-default btn-addon form-inline bg-light m-l-lg" ng-click="vm.back()"><i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}}</button>
+						<button class="btn btn-sm btn-info form-inline btn-addon" ng-if="vm.isAdd" type="submit" ng-click="vm.submitAction()" ng-disabled='form.$invalid'> <i class="fa fa-plus"></i>{{'product.DEPLOY' | translate}}</button>
+						<button class="btn btn-sm btn-info form-inline btn-addon" ng-if="!vm.isAdd" type="submit" ng-click="vm.submitAction()" ng-disabled='form.$invalid'> <i class="fa fa-edit"></i>{{'product.SUBMIT' | translate}}</button>
+					</div>
+				</div>
+
+
+
+
+				<!--<div>
+					<label class="font-bold m-l-lg col-sm-2 control-label">SDK</label>
+					<div class="col-sm-2">
+						<select class="form-control" ng-model="vm.platform" ng-options="opt.value as opt.name for opt in vm.downLoadOptions">
+						</select>
+					</div>
+					<button class="btn btn-sm btn-success btn-addon form-inline" ng-click="vm.downloadSDK(vm.platform)"><i class="fa fa-download"></i>{{'product.DOWNLOADSDK' | translate}}</button>
+				</div>
+
+
+				<div>
+				<select class="form-control" ng-model="item.plat" ng-options="opt.val as opt.name for opt in vm.platOptions.plat"></select>
+					<select ng-model="vm.selImg" ng-options="o for o in vm.imgArr"></select>
+
+
+					<button class="btn btn-sm btn-success btn-addon form-inline" ng-click="vm.downloadSDK(vm.selImg)"><i class="fa fa-download"></i>{{'product.DOWNLOADSDK' | translate}}</button>
+
+				</div>-->
+
+				<br/>
+
+			</form>
+		</div>
+	</div>
+</div>

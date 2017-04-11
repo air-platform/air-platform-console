@@ -1,0 +1,183 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+  " ng-controller="DashCtrl as vm">
+    <!-- main -->
+    <div class="col">
+
+        <div class="m-l m-r m-t" style="overflow:hidden;">
+            <!-- stats -->
+            <div class="col-md-12" style="padding:0;" >
+                <div style="overflow: hidden;">
+                    <div class="col-md-6 col-sm-12" ng-style="vm.myPaddingStyle">
+                        <div class="panel panel-default" style="overflow: hidden;">
+                            <div class="panel-body col-sm-12">
+                                <span class="h3 font-bold">{{'dashboard.GENERALSITUATION' | translate}}</span>
+                            </div>
+                            <div class="panel-body text-center col-sm-12" style="margin-top: 3%; height: 225px;" >
+                                <div class="col-md-6 col-xs-12 padder-v item" style="border-right: 2px solid #EAE9EF;">
+                                    <div class="h1 text-info m-b" style="color: #279BF6;">{{vm.productNum}}</div>
+                                    <span class="h4 font-bold">{{'dashboard.PRODUCT' | translate}}{{'dashboard.TOTALAMOUNT' | translate}}</span>
+                                </div>
+                                <div class="col-md-6 col-x12 block padder-v item" style="border-right: 2px solid #EAE9EF;">
+                                    <span class="h1 block m-b" style="color: #F94380;">{{vm.applicationNum}}</span>
+                                    <span class="h4 font-bold">{{'dashboard.APPLICATION' | translate}}{{'dashboard.TOTALAMOUNT' | translate}}</span>
+                                </div>
+                              <!--  <div class="col-md-3 col-xs-3 block padder-v item" style="border-right: 2px solid #EAE9EF;">
+                                    <span class="h1 block m-b" style="color: #65C96C;">{{vm.eventNum}}</span>
+                                    <span class="h4 font-bold">{{'dashboard.EVENT' | translate}}{{'dashboard.TOTALAMOUNT' | translate}}</span>
+                                </div>
+                                <div class="col-md-3 col-xs-3 padder-v item">
+                                    <div class="h1 block m-b" style="color: #AF59D5;">{{vm.deviceNum}}</div>
+                                    <span class="h4 font-bold">{{'dashboard.DEVICE' | translate}}{{'dashboard.TOTALAMOUNT' | translate}}</span>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12" style="padding: 0">
+                        <div class="panel panel-default" style="overflow: hidden;">
+                            <div class="panel-body">
+                                <span class="h3 font-bold">{{'dashboard.DEVICESITUATION' | translate}}</span>
+                            </div>
+                            <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                            <div id="main" style="margin-top: 3%;height:225px;"></div>
+                            <script type="text/javascript">
+                                // 基于准备好的dom，初始化echarts实例
+                                var myChart = echarts.init(document.getElementById('main'));
+
+                                option = {
+                                    tooltip : {
+                                        trigger: 'item',
+                                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                                    },
+                                    legend: {
+                                        orient: 'vertical',
+                                        x: 20,
+                                        data: ['Created','Pending','Stoped','Running']
+                                    },
+                                    series : [
+                                        {
+                                            name: '服务状态',
+                                            type: 'pie',
+                                            radius : '60%',
+                                            center: ['50%', '40%'],
+                                            data:[
+                                                {value:43, name:'Created'},
+                                                {value:10, name:'Pending'},
+                                                {value:7, name:'Stoped'},
+                                                {value:40, name:'Running'}
+                                            ],
+                                            itemStyle: {
+                                                emphasis: {
+                                                    shadowBlur: 10,
+                                                    shadowOffsetX: 0,
+                                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                                },
+                                                normal: {
+                                                    color: function(params) {
+                                                        // build a color map as your need.
+                                                        var colorList = [
+                                                            '#00CC00','#3300CC','#CC3300','#CC00CC'
+                                                        ];
+                                                        return colorList[params.dataIndex]
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                };
+
+                                // 使用刚指定的配置项和数据显示图表。
+                                myChart.setOption(option);
+                            </script>
+
+                            <!--</div>-->
+
+                                <!--<div class="col-md-4 col-sm-6 padder-v item">-->
+                                    <!--<div easypiechart options="vm.optionCpu" percent="vm.percent.cpu">-->
+                                    <!--</div>-->
+                                    <!--<span class="text-info h4">{{vm.percent.cpu.toString() + '%'}}</span>-->
+                                    <!--<div class="text-muted font-bold text-xs m-b">{{vm.monitorInfos[0] | translate}}</div>-->
+                                <!--</div>-->
+                                <!--<div class="col-md-4 col-sm-6 padder-v item">-->
+                                    <!--<div easypiechart options="vm.optionMem" percent="vm.percent.mem"></div>-->
+                                    <!--<span class="text-info h4">{{vm.percent.mem.toString() + '%'}}</span>-->
+                                    <!--<div class="text-muted font-bold text-xs m-b">{{vm.monitorInfos[1] | translate}}</div>-->
+                                <!--</div>-->
+                                <!--<div class="col-md-4 col-sm-6 padder-v item">-->
+                                    <!--<div easypiechart options="vm.optionDisk" percent="vm.percent.disk"></div>-->
+                                    <!--<span class="text-info h4">{{vm.percent.disk.toString() + '%'}}</span>-->
+                                    <!--<div class="text-muted font-bold text-xs m-b">{{vm.monitorInfos[2] | translate}}</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12" style="padding:0;">
+                <div class="col-md-6 col-sm-12 text-center" ng-style="vm.myPaddingStyle">
+                    <div class="panel panel-default">
+                        <div class="panel-body text-left">
+                            <span class="h3 font-bold">{{'dashboard.EVENTSITUATION' | translate}}</span>
+                        </div>
+                        <div class="panel-body">
+                            <div style="height: 350px;"  e-chart e-data="vm.eventOption"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12" style="padding:0;">
+                    <div class="panel panel-default" style="padding:0;">
+                        <div class="panel-body">
+                            <span class="h3 font-bold">{{'dashboard.DEVICEMAP' | translate}}</span>
+                        </div>
+                        <div class="panel-body">
+                            <div class="panel-body col-sm-12" style="height: 350px;">
+                                <div class="col-md-4 col-sm-12 padder-v item" style="border-right: 2px solid #EAE9EF;">
+                                    <span class="h4 font-bold">热门应用</span>
+                                    <br><br>
+                                    <h5>
+                                        <div class="block m-b" style="color: #279BF6;">1. 舆情</div>
+                                        <div class="block m-b" style="color: #279BF6;">2. 大数据</div>
+                                        <div class="block m-b" style="color: #279BF6;">3. bimbolt</div>
+                                        <div class="block m-b" style="color: #279BF6;">4. iot</div>
+                                        <div class="block m-b" style="color: #279BF6;">5. 物联网</div>
+                                        <div class="block m-b" style="color: #279BF6;">......</div>
+                                    </h5>
+
+                                </div>
+                                <div class="col-md-4 col-sm-12 block padder-v item" style="border-right: 2px solid #EAE9EF;">
+                                    <span class="h4 font-bold text-center">热门服务</span>
+                                    <br><br>
+                                    <h5>
+                                        <div class="block m-b" style="color: #279BF6;">1. 舆情</div>
+                                        <div class="block m-b" style="color: #279BF6;">2. 大数据</div>
+                                        <div class="block m-b" style="color: #279BF6;">3. bimbolt</div>
+                                        <div class="block m-b" style="color: #279BF6;">4. iot</div>
+                                        <div class="block m-b" style="color: #279BF6;">5. 物联网</div>
+                                        <div class="block m-b" style="color: #279BF6;">......</div>
+                                    </h5>
+
+                                </div>
+                                <div class="col-md-4 col-sm-12 block padder-v item" style="border-right: 2px solid #EAE9EF;">
+                                    <span class="h4 font-bold text-center">最新更新</span>
+                                    <br><br>
+                                    <h5>
+                                        <div class="block m-b" style="color: #279BF6;">1. 舆情</div>
+                                        <div class="block m-b" style="color: #279BF6;">2. 大数据</div>
+                                        <div class="block m-b" style="color: #279BF6;">3. bimbolt</div>
+                                        <div class="block m-b" style="color: #279BF6;">4. iot</div>
+                                        <div class="block m-b" style="color: #279BF6;">5. 物联网</div>
+                                        <div class="block m-b" style="color: #279BF6;">......</div>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

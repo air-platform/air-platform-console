@@ -1,0 +1,159 @@
+<div class="container w-xxl w-auto-xs" ng-init="app.settings.container = false;">
+	<a href class="navbar-brand block m-t">{{app.name}}</a>
+
+
+	<div class="form-box">
+		<div class="header"><img class="img-responsive" src="images/logo.png"></div>
+
+		<form role="form" name="registerForm" ng-submit="vm.register()">
+			<div class="body bg-gray">
+				<div class="text-center text-danger" ng-show="vm.registerError">
+					<h2>注册失败（{{register.registerError}})</h2>
+				</div>
+
+				<div style="color:#00A600" class="text-center" ng-show="vm.result!== undefined && vm.result === 0" >
+					<h2>
+					<span class="icon-success"><span class="fa"
+										 ng-class="{'fa-check-circle-o': vm.result == 0, 'fa-close': vm.result != 0}"></span></span>
+					<span class="success-text" ng-bind="vm.message"></span>
+					</h2>
+					<!--<a ui-sref="login" target="_blank" class="bg-primary run-btn">立即登录</a>-->
+				</div>
+
+				<div class="text-center text-danger" ng-show="vm.result!== undefined && vm.result !== 0" >
+					<h2>
+					<span class="icon-success"><span class="fa"
+										 ng-class="{'fa-check-circle-o': vm.result == 0, 'fa-close': vm.result != 0}"></span></span>
+					<span class="success-text" ng-bind="vm.message">
+					</span>
+					</h2>
+					<!--<a ui-sref="login" target="_blank" class="bg-primary run-btn">立即登录</a>-->
+				</div>
+
+				<div class="form-group">
+					<label for="email" translate="register.EMAIL">Email</label>
+					<div class="input-group" style="margin-bottom:5px">
+						<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+							<input ng-disabled="vm.isRegistering" id="email" class="form-control" type='email'  name="email" ng-model="vm.user.email" placeholder="{{'register.EMAIL_PROMPT' | translate}}" required>
+					</div>
+					<span class="inline input-error text-danger"
+						  ng-show="registerForm.email.$dirty && registerForm.email.$invalid">
+              				<small style="margin-left:40px" ng-show="registerForm.email.$error.required">请输入邮箱</small>
+                			<small style="margin-left:40px" ng-show="registerForm.email.$invalid && !registerForm.email.$error.required">邮箱格式不正确</small>
+              			</span>
+				</div>
+
+				<div class="form-group">
+					<label for="phone" translate="register.PHONE">Phone</label>
+					<div class="input-group" style="margin-bottom:5px">
+						<span class="input-group-addon"><i class="fa fa-phone"></i></span>
+						<input ng-disabled="vm.isRegistering" id="phone" type='text' name="phone" class="form-control" ng-pattern="/^1(3|4|5|7|8)\d{9}$/"
+							   ng-model="vm.user.phone" placeholder="{{'register.PHONE_PROMPT' | translate}}" required>
+					</div>
+					<span class="inline input-error text-danger"
+						  ng-show="registerForm.phone.$dirty && registerForm.phone.$invalid">
+              			<small style="margin-left:40px" ng-show="registerForm.phone.$error.required">请输入手机号</small>
+                		<small style="margin-left:40px" ng-show="registerForm.phone.$invalid && !registerForm.phone.$error.required">手机号码不正确</small>
+					</span>
+				</div>
+
+				<div class="form-group">
+					<label for="name" translate="register.USERNAME">ame</label>
+					<div class="input-group" style="margin-bottom:5px">
+						<span class="input-group-addon"><i class="fa fa-user"></i></span>
+						<!-- fa-envelope -->
+						<input ng-disabled="vm.isRegistering" id="name" name="name" type="text"
+							   class="form-control" placeholder="{{'register.USERNAME_PROMPT' | translate}}"
+							   ng-model="vm.user.name" ng-pattern="/^[a-zA-Z][a-zA-Z0-9_]{3,11}$/" required>
+					</div>
+					<span class="inline input-error text-danger"
+						  ng-show="registerForm.name.$dirty && registerForm.name.$invalid">
+              				<small style="margin-left:40px" ng-show="registerForm.name.$error.required">请输入用户名</small>
+                			<small style="margin-left:40px" ng-show="registerForm.name.$invalid && !registerForm.name.$error.required">字母开头且只包含字母,数字,下划线</small>
+              			</span>
+				</div>
+
+				<div class="form-group" ng-class="{'has-error': registerForm.password.$dirty && registerForm.password.$invalid}">
+					<label for="password"  translate="register.PASSWORD">Password</label>
+					<div class="input-group" style="margin-bottom:5px">
+						<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+						<input ng-disabled="vm.isRegistering"
+							id="password" name="password" type="password" class="form-control" ng-minlength="6"
+							ng-maxlength="20"
+							placeholder="{{'register.PASSWORD_PROMPT'| translate}}" ng-model="vm.user.password" ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,16}$/"  required>
+
+					</div>
+					<span class="inline input-error text-danger"
+						  ng-show="registerForm.password.$dirty && registerForm.password.$invalid">
+                			<small style="margin-left:40px" ng-show="registerForm.password.$invalid && !registerForm.password.$error.required">必须包含英文大小写、数字且8到16位</small>
+              			</span>
+					<p class=" help-block" ng-show="registerForm.password.$dirty && registerForm.password.$invalid">
+						<small style="margin-left:40px" ng-show="registerForm.password.$error.required">预设密码必填!!</small>
+					</p>
+				</div>
+
+				<div class="form-group" ng-class="{'has-error': registerForm.confirm.$dirty && registerForm.confirm.$invalid}">
+
+					<label for="password"  translate="register.CONFIRM">Confirm</label>
+					<div class="input-group" style="margin-bottom:5px">
+						<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+						<input ng-disabled="vm.isRegistering"
+							id="confirm" name="confirm" type="password" class="form-control"
+							placeholder="{{'register.CONFIRM_PROMPT'| translate}}" ng-model="vm.user.confirm" pw-check="password" required>
+					</div>
+					<p class="text-danger help-block" ng-show="registerForm.confirm.$dirty && registerForm.confirm.$invalid">
+						<small style="margin-left:40px" ng-show="registerForm.confirm.$error.required">确认密码必填!!</small>
+						<small style="margin-left:40px" ng-show="registerForm.confirm.$error.pwmatch">预设密码和确认密码不一致!!</small>
+					</p>
+				</div>
+
+				<div class="form-group">
+					<button  type="submit" class="btn btn-lg btn-block" style="background: #61a9eb;color: white;" ng-disabled='form.$invalid'>
+						<i class="fa fa-keyboard-o"></i>
+						{{ vm.registerText }}
+					</button>
+				</div>
+			</div>
+			<!-- /.box-body -->
+		</form>
+	</div>
+
+	<!--<div class="login-box success-box" ng-show="vm.result!== undefined && vm.result === 0" >-->
+		<!--<span class="icon-success"><span class="fa"-->
+									  <!--ng-class="{'fa-check-circle-o': vm.result == 0, 'fa-close': vm.result != 0}"></span></span>-->
+		<!--<span class="success-text" ng-bind="vm.message"></span>-->
+		<!--&lt;!&ndash;<a ui-sref="login" target="_blank" class="bg-primary run-btn">立即登录</a>&ndash;&gt;-->
+	<!--</div>-->
+
+	<!--<div class="login-box fail-box" ng-show="vm.result!== undefined && vm.result !== 0" >-->
+		<!--<span class="icon-success"><span class="fa"-->
+										 <!--ng-class="{'fa-check-circle-o': vm.result == 0, 'fa-close': vm.result != 0}"></span></span>-->
+		<!--<span class="success-text" ng-bind="vm.message"></span>-->
+		<!--&lt;!&ndash;<a ui-sref="login" target="_blank" class="bg-primary run-btn">立即登录</a>&ndash;&gt;-->
+	<!--</div>-->
+
+	<!--<div class="register">-->
+		<!--<p class="copyright">Copyright © 2017 海航科技物流集团</p>-->
+	<!--</div>-->
+
+	<div class="text-center" ng-include="'app/blocks/page.footer.html'">
+		{% include 'app/blocks/page.footer.html' %}
+	</div>
+</div>
+
+<!-- build:js(src) scripts/vendor.js -->
+<!-- bower:js -->
+<!-- run `gulp inject` to automatically populate bower script dependencies -->
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- build:js({tmp/serve,tmp/partials,src}) scripts/app.js -->
+<!-- inject:js -->
+<!-- js files will be automatically insert here -->
+<!-- endinject -->
+
+<!-- inject:partials -->
+<!-- angular templates will be automatically converted in js and inserted here -->
+<!-- endinject -->
+<!-- endbuild -->
+

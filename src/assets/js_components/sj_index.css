@@ -1,0 +1,25 @@
+.box{position: relative;}
+.draFting{width: 330px;position: absolute;left: 0;top: 0;background: #93D7F3;border-radius: 4px;overflow: hidden;}
+.tith3{width: 100%;background: #1DAEEF;}
+
+.tith3 input{width: 88%;display: inline-block;border-radius: 0;border: none;}
+.tith3 i{display: inline-block;width: 10%;text-align: center;}
+.lister{padding: 0 15px;}
+.lister p{width: 100%;height: 35px;margin-top: 6px;position: relative;}
+
+.draFting p i{display: inline-block; position: absolute;right: 0;top: 30%;}
+.Recordchild .lister p input{width: 45%;float: left;}
+.Recordchild .lister p select{width: 45%;height: 100%;float: left;margin-left: 2%;}
+.Enumerationchild p input{width: 90%;display: inline-block;}
+
+#left{left: 50px;top: 50px;}
+.Recordchild{left: 480px;top: 300px;}
+.Enumerationchild{left: 500px;top: 50px;}
+/* 修改bootstrap样式 */
+.form-control{border-radius: 0;}
+/* 移入移除样式 .bg */
+.draFting .tith3 input{color:#fff;}
+.tith3.bg,.tith3 input.bg{background: #3879D9;color: #fff;}
+.draFting p i.bg{color: #D84848;}
+
+#box input.bgSpeech{border:1px solid #f05050;}

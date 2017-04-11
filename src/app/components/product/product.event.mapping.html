@@ -1,0 +1,38 @@
+
+<div class="m-t panel panel-default" ng-controller="productEventMappingCtrl as vm">
+    <table  st-table="vm.displayedCollection" st-safe-src="vm.emInfos" class="table table-bordered table-striped table-hover bg-white text-center">
+        <thead class="table-striped table-bordered">
+        <tr>
+            <th colspan="3">
+                <button ng-click="vm.addEventMapping()" class="btn m-b-xs btn-sm btn-info btn-addon"><i class="fa fa-plus"></i>{{'product.ADD' | translate}}</button>
+            </th>
+        </tr>
+        <tr class="font-bold bg-light">
+            <th class="text-center col-md-4">{{'product.NAME' | translate}}</th>
+            <th class="text-center col-md-2">{{'product.VERSION' | translate}}</th>
+           <!--  <th class="text-center col-md-2">{{'product.CREATEDBY' | translate}}</th> -->
+            <th class="text-center col-md-3">{{'product.CREATEDDATE' | translate}}</th>
+            <th class="text-center col-md-3">{{'product.OPERATE' | translate}}</th>
+        </tr>
+        </thead>
+        <tbody class="font-thin">
+
+        <tr ng-repeat="item in vm.displayedCollection track by $index">
+            <td ng-click="vm.gotoDetail($index)" style="vertical-align: middle;">{{item.eventClassFamilyDisplayName ? item.eventClassFamilyDisplayName : item.eventClassFamilyName}}</td>
+            <td ng-click="vm.gotoDetail($index)" style="vertical-align: middle;">{{item.eventSchemaVersion}}</td>
+            <!-- <td ng-click="vm.gotoDetail($index)" style="vertical-align: middle;">{{item.createdBy}}</td> -->
+            <td ng-click="vm.gotoDetail($index)" style="vertical-align: middle;">{{item.createdDate | date:"yyyy-MM-dd"}}</td>
+            <td style="vertical-align: middle;">
+                <!--<button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.editPros($index)"><i class="fa fa-circle"></i>edit</button>-->
+                <button class="btn btn-sm btn-danger btn-addon" style="width: 80px"  ng-click="vm.openAlert('sm',item)"><i class="fa fa-trash-o"></i>{{'product.DELETE' | translate}}</button>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+
+</div>
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div ng-include="'app/components/core/modal.html'"></div>
+</script>

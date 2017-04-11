@@ -1,0 +1,95 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="AddFormCtrlPro as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+  ">
+    <div class="col">
+        <!-- main-header -->
+        <div class="bg-light lter b-b wrapper-md">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="m-n h3 text-black" ng-bind="vm.title"></h1>
+                </div>
+                <!-- button -->
+            </div>
+        </div>
+        <!-- main -->
+
+
+
+        <div class="panel panel-default m-l m-r m-t">
+            <br/>
+            <form name="form" class="form-horizontal form-validation" role="form">
+
+                <div class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'product.PRODUCTNAME' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control"  ng-model="vm.newProInfo.serviceName" placeholder="{{'product.INPUTPRODUCTNAME' | translate}}" required />
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'product.SERVICE_PIC' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control"  ng-model="vm.newProInfo.servicePic" placeholder="{{'product.INPUTSERVICEPIC' | translate}}" required />
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'product.REQUESTPATH' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control"  ng-model="vm.newProInfo.requestPath" placeholder="{{'product.INPUTREQUESTPATH' | translate}}" required />
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'product.PROVIDER' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control"  ng-model="vm.newProInfo.provider" placeholder="{{'product.INPUTPROVIDER' | translate}}" required />
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'product.VERSION' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control"  ng-model="vm.newProInfo.version" placeholder="{{'product.INPUTVERSION' | translate}}" required />
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'product.UPSTREAMURL' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control"  ng-model="vm.newProInfo.upstreamUrl" placeholder="{{'product.INPUTUPSTREAMURL' | translate}}" required />
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+
+
+                <div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'product.SERVICEDESC' | translate}}</label>
+                    <div class="col-sm-4">
+                        <textarea class="form-control" ng-model="vm.newProInfo.serviceDesc" rows="4" placeholder="{{'product.INPUTSERVICEDESC' | translate}}" style="resize: none;"></textarea>
+                    </div>
+                </div>
+
+                <div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-3">
+                        <button class="btn btn-default btn-sm m-l-lg btn-addon bg-light" ng-click="vm.backToPro()"><i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}}</button>
+                        <button class="btn btn-sm btn-info btn-addon" type="submit" ng-click="vm.saveInfo()" ng-disabled="!(vm.newProInfo.serviceName)"><i class="fa fa-plus"></i>{{'product.ADD' | translate}}</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+
+
+
+    </div>
+</div>

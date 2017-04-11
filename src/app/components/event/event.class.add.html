@@ -1,0 +1,44 @@
+<div ng-controller="EventClassAddCtrl as vm">
+	<div class="col-sm-12" style="padding: 0!important;">
+		<!--<div style="margin-bottom: 10px;" class="col-sm-12">
+			<div class="col-sm-4 pull-right">
+                <button ng-click="" class="btn m-b-xs btn-sm btn-primary btn-addon pull-right"><i class="fa fa-plus"></i>添加</button>
+                <select style="margin-right: 7px;" class="input-sm form-control w-sm inline v-middle pull-right" ng-model="vm.myEMOption" 
+                	ng-options="s.val for s in vm.EMOptions" ng-change="vm.qwqw()"></select>
+            </div>
+		</div>-->
+		<table class="table table-bordered" style="margin: 10px 0!important; text-align: center;">
+			<thead>
+			<tr>
+				<th colspan="7">
+					<!--<h4 style="margin: 7px 20px 0 0!important;" class="pull-left">Symbols</h4>-->
+					<button ng-click="vm.addNewClass()" class="btn btn-sm btn-info btn-addon"><i class="fa fa-plus"></i>{{'product.ADD' | translate}}</button>
+					<button class="btn btn-sm btn-info btn-addon" ng-click="vm.submitAction()" ng-disabled="!isEvClassDataChanged"><i class="fa fa-save"></i>{{'product.SAVE' | translate}}</button>
+				</th>
+			</tr>
+				<tr class="bg-light">
+					<th style="text-align: center; width: 25%;">{{'product.NAME' | translate}}</th>
+					<th style="text-align: center; width: 25%;">{{'product.DATATYPE' | translate}}</th>
+					<th style="text-align: center; width: 25%;">{{'product.TYPE' | translate}}</th>
+					<th style="text-align: center; width: 25%;">{{'product.OPERATE' | translate}}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="class in vm.classItems">
+					<td style="vertical-align: middle;">{{class.name}}</td>
+					<td style="vertical-align: middle;">{{vm.shouldUpperCase(class.type)}}</td>
+					<td style="vertical-align: middle;">{{vm.shouldUpperCase(class.classType)}}</td>
+					<td style="vertical-align: middle;">
+						<button class="btn btn-sm btn-info btn-addon" ng-click="vm.editEventClassAction(class)"><i class="fa fa-edit"></i>{{'product.EDIT' | translate}}</button>
+						<button class="btn btn-sm btn-danger btn-addon" ng-click="vm.deleteEventClass(' ',$index)"><i class="fa fa-trash-o"></i>{{'product.DELETE' | translate}}</button>
+					</td>
+				</tr>
+			</tbody>	
+		</table>
+	</div>
+</div>
+
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div ng-include="'app/components/core/modal.html'"></div>
+</script>

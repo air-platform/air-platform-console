@@ -1,0 +1,80 @@
+<!doctype html>
+<!-- ng-strict-di -->
+<html lang="en" ng-app="iot">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="description" content="IOT,M2M,MQTT,HNA" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>数字化创新平台</title>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico?v=0.1.0" />
+    <link rel="stylesheet" href="js_components/contextMenu.css" />
+    <link rel="stylesheet" href="js_components/ui-dialog.css" />
+    <link rel="stylesheet" href="js_components/sj_index.css" />
+    <!--
+    <link rel="icon" href="_/img/favicon.png">
+    <link rel="icon" href="http://sstatic.net/so/favicon.ico">
+    <link rel="apple-itouch-icon" href="http://sstatic.net/so/apple-touch-icon.png">
+    -->
+    <!-- build:css({tmp/serve,src}) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- run `gulp inject` to automatically populate bower styles dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css({tmp/serve,src}) styles/app.css -->
+    <!-- inject:css -->
+    <!-- css files will be automatically insert here -->
+    <!-- endinject -->
+    <!-- endbuild -->
+</head>
+
+<body ng-controller="MainController">
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!--
+    <div ng-view></div>
+    -->
+    <div class="app" id="app" ng-class="{'app-header-fixed':main.app.settings.headerFixed, 'app-aside-fixed':main.app.settings.asideFixed, 'app-aside-folded':main.app.settings.asideFolded, 'app-aside-dock':main.app.settings.asideDock, 'container':main.app.settings.container}" ui-view></div>
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+    <script src="js_components/echarts.min.js"></script>
+    <script src="js_components/china.js"></script>
+    <!--<script src="js_components/dialog.js"></script>-->
+    <!--<script src="js_components/Widget.js"></script>-->
+    <!--<script src="js_components/mySchemaSettings.js"></script>-->
+
+    <script>
+    ! function(A, n, g, u, l, a, r) {
+        A.GoogleAnalyticsObject = l, A[l] = A[l] || function() {
+                (A[l].q = A[l].q || []).push(arguments)
+            }, A[l].l = +new Date, a = n.createElement(g),
+            r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
+    }(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-XXXXX-X');
+    ga('send', 'pageview');
+    </script>
+    <!-- build:js(src) scripts/vendor.js -->
+    <!-- bower:js -->
+    <!-- run `gulp inject` to automatically populate bower script dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:js({tmp/serve,tmp/partials,src}) scripts/app.js -->
+    <!-- inject:js -->
+    <!-- js files will be automatically insert here -->
+    <!-- endinject -->
+    <!-- inject:partials -->
+    <!-- angular templates will be automatically converted in js and inserted here -->
+    <!-- endinject -->
+    <!-- endbuild -->
+<!--<<<<<<< HEAD-->
+<!--=======-->
+
+    <!--<SCRIPT src="js_components/dialog.js"></SCRIPT>-->
+    <!--<SCRIPT src="js_components/Widget.js"></SCRIPT>-->
+    <!--<script src="js_components/mySchemaSettings.js"></script>-->
+<!--&gt;>>>>>> dda1b4efd25268ffa22076d3bc659374797bc198-->
+</body>
+
+</html>

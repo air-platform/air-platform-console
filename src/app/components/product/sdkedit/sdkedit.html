@@ -1,0 +1,13 @@
+<div class="top wrapper-md" ng-controller="SdkEditCtrl as vm">
+	<ul class="nav nav-tabs" role="tablist">
+		<li sdkEdit role="presentation" class="active"><a  ng-click="vm.goBasic()" aria-controls="SDK" role="tab" data-toggle="tab">{{'product.BASICINFO' | translate}}</a></li>
+		<li sdkEdit role="presentation"><a ng-click="vm.goProfile()" aria-controls="Topic" role="tab" data-toggle="tab">{{'product.DEVICEPROFILE' | translate}}</a></li>
+		<li sdkEdit role="presentation"><a ng-click="vm.goConfiguration()" aria-controls="EventMapping" role="tab" data-toggle="tab">{{'product.CONFIGURATION' | translate}}</a></li>
+		<li sdkEdit role="presentation"><a ng-click="vm.goNotification()" aria-controls="NotificationTopic" role="tab" data-toggle="tab">{{'product.NOTIFICATION' | translate}}</a></li>	
+		<li sdkEdit role="presentation"><a ng-click="vm.goData()" aria-controls="NotificationTopic" role="tab" data-toggle="tab">{{'product.DATA' | translate}}</a></li>	
+		<!-- <button class="btn btn-outline-inverse bg-info glyphicon glyphicon-arrow-left pull-right" ng-click="vm.backToProSdk()"> {{'product.BACK' | translate}}</button> -->
+		<button ng-click="vm.backToProSdk()" class="btn m-b-xs btn-sm btn-info btn-addon pull-right"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
+	</ul>
+	<!-- content -->
+	<div ui-view="basic"></div>
+</div>

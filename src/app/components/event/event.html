@@ -1,0 +1,210 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="EventController as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+">
+
+    <!-- main -->
+    <div class="col">
+        <!-- main header -->
+        <!-- <div class="bg-light lter b-b wrapper-md" ng-hide="isRoleAdmin">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="m-n font-thin h3 text-black">{{'event.EVENTMANAGER' | translate}}</h1>
+                    <small class="text-muted">HNA EcoTech Internet of Things</small>
+                </div>
+                <div class="col-sm-4 col-xs-6 col-md-6" ng-show="vm.shouldShowBackAction">
+                    <button ng-click="vm.back()" class="btn m-b-xs btn-sm btn-info btn-addon pull-right"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
+                </div>
+            </div>
+        </div> -->
+        <!-- tasks -->
+
+        <!--<div class="col-sm-6 col-xs-12">-->
+            <!--<h1 class="m-n font-thin h4 text-black ng-binding">云服务信息</h1>-->
+        <!--</div>-->
+
+        <div class="m-l m-r m-t panel panel-default">
+            <div class="tab-content">
+                <div class="wallet-config span-12">
+                    <div>
+                        <br>
+                        <div class="col-sm-5 col-xs-10"  >服务开关:</div>
+                        <!--<div>-->
+                            <label for="balance">
+                                <input id="balance" name="accountstrategy" type="radio" ng-model="$ctrl.form.strategy" ng-value="NO_BALANCE_LEFT" ng-checked="$ctrl.form.strategy == 'NO_BALANCE_LEFT'" ng-click="$ctrl.form.strategy='NO_BALANCE_LEFT'" class="ng-pristine ng-untouched ng-valid ng-not-empty" checked="checked" style="">
+                                开启
+                            </label> &nbsp;&nbsp;&nbsp;&nbsp;
+                            <label for="credit">
+                                <input id="credit" name="accountstrategy" type="radio" ng-model="$ctrl.form.strategy" ng-value="NO_CREDIT_LEFT" ng-checked="$ctrl.form.strategy == 'NO_CREDIT_LEFT'" ng-click="$ctrl.form.strategy='NO_CREDIT_LEFT'" class="ng-pristine ng-untouched ng-valid ng-not-empty" style="">
+                                关闭
+                            </label>
+                        <!--</div>-->
+                    </div>
+                    <div class="clearfix"></div>
+                    <br>
+                    <div>
+                        <div class="col-sm-5 col-xs-10" >服务端口修改:</div>
+                        <div>
+                            <input type="text" ng-model="$ctrl.form.credit" class="ng-pristine ng-untouched ng-valid ng-not-empty" style="">&nbsp;
+                        </div>
+                    </div>
+                    <!--<div class="clearfix"></div>
+                    <div>
+                      <div class="config-label pt-5">PayPal ID:</div>
+                      <div>
+                        <input type="text" ng-model="$ctrl.form.paypal_client_id">
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div>
+                      <div class="config-label pt-5">PayPal密钥:</div>
+                      <div>
+                        <input type="text" ng-model="$ctrl.form.paypal_client_secret">
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div>
+                      <div class="config-label pt-5">PayPal模式:</div>
+                      <div>
+                        <input type="text" ng-model="$ctrl.form.paypal_mode">
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div>
+                      <div class="config-label pt-5">合作者ID:</div>
+                      <div>
+                        <input type="text" ng-model="$ctrl.form.alipay_partner">
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div>
+                      <div class="config-label pt-5">密钥:</div>
+                      <div>
+                        <input type="text" ng-model="$ctrl.form.alipay_key">
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div>
+                      <div class="config-label pt-5">商家邮箱:</div>
+                      <div>
+                        <input type="text" ng-model="$ctrl.form.alipay_seller_email">
+                      </div>
+                    </div>-->
+                    <div class="clearfix"></div>
+                    <div>
+                        <br>
+                        <div class="col-sm-5 col-xs-10">服务告警通知:</div>
+                        <div>
+                            <label for="message">
+                                <input id="message" type="checkbox" name="notify" ng-model="$ctrl.form.sms_notify" ng-check="$ctrl.form.sms_notify" class="ng-pristine ng-untouched ng-valid ng-not-empty" style="">
+                                短信
+                            </label> &nbsp;&nbsp;&nbsp;&nbsp;
+                            <label for="email">
+                                <input id="email" type="checkbox" name="notify" ng-model="$ctrl.form.email_notify" ng-check="$ctrl.form.email_notify" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                邮件
+                            </label>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div>
+                        <br>
+                        <div class="col-sm-5 col-xs-10">日志保存时间:</div>
+                        <div>
+                            <input type="text" ng-model="$ctrl.form.min_remaining_days" class="ng-pristine ng-untouched ng-valid ng-not-empty" style="">&nbsp;天
+                        </div>
+                        <br>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="create-option span-6">
+                        <div class="pull-right">
+                            <br>
+                            <button class="btn btn-unique bg-primary btn-confirm" ng-click="vm.save()">
+                                保存
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <!--<a ui-sref="login" target="_blank" class="bg-primary run-btn">立即登录</a>-->
+            <!--<ul class="nav nav-tabs col-md-12" role="tablist" style="padding-right:0;">-->
+                <!--<li sdk role="presentation" class="active"><a ng-click="vm.goSdk()" aria-controls="SDK" role="tab" data-toggle="tab">系统设置</a></li>-->
+                <!--<li sdk role="presentation" class="active"><a ng-click="vm.goSdk()" aria-controls="SDK" role="tab" data-toggle="tab">服务设置}</a></li>-->
+                <!--&lt;!&ndash;<li sdk role="presentation"><a ng-click="vm.goTopic()" aria-controls="Topic" role="tab" data-toggle="tab">{{'product.TOPIC' | translate}}</a></li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li sdk role="presentation"><a ng-click="vm.goEventMapping()" aria-controls="EventMapping" role="tab" data-toggle="tab">{{'product.EVENTMAPPING' | translate}}</a></li>-->
+                <!--<li sdk role="presentation"><a ng-click="vm.goNotificationTopic()" aria-controls="NotificationTopic" role="tab" data-toggle="tab">{{'product.NOTIFICATION' | translate}}</a></li>-->
+                <!--&ndash;&gt;-->
+                <!--<button ng-click="vm.backToProductList()" class="btn m-b-xs btn-sm btn-info btn-addon pull-right"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>-->
+            <!--</ul>-->
+            <!--<table  st-table="vm.displayedCollection" st-safe-src="vm.items" class="table table-bordered table-striped table-hover bg-white text-center">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th colspan="5">-->
+                        <!--<button ng-click="vm.goAddItem()" class="btn btn-sm btn-info btn-addon"><i class="fa fa-plus"></i>{{'product.ADD' | translate}}</button>-->
+                        <!--<input st-search="" class="form-control pull-right m-b-xs w-md" placeholder="{{'product.SEARCH' | translate}}" type="text"/>-->
+                    <!--</th>-->
+                <!--</tr>-->
+                <!--<tr class="bg-light">-->
+                    <!--<th style="width: 20%;" class="text-center">{{'product.NAME' | translate}}</th>-->
+                    <!--<th style="width: 20%;" class="text-center">{{'product.SHOWEDNAME' | translate}}</th>-->
+                   <!--&lt;!&ndash;  <th style="width: 25%;" class="text-center">{{'product.CREATEDBY' | translate}}</th> &ndash;&gt;-->
+                    <!--<th style="width: 20%;" class="text-center">{{'product.CREATEDDATE' | translate}}</th>-->
+                    <!--<th style="width: 20%;" class="text-center">{{'product.DESCRIPTION' | translate}}</th>-->
+                    <!--<th style="width: 20%;" class="text-center">{{'product.OPERATE' | translate}}</th>-->
+                <!--</tr>-->
+
+                <!--</thead>-->
+                <!--<tbody>-->
+
+                <!--<tr ng-repeat="item in vm.displayedCollection">-->
+                    <!--<td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.name}}</td>-->
+                    <!--<td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.displayName}}</td>-->
+                   <!--&lt;!&ndash;  <td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.createdBy}}</td> &ndash;&gt;-->
+                    <!--<td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.createdDate | date:"yyyy-MM-dd"}}</td>-->
+                    <!--<td ng-click="vm.goDetail(item)" style="vertical-align: middle;">{{item.description}}</td>-->
+                    <!--<td style="vertical-align: middle;">-->
+                        <!--<button class="btn btn-sm btn-info btn-addon" ng-click="vm.goEditItem(item)"><i class="fa fa-edit"></i>{{'product.EDIT' | translate}}</button>-->
+                        <!--<button class="btn btn-sm btn-danger btn-addon" ng-click="vm.openAlert('sm',item)"><i class="fa fa-trash-o"></i>{{'product.DELETE' | translate}}</button>-->
+                    <!--</td>-->
+                <!--</tr>-->
+
+                <!--</tbody>-->
+            <!--</table>-->
+        </div>
+
+
+        <div style="color:#00A600" class="text-center" ng-show="vm.saveButton!== undefined && vm.saveButton === true">
+            <h2>
+					<span class="icon-success" ng-if="!vm.dispear"><span class="fa"
+                                                     ng-class="{'fa-check-circle-o': vm.saveButton === true, 'fa-close': vm.saveButton === false}"></span></span>
+                <span class="success-text" ng-if="!vm.dispear">修改成功</span>
+            </h2>
+            <!--<a ui-sref="login" target="_blank" class="bg-primary run-btn">立即登录</a>-->
+        </div>
+
+        <div class="text-center text-danger" ng-show="vm.saveButton!== undefined && vm.saveButton === false" >
+            <h2>
+					<span class="icon-success" ng-if="!vm.dispear"><span class="fa"
+                                                     ng-class="{'fa-check-circle-o': vm.saveButton === true, 'fa-close': vm.saveButton === false}"></span></span>
+                <span class="success-text" ng-if="!vm.dispear">修改失败
+					</span>
+            </h2>
+            <!--<a ui-sref="login" target="_blank" class="bg-primary run-btn">立即登录</a>-->
+        </div>
+
+        <!--<div class="btn-group pagination pull-right padder-lg">-->
+            <!--<button type="button" class="btn btn-default" ng-click="vm.preAction()" ng-disabled= !vm.pagePreEnabled>{{ 'page.pre' | translate }}</button>-->
+            <!--<button type="button" class="btn btn-default" ng-repeat="page in vm.pages" ng-click="vm.goPage(page)" ng-disabled= vm.pageCurrentState(page)>{{page}}</button>-->
+            <!--<button type="button" class="btn btn-default" ng-click="vm.nextAction()" ng-disabled= !vm.pageNextEnabled>{{ 'page.next' | translate }}</button>-->
+        <!--</div>-->
+
+        <!-- / tasks -->
+    </div>
+</div>
+
+
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div ng-include="'app/components/core/modal.html'"></div>
+</script>
+
+

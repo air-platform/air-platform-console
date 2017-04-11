@@ -1,0 +1,102 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="EditTenantController as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+">
+    <!-- main -->
+    <div class="col">
+        <!-- main header -->
+        <!-- <div class="bg-light lter b-b wrapper-md" ng-hide="isRoleAdmin">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="m-n font-thin h3 text-black">{{vm.title}}</h1>
+                    <small class="text-muted">HNA EcoTech Internet of Things</small>
+                </div>
+               
+            </div>
+        </div> -->
+
+        <!-- tasks -->
+
+
+
+        <div class="panel panel-default m-l m-r m-t">
+
+            <div class="panel-heading">
+                <h3 class="panel-title">{{'product.INFORMATION' | translate}}</h3>
+            </div>
+            <br/>
+            <form name="form" class="form-horizontal form-validation" role="form">
+
+                <div class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'profile.USERNAME' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="{{'profile.USERNAME' | translate}}" ng-model="vm.user.username" ng-disabled="!vm.isAdd" ng-pattern="/^[a-zA-Z0-9_\\-]{2,20}$/" required>
+                    </div>
+                    <span ng-if="vm.isAdd"><i style="color:red;font-size:20px;">* </i><i style="font-style:normal; color:#999;">{{'tenant.USERNAMETIP' | translate}}</i></span>
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'profile.NICKNAME' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="{{'profile.NICKNAME' | translate}}" ng-model="vm.user.nickName" required>
+                    </div>
+                    <span style="color:red;font-size:20px;">*</span>
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'profile.MAILBOX' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="email"
+                               placeholder="{{'profile.MAILBOX' | translate}}" ng-model="vm.user.email" required>
+                    </div>
+                    <span style="color:red;font-size:20px;">*</span>
+                </div>
+                <!--<div class="form-group">-->
+                    <!--<label class="col-sm-1 control-label">权限</label>-->
+                    <!--<div class="col-sm-4">-->
+                        <!--<select class="form-control" ng-model="vm.power" ng-change="vm.powerChanged()" ng-options="opt for opt in vm.options.power"></select>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+
+
+                <div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'tenant.ACTIVESTATUS' | translate}}</label>
+                    <div class="col-sm-1 checkbox" style="padding-top:0;">
+                        <!-- <label style="vertical-align:middle;">
+                            <input class="form-control" type="checkbox" ng-model="vm.user.enabled" disabled>
+                        </label> -->
+                        <label>
+                             <input style="width:20px;height:20px;" type="checkbox" ng-model="vm.user.enabled" ng-disabled="!vm.isAdd">
+                        </label>
+                    </div>
+                    <div ng-if="!vm.isAdd" class="col-sm-2" style="padding-left:0;">
+                        <button ng-if="vm.user.enabled" class="btn btn-info btn-addon btn-sm pull-left" ng-click="vm.lockTenant()"><i class="fa fa-lock"></i>{{'tenant.LOCK' | translate}}</button>
+                        <button ng-if="!vm.user.enabled" class="btn btn-info btn-addon btn-sm pull-left" ng-click="vm.unlockTenant()"><i class="fa fa-unlock-alt"></i>{{'tenant.ACTIVE' | translate}}</button>
+                    </div>
+                </div>
+
+                <div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-3">
+                        <button class="btn btn-default btn-sm m-l-lg btn-addon bg-light" ng-click="vm.backAction()"> <i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}} </button>
+                        <button class="btn btn-sm btn-info btn-addon" type="submit" ng-click="vm.submitAction()" ng-disabled='form.$invalid'> <i class="fa fa-check-circle"></i>{{'product.CONFIRM' | T}} </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+
+        <!-- / tasks -->
+    </div>
+</div>
+<!-- / main -->
+<!--<div data-ng-include=" 'tpl/blocks/aside.right.html' ">-->
+<!--</div>-->
+<!--</div>-->
+<!--&lt;!&ndash; / right col &ndash;&gt;-->
+<!--</div>-->

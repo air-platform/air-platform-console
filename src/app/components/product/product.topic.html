@@ -1,0 +1,12 @@
+
+<div class="m-t panel panel-default" ng-controller="productTopicCtrl as vm">
+    <div  ng-include="vm.descpath">
+            {% include '{{vm.descpath}}' %}
+    </div>
+</div>
+<!--<div class="text-center" ng-include="'app/service-intro/news.html'">-->
+    <!--{% include 'app/service-intro/news.html' %}-->
+<!--</div>>-->
+<script type="text/ng-template" id="myModalContent.html">
+    <div ng-include="'app/components/core/modal.html'"></div>
+</script>
