@@ -13,11 +13,14 @@
             var token = StorageService.get('iot.hnair.cloud.access_token');
             if (token){
                 logger.debug(token);
-                // $http.defaults.headers.common['Authorization'] = token;
-                //token = 'Bearer ' + token;
-                RestangularConfigurer.setDefaultHeaders({UserName:token});
+                 //$http.defaults.headers.common['Authorization'] = token;
+                token = 'Bearer ' + token;
+              //  RestangularConfigurer.setDefaultHeaders({UserName:token});
+                RestangularConfigurer.setDefaultHeaders({Authorization:token});
             }else{
-                RestangularConfigurer.setDefaultHeaders({UserName:null});
+                //RestangularConfigurer.setDefaultHeaders({UserName:null});
+                RestangularConfigurer.setDefaultHeaders({Authorization:null});
+
             }
             RestangularConfigurer.setFullResponse(true);
         });
@@ -73,7 +76,7 @@
             path = checkPath(path);
             var account = RestService.one(path);
             var token = StorageService.get('iot.hnair.cloud.access_token');
-            //token = 'Bearer ' + token;
+            token = 'Bearer ' + token;
             account.customGET("",param,{Authorization:token}).then(successHandler,function (response) {
                 failedResponse(response,failedHandler,path);
             });
@@ -195,11 +198,19 @@
              }
 
              var reg = RestService.one(path);
-             reg.customPOST(formdata, undefined, undefined, { 'Content-Type': undefined }).then(
+             /*reg.customPOST(formdata, undefined, undefined, { 'Content-Type': undefined }).then(
+                 successHandler,function (response) {
+                     failedResponse(response,failedHandler,path);
+                 }
+             );*/
+
+             reg.customPOST(body).then(
                  successHandler,function (response) {
                      failedResponse(response,failedHandler,path);
                  }
              );
+
+
          };
 
          function get(path,param,token,successHandler,failedHandler) {

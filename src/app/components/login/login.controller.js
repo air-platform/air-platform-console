@@ -56,27 +56,29 @@
             /* 登录 */
 
             if(vm.user.rememberMe){//记住密码
-                setCookie(vm.user.username,vm.user.password);
+                setCookie(vm.user.principal,vm.user.credential);
             }else{
-                setCookie(vm.user.username,'');
+                setCookie(vm.user.principal,'');
             }
 
             startLogin();
 
             var action = '1';//登录动作
             LoginService.post(constdata.api.login.authPath,vm.user,action,function(response) {
-                if (response.data.code == 0){
-                    StorageService.put(accessToken,vm.user.username,24 * 3 * 60 * 60);//3 天过期
+                console.log(response.data);
+                if (response.data.token != null && response.data.token != ''){
+                    StorageService.put(accessToken,response.data.token,24 * 3 * 60 * 60);//3 天过期
             //        LoginService.get(constdata.api.login.profilePath,null,vm.user.username,function (response2) {
                         
                         stopLogin();
-                        vm.user = response.data.user;
-                        vm.user.type = 'tenant';
+                        //vm.user = response.data.user;
+                        vm.user.type = 'ADMIN';//'TENANT';
                         StorageService.put(hnaInfo,vm.user,24 * 3 * 60 * 60);
                         localStorage.setItem(constdata.tenant,'hna');
                         $rootScope.$on('$locationChangeSuccess',function(){//返回前页时，刷新前页
                             parent.location.reload();
                         });
+                        //return;
                         $state.go('app.dashboard');
 
                     // },function (response) {
@@ -108,18 +110,18 @@
         function usernameChanged() {
 
             if (vm.user.rememberMe){
-                vm.user.password = '';
+                vm.user.principal = '';
                 vm.user.rememberMe = false;
             }
 
             var username = getCookie(hnaName);
-            if (username == vm.user.username){
+            if (username == vm.user.principal){
                 checkCookie();
             }else{
                 var info = StorageService.get(vm.user.username);
                 if (info){
-                    vm.user.password = info.p;
-                    vm.user.username = info.n;
+                    vm.user.credential = info.p;
+                    vm.user.principal = info.n;
                     vm.user.rememberMe = true;
                 }
             };
@@ -180,9 +182,9 @@
             var username = getCookie(hnaName);
             var password = getCookie(hnaPwd);
             if(username && username.length > 0){
-                vm.user.username = username;
+                vm.user.principal = username;
                 if(password && password.length > 0){
-                    vm.user.password = password;
+                    vm.user.credential = password;
                     if (username.length > 0){
                         vm.user.rememberMe = true;
                     }
@@ -222,7 +224,7 @@
             // "ADMIN"; "TENANT"; "USER";
             var info = StorageService.get(hnaInfo);
 
-            if (info && info.type.toUpperCase() == 'USER'){
+            if (info && info.type.toUpperCase() == 'ADMIN'){
                 return true;
             }
             return false;

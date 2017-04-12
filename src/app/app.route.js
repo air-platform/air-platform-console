@@ -188,7 +188,7 @@
           }else{
               prefix = username + '/';
           };
-         //  prefix='/tenant/';
+           prefix='admin/';
           $urlRouterProvider
             .otherwise('/access/signin');
           $stateProvider
