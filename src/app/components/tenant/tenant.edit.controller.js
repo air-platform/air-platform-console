@@ -35,25 +35,60 @@
             ]
         };
         vm.isAdd = true;
-
+        vm.isEdit = false;
+        vm.isDetail = false;
         vm.getTenantItem = getTenantItem;
         vm.submitAction = submitAction;
         vm.lockTenant = lockTenant;
         vm.unlockTenant = unlockTenant;
         vm.backAction = backAction;
         vm.back = back;
+        vm.addUser = {};
+        vm.addUser.role='tenant';
+        vm.userType = [
+            {
+                title:'管理员',
+                value:'admin'
+            },
+            {
+                title:'商户',
+                value:'tenant'
+            },
+            {
+                title:'用户',
+                value:'user'
+            }
+        ];
 
+        vm.statusType = [
+            {
+                title:'已启用',
+                value:'enabled'
+            },
+            {
+                title:'已禁用',
+                value:'disabled'
+            }
+        ];
 
         var username = $stateParams.username;
+        var type = $stateParams.args.type;
+        console.log(type);
         if (username){
             vm.isAdd = false;
             vm.title = i18n.t('profile.EDIT_T_INFO');
         }
 
+        if(type && type=='edit'){
+            vm.isEdit = true;
+        }
+        if(type && type=='detail'){
+            vm.isDetail = true;
+        }
 
         function getTenantItem() {
 
-            NetworkService.get(constdata.api.tenant.tenantInfoPath + '/' + username,null,function (response) {
+            NetworkService.get(constdata.api.tenant.listAllPath + '/' + username,null,function (response) {
                 vm.user = response.data;
                 $rootScope.userNamePlacedTop = vm.user.nickName;
             },function (response) {
@@ -64,7 +99,7 @@
 
 
         function addItem() {
-            NetworkService.post(constdata.api.tenant.addPath,vm.user,function (response) {
+            NetworkService.post(constdata.api.tenant.listAllPath,vm.addUser,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {

@@ -213,14 +213,12 @@
 
          };
 
-         function get(path,param,token,successHandler,failedHandler) {
+         function get(path,param,uname,successHandler,failedHandler) {
              var account = RestService.one(path);
-             if (token != 'undefined'){
-             }else{
-                 token = StorageService.get('iot.hnair.cloud.access_token');
-             }
+             var token = StorageService.get('iot.hnair.cloud.access_token');
 
-             account.customGET("",param,{UserName:token}).then(successHandler,function (response) {
+             token = 'Bearer ' + token;
+             account.customGET("",param,{Authorization:token}).then(successHandler,function (response) {
                  failedResponse(response,failedHandler,path);
              });
          };

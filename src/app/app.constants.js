@@ -19,11 +19,11 @@
 			tenant:'hna-tenant',
             api:{ "token":{"refresh":"/iot/api/v1/account/token/refresh"},
                     "login":
-                        {"authPath":"/api/v1/account/auth", "profilePath":"/cp-ua/v1/user/", "logoutPath":"/cp-ua/v1/user/logout","changePSDPath":"/iot/api/v1/account/password/change","updatePath":"/iot/api/v1/account/profile"},
+                        {"authPath":"/api/v1/account/auth", "profilePath":"api/v1/account/profile", "logoutPath":"/cp-ua/v1/user/logout","changePSDPath":"/iot/api/v1/account/password/change","updatePath":"/iot/api/v1/account/profile"},
                     "register":
                         {"registerPath":"/cp-ua/v1/user/register"},
                     "tenant":
-                        {"listAllPath":"/api/v1/platform/accounts?role=tenant","updatePath":"/iot/api/v1/tenants","deletePath":"/iot/api/v1/tenants","tenantInfoPath":"/iot/api/v1/tenants","addPath":"/api/v1/account/tenant","lockPath":"/iot/api/v1/tenants"},
+                        {"listAllPath":"/api/v1/platform/accounts","updatePath":"/iot/api/v1/tenants","deletePath":"/iot/api/v1/tenants","tenantInfoPath":"/iot/api/v1/tenants","addPath":"api/v1/platform/accounts","lockPath":"/iot/api/v1/tenants"},
                     "device":
                         {"listAllPath":"/iot/api/v1/devices","updatePath":"/iot/api/v1/devices/device1","deletePath":"/iot/api/v1/devices/device1","deviceInfoPath":"/iot/api/v1/devices/id","addPath":"/iot/api/v1/devices"},
                     "product":
@@ -47,7 +47,8 @@
             },
             routeName:{
                 "appprofile":"个人中心",
-                "apptenant":"租户管理",
+                "apptenant":"商户管理",
+                "apptenantdetail":"商户详情",
                 "appmonitoring":"监测",
                 "applogging":"日志",
                 "appsettings":"设置",

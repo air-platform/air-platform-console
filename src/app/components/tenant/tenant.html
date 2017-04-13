@@ -26,32 +26,37 @@
                 </th>
             </tr>
             <tr class="font-bold">
-                <th class="text-center">{{'login.USERNAME' | T}}</th>
+               <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
                 <th class="text-center">{{'u.NICKNAME' | T}}</th>
+                <th class="text-center">{{'u.ROLE' | T}}</th>
                 <th class="text-center">{{'u.EMAIL' | T}}</th>
+                <th class="text-center">{{'u.HOTLINE' | T}}</th>
                 <th class="text-center">{{'u.CREATEDATE' | T}}</th>
-                <th class="text-center">{{'u.A_STATUS' | T}}</th>
-                <th class="text-center">{{'u.OPERATE' | T}}</th>
+               <!-- <th class="text-center">{{'u.OPERATE' | T}}</th>-->
             </tr>
 
             </thead>
             <tbody class="">
 
             <tr ng-repeat="item in vm.displayedCollection">
-                <td ng-click="vm.goDetail(item)">{{item.username}}</td>
+              <!--  <td ng-click="vm.goDetail(item)">{{item.id}}</td>-->
                 <td ng-click="vm.goDetail(item)">{{item.nickName}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.email}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.website}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.address}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.role}}</td>
+               <td ng-click="vm.goDetail(item)">{{item.email}}</td>
                 <td ng-click="vm.goDetail(item)">{{item.hotline}}</td>
+                <!-- <td ng-click="vm.goDetail(item)">{{item.website}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.address}}</td>-->
                 <td ng-click="vm.goDetail(item)">{{item.creationDate}}</td>
-                <td ng-click="vm.goDetail(item)">
-                    <!--<input type="checkbox" ng-disabled=true class="checkbox" ng-checked="item.enabled">-->
+
+
+               <!-- <td ng-click="vm.goDetail(item)">
                     {{item.enabled ? ('u.ACTIVITY'|T ):('u.UNACTIVITY'|T)}}
-                </td>
+                </td>-->
                 <td>
-                    <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goDetail(item)"><i class="fa fa-eye"></i>{{'u.LOOK'|T}}</button>
+                    <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goDetail(item)"><i class="fa fa-eye"></i>{{'u.DETAIL'|T}}</button>
+<!--
                     <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goEditItem(item)"><i class="fa fa-edit"></i>{{ 'u.EDIT' | T}}</button>
+-->
                     <button class="btn btn-sm btn-info btn-addon" style="width: 100px" ng-click="vm.resetAlert('',item)"><i class="fa fa-rotate-left"></i>{{'profile.RESET_PWD'|T}}</button>
                     <button class="btn btn-sm btn-danger btn-addon" style="width: 80px"  ng-click="vm.openAlert('sm',item)"><i class="fa fa-trash-o"></i>{{'u.DELETE' | T}}</button>
                 </td>

@@ -218,8 +218,13 @@
               })
               .state('app.edittenant', {
                   url: prefix + 'tenant/edit/:username',
+                  params : {args : {}},
                   templateUrl: 'app/components/tenant/tenant.edit.html'
               })
+              .state('app.tenantdetail', {
+              url: prefix + 'tenant/detail',
+              templateUrl: 'app/components/tenant/tenant.detail.html'
+                })
               .state('app.application', {
                   url: prefix + '{t}/application',
                   templateUrl: 'app/components/application/application.html'

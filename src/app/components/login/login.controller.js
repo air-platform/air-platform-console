@@ -65,26 +65,30 @@
 
             var action = '1';//登录动作
             LoginService.post(constdata.api.login.authPath,vm.user,action,function(response) {
-                console.log(response.data);
+              //  console.log(response.data);
                 if (response.data.token != null && response.data.token != ''){
                     StorageService.put(accessToken,response.data.token,24 * 3 * 60 * 60);//3 天过期
-            //        LoginService.get(constdata.api.login.profilePath,null,vm.user.username,function (response2) {
-                        
+                    LoginService.get(constdata.api.login.profilePath,null,vm.user.username,function (response2) {
+                        console.log(response2.data);
                         stopLogin();
-                        //vm.user = response.data.user;
-                        vm.user.type = 'ADMIN';//'TENANT';
+
+                        vm.user = response2.data;
+                        vm.user.type = vm.user.role;
+                        console.log(vm.user);
+                      //  vm.user.type = 'ADMIN';//'TENANT';
                         StorageService.put(hnaInfo,vm.user,24 * 3 * 60 * 60);
-                        localStorage.setItem(constdata.tenant,'hna');
-                        $rootScope.$on('$locationChangeSuccess',function(){//返回前页时，刷新前页
+                        //localStorage.setItem(constdata.tenant,'hna');
+                       /* $rootScope.$on('$locationChangeSuccess',function(){//返回前页时，刷新前页
                             parent.location.reload();
-                        });
+                        });*/
                         //return;
                         $state.go('app.dashboard');
 
-                    // },function (response) {
+                     },function (response) {
+                        console.log('failed....');
                          stopLogin();
-                    //     vm.authError = response.statusText + ' ' + response.status;
-                    // });
+                         vm.authError = response.statusText + ' ' + response.status;
+                     });
 
                 }else{
                     stopLogin();
@@ -151,7 +155,7 @@
         }
 
         function logout() {
-            var action = '2';//登出动作
+            /*var action = '2';//登出动作
             LoginService.post(constdata.api.login.logoutPath,StorageService.get(hnaInfo),action,function(response) {
                 if (response.data.code == 0){
                     $timeout(function () {
@@ -174,7 +178,18 @@
                     vm.authError = i18n.t('login.LOGIN_FAILED');
                 }
                 // toastr.error(vm.authError);
-            });
+            });*/
+
+
+
+                localStorage.removeItem(constdata.tenant);
+                StorageService.clear(accessToken);
+                StorageService.clear(hnaInfo);
+
+                $state.go('access.signin');
+
+
+
         };
 
         // 设置登录信息

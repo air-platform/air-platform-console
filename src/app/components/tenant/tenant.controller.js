@@ -9,7 +9,7 @@
         .controller('TenantController', TenantController);
 
     /** @ngInject */
-    function TenantController(NetworkService,constdata,$state,$uibModal,$log,toastr,i18n, delmodaltip) {
+    function TenantController(NetworkService,constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -27,11 +27,11 @@
         vm.goDetail = goDetail;
         vm.resetPassword = resetPassword;
         vm.removeItem = removeItem;
-
-
+        vm.curItem = {};
+        vm.backAction = backAction;
         function getDatas() {
 
-            NetworkService.get(constdata.api.tenant.listAllPath,{page:vm.pageCurrent},function (response) {
+            NetworkService.get(constdata.api.tenant.listAllPath + '/' + '?role=tenant',{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
                 updatePagination(response.data);
             },function (response) {
@@ -45,26 +45,27 @@
         };
 
         function goEditItem(item) {
-            $state.go('app.edittenant',{username:item.username});
+            $state.go('app.edittenant',{username:item.id, args:{type:'edit'}});
         };
 
         function goDetail(item) {
-            localStorage.setItem(constdata.tenant,item.username);
-            $state.go('app.customTenantDashboard',{username:item.username,args:{nickname:item.username}});
+            $state.go('app.edittenant',{username:item.id, args:{type:'detail'}});
+
         };
 
         function resetPassword(item) {
-            NetworkService.post(constdata.api.tenant.listAllPath + '/' + item.username + '/password/reset',null,function (response) {
+            /*NetworkService.post(constdata.api.tenant.listAllPath + '/' + item.username + '/password/reset',null,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
             },function (response) {
                 toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
-            });
+            });*/
+            toastr.success(i18n.t('u.OPERATE_SUC'));
         }
 
         function removeItem(item) {
-            NetworkService.delete(constdata.api.tenant.deletePath + '/' + item.username,null,function success() {
+            NetworkService.delete(constdata.api.tenant.listAllPath + '/' + item.id,null,function success() {
                 var index = vm.items.indexOf(item);
-                vm.items.splice(index,1);
+                //vm.items.splice(index,1);
                 toastr.success(i18n.t('u.DELETE_SUC'));
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
@@ -72,7 +73,10 @@
             });
 
         };
-
+        function backAction() {
+            // $state.go('app.tenant');
+            $rootScope.backPre();
+        }
 
         vm.displayedCollection = [].concat(vm.items);
 
