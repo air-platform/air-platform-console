@@ -74,6 +74,7 @@
 
                         vm.user = response2.data;
                         vm.user.type = vm.user.role;
+                        //vm.user.type = 'TENANT';
                         console.log(vm.user);
                       //  vm.user.type = 'ADMIN';//'TENANT';
                         StorageService.put(hnaInfo,vm.user,24 * 3 * 60 * 60);

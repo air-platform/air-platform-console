@@ -541,6 +541,16 @@
                   url: '/forgotpassword',
                   templateUrl: 'app/components/changepwd/change.password.html'
               })
+              .state('app.airjetbook', {
+                  url: '/airjetbook',
+                  templateUrl: 'app/components/air-jet/airjet-book.html'
+
+              })
+              .state('app.editairjetbook', {
+              url: prefix + '/airjetbook/edit/:username',
+              params : {args : {}},
+              templateUrl: 'app/components/air-jet/airjet-book.edit.html'
+          })
           ;
     }
 

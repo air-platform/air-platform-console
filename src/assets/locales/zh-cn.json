@@ -55,7 +55,21 @@
     "DESCRIPTION":"描述",
     "ENABLE":"已启用",
     "DISABLE":"已禁用",
-    "PASSWORD":"密码"
+    "PASSWORD":"密码",
+
+
+
+    "FLEETNAME":"飞机名称",
+    "PRICE":"价格",
+    "PRICEUNIT":"单位",
+    "FLEETNUNBER":"飞机编号",
+    "FLEETTYPE":"机型",
+    "CAPACITY":"可载人数",
+    "LUGGAGEWEIGHT":"行李重量",
+    "BEDS":"可铺床位",
+    "FACILITIES":"机舱设备",
+    "FULLLOADRANGE":"满载航程"
+
   },
   "header" : {
     "navbar" : {
