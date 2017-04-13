@@ -52,6 +52,8 @@
     "AVATAR":"头像",
     "WEBSITE":"官网",
     "ADDRESS":"地址",
+    "TYPE":"类型",
+     "SUMMARY":"摘要",
     "PASSWORD":"密码"
 
   },

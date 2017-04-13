@@ -1,4 +1,4 @@
-<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="AirjetBookController as vm" ng-init="
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="AirjetCardController as vm" ng-init="
     app.settings.asideFolded = false;
     app.settings.asideDock = false;
 ">
@@ -27,12 +27,11 @@
             </tr>
             <tr class="font-bold">
                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
-                <th class="text-center">{{'u.FLEETNAME' | T}}</th>
+                <th class="text-center">{{'u.NAME' | T}}</th>
                 <th class="text-center">{{'u.PRICE' | T}}</th>
                 <th class="text-center">{{'u.PRICEUNIT' | T}}</th>
-                <th class="text-center">{{'u.FLEETNUNBER' | T}}</th>
-                <th class="text-center">{{'u.FLEETTYPE' | T}}</th>
-               <!-- <th class="text-center">{{'u.OPERATE' | T}}</th>-->
+                <th class="text-center">{{'u.TYPE' | T}}</th>
+
             </tr>
 
             </thead>
@@ -43,10 +42,8 @@
                 <td ng-click="vm.goDetail(item)">{{item.name}}</td>
                 <td ng-click="vm.goDetail(item)"> {{item.price }}</td>
                <td ng-click="vm.goDetail(item)">{{item.currencyUnit == 'rmb' ? ('人民币'):('美元')}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.flightNo}}</td>
-                <!-- <td ng-click="vm.goDetail(item)">{{item.website}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.address}}</td>-->
-                <td ng-click="vm.goDetail(item)">{{item.aircraftType}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.type}}</td>
+
 
 
                <!-- <td ng-click="vm.goDetail(item)">

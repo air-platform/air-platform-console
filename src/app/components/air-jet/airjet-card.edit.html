@@ -1,4 +1,4 @@
-<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="AirjetBookEditController as vm" ng-init="
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="AirjetCardEditController as vm" ng-init="
     app.settings.asideFolded = false;
     app.settings.asideDock = false;
 ">
@@ -33,10 +33,10 @@
 
 
                 <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FLEETNAME' | translate}}</label>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.NAME' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.FLEETNAME' | translate}}" ng-model="vm.user.name" ng-disabled="vm.isDetail" ng-pattern="/^[a-zA-Z0-9_\\-]{2,20}$/" required>
+                               placeholder="{{'u.NAME' | translate}}" ng-model="vm.user.name" ng-disabled="vm.isDetail" ng-pattern="/^[a-zA-Z0-9_\\-]{2,20}$/" required>
                     </div>
                     <span ng-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i><i style="font-style:normal; color:#999;">{{'tenant.USERNAMETIP' | translate}}</i></span>
                 </div>
@@ -84,25 +84,14 @@
 
 
 
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FLEETNUNBER' | translate}}</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="{{'u.FLEETNUNBER' | translate}}" ng-model="vm.user.flightNo" ng-disabled="vm.isDetail" >
-                    </div>
-
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
 
 
 
                 <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FLEETTYPE' | translate}}</label>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.TYPE' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.FLEETTYPE' | translate}}" ng-model="vm.user.aircraftType" ng-disabled="vm.isDetail" >
+                               placeholder="{{'u.TYPE' | translate}}" ng-model="vm.user.type" ng-disabled="vm.isDetail" >
                     </div>
 
                 </div>
@@ -114,60 +103,10 @@
 
 
                 <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CAPACITY' | translate}}</label>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.SUMMARY' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.CAPACITY' | translate}}" ng-model="vm.user.capacity" ng-disabled="vm.isDetail" >
-                    </div>
-
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.LUGGAGEWEIGHT' | translate}}</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="{{'u.LUGGAGEWEIGHT' | translate}}" ng-model="vm.user.weight" ng-disabled="vm.isDetail" ng-pattern="/^[0-9]{1,20}$/">
-                    </div>
-
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.BEDS' | translate}}</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="{{'u.BEDS' | translate}}" ng-model="vm.user.beds" ng-disabled="vm.isDetail" ng-pattern="/^[0-9]{1,20}$/">
-                    </div>
-
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FACILITIES' | translate}}</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="{{'u.FACILITIES' | translate}}" ng-model="vm.user.facilities" ng-disabled="vm.isDetail" >
-                    </div>
-
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FULLLOADRANGE' | translate}}</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="{{'u.FULLLOADRANGE' | translate}}" ng-model="vm.user.fullloadRange" ng-disabled="vm.isDetail" ng-pattern="/^[0-9]{1,20}$/">
+                               placeholder="{{'u.SUMMARY' | translate}}" ng-model="vm.user.summary" ng-disabled="vm.isDetail" >
                     </div>
 
                 </div>

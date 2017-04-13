@@ -550,7 +550,17 @@
               url: prefix + '/airjetbook/edit/:username',
               params : {args : {}},
               templateUrl: 'app/components/air-jet/airjet-book.edit.html'
-          })
+                })
+              .state('app.airjetcard', {
+                  url: '/airjetcard',
+                  templateUrl: 'app/components/air-jet/airjet-card.html'
+
+              })
+              .state('app.editairjetcard', {
+                  url: prefix + '/airjetcard/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/air-jet/airjet-card.edit.html'
+              })
           ;
     }
 
