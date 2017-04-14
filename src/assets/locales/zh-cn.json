@@ -89,6 +89,21 @@
    
 
 
+   
+
+    "COURSESERVICE":"课学服务",
+    "ENDDATE":"截止日期",
+    "ENROLLNUM":"已报名人数",
+    "ENROLLMENT":"招生条件",
+    "CLASSIMAGE":"课程图片",
+    "LICENSE":"证照类型",
+    "LOCATION":"地点",
+    "STARTDATE":"开始日期",
+    "CLASSTOTALNUM":"计划招生人数",
+    "COURSESCHOOL":"所属学校",
+
+
+
 
 
 

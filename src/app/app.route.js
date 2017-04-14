@@ -581,6 +581,15 @@
                   params : {args : {}},
                   templateUrl: 'app/components/training/training-school.edit.html'
               })
+              .state('app.trainingclass', {
+                  url: '/trainingclass',
+                  templateUrl: 'app/components/training/training-class.html'
+              })
+              .state('app.edittrainingclass', {
+                  url: prefix + '/trainingclass/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/training/training-class.edit.html'
+              })
           ;
     }
 
