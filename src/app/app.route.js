@@ -571,6 +571,16 @@
                   params : {args : {}},
                   templateUrl: 'app/components/air-jet/airjet-flight.edit.html'
               })
+              .state('app.trainingschool', {
+                  url: '/trainingschool',
+                  templateUrl: 'app/components/training/training-school.html'
+
+              })
+              .state('app.edittrainingschool', {
+                  url: prefix + '/trainingschool/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/training/training-school.edit.html'
+              })
           ;
     }
 

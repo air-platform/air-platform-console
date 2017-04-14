@@ -78,6 +78,20 @@
     "SEATPRICE":"单座价钱",
     "ALLSEATS":"座位数",
     "MINPASSENGER":"最低成行乘客数",
+
+
+
+    "SCHOOLNAME":"航校名称",
+
+    "SCHOOLIMAGE":"航校图片",
+    "ADDRESS":"地址",
+    "CONTACT":"联系方式",
+   
+
+
+
+
+
     "DATE":"日期"
 
   },
