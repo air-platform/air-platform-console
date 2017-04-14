@@ -561,6 +561,16 @@
                   params : {args : {}},
                   templateUrl: 'app/components/air-jet/airjet-card.edit.html'
               })
+              .state('app.airjetflight', {
+                  url: '/airjetflight',
+                  templateUrl: 'app/components/air-jet/airjet-flight.html'
+
+              })
+              .state('app.editairjetflight', {
+                  url: prefix + '/airjetflight/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/air-jet/airjet-flight.edit.html'
+              })
           ;
     }
 

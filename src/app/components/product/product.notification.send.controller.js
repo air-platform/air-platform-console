@@ -58,7 +58,15 @@
 
 	      vm.opened = true;
 	    };
-    
+
+
+
+
+
+
+
+
+
 		// end of date picker
         //监听输入数字最大值
         vm.isNumberValid = [];

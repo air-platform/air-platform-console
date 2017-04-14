@@ -6,7 +6,7 @@
 
     angular
         .module('iot')
-        .controller('AirjetCardEditController', AirjetCardEditController)
+        .controller('AirjetFlightEditController', AirjetFlightEditController)
         .filter('userType',function(i18n) {
         return function(input) {
             var out = '';
@@ -20,7 +20,7 @@
     });
 
     /** @ngInject */
-    function AirjetCardEditController(NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
+    function AirjetFlightEditController($scope, NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -45,7 +45,7 @@
         vm.back = back;
         vm.addUser = {};
         vm.addUser.role='tenant';
-        vm.subPath = 'jetcards';
+        vm.subPath = 'ferryflights';
         vm.userType = [
             {
                 title:'管理员',
@@ -179,6 +179,97 @@
             // history.back();
             vm.backAction();
         }
+
+
+
+
+
+
+        $scope.today = function() {
+            $scope.dt = new Date();
+        };
+        $scope.today();
+
+        $scope.clear = function () {
+            $scope.dt = null;
+        };
+
+        // Disable weekend selection
+        $scope.disabled = function(date, mode) {
+            return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+        };
+
+        $scope.toggleMin = function() {
+            $scope.minDate = $scope.minDate ? null : new Date();
+        };
+        $scope.toggleMin();
+
+        $scope.open = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.opened = true;
+        };
+
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1,
+            class: 'datepicker'
+        };
+
+        $scope.initDate = new Date('2016-15-20');
+        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        $scope.format = $scope.formats[0];
+
+
+
+
+
+
+
+        vm.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1,
+            class: 'datepicker'
+        };
+        vm.initDate = new Date('2016-15-20');
+        vm.formats = ['MM/dd/yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        vm.format = vm.formats[0];
+
+        //每次选择不同版本请求不同数据
+        vm.change = function() {
+            vm.notificationDatas = [];
+            getNotiData(vm.selectedOption);
+        }
+
+        // date picker
+        vm.today = function() {
+            vm.dt = new Date();
+        };
+        vm.today();
+
+        vm.clear = function () {
+            vm.dt = null;
+        };
+
+        // Disable weekend selection
+        vm.disabled = function(date, mode) {
+            return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+        };
+
+        vm.toggleMin = function() {
+            vm.minDate = new Date();
+        };
+        vm.toggleMin();
+
+        vm.open = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            vm.opened = true;
+        };
+
+
 
     }
 

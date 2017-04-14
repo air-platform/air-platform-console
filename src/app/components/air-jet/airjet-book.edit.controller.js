@@ -78,7 +78,7 @@
             },
             {
                 title:'美元',
-                value:'dollar'
+                value:'usd'
             }
         ];
         var username = $stateParams.username;
@@ -170,6 +170,8 @@
 
         if (!vm.isAdd){
             vm.getTenantItem();
+        }else{
+            vm.user.currencyUnit = 'rmb';
         }
 
         function back() {

@@ -68,7 +68,17 @@
     "LUGGAGEWEIGHT":"行李重量",
     "BEDS":"可铺床位",
     "FACILITIES":"机舱设备",
-    "FULLLOADRANGE":"满载航程"
+    "FULLLOADRANGE":"满载航程",
+
+    "FLIGHTNAME":"航线名称",
+    "FLIGHTNUMBER":"航线编号",
+    "DEPARTURE":"出发地",
+    "ARRIVAL":"目的地",
+    "ALLPRICE":"整机价钱",
+    "SEATPRICE":"单座价钱",
+    "ALLSEATS":"座位数",
+    "MINPASSENGER":"最低成行乘客数",
+    "DATE":"日期"
 
   },
   "header" : {
