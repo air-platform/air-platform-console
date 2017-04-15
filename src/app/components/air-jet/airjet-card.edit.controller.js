@@ -20,13 +20,15 @@
     });
 
     /** @ngInject */
-    function AirjetCardEditController(NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
+    function AirjetCardEditController($scope, NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
         vm.user = {};
         vm.title = i18n.t('profile.ADD_T_INFO');
         vm.power = i18n.t('profile.USER');
+        $scope.response = {};
+        $scope.response.content = 'my card';
         vm.options = {
             power: [
                 i18n.t('profile.USER'),
@@ -46,6 +48,7 @@
         vm.addUser = {};
         vm.addUser.role='tenant';
         vm.subPath = 'jetcards';
+        vm.myHtml = '';
         vm.userType = [
             {
                 title:'管理员',
@@ -82,6 +85,7 @@
                 value:'usd'
             }
         ];
+        vm.editorContent = '';
         var username = $stateParams.username;
         var type = $stateParams.args.type;
         console.log(type);
@@ -126,6 +130,9 @@
 
         function editItem() {
             var myid = vm.userInfo.id;
+
+            console.log($scope.response.content);
+            return;
             NetworkService.put(constdata.api.tenant.fleetPath + '/' + myid + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();

@@ -31,6 +31,8 @@
         vm.backAction = backAction;
         vm.userInfo = {};
         vm.subPath = 'jetcards';
+
+        vm.richEditorContent = '';
         function getDatas() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
             var myid = vm.userInfo.id;
