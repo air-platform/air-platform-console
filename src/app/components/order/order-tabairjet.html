@@ -1,0 +1,27 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="OrderAirjetController as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+  ">
+    <!-- main -->
+    <div class="col">
+        <br/>
+
+
+        <uib-tabset class="m-l m-r control" active="vm.tabSelectedIndex">
+            <uib-tab ng-repeat="tab in vm.tabs" heading="{{tab.title}}" ng-click="vm.tapAction(tab.fun)"></uib-tab>
+            <button ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-right"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
+        </uib-tabset>
+
+        <div class="tab-content panel m-l m-r">
+            <div ui-view></div>
+
+            <br/>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+

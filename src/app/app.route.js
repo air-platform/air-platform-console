@@ -616,7 +616,7 @@
                   templateUrl: 'app/components/order/order-airtaxi.html'
 
               })
-              .state('app.editorderairtaxis', {
+              .state('app.editorderairtaxi', {
                   url: prefix + '/orderairtaxi/edit/:username',
                   params : {args : {}},
                   templateUrl: 'app/components/order/order-airtaxi.edit.html'
@@ -646,7 +646,32 @@
                   templateUrl: 'app/components/order/order-class.edit.html'
               })
 
+              .state('app.orderairjet', {
+                  url: '/orderairjet',
+                  templateUrl: 'app/components/order/order-airjet.html'
 
+              })
+              .state('app.editorderairjet', {
+                  url: prefix + '/orderairjet/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/order/order-airjet.edit.html'
+              })
+
+
+              .state('app.ordertabairjet', {
+                  url: '/ordertabairjet',
+                  templateUrl: 'app/components/order/order-tabairjet.html'
+
+              })
+
+
+              /*.state('app.orderairjet', {
+                  url: '/orderairjet',
+                  params : {args : {}},
+                  views:{
+                      '':{templateUrl: 'app/components/order/order-airjet.html'}
+                  }
+              })*/
 
 
           ;
