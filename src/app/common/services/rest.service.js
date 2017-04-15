@@ -50,11 +50,17 @@
         function post(path,body,successHandler,failedHandler) {
             path = checkPath(path);
             var account = RestService.one(path);
-            account.customPOST(body).then(
+            var token = StorageService.get('iot.hnair.cloud.access_token');
+            token = 'Bearer ' + token;
+           /* account.customPOST(body).then(
                 successHandler,function (response) {
                     failedResponse(response,failedHandler,path);
                 }
-            );
+            );*/
+            account.customPOST(body,undefined,undefined,{Authorization:token}).then(successHandler,function (response) {
+                failedResponse(response,failedHandler,path);
+            });
+
         };
 
         function postForm(path,body,successHandler,failedHandler) {
@@ -85,14 +91,19 @@
         function put(path,param,successHandler,failedHandler) {
             path = checkPath(path);
             var account = RestService.one(path);
-            account.customPUT(param).then(successHandler,function (response) {
+            var token = StorageService.get('iot.hnair.cloud.access_token');
+            token = 'Bearer ' + token;
+            account.customPUT(param,'','',{Authorization:token}).then(successHandler,function (response) {
                 failedResponse(response,failedHandler,path);
             });
         };
         function del(path,param,successHandler,failedHandler) {
             path = checkPath(path);
+
             var account = RestService.one(path);
-            account.customDELETE().then(successHandler,function (response) {
+            var token = StorageService.get('iot.hnair.cloud.access_token');
+            token = 'Bearer ' + token;
+            account.customDELETE('',{Authorization:token}).then(successHandler,function (response) {
                 console.log('delete failed');
                 failedResponse(response,failedHandler,path);
             });

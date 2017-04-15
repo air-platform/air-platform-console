@@ -28,45 +28,102 @@
                     <!-- fields -->
                     <!--<br/>-->
                     <div class="form-group">
-                        <label class="col-sm-1 m-l-lg font-bold control-label">{{'profile.USERNAME' | translate}}</label>
-                        <div class="col-sm-3">
+                        <label class="col-sm-1 m-l-lg font-bold control-label">{{'profile.NICKNAME' | translate}}</label>
+                        <div class="col-sm-6">
                             <!--<p class="form-control-static">{{vm.userinfo.username}}</p>-->
-                            <input type="text" class="form-control col-sm-5" placeholder="{{'profile.USERNAME' | translate}}" ng-model="vm.userinfo.name" disabled>
+                            <input type="text" class="form-control col-sm-5" placeholder="{{'profile.NICKNAME' | translate}}" ng-model="vm.userinfo.nickName" >
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg"></div>
-                    <!--<div class="form-group">-->
-                        <!--<label class="col-sm-1 m-l-lg font-bold control-label">{{'profile.NICKNAME' | translate}}</label>-->
-                        <!--<div class="col-sm-3">-->
-                            <!--&lt;!&ndash;<p class="form-control-static" ng-hide="vm.editing">{{vm.userinfo.nickName}}</p>&ndash;&gt;-->
-                            <!--<input type="text" class="form-control col-sm-5" placeholder="{{'profile.NICKNAME' | translate}}"  ng-model="vm.userinfo.nickName" required>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="line line-dashed b-b line-lg"></div>-->
+
+
+                    <div class="form-group">
+                        <label class="col-sm-1 m-l-lg font-bold control-label">{{'profile.AVATAR' | translate}}</label>
+                        <div class="col-sm-6">
+                            <!--<p class="form-control-static">{{vm.userinfo.username}}</p>-->
+                            <input type="text" class="form-control col-sm-5" placeholder="{{'profile.AVATAR' | translate}}" ng-model="vm.userinfo.avatar" >
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg"></div>
+
+
+
+
                     <div class="form-group">
                         <label class="col-sm-1 m-l-lg font-bold control-label">{{'profile.MAILBOX' | translate}}</label>
-                        <div class="col-sm-3">
+                        <div class="col-sm-6">
                             <!--<p class="form-control-static">{{vm.userinfo.email}}</p>-->
                             <input type="email" class="form-control col-sm-5" placeholder="{{'profile.MAILBOX' | translate}}" ng-model="vm.userinfo.email" required>
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg"></div>
+
+
+
+
                     <div class="form-group">
-                        <label class="col-sm-1 m-l-lg font-bold control-label">{{'profile.PHONE' | translate}}</label>
-                        <div class="col-sm-3">
-                            <!--<p class="form-control-static">{{vm.userinfo.email}}</p>-->
-                            <input type="phone" class="form-control col-sm-5" placeholder="{{'profile.PHONE' | translate}}" ng-model="vm.userinfo.phone" required>
+                        <label class="col-sm-1 m-l-lg font-bold control-label">{{'profile.WEBSITE' | translate}}</label>
+                        <div class="col-sm-6">
+                            <!--<p class="form-control-static">{{vm.userinfo.username}}</p>-->
+                            <input type="text" class="form-control col-sm-5" placeholder="{{'profile.WEBSITE' | translate}}" ng-model="vm.userinfo.website" >
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg"></div>
-                    <!--<div class="form-group">-->
-                        <!--<label class="col-sm-1 m-l-lg font-bold control-label">{{'profile.ROLE' | translate}}</label>-->
-                        <!--<div class="col-sm-3">-->
-                            <!--&lt;!&ndash;<p class="form-control-static">{{vm.userinfo.type}}</p>&ndash;&gt;-->
-                            <!--<span class="form-control col-sm-5" disabled>{{vm.userinfo.type | userType}}</span>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="line line-dashed b-b line-lg"></div>-->
+
+
+
+
+                    <div class="form-group">
+                        <label class="col-sm-1 m-l-lg font-bold control-label">{{'profile.ADDRESS' | translate}}</label>
+                        <div class="col-sm-6">
+                            <!--<p class="form-control-static">{{vm.userinfo.username}}</p>-->
+                            <input type="text" class="form-control col-sm-5" placeholder="{{'profile.ADDRESS' | translate}}" ng-model="vm.userinfo.address" >
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+
+
+                    <div class="form-group">
+                        <label class="col-sm-1 m-l-lg font-bold control-label">{{'profile.HOTLINE' | translate}}</label>
+                        <div class="col-sm-6">
+                            <!--<p class="form-control-static">{{vm.userinfo.email}}</p>-->
+                            <input type="phone" class="form-control col-sm-5" placeholder="{{'profile.HOTLINE' | translate}}" ng-model="vm.userinfo.hotline" required>
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg"></div>
+
+
+
+
+                    <div class="form-group">
+                        <label class="col-sm-1 m-l-lg font-bold control-label">{{'profile.DESCRIPTION' | translate}}</label>
+                        <div class="col-sm-6">
+<!--
+                            <input type="text" class="form-control col-sm-5" placeholder="{{'profile.DESCRIPTION' | translate}}" ng-model="vm.userinfo.description" >
+-->
+                            <textarea class="form-control font-thin" ng-model="vm.userinfo.description" rows="4" placeholder="{{'u.DESCRIPTION' | translate}}" style="resize: none;" ></textarea>
+
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
                     <div class="form-group">
                         <div class="col-sm-offset-1 col-sm-3">
                             <button class="btn m-l-lg btn-sm btn-info form-inline btn-addon" type="submit" ng-click="vm.doneEditing()" ng-disabled='formInfo.$invalid'><i class="glyphicon glyphicon-upload"></i>{{'profile.UPDATE' | translate}}</button>
@@ -79,7 +136,14 @@
 
         </div>
 
-        <div class="panel panel-default m-l m-r">
+
+
+
+
+
+
+
+     <!--   <div class="panel panel-default m-l m-r">
             <div class="panel-heading">
                 <h3 class="panel-title">{{'profile.MODIFYPASSWORD' | translate}}</h3>
             </div>
@@ -110,17 +174,10 @@
                             <span ng-show="form.newpassword.$valid">
                                 <label ng-show="vm.confirmPassword!=vm.newpassword" class="no-border" type="text" style="color:red;">{{'profile.DIFFERENT' | translate}}</label>
                             </span>
-                            <!-- (confirmPassword.$touched)&&(vm.confirmPassword!=vm.newpassword) -->
                         </div>
                         <span style="color:red;font-size:20px;">*</span>
                     </div>
-                    <!--<div class="form-group">-->
-                        <!--<label class="col-sm-1 control-label">确认密码</label>-->
-                        <!--<div class="col-sm-3">-->
-                            <!--<input name="confirm_password" class="form-control" type="password" placeholder="确认密码" ng-model="vm.confirm_password" ui-validate=" '$value==vm.newpassword' " ui-validate-watch=" 'vm.newpassword' " required>-->
-                            <!--<span ng-show='form.confirm_password.$error.validator'>Passwords do not match!</span>-->
-                        <!--</div>-->
-                    <!--</div>-->
+
                     <div class="line line-dashed b-b line-lg"></div>
                     <div class="form-group">
                         <div class="col-sm-offset-1 col-sm-3">
@@ -129,10 +186,9 @@
                     </div>
 
                 </form>
-                <!-- /修改密码-->
             </div>
             
-        </div>
+        </div>-->
 
 
 

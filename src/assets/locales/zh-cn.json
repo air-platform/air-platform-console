@@ -206,6 +206,17 @@
     "ADD_T_INFO":"添加租户信息",
     "TENANT":"租户",
     "USER":"用户",
+
+
+    "AVATAR":"头像",
+    "WEBSITE":"官网",
+    "ADDRESS":"地址",
+    "HOTLINE":"热线电话",
+    "DESCRIPTION":"描述",
+
+
+
+
     "ADMIN":"管理员"
   },
   "device" : {

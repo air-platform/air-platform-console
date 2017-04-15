@@ -67,6 +67,7 @@
                 var index = vm.items.indexOf(item);
                 //vm.items.splice(index,1);
                 toastr.success(i18n.t('u.DELETE_SUC'));
+                getDatas();
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
                 toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
