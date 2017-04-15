@@ -610,6 +610,45 @@
                   params : {args : {}},
                   templateUrl: 'app/components/air-trans/airtrans.edit.html'
               })
+
+              .state('app.orderairtaxi', {
+                  url: '/orderairtaxi',
+                  templateUrl: 'app/components/order/order-airtaxi.html'
+
+              })
+              .state('app.editorderairtaxis', {
+                  url: prefix + '/orderairtaxi/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/order/order-airtaxi.edit.html'
+              })
+
+              .state('app.orderairtrans', {
+                  url: '/orderairtrans',
+                  templateUrl: 'app/components/order/order-airtrans.html'
+
+              })
+              .state('app.editorderairtrans', {
+                  url: prefix + '/orderairtrans/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/order/order-airtrans.edit.html'
+              })
+
+
+
+              .state('app.orderclass', {
+                  url: '/orderclass',
+                  templateUrl: 'app/components/order/order-class.html'
+
+              })
+              .state('app.editorderclass', {
+                  url: prefix + '/orderclass/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/order/order-class.edit.html'
+              })
+
+
+
+
           ;
     }
 
