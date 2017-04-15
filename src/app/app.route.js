@@ -590,6 +590,26 @@
                   params : {args : {}},
                   templateUrl: 'app/components/training/training-class.edit.html'
               })
+              .state('app.airtaxi', {
+                  url: '/airtaxi',
+                  templateUrl: 'app/components/air-taxi/airtaxi.html'
+
+              })
+              .state('app.editairtaxi', {
+                  url: prefix + '/airtaxi/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/air-taxi/airtaxi.edit.html'
+              })
+              .state('app.airtrans', {
+                  url: '/airtrans',
+                  templateUrl: 'app/components/air-trans/airtrans.html'
+
+              })
+              .state('app.editairtrans', {
+                  url: prefix + '/airtrans/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/air-trans/airtrans.edit.html'
+              })
           ;
     }
 
