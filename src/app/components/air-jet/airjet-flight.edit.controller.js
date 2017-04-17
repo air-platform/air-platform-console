@@ -98,7 +98,7 @@
         if(type && type=='detail'){
             vm.isDetail = true;
         }
-
+        vm.richContent="input here";
         function getTenantItem() {
 
             var myid = vm.userInfo.id;
@@ -143,6 +143,10 @@
             vm.user.timeSlot=vm.user.time.start+'-'+vm.user.time.end;
             console.log(vm.user.timeSlot);
             vm.user.date = dateToString(vm.dt);
+
+            vm.user.description = getMarkDownAction().markdown;
+            console.log(vm.user.description);
+
             NetworkService.post(constdata.api.tenant.fleetPath + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
@@ -155,6 +159,11 @@
 
         function editItem() {
             var myid = vm.userInfo.id;
+
+            vm.user.description = getMarkDownAction().markdown;
+            console.log(vm.user.description);
+            //return;
+            //vm.user.description = mdContent;
             vm.user.timeSlot=vm.user.time.start+'-'+vm.user.time.end;
             vm.user.date = dateToString(vm.dt);
             NetworkService.put(constdata.api.tenant.fleetPath + '/' + vm.subPath + '/'+ username,vm.user,function (response) {

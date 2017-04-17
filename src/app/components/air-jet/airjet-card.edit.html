@@ -139,62 +139,6 @@
 
 
 
-                        <div class="panel" style="background-color: #f2f2f2; width:80%">
-                            <link rel="stylesheet" href="js_components/editor.md/css/editormd.min.css" />
-                            <div id="editormd" class="" style="margin: 0;padding: 0;border: 0;border-radius: 0;">
-                                <textarea style="display:none;" ng-model="response.content"></textarea>
-                            </div>
-                            <script src="js_components/editor.md/editormd.js"></script>
-                            <script type="text/javascript">
-                                var editor;
-                                var mdIndex = -1;
-                                $(function() {
-                                    editor = editormd("editormd", {
-                                        height: 400,
-                                        path : "js_components/editor.md/lib/", // Autoload modules mode, codemirror, marked... dependents libs path
-                                        toolbarIcons : function() {
-                                            var simple = ["undo", "redo", "|",
-                                                "bold", "del", "italic", "quote", "|",
-                                                "h1", "h2", "h3", "h4", "h5", "h6", "|",
-                                                "list-ul", "list-ol", "hr", "|",
-                                                "code", "datetime", "pagebreak", "|",
-                                                "watch", "preview", "clear", "|", "helper"];
-
-                                            return simple;
-                                        },
-                                        toolbarIconsClass : {
-                                            helper : "fa-question-circle"  // 指定一个FontAawsome的图标类
-                                        },
-                                        toolbarHandlers : {
-                                            /**
-                                             * @param {Object}      cm         CodeMirror对象
-                                             * @param {Object}      icon       图标按钮jQuery元素对象
-                                             * @param {Object}      cursor     CodeMirror的光标对象，可获取光标所在行和位置
-                                             * @param {String}      selection  编辑器选中的文本
-                                             */
-                                            helper : function(cm, icon, cursor, selection) {
-                                                window.open('https://guides.github.com/features/mastering-markdown/');
-                                            }
-                                        }
-                                    });
-                                });
-                                function updateMarkdown(content,index) {
-                                    mdIndex = index;
-                                    editor.clear();
-                                    editor.setMarkdown(content);
-                                }
-                                function getMarkDownAction() {
-                                    var md = editor.getMarkdown();
-                                    return {markdown:md,index:mdIndex};
-                                }
-                            </script>
-                        </div>
-
-                <p>aaa</p>
-
-                <p ng-bind="response.content"></p>
-
-                <p>bbb</p>
 
 
 
