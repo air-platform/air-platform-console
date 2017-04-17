@@ -142,8 +142,6 @@
             var myid = vm.userInfo.id;
             vm.user.timeSlot=vm.user.time.start+'-'+vm.user.time.end;
             console.log(vm.user.timeSlot);
-            //console.log(vm.dt);
-            //vm.user.date = dateToString(vm.dt);
             vm.user.date = dateToString(vm.dt);
             NetworkService.post(constdata.api.tenant.fleetPath + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
@@ -158,11 +156,6 @@
         function editItem() {
             var myid = vm.userInfo.id;
             vm.user.timeSlot=vm.user.time.start+'-'+vm.user.time.end;
-            console.log(vm.user.timeSlot);
-
-            // console.log(vm.user.date);
-           // vm.user.date = dateToString(vm.dt);
-            //console.log(vm.user.date);
             vm.user.date = dateToString(vm.dt);
             NetworkService.put(constdata.api.tenant.fleetPath + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
