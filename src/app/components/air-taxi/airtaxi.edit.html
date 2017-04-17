@@ -36,7 +36,7 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FLEETNAME' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.FLEETNAME' | translate}}" ng-model="vm.user.name" ng-disabled="vm.isDetail" ng-pattern="/^[a-zA-Z0-9_\\-]{2,20}$/" required>
+                               placeholder="{{'u.FLEETNAME' | translate}}" ng-model="vm.user.name" ng-disabled="vm.isDetail"  required>
                     </div>
                     <span ng-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i><i style="font-style:normal; color:#999;">{{'tenant.USERNAMETIP' | translate}}</i></span>
                 </div>

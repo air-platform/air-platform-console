@@ -600,6 +600,20 @@
                   params : {args : {}},
                   templateUrl: 'app/components/air-taxi/airtaxi.edit.html'
               })
+
+              .state('app.airtour', {
+                  url: prefix + '/airtour',
+                  templateUrl: 'app/components/air-tour/airtour.html'
+
+              })
+              .state('app.editairtour', {
+                  url: prefix + '/airtour/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/air-tour/airtour.edit.html'
+              })
+
+
+
               .state('app.airtrans', {
                   url: prefix + '/airtrans',
                   templateUrl: 'app/components/air-trans/airtrans.html'

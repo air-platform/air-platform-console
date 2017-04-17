@@ -103,7 +103,13 @@
     "COURSESCHOOL":"所属学校",
 
 
-
+    "CITY":"城市",
+    "TOURPOINT" : "观光景点",
+    "TOURDISTANCE":"观光距离",
+    "TOURTIME":"观光时长",
+    "TOURSHOW":"景点展示",
+    "BOARDINGLOC":"乘机地点",
+    "TRAFFIC":"交通路线",
 
 
 
