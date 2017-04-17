@@ -188,7 +188,7 @@
           }else{
               prefix = username + '/';
           };
-           prefix='admin/';
+          // prefix='admin/';
           $urlRouterProvider
             .otherwise('/access/signin');
           $stateProvider
@@ -538,11 +538,11 @@
                   controllerAs: 'vm'
               })
               .state('access.changepsd', {
-                  url: '/forgotpassword',
+                  url: prefix + '/forgotpassword',
                   templateUrl: 'app/components/changepwd/change.password.html'
               })
               .state('app.airjetbook', {
-                  url: '/airjetbook',
+                  url: prefix + '/airjetbook',
                   templateUrl: 'app/components/air-jet/airjet-book.html'
 
               })
@@ -552,7 +552,7 @@
               templateUrl: 'app/components/air-jet/airjet-book.edit.html'
                 })
               .state('app.airjetcard', {
-                  url: '/airjetcard',
+                  url: prefix + '/airjetcard',
                   templateUrl: 'app/components/air-jet/airjet-card.html'
 
               })
@@ -562,7 +562,7 @@
                   templateUrl: 'app/components/air-jet/airjet-card.edit.html'
               })
               .state('app.airjetflight', {
-                  url: '/airjetflight',
+                  url: prefix + '/airjetflight',
                   templateUrl: 'app/components/air-jet/airjet-flight.html'
 
               })
@@ -572,7 +572,7 @@
                   templateUrl: 'app/components/air-jet/airjet-flight.edit.html'
               })
               .state('app.trainingschool', {
-                  url: '/trainingschool',
+                  url: prefix + '/trainingschool',
                   templateUrl: 'app/components/training/training-school.html'
 
               })
@@ -582,7 +582,7 @@
                   templateUrl: 'app/components/training/training-school.edit.html'
               })
               .state('app.trainingclass', {
-                  url: '/trainingclass',
+                  url: prefix + '/trainingclass',
                   templateUrl: 'app/components/training/training-class.html'
               })
               .state('app.edittrainingclass', {
@@ -591,7 +591,7 @@
                   templateUrl: 'app/components/training/training-class.edit.html'
               })
               .state('app.airtaxi', {
-                  url: '/airtaxi',
+                  url: prefix + '/airtaxi',
                   templateUrl: 'app/components/air-taxi/airtaxi.html'
 
               })
@@ -601,7 +601,7 @@
                   templateUrl: 'app/components/air-taxi/airtaxi.edit.html'
               })
               .state('app.airtrans', {
-                  url: '/airtrans',
+                  url: prefix + '/airtrans',
                   templateUrl: 'app/components/air-trans/airtrans.html'
 
               })
@@ -612,7 +612,7 @@
               })
 
               .state('app.orderairtaxi', {
-                  url: '/orderairtaxi',
+                  url: prefix + '/orderairtaxi',
                   templateUrl: 'app/components/order/order-airtaxi.html'
 
               })
@@ -623,7 +623,7 @@
               })
 
               .state('app.orderairtrans', {
-                  url: '/orderairtrans',
+                  url: prefix + '/orderairtrans',
                   templateUrl: 'app/components/order/order-airtrans.html'
 
               })
@@ -636,7 +636,7 @@
 
 
               .state('app.orderclass', {
-                  url: '/orderclass',
+                  url: prefix + '/orderclass',
                   templateUrl: 'app/components/order/order-class.html'
 
               })
@@ -647,7 +647,7 @@
               })
 
               .state('app.orderairjet', {
-                  url: '/orderairjet',
+                  url: prefix + '/orderairjet',
                   templateUrl: 'app/components/order/order-airjet.html'
 
               })
@@ -659,7 +659,7 @@
 
 
               .state('app.ordertabairjet', {
-                  url: '/ordertabairjet',
+                  url: prefix + '/ordertabairjet',
                   templateUrl: 'app/components/order/order-tabairjet.html'
 
               })

@@ -87,9 +87,9 @@
     "ADDRESS":"地址",
     "CONTACT":"联系方式",
    
-
-
-   
+    "TIMESLOT":"时段",
+    "TIMESLOTSTART":"开始",
+    "TIMESLOTEND":"结束",
 
     "COURSESERVICE":"课学服务",
     "ENDDATE":"截止日期",

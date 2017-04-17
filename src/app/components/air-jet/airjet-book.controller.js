@@ -35,7 +35,7 @@
             var myid = vm.userInfo.id;
             console.log(vm.userInfo);
 
-            NetworkService.get(constdata.api.tenant.fleetPath + '/' + myid + '/' + 'fleets',{page:vm.pageCurrent},function (response) {
+            NetworkService.get(constdata.api.tenant.fleetPath + '/' + 'fleets',{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
                 updatePagination(response.data);
             },function (response) {
@@ -68,7 +68,7 @@
 
         function removeItem(item) {
             var myid = vm.userInfo.id;
-            NetworkService.delete(constdata.api.tenant.fleetPath + '/' + myid + '/fleets/'+ item.id,null,function success() {
+            NetworkService.delete(constdata.api.tenant.fleetPath + '/fleets/'+ item.id,null,function success() {
                 var index = vm.items.indexOf(item);
                 //vm.items.splice(index,1);
                 toastr.success(i18n.t('u.DELETE_SUC'));

@@ -23,7 +23,7 @@
                     "register":
                         {"registerPath":"/cp-ua/v1/user/register"},
                     "tenant":
-                        {"listAllPath":"/api/v1/platform/accounts","updatePath":"/iot/api/v1/tenants","deletePath":"/iot/api/v1/tenants","tenantInfoPath":"/iot/api/v1/tenants","addPath":"api/v1/platform/accounts","fleetPath":"api/v1/platform/accounts"},
+                        {"listAllPath":"/api/v1/platform/accounts","updatePath":"/iot/api/v1/tenants","deletePath":"/iot/api/v1/tenants","tenantInfoPath":"/iot/api/v1/tenants","addPath":"api/v1/platform/accounts","fleetPath":"/api/v1/tenant"},
                 "school":
                 {"basePath":"/api/v1/schools"},
                 "course":

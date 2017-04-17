@@ -179,7 +179,28 @@
                 <div  class="line line-dashed b-b line-lg"></div>
 
 
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.TIMESLOT' | translate}}</label>
 
+                    <div class="col-sm-2">
+                        <!--<input class="form-control" type="text"
+                               placeholder="{{'u.TIMESLOTSTART' | translate}}" ng-model="vm.user.time.start" ng-disabled="vm.isDetail" >
+-->
+
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.time.start" ng-options="s for s in vm.selTime" ng-disabled="vm.isDetail" ></select>
+
+                    </div>
+                    <label class="font-bold" style="float:left;text-align:center; padding:0px 0px 0px 0px;">--</label>
+                    <div class="col-sm-2">
+                        <!--<input class="form-control" type="text"
+                               placeholder="{{'u.TIMESLOTEND' | translate}}" ng-model="vm.user.time.end" ng-disabled="vm.isDetail" >-->
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.time.end" ng-options="s for s in vm.selTime" ng-disabled="vm.isDetail" ></select>
+
+                    </div>
+
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
 
 
 

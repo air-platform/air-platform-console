@@ -46,6 +46,8 @@
         vm.addUser = {};
         vm.addUser.role='tenant';
         vm.subPath = 'ferryflights';
+        vm.selTime = ['0:00','1:00','2:00','3:00','4:00','5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00',
+                      '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
         vm.userType = [
             {
                 title:'管理员',
@@ -102,8 +104,12 @@
             var myid = vm.userInfo.id;
             console.log(myid);
             console.log(username);
-            NetworkService.get(constdata.api.tenant.fleetPath + '/' + myid + '/' + vm.subPath + '/'+ username,null,function (response) {
+            NetworkService.get(constdata.api.tenant.fleetPath  + '/' + vm.subPath + '/'+ username,null,function (response) {
                 vm.user = response.data;
+                var arrTime = vm.user.timeSlot.split("-");
+                vm.user.time = {start:arrTime[0], end:arrTime[1]};
+
+                console.log(vm.user);
                 $rootScope.userNamePlacedTop = vm.user.nickName;
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
@@ -114,7 +120,9 @@
 
         function addItem() {
             var myid = vm.userInfo.id;
-            NetworkService.post(constdata.api.tenant.fleetPath + '/' + myid + '/' + vm.subPath,vm.user,function (response) {
+            vm.user.timeSlot=vm.user.time.start+'-'+vm.user.time.end;
+            console.log(vm.user.timeSlot);
+            NetworkService.post(constdata.api.tenant.fleetPath + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -126,7 +134,9 @@
 
         function editItem() {
             var myid = vm.userInfo.id;
-            NetworkService.put(constdata.api.tenant.fleetPath + '/' + myid + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
+            vm.user.timeSlot=vm.user.time.start+'-'+vm.user.time.end;
+            console.log(vm.user.timeSlot);
+            NetworkService.put(constdata.api.tenant.fleetPath + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -173,6 +183,9 @@
             vm.getTenantItem();
         }else{
             vm.user.currencyUnit = 'rmb';
+            vm.user.time = {'start':'9:00', 'end':'9.00'};
+            vm.user.time.end = '10:00';
+            console.log(vm.user.time);
         }
 
         function back() {
