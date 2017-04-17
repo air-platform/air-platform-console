@@ -106,10 +106,16 @@
             console.log(username);
             NetworkService.get(constdata.api.tenant.fleetPath  + '/' + vm.subPath + '/'+ username,null,function (response) {
                 vm.user = response.data;
+
                 var arrTime = vm.user.timeSlot.split("-");
                 vm.user.time = {start:arrTime[0], end:arrTime[1]};
 
                 console.log(vm.user);
+                vm.dt   =   new Date((vm.user.date));
+                //console.log(vm.dt);
+               // vm.dt = new   Date(vm.user.date.replace(/-/g,   "/"));
+                //console.log(vm.dt);
+
                 $rootScope.userNamePlacedTop = vm.user.nickName;
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
@@ -117,11 +123,28 @@
             });
         }
 
+        function dateToString(temp) {
+            //var temp = new Date();
+            var dateStr = padStr(temp.getFullYear()) + '-' +
+                padStr(1 + temp.getMonth()) + '-' +
+                padStr(temp.getDate());// +
+                //padStr(temp.getHours()) +
+                //padStr(temp.getMinutes()) +
+                //padStr(temp.getSeconds());
+            console.log(dateStr);
+            return dateStr;
+        }
 
+        function padStr(i) {
+            return (i < 10) ? "0" + i : "" + i;
+        }
         function addItem() {
             var myid = vm.userInfo.id;
             vm.user.timeSlot=vm.user.time.start+'-'+vm.user.time.end;
             console.log(vm.user.timeSlot);
+            //console.log(vm.dt);
+            //vm.user.date = dateToString(vm.dt);
+            vm.user.date = dateToString(vm.dt);
             NetworkService.post(constdata.api.tenant.fleetPath + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
@@ -136,6 +159,11 @@
             var myid = vm.userInfo.id;
             vm.user.timeSlot=vm.user.time.start+'-'+vm.user.time.end;
             console.log(vm.user.timeSlot);
+
+            // console.log(vm.user.date);
+           // vm.user.date = dateToString(vm.dt);
+            //console.log(vm.user.date);
+            vm.user.date = dateToString(vm.dt);
             NetworkService.put(constdata.api.tenant.fleetPath + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
@@ -185,6 +213,7 @@
             vm.user.currencyUnit = 'rmb';
             vm.user.time = {'start':'9:00', 'end':'9.00'};
             vm.user.time.end = '10:00';
+            vm.dt = new Date();
             console.log(vm.user.time);
         }
 
@@ -198,7 +227,7 @@
 
 
 
-        $scope.today = function() {
+       /* $scope.today = function() {
             $scope.dt = new Date();
         };
         $scope.today();
@@ -232,7 +261,7 @@
 
         $scope.initDate = new Date('2016-15-20');
         $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        $scope.format = $scope.formats[0];
+        $scope.format = $scope.formats[0];*/
 
 
 
@@ -245,9 +274,9 @@
             startingDay: 1,
             class: 'datepicker'
         };
-        vm.initDate = new Date('2016-15-20');
-        vm.formats = ['MM/dd/yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        vm.format = vm.formats[0];
+        vm.initDate = new Date('2017-1-20');
+
+        vm.format = 'yyyy-MM-dd';
 
         //每次选择不同版本请求不同数据
         vm.change = function() {
@@ -255,14 +284,12 @@
             getNotiData(vm.selectedOption);
         }
 
-        // date picker
-        vm.today = function() {
-            vm.dt = new Date();
-        };
-        vm.today();
 
+      // vm.dt = new Date();
+       // vm.user.date = new Date();
         vm.clear = function () {
             vm.dt = null;
+            //vm.user.date = null;
         };
 
         // Disable weekend selection

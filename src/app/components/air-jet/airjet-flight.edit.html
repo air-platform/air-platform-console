@@ -168,7 +168,7 @@
 
 
 
-                <div  class="form-group">
+               <!-- <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.DATE' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
@@ -176,7 +176,30 @@
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
-                <div  class="line line-dashed b-b line-lg"></div>
+                <div  class="line line-dashed b-b line-lg"></div>-->
+
+
+
+
+                <div class="form-group">
+                    <label class="col-sm-1 m-l-lg font-bold control-label">{{'u.DATE' | translate}}</label>
+                    <div class="col-sm-4">
+                        <p class="input-group">
+                            <input type="text" class="form-control font-thin" uib-datepicker-popup="{{vm.format}}" ng-model="vm.dt" is-open="vm.opened"  ng-disabled="vm.isDetail"/>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="vm.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                              </span>
+                        </p>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
 
 
                 <div  class="form-group">
@@ -205,6 +228,9 @@
 
 
 
+
+
+
                 <!--<div class="form-group">
                     <label class="col-sm-2 control-label">Datepicker</label>
                     <div class="col-sm-10" ng-controller="AirjetFlightEditController">
@@ -216,21 +242,21 @@
                         </div>
                     </div>
                 </div>
+-->
 
-
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label class="col-sm-1 m-l-lg font-bold control-label">{{'product.EXPDATE' | translate}}</label>
                     <div class="col-sm-5">
                         <p class="input-group">
-                            <input type="text" class="form-control font-thin" uib-datepicker-popup="{{vm.format}}" ng-model="vm.dt" is-open="vm.opened" min-date="vm.minDate" maxDate="'2016-08-25'" uib-datepicker-options="vm.dateOptions" date-disabled="vm.disabled(date, mode)" ng-required="true" close-text="Close" />
+                            <input type="text" class="form-control font-thin" uib-datepicker-popup="{{vm.format}}" ng-model="vm.dt" is-open="vm.opened" date-disabled="vm.disabled(date, mode)" ng-required="true"  />
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="vm.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                               </span>
                         </p>
                     </div>
-                </div>
+                </div>-->
 
--->
+
 
 
 
