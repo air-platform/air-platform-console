@@ -38,7 +38,7 @@ function browserSyncInit(baseDir, browser) {
    *
    * For more details and option, https://github.com/chimurai/http-proxy-middleware/blob/v0.9.0/README.md
    */
-  var proxy_main = proxyMiddleware('/api/v1/**', {target: 'http://10.70.80.92:8080', changeOrigin: true});
+  var proxy_main = proxyMiddleware('/api/v1/**', {target: 'http://10.70.80.92', changeOrigin: true});
 
 
 /*

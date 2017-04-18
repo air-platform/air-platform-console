@@ -17,11 +17,11 @@
                 token = 'Bearer ' + token;
               //  RestangularConfigurer.setDefaultHeaders({UserName:token});
                 RestangularConfigurer.setDefaultHeaders({Authorization:token});
-            }else{
+            }/*else{
                 //RestangularConfigurer.setDefaultHeaders({UserName:null});
                 RestangularConfigurer.setDefaultHeaders({Authorization:null});
 
-            }
+            }*/
             RestangularConfigurer.setFullResponse(true);
         });
     }
@@ -65,10 +65,12 @@
 
         function postForm(path,body,successHandler,failedHandler) {
             var formdata = new FormData();
-            formdata.append('serviceId',body.service_id);
+            formdata.append('editormd-image-file',body);
 
             var token = StorageService.get('iot.hnair.cloud.access_token');
+            token = 'Bearer ' + token;
             var reg = RestService.one(path);
+
             reg.customPOST(formdata, undefined, undefined, { 'Content-Type': undefined ,'Authorization':token}).then(
                 successHandler,function (response) {
                     failedResponse(response,failedHandler,path);

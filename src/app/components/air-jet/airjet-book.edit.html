@@ -154,8 +154,11 @@
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FACILITIES' | translate}}</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="{{'u.FACILITIES' | translate}}" ng-model="vm.user.facilities" ng-disabled="vm.isDetail" >
+                        <!--                       <input class="form-control" type="text"
+                                                      placeholder="{{'u.FACILITIES' | translate}}" ng-model="vm.user.facilities" ng-disabled="vm.isDetail" >
+                       -->
+                        <textarea class="form-control font-thin" ng-model="vm.user.facilities" rows="4" placeholder="{{'u.FACILITIES' | translate}}" style="resize: none;" ng-disabled="vm.isDetail"></textarea>
+
                     </div>
 
                 </div>

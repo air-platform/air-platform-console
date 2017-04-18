@@ -19,6 +19,7 @@
         }
     });
 
+
     /** @ngInject */
     function TraingSchoolEditController($scope, NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
         /* jshint validthis: true */
@@ -46,6 +47,7 @@
         vm.addUser = {};
         vm.addUser.role='tenant';
         vm.subPath = 'ferryflights';
+        vm.myUploadFile = {};
         vm.userType = [
             {
                 title:'管理员',
@@ -97,6 +99,31 @@
             vm.isDetail = true;
         }
 
+
+        vm.uploadFile = function (){
+           // $rootScope.backPre();
+            //console.log('gggg');
+           // document.getElementById('myfileId').click();
+            //console.log( document.getElementById('myfileId').value);
+            console.log(vm.myUploadFile);
+
+
+            console.log('dddd');
+
+            NetworkService.postForm('/api/v1/files',vm.myUploadFile,function (response) {
+                toastr.success(i18n.t('u.OPERATE_SUC'));
+
+                console.log(response.data);
+                vm.user.image = response.data.url;
+                //vm.backAction();
+            },function (response) {
+                vm.authError = response.statusText + '(' + response.status + ')';
+                console.log(vm.authError);
+                toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+            });
+
+            //$rootScope.backPre();
+        }
         function getTenantItem() {
 
             var myid = vm.userInfo.id;

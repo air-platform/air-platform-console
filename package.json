@@ -1,5 +1,5 @@
 {
-  "name": "CloudPlatform",
+  "name": "AirPlatformConsole",
   "version": "0.1.0",
   "dependencies": {
     "angular-xeditable": "^0.2.0",

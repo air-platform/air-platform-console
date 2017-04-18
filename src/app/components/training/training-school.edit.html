@@ -36,9 +36,9 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.SCHOOLNAME' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.SCHOOLNAME' | translate}}" ng-model="vm.user.name" ng-disabled="vm.isDetail" ng-pattern="/^[a-zA-Z0-9_\\-]{2,20}$/" required>
+                               placeholder="{{'u.SCHOOLNAME' | translate}}" ng-model="vm.user.name" ng-disabled="vm.isDetail"  required>
                     </div>
-                    <span ng-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i><i style="font-style:normal; color:#999;">{{'tenant.USERNAMETIP' | translate}}</i></span>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
 
@@ -73,13 +73,30 @@
 
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.SCHOOLIMAGE' | translate}}</label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                         <input class="form-control" type="text"
                                placeholder="{{'u.SCHOOLIMAGE' | translate}}" ng-model="vm.user.image" ng-disabled="vm.isDetail" >
+
+                        <input type="file" file-model = "vm.myUploadFile" name="uploadPic" id="myfileId"/>
+                        <button  class="btn btn-default" ng-click="vm.uploadFile()"> <i class="fa fa-check-circle"></i> 上传 </button>
+
                     </div>
+
+
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
+
+
+
+
                 <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+
+
 
 
 
@@ -168,7 +185,6 @@
                     <div class="col-sm-offset-1 col-sm-3">
                         <button ng-if="!vm.isDetail" class="btn btn-default btn-sm m-l-lg btn-addon bg-light" ng-click="vm.backAction()"> <i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}} </button>
                         <button ng-if="!vm.isDetail" class="btn btn-sm btn-info btn-addon" type="submit" ng-click="vm.submitAction()" ng-disabled='form.$invalid'> <i class="fa fa-check-circle"></i>{{'product.CONFIRM' | T}} </button>
-                        <button ng-if="vm.isDetail" ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
 
                     </div>
                 </div>
