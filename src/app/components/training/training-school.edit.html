@@ -36,7 +36,7 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.SCHOOLNAME' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.SCHOOLNAME' | translate}}" ng-model="vm.user.schoolName" ng-disabled="vm.isDetail" ng-pattern="/^[a-zA-Z0-9_\\-]{2,20}$/" required>
+                               placeholder="{{'u.SCHOOLNAME' | translate}}" ng-model="vm.user.name" ng-disabled="vm.isDetail" ng-pattern="/^[a-zA-Z0-9_\\-]{2,20}$/" required>
                     </div>
                     <span ng-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i><i style="font-style:normal; color:#999;">{{'tenant.USERNAMETIP' | translate}}</i></span>
                 </div>
@@ -75,7 +75,7 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.SCHOOLIMAGE' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.SCHOOLIMAGE' | translate}}" ng-model="vm.user.imageUrl" ng-disabled="vm.isDetail" >
+                               placeholder="{{'u.SCHOOLIMAGE' | translate}}" ng-model="vm.user.image" ng-disabled="vm.isDetail" >
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
@@ -87,7 +87,7 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.DESCRIPTION' | translate}}</label>
                     <div class="col-sm-4">
 
-                        <textarea class="form-control font-thin" ng-model="vm.user.schoolDesc" rows="4" placeholder="{{'u.DESCRIPTION' | translate}}" style="resize: none;" ng-disabled="vm.isDetail"></textarea>
+                        <textarea class="form-control font-thin" ng-model="vm.user.description" rows="4" placeholder="{{'u.DESCRIPTION' | translate}}" style="resize: none;" ng-disabled="vm.isDetail"></textarea>
 
 
                     </div>

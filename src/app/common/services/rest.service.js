@@ -103,7 +103,7 @@
             var account = RestService.one(path);
             var token = StorageService.get('iot.hnair.cloud.access_token');
             token = 'Bearer ' + token;
-            account.customDELETE('',{Authorization:token}).then(successHandler,function (response) {
+            account.customDELETE('').then(successHandler,function (response) {
                 console.log('delete failed');
                 failedResponse(response,failedHandler,path);
             });

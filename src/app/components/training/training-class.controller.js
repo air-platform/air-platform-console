@@ -36,7 +36,7 @@
             var myid = vm.userInfo.id;
             console.log(vm.userInfo);
 
-            NetworkService.get(constdata.api.course.basePath+'/tenant',{page:vm.pageCurrent},function (response) {
+            NetworkService.get(constdata.api.course.basePath,{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
                 updatePagination(response.data);
             },function (response) {

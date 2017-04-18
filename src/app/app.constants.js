@@ -25,9 +25,9 @@
                     "tenant":
                         {"listAllPath":"/api/v1/platform/accounts","updatePath":"/iot/api/v1/tenants","deletePath":"/iot/api/v1/tenants","tenantInfoPath":"/iot/api/v1/tenants","addPath":"api/v1/platform/accounts","fleetPath":"/api/v1/tenant"},
                 "school":
-                {"basePath":"/api/v1/schools"},
+                {"basePath":"/api/v1/tenant/schools"},
                 "course":
-                {"basePath":"/api/v1/courses"},
+                {"basePath":"/api/v1/tenant/courses"},
                 "device":
                         {"listAllPath":"/iot/api/v1/devices","updatePath":"/iot/api/v1/devices/device1","deletePath":"/iot/api/v1/devices/device1","deviceInfoPath":"/iot/api/v1/devices/id","addPath":"/iot/api/v1/devices"},
                     "product":

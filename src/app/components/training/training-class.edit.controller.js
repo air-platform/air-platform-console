@@ -115,7 +115,7 @@
 
         function addItem() {
             var myid = vm.userInfo.id;
-            NetworkService.post(constdata.api.course.basePath+'/create/'+vm.user.school.id,vm.user,function (response) {
+            NetworkService.post(constdata.api.course.basePath+'?school='+vm.user.school.id,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -127,7 +127,7 @@
 
         function editItem() {
             var myid = vm.userInfo.id;
-            NetworkService.put(constdata.api.course.basePath + '/update/'+ vm.user.school.id,vm.user,function (response) {
+            NetworkService.put(constdata.api.course.basePath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
