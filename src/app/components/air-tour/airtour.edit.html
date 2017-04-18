@@ -56,6 +56,28 @@
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
 
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CRAFTSELECT' | translate}}</label>
+                    <div class="col-sm-4">
+                        <!--<input class="form-control" type="text"
+                               placeholder="{{'u.CRAFTSELECT' | translate}}" ng-model="vm.user.aircraftItems" ng-disabled="vm.isDetail" >
+-->
+
+                        <select class="form-control"  multiple ng-model="vm.user.aircraftItemsd" ng-options="opt.id as opt.name for opt in vm.crafts"></select>
+
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+
+
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.TOURPOINT' | translate}}</label>
                     <div class="col-sm-4">

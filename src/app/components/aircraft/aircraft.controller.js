@@ -6,10 +6,10 @@
 
     angular
         .module('iot')
-        .controller('AirtaxiController', AirtaxiController);
+        .controller('AircraftController', AircraftController);
 
     /** @ngInject */
-    function AirtaxiController(NetworkService,StorageService, constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
+    function AircraftController(NetworkService,StorageService, constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -30,7 +30,7 @@
         vm.curItem = {};
         vm.backAction = backAction;
         vm.userInfo = {};
-        vm.subPath = 'airtaxis';
+        vm.subPath = 'aircrafts';
         function getDatas() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
             var myid = vm.userInfo.id;
@@ -46,15 +46,15 @@
 
 
         function goAddItem() {
-            $state.go('app.editairtaxi',{});
+            $state.go('app.editaircraft',{});
         };
 
         function goEditItem(item) {
-            $state.go('app.editairtaxi',{username:item.id, args:{type:'edit'}});
+            $state.go('app.editaircraft',{username:item.id, args:{type:'edit'}});
         };
 
         function goDetail(item) {
-            $state.go('app.editairtaxi',{username:item.id, args:{type:'detail'}});
+            $state.go('app.editaircraft',{username:item.id, args:{type:'detail'}});
 
         };
 

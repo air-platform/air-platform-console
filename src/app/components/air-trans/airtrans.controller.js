@@ -30,7 +30,7 @@
         vm.curItem = {};
         vm.backAction = backAction;
         vm.userInfo = {};
-        vm.subPath = 'ferryflights';
+        vm.subPath = 'airTransports';
         function getDatas() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
             var myid = vm.userInfo.id;
@@ -46,15 +46,15 @@
 
 
         function goAddItem() {
-            $state.go('app.editairjetflight',{});
+            $state.go('app.editairtrans',{});
         };
 
         function goEditItem(item) {
-            $state.go('app.editairjetflight',{username:item.id, args:{type:'edit'}});
+            $state.go('app.editairtrans',{username:item.id, args:{type:'edit'}});
         };
 
         function goDetail(item) {
-            $state.go('app.editairjetflight',{username:item.id, args:{type:'detail'}});
+            $state.go('app.editairtrans',{username:item.id, args:{type:'detail'}});
 
         };
 

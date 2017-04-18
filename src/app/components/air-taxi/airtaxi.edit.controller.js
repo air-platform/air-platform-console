@@ -45,7 +45,7 @@
         vm.back = back;
         vm.addUser = {};
         vm.addUser.role='tenant';
-        vm.subPath = 'ferryflights';
+        vm.subPath = 'airtaxis';
         vm.userType = [
             {
                 title:'管理员',

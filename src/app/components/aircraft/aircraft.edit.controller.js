@@ -6,7 +6,7 @@
 
     angular
         .module('iot')
-        .controller('AirtourEditController', AirtourEditController)
+        .controller('AircraftEditController', AircraftEditController)
         .filter('userType',function(i18n) {
         return function(input) {
             var out = '';
@@ -20,7 +20,7 @@
     });
 
     /** @ngInject */
-    function AirtourEditController($scope, NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
+    function AircraftEditController($scope, NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -45,7 +45,7 @@
         vm.back = back;
         vm.addUser = {};
         vm.addUser.role='tenant';
-        vm.subPath = 'airtours';
+        vm.subPath = 'aircrafts';
         vm.userType = [
             {
                 title:'管理员',
@@ -96,26 +96,6 @@
         if(type && type=='detail'){
             vm.isDetail = true;
         }
-
-
-
-
-        function getAircraftsDatas() {
-
-
-            NetworkService.get(constdata.api.tenant.fleetPath  + '/aircrafts',{page:vm.pageCurrent},function (response) {
-                vm.crafts = response.data.content;
-
-            },function (response) {
-                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
-            });
-        }
-
-
-
-
-        getAircraftsDatas();
-
 
         function getTenantItem() {
 

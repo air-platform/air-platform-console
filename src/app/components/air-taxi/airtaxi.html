@@ -27,11 +27,10 @@
             </tr>
             <tr class="font-bold">
                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
-                <th class="text-center">{{'u.FLIGHTNAME' | T}}</th>
-                <th class="text-center">{{'u.FLIGHTNUMBER' | T}}</th>
-                <th class="text-center">{{'u.FLEETTYPE' | T}}</th>
+                <th class="text-center">{{'u.NAME' | T}}</th>
                 <th class="text-center">{{'u.DEPARTURE' | T}}</th>
                 <th class="text-center">{{'u.ARRIVAL' | T}}</th>
+                <th class="text-center">{{'u.DESCRIPTION' | T}}</th>
 
             </tr>
 
@@ -41,10 +40,9 @@
             <tr ng-repeat="item in vm.displayedCollection">
               <!--  <td ng-click="vm.goDetail(item)">{{item.id}}</td>-->
                 <td ng-click="vm.goDetail(item)">{{item.name}}</td>
-                <td ng-click="vm.goDetail(item)"> {{item.flightNo }}</td>
-               <td ng-click="vm.goDetail(item)">{{item.aircraftType}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.departure}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.arrival}}</td>
+                <td ng-click="vm.goDetail(item)"> {{item.departure }}</td>
+               <td ng-click="vm.goDetail(item)">{{item.arrival}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.description}}</td>
 
 
                <!-- <td ng-click="vm.goDetail(item)">

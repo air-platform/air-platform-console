@@ -612,6 +612,16 @@
                   templateUrl: 'app/components/air-tour/airtour.edit.html'
               })
 
+              .state('app.aircraft', {
+                  url: prefix + '/aircraft',
+                  templateUrl: 'app/components/aircraft/aircraft.html'
+
+              })
+              .state('app.editaircraft', {
+                  url: prefix + '/aircraft/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/aircraft/aircraft.edit.html'
+              })
 
 
               .state('app.airtrans', {

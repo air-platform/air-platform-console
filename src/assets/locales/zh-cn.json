@@ -58,7 +58,7 @@
     "PASSWORD":"密码",    
        "SUMMARY":"摘要",
     "TYPE":"类型",
-
+    "CATEGARY":"分类",
     "FLEETNAME":"飞机名称",
     "PRICE":"价格",
     "PRICEUNIT":"单位",
@@ -78,7 +78,7 @@
     "SEATPRICE":"单座价钱",
     "ALLSEATS":"座位数",
     "MINPASSENGER":"最低成行乘客数",
-
+    "IMAGE":"图片",
 
 
     "SCHOOLNAME":"航校名称",
@@ -101,7 +101,7 @@
     "STARTDATE":"开始日期",
     "CLASSTOTALNUM":"计划招生人数",
     "COURSESCHOOL":"所属学校",
-
+    "CRAFTSELECT":"选择机型",
 
     "CITY":"城市",
     "TOURPOINT" : "观光景点",
@@ -111,8 +111,14 @@
     "BOARDINGLOC":"乘机地点",
     "TRAFFIC":"交通路线",
 
-
-
+    "DEPARTURELOC":"出发地经纬度",
+    "ARRIVALLOC":"目的地经纬度",
+    "FAMILY":"产品簇",
+    "TIMEESTI":"预估时长(分钟)",
+    "DEPLONG":"出发地经度",
+    "DEPLAT":"出发地维度",
+    "ARRILONG":"目的地经度",
+    "ARRILAT":"目的地维度",
     "DATE":"日期"
 
   },

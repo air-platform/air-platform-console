@@ -45,7 +45,7 @@
         vm.back = back;
         vm.addUser = {};
         vm.addUser.role='tenant';
-        vm.subPath = 'ferryflights';
+        vm.subPath = 'airTransports';
         vm.userType = [
             {
                 title:'管理员',
@@ -173,6 +173,7 @@
             vm.getTenantItem();
         }else{
             vm.user.currencyUnit = 'rmb';
+            vm.user.flightRoute = {};
         }
 
         function back() {
