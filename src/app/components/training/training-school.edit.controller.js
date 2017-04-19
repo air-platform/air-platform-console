@@ -99,17 +99,8 @@
             vm.isDetail = true;
         }
 
-
         vm.uploadFile = function (){
-           // $rootScope.backPre();
-            //console.log('gggg');
-           // document.getElementById('myfileId').click();
-            //console.log( document.getElementById('myfileId').value);
             console.log(vm.myUploadFile);
-
-
-            console.log('dddd');
-
             NetworkService.postForm('/api/v1/files',vm.myUploadFile,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
 
@@ -127,6 +118,8 @@
         function getTenantItem() {
 
             var myid = vm.userInfo.id;
+
+
             console.log(myid);
             console.log(username);
             NetworkService.get(constdata.api.school.basePath + '/'+ username,null,function (response) {
@@ -141,8 +134,13 @@
 
         function addItem() {
             var myid = vm.userInfo.id;
+            vm.user.description = getMarkDownAction().markdown;
+            vm.user.baseDesc = getMarkDownAction2().markdown;
+            console.log(vm.user.description);
+            console.log(vm.user.baseDesc);
             NetworkService.post(constdata.api.school.basePath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
+                //return;
                 vm.backAction();
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
@@ -153,6 +151,10 @@
 
         function editItem() {
             var myid = vm.userInfo.id;
+            vm.user.description = getMarkDownAction().markdown;
+            vm.user.baseDesc = getMarkDownAction2().markdown;
+            console.log(vm.user.description);
+            console.log(vm.user.baseDesc);
             NetworkService.put(constdata.api.school.basePath + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();

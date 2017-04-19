@@ -121,6 +121,18 @@
                 <div  class="line line-dashed b-b line-lg"></div>
 
 
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.IMAGE' | translate}}</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.IMAGE' | translate}}" ng-model="vm.user.image" ng-disabled="vm.isDetail" >
+
+                        <input type="file"  file-model = "vm.myUploadFile" name="uploadPic" id="myfileId"/>
+                        <button  class="btn btn-default" ng-click="vm.uploadFile()"> <i class="fa fa-check-circle"></i> 上传 </button>
+
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
 
 
 
@@ -130,6 +142,22 @@
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
                                placeholder="{{'u.BOARDINGLOC' | translate}}" ng-model="vm.user.boardingLoc" ng-disabled="vm.isDetail" >
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.TOURROUTE' | translate}}</label>
+                    <div class="col-sm-4">
+                        <!--<input class="form-control" type="text"
+                               placeholder="{{'u.TRAFFIC' | translate}}" ng-model="vm.user.traffic" ng-disabled="vm.isDetail" >-->
+                        <textarea class="form-control font-thin" ng-model="vm.user.tourRoute" rows="4" placeholder="{{'u.TOURROUTE' | translate}}" style="resize: none;" ng-disabled="vm.isDetail"></textarea>
+
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>

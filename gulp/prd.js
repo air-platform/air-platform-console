@@ -188,7 +188,7 @@ gulp.task('build:images', function () {
  */
 gulp.task('build:js_components', function () {
     return gulp.src([
-            path.join(conf.paths.src, '/assets/js_components/*.*')
+            path.join(conf.paths.src, '/assets/js_components/**/*')
         ]).pipe(gulp.dest(path.join(conf.paths.build, '/js_components')));
 });
 /**

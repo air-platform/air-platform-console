@@ -223,7 +223,22 @@
 
 
 
+        vm.uploadFile = function (){
+            console.log(vm.myUploadFile);
+            NetworkService.postForm('/api/v1/files',vm.myUploadFile,function (response) {
+                toastr.success(i18n.t('u.OPERATE_SUC'));
 
+                console.log(response.data);
+                vm.user.image = response.data.url;
+                //vm.backAction();
+            },function (response) {
+                vm.authError = response.statusText + '(' + response.status + ')';
+                console.log(vm.authError);
+                toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+            });
+
+            //$rootScope.backPre();
+        }
 
 
 

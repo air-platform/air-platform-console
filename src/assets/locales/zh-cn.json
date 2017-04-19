@@ -2,12 +2,16 @@
   "u":{
     "OK":"确定",
     "CANCEL":"取消",
+    "BASEDESC":"基地描述",
+    "TOURROUTE":"观光路线",
     "ALL":"全部",
     "NAME":"名称",
     "NICKNAME":"昵称",
     "OWNER":"所有者",
     "TENANT":"租户",
     "EMAIL":"邮箱",
+    "FLYDIST":"飞行距离",
+    "FLYDURA":"飞行时长",
     "LOOK":"查看",
     "STATUS":"状态",
     "CREATEDATE":"创建时间",
@@ -399,8 +403,8 @@
     "DESKTOP":"桌面版"
   },
   "tenant":{
-    "USERNAMETIP":"只能是数字、字母、下划线、\\、-，长度在4-20位之间",
-    "PASSWORDTIP":"只能是数字、字母、下划线、\\、-，长度在8-20位之间",
+    "USERNAMETIP":"",
+    "PASSWORDTIP":"",
     "ACTIVESTATUS":"激活状态",
     "LOCK":"锁定",
     "ACTIVE":"激活"
