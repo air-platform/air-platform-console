@@ -36,7 +36,7 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.NAME' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.NAME' | translate}}" ng-model="vm.user.name" ng-disabled="vm.isDetail" ng-pattern="/^[a-zA-Z0-9_\\-]{2,20}$/" required>
+                               placeholder="{{'u.NAME' | translate}}" ng-model="vm.user.name" ng-disabled="vm.isDetail"  required>
                     </div>
                     <span ng-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i><i style="font-style:normal; color:#999;">{{'tenant.USERNAMETIP' | translate}}</i></span>
                 </div>
@@ -98,7 +98,7 @@
                 <div  class="line line-dashed b-b line-lg"></div>
 
 
-                <div  class="form-group">
+                <!--<div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.STARTDATE' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
@@ -106,25 +106,69 @@
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
+                -->
+
+
+
+
+
+
+                <div class="form-group">
+                    <label class="col-sm-1 m-l-lg font-bold control-label">{{'u.STARTDATE' | translate}}</label>
+                    <div class="col-sm-4">
+                        <p class="input-group">
+                            <input type="text" class="form-control font-thin" uib-datepicker-popup="{{vm.format}}" ng-model="vm.sdt" is-open="vm.opened1"  ng-disabled="vm.isDetail"/>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="vm.open1($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                              </span>
+                        </p>
+                    </div>
+                </div>
                 <div  class="line line-dashed b-b line-lg"></div>
 
 
-                <div  class="form-group">
+
+
+
+
+               <!-- <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.ENDDATE' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
                                placeholder="{{'u.ENDDATE' | translate}}" ng-model="vm.user.endDate" ng-disabled="vm.isDetail" >
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>-->
+
+
+
+                <div class="form-group">
+                    <label class="col-sm-1 m-l-lg font-bold control-label">{{'u.ENDDATE' | translate}}</label>
+                    <div class="col-sm-4">
+                        <p class="input-group">
+                            <input type="text" class="form-control font-thin" uib-datepicker-popup="{{vm.format}}" ng-model="vm.edt" is-open="vm.opened2"  ng-disabled="vm.isDetail"/>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="vm.open2($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                              </span>
+                        </p>
+                    </div>
                 </div>
+
+
+
                 <div  class="line line-dashed b-b line-lg"></div>
 
 
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FLEETTYPE' | translate}}</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="{{'u.FLEETTYPE' | translate}}" ng-model="vm.user.airType" ng-disabled="vm.isDetail" >
+                        <!--<input class="form-control" type="text"
+                               placeholder="{{'u.FLEETTYPE' | translate}}" ng-model="vm.user.airType" ng-disabled="vm.isDetail" >-->
+
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.airType" ng-options="s for s in vm.classFleet" ng-disabled="vm.isDetail" ></select>
+
+
+
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
@@ -192,7 +236,7 @@
                 <div  class="line line-dashed b-b line-lg"></div>
 
 
-
+<!--
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CLASSIMAGE' | translate}}</label>
                     <div class="col-sm-4">
@@ -201,7 +245,28 @@
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
-                <div  class="line line-dashed b-b line-lg"></div>
+                <div  class="line line-dashed b-b line-lg"></div>-->
+
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CLASSIMAGE' | translate}}</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.CLASSIMAGE' | translate}}" ng-model="vm.user.image" ng-disabled="vm.isDetail" >
+
+                        <input type="file"  file-model = "vm.myUploadFile" name="uploadPic" id="myfileId"/>
+                        <button  class="btn btn-default" ng-click="vm.uploadFile()"> <i class="fa fa-check-circle"></i> 上传 </button>
+
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+
+
+
+
+
+
 
 
 

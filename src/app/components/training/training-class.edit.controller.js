@@ -83,6 +83,11 @@
                 value:'usd'
             }
         ];
+
+        vm.classFleet = [
+            '直升机',
+            '固定翼'
+        ]
         var username = $stateParams.username;
         var type = $stateParams.args.type;
         console.log(type);
@@ -106,15 +111,34 @@
             NetworkService.get(constdata.api.course.basePath + '/'+ username,null,function (response) {
                 vm.user = response.data;
                 $rootScope.userNamePlacedTop = vm.user.nickName;
+                vm.sdt   =   new Date((vm.user.startDate));
+                vm.edt   =   new Date((vm.user.endDate));
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
                 toastr.error(i18n.t('u.GET_DATA_FAILED'));
             });
         }
 
+        function padStr(i) {
+            return (i < 10) ? "0" + i : "" + i;
+        }
+        function dateToString(temp) {
+            //var temp = new Date();
+            var dateStr = padStr(temp.getFullYear()) + '-' +
+                padStr(1 + temp.getMonth()) + '-' +
+                padStr(temp.getDate());// +
+            //padStr(temp.getHours()) +
+            //padStr(temp.getMinutes()) +
+            //padStr(temp.getSeconds());
+            console.log(dateStr);
+            return dateStr;
+        }
+
 
         function addItem() {
             var myid = vm.userInfo.id;
+            vm.user.startDate = dateToString(vm.sdt);
+            vm.user.endDate = dateToString(vm.edt);
             NetworkService.post(constdata.api.course.basePath+'?school='+vm.user.school.id,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
@@ -127,6 +151,8 @@
 
         function editItem() {
             var myid = vm.userInfo.id;
+            vm.user.startDate = dateToString(vm.sdt);
+            vm.user.endDate = dateToString(vm.edt);
             NetworkService.put(constdata.api.course.basePath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
@@ -175,9 +201,11 @@
         }else{
             vm.user.currencyUnit = 'rmb';
             vm.user.school = {};
+            vm.user.airType = '直升机';
         }
 
-
+        vm.sdt = new Date();
+        vm.edt = new Date();
         function getSchoolDatas() {
 
 
@@ -206,60 +234,14 @@
         }
 
 
-
-
-
-
-        $scope.today = function() {
-            $scope.dt = new Date();
-        };
-        $scope.today();
-
-        $scope.clear = function () {
-            $scope.dt = null;
-        };
-
-        // Disable weekend selection
-        $scope.disabled = function(date, mode) {
-            return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-        };
-
-        $scope.toggleMin = function() {
-            $scope.minDate = $scope.minDate ? null : new Date();
-        };
-        $scope.toggleMin();
-
-        $scope.open = function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-
-            $scope.opened = true;
-        };
-
-        $scope.dateOptions = {
-            formatYear: 'yy',
-            startingDay: 1,
-            class: 'datepicker'
-        };
-
-        $scope.initDate = new Date('2016-15-20');
-        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        $scope.format = $scope.formats[0];
-
-
-
-
-
-
-
         vm.dateOptions = {
             formatYear: 'yy',
             startingDay: 1,
             class: 'datepicker'
         };
-        vm.initDate = new Date('2016-15-20');
-        vm.formats = ['MM/dd/yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        vm.format = vm.formats[0];
+        vm.initDate = new Date('2017-1-20');
+
+        vm.format = 'yyyy-MM-dd';
 
         //每次选择不同版本请求不同数据
         vm.change = function() {
@@ -267,16 +249,19 @@
             getNotiData(vm.selectedOption);
         }
 
-        // date picker
-        vm.today = function() {
-            vm.dt = new Date();
-        };
-        vm.today();
 
-        vm.clear = function () {
-            vm.dt = null;
-        };
+        // vm.dt = new Date();
+        // vm.user.date = new Date();
+        vm.clear1 = function () {
+            vm.sdt = null;
 
+            //vm.user.date = null;
+        };
+        vm.clear2 = function () {
+
+            vm.edt = null;
+            //vm.user.date = null;
+        };
         // Disable weekend selection
         vm.disabled = function(date, mode) {
             return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
@@ -287,12 +272,24 @@
         };
         vm.toggleMin();
 
-        vm.open = function($event) {
+        vm.open1 = function($event) {
             $event.preventDefault();
             $event.stopPropagation();
 
-            vm.opened = true;
+            vm.opened1 = true;
         };
+
+        vm.open2 = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            vm.opened2 = true;
+        };
+
+
+
+
+
 
 
 

@@ -177,7 +177,7 @@
 
         }
         vm.removeCraftItem = function(item) {
-            var index = vm.user.aircraftItem.indexOf(item);
+            var index = vm.user.aircraftItems.indexOf(item);
             vm.user.aircraftItems.splice(index, 1);
         }
         getAircraftsDatas();
