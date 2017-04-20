@@ -114,13 +114,17 @@
 
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.IMAGE' | translate}}</label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                         <input class="form-control" type="text"
                                placeholder="{{'u.IMAGE' | translate}}" ng-model="vm.user.image" ng-disabled="vm.isDetail" >
+
+                        <input type="file"  file-model = "vm.myUploadFile" name="uploadPic" id="myfileId"/>
+                        <button  class="btn btn-default" ng-click="vm.uploadFile()"> <i class="fa fa-check-circle"></i> 上传 </button>
+
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
-                <div  class="line line-dashed b-b line-lg"></div>
+
 
 
 

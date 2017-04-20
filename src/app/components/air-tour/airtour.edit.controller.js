@@ -82,6 +82,32 @@
                 value:'usd'
             }
         ];
+
+
+        vm.testItems = [
+            {
+            price:'10',
+            seatPrice:'100',
+            currencyUnit:'rmb',
+            aircraft:'idddddd'
+            },
+            {
+                price:'12',
+                seatPrice:'100',
+                currencyUnit:'rmb',
+                aircraft:'idddddd'
+            },
+            {
+                price:'13',
+                seatPrice:'100',
+                currencyUnit:'rmb',
+                aircraft:'idddddd'
+            }
+
+            ]
+
+
+
         var username = $stateParams.username;
         var type = $stateParams.args.type;
         console.log(type);
@@ -128,7 +154,32 @@
             //$rootScope.backPre();
         }
 
+        vm.addNewCraftItem = function() {
 
+            vm.user.aircraftItemsAdd.push({
+                price:'',
+                seatPrice:'',
+                currencyUnit:'rmb',
+                aircraft:''
+            })
+        }
+
+        vm.realAddNewCraftItem = function(item) {
+            console.log('ok');
+            var index = vm.user.aircraftItemsAdd.indexOf(item);
+            console.log('ok'+index);
+
+            vm.user.aircraftItemsAdd.splice(index, 1);
+
+            vm.user.aircraftItems.push(angular.copy(item));
+            console.log(vm.user.aircraftItems);
+
+
+        }
+        vm.removeCraftItem = function(item) {
+            var index = vm.user.aircraftItem.indexOf(item);
+            vm.user.aircraftItems.splice(index, 1);
+        }
         getAircraftsDatas();
 
 
@@ -139,6 +190,12 @@
             console.log(username);
             NetworkService.get(constdata.api.tenant.fleetPath +'/' + vm.subPath + '/'+ username,null,function (response) {
                 vm.user = response.data;
+                vm.user.aircraftItemsAdd = [];
+                if(vm.user.aircraftItems.length > 0){
+                    for (var i = 0; i < vm.user.aircraftItems.length; i ++){
+                        vm.user.aircraftItems[i].aircraftId = vm.user.aircraftItems[i].aircraft.id;
+                    }
+                }
                 $rootScope.userNamePlacedTop = vm.user.nickName;
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
@@ -149,6 +206,17 @@
 
         function addItem() {
             var myid = vm.userInfo.id;
+            vm.user.tourShow = getMarkDownAction().markdown;
+            console.log(vm.user.tourShow);
+
+            if(vm.user.aircraftItems.length > 0) {
+                for (var i = 0; i < vm.user.aircraftItems.length; i++) {
+                    var tmp = vm.user.aircraftItems[i].aircraftId;
+                    vm.user.aircraftItems[i].aircraft = tmp;
+                }
+            }
+
+
             NetworkService.post(constdata.api.tenant.fleetPath  + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
@@ -161,6 +229,18 @@
 
         function editItem() {
             var myid = vm.userInfo.id;
+            vm.user.tourShow = getMarkDownAction().markdown;
+
+
+            if(vm.user.aircraftItems.length > 0) {
+                for (var i = 0; i < vm.user.aircraftItems.length; i++) {
+                    var tmp = vm.user.aircraftItems[i].aircraftId;
+                    vm.user.aircraftItems[i].aircraft = tmp;
+                }
+            }
+            console.log(vm.user.aircraftItems);
+
+
             NetworkService.put(constdata.api.tenant.fleetPath  + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
@@ -206,8 +286,12 @@
 
         if (!vm.isAdd){
             vm.getTenantItem();
+
+
         }else{
             vm.user.currencyUnit = 'rmb';
+            vm.user.aircraftItems = [];
+            vm.user.aircraftItemsAdd = [];
         }
 
         function back() {

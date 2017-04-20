@@ -58,19 +58,145 @@
 
 
 
-                <div  class="form-group">
+                <!--<div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CRAFTSELECT' | translate}}</label>
                     <div class="col-sm-4">
-                        <!--<input class="form-control" type="text"
-                               placeholder="{{'u.CRAFTSELECT' | translate}}" ng-model="vm.user.aircraftItems" ng-disabled="vm.isDetail" >
--->
-
                         <select class="form-control"  multiple ng-model="vm.user.aircraftItemsd" ng-options="opt.id as opt.name for opt in vm.crafts"></select>
-
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
+                <div  class="line line-dashed b-b line-lg"></div>-->
+
+                <div  class="form-group">
+                    <div style="display:block;" class="col-sm-6  m-l-lg font-bold">{{'u.CRAFTSELECT' | translate}}</div>
+                </div>
+
+                    <div  class="form-group">
+
+
+
+                    <div class="form-group" ng-repeat="item in vm.user.aircraftItems">
+
+                        <label class="col-sm-1 control-label  font-bold">{{'u.PRICE' | translate}}</label>
+                        <div class="col-sm-1">
+                            <input class="form-control" type="text"
+                                   placeholder="{{'u.PRICE' | translate}}" ng-model="item.price" ng-disabled="vm.isDetail"  required>
+
+                        </div>
+
+                        <label class="col-sm-1 control-label  font-bold">{{'u.SEATPRICE' | translate}}</label>
+                        <div class="col-sm-1">
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.SEATPRICE' | translate}}" ng-model="item.seatPrice" ng-disabled="vm.isDetail"  required>
+                        </div>
+
+
+                        <label class="col-sm-1 control-label  font-bold">{{'u.PRICEUNIT' | translate}}</label>
+                        <div class="col-sm-1">
+
+                            <!--<input class="form-control" type="text"
+                                   placeholder="{{'u.PRICEUNIT' | translate}}" ng-model="item.currencyUnit" ng-disabled="vm.isDetail"  required>
+                        -->
+
+                            <select style="width: 100%;" class="form-control font-thin" ng-model="item.currencyUnit" ng-options="s.value as s.title for s in vm.priceType" ng-disabled="vm.isDetail" ></select>
+
+                        </div>
+
+
+
+                        <label class="col-sm-1 control-label font-bold">{{'u.FLEETTYPE' | translate}}</label>
+                        <div class="col-sm-2">
+                            <!--
+                            <input class="form-control" type="text"
+                                   placeholder="{{'u.FLEETTYPE' | translate}}" ng-model="item.aircraft" ng-disabled="vm.isDetail"  required>
+                            <select class="form-control"  ng-model="item.aircraft" ng-options="opt.id as opt.name for opt in vm.crafts"></select>
+-->
+
+                            <select style="width: 100%;" class="form-control font-thin" ng-model="item.aircraftId" ng-options="opt.id as opt.name for opt in vm.crafts" ng-disabled="vm.isDetail" ></select>
+
+
+                        </div>
+
+                        <div class="col-sm-1">
+                        <button ng-if="!vm.isDetail" ng-click="vm.removeCraftItem(item)" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-minus"></i>{{'product.DELETE' | translate}}</button>
+
+                        </div>
+
+
+                    </div>
+
+                        <div class="form-group" ng-repeat="item in vm.user.aircraftItemsAdd">
+
+                            <label class="col-sm-1 control-label  font-bold">{{'u.PRICE' | translate}}</label>
+                            <div class="col-sm-1">
+                                <input class="form-control" type="text"
+                                       placeholder="{{'u.PRICE' | translate}}" ng-model="item.price" ng-disabled="vm.isDetail"  required>
+
+                            </div>
+
+                            <label class="col-sm-1 control-label  font-bold">{{'u.SEATPRICE' | translate}}</label>
+                            <div class="col-sm-1">
+                                <input class="form-control" type="text"
+                                       placeholder="{{'u.SEATPRICE' | translate}}" ng-model="item.seatPrice" ng-disabled="vm.isDetail"  required>
+                            </div>
+
+
+                            <label class="col-sm-1 control-label  font-bold">{{'u.PRICEUNIT' | translate}}</label>
+                            <div class="col-sm-1">
+
+                                <!--<input class="form-control" type="text"
+                                       placeholder="{{'u.PRICEUNIT' | translate}}" ng-model="item.currencyUnit" ng-disabled="vm.isDetail"  required>
+                            -->
+
+                                <select style="width: 100%;" class="form-control font-thin" ng-model="item.currencyUnit" ng-options="s.value as s.title for s in vm.priceType" ng-disabled="vm.isDetail" ></select>
+
+                            </div>
+
+
+
+                            <label class="col-sm-1 control-label font-bold">{{'u.FLEETTYPE' | translate}}</label>
+                            <div class="col-sm-2">
+                                <!--
+                                <input class="form-control" type="text"
+                                       placeholder="{{'u.FLEETTYPE' | translate}}" ng-model="item.aircraft" ng-disabled="vm.isDetail"  required>
+                                <select class="form-control"  ng-model="item.aircraft" ng-options="opt.id as opt.name for opt in vm.crafts"></select>
+    -->
+
+                                <select style="width: 100%;" class="form-control font-thin" ng-model="item.aircraftId" ng-options="opt.id as opt.name for opt in vm.crafts" ng-disabled="vm.isDetail" ></select>
+
+
+                            </div>
+
+                            <div class="col-sm-1">
+                                <button ng-if="!vm.isDetail" ng-click="vm.realAddNewCraftItem(item)" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-plus"></i>{{'product.ADD' | translate}}</button>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="col-sm-4">
+                            <button ng-if="!vm.isDetail" ng-click="vm.addNewCraftItem()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-plus"></i>{{'product.ADD' | translate}}</button>
+
+                        </div>
+
+
+
+                </div>
+
+
+
+
+
+
+
                 <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
 
 
 
@@ -185,7 +311,7 @@
 
 
 
-                <div  class="form-group">
+               <!-- <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.TOURSHOW' | translate}}</label>
                     <div class="col-sm-4">
 
@@ -196,6 +322,78 @@
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
 
+-->
+
+
+                <div class="form-group" >
+
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.TOURSHOW' | translate}}</label>
+
+                    <div class="panel" style="background-color: #f2f2f2; width:80%; padding:0px 0px 0px 0px; margin:0px 0px 0px 30px;">
+                        <link rel="stylesheet" href="js_components/editor.md/css/editormd.min.css" />
+                        <div id="editormd" class="" style="margin: 0;padding: 0;border: 0;border-radius: 0;">
+                            <textarea style="display:none;" ng-model="vm.user.tourShow" ng-disabled="vm.isDetail"></textarea>
+                        </div>
+                        <script src="js_components/editor.md/editormd.js"></script>
+                        <script type="text/javascript">
+                            var editor;
+                            var mdIndex = -1;
+                            $(function() {
+                                editor = editormd("editormd", {
+                                    height: 400,
+
+                                    imageUpload    : true,
+                                    imageFormats   : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                                    imageUploadURL : " api/v1/files",
+
+
+
+                                    path : "js_components/editor.md/lib/", // Autoload modules mode, codemirror, marked... dependents libs path
+                                    toolbarIcons : function() {
+                                        var simple = ["undo", "redo", "|",
+                                            "bold", "del", "italic", "quote", "|",
+                                            "h1", "h2", "h3", "h4", "h5", "h6", "|",
+                                            "list-ul", "list-ol", "hr", "|",
+                                            "code", "datetime", "pagebreak", "|",
+                                            "watch", "preview", "clear", "|", "helper", "image"];
+
+                                        return simple;
+                                    },
+                                    toolbarIconsClass : {
+                                        helper : "fa-question-circle"  // 指定一个FontAawsome的图标类
+                                    },
+                                    toolbarHandlers : {
+                                        /**
+                                         * @param {Object}      cm         CodeMirror对象
+                                         * @param {Object}      icon       图标按钮jQuery元素对象
+                                         * @param {Object}      cursor     CodeMirror的光标对象，可获取光标所在行和位置
+                                         * @param {String}      selection  编辑器选中的文本
+                                         */
+                                        helper : function(cm, icon, cursor, selection) {
+                                            window.open('https://guides.github.com/features/mastering-markdown/');
+                                        }
+                                    }
+                                });
+                            });
+                            function updateMarkdown(content,index) {
+                                mdIndex = index;
+                                editor.clear();
+                                editor.setMarkdown(content);
+                            }
+                            function getMarkDownAction() {
+                                var md = editor.getMarkdown();
+                                return {markdown:md,index:mdIndex};
+                            }
+                        </script>
+                    </div>
+
+                    <!-- <p>aaa</p>
+
+                     <p ng-bind="vm.user.description"></p>
+
+                     <p>bbb</p>-->
+
+                </div>
 
 
 

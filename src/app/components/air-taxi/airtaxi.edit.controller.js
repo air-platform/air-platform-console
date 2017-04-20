@@ -97,6 +97,46 @@
             vm.isDetail = true;
         }
 
+
+
+        vm.addNewCraftItem = function() {
+
+            vm.user.aircraftItemsAdd.push({
+                price:'',
+                seatPrice:'',
+                currencyUnit:'rmb',
+                aircraft:''
+            })
+        }
+
+        vm.realAddNewCraftItem = function(item) {
+            console.log('ok');
+            var index = vm.user.aircraftItemsAdd.indexOf(item);
+            console.log('ok'+index);
+
+            vm.user.aircraftItemsAdd.splice(index, 1);
+
+            vm.user.aircraftItems.push(angular.copy(item));
+            console.log(vm.user.aircraftItems);
+
+
+        }
+        vm.removeCraftItem = function(item) {
+            var index = vm.user.aircraftItem.indexOf(item);
+            vm.user.aircraftItems.splice(index, 1);
+        }
+        function getAircraftsDatas() {
+
+
+            NetworkService.get(constdata.api.tenant.fleetPath  + '/aircrafts',{page:vm.pageCurrent},function (response) {
+                vm.crafts = response.data.content;
+
+            },function (response) {
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
+            });
+        }
+        getAircraftsDatas();
+
         function getTenantItem() {
 
             var myid = vm.userInfo.id;
@@ -104,6 +144,13 @@
             console.log(username);
             NetworkService.get(constdata.api.tenant.fleetPath +'/' + vm.subPath + '/'+ username,null,function (response) {
                 vm.user = response.data;
+
+                vm.user.aircraftItemsAdd = [];
+                if(vm.user.aircraftItems.length > 0){
+                    for (var i = 0; i < vm.user.aircraftItems.length; i ++){
+                        vm.user.aircraftItems[i].aircraftId = vm.user.aircraftItems[i].aircraft.id;
+                    }
+                }
                 $rootScope.userNamePlacedTop = vm.user.nickName;
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
@@ -114,6 +161,13 @@
 
         function addItem() {
             var myid = vm.userInfo.id;
+
+            if(vm.user.aircraftItems.length > 0) {
+                for (var i = 0; i < vm.user.aircraftItems.length; i++) {
+                    var tmp = vm.user.aircraftItems[i].aircraftId;
+                    vm.user.aircraftItems[i].aircraft = tmp;
+                }
+            }
             NetworkService.post(constdata.api.tenant.fleetPath  + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
@@ -126,6 +180,19 @@
 
         function editItem() {
             var myid = vm.userInfo.id;
+
+
+
+            if(vm.user.aircraftItems.length > 0) {
+                for (var i = 0; i < vm.user.aircraftItems.length; i++) {
+                    var tmp = vm.user.aircraftItems[i].aircraftId;
+                    vm.user.aircraftItems[i].aircraft = tmp;
+                }
+            }
+            console.log(vm.user.aircraftItems);
+
+
+
             NetworkService.put(constdata.api.tenant.fleetPath  + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
@@ -173,6 +240,8 @@
             vm.getTenantItem();
         }else{
             vm.user.currencyUnit = 'rmb';
+            vm.user.aircraftItems = [];
+            vm.user.aircraftItemsAdd = [];
         }
 
         function back() {
