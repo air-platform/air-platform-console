@@ -118,6 +118,8 @@
 
         function addItem() {
             var myid = vm.userInfo.id;
+            vm.user.description = getMarkDownAction().markdown;
+            console.log(vm.user.description);
             NetworkService.post(constdata.api.tenant.fleetPath  + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
@@ -130,9 +132,10 @@
 
         function editItem() {
             var myid = vm.userInfo.id;
-
-            console.log($scope.response.content);
-            return;
+            vm.user.description = getMarkDownAction().markdown;
+            console.log(vm.user.description);
+            //console.log($scope.response.content);
+            //return;
             NetworkService.put(constdata.api.tenant.fleetPath + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();

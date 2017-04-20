@@ -102,7 +102,22 @@
         if(type && type=='detail'){
             vm.isDetail = true;
         }
+        vm.uploadFile = function (){
+            console.log(vm.myUploadFile);
+            NetworkService.postForm('/api/v1/files',vm.myUploadFile,function (response) {
+                toastr.success(i18n.t('u.OPERATE_SUC'));
 
+                console.log(response.data);
+                vm.user.image = response.data.url;
+                //vm.backAction();
+            },function (response) {
+                vm.authError = response.statusText + '(' + response.status + ')';
+                console.log(vm.authError);
+                toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+            });
+
+            //$rootScope.backPre();
+        }
         function getTenantItem() {
 
             var myid = vm.userInfo.id;
@@ -139,6 +154,9 @@
             var myid = vm.userInfo.id;
             vm.user.startDate = dateToString(vm.sdt);
             vm.user.endDate = dateToString(vm.edt);
+
+            vm.user.description = getMarkDownAction().markdown;
+            console.log(vm.user.description);
             NetworkService.post(constdata.api.course.basePath+'?school='+vm.user.school.id,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
@@ -153,7 +171,10 @@
             var myid = vm.userInfo.id;
             vm.user.startDate = dateToString(vm.sdt);
             vm.user.endDate = dateToString(vm.edt);
-            NetworkService.put(constdata.api.course.basePath,vm.user,function (response) {
+
+            vm.user.description = getMarkDownAction().markdown;
+            console.log(vm.user.description);
+            NetworkService.put(constdata.api.course.basePath+'/'+vm.user.id,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
