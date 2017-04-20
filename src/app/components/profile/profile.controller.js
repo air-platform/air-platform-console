@@ -7,7 +7,7 @@
     angular.module('iot').controller('ProfileController', ProfileController);
 
     /** @ngInject */
-    function ProfileController($rootScope,LoginService,NetworkService,constdata,toastr,i18n,StorageService) {
+    function ProfileController($rootScope,$stateParams,$state, LoginService,NetworkService,constdata,toastr,i18n,StorageService) {
         /* jshint validthis: true */
         var vm = this;
 
@@ -26,15 +26,23 @@
 
         getProfile();
 
+        vm.uploadFile = function (){
+            console.log(vm.myUploadFile);
+            NetworkService.postForm('/api/v1/files',vm.myUploadFile,function (response) {
+                toastr.success(i18n.t('u.OPERATE_SUC'));
 
+                console.log(response.data);
+                vm.userinfo.avatar = response.data.url;
+                //vm.backAction();
+            },function (response) {
+                vm.authError = response.statusText + '(' + response.status + ')';
+                console.log(vm.authError);
+                toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+            });
+
+            //$rootScope.backPre();
+        }
         function getProfile () {
-           // var token = StorageService.get('iot.hnair.cloud.access_token');
-            //var hnaInfo = StorageService.get('iot.hnair.cloud.information');
-            //var path = constdata.api.login.profilePath + hnaInfo.name;
-
-
-
-
             NetworkService.get(constdata.api.login.profilePath,{page:vm.pageCurrent},function (response) {
                // vm.items = response.data.content;
                 vm.userinfo = response.data;
@@ -55,7 +63,7 @@
 
             NetworkService.put(constdata.api.login.profilePath,vm.userinfo,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
-                vm.backAction();
+                $state.go('app.dashboard');
             },function (response) {
                 vm.authError = i18n.t('login.LOGIN_FAILED');
                 toastr.error(i18n.t('u.OPERATE_FAILED') + response.status + ' ' + response.status)

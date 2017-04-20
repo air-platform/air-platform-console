@@ -22,7 +22,7 @@
     /* 登录模块 */
     // 自动依赖注入
     /** @ngInject */
-    function LoginController(LoginService,StorageService,$timeout,$state,constdata,$rootScope,$cookies,$interval,$translate,i18n) {
+    function LoginController(LoginService,NetworkService, StorageService,$timeout,$state,constdata,$rootScope,$cookies,$interval,$translate,i18n) {
        /* jshint validthis: true */
         var vm = this;// vm -> ViewModel
 
@@ -50,7 +50,18 @@
 
 
         checkCookie();
-
+        function getProfile () {
+            NetworkService.get('api/v1/account/profile',{page:vm.pageCurrent},function (response) {
+                // vm.items = response.data.content;
+                vm.userinfo = response.data;
+                //updatePagination(response.data);
+                console.log(vm.userinfo);
+            },function (response) {
+                vm.authError = i18n.t('login.LOGIN_FAILED');
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + ' ' + response.status);
+            });
+        };
+        getProfile();
 
         function login(){
             /* 登录 */

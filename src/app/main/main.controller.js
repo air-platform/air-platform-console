@@ -8,7 +8,7 @@
     angular.module('iot').controller('MainController', MainController);
 
     /** @ngInject */
-    function MainController($rootScope, $timeout,$translate,$state,StorageService, webDevTec, toastr) {
+    function MainController($rootScope, NetworkService, $timeout,$translate,$state,StorageService, webDevTec, toastr) {
        /* jshint validthis: true */
        var vm = this;
 
@@ -146,6 +146,9 @@
         }
 
         //快速导航条相关
+
+
+
         function getUserRole() {
             // "ADMIN"; "TENANT"; "USER";
             var infos = StorageService.get('iot.hnair.cloud.information');
