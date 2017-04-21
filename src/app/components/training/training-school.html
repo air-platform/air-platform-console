@@ -31,7 +31,7 @@
                 <th class="text-center">{{'u.ADDRESS' | T}}</th>
                 <th class="text-center">{{'u.CONTACT' | T}}</th>
                 <th class="text-center">{{'u.SCHOOLIMAGE' | T}}</th>
-                <th class="text-center">{{'u.DESCRIPTION' | T}}</th>
+                <!--<th class="text-center">{{'u.DESCRIPTION' | T}}</th>-->
 
             </tr>
 
@@ -43,8 +43,15 @@
                 <td ng-click="vm.goDetail(item)">{{item.name}}</td>
                 <td ng-click="vm.goDetail(item)"> {{item.address }}</td>
                <td ng-click="vm.goDetail(item)">{{item.contact}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.image}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.description}}</td>
+                <td ng-click="vm.goDetail(item)">
+
+
+                   <!-- {{item.image}}-->
+                    <img ng-src="{{item.image}}" style="height:40px;width:90px;" alt="...">
+
+
+                </td>
+                <!--<td ng-click="vm.goDetail(item)">{{item.description}}</td>-->
 
 
                <!-- <td ng-click="vm.goDetail(item)">

@@ -30,13 +30,34 @@
         vm.curItem = {};
         vm.backAction = backAction;
         vm.userInfo = {};
-        vm.subPath = 'ferryflights';
+        vm.subPath = 'airbook';
+        vm.statusType = [
+            {
+                title:'处理中',
+                value:'pending'
+            },
+            {
+                title:'已完成',
+                value:'finished'
+            }
+            ,
+            {
+                title:'已付款',
+                value:'paid'
+            },
+            {
+                title:'已取消',
+                value:'cancelled'
+            }
+        ];
+        vm.reqPath = constdata.api.order.airtrans;
+        vm.editPath = 'app.editorderairtrans';
         function getDatas() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
             var myid = vm.userInfo.id;
             console.log(vm.userInfo);
 
-            NetworkService.get(constdata.api.tenant.fleetPath  + '/' + vm.subPath,{page:vm.pageCurrent},function (response) {
+            NetworkService.get(vm.reqPath,{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
                 updatePagination(response.data);
             },function (response) {
@@ -46,15 +67,30 @@
 
 
         function goAddItem() {
-            $state.go('app.editairjetflight',{});
+            $state.go(vm.editPath,{});
         };
 
         function goEditItem(item) {
-            $state.go('app.editairjetflight',{username:item.id, args:{type:'edit'}});
+            $state.go(vm.editPath,{username:item.id, args:{type:'edit'}});
         };
 
+
+        vm.goPaidItem = function (item) {
+
+            NetworkService.post(vm.reqPath  + '/' + item.id + '/paid',null,function success() {
+                var index = vm.items.indexOf(item);
+                //vm.items.splice(index,1);
+                toastr.success(i18n.t('u.OPER_SUC'));
+                getDatas();
+            },function (response) {
+                vm.authError = response.statusText + '(' + response.status + ')';
+                toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+            });
+        };
+
+
         function goDetail(item) {
-            $state.go('app.editairjetflight',{username:item.id, args:{type:'detail'}});
+            $state.go(vm.editPath,{username:item.id, args:{type:'detail'}});
 
         };
 
@@ -149,9 +185,13 @@
 
 
         //Model
-
-        vm.tipsInfo = delmodaltip;
+        //vm.tipsInfo = delmodaltip;
+        vm.tipsInfo = {
+            title:'修改订单',
+            content:'您确定该订单已付款吗？更改订单状态后不可撤销'
+        };
         vm.openAlert = function (size,model) {
+            console.log(vm.tipsInfo);
             var modalInstance = $uibModal.open({
                 templateUrl: 'myModalContent.html',
                 size: size,
@@ -163,7 +203,7 @@
                 }
             });
             modalInstance.result.then(function (param) {
-                vm.removeItem(model);
+                vm.goPaidItem(model);
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });

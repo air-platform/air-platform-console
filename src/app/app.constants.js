@@ -23,9 +23,11 @@
                     "register":
                         {"registerPath":"/cp-ua/v1/user/register"},
                     "tenant":
-                        {"listAllPath":"/api/v1/platform/accounts","updatePath":"/iot/api/v1/tenants","deletePath":"/iot/api/v1/tenants","tenantInfoPath":"/iot/api/v1/tenants","addPath":"api/v1/platform/accounts","fleetPath":"/api/v1/tenant"},
+                        {"listAllPath":"/api/v1/platform/accounts","updatePath":"/iot/api/v1/tenants","deletePath":"/iot/api/v1/tenants","tenantInfoPath":"/iot/api/v1/tenants","addPath":"api/v1/platform/accounts","fleetPath":"/api/v1/tenant","jetPath":"/api/v1"},
                 "school":
                 {"basePath":"/api/v1/tenant/schools"},
+                "order":
+                {"airtaxi":"/api/v1/tenant/airtaxi/orders","airtour":"/api/v1/tenant/airtour/orders","airtrans":"/api/v1/tenant/airtransport/orders","airbook":"/api/v1/tenant/charter/orders","airflight":"/api/v1/tenant/ferryflight/orders"},
                 "course":
                 {"basePath":"/api/v1/tenant/courses"},
                 "device":

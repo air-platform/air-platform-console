@@ -1,4 +1,4 @@
-<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="AirjetFlightController as vm" ng-init="
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="AirjetsController as vm" ng-init="
     app.settings.asideFolded = false;
     app.settings.asideDock = false;
 ">
@@ -27,11 +27,11 @@
             </tr>
             <tr class="font-bold">
                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
-                <th class="text-center">{{'u.FLIGHTNAME' | T}}</th>
-                <th class="text-center">{{'u.FLIGHTNUMBER' | T}}</th>
+                <th class="text-center">{{'u.FLEETNAME' | T}}</th>
                 <th class="text-center">{{'u.FLEETTYPE' | T}}</th>
-                <th class="text-center">{{'u.DEPARTURE' | T}}</th>
-                <th class="text-center">{{'u.ARRIVAL' | T}}</th>
+                <th class="text-center">{{'u.WEIGHT' | T}}</th>
+                <th class="text-center">{{'u.CAPACITY' | T}}</th>
+                <th class="text-center">{{'u.FULLLOADRANGE' | T}}</th>
 
             </tr>
 
@@ -41,17 +41,10 @@
             <tr ng-repeat="item in vm.displayedCollection">
               <!--  <td ng-click="vm.goDetail(item)">{{item.id}}</td>-->
                 <td ng-click="vm.goDetail(item)">{{item.name}}</td>
-                <td ng-click="vm.goDetail(item)"> {{item.flightNo }}</td>
-               <td ng-click="vm.goDetail(item)">
-
-                 <!--  {{item.aircraftType}}-->
-
-                   <select style="width: 100%;" class="form-control font-thin" ng-model="item.aircraftType" ng-options="opt.id as opt.name for opt in vm.jets" ng-disabled=true ></select>
-
-
-               </td>
-                <td ng-click="vm.goDetail(item)">{{item.departure}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.arrival}}</td>
+               <td ng-click="vm.goDetail(item)">{{item.type}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.weight}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.capacity}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.fullloadRange}}</td>
 
 
                <!-- <td ng-click="vm.goDetail(item)">
@@ -60,8 +53,9 @@
                 <td>
                     <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goDetail(item)"><i class="fa fa-eye"></i>{{'u.DETAIL'|T}}</button>
 
-                    <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goEditItem(item)"><i class="fa fa-edit"></i>{{ 'u.EDIT' | T}}</button>
+                   <!-- <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goEditItem(item)"><i class="fa fa-edit"></i>{{ 'u.EDIT' | T}}</button>
                     <button class="btn btn-sm btn-danger btn-addon" style="width: 80px"  ng-click="vm.openAlert('sm',item)"><i class="fa fa-trash-o"></i>{{'u.DELETE' | T}}</button>
+               -->
                 </td>
             </tr>
 

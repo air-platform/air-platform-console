@@ -1,4 +1,4 @@
-<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="AirjetFlightController as vm" ng-init="
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="OrderAirtourController as vm" ng-init="
     app.settings.asideFolded = false;
     app.settings.asideDock = false;
 ">
@@ -21,17 +21,18 @@
             <thead>
             <tr>
                 <th colspan="7">
-                    <button ng-click="vm.goAddItem()" class="btn btn-sm btn-info btn-addon"><i class="fa fa-plus"></i>{{ 'u.ADD' | T }}</button>
+                    <button ng-disabled=true ng-click="vm.goAddItem()" class="btn btn-sm btn-info btn-addon"><i class="fa fa-plus"></i>{{ 'u.ADD' | T }}</button>
                     <input st-search="" class="form-control pull-right m-b-xs w-md" placeholder="{{'u.SEARCH' | T}}" type="text"/>
                 </th>
             </tr>
             <tr class="font-bold">
                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
-                <th class="text-center">{{'u.FLIGHTNAME' | T}}</th>
-                <th class="text-center">{{'u.FLIGHTNUMBER' | T}}</th>
-                <th class="text-center">{{'u.FLEETTYPE' | T}}</th>
-                <th class="text-center">{{'u.DEPARTURE' | T}}</th>
-                <th class="text-center">{{'u.ARRIVAL' | T}}</th>
+                <th class="text-center">{{'u.ORDERNO' | T}}</th>
+                <th class="text-center">{{'u.STATUS' | T}}</th>
+                <th class="text-center">{{'u.CTEATEIONDATE' | T}}</th>
+                <th class="text-center">{{'u.PAYMENTDATE' | T}}</th>
+                <th class="text-center">{{'u.FINISHEDDATE' | T}}</th>
+
 
             </tr>
 
@@ -40,28 +41,23 @@
 
             <tr ng-repeat="item in vm.displayedCollection">
               <!--  <td ng-click="vm.goDetail(item)">{{item.id}}</td>-->
-                <td ng-click="vm.goDetail(item)">{{item.name}}</td>
-                <td ng-click="vm.goDetail(item)"> {{item.flightNo }}</td>
-               <td ng-click="vm.goDetail(item)">
-
-                 <!--  {{item.aircraftType}}-->
-
-                   <select style="width: 100%;" class="form-control font-thin" ng-model="item.aircraftType" ng-options="opt.id as opt.name for opt in vm.jets" ng-disabled=true ></select>
+                <td ng-click="vm.goDetail(item)">{{item.orderNo}}</td>
+                <td ng-click="vm.goDetail(item)">
+                    <select style="width: 100%;" class="form-control font-thin" ng-model="item.status" ng-options="opt.value as opt.title for opt in vm.statusType" ng-disabled=true ></select>
 
 
-               </td>
-                <td ng-click="vm.goDetail(item)">{{item.departure}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.arrival}}</td>
+                </td>
+               <td ng-click="vm.goDetail(item)">{{item.creationDate}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.paymentDate}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.finishedDate}}</td>
 
-
-               <!-- <td ng-click="vm.goDetail(item)">
-                    {{item.enabled ? ('u.ACTIVITY'|T ):('u.UNACTIVITY'|T)}}
-                </td>-->
                 <td>
                     <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goDetail(item)"><i class="fa fa-eye"></i>{{'u.DETAIL'|T}}</button>
 
-                    <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goEditItem(item)"><i class="fa fa-edit"></i>{{ 'u.EDIT' | T}}</button>
+                    <button class="btn btn-sm btn-danger btn-addon" style="width: 80px" ng-click="vm.openAlert('sm',item)"><i class="fa fa-edit"></i>{{ 'u.PAIDORDER' | T}}</button>
+<!--
                     <button class="btn btn-sm btn-danger btn-addon" style="width: 80px"  ng-click="vm.openAlert('sm',item)"><i class="fa fa-trash-o"></i>{{'u.DELETE' | T}}</button>
+-->
                 </td>
             </tr>
 

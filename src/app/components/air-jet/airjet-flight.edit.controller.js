@@ -99,6 +99,18 @@
             vm.isDetail = true;
         }
         vm.richContent="input here";
+
+        function getAirjetsDatas() {
+
+
+            NetworkService.get(constdata.api.tenant.jetPath  + '/airjets',{page:vm.pageCurrent},function (response) {
+                vm.jets = response.data;
+
+            },function (response) {
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
+            });
+        }
+        getAirjetsDatas();
         function getTenantItem() {
 
             var myid = vm.userInfo.id;
@@ -334,7 +346,11 @@
                 toastr.success(i18n.t('u.OPERATE_SUC'));
 
                 console.log(response.data);
-                vm.user.appearances = response.data.url;
+                if(vm.user.appearances == null || vm.user.appearances == ''){
+                    vm.user.appearances = response.data.url;
+                }else {
+                    vm.user.appearances += ',' + response.data.url;
+                }
                 //vm.backAction();
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';

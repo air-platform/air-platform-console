@@ -51,15 +51,18 @@
 
         checkCookie();
         function getProfile () {
-            NetworkService.get('api/v1/account/profile',{page:vm.pageCurrent},function (response) {
-                // vm.items = response.data.content;
-                vm.userinfo = response.data;
-                //updatePagination(response.data);
-                console.log(vm.userinfo);
-            },function (response) {
-                vm.authError = i18n.t('login.LOGIN_FAILED');
-                toastr.error(i18n.t('u.GET_DATA_FAILED') + ' ' + response.status);
-            });
+            var token = StorageService.get('iot.hnair.cloud.access_token');
+            if(token) {
+                NetworkService.get('api/v1/account/profile', {page: vm.pageCurrent}, function (response) {
+                    // vm.items = response.data.content;
+                    vm.userinfo = response.data;
+                    //updatePagination(response.data);
+                    console.log(vm.userinfo);
+                }, function (response) {
+                    vm.authError = i18n.t('login.LOGIN_FAILED');
+                    toastr.error(i18n.t('u.GET_DATA_FAILED') + ' ' + response.status);
+                });
+            }
         };
         getProfile();
 
@@ -87,6 +90,12 @@
                         vm.user.type = vm.user.role;
                         //vm.user.type = 'TENANT';
                         console.log(vm.user);
+
+
+
+
+
+
                       //  vm.user.type = 'ADMIN';//'TENANT';
                         StorageService.put(hnaInfo,vm.user,24 * 3 * 60 * 60);
                         //localStorage.setItem(constdata.tenant,'hna');
@@ -94,6 +103,17 @@
                             parent.location.reload();
                         });*/
                         //return;
+
+
+
+
+                        //getProfile();
+
+
+
+
+
+
                         $state.go('app.dashboard');
 
                      },function (response) {

@@ -6,10 +6,10 @@
 
     angular
         .module('iot')
-        .controller('OrderAirtaxiController', OrderAirtaxiController);
+        .controller('OrderAirbookController', OrderAirbookController);
 
     /** @ngInject */
-    function OrderAirtaxiController(NetworkService,StorageService, constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
+    function OrderAirbookController(NetworkService,StorageService, constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -50,8 +50,8 @@
                 value:'cancelled'
             }
         ];
-        vm.reqPath = constdata.api.order.airtaxi;
-        vm.editPath = 'app.editorderairtaxi';
+        vm.reqPath = constdata.api.order.airbook;
+        vm.editPath = 'app.editorderairbook';
         function getDatas() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
             var myid = vm.userInfo.id;

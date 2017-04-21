@@ -37,13 +37,25 @@
 
             NetworkService.get(constdata.api.tenant.fleetPath + '/' + 'fleets',{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
+
+
                 updatePagination(response.data);
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
             });
         }
 
+        function getAirjetsDatas() {
 
+
+            NetworkService.get(constdata.api.tenant.jetPath  + '/airjets',{page:vm.pageCurrent},function (response) {
+                vm.jets = response.data.content;
+
+            },function (response) {
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
+            });
+        }
+        getAirjetsDatas();
         function goAddItem() {
             $state.go('app.editairjetbook',{});
         };

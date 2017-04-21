@@ -551,6 +551,21 @@
               params : {args : {}},
               templateUrl: 'app/components/air-jet/airjet-book.edit.html'
                 })
+
+              .state('app.airjets', {
+                  url: prefix + '/airjets',
+                  templateUrl: 'app/components/air-jet/airjets.html'
+
+              })
+              .state('app.editairjets', {
+                  url: prefix + '/airjets/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/air-jet/airjets.edit.html'
+              })
+
+
+
+
               .state('app.airjetcard', {
                   url: prefix + '/airjetcard',
                   templateUrl: 'app/components/air-jet/airjet-card.html'
@@ -646,6 +661,30 @@
                   templateUrl: 'app/components/order/order-airtaxi.edit.html'
               })
 
+
+              .state('app.orderairbook', {
+                  url: prefix + '/orderairbook',
+                  templateUrl: 'app/components/order/order-airbook.html'
+
+              })
+              .state('app.editorderairbook', {
+                  url: prefix + '/orderairbook/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/order/order-airbook.edit.html'
+              })
+
+              .state('app.orderairtour', {
+                  url: prefix + '/orderairtour',
+                  templateUrl: 'app/components/order/order-airtour.html'
+
+              })
+              .state('app.editorderairtour', {
+                  url: prefix + '/orderairtour/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/order/order-airtour.edit.html'
+              })
+
+
               .state('app.orderairtrans', {
                   url: prefix + '/orderairtrans',
                   templateUrl: 'app/components/order/order-airtrans.html'
@@ -682,11 +721,24 @@
               })
 
 
-              .state('app.ordertabairjet', {
-                  url: prefix + '/ordertabairjet',
-                  templateUrl: 'app/components/order/order-tabairjet.html'
+
+              .state('app.orderflight', {
+                  url: prefix + '/orderflight',
+                  templateUrl: 'app/components/order/order-flight.html'
 
               })
+              .state('app.editorderflight', {
+                  url: prefix + '/orderflight/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/order/order-flight.edit.html'
+              })
+
+
+             /* .state('app.orderflight', {
+                  url: prefix + '/orderflight',
+                  templateUrl: 'app/components/order/order-tabairjet.html'
+
+              })*/
 
 
               /*.state('app.orderairjet', {

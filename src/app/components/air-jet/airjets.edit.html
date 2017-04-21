@@ -1,4 +1,4 @@
-<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="AirjetBookEditController as vm" ng-init="
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="AirjetsEditController as vm" ng-init="
     app.settings.asideFolded = false;
     app.settings.asideDock = false;
 ">
@@ -45,73 +45,34 @@
 
 
 
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.PRICE' | translate}}</label>
-                    <div class="col-sm-4">
-                       <input class="form-control" type="text"
-                               placeholder="{{'u.PRICE' | translate}}" ng-model="vm.user.price" ng-disabled="vm.isDetail" >
-
-<!--
-                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.role" ng-options="s.value as s.title for s in vm.userType" ng-disabled="vm.isDetail" ></select>
--->
-
-                    </div>
-                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.PRICEUNIT' | translate}}</label>
-                    <div class="col-sm-4">
-
-                      <!--  <input class="form-control" type="text"
-                               placeholder="{{'u.PRICEUNIT' | translate}}" ng-model="vm.user.currencyUnit" ng-disabled="vm.isDetail" >
--->
-
-                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.currencyUnit" ng-options="s.value as s.title for s in vm.priceType" ng-disabled="vm.isDetail" ></select>
-
-
-                    </div>
-                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FLEETNUNBER' | translate}}</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="{{'u.FLEETNUNBER' | translate}}" ng-model="vm.user.flightNo" ng-disabled="vm.isDetail" >
-                    </div>
-
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-
-
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FLEETTYPE' | translate}}</label>
                     <div class="col-sm-4">
-                       <!-- <input class="form-control" type="text"
-                               placeholder="{{'u.FLEETTYPE' | translate}}" ng-model="vm.user.aircraftType" ng-disabled="vm.isDetail" >
-
--->
-
-                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.aircraftType" ng-options="opt.id as opt.name for opt in vm.jets" ng-disabled="vm.isDetail" ></select>
-
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.FLEETTYPE' | translate}}" ng-model="vm.user.type" ng-disabled="vm.isDetail" >
                     </div>
-
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.WEIGHT' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.WEIGHT' | translate}}" ng-model="vm.user.weight" ng-disabled="vm.isDetail" >
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
 
 
 
@@ -124,64 +85,28 @@
                         <input class="form-control" type="text"
                                placeholder="{{'u.CAPACITY' | translate}}" ng-model="vm.user.capacity" ng-disabled="vm.isDetail" >
                     </div>
-
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
 
 
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.LUGGAGEWEIGHT' | translate}}</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="{{'u.LUGGAGEWEIGHT' | translate}}" ng-model="vm.user.weight" ng-disabled="vm.isDetail" ng-pattern="/^[0-9]{1,20}$/">
-                    </div>
-
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.BEDS' | translate}}</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="{{'u.BEDS' | translate}}" ng-model="vm.user.beds" ng-disabled="vm.isDetail" ng-pattern="/^[0-9]{1,20}$/">
-                    </div>
-
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FACILITIES' | translate}}</label>
-                    <div class="col-sm-4">
-                        <!--                       <input class="form-control" type="text"
-                                                      placeholder="{{'u.FACILITIES' | translate}}" ng-model="vm.user.facilities" ng-disabled="vm.isDetail" >
-                       -->
-                        <textarea class="form-control font-thin" ng-model="vm.user.facilities" rows="4" placeholder="{{'u.FACILITIES' | translate}}" style="resize: none;" ng-disabled="vm.isDetail"></textarea>
-
-                    </div>
-
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
 
 
 
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FULLLOADRANGE' | translate}}</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="{{'u.FULLLOADRANGE' | translate}}" ng-model="vm.user.fullloadRange" ng-disabled="vm.isDetail" ng-pattern="/^[0-9]{1,20}$/">
-                    </div>
+                       <input class="form-control" type="text"
+                               placeholder="{{'u.FULLLOADRANGE' | translate}}" ng-model="vm.user.fullloadRange" ng-disabled="vm.isDetail" >
 
+<!--
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.role" ng-options="s.value as s.title for s in vm.userType" ng-disabled="vm.isDetail" ></select>
+-->
+
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
-
-
 
 
 
@@ -199,37 +124,6 @@
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
-
-
-
-
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.APPEARANCE' | translate}}</label>
-                    <div class="col-sm-6">
-                        <!--<input class="form-control" type="text"
-                               placeholder="{{'u.APPEARANCE' | translate}}" ng-model="vm.user.appearances" ng-disabled="vm.isDetail" >
--->
-
-
-                        <textarea class="form-control font-thin" ng-model="vm.user.appearances" rows="4" placeholder="{{'u.APPEARANCE' | translate}}" style="resize: none;" ng-disabled="vm.isDetail"></textarea>
-
-
-
-
-                        <input type="file"  file-model = "vm.myUploadFile" />
-
-
-                        <button  class="btn btn-default" ng-click="vm.uploadFileApp()"> <i class="fa fa-check-circle"></i> 上传 </button>
-
-                    </div>
-                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
-                </div>
-
-
-
-
 
 
 

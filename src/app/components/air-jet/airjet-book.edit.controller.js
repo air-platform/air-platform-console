@@ -95,7 +95,17 @@
         if(type && type=='detail'){
             vm.isDetail = true;
         }
+        function getAirjetsDatas() {
 
+
+            NetworkService.get(constdata.api.tenant.jetPath  + '/airjets',{page:vm.pageCurrent},function (response) {
+                vm.jets = response.data;
+
+            },function (response) {
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
+            });
+        }
+        getAirjetsDatas();
         function getTenantItem() {
 
             var myid = vm.userInfo.id;
@@ -109,6 +119,30 @@
                 toastr.error(i18n.t('u.GET_DATA_FAILED'));
             });
         }
+
+
+        vm.uploadFileApp = function (){
+            console.log(vm.myUploadFile);
+            NetworkService.postForm('/api/v1/files',vm.myUploadFile,function (response) {
+                toastr.success(i18n.t('u.OPERATE_SUC'));
+
+                console.log(response.data);
+                if(vm.user.appearances == null || vm.user.appearances == ''){
+                    vm.user.appearances = response.data.url;
+                }else {
+                    vm.user.appearances += ',' + response.data.url;
+                }
+                //vm.backAction();
+            },function (response) {
+                vm.authError = response.statusText + '(' + response.status + ')';
+                console.log(vm.authError);
+                toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+            });
+
+            //$rootScope.backPre();
+        }
+
+
 
         vm.uploadFile = function (){
             console.log(vm.myUploadFile);

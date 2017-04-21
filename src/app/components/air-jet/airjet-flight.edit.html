@@ -59,8 +59,14 @@
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FLEETTYPE' | translate}}</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text"
+                       <!-- <input class="form-control" type="text"
                                placeholder="{{'u.FLEETTYPE' | translate}}" ng-model="vm.user.aircraftType" ng-disabled="vm.isDetail" >
+                   -->
+
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.aircraftType" ng-options="opt.id as opt.name for opt in vm.jets" ng-disabled="vm.isDetail" ></select>
+
+
+
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
@@ -292,12 +298,21 @@
 
 
                 <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.IMAGE' | translate}}</label>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.APPEARANCE' | translate}}</label>
                     <div class="col-sm-6">
-                        <input class="form-control" type="text"
-                               placeholder="{{'u.IMAGE' | translate}}" ng-model="vm.user.appearances" ng-disabled="vm.isDetail" >
+                        <!--<input class="form-control" type="text"
+                               placeholder="{{'u.APPEARANCE' | translate}}" ng-model="vm.user.appearances" ng-disabled="vm.isDetail" >
+-->
+
+
+                        <textarea class="form-control font-thin" ng-model="vm.user.appearances" rows="4" placeholder="{{'u.APPEARANCE' | translate}}" style="resize: none;" ng-disabled="vm.isDetail"></textarea>
+
+
+
 
                         <input type="file"  file-model = "vm.myUploadFile" />
+
+
                         <button  class="btn btn-default" ng-click="vm.uploadFileApp()"> <i class="fa fa-check-circle"></i> 上传 </button>
 
                     </div>

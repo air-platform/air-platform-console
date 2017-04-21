@@ -1,0 +1,75 @@
+<!-- list -->
+<ul class="nav" style="position:fixed; width:199px;">
+    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+       <!-- <span translate="">导航菜单</span>-->
+    </li>
+    
+    <li>
+        <a ui-sref="app.orderairbook" class="auto">
+            <span class="pull-right text-muted">
+             <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+            </span>
+            <i class="fa icon-screen-desktop icon text-info-lter"></i>
+            <span class="font-bold" translate="">订单查询</span>
+        </a>
+        <ul class="nav nav-sub dk">
+            <li ui-sref-active="active">
+                <a ui-sref="app.orderairbook">
+                    <span>包机预定</span>
+
+                </a>
+            </li>
+
+
+            <li ui-sref-active="active">
+                <a ui-sref="app.orderflight">
+                    <span>圆梦飞行</span>
+                </a>
+            </li>
+
+
+
+            <li ui-sref-active="active">
+                <a ui-sref="app.orderairtaxi">
+                    <span>Air Taxi</span>
+            </a>
+            </li>
+
+            <li ui-sref-active="active">
+                <a ui-sref="app.orderairtour">
+                    <span>Air Tour</span>
+
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.orderairtrans">
+                    <span>Air Transportation</span>
+
+                </a>
+            </li>
+
+            <!--<li ui-sref-active="active">
+                <a ui-sref="app.orderclass">
+                    <span>航校课程</span>
+
+                </a>
+            </li>-->
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+<!-- / list -->

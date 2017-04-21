@@ -33,10 +33,10 @@
 
 
                 <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FLEETNAME' | translate}}</label>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.ORDERNO' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.FLEETNAME' | translate}}" ng-model="vm.user.name" ng-disabled="vm.isDetail"  required>
+                               placeholder="{{'u.ORDERNO' | translate}}" ng-model="vm.user.orderNo" ng-disabled=true  required>
                     </div>
                     <span ng-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i><i style="font-style:normal; color:#999;">{{'tenant.USERNAMETIP' | translate}}</i></span>
                 </div>
@@ -47,35 +47,48 @@
 
 
                 <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FLEETNUNBER' | translate}}</label>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.STATUS' | translate}}</label>
+                    <div class="col-sm-4">
+
+
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.status" ng-options="opt.value as opt.title for opt in vm.statusType" ng-disabled="vm.isDetail" ></select>
+
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.OWNERNICKNAME' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.FLEETNUNBER' | translate}}" ng-model="vm.user.flightNo" ng-disabled="vm.isDetail" >
+                               placeholder="{{'u.OWNERNICKNAME' | translate}}" ng-model="vm.user.owner" ng-disabled=true >
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
 
+
                 <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FLEETTYPE' | translate}}</label>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CONTACTNAME' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.FLEETTYPE' | translate}}" ng-model="vm.user.aircraftType" ng-disabled="vm.isDetail" >
+                               placeholder="{{'u.CONTACTNAME' | translate}}" ng-model="vm.user.contact.person" ng-disabled=true >
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
 
 
-
-
-
-
                 <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.DEPARTURE' | translate}}</label>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CONTACTPHONE' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.DEPARTURE' | translate}}" ng-model="vm.user.departure" ng-disabled="vm.isDetail" >
+                               placeholder="{{'u.CONTACTPHONE' | translate}}" ng-model="vm.user.contact.mobile" ng-disabled=true >
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
@@ -84,26 +97,10 @@
 
 
                 <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.ARRIVAL' | translate}}</label>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CONTACTMAIL' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.ARRIVAL' | translate}}" ng-model="vm.user.arrival" ng-disabled="vm.isDetail" >
-                    </div>
-                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.ALLPRICE' | translate}}</label>
-                    <div class="col-sm-4">
-                       <input class="form-control" type="text"
-                               placeholder="{{'u.ALLPRICE' | translate}}" ng-model="vm.user.price" ng-disabled="vm.isDetail" >
-
-<!--
-                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.role" ng-options="s.value as s.title for s in vm.userType" ng-disabled="vm.isDetail" ></select>
--->
-
+                               placeholder="{{'u.CONTACTMAIL' | translate}}" ng-model="vm.user.contact.email" ng-disabled=true >
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
@@ -114,27 +111,10 @@
 
 
                 <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.SEATPRICE' | translate}}</label>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CTEATEIONDATE' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.SEATPRICE' | translate}}" ng-model="vm.user.seatPrice" ng-disabled="vm.isDetail" >
-                    </div>
-                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.PRICEUNIT' | translate}}</label>
-                    <div class="col-sm-4">
-
-                      <!--  <input class="form-control" type="text"
-                               placeholder="{{'u.PRICEUNIT' | translate}}" ng-model="vm.user.currencyUnit" ng-disabled="vm.isDetail" >
--->
-
-                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.currencyUnit" ng-options="s.value as s.title for s in vm.priceType" ng-disabled="vm.isDetail" ></select>
-
-
+                               placeholder="{{'u.CTEATEIONDATE' | translate}}" ng-model="vm.user.creationDate" ng-disabled=true >
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
@@ -142,12 +122,11 @@
 
 
 
-
                 <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.ALLSEATS' | translate}}</label>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.PAYMENTDATE' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.ALLSEATS' | translate}}" ng-model="vm.user.seats" ng-disabled="vm.isDetail" >
+                               placeholder="{{'u.PAYMENTDATE' | translate}}" ng-model="vm.user.paymentDate" ng-disabled=true>
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
@@ -155,11 +134,16 @@
 
 
 
+
+
+
+
+
                 <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.MINPASSENGER' | translate}}</label>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FINISHEDDATE' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.MINPASSENGER' | translate}}" ng-model="vm.user.minPassengers" ng-disabled="vm.isDetail" >
+                               placeholder="{{'u.FINISHEDDATE' | translate}}" ng-model="vm.user.finishedDate" ng-disabled=true >
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
@@ -167,97 +151,17 @@
 
 
 
-
                 <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.DATE' | translate}}</label>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.NOTE' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.DATE' | translate}}" ng-model="vm.user.date" ng-disabled="vm.isDetail" >
+                               placeholder="{{'u.NOTE' | translate}}" ng-model="vm.user.note" ng-disabled=true >
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
 
 
-
-
-
-
-
-                <!--<div class="form-group">
-                    <label class="col-sm-2 control-label">Datepicker</label>
-                    <div class="col-sm-10" ng-controller="AirjetFlightEditController">
-                        <div class="input-group w-md">
-                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
-                            <span class="input-group-btn">
-                             <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                        </span>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <label class="col-sm-1 m-l-lg font-bold control-label">{{'product.EXPDATE' | translate}}</label>
-                    <div class="col-sm-5">
-                        <p class="input-group">
-                            <input type="text" class="form-control font-thin" uib-datepicker-popup="{{vm.format}}" ng-model="vm.dt" is-open="vm.opened" min-date="vm.minDate" maxDate="'2016-08-25'" uib-datepicker-options="vm.dateOptions" date-disabled="vm.disabled(date, mode)" ng-required="true" close-text="Close" />
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="vm.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                              </span>
-                        </p>
-                    </div>
-                </div>
-
--->
-
-
-
-
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.DESCRIPTION' | translate}}</label>
-                    <div class="col-sm-4">
-
-                        <textarea class="form-control font-thin" ng-model="vm.user.description" rows="4" placeholder="{{'u.DESCRIPTION' | translate}}" style="resize: none;" ng-disabled="vm.isDetail"></textarea>
-                    </div>
-
-                </div>
-
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-
-
-
-                <!--   <div class="form-group">
-                       <label class="col-sm-1 control-label m-l-lg font-bold">{{'profile.MAILBOX' | translate}}</label>
-                       <div class="col-sm-4">
-                           <input class="form-control" type="email"
-                                  placeholder="{{'profile.MAILBOX' | translate}}" ng-model="vm.user.email" required>
-                       </div>
-                       <span style="color:red;font-size:20px;">*</span>
-                   </div>
-
-                   <div class="line line-dashed b-b line-lg"></div>
-                   <div class="form-group">
-                       <label class="col-sm-1 control-label m-l-lg font-bold">{{'tenant.ACTIVESTATUS' | translate}}</label>
-                       <div class="col-sm-1 checkbox" style="padding-top:0;">
-
-                           <label>
-                                <input style="width:20px;height:20px;" type="checkbox" ng-model="vm.user.enabled" ng-disabled="!vm.isAdd">
-                           </label>
-                       </div>
-                       <div ng-if="!vm.isAdd" class="col-sm-2" style="padding-left:0;">
-                           <button ng-if="vm.user.enabled" class="btn btn-info btn-addon btn-sm pull-left" ng-click="vm.lockTenant()"><i class="fa fa-lock"></i>{{'tenant.LOCK' | translate}}</button>
-                           <button ng-if="!vm.user.enabled" class="btn btn-info btn-addon btn-sm pull-left" ng-click="vm.unlockTenant()"><i class="fa fa-unlock-alt"></i>{{'tenant.ACTIVE' | translate}}</button>
-                       </div>
-                   </div>
-
-                   <div class="line line-dashed b-b line-lg"></div>
-                  -->
 
 
                 <div class="form-group">

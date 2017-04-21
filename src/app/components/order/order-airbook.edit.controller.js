@@ -6,7 +6,7 @@
 
     angular
         .module('iot')
-        .controller('OrderAirtransEditController', OrderAirtransEditController)
+        .controller('OrderAirbookEditController', OrderAirbookEditController)
         .filter('userType',function(i18n) {
         return function(input) {
             var out = '';
@@ -20,7 +20,7 @@
     });
 
     /** @ngInject */
-    function OrderAirtransEditController($scope, NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
+    function OrderAirbookEditController($scope, NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -105,8 +105,8 @@
         if(type && type=='detail'){
             vm.isDetail = true;
         }
-        vm.reqPath = constdata.api.order.airtrans;
-        vm.editPath = 'app.editorderairtrans';
+        vm.reqPath = constdata.api.order.airbook;
+        vm.editPath = 'app.editorderairbook';
         function getTenantItem() {
 
             var myid = vm.userInfo.id;

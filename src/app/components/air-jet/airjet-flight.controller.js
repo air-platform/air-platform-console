@@ -31,6 +31,21 @@
         vm.backAction = backAction;
         vm.userInfo = {};
         vm.subPath = 'ferryflights';
+
+        function getAirjetsDatas() {
+
+
+            NetworkService.get(constdata.api.tenant.jetPath  + '/airjets',{page:vm.pageCurrent},function (response) {
+                vm.jets = response.data.content;
+
+            },function (response) {
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
+            });
+        }
+        getAirjetsDatas();
+
+
+
         function getDatas() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
             var myid = vm.userInfo.id;
