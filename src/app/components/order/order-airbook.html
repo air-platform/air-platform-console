@@ -43,8 +43,9 @@
               <!--  <td ng-click="vm.goDetail(item)">{{item.id}}</td>-->
                 <td ng-click="vm.goDetail(item)">{{item.orderNo}}</td>
                 <td ng-click="vm.goDetail(item)">
-                    <select style="width: 100%;" class="form-control font-thin" ng-model="item.status" ng-options="opt.value as opt.title for opt in vm.statusType" ng-disabled=true ></select>
+                   <!-- {{item.status}}-->
 
+                    <select style="width: 100%;" class="form-control font-thin" ng-model="item.status" ng-options="opt.value as opt.title for opt in vm.statusType" ng-disabled=true ></select>
 
                 </td>
                <td ng-click="vm.goDetail(item)">{{item.creationDate}}</td>

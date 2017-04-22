@@ -57,7 +57,7 @@
             var myid = vm.userInfo.id;
             console.log(vm.userInfo);
 
-            NetworkService.get(vm.reqPath,{page:vm.pageCurrent},function (response) {
+            NetworkService.get(vm.reqPath,{page:vm.pageCurrent,pageSize:10},function (response) {
                 vm.items = response.data.content;
                 updatePagination(response.data);
             },function (response) {
