@@ -433,7 +433,16 @@
                   params : {args : {}},
                   templateUrl: 'app/components/order/order-flight.edit.html'
               })
+              .state('app.ordercard', {
+                  url: prefix + '/ordercard',
+                  templateUrl: 'app/components/order/order-card.html'
 
+              })
+              .state('app.editordercard', {
+                  url: prefix + '/ordercard/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/order/order-card.edit.html'
+              })
 
              /* .state('app.orderflight', {
                   url: prefix + '/orderflight',

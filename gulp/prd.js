@@ -172,7 +172,7 @@ gulp.task('build:fonts', function () {
  */
 gulp.task('build:images', function () {
     return gulp.src([
-        path.join(conf.paths.src, '/assets/images/*.{png,jpeg,jpg,gif,ico}')
+        path.join(conf.paths.src, '/assets/images/*.{png,jpeg,jpg,gif,ico,svg}')
     ])
         /*.pipe($.imagemin({
          optimizationLevel: 5, //type：Number  defaults：3,  optimization level between [0 - 7 ]
