@@ -105,8 +105,8 @@
         if(type && type=='detail'){
             vm.isDetail = true;
         }
-        vm.reqPath = constdata.api.order.airtaxi;
-        vm.editPath = 'app.editorderairtaxi';
+        vm.reqPath = constdata.api.order.card;
+        vm.editPath = 'app.editordercard';
         function getTenantItem() {
 
             var myid = vm.userInfo.id;

@@ -39,8 +39,6 @@
         vm.isDetail = false;
         vm.getTenantItem = getTenantItem;
         vm.submitAction = submitAction;
-        vm.lockTenant = lockTenant;
-        vm.unlockTenant = unlockTenant;
         vm.backAction = backAction;
         vm.back = back;
         vm.addUser = {};
@@ -63,12 +61,21 @@
 
         vm.statusType = [
             {
-                title:'已启用',
-                value:'enabled'
+                title:'处理中',
+                value:'pending'
             },
             {
-                title:'已禁用',
-                value:'disabled'
+                title:'已完成',
+                value:'finished'
+            }
+            ,
+            {
+                title:'已付款',
+                value:'paid'
+            },
+            {
+                title:'已取消',
+                value:'cancelled'
             }
         ];
 
@@ -82,6 +89,8 @@
                 value:'usd'
             }
         ];
+
+
         var username = $stateParams.username;
         var type = $stateParams.args.type;
         console.log(type);
@@ -96,13 +105,14 @@
         if(type && type=='detail'){
             vm.isDetail = true;
         }
-
+        vm.reqPath = constdata.api.order.airtaxi;
+        vm.editPath = 'app.editorderclass';
         function getTenantItem() {
 
             var myid = vm.userInfo.id;
             console.log(myid);
             console.log(username);
-            NetworkService.get(constdata.api.tenant.fleetPath  + '/' + vm.subPath + '/'+ username,null,function (response) {
+            NetworkService.get(vm.reqPath  + '/'  + username,null,function (response) {
                 vm.user = response.data;
                 $rootScope.userNamePlacedTop = vm.user.nickName;
             },function (response) {
@@ -114,7 +124,7 @@
 
         function addItem() {
             var myid = vm.userInfo.id;
-            NetworkService.post(constdata.api.tenant.fleetPath  + '/' + vm.subPath,vm.user,function (response) {
+            NetworkService.post(vm.reqPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -126,7 +136,7 @@
 
         function editItem() {
             var myid = vm.userInfo.id;
-            NetworkService.put(constdata.api.tenant.fleetPath  + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
+            NetworkService.put(vm.reqPath  + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -142,24 +152,7 @@
             }
         }
 
-        function lockTenant() {
-            NetworkService.post(constdata.api.tenant.lockPath +'/'+ username + '/lock',null,function (response) {
-                toastr.success(i18n.t('u.OPERATE_SUC'));
-                vm.getTenantItem();
-            },function (response) {
-                vm.authError = response.statusText + '(' + response.status + ')';
-                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
-            });
-        }
-        function unlockTenant() {
-            NetworkService.post(constdata.api.tenant.lockPath +'/'+ username + '/unlock',null,function (response) {
-                toastr.success(i18n.t('u.OPERATE_SUC'));
-                vm.getTenantItem();
-            },function (response) {
-                vm.authError = response.statusText + '(' + response.status + ')';
-                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
-            });
-        }
+
 
         function backAction() {
             // $state.go('app.tenant');

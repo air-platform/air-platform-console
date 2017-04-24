@@ -30,14 +30,70 @@
         vm.curItem = {};
         vm.backAction = backAction;
         vm.userInfo = {};
-        vm.subPath = 'ferryflights';
+        vm.subPath = 'airbook';
+        vm.statusType = [
+            {
+                title:'处理中',
+                value:'pending'
+            },
+            {
+                title:'已完成',
+                value:'finished'
+            }
+            ,
+            {
+                title:'已付款',
+                value:'paid'
+            },
+            {
+                title:'已取消',
+                value:'cancelled'
+            }
+        ];
+        vm.reqPath = constdata.api.order.airtaxi;
+        vm.editPath = 'app.editorderclass';
         function getDatas() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
             var myid = vm.userInfo.id;
             console.log(vm.userInfo);
 
-            NetworkService.get(constdata.api.tenant.fleetPath  + '/' + vm.subPath,{page:vm.pageCurrent},function (response) {
+            NetworkService.get(vm.reqPath,{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
+
+                if(vm.items.length > 0){
+
+                    for(var i = 0; i < vm.items.length; i ++) {
+
+                        if (vm.items[i].status == 'pending') {
+                            vm.items[i].isPaidEnable = true;
+                            vm.items[i].isFinishEnable = false;
+                            vm.items[i].isDeleteEnable = false;
+
+                        } else if (vm.items[i].status == 'finished') {
+                            vm.items[i].isPaidEnable = false;
+                            vm.items[i].isFinishEnable = false;
+                            vm.items[i].isDeleteEnable = false;
+                        } else if (vm.items[i].status == 'paid') {
+                            vm.items[i].isPaidEnable = false;
+                            vm.items[i].isFinishEnable = true;
+                            vm.items[i].isDeleteEnable = false;
+                        } else if (vm.items[i].status == 'cancelled') {
+                            vm.items[i].isPaidEnable = false;
+                            vm.items[i].isFinishEnable = false;
+                            vm.items[i].isDeleteEnable = false;
+                        }else{
+                            vm.items[i].isPaidEnable = false;
+                            vm.items[i].isFinishEnable = false;
+                            vm.items[i].isDeleteEnable = false;
+                        }
+                    }
+                }
+                vm.displayedCollection = [].concat(vm.items);
+
+
+
+
+
                 updatePagination(response.data);
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
@@ -46,15 +102,42 @@
 
 
         function goAddItem() {
-            $state.go('app.editairjetflight',{});
+            $state.go(vm.editPath,{});
         };
 
         function goEditItem(item) {
-            $state.go('app.editairjetflight',{username:item.id, args:{type:'edit'}});
+            $state.go(vm.editPath,{username:item.id, args:{type:'edit'}});
         };
 
+
+        vm.goOperItem = function (item,oper) {
+
+            if(oper == 1) {
+                NetworkService.post(vm.reqPath + '/' + item.id + '/pay', null, function success() {
+                    var index = vm.items.indexOf(item);
+                    //vm.items.splice(index,1);
+                    toastr.success(i18n.t('u.OPER_SUC'));
+                    getDatas();
+                }, function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+                });
+            }else if(oper == 2){
+                NetworkService.post(vm.reqPath + '/' + item.id + '/finish', null, function success() {
+                    var index = vm.items.indexOf(item);
+                    //vm.items.splice(index,1);
+                    toastr.success(i18n.t('u.OPER_SUC'));
+                    getDatas();
+                }, function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+                });
+            }
+        };
+
+
         function goDetail(item) {
-            $state.go('app.editairjetflight',{username:item.id, args:{type:'detail'}});
+            $state.go(vm.editPath,{username:item.id, args:{type:'detail'}});
 
         };
 
@@ -148,10 +231,12 @@
         getDatas();
 
 
-        //Model
-
-        vm.tipsInfo = delmodaltip;
-        vm.openAlert = function (size,model) {
+        vm.tipsInfo = {
+            title:'修改订单',
+            content:'您确定对该订单执行此操作吗？更改后将不可撤销!'
+        };
+        vm.openAlert = function (size,model, oper) {
+            console.log(vm.tipsInfo);
             var modalInstance = $uibModal.open({
                 templateUrl: 'myModalContent.html',
                 size: size,
@@ -163,7 +248,7 @@
                 }
             });
             modalInstance.result.then(function (param) {
-                vm.removeItem(model);
+                vm.goOperItem(model,oper);
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
