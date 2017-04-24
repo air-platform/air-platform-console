@@ -13,7 +13,7 @@
           <!--<span class="hidden-folded m-l-xs">{{main.app.name}}</span>-->
         <!--</a>-->
 
-        <a ui-sref="app.dashboard"> <img class="img-responsive" style="height: 60px;" src="images/logo.png"></a>
+        <a ui-sref="app.dashboard"> <img class="img-responsive" style="height: 60px;" src="images/logo.svg"></a>
 
         <!-- / brand -->
       </div>
@@ -26,9 +26,8 @@
             <h3 class="font-bold" ng-if="vm.getUserRole()"></h3>
             <h3 class="font-bold" ng-if="!vm.getUserRole()" ></h3>
         </div>
-        <div class="buttons pull-right inline">
-          <!-- toggle languages -->
-          <div class="dropdown inline">
+        <div class="buttons pull-right inline" style="margin-top:15px;">
+         <!--<div class="dropdown inline">
             <a style="background-color:#23B7E5; color:white;" type="button" class="btn dropdown-toggle bg-white header" data-toggle="dropdown" id="dropdownLang">
               {{ vm.langChoosen }}
               <span class="caret"></span>
@@ -38,13 +37,11 @@
                 <a role="menuitem" ng-click="vm.toggleLang(vm.langLeft)" ng-bind="vm.langLeft"></a>
               </li>
             </ul>
-          </div>
+          </div>-->
           <!-- profile -->
 
 
-          <div class="dropdown inline">
-
-
+          <div class="dropdown inline" style="background-color:#23B7E5; color:white;>
 
             <a ui-sref="app.profile" ng-bind="vm.userinfo.nickName"></a>
             </div>

@@ -30,6 +30,7 @@
         vm.curItem = {};
         vm.backAction = backAction;
         vm.userInfo = {};
+
         function getDatas() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
             var myid = vm.userInfo.id;

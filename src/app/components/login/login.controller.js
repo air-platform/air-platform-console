@@ -279,6 +279,7 @@
         // 
         StorageService.get(hnaInfo) && (StorageService.get(hnaInfo).type == 'user') ? $rootScope.isRoleAdmin = true : $rootScope.isRoleAdmin = false
         //切换语言
+        userLanguage = 'zh-cn';
         userLanguage == 'zh-cn' ? vm.langChoosen = langChi : vm.langChoosen = langEng
         userLanguage == 'zh-cn' ? vm.langLeft = langEng : vm.langLeft = langChi
         vm.toggleLang = function(lang) {

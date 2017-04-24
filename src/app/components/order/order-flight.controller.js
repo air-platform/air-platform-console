@@ -50,6 +50,14 @@
                 value:'cancelled'
             }
         ];
+
+
+
+
+
+
+
+
         vm.reqPath = constdata.api.order.airflight;
         vm.editPath = 'app.editorderflight';
         function getDatas() {
@@ -59,6 +67,44 @@
 
             NetworkService.get(vm.reqPath,{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
+
+
+                if(vm.items.length > 0){
+
+                    for(var i = 0; i < vm.items.length; i ++) {
+
+                        if (vm.items[i].status == 'pending') {
+                            vm.items[i].isPaidEnable = true;
+                            vm.items[i].isFinishEnable = false;
+                            vm.items[i].isDeleteEnable = false;
+
+                        } else if (vm.items[i].status == 'finished') {
+                            vm.items[i].isPaidEnable = false;
+                            vm.items[i].isFinishEnable = false;
+                            vm.items[i].isDeleteEnable = false;
+                        } else if (vm.items[i].status == 'paid') {
+                            vm.items[i].isPaidEnable = false;
+                            vm.items[i].isFinishEnable = true;
+                            vm.items[i].isDeleteEnable = false;
+                        } else if (vm.items[i].status == 'cancelled') {
+                            vm.items[i].isPaidEnable = false;
+                            vm.items[i].isFinishEnable = false;
+                            vm.items[i].isDeleteEnable = false;
+                        }else{
+                            vm.items[i].isPaidEnable = false;
+                            vm.items[i].isFinishEnable = false;
+                            vm.items[i].isDeleteEnable = false;
+                        }
+                    }
+                }
+               // vm.displayedCollection = [].concat(vm.items);
+
+
+
+
+
+
+
                 updatePagination(response.data);
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
@@ -75,18 +121,33 @@
         };
 
 
-        vm.goPaidItem = function (item) {
+        vm.goOperItem = function (item,oper) {
 
-            NetworkService.post(vm.reqPath  + '/' + item.id + '/pay',null,function success() {
-                var index = vm.items.indexOf(item);
-                //vm.items.splice(index,1);
-                toastr.success(i18n.t('u.OPER_SUC'));
-                getDatas();
-            },function (response) {
-                vm.authError = response.statusText + '(' + response.status + ')';
-                toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
-            });
+            if(oper == 1) {
+                NetworkService.post(vm.reqPath + '/' + item.id + '/pay', null, function success() {
+                    var index = vm.items.indexOf(item);
+                    //vm.items.splice(index,1);
+                    toastr.success(i18n.t('u.OPER_SUC'));
+                    getDatas();
+                }, function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+                });
+            }else if(oper == 2){
+                NetworkService.post(vm.reqPath + '/' + item.id + '/finish', null, function success() {
+                    var index = vm.items.indexOf(item);
+                    //vm.items.splice(index,1);
+                    toastr.success(i18n.t('u.OPER_SUC'));
+                    getDatas();
+                }, function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+                });
+            }
         };
+
+
+
 
 
         function goDetail(item) {
@@ -188,9 +249,9 @@
         //vm.tipsInfo = delmodaltip;
         vm.tipsInfo = {
             title:'修改订单',
-            content:'您确定该订单已付款吗？更改订单状态后不可撤销'
+            content:'您确定对该订单执行此操作吗？更改后将不可撤销!'
         };
-        vm.openAlert = function (size,model) {
+        vm.openAlert = function (size,model, oper) {
             console.log(vm.tipsInfo);
             var modalInstance = $uibModal.open({
                 templateUrl: 'myModalContent.html',
@@ -203,12 +264,11 @@
                 }
             });
             modalInstance.result.then(function (param) {
-                vm.goPaidItem(model);
+                vm.goOperItem(model,oper);
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
         }
-
 
         vm.tipsInfoReset = {title:i18n.t('profile.RESET_PWD'),content:i18n.t('profile.RESET_PWD_CONFIRM')};
         vm.resetAlert = function (size,model) {

@@ -99,6 +99,20 @@
             vm.isDetail = true;
         }
         vm.richContent="input here";
+        vm.user.clientManagersArr = [];
+
+        vm.addNewClientManager = function() {
+
+            vm.user.clientManagersArr.push({
+                name:'',
+                email:''
+            })
+        }
+
+        vm.removeClientManager = function(item) {
+            var index = vm.user.clientManagersArr.indexOf(item);
+            vm.user.clientManagersArr.splice(index, 1);
+        }
 
         function getAirjetsDatas() {
 
@@ -121,6 +135,26 @@
 
                 var arrTime = vm.user.timeSlot.split("-");
                 vm.user.time = {start:arrTime[0], end:arrTime[1]};
+
+                vm.user.clientManagersArr = [];
+                if(vm.user.clientManagers){
+                    var uInfo = vm.user.clientManagers.split( "," );
+
+                    if(uInfo.length > 0){
+                        for(var i = 0; i < uInfo.length; i ++){
+                            var uDetailStr = uInfo[i].split(':');
+                            if(uDetailStr.length > 0){
+                                vm.user.clientManagersArr.push({
+                                    name:uDetailStr[0],
+                                    email:uDetailStr[1]
+                                })
+                            }
+
+                        }
+                    }
+                }
+
+
 
                 console.log(vm.user);
                 vm.dt   =   new Date((vm.user.date));
@@ -158,9 +192,18 @@
 
             vm.user.description = getMarkDownAction().markdown;
             console.log(vm.user.description);
+            vm.user.clientManagers = '';//JSON.stringify(vm.user.clientManagersArr);
+            if(vm.user.clientManagersArr.length > 0) {
+                vm.user.clientManagers  = vm.user.clientManagersArr[0].name + ':'+vm.user.clientManagersArr[0].email;
+                for (var i = 1; i < vm.user.clientManagersArr.length; i ++) {
+                    vm.user.clientManagers  += ',' + vm.user.clientManagersArr[i].name + ':'+vm.user.clientManagersArr[i].email;
+                }
+            }
+            console.log(vm.user.clientManagers);
 
             NetworkService.post(constdata.api.tenant.fleetPath + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
+
                 vm.backAction();
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
@@ -178,6 +221,17 @@
             //vm.user.description = mdContent;
             vm.user.timeSlot=vm.user.time.start+'-'+vm.user.time.end;
             vm.user.date = dateToString(vm.dt);
+
+            vm.user.clientManagers = '';//JSON.stringify(vm.user.clientManagersArr);
+            if(vm.user.clientManagersArr.length > 0) {
+                vm.user.clientManagers  = vm.user.clientManagersArr[0].name + ':'+vm.user.clientManagersArr[0].email;
+                for (var i = 1; i < vm.user.clientManagersArr.length; i ++) {
+                    vm.user.clientManagers  += ',' + vm.user.clientManagersArr[i].name + ':'+vm.user.clientManagersArr[i].email;
+                }
+            }
+            console.log(vm.user.clientManagers);
+
+
             NetworkService.put(constdata.api.tenant.fleetPath + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();

@@ -140,7 +140,8 @@
     "FLIGHTDATE":"行程日期",
     "PASSENGERNUM":"乘客人数",
 
-    "CLIENTMNGADD":"客户经理信息",
+    "CLIENTMNGADD":"客户经理",
+    "PASSENGERSNUM":"乘客数",
     "CLIENTMNGNAME":"姓名",
     "CLIENTMNGEMAIL":"邮箱",
     "DATE":"日期"
