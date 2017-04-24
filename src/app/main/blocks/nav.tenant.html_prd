@@ -3,7 +3,16 @@
     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
        <!-- <span translate="">导航菜单</span>-->
     </li>
-    
+
+
+    <li ui-sref-active="active">
+        <a ui-sref="app.airjets">
+            <i class="glyphicon glyphicon-th-large icon text-info-lter"></i>
+            <span class="font-bold" translate="">AirJet机型</span>
+        </a>
+    </li>
+
+
     <li>
         <a ui-sref="app.orderairbook" class="auto">
             <span class="pull-right text-muted">
@@ -24,7 +33,7 @@
 
             <li ui-sref-active="active">
                 <a ui-sref="app.orderflight">
-                    <span>圆梦飞行</span>
+                    <span>缘梦飞行</span>
                 </a>
             </li>
 
@@ -33,7 +42,7 @@
             <li ui-sref-active="active">
                 <a ui-sref="app.orderairtaxi">
                     <span>Air Taxi</span>
-            </a>
+                </a>
             </li>
 
             <li ui-sref-active="active">
@@ -55,21 +64,9 @@
 
                 </a>
             </li>-->
-    </li>
+            </li>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-</ul>
+        </ul>
 <!-- / list -->
