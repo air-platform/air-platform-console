@@ -112,9 +112,14 @@
 
 
 
+                       // console.log(hnaInfo,vm.user);
+                        //return;
+                        if(vm.user.type == 'admin'){
 
-
-                        $state.go('app.dashboard');
+                            $state.go('app.tenant');
+                        }else {
+                            $state.go('app.orderairbook');
+                        }
 
                      },function (response) {
                         console.log('failed....');

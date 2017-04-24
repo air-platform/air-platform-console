@@ -140,6 +140,10 @@
     "FLIGHTDATE":"行程日期",
     "PASSENGERNUM":"乘客人数",
 
+    "CLIENTMNGADD":"客户经理",
+    "PASSENGERSNUM":"乘客数",
+    "CLIENTMNGNAME":"姓名",
+    "CLIENTMNGEMAIL":"邮箱",
     "DATE":"日期"
 
   },
@@ -193,6 +197,9 @@
     "VERIFYCODE": "请输入验证码",
     "REGISTER": "注册",
     "REGISTER_FAILED": "注册失败",
+    "REGISTERING":"注册中...",
+    "REGISTERING2":"注册中..",
+    "REGISTERING1":"注册中.",
     "REGISTER_ERROR": "用户名或密码格式不正确",
     "PASSWORD_ERROR": "密码不匹配",
     "VERIFY_ERROR": "验证码错误",
@@ -201,16 +208,16 @@
   "dashboard" : {
     "DASHBOARD":"仪表盘",
     "TOTALAMOUNT":"总数",
-    "PRODUCT":"产品",
+    "PRODUCT":"云服务",
     "APPLICATION":"应用",
     "DEVICE":"设备",
     "EVENT":"事件",
     "MEM":"内存",
     "CPU":"CPU",
     "DISK":"磁盘",
-    "ACTIVE_DEVICE_NO":"每周",
-    "ACTIVE_EVENT_NO":"活跃事件量",
-    "SDK_STA":"SDK稳定性",
+    "ACTIVE_DEVICE_NO":"舆情分析",
+    "ACTIVE_EVENT_NO":"物联网",
+    "SDK_STA":"人工智能",
     "GENERALSITUATION":"概况",
     "EVENTSITUATION":"服务统计图",
     "DEVICESITUATION":"应用统计图",
@@ -236,8 +243,18 @@
     "ADD_T_INFO":"添加租户信息",
     "TENANT":"租户",
     "USER":"用户",
-    "ADMIN":"管理员",
-    "DESCRIPTION":"描述"
+
+
+    "AVATAR":"头像",
+    "WEBSITE":"官网",
+    "ADDRESS":"地址",
+    "HOTLINE":"热线电话",
+    "DESCRIPTION":"描述",
+
+
+
+
+    "ADMIN":"管理员"
   },
   "device" : {
     "DEVICEMANAGER":"设备管理",
@@ -292,16 +309,13 @@
     "PROFILE":"云服务信息",
     "TOPIC":"使用说明",
     "SERVICEAPI":"API说明",
-    "ACCESSURL":"路径",
     "EVENTMAPPING":"事件映射",
     "NOTIFICATION":"主题订阅",
-    "DESCRIPTION":"应用描述",
-    "DETAILS":"详情",
-    "LANGUAGE":"开发语言",
-    "STATUS":"应用状态",
     "BACK":"返回",
-    "PRODUCTDETAIL":"Cloud Service Info",
+    "PRODUCTDETAIL":"云服务信息",
+    "ACCESSURL":"路径",
     "ACCESSTOKEN":"访问密钥",
+    "ENABLE":"开启云服务",
     "SAVE":"保存",
     "SDKDETAIL":"SDK信息",
     "VERSION":"版本",
@@ -331,6 +345,11 @@
     "ADDNOTIFICATION":"添加主题订阅",
     "CHOOSETOPIC":"选择主题",
     "SHOWEDNAME":"展示名称",
+    "DETAILS":"详情",
+    "ENABLE_SERVICE":"启用云服务",
+    "DISABLE_SERVICE":"禁用云服务",
+    "LANGUAGE":"开发语言",
+    "STATUS":"应用状态",
     "FIELDNAME":"字段名称",
     "FIELDTYPE":"字段类型",
     "INPUTENUMNAME":"请输入枚举名称",
@@ -344,8 +363,6 @@
     "ISINDEXED":"是否索引",
     "NONE":"无",
     "REMOVE":"移除",
-    "ENABLE_SERVICE":"Enable Service",
-    "DISABLE_SERVICE":"Disable Service",
     "CODE_ADDR":"代码地址",
     "ENABLE_APP":"启用应用",
     "DISABLE_APP":"禁用应用",
@@ -356,8 +373,8 @@
     "DEPLOY":"部署",
     "ACCESS_PORT":"访问端口",
     "SERVICE_PIC":"服务图片",
-    "INPUTSERVICEPIC":"请输入服务图片的路径",
     "REQUESTPATH":"访问路径",
+    "INPUTSERVICEPIC":"请输入服务图片的路径",
     "INPUTREQUESTPATH":"请输入访问路径地址",
     "PROVIDER":"提供者",
     "INPUTPROVIDER":"请输入服务提供者",
@@ -371,7 +388,6 @@
     "DEPLOYINFO":"部署信息",
     "MONITORINFO":"应用监控",
     "LOGINFO":"应用日志"
-
   },
   "event":{
     "EVENTMANAGER":"事件管理",
@@ -408,7 +424,8 @@
     "DESKTOP":"桌面版"
   },
   "tenant":{
-    "USERNAMETIP":"只能是数字、字母、下划线、\\、-，长度在2-20位之间",
+    "USERNAMETIP":"",
+    "PASSWORDTIP":"",
     "ACTIVESTATUS":"激活状态",
     "LOCK":"锁定",
     "ACTIVE":"激活"
