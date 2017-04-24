@@ -299,6 +299,55 @@
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CLIENTMNGADD' | translate}}</label>
+                </div>
+
+                <div  class="form-group">
+
+                    <div class="form-group" ng-repeat="item in vm.user.clientManagersArr">
+
+                        <label class="col-sm-1 control-label  font-bold">{{'u.CLIENTMNGNAME' | translate}}</label>
+                        <div class="col-sm-2">
+                            <input class="form-control" type="text"
+                                   placeholder="{{'u.CLIENTMNGNAME' | translate}}" ng-model="item.name" ng-disabled="vm.isDetail"  required>
+
+                        </div>
+
+                        <label class="col-sm-1 control-label  font-bold">{{'u.CLIENTMNGEMAIL' | translate}}</label>
+                        <div class="col-sm-2">
+                            <input class="form-control" type="text"
+                                   placeholder="{{'u.CLIENTMNGEMAIL' | translate}}" ng-model="item.email" ng-disabled="vm.isDetail"  required>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <button ng-if="!vm.isDetail" ng-click="vm.removeClientManager(item)" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-minus"></i>{{'product.DELETE' | translate}}</button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-sm-4">
+                        <button ng-if="!vm.isDetail" ng-click="vm.addNewClientManager()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-plus"></i>{{'u.ADD' | translate}}</button>
+
+                    </div>
+
+                </div>
+
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+
+
+
 
 
                 <div  class="form-group">

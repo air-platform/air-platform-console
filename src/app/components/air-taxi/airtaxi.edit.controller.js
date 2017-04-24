@@ -46,6 +46,7 @@
         vm.addUser = {};
         vm.addUser.role='tenant';
         vm.subPath = 'airtaxis';
+        vm.user.clientManagersArr = [];
         vm.userType = [
             {
                 title:'管理员',
@@ -101,12 +102,26 @@
 
         vm.addNewCraftItem = function() {
 
-            vm.user.aircraftItemsAdd.push({
+            vm.user.aircraftItems.push({
                 price:'',
                 seatPrice:'',
                 currencyUnit:'rmb',
                 aircraft:''
             })
+        }
+
+
+        vm.addNewClientManager = function() {
+
+            vm.user.clientManagersArr.push({
+                name:'',
+                email:''
+            })
+        }
+
+        vm.removeClientManager = function(item) {
+            var index = vm.user.clientManagersArr.indexOf(item);
+            vm.user.clientManagersArr.splice(index, 1);
         }
 
         vm.realAddNewCraftItem = function(item) {
@@ -140,17 +155,41 @@
         function getTenantItem() {
 
             var myid = vm.userInfo.id;
+
             console.log(myid);
             console.log(username);
             NetworkService.get(constdata.api.tenant.fleetPath +'/' + vm.subPath + '/'+ username,null,function (response) {
                 vm.user = response.data;
 
                 vm.user.aircraftItemsAdd = [];
+                vm.user.clientManagersArr = [];
                 if(vm.user.aircraftItems.length > 0){
                     for (var i = 0; i < vm.user.aircraftItems.length; i ++){
                         vm.user.aircraftItems[i].aircraftId = vm.user.aircraftItems[i].aircraft.id;
                     }
                 }
+
+                if(vm.user.clientManagers){
+                    var uInfo = vm.user.clientManagers.split( "," );
+
+                    if(uInfo.length > 0){
+                        for(var i = 0; i < uInfo.length; i ++){
+                            var uDetailStr = uInfo[i].split(':');
+                            if(uDetailStr.length > 0){
+                                vm.user.clientManagersArr.push({
+                                    name:uDetailStr[0],
+                                    email:uDetailStr[1]
+                                })
+                            }
+
+                        }
+                    }
+
+
+                }
+
+
+
                 $rootScope.userNamePlacedTop = vm.user.nickName;
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
@@ -168,6 +207,21 @@
                     vm.user.aircraftItems[i].aircraft = tmp;
                 }
             }
+
+            vm.user.clientManagers = '';//JSON.stringify(vm.user.clientManagersArr);
+            if(vm.user.clientManagersArr.length > 0) {
+                vm.user.clientManagers  = vm.user.clientManagersArr[0].name + ':'+vm.user.clientManagersArr[0].email;
+                for (var i = 1; i < vm.user.clientManagersArr.length; i ++) {
+                    vm.user.clientManagers  += ',' + vm.user.clientManagersArr[i].name + ':'+vm.user.clientManagersArr[i].email;
+                }
+            }
+            console.log(vm.user.clientManagers);
+
+            console.log(vm.user.aircraftItems);
+           // return;
+
+
+
             NetworkService.post(constdata.api.tenant.fleetPath  + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
@@ -189,6 +243,18 @@
                     vm.user.aircraftItems[i].aircraft = tmp;
                 }
             }
+
+
+
+            vm.user.clientManagers = '';//JSON.stringify(vm.user.clientManagersArr);
+
+            if(vm.user.clientManagersArr.length > 0) {
+                vm.user.clientManagers  = vm.user.clientManagersArr[0].name + ':'+vm.user.clientManagersArr[0].email;
+                for (var i = 1; i < vm.user.clientManagersArr.length; i ++) {
+                    vm.user.clientManagers  += ',' + vm.user.clientManagersArr[i].name + ':'+vm.user.clientManagersArr[i].email;
+                }
+            }
+            console.log(vm.user.clientManagers);
             console.log(vm.user.aircraftItems);
 
 

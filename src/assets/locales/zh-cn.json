@@ -98,7 +98,7 @@
     "CONTACTNAME":"客户姓名",
     "CONTACTMAIL":"客户邮箱",
     "CONTACTPHONE":"客户电话",
-   
+    "CONTACT":"联系方式",
     "TIMESLOT":"时段",
     "TIMESLOTSTART":"开始",
     "TIMESLOTEND":"结束",
@@ -136,7 +136,13 @@
     "PAYMENTDATE":"付款日期",
     "FINISHEDDATE":"完成日期",
     "OWNERNICKNAME":"订单客户",
+    "FLIGHTINFO":"航段信息",
+    "FLIGHTDATE":"行程日期",
+    "PASSENGERNUM":"乘客人数",
 
+    "CLIENTMNGADD":"客户经理信息",
+    "CLIENTMNGNAME":"姓名",
+    "CLIENTMNGEMAIL":"邮箱",
     "DATE":"日期"
 
   },

@@ -77,7 +77,7 @@
 
         vm.goPaidItem = function (item) {
 
-            NetworkService.post(vm.reqPath  + '/' + item.id + '/paid',null,function success() {
+            NetworkService.post(vm.reqPath  + '/' + item.id + '/pay',null,function success() {
                 var index = vm.items.indexOf(item);
                 //vm.items.splice(index,1);
                 toastr.success(i18n.t('u.OPER_SUC'));
