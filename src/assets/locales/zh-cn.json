@@ -144,6 +144,7 @@
     "PASSENGERSNUM":"乘客数",
     "CLIENTMNGNAME":"姓名",
     "CLIENTMNGEMAIL":"邮箱",
+    "CARDNAME":"卡名称",
     "DATE":"日期"
 
   },

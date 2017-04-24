@@ -50,7 +50,7 @@
                 value:'cancelled'
             }
         ];
-        vm.reqPath = constdata.api.order.airtaxi;
+        vm.reqPath = constdata.api.order.course;
         vm.editPath = 'app.editorderclass';
         function getDatas() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
