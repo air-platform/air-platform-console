@@ -61,7 +61,43 @@
 
 
 
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CONTACTNAME' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.CONTACTNAME' | translate}}" ng-model="vm.user.contact.person" ng-disabled=true >
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
 
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CONTACTPHONE' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.CONTACTPHONE' | translate}}" ng-model="vm.user.contact.mobile" ng-disabled=true >
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CONTACTMAIL' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.CONTACTMAIL' | translate}}" ng-model="vm.user.contact.email" ng-disabled=true >
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+<!--
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.OWNERNICKNAME' | translate}}</label>
                     <div class="col-sm-4">
@@ -70,7 +106,7 @@
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
-                <div  class="line line-dashed b-b line-lg"></div>
+                <div  class="line line-dashed b-b line-lg"></div>-->
 
 
                 <div  class="form-group">

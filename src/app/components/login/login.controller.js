@@ -59,8 +59,8 @@
                     //updatePagination(response.data);
                     console.log(vm.userinfo);
                 }, function (response) {
-                    vm.authError = i18n.t('login.LOGIN_FAILED');
-                    toastr.error(i18n.t('u.GET_DATA_FAILED') + ' ' + response.status);
+                    vm.authError = '服务器内部错误';
+                   // toastr.error(i18n.t('u.GET_DATA_FAILED') + ' ' + response.status);
                 });
             }
         };
@@ -139,6 +139,8 @@
                     vm.authError = i18n.t('login.LOGIN_ERROR');
                 }else if(response.status == '404'){
                     vm.authError = i18n.t('login.LOGIN_ERROR_NO_URER');
+                }else if(response.status == '500'){
+                    vm.authError = '服务器内部错误';
                 }else{
                     vm.authError = i18n.t('login.LOGIN_FAILED');
                 }
