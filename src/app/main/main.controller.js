@@ -163,13 +163,10 @@
         //getUserRole();
         vm.pageRoutes = $rootScope.pageRoutes;
         vm.goSeperateState = function(index,item) {
-            if(index == -1) {
-              $state.go('app.dashboard');
-            } else {
-              $state.go(item.name,item.params);
-              // console.log(item.name);
-              var n = vm.pageRoutes.length-index;
-              vm.pageRoutes.splice(index+1,n+1);
+            if(index == 1){
+                $state.go('app.tenant');
+            }else {
+                $state.go('app.orderairbook');
             }
         }
         // vm.clearItems = function() {

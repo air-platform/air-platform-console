@@ -193,6 +193,7 @@
 
                 console.log(response.data);
                 vm.user.image = response.data.url;
+                console.log(vm.user.image);
                 //vm.backAction();
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';

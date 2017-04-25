@@ -6,6 +6,8 @@
     "TOURROUTE":"观光路线",
     "ALL":"全部",
     "NAME":"名称",
+    "ENTNAME":"企业名称",
+    "ENTAVATAR":"企业Logo",
     "NICKNAME":"昵称",
     "OWNER":"所有者",
     "TENANT":"租户",
@@ -179,7 +181,7 @@
     "LOGIN_ERROR_NO_URER": "用户不存在",
     "LOGIN_ERROR_SERVER": "服务器连接错误",
     "LOGOUT": "退出",
-    "PINFO":"个人信息",
+    "PINFO":"信息",
     "CHANGEPSD":"修改密码"
   },
   "register" : {

@@ -22,18 +22,18 @@
           <div class="wrapper-md m-t m-b" style="padding-left:0;padding-right:0;">
               <ul class="bg-light" style="margin:0;list-style: none;">
                 <li style="float:left;">
-                  <a class="h4" ng-if="isRoleAdmin" ng-click="main.goSeperateState(-1,item)" style="font-weight: bold; font-size: 15px;">
+                  <a class="h4" ng-if="isRoleAdmin" ng-click="main.goSeperateState(1,item)" style="font-weight: bold; font-size: 15px;">
                     <i class="fa fa-home"></i> 管理员主页
                   </a>
-                  <a class="h4" ng-if="!isRoleAdmin" ng-click="main.goSeperateState(-1,item)" style="font-weight: bold; font-size: 15px;">
+                  <a class="h4" ng-if="!isRoleAdmin" ng-click="main.goSeperateState(2,item)" style="font-weight: bold; font-size: 15px;">
                     <i class="fa fa-home"></i> 用户主页
                   </a>
                 </li>
-                <li style="float:left;" ng-repeat="item in main.pageRoutes">
+                <!--<li style="float:left;" ng-repeat="item in main.pageRoutes">
                   <span class="divider" style="padding:0 4px 0 6px;">></span>
                   <a class="h4" ng-click="main.goSeperateState($index,item)" style="font-weight: bold; font-size: 14px;">{{item.url}}
                   </a>
-                </li>
+                </li>-->
               </ul>
           </div>
         </div>

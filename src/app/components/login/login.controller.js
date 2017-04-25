@@ -115,7 +115,6 @@
                        // console.log(hnaInfo,vm.user);
                         //return;
                         if(vm.user.type == 'admin'){
-
                             $state.go('app.tenant');
                         }else {
                             $state.go('app.orderairbook');
@@ -277,8 +276,10 @@
             var info = StorageService.get(hnaInfo);
 
             if (info && info.type.toUpperCase() == 'ADMIN'){
+                $rootScope.isRoleAdmin = true;
                 return true;
             }
+            $rootScope.isRoleAdmin = false;
             return false;
         }
         // 

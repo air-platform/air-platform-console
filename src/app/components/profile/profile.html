@@ -28,10 +28,10 @@
                     <!-- fields -->
                     <!--<br/>-->
                     <div class="form-group">
-                        <label class="col-sm-1 m-l-lg font-bold control-label">{{'profile.NICKNAME' | translate}}</label>
+                        <label class="col-sm-1 m-l-lg font-bold control-label">{{'u.ENTNAME' | translate}}</label>
                         <div class="col-sm-6">
                             <!--<p class="form-control-static">{{vm.userinfo.username}}</p>-->
-                            <input type="text" class="form-control col-sm-5" placeholder="{{'profile.NICKNAME' | translate}}" ng-model="vm.userinfo.nickName" >
+                            <input type="text" class="form-control col-sm-5" placeholder="{{'u.ENTNAME' | translate}}" ng-model="vm.userinfo.nickName" >
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg"></div>
@@ -49,10 +49,10 @@
 
 
                     <div  class="form-group">
-                        <label class="col-sm-1 control-label m-l-lg font-bold">{{'profile.AVATAR' | translate}}</label>
+                        <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.ENTAVATAR' | translate}}</label>
                         <div class="col-sm-6">
                             <input class="form-control" type="text"
-                                   placeholder="{{'profile.AVATAR' | translate}}" ng-model="vm.userinfo.avatar" ng-disabled="vm.isDetail" >
+                                   placeholder="{{'u.ENTAVATAR' | translate}}" ng-model="vm.userinfo.avatar" ng-disabled="vm.isDetail" >
 
                             <input type="file"  file-model = "vm.myUploadFile" name="uploadPic" id="myfileId"/>
                             <button  class="btn btn-default" ng-click="vm.uploadFile()"> <i class="fa fa-check-circle"></i> 上传 </button>

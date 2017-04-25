@@ -76,6 +76,10 @@
             {
                 title:'已取消',
                 value:'cancelled'
+            },
+            {
+                title:'已删除',
+                value:'deleted'
             }
         ];
 
@@ -105,7 +109,7 @@
         if(type && type=='detail'){
             vm.isDetail = true;
         }
-        vm.reqPath = constdata.api.order.airtaxi;
+        vm.reqPath = constdata.api.order.course;
         vm.editPath = 'app.editorderclass';
         function getTenantItem() {
 

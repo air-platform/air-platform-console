@@ -48,6 +48,10 @@
             {
                 title:'已取消',
                 value:'cancelled'
+            },
+            {
+                title:'已删除',
+                value:'deleted'
             }
         ];
         vm.reqPath = constdata.api.order.airtrans;

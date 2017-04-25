@@ -44,7 +44,7 @@
                 <div ng-if="vm.isAdd" class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.PASSWORD' | translate}}</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text"
+                        <input class="form-control" type="password"
                                placeholder="{{'u.PASSWORD' | translate}}" ng-model="vm.addUser.password" ng-pattern="/^[a-zA-Z0-9_\\-]{8,20}$/" required>
                     </div>
                     <span><i style="color:red;font-size:20px;">* </i><i style="font-style:normal; color:#999;">{{'tenant.PASSWORDTIP' | translate}}</i></span>
@@ -59,7 +59,7 @@
 
 
                 <div ng-if="!vm.isAdd" class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.NICKNAME' | translate}}</label>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.ENTNAME' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
                                placeholder="{{'u.NICKNAME' | translate}}" ng-model="vm.user.nickName" ng-disabled="vm.isDetail" ng-pattern="/^[a-zA-Z0-9_\\-]{2,20}$/" required>
@@ -122,7 +122,7 @@
 
 
                 <div ng-if="!vm.isAdd" class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.AVATAR' | translate}}</label>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.ENTAVATAR' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
                                placeholder="{{'u.AVATAR' | translate}}" ng-model="vm.user.avatar" ng-disabled="vm.isDetail">
