@@ -31,6 +31,14 @@
         vm.backAction = backAction;
         vm.userInfo = {};
         vm.subPath = 'airbook';
+        vm.statusMap={
+            'pending':'处理中',
+            'finished':'已完成',
+            'paid':'已付款',
+            'cancelled':'已取消',
+            'deleted':'已删除'
+
+        };
         vm.statusType = [
             {
                 title:'处理中',

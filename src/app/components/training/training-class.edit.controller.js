@@ -72,6 +72,7 @@
                 value:'disabled'
             }
         ];
+        vm.user.clientManagersArr = [];
 
         vm.priceType = [
             {
@@ -102,6 +103,20 @@
         if(type && type=='detail'){
             vm.isDetail = true;
         }
+
+        vm.addNewClientManager = function() {
+
+            vm.user.clientManagersArr.push({
+                name:'',
+                email:''
+            })
+        }
+
+        vm.removeClientManager = function(item) {
+            var index = vm.user.clientManagersArr.indexOf(item);
+            vm.user.clientManagersArr.splice(index, 1);
+        }
+
         vm.uploadFile = function (){
             console.log(vm.myUploadFile);
             NetworkService.postForm('/api/v1/files',vm.myUploadFile,function (response) {
@@ -128,6 +143,30 @@
                 $rootScope.userNamePlacedTop = vm.user.nickName;
                 vm.sdt   =   new Date((vm.user.startDate));
                 vm.edt   =   new Date((vm.user.endDate));
+
+                vm.user.clientManagersArr = [];
+                if(vm.user.clientManagers){
+                    var uInfo = vm.user.clientManagers.split( "," );
+
+                    if(uInfo.length > 0){
+                        for(var i = 0; i < uInfo.length; i ++){
+                            var uDetailStr = uInfo[i].split(':');
+                            if(uDetailStr.length > 0){
+                                vm.user.clientManagersArr.push({
+                                    name:uDetailStr[0],
+                                    email:uDetailStr[1]
+                                })
+                            }
+
+                        }
+                    }
+
+
+                }
+
+
+
+
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
                 toastr.error(i18n.t('u.GET_DATA_FAILED'));
@@ -157,6 +196,18 @@
 
             vm.user.description = getMarkDownAction().markdown;
             console.log(vm.user.description);
+
+
+            vm.user.clientManagers = '';//JSON.stringify(vm.user.clientManagersArr);
+            if(vm.user.clientManagersArr.length > 0) {
+                vm.user.clientManagers  = vm.user.clientManagersArr[0].name + ':'+vm.user.clientManagersArr[0].email;
+                for (var i = 1; i < vm.user.clientManagersArr.length; i ++) {
+                    vm.user.clientManagers  += ',' + vm.user.clientManagersArr[i].name + ':'+vm.user.clientManagersArr[i].email;
+                }
+            }
+            console.log(vm.user.clientManagers);
+
+
             NetworkService.post(constdata.api.course.basePath+'?school='+vm.user.school.id,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
@@ -173,6 +224,18 @@
             vm.user.endDate = dateToString(vm.edt);
 
             vm.user.description = getMarkDownAction().markdown;
+
+
+            vm.user.clientManagers = '';//JSON.stringify(vm.user.clientManagersArr);
+            if(vm.user.clientManagersArr.length > 0) {
+                vm.user.clientManagers  = vm.user.clientManagersArr[0].name + ':'+vm.user.clientManagersArr[0].email;
+                for (var i = 1; i < vm.user.clientManagersArr.length; i ++) {
+                    vm.user.clientManagers  += ',' + vm.user.clientManagersArr[i].name + ':'+vm.user.clientManagersArr[i].email;
+                }
+            }
+            console.log(vm.user.clientManagers);
+
+
             console.log(vm.user.description);
             NetworkService.put(constdata.api.course.basePath+'/'+vm.user.id,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
@@ -234,6 +297,12 @@
                 vm.schools = response.data.content;
                 console.log(vm.schools);
                 if(vm.schools.length > 0){
+                    if(!vm.user){
+                        vm.user = {};
+                    }
+                    if(!vm.user.school){
+                        vm.user.school = {};
+                    }
                     vm.user.school.id = vm.schools[0].id;
                 }
                 //updatePagination(response.data);
