@@ -93,8 +93,24 @@
                 value:'usd'
             }
         ];
+        vm.classMap={
+            'pending':{'pending':true},
+            'finished':{'finished':true},
+            'paid':{'paid':true},
+            'cancelled':{'cancelled':true},
+            'deleted':{'deleted':true},
+            "published":{'published':true}
 
+        };
+        vm.statusMap={
+            'pending':'处理中',
+            'finished':'已完成',
+            'paid':'已付款',
+            'cancelled':'已取消',
+            'deleted':'已删除',
+            "published":"已发布"
 
+        };
         var username = $stateParams.username;
         var type = $stateParams.args.type;
         console.log(type);

@@ -48,10 +48,12 @@
 
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.STATUS' | translate}}</label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-4" style="top:4px;">
 
-
-                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.status" ng-options="opt.value as opt.title for opt in vm.statusType" ng-disabled="vm.isDetail" ></select>
+                        <!--
+                                                <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.status" ng-options="opt.value as opt.title for opt in vm.statusType" ng-disabled="vm.isDetail" ></select>
+                        -->
+                        <label ng-class="{'bg-info':vm.classMap['pending'][vm.user.status],'bg-warning':vm.classMap['cancelled'][vm.user.status], 'bg-dark':vm.classMap['deleted'][vm.user.status],'bg-finished':vm.classMap['finished'][vm.user.status],'bg-success':vm.classMap['paid'][vm.user.status], 'bg-published':vm.classMap['published'][vm.user.status]}" ng-bind="vm.statusMap[vm.user.status]" class="label"></label>
 
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>

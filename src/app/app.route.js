@@ -374,6 +374,20 @@
                   templateUrl: 'app/components/order/order-airbook.edit.html'
               })
 
+
+
+              .state('app.orderairbookquick', {
+                  url: prefix + '/orderairbookquick',
+                  templateUrl: 'app/components/order/order-airbook-quick.html'
+
+              })
+              .state('app.editorderairbookquick', {
+                  url: prefix + '/orderairbookquick/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/order/order-airbook-quick.edit.html'
+              })
+
+
               .state('app.orderairtour', {
                   url: prefix + '/orderairtour',
                   templateUrl: 'app/components/order/order-airtour.html'

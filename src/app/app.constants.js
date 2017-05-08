@@ -27,7 +27,7 @@
                 "school":
                 {"basePath":"/api/v1/tenant/schools"},
                 "order":
-                {"airtaxi":"/api/v1/tenant/airtaxi/orders","airtour":"/api/v1/tenant/airtour/orders","airtrans":"/api/v1/tenant/airtransport/orders","airbook":"/api/v1/tenant/charter/orders","airflight":"/api/v1/tenant/ferryflight/orders","card":"/api/v1/tenant/jetcard/orders","course":"/api/v1/tenant/course/enrollments"},
+                {"airtaxi":"/api/v1/tenant/airtaxi/orders","airbookquick":"/api/v1/tenant/charter/orders?status=published", "airtour":"/api/v1/tenant/airtour/orders","airtrans":"/api/v1/tenant/airtransport/orders","airbook":"/api/v1/tenant/charter/orders","airflight":"/api/v1/tenant/ferryflight/orders","card":"/api/v1/tenant/jetcard/orders","course":"/api/v1/tenant/course/enrollments"},
                 "course":
                 {"basePath":"/api/v1/tenant/courses"},
                 "device":

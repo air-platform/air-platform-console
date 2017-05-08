@@ -6,10 +6,10 @@
 
     angular
         .module('iot')
-        .controller('OrderCardController', OrderCardController);
+        .controller('OrderAirbookquickController', OrderAirbookquickController);
 
     /** @ngInject */
-    function OrderCardController(NetworkService,StorageService, constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
+    function OrderAirbookquickController(NetworkService,StorageService, constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -52,6 +52,10 @@
             {
                 title:'已删除',
                 value:'deleted'
+            },
+            {
+                title:'已发布',
+                value:'published'
             }
         ];
         vm.statusMap={
@@ -72,21 +76,21 @@
             "published":{'published':true}
 
         };
-        vm.reqPath = constdata.api.order.card;
-        vm.editPath = 'app.editordercard';
+        vm.reqPath = constdata.api.order.airbookquick;
+        vm.editPath = 'app.editorderairbookquick';
         function getDatas() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
             var myid = vm.userInfo.id;
             console.log(vm.userInfo);
 
-            NetworkService.get(vm.reqPath,{page:vm.pageCurrent},function (response) {
+            NetworkService.get(vm.reqPath,{page:vm.pageCurrent,pageSize:10},function (response) {
                 vm.items = response.data.content;
 
                 if(vm.items.length > 0){
 
                     for(var i = 0; i < vm.items.length; i ++) {
 
-                        if (vm.items[i].status == 'pending') {
+                        if (vm.items[i].status == 'pending' ) {
                             vm.items[i].isPaidEnable = true;
                             vm.items[i].isFinishEnable = false;
                             vm.items[i].isDeleteEnable = false;
@@ -103,20 +107,23 @@
                             vm.items[i].isPaidEnable = false;
                             vm.items[i].isFinishEnable = false;
                             vm.items[i].isDeleteEnable = false;
+                        }else if (vm.items[i].status == 'published') {
+                            vm.items[i].isPaidEnable = false;
+                            vm.items[i].isFinishEnable = false;
+                            vm.items[i].isDeleteEnable = false;
                         }else{
                             vm.items[i].isPaidEnable = false;
                             vm.items[i].isFinishEnable = false;
                             vm.items[i].isDeleteEnable = false;
                         }
                     }
-                }
+                    }
                 vm.displayedCollection = [].concat(vm.items);
 
 
 
 
-
-                updatePagination(response.data);
+                        updatePagination(response.data);
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
             });
@@ -135,7 +142,7 @@
         vm.goOperItem = function (item,oper) {
 
             if(oper == 1) {
-                NetworkService.post(vm.reqPath + '/' + item.id + '/pay', null, function success() {
+                NetworkService.post(constdata.api.order.airbook + '/' + item.id + '/pay', null, function success() {
                     var index = vm.items.indexOf(item);
                     //vm.items.splice(index,1);
                     toastr.success(i18n.t('u.OPER_SUC'));
@@ -145,7 +152,7 @@
                     toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
                 });
             }else if(oper == 2){
-                NetworkService.post(vm.reqPath + '/' + item.id + '/finish', null, function success() {
+                NetworkService.post(constdata.api.order.airbook + '/' + item.id + '/finish', null, function success() {
                     var index = vm.items.indexOf(item);
                     //vm.items.splice(index,1);
                     toastr.success(i18n.t('u.OPER_SUC'));
@@ -190,7 +197,7 @@
             $rootScope.backPre();
         }
 
-        vm.displayedCollection = [].concat(vm.items);
+
 
 
         // 分页 Start
@@ -253,6 +260,8 @@
         getDatas();
 
 
+        //Model
+        //vm.tipsInfo = delmodaltip;
         vm.tipsInfo = {
             title:'修改订单',
             content:'您确定对该订单执行此操作吗？更改后将不可撤销!'

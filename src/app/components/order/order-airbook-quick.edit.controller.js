@@ -6,7 +6,7 @@
 
     angular
         .module('iot')
-        .controller('OrderAirtransEditController', OrderAirtransEditController)
+        .controller('OrderAirbookquickEditController', OrderAirbookquickEditController)
         .filter('userType',function(i18n) {
         return function(input) {
             var out = '';
@@ -20,7 +20,7 @@
     });
 
     /** @ngInject */
-    function OrderAirtransEditController($scope, NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
+    function OrderAirbookquickEditController($scope, NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -58,24 +58,7 @@
                 value:'user'
             }
         ];
-        vm.statusMap={
-            'pending':'处理中',
-            'finished':'已完成',
-            'paid':'已付款',
-            'cancelled':'已取消',
-            'deleted':'已删除',
-            "published":"已发布"
 
-        };
-        vm.classMap={
-            'pending':{'pending':true},
-            'finished':{'finished':true},
-            'paid':{'paid':true},
-            'cancelled':{'cancelled':true},
-            'deleted':{'deleted':true},
-            "published":{'published':true}
-
-        };
         vm.statusType = [
             {
                 title:'处理中',
@@ -97,6 +80,10 @@
             {
                 title:'已删除',
                 value:'deleted'
+            },
+            {
+                title:'已发布',
+                value:'published'
             }
         ];
 
@@ -110,7 +97,24 @@
                 value:'usd'
             }
         ];
+        vm.statusMap={
+            'pending':'处理中',
+            'finished':'已完成',
+            'paid':'已付款',
+            'cancelled':'已取消',
+            'deleted':'已删除',
+            "published":"已发布"
 
+        };
+        vm.classMap={
+            'pending':{'pending':true},
+            'finished':{'finished':true},
+            'paid':{'paid':true},
+            'cancelled':{'cancelled':true},
+            'deleted':{'deleted':true},
+            "published":{'published':true}
+
+        };
 
         var username = $stateParams.username;
         var type = $stateParams.args.type;
@@ -126,14 +130,14 @@
         if(type && type=='detail'){
             vm.isDetail = true;
         }
-        vm.reqPath = constdata.api.order.airtrans;
-        vm.editPath = 'app.editorderairtrans';
+        vm.reqPath = constdata.api.order.airbookquick;
+        vm.editPath = 'app.editorderairbookquick';
         function getTenantItem() {
 
             var myid = vm.userInfo.id;
             console.log(myid);
             console.log(username);
-            NetworkService.get(vm.reqPath  + '/'  + username,null,function (response) {
+            NetworkService.get(constdata.api.order.airbook  + '/'  + username,null,function (response) {
                 vm.user = response.data;
                 $rootScope.userNamePlacedTop = vm.user.nickName;
             },function (response) {

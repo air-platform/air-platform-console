@@ -52,8 +52,30 @@
             {
                 title:'已删除',
                 value:'deleted'
+            },
+            {
+                title:'已发布',
+                value:'published'
             }
         ];
+        vm.statusMap={
+            'pending':'处理中',
+            'finished':'已完成',
+            'paid':'已付款',
+            'cancelled':'已取消',
+            'deleted':'已删除',
+            "published":"已发布"
+
+        };
+        vm.classMap={
+            'pending':{'pending':true},
+            'finished':{'finished':true},
+            'paid':{'paid':true},
+            'cancelled':{'cancelled':true},
+            'deleted':{'deleted':true},
+            "published":{'published':true}
+
+        };
         vm.reqPath = constdata.api.order.airbook;
         vm.editPath = 'app.editorderairbook';
         function getDatas() {
@@ -68,7 +90,7 @@
 
                     for(var i = 0; i < vm.items.length; i ++) {
 
-                        if (vm.items[i].status == 'pending') {
+                        if (vm.items[i].status == 'pending' || vm.items[i].status == 'published') {
                             vm.items[i].isPaidEnable = true;
                             vm.items[i].isFinishEnable = false;
                             vm.items[i].isDeleteEnable = false;
