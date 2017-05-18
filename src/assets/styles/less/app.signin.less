@@ -158,6 +158,7 @@ li.disabled{
     top: 0px;
 
 }
+
 .bg-finished {
     background-color: #1e2cd0;
     color: #fffefa;
@@ -167,7 +168,45 @@ li.disabled{
     background-color: #99d81e;
     color: #fffefa;
 }
+.login-bgdd{
 
+    &:before{
+        content: "";
+        width: 100%;
+        left: 0px;
+        top: 0px;
+        bottom: 0;
+        position: absolute;
+        z-index: -1;
+        background-color: @body-bg;
+        background: url(../images/bgnn.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+
+        display: block;
+    }
+}
+
+.login-bg{
+
+
+        content: "";
+        width: 100%;
+        left: 0px;
+        top: 0px;
+        bottom: 0;
+        position: absolute;
+        background-color: @body-bg;
+        background: url(../images/bgrr.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+
+
+}
 /*
 
 .fileUpload {

@@ -1,7 +1,9 @@
 /**
  * Created by Otherplayer on 16/7/25.
  */
-(function () {
+
+var map;
+    (function () {
     'use strict';
 
     angular
@@ -83,6 +85,158 @@
                 value:'usd'
             }
         ];
+
+
+        vm.opts = {
+            centerAndZoom: {
+                longitude: 121.51606,
+                latitude: 31.244604,
+                zoom: 16
+            }
+        };
+        $scope.watchV = 'ddd';
+
+
+        map = new BMap.Map("map-div",{minZoom:3,maxZoom:14});          // 创建地图实例
+        var point = new BMap.Point(116.404, 39.915);  // 创建点坐标
+        var geoc = new BMap.Geocoder();
+        map.centerAndZoom(point, 10);
+        map.enableScrollWheelZoom(false);     //开启鼠标滚轮缩放
+
+        var finalMarker = null;
+
+        vm.departureInfo = {lng:116.404, lat:39.915, desc:'出发地'};
+        vm.arrivalInfo = {lng:116.082047,lat:40.06536, desc:'目的地'};
+        function deletePoint(){
+            /*var allOverlay = map.getOverlays();
+            for (var i = 0; i < allOverlay.length-1; i++){
+                if(allOverlay[i].getLabel().content == "出发地"){
+                    map.removeOverlay(allOverlay[i]);
+                }
+            }*/
+            map.clearOverlays();
+        }
+
+        vm.curve = null;
+
+        function createNewCurveLine()
+        {
+
+
+            if(vm.curve != null){
+                map.removeOverlay(vm.curve);
+            }
+            var beijingPosition=new BMap.Point(vm.departureInfo.lng, vm.departureInfo.lat);
+            var   hangzhouPosition=new BMap.Point(vm.arrivalInfo.lng, vm.arrivalInfo.lat);
+            var points = [beijingPosition,hangzhouPosition];
+
+            vm.curve = new BMapLib.CurveLine(points, {strokeColor:"blue", strokeWeight:3, strokeOpacity:0.5}); //创建弧线对象
+            map.addOverlay(vm.curve); //添加到地图中
+            vm.curve.disableEditing(); //开启编辑功能
+            /*curve.addEventListener('lineupdate', function(e) {
+                //console.log('触发');
+                console.log(e.target);
+                var ptArr = e.target.getPath();
+                console.log(ptArr[0]+':'+e.target.getPath().length);
+
+                    //console.log(ptArr[ptArr.length-1]);//net
+            });*/
+
+
+        }
+        function createNewMarker(pt, desc){
+           // deletePoint();
+
+            if(desc == '出发地'){
+                vm.departureInfo.lng = pt.lng;
+                vm.departureInfo.lat = pt.lat;
+                document.getElementById('depature_loc').value = ll;
+            }else if(desc == '目的地'){
+                vm.arrivalInfo.lng = pt.lng;
+                vm.arrivalInfo.lat = pt.lat;
+                document.getElementById('arrival_loc').value = ll;
+            }
+            createNewCurveLine();
+            var ll = pt.lng+","+pt.lat;
+            console.log(ll);
+
+            geoc.getLocation(pt, function(rs){
+                var addComp = rs.addressComponents;
+                console.log(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+                if(desc == '出发地'){
+                    document.getElementById('depature_area').value = addComp.city;
+                }else if(desc == '目的地'){
+                    document.getElementById('arrival_area').value = addComp.city;
+                }
+            });
+
+
+            var label = new BMap.Label(desc,{ position : pt, offset:new BMap.Size(20,-10)});
+            label.setStyle({
+                color : "red",
+                fontSize : "16px",
+                height : "20px",
+                fontFamily:"微软雅黑",
+                border :"0"
+            });
+            var marker = new BMap.Marker(pt);
+
+            map.addOverlay(marker);
+            marker.setLabel(label);
+            marker.enableDragging();
+
+
+
+
+
+
+
+
+            marker.addEventListener("dragend",function(e){
+                var ll = e.point.lng+","+e.point.lat;
+                console.log(ll);
+
+                console.log(e.target.getLabel().content);
+               // if(e.target.getLabel().content)
+                    if(e.target.getLabel().content == '出发地'){
+                        vm.departureInfo.lng = e.point.lng;
+                        vm.departureInfo.lat = e.point.lat;
+                        document.getElementById('depature_loc').value = ll;
+                    }else if(e.target.getLabel().content == '目的地'){
+                        vm.arrivalInfo.lng = e.point.lng;
+                        vm.arrivalInfo.lat = e.point.lat;
+                        document.getElementById('arrival_loc').value = ll;
+                    }
+                    createNewCurveLine();
+                geoc.getLocation(e.point, function(rs){
+                    var addComp = rs.addressComponents;
+                    console.log(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+                    if(e.target.getLabel().content == '出发地') {
+                        document.getElementById('depature_area').value = addComp.city;
+                    }else if(e.target.getLabel().content == '目的地') {
+                        document.getElementById('arrival_area').value = addComp.city;
+                    }
+                });
+
+
+            });
+            finalMarker = marker;
+        }
+
+
+
+        createNewMarker(new BMap.Point(vm.departureInfo.lng, vm.departureInfo.lat),vm.departureInfo.desc);
+        createNewMarker(new BMap.Point(vm.arrivalInfo.lng, vm.arrivalInfo.lat),vm.arrivalInfo.desc);
+       // createNewCurveLine();
+
+
+       /* map.addEventListener("click",function (e) {
+            var pt = e.point;
+            createNewMarker(pt,"出发地");
+        });*/
+
+
+
         var username = $stateParams.username;
         var type = $stateParams.args.type;
         console.log(type);
@@ -97,6 +251,8 @@
         if(type && type=='detail'){
             vm.isDetail = true;
         }
+
+
 
 
 
@@ -221,7 +377,7 @@
            // return;
 
 
-
+            vm.user.departLoc = document.getElementById('depature_loc').value;
             NetworkService.post(constdata.api.tenant.fleetPath  + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();

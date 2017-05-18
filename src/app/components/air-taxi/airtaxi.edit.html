@@ -174,53 +174,69 @@
 
 
 
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.DEPARTURE' | translate}}</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="{{'u.DEPARTURE' | translate}}" ng-model="vm.user.departure" ng-disabled="vm.isDetail" >
+                <div class = "map-panel" style="background: #faffff;
+    padding: 10px 0px;
+    border: solid 1px;
+    border-radius: 8px;">
+                    <div  class="form-group">
+                        <label class="col-sm-1 control-label  m-l-lg font-bold">航程信息</label>
                     </div>
-                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+
+                    <div  class="form-group">
+                        <label class="col-sm-1 control-label m-l-lg font-bold">出发地</label>
+                        <div class="col-sm-2">
+                            <input class="form-control" type="text"
+                                   placeholder="{{'u.DEPARTURE' | translate}}" id='depature_area' ng-model="vm.user.departure" ng-disabled="vm.isDetail" >
+                        </div>
+
+
+                        <label class="col-sm-1 control-label m-l-lg font-bold">经纬度</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="text"
+                                   placeholder="{{'u.DEPARTURELOC' | translate}}" id='depature_loc' ng-model="vm.user.departLoc" ng-disabled="vm.isDetail" >
+
+                        </div>
+
+
+                    </div>
+
+                    <div  class="form-group">
+                        <label class="col-sm-1 control-label m-l-lg font-bold">目的地</label>
+                        <div class="col-sm-2">
+                            <input class="form-control" type="text"
+                                   placeholder="{{'u.ARRIVAL' | translate}}" id='arrival_area' ng-model="vm.user.arrival" ng-disabled="vm.isDetail" >
+                        </div>
+
+                        <label class="col-sm-1 control-label m-l-lg font-bold">经纬度</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="text"
+                                   placeholder="{{'u.ARRIVALLOC' | translate}}" id='arrival_loc' ng-model="vm.user.arrivalLoc" ng-disabled="vm.isDetail" >
+                        </div>
+
+
+
+                    </div>
+
+
+                    <div  class="form-group">
+                        <label class="col-sm-1 control-label m-l-lg font-bold">地图选择</label>
+                        <div class="col-md-10">
+
+                            <div >
+                                <div id="map-div" style="height: 300px;width: 500px;"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
                 </div>
+
+
+
+
                 <div  class="line line-dashed b-b line-lg"></div>
 
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.ARRIVAL' | translate}}</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="{{'u.ARRIVAL' | translate}}" ng-model="vm.user.arrival" ng-disabled="vm.isDetail" >
-                    </div>
-                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
 
-
-
-
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.DEPARTURELOC' | translate}}</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="{{'u.DEPARTURELOC' | translate}}" ng-model="vm.user.departLoc" ng-disabled="vm.isDetail" >
-                    </div>
-                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.ARRIVALLOC' | translate}}</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="{{'u.ARRIVALLOC' | translate}}" ng-model="vm.user.arrivalLoc" ng-disabled="vm.isDetail" >
-                    </div>
-                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
 
 
 
