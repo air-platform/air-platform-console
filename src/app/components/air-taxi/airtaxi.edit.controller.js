@@ -2,7 +2,7 @@
  * Created by Otherplayer on 16/7/25.
  */
 
-var map;
+
     (function () {
     'use strict';
 
@@ -87,26 +87,16 @@ var map;
         ];
 
 
-        vm.opts = {
-            centerAndZoom: {
-                longitude: 121.51606,
-                latitude: 31.244604,
-                zoom: 16
-            }
-        };
-        $scope.watchV = 'ddd';
 
-
-        map = new BMap.Map("map-div",{minZoom:3,maxZoom:14});          // 创建地图实例
+        var map = new BMap.Map("map-div");          // 创建地图实例
         var point = new BMap.Point(116.404, 39.915);  // 创建点坐标
         var geoc = new BMap.Geocoder();
         map.centerAndZoom(point, 10);
         map.enableScrollWheelZoom(false);     //开启鼠标滚轮缩放
 
         var finalMarker = null;
-
         vm.departureInfo = {lng:116.404, lat:39.915, desc:'出发地'};
-        vm.arrivalInfo = {lng:116.082047,lat:40.06536, desc:'目的地'};
+        vm.arrivalInfo = {lng:117.204282,lat:39.134923, desc:'目的地'};
         function deletePoint(){
             /*var allOverlay = map.getOverlays();
             for (var i = 0; i < allOverlay.length-1; i++){
@@ -133,32 +123,23 @@ var map;
             vm.curve = new BMapLib.CurveLine(points, {strokeColor:"blue", strokeWeight:3, strokeOpacity:0.5}); //创建弧线对象
             map.addOverlay(vm.curve); //添加到地图中
             vm.curve.disableEditing(); //开启编辑功能
-            /*curve.addEventListener('lineupdate', function(e) {
-                //console.log('触发');
-                console.log(e.target);
-                var ptArr = e.target.getPath();
-                console.log(ptArr[0]+':'+e.target.getPath().length);
-
-                    //console.log(ptArr[ptArr.length-1]);//net
-            });*/
-
-
         }
         function createNewMarker(pt, desc){
            // deletePoint();
-
+            var ll = pt.lng+","+pt.lat;
             if(desc == '出发地'){
                 vm.departureInfo.lng = pt.lng;
                 vm.departureInfo.lat = pt.lat;
                 document.getElementById('depature_loc').value = ll;
+                console.log(ll+':'+desc);
             }else if(desc == '目的地'){
                 vm.arrivalInfo.lng = pt.lng;
                 vm.arrivalInfo.lat = pt.lat;
                 document.getElementById('arrival_loc').value = ll;
+                console.log(ll+':'+desc);
             }
             createNewCurveLine();
-            var ll = pt.lng+","+pt.lat;
-            console.log(ll);
+            console.log(ll+':'+desc);
 
             geoc.getLocation(pt, function(rs){
                 var addComp = rs.addressComponents;
@@ -224,11 +205,17 @@ var map;
         }
 
 
+        vm.initMap = function()
+        {
+            map.clearOverlays();
+            var dep = new BMap.Point(vm.departureInfo.lng, vm.departureInfo.lat);
+            createNewMarker(dep,vm.departureInfo.desc);
+            createNewMarker(new BMap.Point(vm.arrivalInfo.lng, vm.arrivalInfo.lat),vm.arrivalInfo.desc);
+            map.centerAndZoom(dep, 8);
+            // createNewCurveLine();
+        }
 
-        createNewMarker(new BMap.Point(vm.departureInfo.lng, vm.departureInfo.lat),vm.departureInfo.desc);
-        createNewMarker(new BMap.Point(vm.arrivalInfo.lng, vm.arrivalInfo.lat),vm.arrivalInfo.desc);
-       // createNewCurveLine();
-
+        //vm.initMap();
 
        /* map.addEventListener("click",function (e) {
             var pt = e.point;
@@ -345,7 +332,20 @@ var map;
                 }
 
 
+                if(vm.user.departLoc){
+                    var depLoc = vm.user.departLoc.split(',');
+                    if(depLoc.length == 2){
+                        vm.departureInfo.lng = parseFloat(depLoc[0]);
+                        vm.departureInfo.lat = parseFloat(depLoc[1]);
+                    }
+                    var arrLoc = vm.user.arrivalLoc.split(',');
+                    if(arrLoc.length == 2){
+                        vm.arrivalInfo.lng = parseFloat(arrLoc[0]);
+                        vm.arrivalInfo.lat = parseFloat(arrLoc[1]);
+                    }
+                }
 
+                vm.initMap();
                 $rootScope.userNamePlacedTop = vm.user.nickName;
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
@@ -378,6 +378,10 @@ var map;
 
 
             vm.user.departLoc = document.getElementById('depature_loc').value;
+            vm.user.departure = document.getElementById('depature_area').value;
+            vm.user.arrivalLoc = document.getElementById('arrival_loc').value;
+            vm.user.arrival = document.getElementById('arrival_area').value;
+
             NetworkService.post(constdata.api.tenant.fleetPath  + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
@@ -414,6 +418,10 @@ var map;
             console.log(vm.user.aircraftItems);
 
 
+            vm.user.departLoc = document.getElementById('depature_loc').value;
+            vm.user.departure = document.getElementById('depature_area').value;
+            vm.user.arrivalLoc = document.getElementById('arrival_loc').value;
+            vm.user.arrival = document.getElementById('arrival_area').value;
 
             NetworkService.put(constdata.api.tenant.fleetPath  + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
@@ -460,10 +468,18 @@ var map;
 
         if (!vm.isAdd){
             vm.getTenantItem();
+            //vm.initMap();
         }else{
             vm.user.currencyUnit = 'rmb';
             vm.user.aircraftItems = [];
             vm.user.aircraftItemsAdd = [];
+            vm.initMap();
+
+            vm.user.departLoc = document.getElementById('depature_loc').value;
+            vm.user.departure = document.getElementById('depature_area').value;
+            vm.user.arrivalLoc = document.getElementById('arrival_loc').value;
+            vm.user.arrival = document.getElementById('arrival_area').value;
+
         }
 
         function back() {
