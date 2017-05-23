@@ -125,55 +125,6 @@
 
                     </div>
 
-                        <div class="form-group" ng-repeat="item in vm.user.aircraftItemsAdd">
-
-                            <label class="col-sm-1 control-label  font-bold">{{'u.PRICE' | translate}}</label>
-                            <div class="col-sm-1">
-                                <input class="form-control" type="text"
-                                       placeholder="{{'u.PRICE' | translate}}" ng-model="item.price" ng-disabled="vm.isDetail"  required>
-
-                            </div>
-
-                            <label class="col-sm-1 control-label  font-bold">{{'u.SEATPRICE' | translate}}</label>
-                            <div class="col-sm-1">
-                                <input class="form-control" type="text"
-                                       placeholder="{{'u.SEATPRICE' | translate}}" ng-model="item.seatPrice" ng-disabled="vm.isDetail"  required>
-                            </div>
-
-
-                            <label class="col-sm-1 control-label  font-bold">{{'u.PRICEUNIT' | translate}}</label>
-                            <div class="col-sm-1">
-
-                                <!--<input class="form-control" type="text"
-                                       placeholder="{{'u.PRICEUNIT' | translate}}" ng-model="item.currencyUnit" ng-disabled="vm.isDetail"  required>
-                            -->
-
-                                <select style="width: 100%;" class="form-control font-thin" ng-model="item.currencyUnit" ng-options="s.value as s.title for s in vm.priceType" ng-disabled="vm.isDetail" ></select>
-
-                            </div>
-
-
-
-                            <label class="col-sm-1 control-label font-bold">{{'u.FLEETTYPE' | translate}}</label>
-                            <div class="col-sm-2">
-                                <!--
-                                <input class="form-control" type="text"
-                                       placeholder="{{'u.FLEETTYPE' | translate}}" ng-model="item.aircraft" ng-disabled="vm.isDetail"  required>
-                                <select class="form-control"  ng-model="item.aircraft" ng-options="opt.id as opt.name for opt in vm.crafts"></select>
-    -->
-
-                                <select style="width: 100%;" class="form-control font-thin" ng-model="item.aircraftId" ng-options="opt.id as opt.name for opt in vm.crafts" ng-disabled="vm.isDetail" ></select>
-
-
-                            </div>
-
-                            <div class="col-sm-1">
-                                <button ng-if="!vm.isDetail" ng-click="vm.realAddNewCraftItem(item)" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-plus"></i>{{'product.ADD' | translate}}</button>
-
-                            </div>
-
-
-                        </div>
 
 
 
@@ -204,11 +155,11 @@
 
 
 
-                <div  class="form-group">
+               <!-- <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.TOURPOINT' | translate}}</label>
                     <div class="col-sm-4">
-                        <!--<input class="form-control" type="text"
-                               placeholder="{{'u.TOURPOINT' | translate}}" ng-model="vm.user.tourPoint" ng-disabled="vm.isDetail" >-->
+                        &lt;!&ndash;<input class="form-control" type="text"
+                               placeholder="{{'u.TOURPOINT' | translate}}" ng-model="vm.user.tourPoint" ng-disabled="vm.isDetail" >&ndash;&gt;
 
                         <textarea class="form-control font-thin" ng-model="vm.user.tourPoint" rows="4" placeholder="{{'u.TOURPOINT' | translate}}" style="resize: none;" ng-disabled="vm.isDetail"></textarea>
 
@@ -217,9 +168,89 @@
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
+                <div  class="line line-dashed b-b line-lg"></div>-->
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.TOURPOINT' | translate}}</label>
+                    <div class="col-sm-4">
+                        <textarea class="form-control font-thin" ng-model="vm.user.tourPoint" rows="4" placeholder="{{'u.TOURPOINT' | translate}}" style="resize: none;" ng-disabled="vm.isDetail"></textarea>
+
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
                 <div  class="line line-dashed b-b line-lg"></div>
 
 
+
+
+
+                <div  class="form-group">
+                    <div style="display:block;" class="col-sm-6  m-l-lg font-bold">观光景点</div>
+                </div>
+
+                <div  class="form-group">
+
+
+
+                    <div class="form-group" ng-repeat="item in vm.tourPointArr">
+
+
+                        <label class="col-sm-1 control-label  font-bold">{{item.locName}}</label>
+
+                        <label class="col-sm-1 control-label  font-bold">经纬度</label>
+                        <div class="col-sm-3">
+                            <input class="form-control" type="text"
+                                   placeholder="经纬度" ng-model="item.loc" id="tour-loc-{{$index}}" ng-disabled="vm.isDetail"  required>
+
+                        </div>
+
+                        <label class="col-sm-1 control-label  font-bold">景点名</label>
+                        <div class="col-sm-2">
+                            <input class="form-control" type="text"
+                                   placeholder="景点名" ng-model="item.name" ng-disabled="vm.isDetail"  required>
+
+                        </div>
+
+                        <div class="col-sm-2">
+                            <button ng-if="!vm.isDetail" ng-click="vm.removeTourPoint(item)" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-minus"></i>{{'product.DELETE' | translate}}</button>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-sm-4">
+                        <button ng-if="!vm.isDetail" ng-click="vm.addNewTourPoint()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-plus"></i>增加景点</button>
+
+                    </div>
+
+
+
+                </div>
+
+
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">观光景点</label>
+                    <div class="col-md-10">
+
+                        <div >
+                            <div id="map-div-tour" style="height: 300px;width: 500px;"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div  class="line line-dashed b-b line-lg"></div>
 
 
 

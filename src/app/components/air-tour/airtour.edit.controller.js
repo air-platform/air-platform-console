@@ -108,7 +108,7 @@
             ]
 
 
-
+        vm.tourPointArr = [];
         var username = $stateParams.username;
         var type = $stateParams.args.type;
         console.log(type);
@@ -123,6 +123,205 @@
         if(type && type=='detail'){
             vm.isDetail = true;
         }
+
+
+
+
+        var map = new BMap.Map("map-div-tour");          // 创建地图实例
+        var point = new BMap.Point(116.404, 39.915);  // 创建点坐标
+        var geoc = new BMap.Geocoder();
+        map.centerAndZoom(point, 10);
+        map.enableScrollWheelZoom(false);     //开启鼠标滚轮缩放
+
+        var finalMarker = null;
+        vm.tourInfo = [];//{lng:116.404, lat:39.915, desc:'出发地'};
+       // vm.arrivalInfo = {lng:117.204282,lat:39.134923, desc:'目的地'};
+        function deletePoint(desc){
+            var allOverlay = map.getOverlays();
+             for (var i = 0; i < allOverlay.length; i++){
+                console.log(desc);
+                 if (allOverlay[i].toString() == "[object Marker]") {
+                     if (allOverlay[i] && allOverlay[i].getLabel() && allOverlay[i].getLabel().content == desc) {
+                         map.removeOverlay(allOverlay[i]);
+                         console.log('ok');
+                         return false;
+                     }
+                 }
+             }
+            //map.clearOverlays();
+        }
+        /*function showInfo(e){
+            alert(e.point.lng + ", " + e.point.lat);
+        }*/
+        vm.curve = null;
+        function createNewCurveLine()
+        {
+
+
+            if(vm.curve != null){
+                map.removeOverlay(vm.curve);
+            }
+            //var beijingPosition=new BMap.Point(vm.departureInfo.lng, vm.departureInfo.lat);
+            //var   hangzhouPosition=new BMap.Point(vm.arrivalInfo.lng, vm.arrivalInfo.lat);
+            var points = [];
+            if(vm.tourInfo.length > 1){
+                for(var i = 0; i < vm.tourInfo.length; i ++){
+                    var p = new BMap.Point(vm.tourInfo[i].lng, vm.tourInfo[i].lat);
+                    points.push(p);
+                }
+                vm.curve = new BMapLib.CurveLine(points, {strokeColor:"blue", strokeWeight:3, strokeOpacity:0.5}); //创建弧线对象
+                map.addOverlay(vm.curve); //添加到地图中
+                vm.curve.disableEditing(); //开启编辑功能
+            }
+
+
+        }
+
+
+
+        function createNewMarker(info){
+            var pt = info.point;
+            // deletePoint();
+
+            var desc = '';
+            if(info.desc){
+                desc = info.desc;
+            }
+           // var ll = pt.lng+","+pt.lat;
+
+                //vm.arrivalInfo.lng = pt.lng;
+                //vm.arrivalInfo.lat = pt.lat;
+                //document.getElementById('arrival_loc').value = ll;
+               // vm.tourInfo.push({lng:pt.lng, lat:pt.lat, desc:'d'});
+                //console.log(vm.tourInfo);
+
+            //createNewCurveLine();
+
+
+            //console.log(ll+':'+desc);
+
+            /*geoc.getLocation(pt, function(rs){
+                var addComp = rs.addressComponents;
+                console.log(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+                if(desc == '出发地'){
+                    document.getElementById('depature_area').value = addComp.city;
+                }else if(desc == '目的地'){
+                    document.getElementById('arrival_area').value = addComp.city;
+                }
+            });*/
+
+
+            var label = new BMap.Label(desc,{ position : pt, offset:new BMap.Size(20,-10)});
+            label.setStyle({
+                color : "red",
+                fontSize : "16px",
+                height : "20px",
+                fontFamily:"微软雅黑",
+                border :"0"
+            });
+
+
+           /* var removeMarker = function(e,ee,marker){
+                map.removeOverlay(marker);
+            }
+
+            var markerMenu=new BMap.ContextMenu();
+            markerMenu.addItem(new BMap.MenuItem('删除',removeMarker.bind(marker)));*/
+
+
+            var marker = new BMap.Marker(pt);
+
+
+
+
+            map.addOverlay(marker);
+            //marker.addContextMenu(markerMenu);
+            marker.setLabel(label);
+            marker.enableDragging();
+
+
+
+
+
+
+
+
+            marker.addEventListener("dragend",function(e){
+                var ll = e.point.lng+","+e.point.lat;
+                console.log(ll);
+                console.log(info.index);
+                vm.tourPointArr[info.index].loc = ll;
+                console.log(vm.tourPointArr);
+                document.getElementById('tour-loc-'+info.index).value = ll;
+                /*console.log(e.target.getLabel().content);
+                // if(e.target.getLabel().content)
+                if(e.target.getLabel().content == '出发地'){
+                    vm.departureInfo.lng = e.point.lng;
+                    vm.departureInfo.lat = e.point.lat;
+                    document.getElementById('depature_loc').value = ll;
+                }else if(e.target.getLabel().content == '目的地'){
+                    vm.arrivalInfo.lng = e.point.lng;
+                    vm.arrivalInfo.lat = e.point.lat;
+                    document.getElementById('arrival_loc').value = ll;
+                }
+                createNewCurveLine();
+                geoc.getLocation(e.point, function(rs){
+                    var addComp = rs.addressComponents;
+                    console.log(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+                    if(e.target.getLabel().content == '出发地') {
+                        document.getElementById('depature_area').value = addComp.city;
+                    }else if(e.target.getLabel().content == '目的地') {
+                        document.getElementById('arrival_area').value = addComp.city;
+                    }
+                });*/
+
+
+            });
+            finalMarker = marker;
+        }
+
+
+
+
+
+        //map.addEventListener("click", createNewMarker);
+
+
+
+
+
+
+      /*
+
+
+
+        vm.initMap = function()
+        {
+            map.clearOverlays();
+            var dep = new BMap.Point(vm.departureInfo.lng, vm.departureInfo.lat);
+            createNewMarker(dep,vm.departureInfo.desc);
+            createNewMarker(new BMap.Point(vm.arrivalInfo.lng, vm.arrivalInfo.lat),vm.arrivalInfo.desc);
+            map.centerAndZoom(dep, 8);
+            // createNewCurveLine();
+        }
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -179,22 +378,39 @@
             })
         }
 
-        vm.realAddNewCraftItem = function(item) {
-            console.log('ok');
-            var index = vm.user.aircraftItemsAdd.indexOf(item);
-            console.log('ok'+index);
 
-            vm.user.aircraftItemsAdd.splice(index, 1);
-
-            vm.user.aircraftItems.push(angular.copy(item));
-            console.log(vm.user.aircraftItems);
-
-
-        }
         vm.removeCraftItem = function(item) {
             var index = vm.user.aircraftItems.indexOf(item);
             vm.user.aircraftItems.splice(index, 1);
         }
+
+
+
+        vm.addNewTourPoint = function() {
+
+
+            var point = new BMap.Point(116.404, 39.915);  // 创建点坐标
+            var e = {};
+            e.point = point;
+            e.desc = '坐标'+(vm.tourPointArr.length+1);
+            e.index = vm.tourPointArr.length;
+            createNewMarker(e);
+            vm.tourPointArr.push({
+                name:'景点1',
+                loc:point.lng+','+point.lat,
+                locName:e.desc
+            })
+
+        }
+
+
+        vm.removeTourPoint = function(item) {
+            var index = vm.tourPointArr.indexOf(item);
+            vm.tourPointArr.splice(index, 1);
+            deletePoint('坐标'+(index+1));
+        }
+
+
         getAircraftsDatas();
 
 
