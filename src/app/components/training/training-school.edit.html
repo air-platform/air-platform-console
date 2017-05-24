@@ -74,11 +74,30 @@
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.SCHOOLIMAGE' | translate}}</label>
                     <div class="col-sm-6">
-                        <input class="form-control" type="text"
+                        <!--<input class="form-control" type="text"
                                placeholder="{{'u.SCHOOLIMAGE' | translate}}" ng-model="vm.user.image" ng-disabled="vm.isDetail" >
 
                         <input type="file"  file-model = "vm.myUploadFile" name="uploadPic" id="myfileId"/>
                         <button  class="btn btn-default" ng-click="vm.uploadFile()"> <i class="fa fa-check-circle"></i> 上传 </button>
+-->
+
+                        <div class="beauty-upload">
+
+                            <div class="lcell span5" style="margin:5px 0px;">
+                                <div class="upload">
+                                    <input type="button" class="btn btn-default upload-btn" value="浏览文件" />
+                                    <!--<span  ng-bind="vm.myUploadFile.name">eee</span>-->
+                                    <label  ng-bind="vm.myUploadFile.name" class="label bg-finished"></label>
+                                    <input type="file" file-model = "vm.myUploadFile" class="upload-input-file" />
+                                    <button style="float:right;background:#23b7e5;border-radius:3px;" class="btn btn-default" ng-click="vm.uploadFile()"> <i class="fa fa-check-circle"></i> 上传 </button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="img-preview">
+                            <img ng-src="{{vm.user.image}}" alt="">
+                        </div>
+
 
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
