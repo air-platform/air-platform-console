@@ -148,12 +148,14 @@
             console.log(ll+':'+desc);
 
             geoc.getLocation(pt, function(rs){
-                var addComp = rs.addressComponents;
-                console.log(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
-                if(desc == '出发地'){
-                    document.getElementById('depature_area_trans').value = addComp.city;
-                }else if(desc == '目的地'){
-                    document.getElementById('arrival_area_trans').value = addComp.city;
+                if(vm.isAdd) {
+                    var addComp = rs.addressComponents;
+                    console.log(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+                    if (desc == '出发地') {
+                        document.getElementById('depature_area_trans').value = addComp.city;
+                    } else if (desc == '目的地') {
+                        document.getElementById('arrival_area_trans').value = addComp.city;
+                    }
                 }
             });
 
@@ -200,12 +202,14 @@
                 }
                 createNewCurveLine();
                 geoc.getLocation(e.point, function(rs){
-                    var addComp = rs.addressComponents;
-                    console.log(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
-                    if(e.target.getLabel().content == '出发地') {
-                        document.getElementById('depature_area_trans').value = addComp.city;
-                    }else if(e.target.getLabel().content == '目的地') {
-                        document.getElementById('arrival_area_trans').value = addComp.city;
+                    if(vm.isAdd) {
+                        var addComp = rs.addressComponents;
+                        console.log(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+                        if (e.target.getLabel().content == '出发地') {
+                            document.getElementById('depature_area_trans').value = addComp.city;
+                        } else if (e.target.getLabel().content == '目的地') {
+                            document.getElementById('arrival_area_trans').value = addComp.city;
+                        }
                     }
                 });
 
