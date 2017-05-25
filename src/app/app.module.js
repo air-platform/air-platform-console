@@ -25,7 +25,8 @@
         'smart-table',
         'iot.ui.directives',
         'xeditable',
-        'easypiechart'
+        'easypiechart',
+        'ui.calendar'
     ]);
 
 })();

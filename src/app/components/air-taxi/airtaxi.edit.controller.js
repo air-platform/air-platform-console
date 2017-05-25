@@ -86,6 +86,96 @@
             }
         ];
 
+         vm.eventSources = [];
+
+        var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
+
+
+
+
+        /*$scope.events = [
+            {title: 'All Day Event',start: new Date(y, m, 1)},
+            {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
+            {id: 999,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: false},
+            {id: 999,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
+            {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
+            {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
+        ];*/
+        $scope.events = [
+            {title: '¥1865',start: new Date(), editable:true, id:'1'},
+
+        ];
+        $scope.eventSource = {
+            url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
+            className: 'gcal-event',           // an option!
+            currentTimezone: 'America/Chicago' // an option!
+        };
+
+
+        $scope.eventsF = function (start, end, timezone, callback) {
+            var s = new Date(start).getTime() / 1000;
+            var e = new Date(end).getTime() / 1000;
+            var m = new Date(start).getMonth();
+            var events = [{title: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}];
+            callback(events);
+        };
+
+         vm.eventSources = [$scope.events, , ];
+        $scope.alertOnEventClick = function( date, jsEvent, view){
+            $scope.alertMessage = (date.title + ' was clicked ');
+            console.log($scope.alertMessage);
+        };
+        $scope.alertOnDrop = function( date, jsEvent, view){
+            $scope.alertMessage = (date.title + ' was clicked ');
+            console.log($scope.alertMessage);
+        };
+        $scope.alertOnResize = function( date, jsEvent, view){
+            $scope.alertMessage = (date.title + ' was clicked ');
+            console.log($scope.alertMessage);
+        };
+        vm.calendarConfig =
+            {
+                height: 300,
+                editable: true,
+                header:{
+                    left: 'month',
+                    center: 'title',
+                    right: 'today prev,next'
+                },
+                eventClick: $scope.alertEventOnClick,
+                eventDrop: $scope.alertOnDrop,
+                eventResize: $scope.alertOnResize,
+                dayClick:function(date, jsEvent, view) {
+                    console.log('Clicked on: ' + date.format());
+                    console.log('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+
+                    console.log('Current view: ' + view.name);
+                    console.log(view);
+
+                    // change the day's background color just for fun
+                    $(this).css('background-color', 'red');
+
+                }
+            };
+
+
+
+       /* vm.calendarConfig =
+        {
+            height: 300,
+            editable: true,
+            header:{
+                left: 'month basicWeek basicDay agendaWeek agendaDay',
+                center: 'title',
+                right: 'today prev,next'
+            },
+            eventClick: $scope.alertEventOnClick,
+            eventDrop: $scope.alertOnDrop,
+            eventResize: $scope.alertOnResize
+        };*/
 
 
         var map = new BMap.Map("map-div");          // 创建地图实例
