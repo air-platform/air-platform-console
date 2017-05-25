@@ -216,9 +216,14 @@
         {
             map.clearOverlays();
             var dep = new BMap.Point(vm.departureInfo.lng, vm.departureInfo.lat);
+            var arr = new BMap.Point(vm.arrivalInfo.lng, vm.arrivalInfo.lat);
             createNewMarker(dep,vm.departureInfo.desc);
-            createNewMarker(new BMap.Point(vm.arrivalInfo.lng, vm.arrivalInfo.lat),vm.arrivalInfo.desc);
-            map.centerAndZoom(dep, 8);
+            createNewMarker(arr,vm.arrivalInfo.desc);
+           // map.centerAndZoom(dep, 8);
+
+            var vp = map.getViewport([dep, arr]);
+            map.centerAndZoom(vp.center, vp.zoom);
+
             // createNewCurveLine();
         }
 

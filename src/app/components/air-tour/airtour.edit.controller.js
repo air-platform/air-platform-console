@@ -458,6 +458,7 @@
                         vm.user.tourPoint = vm.user.tourPoint.substr(0, vm.user.tourPoint.length-1);
                     }
                     var tourArr  = vm.user.tourPoint.split(';');
+                    var allPts = [];
                     for(var i = 0; i < tourArr.length; i ++){
                         var detailArr = tourArr[i].split(',');
                         if(detailArr.length > 0){
@@ -473,6 +474,8 @@
 
 
                             var point = new BMap.Point(parseFloat(detailArr[1]), parseFloat(detailArr[2]));  // 创建点坐标
+                            allPts.push(point);
+
                             var e = {};
                             e.point = point;
                             e.desc = '坐标'+(vm.tourPointArr.length+1);
@@ -483,13 +486,17 @@
                                 loc:loc,
                                 locName:e.desc
                             });
-                            map.centerAndZoom(point, 8);
+                            //map.centerAndZoom(point, 8);
 
 
 
                         }
 
 
+                    }
+                    if(allPts.length > 0){
+                        var vp = map.getViewport(allPts);
+                        map.centerAndZoom(vp.center, vp.zoom);
                     }
 
 

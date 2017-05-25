@@ -219,7 +219,7 @@
         }
 
 
-        vm.initMap = function()
+       /* vm.initMap = function()
         {
             map.clearOverlays();
             var dep = new BMap.Point(vm.departureInfo.lng, vm.departureInfo.lat);
@@ -228,7 +228,20 @@
             map.centerAndZoom(dep, 8);
             // createNewCurveLine();
         }
+*/
 
+        vm.initMap = function()
+        {
+            map.clearOverlays();
+            var dep = new BMap.Point(vm.departureInfo.lng, vm.departureInfo.lat);
+            var arr = new BMap.Point(vm.arrivalInfo.lng, vm.arrivalInfo.lat);
+            createNewMarker(dep,vm.departureInfo.desc);
+            createNewMarker(arr,vm.arrivalInfo.desc);
+            // map.centerAndZoom(dep, 8);
+
+            var vp = map.getViewport([dep, arr]);
+            map.centerAndZoom(vp.center, vp.zoom);
+        }
 
 
 

@@ -88,6 +88,10 @@
         vm.classFleet = [
             '直升机',
             '固定翼'
+        ];
+        vm.licenseType=[
+            '私照',
+            '商照'
         ]
         var username = $stateParams.username;
         var type = $stateParams.args.type;
@@ -217,7 +221,18 @@
                 toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
             });
         }
+       vm.changeClassSite = function(){
+           console.log(vm.user.school.id);
+           if(vm.schools.length > 0){
+               for(var i = 0; i < vm.schools.length;  i++){
+                   if(vm.schools[i].id == vm.user.school.id){
+                       vm.user.location = vm.schools[i].address;
+                       return;
+                   }
+               }
 
+           }
+       }
         function editItem() {
             var myid = vm.userInfo.id;
             vm.user.startDate = dateToString(vm.sdt);
@@ -286,6 +301,8 @@
             vm.user.currencyUnit = 'rmb';
             vm.user.school = {};
             vm.user.airType = '直升机';
+            vm.user.license = '私照';
+
         }
 
         vm.sdt = new Date();
@@ -297,13 +314,16 @@
                 vm.schools = response.data.content;
                 console.log(vm.schools);
                 if(vm.schools.length > 0){
-                    if(!vm.user){
-                        vm.user = {};
+                    if(vm.isAdd) {
+                        if (!vm.user) {
+                            vm.user = {};
+                        }
+                        if (!vm.user.school) {
+                            vm.user.school = {};
+                        }
+                        vm.user.school.id = vm.schools[0].id;
+                        vm.user.location = vm.schools[0].address;
                     }
-                    if(!vm.user.school){
-                        vm.user.school = {};
-                    }
-                    vm.user.school.id = vm.schools[0].id;
                 }
                 //updatePagination(response.data);
             },function (response) {
@@ -311,10 +331,10 @@
             });
         }
 
+
+
+
         getSchoolDatas();
-
-
-
 
 
 

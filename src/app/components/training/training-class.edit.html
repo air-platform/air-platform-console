@@ -88,7 +88,7 @@
                                placeholder="{{'u.COURSESCHOOL' | translate}}" ng-model="vm.user.school.id" ng-disabled="vm.isDetail" >
 -->
 
-                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.school.id" ng-options="s.id as s.name for s in vm.schools" ng-disabled="vm.isDetail" ></select>
+                        <select ng-change="vm.changeClassSite()" style="width: 100%;" class="form-control font-thin" ng-model="vm.user.school.id" ng-options="s.id as s.name for s in vm.schools" ng-disabled="vm.isDetail" ></select>
 
 
 
@@ -180,8 +180,13 @@
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.LICENSE' | translate}}</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="{{'u.LICENSE' | translate}}" ng-model="vm.user.license" ng-disabled="vm.isDetail" >
+                        <!--<input class="form-control" type="text"
+                               placeholder="{{'u.LICENSE' | translate}}" ng-model="vm.user.license" ng-disabled="vm.isDetail" >-->
+
+
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.license" ng-options="s for s in vm.licenseType" ng-disabled="vm.isDetail" ></select>
+
+
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
@@ -229,7 +234,7 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.LOCATION' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.LOCATION' | translate}}" ng-model="vm.user.location" ng-disabled="vm.isDetail" >
+                               placeholder="{{'u.LOCATION' | translate}}" ng-model="vm.user.location" ng-disabled=true >
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
