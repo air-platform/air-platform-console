@@ -1,0 +1,31 @@
+<div  style="width:400px; height:300px; overflow:hidden;margin:10px 5px;" ui-calendar="vm.calendarConfig" ng-model="vm.eventSources" calendar="taxiPriceCalendar"></div>
+<div ng-if="vm.isModifyPrice" ng-style="{'left':vm.priceLeft, 'top' : vm.priceTop }" style="width:350px;height:200px;position:absolute;z-index:1000;">
+
+    <div class="m-l-lg panel b-a">
+        <div class="panel-heading pos-rlt b-b b-light" style="background: #fff;" >
+            <span class="arrow left" ></span>
+            <a href>今日价格</a>
+            <!--<label class="label bg-success m-l-xs">User</label>-->
+            <!--<span class="text-muted m-l-sm pull-right">
+                <i class="fa fa-clock-o"></i>
+                1h ago
+              </span>-->
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" placeholder="价格" ng-model="vm.modifyPrice" ng-pattern="/^[0-9\.]{1,20}$/" required>
+                </div>
+                <div class="col-sm-2">
+                    <button ng-click="vm.updateEventPrice()" class="btn m-b-xs btn-sm btn-danger btn-addon" ng-disabled='form.$invalid'>修改</button>
+                </div>
+                <div class="col-sm-2">
+                    <button ng-click="vm.hideModifyPrice()" class="btn m-b-xs btn-sm btn-info btn-addon">取消</button>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -93,91 +93,11 @@
 
 
 
-        var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
-        vm.eventSources = [];
-        vm.refDate = '';
-        vm.isModifyPrice = false;
-        vm.priceLeft = '0px';
-        vm.priceTop = '0px';
-        vm.curCalEvent = '';
-        vm.events = [];
-        vm.airPrice = [];
-        for(var i = 0; i < 30; i ++){
-            vm.airPrice.push((5000-i*30));
-        }
-        for(var i = 0; i < 30 ; i ++){
-            vm.events.push({title: vm.airPrice[i],start: new Date(y,m,d+i), editable:true, id:i});
-        }
-
-        vm.eventSources = [vm.events];
-
-        vm.calendarConfig =
-            {
-                /*height: 200,
-                width:200,
-                aspectRatio: 1,*/
-                firstDay:1,
-                monthNames:['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
-                monthNamesShort:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-                dayNames:['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-                dayNamesShort:['周日','周一','周二','周三','周四','周五','周六'],
-                buttonText: {
-                    today:'今天'
-                },
-                editable: true,
-                header:{
-                    left: '',
-                    center: 'title',
-                    right: 'today prev,next'
-                },
-                eventClick: function(calEvent, jsEvent, view) {
-
-                    console.log('Event: ' + calEvent.title);
-
-                    /* console.log($(this).find('.fc-title')[0].innerHTML);
-                    console.log('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-                    var tt = $(this).find('.fc-title')[0];
-                    console.log(tt.offsetLeft);
-                    console.log(tt.offsetTop);
-                    console.log($("#modifyPricePopup").offset());
-                    $('#modifyPricePopup').css("left",1000);
-                    $('#modifyPricePopup').css("top",jsEvent.pageY);*/
-
-                    vm.priceLeft = jsEvent.pageX  + 'px';
-                    vm.priceTop = (jsEvent.pageY - 20) + 'px';
-                    vm.modifyPrice = calEvent.title;
-                    vm.curCalEvent = calEvent;
-                    console.log(calEvent.start.format());
-                    if(calEvent.start.format() == vm.refDate){
-                        vm.isModifyPrice = !vm.isModifyPrice;
-                    }else{
-                        vm.isModifyPrice = true;
-                    }
-                    vm.refDate = calEvent.start.format();
-                },
-                dayClick:function(date, jsEvent, view) {
-                    console.log('Clicked on: ' + date.format());
-                }
-            };
-
-        vm.hideModifyPrice = function()
-        {
-            vm.isModifyPrice = false;
-        }
-        vm.updateEventPrice = function()
-        {
-            vm.isModifyPrice = false;
-            //console.log(vm.curCalEvent.title+';;;;'+vm.curCalEvent.id);
-           vm.curCalEvent.title = vm.modifyPrice;
-            vm.airPrice[vm.curCalEvent.id] = vm.modifyPrice;
-            console.log(vm.airPrice);
-            uiCalendarConfig.calendars.taxiPriceCalendar.fullCalendar('updateEvent',vm.curCalEvent);
 
 
-        }
+
+
+
 
 
 
