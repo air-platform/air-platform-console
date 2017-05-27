@@ -86,144 +86,107 @@
             }
         ];
 
-         vm.eventSources = [];
+
+
+
+
+
+
 
         var date = new Date();
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
-
-
+        vm.eventSources = [];
+        vm.refDate = '';
         vm.isModifyPrice = false;
         vm.priceLeft = '0px';
         vm.priceTop = '0px';
-
-        /*$scope.events = [
-            {title: 'All Day Event',start: new Date(y, m, 1)},
-            {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
-            {id: 999,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: false},
-            {id: 999,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
-            {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
-            {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
-        ];*/
-        $scope.events = [
-            {title: '1865',start: new Date(), editable:true, id:'1'},
-
-        ];
-        $scope.events = [];
-        for(var i = 0; i < 30 ; i ++){
-            $scope.events.push({title: 2000-i*30,start: new Date(y,m,d+i), editable:true, id:'1'});
+        vm.curCalEvent = '';
+        vm.events = [];
+        vm.airPrice = [];
+        for(var i = 0; i < 30; i ++){
+            vm.airPrice.push((5000-i*30));
         }
-        $scope.eventSource = {
-            url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
-            className: 'gcal-event',           // an option!
-            currentTimezone: 'America/Chicago' // an option!
-        };
+        for(var i = 0; i < 30 ; i ++){
+            vm.events.push({title: vm.airPrice[i],start: new Date(y,m,d+i), editable:true, id:i});
+        }
 
+        vm.eventSources = [vm.events];
 
-        $scope.eventsF = function (start, end, timezone, callback) {
-            var s = new Date(start).getTime() / 1000;
-            var e = new Date(end).getTime() / 1000;
-            var m = new Date(start).getMonth();
-            var events = [{title: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}];
-            callback(events);
-        };
-
-         vm.eventSources = [$scope.events];
-        $scope.alertOnEventClick = function( date, jsEvent, view){
-            $scope.alertMessage = (date.title + ' was clicked ');
-            console.log($scope.alertMessage);
-        };
-        $scope.alertOnDrop = function( date, jsEvent, view){
-            $scope.alertMessage = (date.title + ' was clicked ');
-            console.log($scope.alertMessage);
-        };
-        $scope.alertOnResize = function( date, jsEvent, view){
-            $scope.alertMessage = (date.title + ' was clicked ');
-            console.log($scope.alertMessage);
-        };
         vm.calendarConfig =
             {
                 /*height: 200,
                 width:200,
                 aspectRatio: 1,*/
+                firstDay:1,
+                monthNames:['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
+                monthNamesShort:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+                dayNames:['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+                dayNamesShort:['周日','周一','周二','周三','周四','周五','周六'],
+                buttonText: {
+                    today:'今天'
+                },
                 editable: true,
                 header:{
-                    left: 'month',
+                    left: '',
                     center: 'title',
                     right: 'today prev,next'
                 },
                 eventClick: function(calEvent, jsEvent, view) {
 
                     console.log('Event: ' + calEvent.title);
-                    console.log($(this).find('.fc-title')[0].innerHTML);
-                   // $(this).find('.fc-title')[0].innerHTML = 'hahaha';
+
+                    /* console.log($(this).find('.fc-title')[0].innerHTML);
                     console.log('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
                     var tt = $(this).find('.fc-title')[0];
                     console.log(tt.offsetLeft);
                     console.log(tt.offsetTop);
                     console.log($("#modifyPricePopup").offset());
                     $('#modifyPricePopup').css("left",1000);
-                    $('#modifyPricePopup').css("top",jsEvent.pageY);
+                    $('#modifyPricePopup').css("top",jsEvent.pageY);*/
 
                     vm.priceLeft = jsEvent.pageX  + 'px';
                     vm.priceTop = (jsEvent.pageY - 20) + 'px';
-                    //var divChild = document.getElementById("modifyPricePopup");
-                    //divChild.style.width="20px";
-                    //divChild.style.left="160px";//因为offsetLeft是只读属性所以要通过left属性设置。而且还要设置绝对定位。
-                    //divChild.style.top="180px";//
-                    //var position = ($(this).find('.fc-title')[0]).offset();
-
-                    //console.log(position);
-                  //  console.log(uiCalendarConfig.calendars.taxiPriceCalendar[0]);
-                   // var dd = uiCalendarConfig.calendars.taxiPriceCalendar.fullCalendar('getEventSources');
-                   // console.log(dd);
-                    vm.isModifyPrice = !vm.isModifyPrice;
-                   // uiCalendarConfig.calendars.taxiPriceCalendar.removeEventSources();
-                   // vm.eventSources = [];
-
+                    vm.modifyPrice = calEvent.title;
+                    vm.curCalEvent = calEvent;
+                    console.log(calEvent.start.format());
+                    if(calEvent.start.format() == vm.refDate){
+                        vm.isModifyPrice = !vm.isModifyPrice;
+                    }else{
+                        vm.isModifyPrice = true;
+                    }
+                    vm.refDate = calEvent.start.format();
                 },
-                eventDrop: $scope.alertOnDrop,
-                eventResize: $scope.alertOnResize,
                 dayClick:function(date, jsEvent, view) {
                     console.log('Clicked on: ' + date.format());
-
-
-                    //console.log('Current view: ' + view.name);
-                    //console.log(view);
-
-
-                    console.log($(this).find('.fc-title'));
-                    console.log($(this).find('.fc-title').text('ddd'));
-                    /*$scope.events = [
-                        {title: '1866',start: new Date(), editable:true, id:'1'},
-
-                    ];
-                    for(var i = 0; i < 30 ; i ++){
-                        $scope.events.push({title: '500'+i,start: new Date(y,m,d+i), editable:true, id:'1'});
-                    }*/
-                    vm.eventSources = [$scope.events];
-                    // change the day's background color just for fun
-                   // $(this).css('background-color', 'red');
-
                 }
             };
 
-
-
-       /* vm.calendarConfig =
+        vm.hideModifyPrice = function()
         {
-            height: 300,
-            editable: true,
-            header:{
-                left: 'month basicWeek basicDay agendaWeek agendaDay',
-                center: 'title',
-                right: 'today prev,next'
-            },
-            eventClick: $scope.alertEventOnClick,
-            eventDrop: $scope.alertOnDrop,
-            eventResize: $scope.alertOnResize
-        };*/
+            vm.isModifyPrice = false;
+        }
+        vm.updateEventPrice = function()
+        {
+            vm.isModifyPrice = false;
+            //console.log(vm.curCalEvent.title+';;;;'+vm.curCalEvent.id);
+           vm.curCalEvent.title = vm.modifyPrice;
+            vm.airPrice[vm.curCalEvent.id] = vm.modifyPrice;
+            console.log(vm.airPrice);
+            uiCalendarConfig.calendars.taxiPriceCalendar.fullCalendar('updateEvent',vm.curCalEvent);
+
+
+        }
+
+
+
+
+
+
+
+
+
 
 
         var map = new BMap.Map("map-div");          // 创建地图实例
