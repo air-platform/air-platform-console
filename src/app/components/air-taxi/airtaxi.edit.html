@@ -53,11 +53,13 @@
 
 
 
-                    <div class="form-group" ng-repeat="item in vm.user.aircraftItems">
+                    <div class="form-group" style="margin-left:20px;" ng-repeat="item in vm.user.aircraftItems">
 
+<!--
                         <label class="col-sm-1 control-label  font-bold">套餐价格</label>
-                        <div class="col-sm-1">
-                            <button ng-if="!vm.isDetail" ng-click="vm.togglePriceCalendar(item.prices)" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-minus"></i>{{'product.DELETE' | translate}}</button>
+-->
+                        <div class="col-sm-1 m-l-lg">
+                            <button ng-if="!vm.isDetail" ng-click="vm.togglePriceCalendar()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left">套餐价格</button>
 
                         </div>
                         <!--<div class="col-sm-1">
@@ -66,8 +68,8 @@
 
                         </div>-->
 
-                        <price-calendar prices="item.price"></price-calendar>
-                        <label class="col-sm-1 control-label  font-bold">{{'u.SEATPRICE' | translate}}</label>
+                        <price-calendar prices="item.price" ng-if="vm.showPriceCalendar"></price-calendar>
+                        <label class="col-sm-1 control-label  font-bold m-l-lg">{{'u.SEATPRICE' | translate}}</label>
                         <div class="col-sm-1">
                             <input class="form-control" type="text"
                                    placeholder="{{'u.SEATPRICE' | translate}}" ng-model="item.seatPrice" ng-disabled="vm.isDetail"  required>
@@ -95,7 +97,7 @@
 
                         </div>
 
-                        <div class="col-sm-1">
+                        <div class="col-sm-2">
                             <button ng-if="!vm.isDetail" ng-click="vm.removeCraftItem(item)" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-minus"></i>{{'product.DELETE' | translate}}</button>
 
                         </div>
@@ -108,13 +110,20 @@
 
 
                     <div class="col-sm-4">
-                        <button ng-if="!vm.isDetail" ng-click="vm.addNewCraftItem()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-plus"></i>{{'u.ADDCRAFT' | translate}}</button>
+                        <button ng-if="!vm.isDetail" ng-click="vm.addNewCraftItem()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left m-l-lg"><i class="glyphicon glyphicon-plus"></i>{{'u.ADDCRAFT' | translate}}</button>
 
                     </div>
 
 
 
                 </div>
+
+
+
+
+
+
+
 
                 <div  class="line line-dashed b-b line-lg"></div>
 

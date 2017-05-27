@@ -102,8 +102,11 @@
 
 
 
-
-
+        vm.showPriceCalendar = false;
+        vm.togglePriceCalendar = function()
+        {
+            vm.showPriceCalendar = !vm.showPriceCalendar;
+        }
 
 
 
