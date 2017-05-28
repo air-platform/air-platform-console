@@ -444,7 +444,7 @@
                 }
 
 
-                if(vm.user.aircraftItems.length > 0){
+                if(vm.user.aircraftItems && vm.user.aircraftItems.length > 0){
                     for (var i = 0; i < vm.user.aircraftItems.length; i ++){
                         vm.user.aircraftItems[i].aircraftId = vm.user.aircraftItems[i].aircraft.id;
                     }

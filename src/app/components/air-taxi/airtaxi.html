@@ -40,8 +40,8 @@
             <tr ng-repeat="item in vm.displayedCollection">
               <!--  <td ng-click="vm.goDetail(item)">{{item.id}}</td>-->
                 <td ng-click="vm.goDetail(item)">{{item.name}}</td>
-                <td ng-click="vm.goDetail(item)"> {{item.departure }}</td>
-               <td ng-click="vm.goDetail(item)">{{item.arrival}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.flightRoute.departure}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.flightRoute.arrival}}</td>
                 <td ng-click="vm.goDetail(item)">{{item.description}}</td>
 
 
@@ -49,7 +49,9 @@
                     {{item.enabled ? ('u.ACTIVITY'|T ):('u.UNACTIVITY'|T)}}
                 </td>-->
                 <td>
+
                     <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goDetail(item)"><i class="fa fa-eye"></i>{{'u.DETAIL'|T}}</button>
+                    <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goDetail(item)"><i class="fa fa-eye"></i>评论</button>
 
                     <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goEditItem(item)"><i class="fa fa-edit"></i>{{ 'u.EDIT' | T}}</button>
                     <button class="btn btn-sm btn-danger btn-addon" style="width: 80px"  ng-click="vm.openAlert('sm',item)"><i class="fa fa-trash-o"></i>{{'u.DELETE' | T}}</button>

@@ -53,7 +53,7 @@
 
 
 
-                    <div class="form-group" ng-repeat="item in vm.user.aircraftItems">
+                    <div class="form-group" ng-repeat="item in vm.user.salesPackages">
 
 
 
@@ -61,14 +61,14 @@
                             <label class="col-sm-1 control-label  font-bold">套餐名</label>
                             <div class="col-sm-2">
                                 <input class="form-control" type="text"
-                                       placeholder="{{'u.SEATPRICE' | translate}}" ng-model="item.seatPrice" ng-disabled="vm.isDetail"  required>
+                                       placeholder="套餐名" ng-model="item.name" ng-disabled="vm.isDetail"  required>
                             </div>
 
 
                             <label class="col-sm-1 control-label  font-bold">乘客数</label>
                             <div class="col-sm-1">
                                 <input class="form-control" type="text"
-                                       placeholder="{{'u.SEATPRICE' | translate}}" ng-model="item.seatPrice" ng-disabled="vm.isDetail"  required>
+                                       placeholder="乘客数" ng-model="item.passengers" ng-disabled="vm.isDetail"  required>
                             </div>
 
 
@@ -89,16 +89,19 @@
                         <div  class="form-group" style="margin-left:17px;">
                             <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.DESCRIPTION' | translate}}</label>
                             <div class="col-sm-4">
-                                        <textarea class="form-control font-thin" ng-model="item.price" rows="4" placeholder="{{'u.DESCRIPTION' | translate}}" style="resize: none;" ng-disabled="vm.isDetail"></textarea>
+                                        <textarea class="form-control font-thin" ng-model="item.description" rows="4" placeholder="{{'u.DESCRIPTION' | translate}}" style="resize: none;" ng-disabled="vm.isDetail"></textarea>
                             </div>
                         </div>
 
                         <div  class="form-group" style="margin-left:50px;">
                             <label class="col-sm-1 control-label  font-bold">套餐价格</label>
-                                <div class="col-sm-3 m-l-lg ">
-                                    <button ng-if="!vm.isDetail" ng-click="vm.togglePriceCalendar()" style="position:relative;top:3px;" class="btn m-b-xs btn-sm btn-info btn-addon pull-left">{{vm.priceButtonTitle}}...</button>
-                                </div>
-                            <price-calendar prices="item.price" ng-if="vm.showPriceCalendar"></price-calendar>
+                            <div class="col-sm-3 m-l-lg ">
+                                <button ng-if="!vm.isDetail" ng-click="vm.togglePriceCalendar(item)" style="position:relative;top:3px;" class="btn m-b-xs btn-sm btn-info btn-addon pull-left">{{item.priceButtonTitle}}...</button>
+                            </div>
+
+                            <div style="width: 600px;margin-left: 220px;margin-top: 8px;">
+                                <price-calendar prices="item.prices" ng-if="item.showPriceCalendar"></price-calendar>
+                            </div>
 
                         </div>
 
@@ -141,14 +144,6 @@
 
 
 
-
-
-
-
-
-
-
-
                 <div class = "map-panel" style="">
                     <div  class="form-group">
                         <label class="col-sm-1 control-label  m-l-lg font-bold">航程信息</label>
@@ -158,14 +153,21 @@
                         <label class="col-sm-1 control-label m-l-lg font-bold">出发地</label>
                         <div class="col-sm-2">
                             <input class="form-control" type="text"
-                                   placeholder="{{'u.DEPARTURE' | translate}}" id='depature_area' ng-model="vm.user.departure" ng-disabled="vm.isDetail" >
+                                   placeholder="{{'u.DEPARTURE' | translate}}" id='depature_area' ng-model="vm.user.flightRoute.departure" ng-disabled="vm.isDetail" >
                         </div>
 
 
-                        <label class="col-sm-1 control-label m-l-lg font-bold">经纬度</label>
-                        <div class="col-sm-4">
+                        <label class="col-sm-1 control-label m-l-lg font-bold">经度</label>
+                        <div class="col-sm-2">
                             <input class="form-control" type="text"
-                                   placeholder="{{'u.DEPARTURELOC' | translate}}" id='depature_loc' ng-model="vm.user.departLoc" ng-disabled="vm.isDetail" >
+                                   placeholder="{{'u.DEPARTURELOC' | translate}}" id='depature_loc_lng_taxi' ng-model="vm.user.flightRoute.departureLongitude" ng-disabled="vm.isDetail" >
+
+                        </div>
+
+                        <label class="col-sm-1 control-label m-l-lg font-bold">纬度</label>
+                        <div class="col-sm-2">
+                            <input class="form-control" type="text"
+                                   placeholder="{{'u.DEPARTURELOC' | translate}}" id='depature_loc_lat_taxi' ng-model="vm.user.flightRoute.departureLatitude" ng-disabled="vm.isDetail" >
 
                         </div>
 
@@ -176,13 +178,18 @@
                         <label class="col-sm-1 control-label m-l-lg font-bold">目的地</label>
                         <div class="col-sm-2">
                             <input class="form-control" type="text"
-                                   placeholder="{{'u.ARRIVAL' | translate}}" id='arrival_area' ng-model="vm.user.arrival" ng-disabled="vm.isDetail" >
+                                   placeholder="{{'u.ARRIVAL' | translate}}" id='arrival_area' ng-model="vm.user.flightRoute.arrival" ng-disabled="vm.isDetail" >
                         </div>
 
-                        <label class="col-sm-1 control-label m-l-lg font-bold">经纬度</label>
-                        <div class="col-sm-4">
+                        <label class="col-sm-1 control-label m-l-lg font-bold">经度</label>
+                        <div class="col-sm-2">
                             <input class="form-control" type="text"
-                                   placeholder="{{'u.ARRIVALLOC' | translate}}" id='arrival_loc' ng-model="vm.user.arrivalLoc" ng-disabled="vm.isDetail" >
+                                   placeholder="{{'u.ARRIVALLOC' | translate}}" id='arrival_loc_lng_taxi' ng-model="vm.user.flightRoute.arrivalLongitude" ng-disabled="vm.isDetail" >
+                        </div>
+                        <label class="col-sm-1 control-label m-l-lg font-bold">纬度</label>
+                        <div class="col-sm-2">
+                            <input class="form-control" type="text"
+                                   placeholder="{{'u.ARRIVALLOC' | translate}}" id='arrival_loc_lat_taxi' ng-model="vm.user.flightRoute.arrivalLatitude" ng-disabled="vm.isDetail" >
                         </div>
 
 
@@ -202,6 +209,14 @@
 
                     </div>
                 </div>
+
+
+
+
+
+
+
+
 
                 <div  class="line line-dashed b-b line-lg"></div>
 

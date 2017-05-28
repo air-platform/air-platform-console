@@ -23,9 +23,18 @@
                 $scope.vm.events = [];
                 $scope.vm.airPrice = [];
                 console.log($scope.prices);
-
+                var initPrices = [];
                 for(var i = 0; i < 30; i ++){
-                    $scope.vm.airPrice.push(($scope.prices-i*30));
+                    initPrices[i]=1000;
+                }
+                var arrPrices = $scope.prices.split(',');
+                if(arrPrices && arrPrices.length==30){
+                    for(var i = 0; i < 30; i ++){
+                        initPrices[i] = parseInt(arrPrices[i]);
+                    }
+                }
+                for(var i = 0; i < 30; i ++){
+                    $scope.vm.airPrice.push(initPrices[i]);
                 }
                 for(var i = 0; i < 30 ; i ++){
                     $scope.vm.events.push({title: $scope.vm.airPrice[i],start: new Date(y,m,d+i), editable:true, id:i});
@@ -95,7 +104,8 @@
                     $scope.vm.airPrice[$scope.vm.curCalEvent.id] = $scope.vm.modifyPrice;
                     console.log($scope.vm.airPrice);
                     uiCalendarConfig.calendars.taxiPriceCalendar.fullCalendar('updateEvent',$scope.vm.curCalEvent);
-
+                    $scope.prices = $scope.vm.airPrice.toString();
+                    console.log($scope.prices);
 
                 }
 

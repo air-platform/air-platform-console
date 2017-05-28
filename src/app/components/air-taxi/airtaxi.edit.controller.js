@@ -102,17 +102,16 @@
 
 
 
-        vm.showPriceCalendar = false;
-        vm.priceButtonTitle = '详情';
-        vm.togglePriceCalendar = function()
+
+        vm.togglePriceCalendar = function(item)
         {
 
 
-            vm.showPriceCalendar = !vm.showPriceCalendar;
-            if(vm.showPriceCalendar){
-                vm.priceButtonTitle = '收起';
+            item.showPriceCalendar = !item.showPriceCalendar;
+            if(item.showPriceCalendar){
+                item.priceButtonTitle = '收起';
             }else{
-                vm.priceButtonTitle = '详情';
+                item.priceButtonTitle = '详情';
             }
 
         }
@@ -163,12 +162,14 @@
             if(desc == '出发地'){
                 vm.departureInfo.lng = pt.lng;
                 vm.departureInfo.lat = pt.lat;
-                document.getElementById('depature_loc').value = ll;
+                document.getElementById('depature_loc_lng_taxi').value = vm.departureInfo.lng;
+                document.getElementById('depature_loc_lat_taxi').value = vm.departureInfo.lat;
                 console.log(ll+':'+desc);
             }else if(desc == '目的地'){
                 vm.arrivalInfo.lng = pt.lng;
                 vm.arrivalInfo.lat = pt.lat;
-                document.getElementById('arrival_loc').value = ll;
+                document.getElementById('arrival_loc_lng_taxi').value = vm.arrivalInfo.lng;
+                document.getElementById('arrival_loc_lat_taxi').value =  vm.arrivalInfo.lat;
                 console.log(ll+':'+desc);
             }
             createNewCurveLine();
@@ -217,11 +218,13 @@
                     if(e.target.getLabel().content == '出发地'){
                         vm.departureInfo.lng = e.point.lng;
                         vm.departureInfo.lat = e.point.lat;
-                        document.getElementById('depature_loc').value = ll;
+                        document.getElementById('depature_loc_lng_taxi').value = vm.departureInfo.lng;
+                        document.getElementById('depature_loc_lat_taxi').value = vm.departureInfo.lat;
                     }else if(e.target.getLabel().content == '目的地'){
                         vm.arrivalInfo.lng = e.point.lng;
                         vm.arrivalInfo.lat = e.point.lat;
-                        document.getElementById('arrival_loc').value = ll;
+                        document.getElementById('arrival_loc_lng_taxi').value = vm.arrivalInfo.lng;
+                        document.getElementById('arrival_loc_lat_taxi').value =  vm.arrivalInfo.lat;
                     }
                     createNewCurveLine();
 
@@ -289,12 +292,19 @@
 
 
         vm.addNewCraftItem = function() {
+            var pp = [];
+            for(var i = 0; i < 30; i ++){
+               pp.push(2000);
+            }
 
-            vm.user.aircraftItems.push({
-                price:'',
-                seatPrice:'',
+            vm.user.salesPackages.push({
+                name:'',
+                prices:pp.toString(),
+                description:'des',
                 currencyUnit:'rmb',
-                aircraft:''
+                aircraft:'',
+                showPriceCalendar:false,
+                priceButtonTitle:'详情'
             })
         }
 
@@ -312,21 +322,10 @@
             vm.user.clientManagersArr.splice(index, 1);
         }
 
-        vm.realAddNewCraftItem = function(item) {
-            console.log('ok');
-            var index = vm.user.aircraftItemsAdd.indexOf(item);
-            console.log('ok'+index);
 
-            vm.user.aircraftItemsAdd.splice(index, 1);
-
-            vm.user.aircraftItems.push(angular.copy(item));
-            console.log(vm.user.aircraftItems);
-
-
-        }
         vm.removeCraftItem = function(item) {
-            var index = vm.user.aircraftItems.indexOf(item);
-            vm.user.aircraftItems.splice(index, 1);
+            var index = vm.user.salesPackages.indexOf(item);
+            vm.user.salesPackages.splice(index, 1);
         }
         function getAircraftsDatas() {
 
@@ -349,11 +348,16 @@
             NetworkService.get(constdata.api.tenant.fleetPath +'/' + vm.subPath + '/'+ username,null,function (response) {
                 vm.user = response.data;
 
-                vm.user.aircraftItemsAdd = [];
+
                 vm.user.clientManagersArr = [];
-                if(vm.user.aircraftItems.length > 0){
-                    for (var i = 0; i < vm.user.aircraftItems.length; i ++){
-                        vm.user.aircraftItems[i].aircraftId = vm.user.aircraftItems[i].aircraft.id;
+                if(vm.user.salesPackages && vm.user.salesPackages.length > 0){
+                    for (var i = 0; i < vm.user.salesPackages.length; i ++){
+                        vm.user.salesPackages[i].aircraftId = vm.user.salesPackages[i].aircraft.id;
+                        vm.user.salesPackages[i].showPriceCalendar = false;
+                        vm.user.salesPackages[i].priceButtonTitle = '详情';
+
+
+
                     }
                 }
 
@@ -377,17 +381,15 @@
                 }
 
 
-                if(vm.user.departLoc){
-                    var depLoc = vm.user.departLoc.split(',');
-                    if(depLoc.length == 2){
-                        vm.departureInfo.lng = parseFloat(depLoc[0]);
-                        vm.departureInfo.lat = parseFloat(depLoc[1]);
-                    }
-                    var arrLoc = vm.user.arrivalLoc.split(',');
-                    if(arrLoc.length == 2){
-                        vm.arrivalInfo.lng = parseFloat(arrLoc[0]);
-                        vm.arrivalInfo.lat = parseFloat(arrLoc[1]);
-                    }
+                if(vm.user.flightRoute){
+
+                    vm.departureInfo.lng = parseFloat(vm.user.flightRoute.departureLongitude);
+                    vm.departureInfo.lat = parseFloat(vm.user.flightRoute.departureLatitude);
+
+
+                    vm.arrivalInfo.lng = parseFloat(vm.user.flightRoute.arrivalLongitude);
+                    vm.arrivalInfo.lat = parseFloat(vm.user.flightRoute.arrivalLatitude);
+
                 }
 
                 vm.initMap();
@@ -402,10 +404,10 @@
         function addItem() {
             var myid = vm.userInfo.id;
 
-            if(vm.user.aircraftItems.length > 0) {
-                for (var i = 0; i < vm.user.aircraftItems.length; i++) {
-                    var tmp = vm.user.aircraftItems[i].aircraftId;
-                    vm.user.aircraftItems[i].aircraft = tmp;
+            if(vm.user.salesPackages.length > 0) {
+                for (var i = 0; i < vm.user.salesPackages.length; i++) {
+                    var tmp = vm.user.salesPackages[i].aircraftId;
+                    vm.user.salesPackages[i].aircraft = tmp;
                 }
             }
 
@@ -418,14 +420,18 @@
             }
             console.log(vm.user.clientManagers);
 
-            console.log(vm.user.aircraftItems);
+            console.log(vm.user.salesPackages);
            // return;
 
 
-            vm.user.departLoc = document.getElementById('depature_loc').value;
-            vm.user.departure = document.getElementById('depature_area').value;
-            vm.user.arrivalLoc = document.getElementById('arrival_loc').value;
-            vm.user.arrival = document.getElementById('arrival_area').value;
+
+            vm.user.flightRoute.departureLongitude = document.getElementById('depature_loc_lng_taxi').value;
+            vm.user.flightRoute.departureLatitude = document.getElementById('depature_loc_lat_taxi').value;
+            vm.user.flightRoute.departure = document.getElementById('depature_area').value;
+
+            vm.user.flightRoute.arrivalLongitude = document.getElementById('arrival_loc_lng_taxi').value;
+            vm.user.flightRoute.arrivalLatitude = document.getElementById('arrival_loc_lat_taxi').value;
+            vm.user.flightRoute.arrival = document.getElementById('arrival_area').value;
 
             NetworkService.post(constdata.api.tenant.fleetPath  + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
@@ -442,10 +448,10 @@
 
 
 
-            if(vm.user.aircraftItems.length > 0) {
-                for (var i = 0; i < vm.user.aircraftItems.length; i++) {
-                    var tmp = vm.user.aircraftItems[i].aircraftId;
-                    vm.user.aircraftItems[i].aircraft = tmp;
+            if(vm.user.salesPackages.length > 0) {
+                for (var i = 0; i < vm.user.salesPackages.length; i++) {
+                    var tmp = vm.user.salesPackages[i].aircraftId;
+                    vm.user.salesPackages[i].aircraft = tmp;
                 }
             }
 
@@ -460,13 +466,16 @@
                 }
             }
             console.log(vm.user.clientManagers);
-            console.log(vm.user.aircraftItems);
+            console.log(vm.user.salesPackages);
 
 
-            vm.user.departLoc = document.getElementById('depature_loc').value;
-            vm.user.departure = document.getElementById('depature_area').value;
-            vm.user.arrivalLoc = document.getElementById('arrival_loc').value;
-            vm.user.arrival = document.getElementById('arrival_area').value;
+            vm.user.flightRoute.departureLongitude = document.getElementById('depature_loc_lng_taxi').value;
+            vm.user.flightRoute.departureLatitude = document.getElementById('depature_loc_lat_taxi').value;
+            vm.user.flightRoute.departure = document.getElementById('depature_area').value;
+
+            vm.user.flightRoute.arrivalLongitude = document.getElementById('arrival_loc_lng_taxi').value;
+            vm.user.flightRoute.arrivalLatitude = document.getElementById('arrival_loc_lat_taxi').value;
+            vm.user.flightRoute.arrival = document.getElementById('arrival_area').value;
 
             NetworkService.put(constdata.api.tenant.fleetPath  + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
@@ -515,15 +524,18 @@
             vm.getTenantItem();
             //vm.initMap();
         }else{
+            vm.user.flightRoute = {};
             vm.user.currencyUnit = 'rmb';
-            vm.user.aircraftItems = [];
-            vm.user.aircraftItemsAdd = [];
+            vm.user.salesPackages = [];
             vm.initMap();
 
-            vm.user.departLoc = document.getElementById('depature_loc').value;
-            vm.user.departure = document.getElementById('depature_area').value;
-            vm.user.arrivalLoc = document.getElementById('arrival_loc').value;
-            vm.user.arrival = document.getElementById('arrival_area').value;
+            vm.user.flightRoute.departureLongitude = document.getElementById('depature_loc_lng_taxi').value;
+            vm.user.flightRoute.departureLatitude = document.getElementById('depature_loc_lat_taxi').value;
+            vm.user.flightRoute.departure = document.getElementById('depature_area').value;
+
+            vm.user.flightRoute.arrivalLongitude = document.getElementById('arrival_loc_lng_taxi').value;
+            vm.user.flightRoute.arrivalLatitude = document.getElementById('arrival_loc_lat_taxi').value;
+            vm.user.flightRoute.arrival = document.getElementById('arrival_area').value;
 
         }
 
