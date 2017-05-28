@@ -103,9 +103,18 @@
 
 
         vm.showPriceCalendar = false;
+        vm.priceButtonTitle = '详情';
         vm.togglePriceCalendar = function()
         {
+
+
             vm.showPriceCalendar = !vm.showPriceCalendar;
+            if(vm.showPriceCalendar){
+                vm.priceButtonTitle = '收起';
+            }else{
+                vm.priceButtonTitle = '详情';
+            }
+
         }
 
 

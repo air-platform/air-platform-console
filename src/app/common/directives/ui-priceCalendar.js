@@ -22,8 +22,10 @@
                 $scope.vm.curCalEvent = '';
                 $scope.vm.events = [];
                 $scope.vm.airPrice = [];
+                console.log($scope.prices);
+
                 for(var i = 0; i < 30; i ++){
-                    $scope.vm.airPrice.push((5000-i*30));
+                    $scope.vm.airPrice.push(($scope.prices-i*30));
                 }
                 for(var i = 0; i < 30 ; i ++){
                     $scope.vm.events.push({title: $scope.vm.airPrice[i],start: new Date(y,m,d+i), editable:true, id:i});
@@ -101,7 +103,7 @@
 
             },
             link: function($scope, $element, $attr) {
-                angular.element($element).append("Hello "+$scope.prices);
+                //angular.element($element).append("Hello "+$scope.prices);
                 //angular.element($element).append($scope.modelValue);
             },
 

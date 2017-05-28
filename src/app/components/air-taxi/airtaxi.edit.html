@@ -53,57 +53,69 @@
 
 
 
-                    <div class="form-group" style="margin-left:20px;" ng-repeat="item in vm.user.aircraftItems">
-
-<!--
-                        <label class="col-sm-1 control-label  font-bold">套餐价格</label>
--->
-                        <div class="col-sm-1 m-l-lg">
-                            <button ng-if="!vm.isDetail" ng-click="vm.togglePriceCalendar()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left">套餐价格</button>
-
-                        </div>
-                        <!--<div class="col-sm-1">
-                            <input class="form-control" type="text"
-                                   placeholder="{{'u.PRICE' | translate}}" ng-model="item.price" ng-disabled="vm.isDetail"  required>
-
-                        </div>-->
-
-                        <price-calendar prices="item.price" ng-if="vm.showPriceCalendar"></price-calendar>
-                        <label class="col-sm-1 control-label  font-bold m-l-lg">{{'u.SEATPRICE' | translate}}</label>
-                        <div class="col-sm-1">
-                            <input class="form-control" type="text"
-                                   placeholder="{{'u.SEATPRICE' | translate}}" ng-model="item.seatPrice" ng-disabled="vm.isDetail"  required>
-                        </div>
-
-
-                        <label class="col-sm-1 control-label  font-bold">{{'u.PRICEUNIT' | translate}}</label>
-                        <div class="col-sm-1">
-                            <select style="width: 100%;" class="form-control font-thin" ng-model="item.currencyUnit" ng-options="s.value as s.title for s in vm.priceType" ng-disabled="vm.isDetail" ></select>
-
-                        </div>
+                    <div class="form-group" ng-repeat="item in vm.user.aircraftItems">
 
 
 
-                        <label class="col-sm-1 control-label font-bold">{{'u.FLEETTYPE' | translate}}</label>
-                        <div class="col-sm-2">
-                            <!--
-                            <input class="form-control" type="text"
-                                   placeholder="{{'u.FLEETTYPE' | translate}}" ng-model="item.aircraft" ng-disabled="vm.isDetail"  required>
-                            <select class="form-control"  ng-model="item.aircraft" ng-options="opt.id as opt.name for opt in vm.crafts"></select>
--->
-
-                            <select style="width: 100%;" class="form-control font-thin" ng-model="item.aircraftId" ng-options="opt.id as opt.name for opt in vm.crafts" ng-disabled="vm.isDetail" ></select>
+                        <div  class="form-group"  style="margin-left:50px;">
+                            <label class="col-sm-1 control-label  font-bold">套餐名</label>
+                            <div class="col-sm-2">
+                                <input class="form-control" type="text"
+                                       placeholder="{{'u.SEATPRICE' | translate}}" ng-model="item.seatPrice" ng-disabled="vm.isDetail"  required>
+                            </div>
 
 
+                            <label class="col-sm-1 control-label  font-bold">乘客数</label>
+                            <div class="col-sm-1">
+                                <input class="form-control" type="text"
+                                       placeholder="{{'u.SEATPRICE' | translate}}" ng-model="item.seatPrice" ng-disabled="vm.isDetail"  required>
+                            </div>
+
+
+                            <label class="col-sm-1 control-label  font-bold">{{'u.PRICEUNIT' | translate}}</label>
+                            <div class="col-sm-1">
+                                <select style="width: 100%;" class="form-control font-thin" ng-model="item.currencyUnit" ng-options="s.value as s.title for s in vm.priceType" ng-disabled="vm.isDetail" ></select>
+
+                            </div>
+
+
+                            <label class="col-sm-1 control-label font-bold">{{'u.FLEETTYPE' | translate}}</label>
+                            <div class="col-sm-2">
+                                <select style="width: 100%;" class="form-control font-thin" ng-model="item.aircraftId" ng-options="opt.id as opt.name for opt in vm.crafts" ng-disabled="vm.isDetail" ></select>
+                            </div>
                         </div>
 
-                        <div class="col-sm-2">
-                            <button ng-if="!vm.isDetail" ng-click="vm.removeCraftItem(item)" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-minus"></i>{{'product.DELETE' | translate}}</button>
+
+                        <div  class="form-group" style="margin-left:17px;">
+                            <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.DESCRIPTION' | translate}}</label>
+                            <div class="col-sm-4">
+                                        <textarea class="form-control font-thin" ng-model="item.price" rows="4" placeholder="{{'u.DESCRIPTION' | translate}}" style="resize: none;" ng-disabled="vm.isDetail"></textarea>
+                            </div>
+                        </div>
+
+                        <div  class="form-group" style="margin-left:50px;">
+                            <label class="col-sm-1 control-label  font-bold">套餐价格</label>
+                                <div class="col-sm-3 m-l-lg ">
+                                    <button ng-if="!vm.isDetail" ng-click="vm.togglePriceCalendar()" style="position:relative;top:3px;" class="btn m-b-xs btn-sm btn-info btn-addon pull-left">{{vm.priceButtonTitle}}...</button>
+                                </div>
+                            <price-calendar prices="item.price" ng-if="vm.showPriceCalendar"></price-calendar>
 
                         </div>
+
+                        <div class="form-group"  style="margin-left:50px;">
+                            <div class="col-sm-2">
+                                <button ng-if="!vm.isDetail" ng-click="vm.removeCraftItem(item)" class="btn m-b-xs btn-sm btn-danger btn-addon pull-left"><i class="glyphicon glyphicon-minus"></i>{{'product.DELETE' | translate}}</button>
+                            </div>
+                        </div>
+
+
 
 
                     </div>
+
+
+
+
 
 
 
@@ -353,18 +365,18 @@
                 <div  class="line line-dashed b-b line-lg"></div>
 
 
-                <div  style="width:400px; height:300px; overflow:hidden;" ui-calendar="vm.calendarConfig" ng-model="vm.eventSources" calendar="taxiPriceCalendar"></div>
+                <!--<div  style="width:400px; height:300px; overflow:hidden;" ui-calendar="vm.calendarConfig" ng-model="vm.eventSources" calendar="taxiPriceCalendar"></div>
                 <div ng-if="vm.isModifyPrice" ng-style="{'left':vm.priceLeft, 'top' : vm.priceTop }" style="width:350px;height:200px;position:absolute;z-index:1000;">
 
                     <div class="m-l-lg panel b-a">
                         <div class="panel-heading pos-rlt b-b b-light" style="background: #fff;" >
                             <span class="arrow left" ></span>
                             <a href>今日价格</a>
-                            <!--<label class="label bg-success m-l-xs">User</label>-->
-                            <!--<span class="text-muted m-l-sm pull-right">
+                            &lt;!&ndash;<label class="label bg-success m-l-xs">User</label>&ndash;&gt;
+                            &lt;!&ndash;<span class="text-muted m-l-sm pull-right">
                                 <i class="fa fa-clock-o"></i>
                                 1h ago
-                              </span>-->
+                              </span>&ndash;&gt;
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
@@ -385,7 +397,7 @@
                     </div>
                 </div>
 
-                <div  class="line line-dashed b-b line-lg"></div>
+                <div  class="line line-dashed b-b line-lg"></div>-->
 
 
 
