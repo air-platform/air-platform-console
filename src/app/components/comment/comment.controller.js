@@ -6,10 +6,10 @@
 
     angular
         .module('iot')
-        .controller('AirtaxiController', AirtaxiController);
+        .controller('CommentController', CommentController);
 
     /** @ngInject */
-    function AirtaxiController(NetworkService,StorageService, constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
+    function CommentController(NetworkService,StorageService, constdata,$state,$rootScope, $uibModal,$log,toastr,i18n,$stateParams, delmodaltip) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -32,12 +32,14 @@
         vm.backAction = backAction;
         vm.userInfo = {};
         vm.subPath = 'airtaxis';
+        console.log($stateParams.args);
+        var username = $stateParams.username;
         function getDatas() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
             var myid = vm.userInfo.id;
             console.log(vm.userInfo);
 
-            NetworkService.get(constdata.api.tenant.fleetPath  + '/' + vm.subPath,{page:vm.pageCurrent},function (response) {
+            NetworkService.get(constdata.api.comment.basePath +'?product='+ username,{page:vm.pageCurrent, pageSize:10},function (response) {
                 vm.items = response.data.content;
                 updatePagination(response.data);
             },function (response) {
@@ -47,7 +49,32 @@
 
 
         function goAddItem() {
-            $state.go('app.editairtaxi',{});
+            vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+            var myid = vm.userInfo.id;
+            //$state.go('app.editairtaxi',{});
+            console.log(vm.userInfo);
+            vm.tuser={
+                content:'this is aaaa reply comment',
+                product:username,
+                //owner:vm.userInfo,
+                source:'user',
+                replyTo:vm.userInfo.id,
+                rate:5
+
+            };
+            NetworkService.post(constdata.api.comment.basePath +'?sourceId='+ username+'&source=user',vm.tuser,function (response) {
+                toastr.success(i18n.t('u.OPERATE_SUC'));
+                vm.backAction();
+            },function (response) {
+                vm.authError = response.statusText + '(' + response.status + ')';
+                console.log(vm.authError);
+                toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+            });
+
+
+
+
+
         };
 
         function goEditItem(item) {
@@ -75,7 +102,7 @@
 
         function removeItem(item) {
             var myid = vm.userInfo.id;
-            NetworkService.delete(constdata.api.tenant.fleetPath  + '/' + vm.subPath + '/'+ item.id,null,function success() {
+            NetworkService.delete(constdata.api.comment.basePath + '/'+ item.id,null,function success() {
                 var index = vm.items.indexOf(item);
                 //vm.items.splice(index,1);
                 toastr.success(i18n.t('u.DELETE_SUC'));

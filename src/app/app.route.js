@@ -317,6 +317,12 @@
                   templateUrl: 'app/components/air-taxi/airtaxi.edit.html'
               })
 
+              .state('app.comment', {
+                  url: prefix + '/comment/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/comment/comment.html'
+              })
+
               .state('app.airtour', {
                   url: prefix + '/airtour',
                   templateUrl: 'app/components/air-tour/airtour.html'

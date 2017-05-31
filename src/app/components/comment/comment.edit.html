@@ -1,0 +1,478 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="CommentEditController as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+">
+    <!-- main -->
+    <div class="col">
+        <!-- main header -->
+        <!-- <div class="bg-light lter b-b wrapper-md" ng-hide="isRoleAdmin">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="m-n font-thin h3 text-black">{{vm.title}}</h1>
+                    <small class="text-muted">HNA EcoTech Internet of Things</small>
+                </div>
+               
+            </div>
+        </div> -->
+
+        <!-- tasks -->
+
+
+
+        <div class="panel panel-default m-l m-r m-t">
+
+            <div class="panel-heading">
+                <h3 class="panel-title">评论详情</h3>
+            </div>
+            <br/>
+            <form name="form" class="form-horizontal form-validation" role="form">
+
+
+
+
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.NAME' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.NAME' | translate}}" ng-model="vm.user.name" ng-disabled="vm.isDetail"  required>
+                    </div>
+
+                    <span ng-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i><i style="font-style:normal; color:#999;">{{'tenant.USERNAMETIP' | translate}}</i></span>
+
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CRAFTSELECT' | translate}}</label>
+                </div>
+
+                <div  class="form-group">
+
+
+
+                    <div class="form-group" ng-repeat="item in vm.user.salesPackages">
+
+
+
+                        <div  class="form-group"  style="margin-left:50px;">
+                            <label class="col-sm-1 control-label  font-bold">套餐名</label>
+                            <div class="col-sm-2">
+                                <input class="form-control" type="text"
+                                       placeholder="套餐名" ng-model="item.name" ng-disabled="vm.isDetail"  required>
+                            </div>
+
+
+                            <label class="col-sm-1 control-label  font-bold">乘客数</label>
+                            <div class="col-sm-1">
+                                <input class="form-control" type="text"
+                                       placeholder="乘客数" ng-model="item.passengers" ng-disabled="vm.isDetail"  required>
+                            </div>
+
+
+                            <label class="col-sm-1 control-label  font-bold">{{'u.PRICEUNIT' | translate}}</label>
+                            <div class="col-sm-1">
+                                <select style="width: 100%;" class="form-control font-thin" ng-model="item.currencyUnit" ng-options="s.value as s.title for s in vm.priceType" ng-disabled="vm.isDetail" ></select>
+
+                            </div>
+
+
+                            <label class="col-sm-1 control-label font-bold">{{'u.FLEETTYPE' | translate}}</label>
+                            <div class="col-sm-2">
+                                <select style="width: 100%;" class="form-control font-thin" ng-model="item.aircraftId" ng-options="opt.id as opt.name for opt in vm.crafts" ng-disabled="vm.isDetail" ></select>
+                            </div>
+                        </div>
+
+
+                        <div  class="form-group" style="margin-left:50px;">
+
+                            <label class="col-sm-1 control-label  font-bold">预售提前天数</label>
+                            <div class="col-sm-2">
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text"
+                                           placeholder="天数" ng-model="item.presalesDays" ng-disabled="vm.isDetail"  required>
+                                </div>
+                            </div>
+
+
+                            <label class="col-sm-1 control-label  font-bold">{{'u.DESCRIPTION' | translate}}</label>
+                            <div class="col-sm-4">
+                                        <textarea class="form-control font-thin" ng-model="item.description" rows="4" placeholder="{{'u.DESCRIPTION' | translate}}" style="resize: none;" ng-disabled="vm.isDetail"></textarea>
+                            </div>
+                        </div>
+
+                        <div  class="form-group" style="margin-left:50px;">
+                            <label class="col-sm-1 control-label  font-bold">套餐价格</label>
+                            <div class="col-sm-3 m-l-lg ">
+                                <button  ng-click="vm.togglePriceCalendar(item)" style="position:relative;top:3px;" class="btn m-b-xs btn-sm btn-info btn-addon pull-left">{{item.priceButtonTitle}}...</button>
+                            </div>
+
+                            <div style="width: 600px;margin-left: 220px;margin-top: 8px;">
+                                <price-calendar prices="item.prices" ng-if="item.showPriceCalendar"></price-calendar>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group"  style="margin-left:50px;">
+                            <div class="col-sm-2">
+                                <button ng-if="!vm.isDetail" ng-click="vm.removeCraftItem(item)" class="btn m-b-xs btn-sm btn-danger btn-addon pull-left"><i class="glyphicon glyphicon-minus"></i>{{'product.DELETE' | translate}}</button>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+
+
+
+
+
+
+
+
+                    <div class="col-sm-4">
+                        <button ng-if="!vm.isDetail" ng-click="vm.addNewCraftItem()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left m-l-lg"><i class="glyphicon glyphicon-plus"></i>{{'u.ADDCRAFT' | translate}}</button>
+
+                    </div>
+
+
+
+                </div>
+
+
+
+
+
+
+
+
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+                <div class = "map-panel" style="">
+                    <div  class="form-group">
+                        <label class="col-sm-1 control-label  m-l-lg font-bold">航程信息</label>
+                    </div>
+
+                    <div  class="form-group">
+                        <label class="col-sm-1 control-label m-l-lg font-bold">出发地</label>
+                        <div class="col-sm-2">
+                            <input class="form-control" type="text"
+                                   placeholder="{{'u.DEPARTURE' | translate}}" id='depature_area' ng-model="vm.user.flightRoute.departure" ng-disabled="vm.isDetail" >
+                        </div>
+
+
+                        <label class="col-sm-1 control-label m-l-lg font-bold">经度</label>
+                        <div class="col-sm-2">
+                            <input class="form-control" type="text"
+                                   placeholder="{{'u.DEPARTURELOC' | translate}}" id='depature_loc_lng_taxi' ng-model="vm.user.flightRoute.departureLongitude" ng-disabled="vm.isDetail" >
+
+                        </div>
+
+                        <label class="col-sm-1 control-label m-l-lg font-bold">纬度</label>
+                        <div class="col-sm-2">
+                            <input class="form-control" type="text"
+                                   placeholder="{{'u.DEPARTURELOC' | translate}}" id='depature_loc_lat_taxi' ng-model="vm.user.flightRoute.departureLatitude" ng-disabled="vm.isDetail" >
+
+                        </div>
+
+
+                    </div>
+
+                    <div  class="form-group">
+                        <label class="col-sm-1 control-label m-l-lg font-bold">目的地</label>
+                        <div class="col-sm-2">
+                            <input class="form-control" type="text"
+                                   placeholder="{{'u.ARRIVAL' | translate}}" id='arrival_area' ng-model="vm.user.flightRoute.arrival" ng-disabled="vm.isDetail" >
+                        </div>
+
+                        <label class="col-sm-1 control-label m-l-lg font-bold">经度</label>
+                        <div class="col-sm-2">
+                            <input class="form-control" type="text"
+                                   placeholder="{{'u.ARRIVALLOC' | translate}}" id='arrival_loc_lng_taxi' ng-model="vm.user.flightRoute.arrivalLongitude" ng-disabled="vm.isDetail" >
+                        </div>
+                        <label class="col-sm-1 control-label m-l-lg font-bold">纬度</label>
+                        <div class="col-sm-2">
+                            <input class="form-control" type="text"
+                                   placeholder="{{'u.ARRIVALLOC' | translate}}" id='arrival_loc_lat_taxi' ng-model="vm.user.flightRoute.arrivalLatitude" ng-disabled="vm.isDetail" >
+                        </div>
+
+
+
+                    </div>
+
+
+                    <div  class="form-group">
+                        <label class="col-sm-1 control-label m-l-lg font-bold">地图显示</label>
+                        <div class="col-md-10">
+
+                            <div >
+                                <div id="map-div" style="height: 300px;width: 500px;"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FLYDIST' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.FLYDIST' | translate}}" ng-model="vm.user.distance" ng-disabled="vm.isDetail" >
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FLYDURA' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.FLYDURA' | translate}}" ng-model="vm.user.duration" ng-disabled="vm.isDetail" >
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+                <!--<div class="form-group">
+                    <label class="col-sm-2 control-label">Datepicker</label>
+                    <div class="col-sm-10" ng-controller="AirjetFlightEditController">
+                        <div class="input-group w-md">
+                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                            <span class="input-group-btn">
+                             <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-1 m-l-lg font-bold control-label">{{'product.EXPDATE' | translate}}</label>
+                    <div class="col-sm-5">
+                        <p class="input-group">
+                            <input type="text" class="form-control font-thin" uib-datepicker-popup="{{vm.format}}" ng-model="vm.dt" is-open="vm.opened" min-date="vm.minDate" maxDate="'2016-08-25'" uib-datepicker-options="vm.dateOptions" date-disabled="vm.disabled(date, mode)" ng-required="true" close-text="Close" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="vm.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                              </span>
+                        </p>
+                    </div>
+                </div>
+
+-->
+
+
+
+
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CLIENTMNGADD' | translate}}</label>
+                </div>
+
+                <div  class="form-group">
+
+                    <div class="form-group" ng-repeat="item in vm.user.clientManagersArr">
+
+                        <label class="col-sm-1 control-label  font-bold">{{'u.CLIENTMNGNAME' | translate}}</label>
+                        <div class="col-sm-2">
+                            <input class="form-control" type="text"
+                                   placeholder="{{'u.CLIENTMNGNAME' | translate}}" ng-model="item.name" ng-disabled="vm.isDetail"  required>
+
+                        </div>
+
+                        <label class="col-sm-1 control-label  font-bold">{{'u.CLIENTMNGEMAIL' | translate}}</label>
+                        <div class="col-sm-3">
+                            <input class="form-control" type="text"
+                                   placeholder="{{'u.CLIENTMNGEMAIL' | translate}}" ng-model="item.email" ng-disabled="vm.isDetail"  required>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <button ng-if="!vm.isDetail" ng-click="vm.removeClientManager(item)" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-minus"></i>{{'product.DELETE' | translate}}</button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-sm-4">
+                        <button ng-if="!vm.isDetail" ng-click="vm.addNewClientManager()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-plus"></i>{{'u.ADD' | translate}}</button>
+
+                    </div>
+
+                </div>
+
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+
+
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.IMAGE' | translate}}</label>
+                    <div class="col-sm-6">
+
+
+                        <div class="beauty-upload">
+
+                            <div class="lcell span5" style="margin:5px 0px;">
+                                    <div class="upload">
+                                        <input type="button" class="btn btn-default upload-btn" value="浏览文件"></input>
+                                        <!--<span  ng-bind="vm.myUploadFile.name">eee</span>-->
+                                         <label  ng-bind="vm.myUploadFile.name" class="label bg-finished"></label>
+                                        <input type="file" file-model = "vm.myUploadFile" class="upload-input-file" />
+                                        <button style="float:right;background:#23b7e5;border-radius:3px;" class="btn btn-default" ng-click="vm.uploadFile()"> <i class="fa fa-check-circle"></i> 上传 </button>
+                                    </div>
+                            </div>
+
+                        </div>
+
+                        <!--<input class="form-control" type="text"
+                               placeholder="{{'u.IMAGE' | translate}}" ng-model="vm.user.image" ng-disabled="vm.isDetail" >-->
+
+                        <div class="img-preview">
+
+                            <img ng-src="{{vm.user.image}}" alt="">
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.DESCRIPTION' | translate}}</label>
+                    <div class="col-sm-4">
+
+                        <textarea class="form-control font-thin" ng-model="vm.user.description" rows="4" placeholder="{{'u.DESCRIPTION' | translate}}" style="resize: none;" ng-disabled="vm.isDetail"></textarea>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+                <!--<div  style="width:400px; height:300px; overflow:hidden;" ui-calendar="vm.calendarConfig" ng-model="vm.eventSources" calendar="taxiPriceCalendar"></div>
+                <div ng-if="vm.isModifyPrice" ng-style="{'left':vm.priceLeft, 'top' : vm.priceTop }" style="width:350px;height:200px;position:absolute;z-index:1000;">
+
+                    <div class="m-l-lg panel b-a">
+                        <div class="panel-heading pos-rlt b-b b-light" style="background: #fff;" >
+                            <span class="arrow left" ></span>
+                            <a href>今日价格</a>
+                            &lt;!&ndash;<label class="label bg-success m-l-xs">User</label>&ndash;&gt;
+                            &lt;!&ndash;<span class="text-muted m-l-sm pull-right">
+                                <i class="fa fa-clock-o"></i>
+                                1h ago
+                              </span>&ndash;&gt;
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-sm-4">
+                                <input type="text" class="form-control" placeholder="价格" ng-model="vm.modifyPrice" ng-pattern="/^[0-9\.]{1,20}$/" required>
+                                </div>
+                                <div class="col-sm-2">
+                                 <button ng-click="vm.updateEventPrice()" class="btn m-b-xs btn-sm btn-danger btn-addon" ng-disabled='form.$invalid'>修改</button>
+                                </div>
+                                <div class="col-sm-2">
+                                    <button ng-click="vm.hideModifyPrice()" class="btn m-b-xs btn-sm btn-info btn-addon">取消</button>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div  class="line line-dashed b-b line-lg"></div>-->
+
+
+
+
+
+
+                <!--   <div class="form-group">
+                       <label class="col-sm-1 control-label m-l-lg font-bold">{{'profile.MAILBOX' | translate}}</label>
+                       <div class="col-sm-4">
+                           <input class="form-control" type="email"
+                                  placeholder="{{'profile.MAILBOX' | translate}}" ng-model="vm.user.email" required>
+                       </div>
+                       <span style="color:red;font-size:20px;">*</span>
+                   </div>
+
+                   <div class="line line-dashed b-b line-lg"></div>
+                   <div class="form-group">
+                       <label class="col-sm-1 control-label m-l-lg font-bold">{{'tenant.ACTIVESTATUS' | translate}}</label>
+                       <div class="col-sm-1 checkbox" style="padding-top:0;">
+
+                           <label>
+                                <input style="width:20px;height:20px;" type="checkbox" ng-model="vm.user.enabled" ng-disabled="!vm.isAdd">
+                           </label>
+                       </div>
+                       <div ng-if="!vm.isAdd" class="col-sm-2" style="padding-left:0;">
+                           <button ng-if="vm.user.enabled" class="btn btn-info btn-addon btn-sm pull-left" ng-click="vm.lockTenant()"><i class="fa fa-lock"></i>{{'tenant.LOCK' | translate}}</button>
+                           <button ng-if="!vm.user.enabled" class="btn btn-info btn-addon btn-sm pull-left" ng-click="vm.unlockTenant()"><i class="fa fa-unlock-alt"></i>{{'tenant.ACTIVE' | translate}}</button>
+                       </div>
+                   </div>
+
+                   <div class="line line-dashed b-b line-lg"></div>
+                  -->
+
+
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-3">
+                        <button ng-if="!vm.isDetail" class="btn btn-default btn-sm m-l-lg btn-addon bg-light" ng-click="vm.backAction()"> <i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}} </button>
+                        <button ng-if="!vm.isDetail" class="btn btn-sm btn-info btn-addon" type="submit" ng-click="vm.submitAction()" ng-disabled='form.$invalid'> <i class="fa fa-check-circle"></i>{{'product.CONFIRM' | T}} </button>
+                        <button ng-if="vm.isDetail" ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
+
+                    </div>
+                </div>
+
+
+
+
+
+
+            </form>
+        </div>
+    </div>
+</div>
+

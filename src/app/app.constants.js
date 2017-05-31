@@ -30,6 +30,8 @@
                 {"airtaxi":"/api/v1/tenant/airtaxi/orders","airbookquick":"/api/v1/tenant/charter/orders?status=published", "airtour":"/api/v1/tenant/airtour/orders","airtrans":"/api/v1/tenant/airtransport/orders","airbook":"/api/v1/tenant/charter/orders","airflight":"/api/v1/tenant/ferryflight/orders","card":"/api/v1/tenant/jetcard/orders","course":"/api/v1/tenant/course/enrollments"},
                 "course":
                 {"basePath":"/api/v1/tenant/courses"},
+                "comment":
+                {"basePath":"/api/v1/comments"},
                 "device":
                         {"listAllPath":"/iot/api/v1/devices","updatePath":"/iot/api/v1/devices/device1","deletePath":"/iot/api/v1/devices/device1","deviceInfoPath":"/iot/api/v1/devices/id","addPath":"/iot/api/v1/devices"},
                     "product":

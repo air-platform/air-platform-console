@@ -1,4 +1,4 @@
-<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="AirtaxiController as vm" ng-init="
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="CommentController as vm" ng-init="
     app.settings.asideFolded = false;
     app.settings.asideDock = false;
 ">
@@ -27,10 +27,11 @@
             </tr>
             <tr class="font-bold">
                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
-                <th class="text-center">{{'u.NAME' | T}}</th>
-                <th class="text-center">{{'u.DEPARTURE' | T}}</th>
-                <th class="text-center">{{'u.ARRIVAL' | T}}</th>
-                <th class="text-center">{{'u.DESCRIPTION' | T}}</th>
+                <th class="text-center">{{'u.DATE' | T}}</th>
+                <th class="text-center">评论者</th>
+                <th class="text-center">评论内容</th>
+                <th class="text-center">评分</th>
+               <!-- <th class="text-center">回复对象</th>-->
 
             </tr>
 
@@ -39,10 +40,11 @@
 
             <tr ng-repeat="item in vm.displayedCollection">
               <!--  <td ng-click="vm.goDetail(item)">{{item.id}}</td>-->
-                <td ng-click="vm.goDetail(item)">{{item.name}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.flightRoute.departure}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.flightRoute.arrival}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.description}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.owner.name}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.content}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.rate}}</td>
+               <!-- <td ng-click="vm.goDetail(item)">{{item.replyTo}}</td>-->
 
 
                <!-- <td ng-click="vm.goDetail(item)">
@@ -50,10 +52,14 @@
                 </td>-->
                 <td>
 
+<!--
                     <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goDetail(item)"><i class="fa fa-eye"></i>{{'u.DETAIL'|T}}</button>
-                    <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goComment(item)"><i class="fa fa-eye"></i>评论</button>
+-->
+                    <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goComment(item)"><i class="fa fa-eye"></i>回复</button>
 
+<!--
                     <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goEditItem(item)"><i class="fa fa-edit"></i>{{ 'u.EDIT' | T}}</button>
+-->
                     <button class="btn btn-sm btn-danger btn-addon" style="width: 80px"  ng-click="vm.openAlert('sm',item)"><i class="fa fa-trash-o"></i>{{'u.DELETE' | T}}</button>
                 </td>
             </tr>
