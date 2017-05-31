@@ -433,6 +433,9 @@
             vm.user.flightRoute.arrivalLatitude = document.getElementById('arrival_loc_lat_taxi').value;
             vm.user.flightRoute.arrival = document.getElementById('arrival_area').value;
 
+
+
+
             NetworkService.post(constdata.api.tenant.fleetPath  + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();

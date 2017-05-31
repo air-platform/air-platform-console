@@ -48,6 +48,7 @@
                     /*height: 200,
                      width:200,
                      aspectRatio: 1,*/
+                    aspectRatio:1.1,
                     firstDay:1,
                     monthNames:['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
                     monthNamesShort:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],

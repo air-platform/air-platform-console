@@ -279,35 +279,29 @@
 
 
         vm.addNewCraftItem = function() {
+            var pp = [];
+            for(var i = 0; i < 30; i ++){
+                pp.push(2000);
+            }
 
-            vm.user.aircraftItems.push({
-                price:'',
-                seatPrice:'',
+            vm.user.salesPackages.push({
+                name:'',
+                prices:pp.toString(),
+                description:'des',
                 currencyUnit:'rmb',
-                aircraft:''
+                aircraft:'',
+                showPriceCalendar:false,
+                priceButtonTitle:'详情'
             })
         }
 
 
-
-
-
-        vm.realAddNewCraftItem = function(item) {
-            console.log('ok');
-            var index = vm.user.aircraftItemsAdd.indexOf(item);
-            console.log('ok'+index);
-
-            vm.user.aircraftItemsAdd.splice(index, 1);
-
-            vm.user.aircraftItems.push(angular.copy(item));
-            console.log(vm.user.aircraftItems);
-
-
-        }
         vm.removeCraftItem = function(item) {
-            var index = vm.user.aircraftItems.indexOf(item);
-            vm.user.aircraftItems.splice(index, 1);
+            var index = vm.user.salesPackages.indexOf(item);
+            vm.user.salesPackages.splice(index, 1);
         }
+
+
         function getAircraftsDatas() {
 
 
@@ -333,6 +327,20 @@
 
                 vm.user.clientManagersArr = [];
                 vm.user.aircraftItemsAdd = [];
+
+                if(vm.user.salesPackages && vm.user.salesPackages.length > 0){
+                    for (var i = 0; i < vm.user.salesPackages.length; i ++){
+                        vm.user.salesPackages[i].aircraftId = vm.user.salesPackages[i].aircraft.id;
+                        vm.user.salesPackages[i].showPriceCalendar = false;
+                        vm.user.salesPackages[i].priceButtonTitle = '详情';
+
+
+
+                    }
+                }
+
+
+
                 if(vm.user.aircraftItems && vm.user.aircraftItems.length > 0){
                     for (var i = 0; i < vm.user.aircraftItems.length; i ++){
                         vm.user.aircraftItems[i].aircraftId = vm.user.aircraftItems[i].aircraft.id;
@@ -411,7 +419,12 @@
 
 
 
-
+            if(vm.user.salesPackages.length > 0) {
+                for (var i = 0; i < vm.user.salesPackages.length; i++) {
+                    var tmp = vm.user.salesPackages[i].aircraftId;
+                    vm.user.salesPackages[i].aircraft = tmp;
+                }
+            }
 
             if(vm.user.aircraftItems.length > 0) {
                 for (var i = 0; i < vm.user.aircraftItems.length; i++) {
@@ -456,6 +469,14 @@
 
 
 
+            if(vm.user.salesPackages.length > 0) {
+                for (var i = 0; i < vm.user.salesPackages.length; i++) {
+                    var tmp = vm.user.salesPackages[i].aircraftId;
+                    vm.user.salesPackages[i].aircraft = tmp;
+                }
+            }
+
+
             if(vm.user.aircraftItems.length > 0) {
                 for (var i = 0; i < vm.user.aircraftItems.length; i++) {
                     var tmp = vm.user.aircraftItems[i].aircraftId;
@@ -492,6 +513,20 @@
             }
         }
 
+
+        vm.togglePriceCalendar = function(item)
+        {
+
+
+            item.showPriceCalendar = !item.showPriceCalendar;
+            if(item.showPriceCalendar){
+                item.priceButtonTitle = '收起';
+            }else{
+                item.priceButtonTitle = '详情';
+            }
+
+        }
+
         function lockTenant() {
             NetworkService.post(constdata.api.tenant.lockPath +'/'+ username + '/lock',null,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
@@ -526,6 +561,7 @@
             vm.user.flightRoute = {};
             vm.user.aircraftItems = [];
             vm.user.aircraftItemsAdd = [];
+            vm.user.salesPackages = [];
             vm.initMap();
 
             vm.user.flightRoute.departureLongitude = document.getElementById('depature_loc_lng_trans').value;
