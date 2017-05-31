@@ -86,8 +86,18 @@
                         </div>
 
 
-                        <div  class="form-group" style="margin-left:17px;">
-                            <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.DESCRIPTION' | translate}}</label>
+                        <div  class="form-group" style="margin-left:50px;">
+
+                            <label class="col-sm-1 control-label  font-bold">预售提前天数</label>
+                            <div class="col-sm-2">
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text"
+                                           placeholder="天数" ng-model="item.presalesDays" ng-disabled="vm.isDetail"  required>
+                                </div>
+                            </div>
+
+
+                            <label class="col-sm-1 control-label  font-bold">{{'u.DESCRIPTION' | translate}}</label>
                             <div class="col-sm-4">
                                         <textarea class="form-control font-thin" ng-model="item.description" rows="4" placeholder="{{'u.DESCRIPTION' | translate}}" style="resize: none;" ng-disabled="vm.isDetail"></textarea>
                             </div>
