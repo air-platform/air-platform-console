@@ -453,6 +453,24 @@
                   params : {args : {}},
                   templateUrl: 'app/components/order/order-flight.edit.html'
               })
+
+
+
+              .state('app.promotion', {
+                  url: prefix + '/promotion',
+                  templateUrl: 'app/components/promotion/promotion.html'
+
+              })
+              .state('app.editpromotion', {
+                  url: prefix + '/promotion/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/promotion/promotion.edit.html'
+              })
+
+
+
+
+
               .state('app.ordercard', {
                   url: prefix + '/ordercard',
                   templateUrl: 'app/components/order/order-card.html'

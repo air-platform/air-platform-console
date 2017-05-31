@@ -6,10 +6,10 @@
 
     angular
         .module('iot')
-        .controller('CommentController', CommentController);
+        .controller('PromotionController', PromotionController);
 
     /** @ngInject */
-    function CommentController(NetworkService,StorageService, constdata,$state,$rootScope, $uibModal,$log,toastr,i18n,$stateParams, delmodaltip) {
+    function PromotionController(NetworkService,StorageService, constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -24,22 +24,19 @@
 
         vm.goAddItem = goAddItem;
         vm.goEditItem = goEditItem;
-        vm.goComment = goComment;
         vm.goDetail = goDetail;
         vm.resetPassword = resetPassword;
         vm.removeItem = removeItem;
         vm.curItem = {};
         vm.backAction = backAction;
         vm.userInfo = {};
-        vm.subPath = 'airtaxis';
-        console.log($stateParams.args);
-        var username = $stateParams.username;
+        vm.subPath = 'aircrafts';
         function getDatas() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
             var myid = vm.userInfo.id;
             console.log(vm.userInfo);
 
-            NetworkService.get(constdata.api.comment.basePath +'?product='+ username,{page:vm.pageCurrent, pageSize:10},function (response) {
+            NetworkService.get(constdata.api.promotion.basePath,{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
                 updatePagination(response.data);
             },function (response) {
@@ -49,45 +46,15 @@
 
 
         function goAddItem() {
-            vm.userInfo = StorageService.get('iot.hnair.cloud.information');
-            var myid = vm.userInfo.id;
-            //$state.go('app.editairtaxi',{});
-            console.log(vm.userInfo);
-            vm.tuser={
-                content:'this is ok reply comment',
-                product:username,
-                //owner:vm.userInfo,
-                source:'user',
-                //replyTo:vm.userInfo.id,
-                rate:5
-
-            };
-            NetworkService.post(constdata.api.comment.basePath +'?sourceId='+ username+'&source=user&replyTo='+vm.userInfo.id,vm.tuser,function (response) {
-                toastr.success(i18n.t('u.OPERATE_SUC'));
-                vm.backAction();
-            },function (response) {
-                vm.authError = response.statusText + '(' + response.status + ')';
-                console.log(vm.authError);
-                toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
-            });
-
-
-
-
-
+            $state.go('app.editpromotion',{});
         };
 
         function goEditItem(item) {
-            $state.go('app.editairtaxi',{username:item.id, args:{type:'edit'}});
+            $state.go('app.editpromotion',{username:item.id, args:{type:'edit'}});
         };
 
         function goDetail(item) {
-            $state.go('app.editairtaxi',{username:item.id, args:{type:'detail'}});
-
-        };
-
-        function goComment(item) {
-            $state.go('app.comment',{username:item.id, args:{type:'detail',prd:'airtaxi'}});
+            $state.go('app.editaircraft',{username:item.id, args:{type:'detail'}});
 
         };
 
@@ -102,7 +69,7 @@
 
         function removeItem(item) {
             var myid = vm.userInfo.id;
-            NetworkService.delete(constdata.api.comment.basePath + '/'+ item.id,null,function success() {
+            NetworkService.delete(constdata.api.tenant.fleetPath  + '/' + vm.subPath + '/'+ item.id,null,function success() {
                 var index = vm.items.indexOf(item);
                 //vm.items.splice(index,1);
                 toastr.success(i18n.t('u.DELETE_SUC'));

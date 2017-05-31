@@ -32,6 +32,8 @@
                 {"basePath":"/api/v1/tenant/courses"},
                 "comment":
                 {"basePath":"/api/v1/comments"},
+                "promotion":
+                {"basePath":"/api/v1/promotions"},
                 "device":
                         {"listAllPath":"/iot/api/v1/devices","updatePath":"/iot/api/v1/devices/device1","deletePath":"/iot/api/v1/devices/device1","deviceInfoPath":"/iot/api/v1/devices/id","addPath":"/iot/api/v1/devices"},
                     "product":
