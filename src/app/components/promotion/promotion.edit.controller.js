@@ -60,6 +60,25 @@
             }
         ];
 
+        vm.categoryType = [
+            {
+                title:'Air Jet',
+                value:'air_jet'
+            },
+            {
+                title:'Air Taxi',
+                value:'air_taxi'
+            },
+            {
+                title:'Air Trans',
+                value:'air_trans'
+            },
+            {
+                title:'Air Train',
+                value:'air_training'
+            }
+        ];
+
         vm.statusType = [
             {
                 title:'已启用',
@@ -224,6 +243,7 @@
             vm.getTenantItem();
         }else{
             vm.user.currencyUnit = 'rmb';
+            vm.user.category = 'air_taxi';
         }
 
         function back() {

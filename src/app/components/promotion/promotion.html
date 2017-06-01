@@ -41,8 +41,11 @@
             <tr ng-repeat="item in vm.displayedCollection">
               <!--  <td ng-click="vm.goDetail(item)">{{item.id}}</td>-->
                 <td ng-click="vm.goDetail(item)">{{item.name}}</td>
-                <td ng-click="vm.goDetail(item)"> {{item.category }}</td>
-               <td ng-click="vm.goDetail(item)">{{item.creationDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                <!--<td ng-click="vm.goDetail(item)"> {{item.category }}</td>-->
+                <td ng-click="vm.goDetail(item)"> <select style="width: 100%;" class="form-control font-thin" ng-model="item.category" ng-options="s.value as s.title for s in vm.categoryType" ng-disabled=true ></select>
+                </td>
+
+                <td ng-click="vm.goDetail(item)">{{item.creationDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
                 <td ng-click="vm.goDetail(item)">{{item.description}}</td>
 
 
