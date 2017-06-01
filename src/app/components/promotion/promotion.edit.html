@@ -36,7 +36,7 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.NAME' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.FLEETNAME' | translate}}" ng-model="vm.user.name" ng-disabled="vm.isDetail"  required>
+                               placeholder="{{'u.NAME' | translate}}" ng-model="vm.user.name" ng-disabled="vm.isDetail"  required>
                     </div>
                     <span ng-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i><i style="font-style:normal; color:#999;">{{'tenant.USERNAMETIP' | translate}}</i></span>
                 </div>
@@ -50,11 +50,72 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">类别</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.FLEETNUNBER' | translate}}" ng-model="vm.user.category" ng-disabled="vm.isDetail" >
+                               placeholder="类别" ng-model="vm.user.category" ng-disabled="vm.isDetail" >
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">推荐列表</label>
+                </div>
+
+                <div  class="form-group"  styel="padding-left:50px;">
+
+                    <div class="form-group" ng-repeat="item in vm.user.items">
+
+                        <label class="col-sm-1 control-label  font-bold">{{'u.NAME' | translate}}</label>
+                        <div class="col-sm-1">
+                            <input class="form-control" type="text"
+                                   placeholder="{{'u.NAME' | translate}}" ng-model="item.title" ng-disabled="vm.isDetail"  required>
+
+                        </div>
+
+                        <label class="col-sm-1 control-label  font-bold">{{'u.IMAGE' | translate}}</label>
+                        <div class="col-sm-2">
+                            <input class="form-control" type="text"
+                                   placeholder="{{'u.IMAGE' | translate}}" ng-model="item.image" ng-disabled="vm.isDetail"  required>
+                        </div>
+
+                        <label class="col-sm-1 control-label  font-bold">链接</label>
+                        <div class="col-sm-2">
+                            <input class="form-control" type="text"
+                                   placeholder="链接" ng-model="item.link" ng-disabled="vm.isDetail"  required>
+                        </div>
+
+
+                        <div class="col-sm-2">
+                            <button ng-if="!vm.isDetail" ng-click="vm.removeClientManager(item)" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-minus"></i>{{'product.DELETE' | translate}}</button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-sm-4">
+                        <button ng-if="!vm.isDetail" ng-click="vm.addNewClientManager()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-plus"></i>{{'u.ADD' | translate}}</button>
+
+                    </div>
+
+                </div>
+
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+
+
+
+
+
+
 
 
 

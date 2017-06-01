@@ -37,7 +37,9 @@
             console.log(vm.userInfo);
 
             NetworkService.get(constdata.api.promotion.basePath,{page:vm.pageCurrent},function (response) {
-                vm.items = response.data.content;
+                vm.items = response.data;
+                console.log(response.data);
+                vm.displayedCollection = [].concat(vm.items);
                 updatePagination(response.data);
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
@@ -54,7 +56,7 @@
         };
 
         function goDetail(item) {
-            $state.go('app.editaircraft',{username:item.id, args:{type:'detail'}});
+            $state.go('app.editpromotion',{username:item.id, args:{type:'detail'}});
 
         };
 
@@ -85,7 +87,7 @@
             $rootScope.backPre();
         }
 
-        vm.displayedCollection = [].concat(vm.items);
+
 
 
         // 分页 Start

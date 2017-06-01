@@ -120,7 +120,7 @@
             NetworkService.get(constdata.api.promotion.basePath +'/' +  '/'+ username,null,function (response) {
                 vm.user = response.data;
                 vm.user.clientManagersArr = [];
-
+                console.log(vm.user);
                 if(vm.user.clientManagers){
                     var uInfo = vm.user.clientManagers.split( "," );
 
@@ -158,7 +158,7 @@
             }
             console.log(vm.user.clientManagers);
 
-
+            vm.user.items = [{title:'item1', image:'img1', link:'lnk1'}];
 
             NetworkService.post(constdata.api.promotion.basePath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
