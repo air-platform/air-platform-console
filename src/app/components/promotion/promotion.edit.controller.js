@@ -194,7 +194,7 @@
 
                 console.log(response.data);
                 item.image = response.data.url;
-                item.image = 'https://ss1.bdstatic.com/5aAHeD3nKgcUp2HgoI7O1ygwehsv/media/ch1000/png/ETpc170601_bg.png';
+                //item.image = 'https://ss1.bdstatic.com/5aAHeD3nKgcUp2HgoI7O1ygwehsv/media/ch1000/png/ETpc170601_bg.png';
                 //vm.backAction();
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
