@@ -71,7 +71,7 @@
 
         function removeItem(item) {
             var myid = vm.userInfo.id;
-            NetworkService.delete(constdata.api.tenant.fleetPath  + '/' + vm.subPath + '/'+ item.id,null,function success() {
+            NetworkService.delete(constdata.api.promotion.basePath + '/'+ item.id,null,function success() {
                 var index = vm.items.indexOf(item);
                 //vm.items.splice(index,1);
                 toastr.success(i18n.t('u.DELETE_SUC'));

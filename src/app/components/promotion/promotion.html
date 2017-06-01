@@ -42,7 +42,7 @@
               <!--  <td ng-click="vm.goDetail(item)">{{item.id}}</td>-->
                 <td ng-click="vm.goDetail(item)">{{item.name}}</td>
                 <td ng-click="vm.goDetail(item)"> {{item.category }}</td>
-               <td ng-click="vm.goDetail(item)">{{item.creationDate}}</td>
+               <td ng-click="vm.goDetail(item)">{{item.creationDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
                 <td ng-click="vm.goDetail(item)">{{item.description}}</td>
 
 

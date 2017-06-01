@@ -39,8 +39,7 @@
         vm.isDetail = false;
         vm.getTenantItem = getTenantItem;
         vm.submitAction = submitAction;
-        vm.lockTenant = lockTenant;
-        vm.unlockTenant = unlockTenant;
+
         vm.backAction = backAction;
         vm.back = back;
         vm.addUser = {};
@@ -84,7 +83,7 @@
         ];
         var username = $stateParams.username;
         var type = $stateParams.args.type;
-        vm.user.clientManagersArr = [];
+        vm.clientManagersArr = [];
         console.log(type);
         if (username){
             vm.isAdd = false;
@@ -99,15 +98,17 @@
         }
         vm.addNewClientManager = function() {
 
-            vm.user.clientManagersArr.push({
+            vm.clientManagersArr.push({
                 name:'',
-                email:''
+                title:'',
+                link:'',
+                myUploadFile:''
             })
         }
 
         vm.removeClientManager = function(item) {
-            var index = vm.user.clientManagersArr.indexOf(item);
-            vm.user.clientManagersArr.splice(index, 1);
+            var index = vm.clientManagersArr.indexOf(item);
+            vm.clientManagersArr.splice(index, 1);
         }
 
         function getTenantItem() {
@@ -119,24 +120,9 @@
 
             NetworkService.get(constdata.api.promotion.basePath +'/' +  '/'+ username,null,function (response) {
                 vm.user = response.data;
-                vm.user.clientManagersArr = [];
                 console.log(vm.user);
-                if(vm.user.clientManagers){
-                    var uInfo = vm.user.clientManagers.split( "," );
-
-                    if(uInfo.length > 0){
-                        for(var i = 0; i < uInfo.length; i ++){
-                            var uDetailStr = uInfo[i].split(':');
-                            if(uDetailStr.length > 0){
-                                vm.user.clientManagersArr.push({
-                                    name:uDetailStr[0],
-                                    email:uDetailStr[1]
-                                })
-                            }
-
-                        }
-                    }
-
+                if(vm.user.items){
+                    vm.clientManagersArr = vm.user.items;
 
                 }
                 $rootScope.userNamePlacedTop = vm.user.nickName;
@@ -150,15 +136,12 @@
         function addItem() {
             var myid = vm.userInfo.id;
 
-            if(vm.user.clientManagersArr.length > 0) {
-                vm.user.clientManagers  = vm.user.clientManagersArr[0].name + ':'+vm.user.clientManagersArr[0].email;
-                for (var i = 1; i < vm.user.clientManagersArr.length; i ++) {
-                    vm.user.clientManagers  += ',' + vm.user.clientManagersArr[i].name + ':'+vm.user.clientManagersArr[i].email;
-                }
+            if(vm.clientManagersArr.length > 0) {
+                vm.user.items =  vm.clientManagersArr;
             }
-            console.log(vm.user.clientManagers);
 
-            vm.user.items = [{title:'item1', image:'img1', link:'lnk1'}];
+
+           // vm.user.items = [{title:'item1', image:'img1', link:'lnk1'}];
 
             NetworkService.post(constdata.api.promotion.basePath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
@@ -185,13 +168,14 @@
 
 
 
-        vm.uploadFile = function (){
-            console.log(vm.myUploadFile);
-            NetworkService.postForm('/api/v1/files',vm.myUploadFile,function (response) {
+        vm.uploadFile = function (item){
+            console.log(item.myUploadFile);
+            NetworkService.postForm('/api/v1/files',item.myUploadFile,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
 
                 console.log(response.data);
-                vm.user.image = response.data.url;
+                item.image = response.data.url;
+                item.image = 'https://ss1.bdstatic.com/5aAHeD3nKgcUp2HgoI7O1ygwehsv/media/ch1000/png/ETpc170601_bg.png';
                 //vm.backAction();
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
@@ -205,15 +189,13 @@
 
         function editItem() {
             var myid = vm.userInfo.id;
-            if(vm.user.clientManagersArr.length > 0) {
-                vm.user.clientManagers  = vm.user.clientManagersArr[0].name + ':'+vm.user.clientManagersArr[0].email;
-                for (var i = 1; i < vm.user.clientManagersArr.length; i ++) {
-                    vm.user.clientManagers  += ',' + vm.user.clientManagersArr[i].name + ':'+vm.user.clientManagersArr[i].email;
-                }
+            if(vm.clientManagersArr.length > 0) {
+                vm.user.items =  vm.clientManagersArr;
             }
-            console.log(vm.user.clientManagers);
 
-            NetworkService.put(constdata.api.tenant.fleetPath  + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
+
+
+            NetworkService.put(constdata.api.promotion.basePath  + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -229,24 +211,6 @@
             }
         }
 
-        function lockTenant() {
-            NetworkService.post(constdata.api.tenant.lockPath +'/'+ username + '/lock',null,function (response) {
-                toastr.success(i18n.t('u.OPERATE_SUC'));
-                vm.getTenantItem();
-            },function (response) {
-                vm.authError = response.statusText + '(' + response.status + ')';
-                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
-            });
-        }
-        function unlockTenant() {
-            NetworkService.post(constdata.api.tenant.lockPath +'/'+ username + '/unlock',null,function (response) {
-                toastr.success(i18n.t('u.OPERATE_SUC'));
-                vm.getTenantItem();
-            },function (response) {
-                vm.authError = response.statusText + '(' + response.status + ')';
-                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
-            });
-        }
 
         function backAction() {
             // $state.go('app.tenant');
@@ -266,95 +230,6 @@
             // history.back();
             vm.backAction();
         }
-
-
-
-
-
-
-        $scope.today = function() {
-            $scope.dt = new Date();
-        };
-        $scope.today();
-
-        $scope.clear = function () {
-            $scope.dt = null;
-        };
-
-        // Disable weekend selection
-        $scope.disabled = function(date, mode) {
-            return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-        };
-
-        $scope.toggleMin = function() {
-            $scope.minDate = $scope.minDate ? null : new Date();
-        };
-        $scope.toggleMin();
-
-        $scope.open = function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-
-            $scope.opened = true;
-        };
-
-        $scope.dateOptions = {
-            formatYear: 'yy',
-            startingDay: 1,
-            class: 'datepicker'
-        };
-
-        $scope.initDate = new Date('2016-15-20');
-        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        $scope.format = $scope.formats[0];
-
-
-
-
-
-
-
-        vm.dateOptions = {
-            formatYear: 'yy',
-            startingDay: 1,
-            class: 'datepicker'
-        };
-        vm.initDate = new Date('2016-15-20');
-        vm.formats = ['MM/dd/yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        vm.format = vm.formats[0];
-
-        //每次选择不同版本请求不同数据
-        vm.change = function() {
-            vm.notificationDatas = [];
-            getNotiData(vm.selectedOption);
-        }
-
-        // date picker
-        vm.today = function() {
-            vm.dt = new Date();
-        };
-        vm.today();
-
-        vm.clear = function () {
-            vm.dt = null;
-        };
-
-        // Disable weekend selection
-        vm.disabled = function(date, mode) {
-            return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-        };
-
-        vm.toggleMin = function() {
-            vm.minDate = new Date();
-        };
-        vm.toggleMin();
-
-        vm.open = function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-
-            vm.opened = true;
-        };
 
 
 
