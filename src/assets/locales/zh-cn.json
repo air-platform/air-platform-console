@@ -60,7 +60,7 @@
     "AVATAR":"头像",
     "WEBSITE":"官网",
     "ADDRESS":"地址",
-    "ADDCRAFT":"添加机型信息",
+    "ADDCRAFT":"添加套餐",
     "DESCRIPTION":"描述",
     "ENABLE":"已启用",
     "DISABLE":"已禁用",
@@ -115,7 +115,7 @@
     "STARTDATE":"开始日期",
     "CLASSTOTALNUM":"计划招生人数",
     "COURSESCHOOL":"所属学校",
-    "CRAFTSELECT":"机型信息",
+    "CRAFTSELECT":"套餐信息",
 
     "CITY":"城市",
     "TOURPOINT" : "观光景点",
