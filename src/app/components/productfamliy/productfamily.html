@@ -1,0 +1,78 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="ProductFamilyController as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+">
+    <!-- main -->
+    <div class="col">
+        <!-- main header -->
+        <!-- div class="bg-light lter b-b wrapper-md" ng-hide="isRoleAdmin">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="m-n font-thin h3 text-black">租户信息</h1>
+                    <small class="text-muted">HNA EcoTech Internet of Things</small>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- tasks -->
+
+        <div class="m-l m-r m-t panel panel-default">
+        <table  st-table="vm.displayedCollection" st-safe-src="vm.items" class="table table-bordered table-striped table-hover bg-white text-center">
+            <thead>
+            <tr>
+                <th colspan="7">
+                    <button ng-click="vm.goAddItem()" class="btn btn-sm btn-info btn-addon"><i class="fa fa-plus"></i>{{ 'u.ADD' | T }}</button>
+                    <input st-search="" class="form-control pull-right m-b-xs w-md" placeholder="{{'u.SEARCH' | T}}" type="text"/>
+                </th>
+            </tr>
+            <tr class="font-bold">
+               <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
+                <th class="text-center">{{'u.NAME' | T}}</th>
+                <th class="text-center">类别</th>
+                <th class="text-center">创建时间</th>
+                <th class="text-center">{{'u.DESCRIPTION' | T}}</th>
+
+
+            </tr>
+
+            </thead>
+            <tbody class="">
+
+            <tr ng-repeat="item in vm.displayedCollection">
+              <!--  <td ng-click="vm.goDetail(item)">{{item.id}}</td>-->
+                <td ng-click="vm.goDetail(item)">{{item.name}}</td>
+                <!--<td ng-click="vm.goDetail(item)"> {{item.category }}</td>-->
+                <td ng-click="vm.goDetail(item)"> <select style="width: 100%;" class="form-control font-thin" ng-model="item.category" ng-options="s.value as s.title for s in vm.categoryType" ng-disabled=true ></select>
+                </td>
+
+                <td ng-click="vm.goDetail(item)">{{item.creationDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.description}}</td>
+
+
+               <!-- <td ng-click="vm.goDetail(item)">
+                    {{item.enabled ? ('u.ACTIVITY'|T ):('u.UNACTIVITY'|T)}}
+                </td>-->
+                <td>
+                    <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goDetail(item)"><i class="fa fa-eye"></i>{{'u.DETAIL'|T}}</button>
+
+                    <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goEditItem(item)"><i class="fa fa-edit"></i>{{ 'u.EDIT' | T}}</button>
+                    <button class="btn btn-sm btn-danger btn-addon" style="width: 80px"  ng-click="vm.openAlert('sm',item)"><i class="fa fa-trash-o"></i>{{'u.DELETE' | T}}</button>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+        </div>
+
+        <div class="btn-group pagination pull-right padder-lg">
+            <button type="button" class="btn btn-default" ng-click="vm.preAction()" ng-disabled= !vm.pagePreEnabled>Previous</button>
+            <button type="button" class="btn btn-default" ng-repeat="page in vm.pages" ng-click="vm.goPage(page)" ng-disabled= vm.pageCurrentState(page)>{{page}}</button>
+            <button type="button" class="btn btn-default" ng-click="vm.nextAction()" ng-disabled= !vm.pageNextEnabled>Next</button>
+        </div>
+
+        <!-- / tasks -->
+    </div>
+</div>
+<script type="text/ng-template" id="myModalContent.html">
+    <div ng-include="'app/components/core/modal.html'"></div>
+</script>

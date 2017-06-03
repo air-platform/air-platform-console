@@ -467,6 +467,17 @@
                   templateUrl: 'app/components/promotion/promotion.edit.html'
               })
 
+              .state('app.productfamily', {
+                  url: prefix + '/productfamily',
+                  templateUrl: 'app/components/productfamily/productfamily.html'
+
+              })
+              .state('app.editproductfamily', {
+                  url: prefix + '/productfamily/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/productfamily/productfamily.edit.html'
+              })
+
 
 
 
