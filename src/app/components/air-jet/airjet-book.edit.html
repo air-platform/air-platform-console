@@ -286,36 +286,16 @@
 
                 <div  class="line line-dashed b-b line-lg"></div>
 
-
-
-
-
-
-
-
-
-
+<!--
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.APPEARANCE' | translate}}</label>
                     <div class="col-sm-6">
-                        <!--<input class="form-control" type="text"
-                               placeholder="{{'u.APPEARANCE' | translate}}" ng-model="vm.user.appearances" ng-disabled="vm.isDetail" >
--->
-
-
                         <textarea class="form-control font-thin" ng-model="vm.user.appearances" rows="4" placeholder="{{'u.APPEARANCE' | translate}}" style="resize: none;" ng-disabled="vm.isDetail"></textarea>
-
-
-
-
                         <input type="file"  file-model = "vm.myUploadFile" />
-
-
                         <button  class="btn btn-default" ng-click="vm.uploadFileApp()"> <i class="fa fa-check-circle"></i> 上传 </button>
-
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
-                </div>
+                </div>-->
 
 
 
@@ -338,7 +318,6 @@
                                 <div class="lcell span5" style="margin:5px 0px;">
                                     <div class="upload">
                                         <input type="button" class="btn btn-default upload-btn" value="浏览文件" />
-                                        <span  ng-bind="vm.myUploadFile.name">eee</span>
                                         <label  ng-bind="item.myUploadFile.name" class="label bg-finished"></label>
                                         <input type="file" file-model = "item.myUploadFile" class="upload-input-file" />
                                         <button style="float:right;background:#23b7e5;border-radius:3px;" class="btn btn-default" ng-click="vm.uploadFileItem(item)"> <i class="fa fa-check-circle"></i> 上传 </button>
