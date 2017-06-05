@@ -323,6 +323,66 @@
 
 
 
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.APPEARANCE' | translate}}</label>
+                </div>
+
+                <div  class="form-group">
+
+                    <div class="form-group"  style="margin-left:100px" ng-repeat="item in vm.imageShow">
+                        <div  ng-if="!vm.isDetail" class="form-group">
+
+                        <div class="col-sm-6">
+                            <div class="beauty-upload">
+
+                                <div class="lcell span5" style="margin:5px 0px;">
+                                    <div class="upload">
+                                        <input type="button" class="btn btn-default upload-btn" value="浏览文件" />
+                                        <span  ng-bind="vm.myUploadFile.name">eee</span>
+                                        <label  ng-bind="item.myUploadFile.name" class="label bg-finished"></label>
+                                        <input type="file" file-model = "item.myUploadFile" class="upload-input-file" />
+                                        <button style="float:right;background:#23b7e5;border-radius:3px;" class="btn btn-default" ng-click="vm.uploadFileItem(item)"> <i class="fa fa-check-circle"></i> 上传 </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-5">
+                                <div class="img-preview">
+                                    <img ng-src="{{item.image}}" alt="">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <button ng-if="!vm.isDetail" ng-click="vm.removeImageShow(item)" class="btn m-b-xs btn-sm btn-danger btn-addon pull-left"><i class="glyphicon glyphicon-minus"></i>{{'product.DELETE' | translate}}</button>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-sm-4">
+                        <button ng-if="!vm.isDetail" ng-click="vm.addImageShow()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-plus"></i>{{'u.ADD' | translate}}</button>
+
+                    </div>
+
+                </div>
+
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+
+
 
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.DESCRIPTION' | translate}}</label>

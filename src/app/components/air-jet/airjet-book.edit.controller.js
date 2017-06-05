@@ -81,6 +81,7 @@
                 value:'usd'
             }
         ];
+        vm.imageShow = [];
         var username = $stateParams.username;
         var type = $stateParams.args.type;
         console.log(type);
@@ -111,6 +112,19 @@
             vm.user.clientManagersArr.splice(index, 1);
         }
 
+        vm.addImageShow = function() {
+
+            vm.imageShow.push({
+                image:'',
+                myUploadFile:{}
+            })
+        }
+
+        vm.removeImageShow = function(item) {
+            var index = vm.imageShow.indexOf(item);
+            vm.imageShow.splice(index, 1);
+        }
+
 
 
         function getAirjetsDatas() {
@@ -134,7 +148,14 @@
 
 
                 vm.user.clientManagersArr = [];
-
+                if(vm.user.appearances){
+                    var appArr = vm.user.appearances.split(',');
+                    if(appArr.length > 0){
+                        for(var i = 0; i < appArr.length; i ++){
+                            vm.imageShow.push({image:appArr[i],myUploadFile:{}});
+                        }
+                    }
+                }
                 if(vm.user.clientManagers){
                     var uInfo = vm.user.clientManagers.split( "," );
 
@@ -184,7 +205,23 @@
             //$rootScope.backPre();
         }
 
+        vm.uploadFileItem = function (item){
+            console.log(item.myUploadFile);
+            NetworkService.postForm('/api/v1/files',item.myUploadFile,function (response) {
+                toastr.success(i18n.t('u.OPERATE_SUC'));
 
+                console.log(response.data);
+                item.image = response.data.url;
+                console.log(vm.user.image);
+                //vm.backAction();
+            },function (response) {
+                vm.authError = response.statusText + '(' + response.status + ')';
+                console.log(vm.authError);
+                toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+            });
+
+            //$rootScope.backPre();
+        }
 
         vm.uploadFile = function (){
             console.log(vm.myUploadFile);
@@ -215,6 +252,17 @@
             console.log(vm.user.clientManagers);
 
 
+            if(vm.imageShow){
+                //var appArr = vm.imageShow.split(',');
+                vm.user.appearances = '';
+                if(vm.imageShow.length > 0){
+                    for(var i = 0; i < vm.imageShow.length; i ++){
+                        vm.user.appearances += vm.imageShow[i].image+',';
+                    }
+                    vm.user.appearances = vm.user.appearances.substr(0, vm.user.appearances.length-1);
+                }
+            }
+
             NetworkService.post(constdata.api.tenant.fleetPath + '/fleets',vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
@@ -235,7 +283,18 @@
                 }
             }
             console.log(vm.user.clientManagers);
-
+            console.log(vm.imageShow);
+            if(vm.imageShow){
+                //var appArr = vm.imageShow.split(',');
+                vm.user.appearances = '';
+                if(vm.imageShow.length > 0){
+                    for(var i = 0; i < vm.imageShow.length; i ++){
+                        vm.user.appearances += vm.imageShow[i].image+',';
+                    }
+                    vm.user.appearances = vm.user.appearances.substr(0, vm.user.appearances.length-1);
+                    console.log(vm.user.appearances);
+                }
+            }
 
             NetworkService.put(constdata.api.tenant.fleetPath + '/fleets/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
