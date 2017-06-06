@@ -31,12 +31,23 @@
         vm.backAction = backAction;
         vm.userInfo = {};
 
+
+
+        vm.reqPath = constdata.api.tenant.fleetPath;
+        vm.isAdmin = false;
+
+
+
+
         function getDatas() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
             var myid = vm.userInfo.id;
             console.log(vm.userInfo);
-
-            NetworkService.get(constdata.api.tenant.fleetPath + '/' + 'fleets',{page:vm.pageCurrent},function (response) {
+            if(vm.userInfo.role != 'tenant'){
+                vm.reqPath = '/api/v1/platform/product';
+                vm.isAdmin = true;
+            }
+            NetworkService.get(vm.reqPath + '/' + 'fleets',{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
 
 

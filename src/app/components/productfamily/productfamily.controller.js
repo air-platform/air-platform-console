@@ -31,6 +31,13 @@
         vm.backAction = backAction;
         vm.userInfo = {};
         vm.subPath = 'aircrafts';
+        vm.approveStatus=[{
+            value:false,
+            title:'未审批'
+        },{
+            value:true,
+            title:'已审批'
+        }];
         vm.categoryType = [
             {
                 title:'Air Jet',
@@ -49,15 +56,24 @@
                 value:'air_training'
             }
         ];
+        vm.displayedCollection = [];
+        vm.reqPath = constdata.api.productFamily.basePath;
+        vm.isAdmin = false;
         function getDatas() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
             var myid = vm.userInfo.id;
             console.log(vm.userInfo);
-
-            NetworkService.get(constdata.api.promotion.basePath,{page:vm.pageCurrent},function (response) {
-                vm.items = response.data;
+            if(vm.userInfo.role != 'tenant'){
+                vm.reqPath = '/api/v1/platform/product/families';
+                vm.isAdmin = true;
+            }
+            console.log(vm.reqPath);
+            NetworkService.get(vm.reqPath,{page:vm.pageCurrent},function (response) {
+                vm.items = response.data.content;
                 console.log(response.data);
-                vm.displayedCollection = [].concat(vm.items);
+
+                vm.displayedCollection = [].concat(vm.items.content);
+               // console.log(vm.displayedCollection.length);
                 updatePagination(response.data);
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
@@ -66,15 +82,15 @@
 
 
         function goAddItem() {
-            $state.go('app.editpromotion',{});
+            $state.go('app.editproductfamily',{});
         };
 
         function goEditItem(item) {
-            $state.go('app.editpromotion',{username:item.id, args:{type:'edit'}});
+            $state.go('app.editproductfamily',{username:item.id, args:{type:'edit',isAdmin:vm.isAdmin}});
         };
 
         function goDetail(item) {
-            $state.go('app.editpromotion',{username:item.id, args:{type:'detail'}});
+            $state.go('app.editproductfamily',{username:item.id, args:{type:'detail',isAdmin:vm.isAdmin}});
 
         };
 
@@ -89,7 +105,7 @@
 
         function removeItem(item) {
             var myid = vm.userInfo.id;
-            NetworkService.delete(constdata.api.promotion.basePath + '/'+ item.id,null,function success() {
+            NetworkService.delete(constdata.api.productFamily.basePath + '/'+ item.id,null,function success() {
                 var index = vm.items.indexOf(item);
                 //vm.items.splice(index,1);
                 toastr.success(i18n.t('u.DELETE_SUC'));

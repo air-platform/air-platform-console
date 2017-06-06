@@ -45,6 +45,13 @@
         vm.addUser = {};
         vm.addUser.role='tenant';
         vm.subPath = 'aircrafts';
+        vm.approveStatus=[{
+            value:false,
+            title:'未审批'
+        },{
+            value:true,
+            title:'已审批'
+        }];
         vm.userType = [
             {
                 title:'管理员',
@@ -102,6 +109,7 @@
         ];
         var username = $stateParams.username;
         var type = $stateParams.args.type;
+        vm.isAdmin = $stateParams.args.isAdmin;
         vm.clientManagersArr = [];
         console.log(type);
         if (username){
@@ -137,7 +145,7 @@
             console.log(username);
 
 
-            NetworkService.get(constdata.api.promotion.basePath +'/' +  '/'+ username,null,function (response) {
+            NetworkService.get(constdata.api.productFamily.basePath +'/' +  '/'+ username,null,function (response) {
                 vm.user = response.data;
                 console.log(vm.user);
                 if(vm.user.items){
@@ -162,7 +170,7 @@
 
            // vm.user.items = [{title:'item1', image:'img1', link:'lnk1'}];
 
-            NetworkService.post(constdata.api.promotion.basePath,vm.user,function (response) {
+            NetworkService.post(constdata.api.productFamily.basePath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -176,25 +184,13 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-        vm.uploadFile = function (item){
-            console.log(item.myUploadFile);
-            NetworkService.postForm('/api/v1/files',item.myUploadFile,function (response) {
+        vm.uploadFile = function (){
+            console.log(vm.myUploadFile);
+            NetworkService.postForm('/api/v1/files',vm.myUploadFile,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
 
                 console.log(response.data);
-                item.image = response.data.url;
-                //item.image = 'https://ss1.bdstatic.com/5aAHeD3nKgcUp2HgoI7O1ygwehsv/media/ch1000/png/ETpc170601_bg.png';
+                vm.user.image = response.data.url;
                 //vm.backAction();
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
@@ -206,6 +202,17 @@
         }
 
 
+
+
+
+
+
+
+
+
+
+
+
         function editItem() {
             var myid = vm.userInfo.id;
             if(vm.clientManagersArr.length > 0) {
@@ -214,7 +221,7 @@
 
 
 
-            NetworkService.put(constdata.api.promotion.basePath  + '/'+ username,vm.user,function (response) {
+            NetworkService.put(constdata.api.productFamily.basePath  + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
