@@ -46,11 +46,14 @@
         vm.addUser.role='tenant';
         vm.subPath = 'aircrafts';
         vm.approveStatus=[{
-            value:false,
+            value:'pending',
             title:'未审批'
         },{
-            value:true,
-            title:'已审批'
+            value:'approved',
+            title:'审批通过'
+        },{
+            value:'rejected',
+            title:'审批拒绝'
         }];
         vm.userType = [
             {
@@ -109,7 +112,18 @@
         ];
         var username = $stateParams.username;
         var type = $stateParams.args.type;
-        vm.isAdmin = $stateParams.args.isAdmin;
+
+
+
+        vm.reqPath = constdata.api.productFamily.basePath;
+        vm.isAdmin = false;
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath = '/api/v1/platform/product/families';
+            vm.isAdmin = true;
+        }
+
+
         vm.clientManagersArr = [];
         console.log(type);
         if (username){
@@ -123,6 +137,7 @@
         if(type && type=='detail'){
             vm.isDetail = true;
         }
+
         vm.addNewClientManager = function() {
 
             vm.clientManagersArr.push({
@@ -145,7 +160,7 @@
             console.log(username);
 
 
-            NetworkService.get(constdata.api.productFamily.basePath +'/' +  '/'+ username,null,function (response) {
+            NetworkService.get(vm.reqPath +'/' +  '/'+ username,null,function (response) {
                 vm.user = response.data;
                 console.log(vm.user);
                 if(vm.user.items){
@@ -221,7 +236,7 @@
 
 
 
-            NetworkService.put(constdata.api.productFamily.basePath  + '/'+ username,vm.user,function (response) {
+            NetworkService.put(vm.reqPath  + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {

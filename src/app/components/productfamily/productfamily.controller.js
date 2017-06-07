@@ -32,11 +32,14 @@
         vm.userInfo = {};
         vm.subPath = 'aircrafts';
         vm.approveStatus=[{
-            value:false,
+            value:'pending',
             title:'未审批'
         },{
-            value:true,
-            title:'已审批'
+            value:'approved',
+            title:'审批通过'
+        },{
+            value:'rejected',
+            title:'审批拒绝'
         }];
         vm.categoryType = [
             {
@@ -57,23 +60,65 @@
             }
         ];
         vm.displayedCollection = [];
+
         vm.reqPath = constdata.api.productFamily.basePath;
         vm.isAdmin = false;
-        function getDatas() {
-            vm.userInfo = StorageService.get('iot.hnair.cloud.information');
-            var myid = vm.userInfo.id;
-            console.log(vm.userInfo);
-            if(vm.userInfo.role != 'tenant'){
-                vm.reqPath = '/api/v1/platform/product/families';
-                vm.isAdmin = true;
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath = '/api/v1/platform/product/families';
+            vm.isAdmin = true;
+        }
+
+        vm.OperApp = OperApp;
+        function OperApp(index, item) {
+            if(index == 3){
+
+
+                //product/families/{productFamilyId}/approve
+                //$state.go('app.application', {applicationName:item.id, args:{selItem:item}});
+                NetworkService.post(vm.reqPath +'/' +item.id +'/approve',null,function (response) {
+                 toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+
+                 },function (response) {
+                 toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                 });
+
+            }else if(index == 4){
+                var myreason={reason:'invalid params'};
+                NetworkService.post(vm.reqPath +'/' +item.id +'/disapprove',myreason,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                });
+            }else{
+                console.log('error ops:'+index);
             }
-            console.log(vm.reqPath);
+
+            //$state.go('app.applicationedit');
+        };
+        function getDatas() {
+
             NetworkService.get(vm.reqPath,{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
                 console.log(response.data);
-
-                vm.displayedCollection = [].concat(vm.items.content);
+                console.log(response.data.content);
+                vm.displayedCollection = [].concat(vm.items);
+                console.log(vm.displayedCollection);
                // console.log(vm.displayedCollection.length);
+                if(vm.displayedCollection) {
+                    for (var i = 0; i < vm.displayedCollection.length; i++) {
+                        if (vm.displayedCollection[i].reviewStatus == 'pending' || vm.displayedCollection[i].reviewStatus == 'rejected') {
+                            vm.displayedCollection[i].isAgreeEnable = true;
+                            vm.displayedCollection[i].isRejectEnable = false;
+                        } else {
+                            vm.displayedCollection[i].isAgreeEnable = false;
+                            vm.displayedCollection[i].isRejectEnable = true;
+                        }
+                    }
+                }
+
                 updatePagination(response.data);
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
@@ -86,11 +131,11 @@
         };
 
         function goEditItem(item) {
-            $state.go('app.editproductfamily',{username:item.id, args:{type:'edit',isAdmin:vm.isAdmin}});
+            $state.go('app.editproductfamily',{username:item.id, args:{type:'edit'}});
         };
 
         function goDetail(item) {
-            $state.go('app.editproductfamily',{username:item.id, args:{type:'detail',isAdmin:vm.isAdmin}});
+            $state.go('app.editproductfamily',{username:item.id, args:{type:'detail'}});
 
         };
 

@@ -87,7 +87,25 @@
         var type = $stateParams.args.type;
         console.log(type);
 
-
+        vm.approveStatus=[{
+            value:'pending',
+            title:'未审批'
+        },{
+            value:'approved',
+            title:'审批通过'
+        },{
+            value:'rejected',
+            title:'审批拒绝'
+        }];
+        vm.reqPath =  constdata.api.tenant.fleetPath;
+        vm.reqPath2 = constdata.api.productFamily.basePath;
+        vm.isAdmin = false;
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath = '/api/v1/platform';
+            vm.reqPath2 = '/api/v1/platform/product/families';
+            vm.isAdmin = true;
+        }
 
 
 
@@ -305,7 +323,7 @@
         function getAircraftsDatas() {
 
 
-            NetworkService.get(constdata.api.tenant.fleetPath  + '/aircrafts',{page:vm.pageCurrent},function (response) {
+            NetworkService.get(vm.reqPath  + '/aircrafts',{page:vm.pageCurrent},function (response) {
                 vm.crafts = response.data.content;
 
             },function (response) {
@@ -313,6 +331,19 @@
             });
         }
         getAircraftsDatas();
+
+        vm.productfamily = [];
+
+
+        function getProductFamiliyDatas() {
+            NetworkService.get(vm.reqPath2+'?status=approved&category=air_trans',{page:vm.pageCurrent},function (response) {
+                vm.productfamily = response.data.content;
+
+            },function (response) {
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
+            });
+        }
+        getProductFamiliyDatas();
 
 
 
@@ -322,7 +353,7 @@
             var myid = vm.userInfo.id;
             console.log(myid);
             console.log(username);
-            NetworkService.get(constdata.api.tenant.fleetPath  + '/' + vm.subPath + '/'+ username,null,function (response) {
+            NetworkService.get(vm.reqPath  + '/' + vm.subPath + '/'+ username,null,function (response) {
                 vm.user = response.data;
 
                 vm.user.clientManagersArr = [];
@@ -339,7 +370,9 @@
                     }
                 }
 
-
+                if(vm.user.family){
+                    vm.user.productfamilyId = vm.user.family.id;
+                }
 
                 if(vm.user.aircraftItems && vm.user.aircraftItems.length > 0){
                     for (var i = 0; i < vm.user.aircraftItems.length; i ++){
@@ -432,7 +465,7 @@
                     vm.user.aircraftItems[i].aircraft = tmp;
                 }
             }
-
+            vm.user.family = vm.productfamily[0];//vm.user.productfamilyId;// = vm.user.family.id;
             vm.user.clientManagers = '';//JSON.stringify(vm.user.clientManagersArr);
             if(vm.user.clientManagersArr.length > 0) {
                 vm.user.clientManagers  = vm.user.clientManagersArr[0].name + ':'+vm.user.clientManagersArr[0].email;
@@ -443,7 +476,7 @@
             console.log(vm.user.clientManagers);
 
 
-            NetworkService.post(constdata.api.tenant.fleetPath  + '/' + vm.subPath,vm.user,function (response) {
+            NetworkService.post(vm.reqPath  + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
 
 
@@ -484,7 +517,7 @@
                 }
             }
             console.log(vm.user.aircraftItems);
-
+            vm.user.family = vm.user.productfamilyId;
 
             vm.user.clientManagers = '';//JSON.stringify(vm.user.clientManagersArr);
             if(vm.user.clientManagersArr.length > 0) {
@@ -497,7 +530,7 @@
 
 
 
-            NetworkService.put(constdata.api.tenant.fleetPath + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
+            NetworkService.put(vm.reqPath + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {

@@ -28,8 +28,11 @@
             <tr class="font-bold">
                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
                 <th class="text-center">{{'u.NAME' | T}}</th>
-                <th class="text-center">类别</th>
+
+                <th ng-if="vm.isAdmin" class="text-center">商户</th>
                 <th class="text-center">审批状态</th>
+                <th class="text-center">类别</th>
+
                 <!--<th class="text-center">创建时间</th>-->
                 <th class="text-center">{{'u.DESCRIPTION' | T}}</th>
 
@@ -42,12 +45,14 @@
             <tr ng-repeat="item in vm.displayedCollection">
               <!--  <td ng-click="vm.goDetail(item)">{{item.id}}</td>-->
                 <td ng-click="vm.goDetail(item)">{{item.name}}</td>
-                <!--<td ng-click="vm.goDetail(item)"> {{item.category }}</td>-->
+                <td ng-if="vm.isAdmin" ng-click="vm.goDetail(item)">{{item.vendor.name}}</td>
+                <td ng-click="vm.goDetail(item)"> <select style="width: 100%;" class="form-control font-thin" ng-model="item.reviewStatus" ng-options="s.value as s.title for s in vm.approveStatus" ng-disabled=true ></select>
+
+                    <!--<td ng-click="vm.goDetail(item)"> {{item.category }}</td>-->
                 <td ng-click="vm.goDetail(item)"> <select style="width: 100%;" class="form-control font-thin" ng-model="item.category" ng-options="s.value as s.title for s in vm.categoryType" ng-disabled=true ></select>
                 </td>
 
 
-                <td ng-click="vm.goDetail(item)"> <select style="width: 100%;" class="form-control font-thin" ng-model="item.approved" ng-options="s.value as s.title for s in vm.approveStatus" ng-disabled=true ></select>
 
                     <!--<td ng-click="vm.goDetail(item)">{{item.approved}}</td>-->
                 <td ng-click="vm.goDetail(item)">{{item.description}}</td>
@@ -61,6 +66,37 @@
 
                     <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goEditItem(item)"><i class="fa fa-edit"></i>{{ 'u.EDIT' | T}}</button>
                     <button class="btn btn-sm btn-danger btn-addon" style="width: 80px"  ng-click="vm.openAlert('sm',item)"><i class="fa fa-trash-o"></i>{{'u.DELETE' | T}}</button>
+
+
+
+                    <div class="btn-group " ng-if="vm.isAdmin">
+                        <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-sliders"></i>  操作</button>
+                        <button type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" style="overflow:visible; z-index:1010;width:100px;position:absolute;">
+                            <!--<li ng-class="{disabled: !item.isImageEnable}" ng-click=" vm.OperApp(1, item)" ng-show="vm.showDeploy"><a><i class="fa fa-database m-r-sm"></i>镜像</a></li>
+                            <li ng-class="{disabled: !item.isDeployEnable}" ng-click="vm.OperApp(2, item)" ng-show="vm.showDeploy"><a><i class="fa fa-building-o m-r-sm"></i>部署</a></li>
+                            -->
+                            <li ng-class="{disabled: !item.isAgreeEnable}" ng-click="vm.OperApp(3, item)" ><a><i class="fa fa-play m-r-sm"></i>同意</a></li>
+                            <li ng-class="{disabled: !item.isRejectEnable}" ng-click="vm.OperApp(4, item)" ><a><i class="fa fa-stop m-r-sm"></i>拒绝</a></li>
+                            <!--<li ng-class="{disabled: !item.isRestartEnable}" ng-click="vm.OperApp(5, item)" ng-show="vm.showOther"><a><i class="fa fa-repeat m-r-sm"></i>重启</a></li>
+
+                                                            <li data-toggle="modal" data-target="#myModal" ng-class="{disabled: !item.isDeleteEnable}" ng-click="vm.OperApp(6, item)" ng-show="vm.showOther"><a><i class="fa fa-trash m-r-sm"></i>删除</a></li>
+                            -->
+
+                            <!--
+                                                            <button  class="btn btn-sm btn-danger btn-addon pull-left" data-toggle="modal" data-target="#myModal"><i class="fa fa-times-circle-o fa-2x"></i>{{vm.buttonEnable}}</button>
+                            -->
+                            <li data-toggle="modal" data-target="#myModal" ng-class="{disabled: !item.isDeleteEnable}"  ng-show="vm.showOther"><a><i class="fa fa-trash m-r-sm"></i>撤销部署</a></li>
+
+                        </ul>
+                    </div>
+
+
+
+
                 </td>
             </tr>
 
