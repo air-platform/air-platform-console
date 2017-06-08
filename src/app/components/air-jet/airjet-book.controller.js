@@ -37,19 +37,75 @@
         vm.isAdmin = false;
 
 
+        vm.approveStatus=[{
+            value:'pending',
+            title:'未审批'
+        },{
+            value:'approved',
+            title:'审批通过'
+        },{
+            value:'rejected',
+            title:'审批拒绝'
+        }];
 
+        vm.reqPath =  constdata.api.tenant.fleetPath;
+        vm.reqPath2 = constdata.api.tenant.jetPath;
+
+        vm.isAdmin = false;
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath = constdata.api.admin.basePath;
+            vm.reqPath2 = constdata.api.tenant.jetPath;
+            vm.isAdmin = true;
+        }
+
+        vm.OperApp = OperApp;
+        function OperApp(index, item) {
+            if(index == 3){
+
+
+                //product/families/{productFamilyId}/approve
+                //$state.go('app.application', {applicationName:item.id, args:{selItem:item}});
+                NetworkService.post(vm.reqPath + '/'+ vm.subPath + '/' +item.id +'/approve',null,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+
+                },function (response) {
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                });
+
+            }else if(index == 4){
+                var myreason={reason:'invalid params'};
+                NetworkService.post(vm.reqPath + '/'+ vm.subPath + '/' +item.id +'/disapprove',myreason,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                });
+            }else{
+                console.log('error ops:'+index);
+            }
+
+            //$state.go('app.applicationedit');
+        };
 
         function getDatas() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
-            var myid = vm.userInfo.id;
-            console.log(vm.userInfo);
-            if(vm.userInfo.role != 'tenant'){
-                vm.reqPath = '/api/v1/platform/product';
-                vm.isAdmin = true;
-            }
+
             NetworkService.get(vm.reqPath + '/' + 'fleets',{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
-
+                vm.displayedCollection = [].concat(vm.items);
+                if(vm.displayedCollection) {
+                    for (var i = 0; i < vm.displayedCollection.length; i++) {
+                        if (vm.displayedCollection[i].reviewStatus == 'pending' || vm.displayedCollection[i].reviewStatus == 'rejected') {
+                            vm.displayedCollection[i].isAgreeEnable = true;
+                            vm.displayedCollection[i].isRejectEnable = false;
+                        } else {
+                            vm.displayedCollection[i].isAgreeEnable = false;
+                            vm.displayedCollection[i].isRejectEnable = true;
+                        }
+                    }
+                }
 
                 updatePagination(response.data);
             },function (response) {
@@ -60,7 +116,7 @@
         function getAirjetsDatas() {
 
 
-            NetworkService.get(constdata.api.tenant.jetPath  + '/airjets',{page:vm.pageCurrent},function (response) {
+            NetworkService.get(vm.reqPath2  + '/airjets',{page:vm.pageCurrent},function (response) {
                 vm.jets = response.data.content;
 
             },function (response) {
@@ -92,7 +148,7 @@
 
         function removeItem(item) {
             var myid = vm.userInfo.id;
-            NetworkService.delete(constdata.api.tenant.fleetPath + '/fleets/'+ item.id,null,function success() {
+            NetworkService.delete(vm.reqPath + '/fleets/'+ item.id,null,function success() {
                 var index = vm.items.indexOf(item);
                 //vm.items.splice(index,1);
                 toastr.success(i18n.t('u.DELETE_SUC'));

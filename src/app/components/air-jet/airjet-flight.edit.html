@@ -45,6 +45,33 @@
 
 
 
+                <div  ng-if="vm.isDetail" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">审批状态</label>
+                    <div class="col-sm-4">
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.reviewStatus" ng-options="s.value as s.title for s in vm.approveStatus" ng-disabled="vm.isDetail || !vm.isAdmin" ></select>
+
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  ng-if="vm.isDetail"  class="line line-dashed b-b line-lg"></div>
+
+
+
+                <div  ng-if="vm.user.reviewStatus=='rejected' && vm.isDetail" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">审批拒绝原因</label>
+                    <div class="col-sm-4">
+                        <textarea class="form-control font-thin" ng-model="vm.user.rejectedReason" rows="4" placeholder="审批拒绝原因" style="resize: none;" ng-disabled="vm.isDetail || !vm.isAdmin"></textarea>
+                    </div>
+
+                </div>
+
+                <div  ng-if="vm.user.reviewStatus=='rejected' && vm.isDetail" class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+
 
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FLEETNUNBER' | translate}}</label>

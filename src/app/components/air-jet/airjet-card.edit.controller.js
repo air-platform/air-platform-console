@@ -47,7 +47,7 @@
         vm.back = back;
         vm.addUser = {};
         vm.addUser.role='tenant';
-        vm.subPath = 'jetcards';
+        vm.subPath = 'jettravels';
         vm.myHtml = '';
         vm.userType = [
             {
@@ -101,6 +101,25 @@
             vm.isDetail = true;
         }
         vm.user.clientManagersArr = [];
+        vm.approveStatus=[{
+            value:'pending',
+            title:'未审批'
+        },{
+            value:'approved',
+            title:'审批通过'
+        },{
+            value:'rejected',
+            title:'审批拒绝'
+        }];
+        vm.reqPath =  constdata.api.tenant.fleetPath;
+        vm.reqPath2 = constdata.api.tenant.jetPath;
+        vm.isAdmin = false;
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath = constdata.api.admin.basePath;
+            vm.reqPath2 = constdata.api.tenant.jetPath;
+            vm.isAdmin = true;
+        }
 
 
         vm.addNewClientManager = function() {
@@ -122,7 +141,7 @@
             var myid = vm.userInfo.id;
             console.log(myid);
             console.log(username);
-            NetworkService.get(constdata.api.tenant.fleetPath + '/' + vm.subPath + '/'+ username,null,function (response) {
+            NetworkService.get(vm.reqPath + '/' + vm.subPath + '/'+ username,null,function (response) {
                 vm.user = response.data;
 
 
@@ -170,7 +189,7 @@
 
 
 
-            NetworkService.post(constdata.api.tenant.fleetPath  + '/' + vm.subPath,vm.user,function (response) {
+            NetworkService.post(vm.reqPath  + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -196,7 +215,7 @@
             }
             console.log(vm.user.clientManagers);
 
-            NetworkService.put(constdata.api.tenant.fleetPath + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
+            NetworkService.put(vm.reqPath + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {

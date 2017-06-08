@@ -31,12 +31,33 @@
         vm.backAction = backAction;
         vm.userInfo = {};
         vm.subPath = 'aircrafts';
+
+
+        vm.approveStatus=[{
+            value:'pending',
+            title:'未审批'
+        },{
+            value:'approved',
+            title:'审批通过'
+        },{
+            value:'rejected',
+            title:'审批拒绝'
+        }];
+        vm.reqPath =  constdata.api.tenant.fleetPath;
+        vm.isAdmin = false;
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath = constdata.api.admin.basePath;
+            vm.isAdmin = true;
+        }
+
+
         function getDatas() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
             var myid = vm.userInfo.id;
             console.log(vm.userInfo);
 
-            NetworkService.get(constdata.api.tenant.fleetPath  + '/' + vm.subPath,{page:vm.pageCurrent},function (response) {
+            NetworkService.get( vm.reqPath  + '/' + vm.subPath,{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
                 updatePagination(response.data);
             },function (response) {
@@ -69,7 +90,7 @@
 
         function removeItem(item) {
             var myid = vm.userInfo.id;
-            NetworkService.delete(constdata.api.tenant.fleetPath  + '/' + vm.subPath + '/'+ item.id,null,function success() {
+            NetworkService.delete( vm.reqPath  + '/' + vm.subPath + '/'+ item.id,null,function success() {
                 var index = vm.items.indexOf(item);
                 //vm.items.splice(index,1);
                 toastr.success(i18n.t('u.DELETE_SUC'));

@@ -39,8 +39,6 @@
         vm.isDetail = false;
         vm.getTenantItem = getTenantItem;
         vm.submitAction = submitAction;
-        vm.lockTenant = lockTenant;
-        vm.unlockTenant = unlockTenant;
         vm.backAction = backAction;
         vm.back = back;
         vm.addUser = {};
@@ -102,7 +100,7 @@
         vm.isAdmin = false;
         vm.userInfo = StorageService.get('iot.hnair.cloud.information');
         if(vm.userInfo.role != 'tenant'){
-            vm.reqPath = '/api/v1/platform';
+            vm.reqPath = constdata.api.admin.basePath;
             vm.reqPath2 = '/api/v1/platform/product/families';
             vm.isAdmin = true;
         }
@@ -475,6 +473,13 @@
             }
             console.log(vm.user.clientManagers);
 
+            if(vm.user.salesPackages){
+                for(var i = 0;i < vm.user.salesPackages.length; i ++){
+                    vm.user.salesPackages[i].passengers = parseInt(vm.user.salesPackages[i].passengers);
+                    vm.user.salesPackages[i].presalesDays = parseInt(vm.user.salesPackages[i].presalesDays);
+                }
+            }
+            vm.user.timeEstimation = parseInt(vm.user.timeEstimation);
 
             NetworkService.post(vm.reqPath  + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
@@ -550,7 +555,6 @@
         vm.togglePriceCalendar = function(item)
         {
 
-
             item.showPriceCalendar = !item.showPriceCalendar;
             if(item.showPriceCalendar){
                 item.priceButtonTitle = '收起';
@@ -560,24 +564,6 @@
 
         }
 
-        function lockTenant() {
-            NetworkService.post(constdata.api.tenant.lockPath +'/'+ username + '/lock',null,function (response) {
-                toastr.success(i18n.t('u.OPERATE_SUC'));
-                vm.getTenantItem();
-            },function (response) {
-                vm.authError = response.statusText + '(' + response.status + ')';
-                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
-            });
-        }
-        function unlockTenant() {
-            NetworkService.post(constdata.api.tenant.lockPath +'/'+ username + '/unlock',null,function (response) {
-                toastr.success(i18n.t('u.OPERATE_SUC'));
-                vm.getTenantItem();
-            },function (response) {
-                vm.authError = response.statusText + '(' + response.status + ')';
-                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
-            });
-        }
 
         function backAction() {
             // $state.go('app.tenant');

@@ -48,7 +48,7 @@
         vm.isAdmin = false;
         vm.userInfo = StorageService.get('iot.hnair.cloud.information');
         if(vm.userInfo.role != 'tenant'){
-            vm.reqPath = '/api/v1/platform/product';
+            vm.reqPath =  constdata.api.admin.basePath;
             vm.isAdmin = true;
         }
 
@@ -81,13 +81,27 @@
 
             //$state.go('app.applicationedit');
         };
+        vm.displayedCollection = [];
         function getDatas() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
-            var myid = vm.userInfo.id;
-            console.log(vm.userInfo);
+
 
             NetworkService.get(vm.reqPath  + '/' + vm.subPath,{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
+                vm.displayedCollection = [].concat(vm.items);
+                if(vm.displayedCollection) {
+                    for (var i = 0; i < vm.displayedCollection.length; i++) {
+                        if (vm.displayedCollection[i].reviewStatus == 'pending' || vm.displayedCollection[i].reviewStatus == 'rejected') {
+                            vm.displayedCollection[i].isAgreeEnable = true;
+                            vm.displayedCollection[i].isRejectEnable = false;
+                        } else {
+                            vm.displayedCollection[i].isAgreeEnable = false;
+                            vm.displayedCollection[i].isRejectEnable = true;
+                        }
+                    }
+                }
+
+
                 updatePagination(response.data);
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);

@@ -35,7 +35,9 @@
                 "promotion":
                 {"basePath":"/api/v1/promotions"},
                 "productFamily":
-                {"basePath":"/api/v1/tenant/product/families"}
+                {"basePath":"/api/v1/tenant/product/families"},
+                "admin":
+                {"basePath":"/api/v1/platform/product"}
             },
             routeName:{
                 "appprofile":"个人中心",

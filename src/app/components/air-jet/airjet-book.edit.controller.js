@@ -39,8 +39,6 @@
         vm.isDetail = false;
         vm.getTenantItem = getTenantItem;
         vm.submitAction = submitAction;
-        vm.lockTenant = lockTenant;
-        vm.unlockTenant = unlockTenant;
         vm.backAction = backAction;
         vm.back = back;
         vm.addUser = {};
@@ -125,12 +123,30 @@
             vm.imageShow.splice(index, 1);
         }
 
-
+        vm.approveStatus=[{
+            value:'pending',
+            title:'未审批'
+        },{
+            value:'approved',
+            title:'审批通过'
+        },{
+            value:'rejected',
+            title:'审批拒绝'
+        }];
+        vm.reqPath =  constdata.api.tenant.fleetPath;
+        vm.reqPath2 = constdata.api.tenant.jetPath;
+        vm.isAdmin = false;
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath = constdata.api.admin.basePath;
+            vm.reqPath2 = constdata.api.tenant.jetPath;
+            vm.isAdmin = true;
+        }
 
         function getAirjetsDatas() {
 
 
-            NetworkService.get(constdata.api.tenant.jetPath  + '/airjets',{page:vm.pageCurrent},function (response) {
+            NetworkService.get(vm.reqPath2  + '/airjets',{page:vm.pageCurrent},function (response) {
                 vm.jets = response.data;
 
             },function (response) {
@@ -143,7 +159,7 @@
             var myid = vm.userInfo.id;
             console.log(myid);
             console.log(username);
-            NetworkService.get(constdata.api.tenant.fleetPath + '/fleets/'+ username,null,function (response) {
+            NetworkService.get(vm.reqPath + '/fleets/'+ username,null,function (response) {
                 vm.user = response.data;
 
 
@@ -263,7 +279,7 @@
                 }
             }
 
-            NetworkService.post(constdata.api.tenant.fleetPath + '/fleets',vm.user,function (response) {
+            NetworkService.post(vm.reqPath + '/fleets',vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -296,7 +312,7 @@
                 }
             }
 
-            NetworkService.put(constdata.api.tenant.fleetPath + '/fleets/'+ username,vm.user,function (response) {
+            NetworkService.put(vm.reqPath + '/fleets/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -312,24 +328,7 @@
             }
         }
 
-        function lockTenant() {
-            NetworkService.post(constdata.api.tenant.lockPath +'/'+ username + '/lock',null,function (response) {
-                toastr.success(i18n.t('u.OPERATE_SUC'));
-                vm.getTenantItem();
-            },function (response) {
-                vm.authError = response.statusText + '(' + response.status + ')';
-                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
-            });
-        }
-        function unlockTenant() {
-            NetworkService.post(constdata.api.tenant.lockPath +'/'+ username + '/unlock',null,function (response) {
-                toastr.success(i18n.t('u.OPERATE_SUC'));
-                vm.getTenantItem();
-            },function (response) {
-                vm.authError = response.statusText + '(' + response.status + ')';
-                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
-            });
-        }
+
 
         function backAction() {
             // $state.go('app.tenant');

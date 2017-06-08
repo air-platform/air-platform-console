@@ -39,8 +39,6 @@
         vm.isDetail = false;
         vm.getTenantItem = getTenantItem;
         vm.submitAction = submitAction;
-        vm.lockTenant = lockTenant;
-        vm.unlockTenant = unlockTenant;
         vm.backAction = backAction;
         vm.back = back;
         vm.addUser = {};
@@ -98,6 +96,31 @@
         if(type && type=='detail'){
             vm.isDetail = true;
         }
+
+
+        vm.approveStatus=[{
+            value:'pending',
+            title:'未审批'
+        },{
+            value:'approved',
+            title:'审批通过'
+        },{
+            value:'rejected',
+            title:'审批拒绝'
+        }];
+        vm.reqPath =  constdata.api.tenant.fleetPath;
+        vm.reqPath2 = constdata.api.tenant.jetPath;
+        vm.isAdmin = false;
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath = constdata.api.admin.basePath;
+            vm.reqPath2 = constdata.api.tenant.jetPath;
+            vm.isAdmin = true;
+        }
+
+
+
+
         vm.richContent="input here";
         vm.user.clientManagersArr = [];
 
@@ -128,7 +151,7 @@
         function getAirjetsDatas() {
 
 
-            NetworkService.get(constdata.api.tenant.jetPath  + '/airjets',{page:vm.pageCurrent},function (response) {
+            NetworkService.get(vm.reqPath2  + '/airjets',{page:vm.pageCurrent},function (response) {
                 vm.jets = response.data;
 
             },function (response) {
@@ -141,7 +164,7 @@
             var myid = vm.userInfo.id;
             console.log(myid);
             console.log(username);
-            NetworkService.get(constdata.api.tenant.fleetPath  + '/' + vm.subPath + '/'+ username,null,function (response) {
+            NetworkService.get(vm.reqPath  + '/' + vm.subPath + '/'+ username,null,function (response) {
                 vm.user = response.data;
 
                 var arrTime = vm.user.timeSlot.split("-");
@@ -175,7 +198,7 @@
 
 
                 console.log(vm.user);
-                vm.dt   =   new Date((vm.user.date));
+                vm.dt   =   new Date((vm.user.departureDate));
                 //console.log(vm.dt);
                // vm.dt = new   Date(vm.user.date.replace(/-/g,   "/"));
                 //console.log(vm.dt);
@@ -222,7 +245,7 @@
             var myid = vm.userInfo.id;
             vm.user.timeSlot=vm.user.time.start+'-'+vm.user.time.end;
             console.log(vm.user.timeSlot);
-            vm.user.date = dateToString(vm.dt);
+            vm.user.departureDate = dateToString(vm.dt);
 
             vm.user.description = getMarkDownAction().markdown;
             console.log(vm.user.description);
@@ -244,7 +267,7 @@
                     vm.user.appearances = vm.user.appearances.substr(0, vm.user.appearances.length-1);
                 }
             }
-            NetworkService.post(constdata.api.tenant.fleetPath + '/' + vm.subPath,vm.user,function (response) {
+            NetworkService.post(vm.reqPath + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
 
                 vm.backAction();
@@ -263,7 +286,7 @@
             //return;
             //vm.user.description = mdContent;
             vm.user.timeSlot=vm.user.time.start+'-'+vm.user.time.end;
-            vm.user.date = dateToString(vm.dt);
+            vm.user.departureDate = dateToString(vm.dt);
 
             vm.user.clientManagers = '';//JSON.stringify(vm.user.clientManagersArr);
             if(vm.user.clientManagersArr.length > 0) {
@@ -284,7 +307,7 @@
                     vm.user.appearances = vm.user.appearances.substr(0, vm.user.appearances.length-1);
                 }
             }
-            NetworkService.put(constdata.api.tenant.fleetPath + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
+            NetworkService.put(vm.reqPath + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -300,24 +323,7 @@
             }
         }
 
-        function lockTenant() {
-            NetworkService.post(constdata.api.tenant.lockPath +'/'+ username + '/lock',null,function (response) {
-                toastr.success(i18n.t('u.OPERATE_SUC'));
-                vm.getTenantItem();
-            },function (response) {
-                vm.authError = response.statusText + '(' + response.status + ')';
-                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
-            });
-        }
-        function unlockTenant() {
-            NetworkService.post(constdata.api.tenant.lockPath +'/'+ username + '/unlock',null,function (response) {
-                toastr.success(i18n.t('u.OPERATE_SUC'));
-                vm.getTenantItem();
-            },function (response) {
-                vm.authError = response.statusText + '(' + response.status + ')';
-                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
-            });
-        }
+
 
         function backAction() {
             // $state.go('app.tenant');
