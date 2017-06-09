@@ -20,7 +20,7 @@
     });
 
     /** @ngInject */
-    function AirtourEditController($scope, NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
+    function AirtourEditController($scope, uiCalendarConfig,NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -385,20 +385,48 @@
             vm.user.clientManagersArr.splice(index, 1);
         }
 
-        vm.addNewCraftItem = function() {
 
-            vm.user.aircraftItems.push({
-                price:'',
-                seatPrice:'',
+
+        vm.togglePriceCalendar = function(item)
+        {
+
+
+            item.showPriceCalendar = !item.showPriceCalendar;
+            if(item.showPriceCalendar){
+                item.priceButtonTitle = '收起';
+            }else{
+                item.priceButtonTitle = '详情';
+            }
+
+        }
+
+
+
+        vm.addNewCraftItem = function() {
+            var pp = [];
+            for(var i = 0; i < 30; i ++){
+                pp.push(2000);
+            }
+
+            vm.user.salesPackages.push({
+                name:'',
+                prices:pp.toString(),
+                description:'des',
                 currencyUnit:'rmb',
-                aircraft:''
+                aircraft:'',
+                showPriceCalendar:false,
+                priceButtonTitle:'详情'
             })
         }
 
 
+
+
+
+
         vm.removeCraftItem = function(item) {
-            var index = vm.user.aircraftItems.indexOf(item);
-            vm.user.aircraftItems.splice(index, 1);
+            var index = vm.user.salesPackages.indexOf(item);
+            vm.user.salesPackages.splice(index, 1);
         }
 
 
@@ -461,13 +489,18 @@
                 }
 
 
-                if(vm.user.aircraftItems && vm.user.aircraftItems.length > 0){
-                    for (var i = 0; i < vm.user.aircraftItems.length; i ++){
-                        vm.user.aircraftItems[i].aircraftId = vm.user.aircraftItems[i].aircraft.id;
+
+
+                if(vm.user.salesPackages && vm.user.salesPackages.length > 0){
+                    for (var i = 0; i < vm.user.salesPackages.length; i ++){
+                        vm.user.salesPackages[i].aircraftId = vm.user.salesPackages[i].aircraft.id;
+                        vm.user.salesPackages[i].showPriceCalendar = false;
+                        vm.user.salesPackages[i].priceButtonTitle = '详情';
+
+
+
                     }
                 }
-
-
 
                 if(vm.user.tourPoint && vm.user.tourPoint.length > 0){
                     console.log(vm.user.tourPoint);
@@ -540,10 +573,10 @@
             vm.user.tourShow = getMarkDownAction().markdown;
             console.log(vm.user.tourShow);
 
-            if(vm.user.aircraftItems.length > 0) {
-                for (var i = 0; i < vm.user.aircraftItems.length; i++) {
-                    var tmp = vm.user.aircraftItems[i].aircraftId;
-                    vm.user.aircraftItems[i].aircraft = tmp;
+            if(vm.user.salesPackages && vm.user.salesPackages.length > 0) {
+                for (var i = 0; i < vm.user.salesPackages.length; i++) {
+                    var tmp = vm.user.salesPackages[i].aircraftId;
+                    vm.user.salesPackages[i].aircraft = tmp;
                 }
             }
 
@@ -584,10 +617,10 @@
             vm.user.tourShow = getMarkDownAction().markdown;
 
 
-            if(vm.user.aircraftItems.length > 0) {
-                for (var i = 0; i < vm.user.aircraftItems.length; i++) {
-                    var tmp = vm.user.aircraftItems[i].aircraftId;
-                    vm.user.aircraftItems[i].aircraft = tmp;
+            if(vm.user.salesPackages && vm.user.salesPackages.length > 0) {
+                for (var i = 0; i < vm.user.salesPackages.length; i++) {
+                    var tmp = vm.user.salesPackages[i].aircraftId;
+                    vm.user.salesPackages[i].aircraft = tmp;
                 }
             }
 
@@ -642,8 +675,9 @@
 
         }else{
             vm.user.currencyUnit = 'rmb';
-            vm.user.aircraftItems = [];
+
             vm.user.aircraftItemsAdd = [];
+            vm.user.salesPackages = [];
         }
 
         function back() {

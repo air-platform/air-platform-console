@@ -53,7 +53,7 @@
                 <td ng-click="vm.goDetail(item)">{{item.city}}</td>
                 <td ng-click="vm.goDetail(item)"> {{item.tourDistance}}</td>
                <td ng-click="vm.goDetail(item)">{{item.tourTime}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.boardingLoc}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.boardingLocation}}</td>
 
 
 
@@ -78,6 +78,23 @@
                             <li ng-class="{disabled: !item.isAgreeEnable}" ng-click="vm.OperApp(3, item)" ><a><i class="fa fa-play m-r-sm"></i>同意</a></li>
                             <li ng-class="{disabled: !item.isRejectEnable}" ng-click="vm.OperApp(4, item)" ><a><i class="fa fa-stop m-r-sm"></i>拒绝</a></li>
                             <li data-toggle="modal" data-target="#myModal" ng-class="{disabled: !item.isDeleteEnable}"  ng-show="vm.showOther"><a><i class="fa fa-trash m-r-sm"></i>撤销部署</a></li>
+
+                        </ul>
+                    </div>
+
+
+                    <div class="btn-group " ng-if="!vm.isAdmin">
+                        <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-sliders"></i>  操作</button>
+                        <button type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+
+                        <ul class="dropdown-menu" style="overflow:visible; z-index:1010;width:100px;position:absolute;">
+                            <li ng-class="{disabled: !item.isPublish}" ng-click="vm.OperApp(11, item)" ><a><i class="fa fa-arrow-up m-r-sm"></i>上线</a></li>
+                            <li ng-class="{disabled: !item.isUnPublish}" ng-click="vm.OperApp(12, item)" ><a><i class="fa fa-arrow-down m-r-sm"></i>下线</a></li>
+                            <li  ng-click="vm.openAlert('sm',item)" ><a><i class="fa fa-trash-o m-r-sm"></i> {{'u.DELETE' | T}}</a></li>
+
 
                         </ul>
                     </div>

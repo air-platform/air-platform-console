@@ -450,14 +450,14 @@
 
 
 
-            if(vm.user.salesPackages.length > 0) {
+            if(vm.user.salesPackages && vm.user.salesPackages.length > 0) {
                 for (var i = 0; i < vm.user.salesPackages.length; i++) {
                     var tmp = vm.user.salesPackages[i].aircraftId;
                     vm.user.salesPackages[i].aircraft = tmp;
                 }
             }
 
-            if(vm.user.aircraftItems.length > 0) {
+            if(vm.user.aircraftItems && vm.user.aircraftItems.length > 0) {
                 for (var i = 0; i < vm.user.aircraftItems.length; i++) {
                     var tmp = vm.user.aircraftItems[i].aircraftId;
                     vm.user.aircraftItems[i].aircraft = tmp;
@@ -507,7 +507,7 @@
 
 
 
-            if(vm.user.salesPackages.length > 0) {
+            if(vm.user.salesPackages && vm.user.salesPackages.length > 0) {
                 for (var i = 0; i < vm.user.salesPackages.length; i++) {
                     var tmp = vm.user.salesPackages[i].aircraftId;
                     vm.user.salesPackages[i].aircraft = tmp;
@@ -515,7 +515,7 @@
             }
 
 
-            if(vm.user.aircraftItems.length > 0) {
+            if(vm.user.aircraftItems && vm.user.aircraftItems.length > 0) {
                 for (var i = 0; i < vm.user.aircraftItems.length; i++) {
                     var tmp = vm.user.aircraftItems[i].aircraftId;
                     vm.user.aircraftItems[i].aircraft = tmp;
@@ -533,6 +533,13 @@
             }
             console.log(vm.user.clientManagers);
 
+            if(vm.user.salesPackages){
+                for(var i = 0;i < vm.user.salesPackages.length; i ++){
+                    vm.user.salesPackages[i].passengers = parseInt(vm.user.salesPackages[i].passengers);
+                    vm.user.salesPackages[i].presalesDays = parseInt(vm.user.salesPackages[i].presalesDays);
+                }
+            }
+            vm.user.timeEstimation = parseInt(vm.user.timeEstimation);
 
 
             NetworkService.put(vm.reqPath + '/' + vm.subPath + '/'+ username,vm.user,function (response) {

@@ -80,6 +80,22 @@
                 },function (response) {
                     toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
                 });
+            }else if(index == 11){
+                var myreason={reason:'invalid params'};
+                NetworkService.post(vm.reqPath + '/'+ vm.subPath + '/' +item.id +'/publish',null,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                });
+            }else if(index == 12){
+                var myreason={reason:'invalid params'};
+                NetworkService.post(vm.reqPath + '/'+ vm.subPath + '/' +item.id +'/unpublish',null,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                });
             }else{
                 console.log('error ops:'+index);
             }
@@ -101,9 +117,24 @@
                         if (vm.displayedCollection[i].reviewStatus == 'pending' || vm.displayedCollection[i].reviewStatus == 'rejected') {
                             vm.displayedCollection[i].isAgreeEnable = true;
                             vm.displayedCollection[i].isRejectEnable = false;
+
+                            vm.displayedCollection[i].isPubilsh = false;
+                            vm.displayedCollection[i].isUnPublish = false;
+
                         } else {
                             vm.displayedCollection[i].isAgreeEnable = false;
                             vm.displayedCollection[i].isRejectEnable = true;
+
+
+                            if(vm.displayedCollection[i].published){
+                                vm.displayedCollection[i].isPubilsh = true;
+                                vm.displayedCollection[i].isUnPublish = false;
+
+                            }else{
+                                vm.displayedCollection[i].isPubilsh = false;
+                                vm.displayedCollection[i].isUnPublish = true;
+                            }
+
                         }
                     }
                 }

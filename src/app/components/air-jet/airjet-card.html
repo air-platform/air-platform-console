@@ -78,6 +78,33 @@
                     </div>
 
 
+
+
+
+                    <div class="btn-group " ng-if="!vm.isAdmin">
+                        <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-sliders"></i>  操作</button>
+                        <button type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+
+                        <ul class="dropdown-menu" style="overflow:visible; z-index:1010;width:100px;position:absolute;">
+                            <li ng-class="{disabled: !item.isPublish}" ng-click="vm.OperApp(11, item)" ><a><i class="fa fa-arrow-up m-r-sm"></i>上线</a></li>
+                            <li ng-class="{disabled: !item.isUnPublish}" ng-click="vm.OperApp(12, item)" ><a><i class="fa fa-arrow-down m-r-sm"></i>下线</a></li>
+                            <li  ng-click="vm.openAlert('sm',item)" ><a><i class="fa fa-trash-o m-r-sm"></i> {{'u.DELETE' | T}}</a></li>
+
+
+                        </ul>
+                    </div>
+
+
+
+
+
+
+
+
+
                 </td>
             </tr>
 

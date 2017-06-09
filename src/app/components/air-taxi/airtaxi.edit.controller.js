@@ -420,7 +420,7 @@
         function addItem() {
             var myid = vm.userInfo.id;
 
-            if(vm.user.salesPackages.length > 0) {
+            if(vm.user.salesPackages && vm.user.salesPackages.length > 0) {
                 for (var i = 0; i < vm.user.salesPackages.length; i++) {
                     var tmp = vm.user.salesPackages[i].aircraftId;
                     vm.user.salesPackages[i].aircraft = tmp;
@@ -467,7 +467,7 @@
 
 
 
-            if(vm.user.salesPackages.length > 0) {
+            if(vm.user.salesPackages && vm.user.salesPackages.length > 0) {
                 for (var i = 0; i < vm.user.salesPackages.length; i++) {
                     var tmp = vm.user.salesPackages[i].aircraftId;
                     vm.user.salesPackages[i].aircraft = tmp;
