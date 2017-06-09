@@ -87,15 +87,8 @@
 
 
 
-
                 <div  class="form-group">
-
-
-
                     <div class="form-group" ng-repeat="item in vm.user.salesPackages">
-
-
-
                         <div  class="form-group"  style="margin-left:50px;">
                             <label class="col-sm-1 control-label  font-bold">套餐名</label>
                             <div class="col-sm-2">
@@ -128,23 +121,23 @@
                         <div  class="form-group" style="margin-left:50px;">
 
                             <label class="col-sm-1 control-label  font-bold">预售提前天数</label>
+
                             <div class="col-sm-2">
-                                <div class="col-sm-6">
-                                    <input class="form-control" type="text"
-                                           placeholder="天数" ng-model="item.presalesDays" ng-disabled="vm.isDetail"  required>
-                                </div>
+                                <input class="form-control" type="text"
+                                       placeholder="天数" ng-model="item.presalesDays" ng-disabled="vm.isDetail"   required>
                             </div>
 
 
+
                             <label class="col-sm-1 control-label  font-bold">{{'u.DESCRIPTION' | translate}}</label>
-                            <div class="col-sm-4">
-                                <textarea class="form-control font-thin" ng-model="item.description" rows="4" placeholder="{{'u.DESCRIPTION' | translate}}" style="resize: none;" ng-disabled="vm.isDetail"></textarea>
+                            <div class="col-sm-6">
+                                <textarea class="form-control font-thin" ng-model="item.description" rows="1" placeholder="{{'u.DESCRIPTION' | translate}}" style="resize: none;" ng-disabled="vm.isDetail"></textarea>
                             </div>
                         </div>
 
                         <div  class="form-group" style="margin-left:50px;">
                             <label class="col-sm-1 control-label  font-bold">套餐价格</label>
-                            <div class="col-sm-3 m-l-lg ">
+                            <div class="col-sm-3" >
                                 <button  ng-click="vm.togglePriceCalendar(item)" style="position:relative;top:3px;" class="btn m-b-xs btn-sm btn-info btn-addon pull-left">{{item.priceButtonTitle}}...</button>
                             </div>
 
@@ -160,18 +153,11 @@
                             </div>
                         </div>
 
-
-
-
                     </div>
-
-
-                    <div class="col-sm-4">
+                    <div class="col-sm-4" style="margin-left:-20px;">
                         <button ng-if="!vm.isDetail" ng-click="vm.addNewCraftItem()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left m-l-lg"><i class="glyphicon glyphicon-plus"></i>{{'u.ADDCRAFT' | translate}}</button>
 
                     </div>
-
-
 
                 </div>
 
@@ -399,7 +385,7 @@
                     </div>
 
 
-                    <div class="col-sm-4">
+                    <div class="col-sm-4" style="margin-left:30px;">
                         <button ng-if="!vm.isDetail" ng-click="vm.addNewClientManager()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-plus"></i>{{'u.ADD' | translate}}</button>
 
                     </div>
