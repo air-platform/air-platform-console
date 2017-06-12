@@ -6,10 +6,10 @@
 
     angular
         .module('iot')
-        .controller('ProductFamilyController', ProductFamilyController);
+        .controller('BannerController', BannerController);
 
     /** @ngInject */
-    function ProductFamilyController(NetworkService,StorageService, constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
+    function BannerController(NetworkService,StorageService, constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -31,16 +31,6 @@
         vm.backAction = backAction;
         vm.userInfo = {};
         vm.subPath = 'aircrafts';
-        vm.approveStatus=[{
-            value:'pending',
-            title:'未审批'
-        },{
-            value:'approved',
-            title:'审批通过'
-        },{
-            value:'rejected',
-            title:'审批拒绝'
-        }];
         vm.categoryType = [
             {
                 title:'Air Jet',
@@ -59,66 +49,15 @@
                 value:'air_training'
             }
         ];
-        vm.displayedCollection = [];
-
-        vm.reqPath = constdata.api.productFamily.basePath;
-        vm.isAdmin = false;
-        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
-        if(vm.userInfo.role != 'tenant'){
-            vm.reqPath = constdata.api.productFamily.adminPath;
-            vm.isAdmin = true;
-        }
-
-        vm.OperApp = OperApp;
-        function OperApp(index, item) {
-            if(index == 3){
-
-
-                //product/families/{productFamilyId}/approve
-                //$state.go('app.application', {applicationName:item.id, args:{selItem:item}});
-                NetworkService.post(vm.reqPath +'/' +item.id +'/approve',null,function (response) {
-                 toastr.success(i18n.t('u.OPERATE_SUC'));
-                    getDatas();
-
-                 },function (response) {
-                 toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
-                 });
-
-            }else if(index == 4){
-                var myreason={reason:'invalid params'};
-                NetworkService.post(vm.reqPath +'/' +item.id +'/disapprove',myreason,function (response) {
-                    toastr.success(i18n.t('u.OPERATE_SUC'));
-                    getDatas();
-                },function (response) {
-                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
-                });
-            }else{
-                console.log('error ops:'+index);
-            }
-
-            //$state.go('app.applicationedit');
-        };
         function getDatas() {
+            vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+            var myid = vm.userInfo.id;
+            console.log(vm.userInfo);
 
-            NetworkService.get(vm.reqPath,{page:vm.pageCurrent},function (response) {
-                vm.items = response.data.content;
+            NetworkService.get(constdata.api.promotion.basePath,{page:vm.pageCurrent},function (response) {
+                vm.items = response.data;
                 console.log(response.data);
-                console.log(response.data.content);
                 vm.displayedCollection = [].concat(vm.items);
-                console.log(vm.displayedCollection);
-               // console.log(vm.displayedCollection.length);
-                if(vm.displayedCollection) {
-                    for (var i = 0; i < vm.displayedCollection.length; i++) {
-                        if (vm.displayedCollection[i].reviewStatus == 'pending' || vm.displayedCollection[i].reviewStatus == 'rejected') {
-                            vm.displayedCollection[i].isAgreeEnable = true;
-                            vm.displayedCollection[i].isRejectEnable = false;
-                        } else {
-                            vm.displayedCollection[i].isAgreeEnable = false;
-                            vm.displayedCollection[i].isRejectEnable = true;
-                        }
-                    }
-                }
-
                 updatePagination(response.data);
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
@@ -127,15 +66,15 @@
 
 
         function goAddItem() {
-            $state.go('app.editproductfamily',{});
+            $state.go('app.editpromotion',{});
         };
 
         function goEditItem(item) {
-            $state.go('app.editproductfamily',{username:item.id, args:{type:'edit'}});
+            $state.go('app.editpromotion',{username:item.id, args:{type:'edit'}});
         };
 
         function goDetail(item) {
-            $state.go('app.editproductfamily',{username:item.id, args:{type:'detail'}});
+            $state.go('app.editpromotion',{username:item.id, args:{type:'detail'}});
 
         };
 
@@ -150,7 +89,7 @@
 
         function removeItem(item) {
             var myid = vm.userInfo.id;
-            NetworkService.delete(constdata.api.productFamily.basePath + '/'+ item.id,null,function success() {
+            NetworkService.delete(constdata.api.promotion.basePath + '/'+ item.id,null,function success() {
                 var index = vm.items.indexOf(item);
                 //vm.items.splice(index,1);
                 toastr.success(i18n.t('u.DELETE_SUC'));

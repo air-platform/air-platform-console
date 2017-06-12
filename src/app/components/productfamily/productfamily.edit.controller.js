@@ -119,7 +119,7 @@
         vm.isAdmin = false;
         vm.userInfo = StorageService.get('iot.hnair.cloud.information');
         if(vm.userInfo.role != 'tenant'){
-            vm.reqPath = '/api/v1/platform/product/families';
+            vm.reqPath = constdata.api.productFamily.adminPath;
             vm.isAdmin = true;
         }
 
@@ -201,7 +201,7 @@
 
         vm.uploadFile = function (){
             console.log(vm.myUploadFile);
-            NetworkService.postForm('/api/v1/files',vm.myUploadFile,function (response) {
+            NetworkService.postForm(constant.api.uploadFile.qiniuPath,vm.myUploadFile,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
 
                 console.log(response.data);

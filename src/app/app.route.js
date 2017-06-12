@@ -467,6 +467,20 @@
                   templateUrl: 'app/components/promotion/promotion.edit.html'
               })
 
+
+              .state('app.banner', {
+                  url: prefix + '/banner',
+                  templateUrl: 'app/components/banner/banner.html'
+
+              })
+              .state('app.editbanner', {
+                  url: prefix + '/banner/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/banner/banner.edit.html'
+              })
+
+
+
               .state('app.productfamily', {
                   url: prefix + '/productfamily',
                   templateUrl: 'app/components/productfamily/productfamily.html'

@@ -15,29 +15,31 @@
             //apiHost_DEV:'http://127.0.0.1:8080/iot/api/v1/',
            //apiHost_DEV:'http://localhost:9005',
             apiHost_DEV:'',
-            apiHost_OFFLINE:'http://10.71.86.222:8888/iot/api/v1/',
+            apiHost_OFFLINE:'http://10.71.86.222:8888/iot/api/v2/',
 			tenant:'hna-tenant',
-            api:{ "token":{"refresh":"/iot/api/v1/account/token/refresh"},
+            api:{
                     "login":
-                        {"authPath":"/api/v1/account/auth", "profilePath":"api/v1/account/profile", "logoutPath":"/cp-ua/v1/user/logout","changePSDPath":"/iot/api/v1/account/password/change","updatePath":"/iot/api/v1/account/profile"},
-                    "register":
-                        {"registerPath":"/cp-ua/v1/user/register"},
+                        {"authPath":"/api/v2/account/auth", "profilePath":"api/v2/account/profile"},
                     "tenant":
-                        {"listAllPath":"/api/v1/platform/accounts","updatePath":"/iot/api/v1/tenants","deletePath":"/iot/api/v1/tenants","tenantInfoPath":"/iot/api/v1/tenants","addPath":"api/v1/platform/accounts","fleetPath":"/api/v1/tenant","jetPath":"/api/v1"},
+                        {"listAllPath":"/api/v2/platform/accounts","addPath":"/api/v2/platform/accounts","fleetPath":"/api/v2/tenant","jetPath":"/api/v2"},
                 "school":
-                {"basePath":"/api/v1/tenant/schools"},
+                {"basePath":"/api/v2/tenant/schools"},
                 "order":
-                {"airtaxi":"/api/v1/tenant/airtaxi/orders","airbookquick":"/api/v1/tenant/charter/orders?status=published", "airtour":"/api/v1/tenant/airtour/orders","airtrans":"/api/v1/tenant/airtransport/orders","airbook":"/api/v1/tenant/charter/orders","airflight":"/api/v1/tenant/ferryflight/orders","card":"/api/v1/tenant/jetcard/orders","course":"/api/v1/tenant/course/enrollments"},
+                {"airtaxi":"/api/v2/tenant/airtaxi/orders","airbookquick":"/api/v2/tenant/charter/orders?status=published", "airtour":"/api/v2/tenant/airtour/orders","airtrans":"/api/v2/tenant/airtransport/orders","airbook":"/api/v2/tenant/charter/orders","airflight":"/api/v2/tenant/ferryflight/orders","card":"/api/v2/tenant/jetcard/orders","course":"/api/v2/tenant/course/enrollments"},
                 "course":
-                {"basePath":"/api/v1/tenant/courses"},
+                {"basePath":"/api/v2/tenant/courses"},
                 "comment":
-                {"basePath":"/api/v1/comments"},
+                {"basePath":"/api/v2/comments"},
                 "promotion":
-                {"basePath":"/api/v1/promotions"},
+                {"basePath":"/api/v2/promotions"},
+                "banner":
+                {"basePath":"/api/v2/platform/banners"},
                 "productFamily":
-                {"basePath":"/api/v1/tenant/product/families"},
+                {"basePath":"/api/v2/tenant/product/families","adminPath":"/api/v2/platform/product/families"},
+                "uploadFile":
+                {"qiniuPath":"/api/v2/files"},
                 "admin":
-                {"basePath":"/api/v1/platform/product"}
+                {"basePath":"/api/v2/platform/product", "platPath":"/api/v2/platform"}
             },
             routeName:{
                 "appprofile":"个人中心",

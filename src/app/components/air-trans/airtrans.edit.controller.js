@@ -39,6 +39,8 @@
         vm.isDetail = false;
         vm.getTenantItem = getTenantItem;
         vm.submitAction = submitAction;
+        vm.lockTenant = lockTenant;
+        vm.unlockTenant = unlockTenant;
         vm.backAction = backAction;
         vm.back = back;
         vm.addUser = {};
@@ -100,8 +102,8 @@
         vm.isAdmin = false;
         vm.userInfo = StorageService.get('iot.hnair.cloud.information');
         if(vm.userInfo.role != 'tenant'){
-            vm.reqPath = constdata.api.admin.basePath;
-            vm.reqPath2 = '/api/v1/platform/product/families';
+            vm.reqPath = constdata.api.admin.platPath;
+            vm.reqPath2 = constdata.api.productFamily.adminPath;
             vm.isAdmin = true;
         }
 
@@ -421,7 +423,7 @@
 
         vm.uploadFile = function (){
             console.log(vm.myUploadFile);
-            NetworkService.postForm('/api/v1/files',vm.myUploadFile,function (response) {
+            NetworkService.postForm(constant.api.uploadFile.qiniuPath,vm.myUploadFile,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
 
                 console.log(response.data);
@@ -450,14 +452,14 @@
 
 
 
-            if(vm.user.salesPackages && vm.user.salesPackages.length > 0) {
+            if(vm.user.salesPackages.length > 0) {
                 for (var i = 0; i < vm.user.salesPackages.length; i++) {
                     var tmp = vm.user.salesPackages[i].aircraftId;
                     vm.user.salesPackages[i].aircraft = tmp;
                 }
             }
 
-            if(vm.user.aircraftItems && vm.user.aircraftItems.length > 0) {
+            if(vm.user.aircraftItems.length > 0) {
                 for (var i = 0; i < vm.user.aircraftItems.length; i++) {
                     var tmp = vm.user.aircraftItems[i].aircraftId;
                     vm.user.aircraftItems[i].aircraft = tmp;
@@ -473,14 +475,9 @@
             }
             console.log(vm.user.clientManagers);
 
-            if(vm.user.salesPackages){
-                for(var i = 0;i < vm.user.salesPackages.length; i ++){
-                    vm.user.salesPackages[i].passengers = parseInt(vm.user.salesPackages[i].passengers);
-                    vm.user.salesPackages[i].presalesDays = parseInt(vm.user.salesPackages[i].presalesDays);
-                }
-            }
-            vm.user.timeEstimation = parseInt(vm.user.timeEstimation);
-
+            vm.user.salesPackages[0].passengers = parseInt(vm.user.salesPackages[0].passengers);
+            vm.user.salesPackages[0].presalesDays = parseInt(vm.user.salesPackages[0].presalesDays);
+            vm.user.timeEstimation = parseInt(vm.user.timeEstimation)
             NetworkService.post(vm.reqPath  + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
 
@@ -507,7 +504,7 @@
 
 
 
-            if(vm.user.salesPackages && vm.user.salesPackages.length > 0) {
+            if(vm.user.salesPackages.length > 0) {
                 for (var i = 0; i < vm.user.salesPackages.length; i++) {
                     var tmp = vm.user.salesPackages[i].aircraftId;
                     vm.user.salesPackages[i].aircraft = tmp;
@@ -515,7 +512,7 @@
             }
 
 
-            if(vm.user.aircraftItems && vm.user.aircraftItems.length > 0) {
+            if(vm.user.aircraftItems.length > 0) {
                 for (var i = 0; i < vm.user.aircraftItems.length; i++) {
                     var tmp = vm.user.aircraftItems[i].aircraftId;
                     vm.user.aircraftItems[i].aircraft = tmp;
@@ -533,13 +530,6 @@
             }
             console.log(vm.user.clientManagers);
 
-            if(vm.user.salesPackages){
-                for(var i = 0;i < vm.user.salesPackages.length; i ++){
-                    vm.user.salesPackages[i].passengers = parseInt(vm.user.salesPackages[i].passengers);
-                    vm.user.salesPackages[i].presalesDays = parseInt(vm.user.salesPackages[i].presalesDays);
-                }
-            }
-            vm.user.timeEstimation = parseInt(vm.user.timeEstimation);
 
 
             NetworkService.put(vm.reqPath + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
@@ -562,6 +552,7 @@
         vm.togglePriceCalendar = function(item)
         {
 
+
             item.showPriceCalendar = !item.showPriceCalendar;
             if(item.showPriceCalendar){
                 item.priceButtonTitle = '收起';
@@ -571,6 +562,24 @@
 
         }
 
+        function lockTenant() {
+            NetworkService.post(constdata.api.tenant.lockPath +'/'+ username + '/lock',null,function (response) {
+                toastr.success(i18n.t('u.OPERATE_SUC'));
+                vm.getTenantItem();
+            },function (response) {
+                vm.authError = response.statusText + '(' + response.status + ')';
+                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+            });
+        }
+        function unlockTenant() {
+            NetworkService.post(constdata.api.tenant.lockPath +'/'+ username + '/unlock',null,function (response) {
+                toastr.success(i18n.t('u.OPERATE_SUC'));
+                vm.getTenantItem();
+            },function (response) {
+                vm.authError = response.statusText + '(' + response.status + ')';
+                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+            });
+        }
 
         function backAction() {
             // $state.go('app.tenant');

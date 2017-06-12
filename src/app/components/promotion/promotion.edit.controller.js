@@ -189,7 +189,7 @@
 
         vm.uploadFile = function (item){
             console.log(item.myUploadFile);
-            NetworkService.postForm('/api/v1/files',item.myUploadFile,function (response) {
+            NetworkService.postForm(constant.api.uploadFile.qiniuPath,item.myUploadFile,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
 
                 console.log(response.data);

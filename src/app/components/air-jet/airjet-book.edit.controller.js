@@ -202,7 +202,7 @@
 
         vm.uploadFileApp = function (){
             console.log(vm.myUploadFile);
-            NetworkService.postForm('/api/v1/files',vm.myUploadFile,function (response) {
+            NetworkService.postForm(constant.api.uploadFile.qiniuPath,vm.myUploadFile,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
 
                 console.log(response.data);
@@ -223,7 +223,7 @@
 
         vm.uploadFileItem = function (item){
             console.log(item.myUploadFile);
-            NetworkService.postForm('/api/v1/files',item.myUploadFile,function (response) {
+            NetworkService.postForm(constant.api.uploadFile.qiniuPath,item.myUploadFile,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
 
                 console.log(response.data);
@@ -241,7 +241,7 @@
 
         vm.uploadFile = function (){
             console.log(vm.myUploadFile);
-            NetworkService.postForm('/api/v1/files',vm.myUploadFile,function (response) {
+            NetworkService.postForm(constant.api.uploadFile.qiniuPath,vm.myUploadFile,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
 
                 console.log(response.data);

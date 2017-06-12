@@ -53,7 +53,7 @@
         function getProfile () {
             var token = StorageService.get('iot.hnair.cloud.access_token');
             if(token) {
-                NetworkService.get('api/v1/account/profile', {page: vm.pageCurrent}, function (response) {
+                NetworkService.get(constdata.api.login.profilePath, {page: vm.pageCurrent}, function (response) {
                     // vm.items = response.data.content;
                     vm.userinfo = response.data;
                     //updatePagination(response.data);
