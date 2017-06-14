@@ -71,8 +71,10 @@
                         </button>
                         <ul class="dropdown-menu" style="overflow:visible; z-index:1010;width:100px;position:absolute;">
                             <li ng-class="{disabled: !item.isAgreeEnable}" ng-click="vm.OperApp(3, item)" ><a><i class="fa fa-play m-r-sm"></i>同意</a></li>
+<!--
                             <li ng-class="{disabled: !item.isRejectEnable}" ng-click="vm.OperApp(4, item)" ><a><i class="fa fa-stop m-r-sm"></i>拒绝</a></li>
-                            <li data-toggle="modal" data-target="#myModal" ng-class="{disabled: !item.isDeleteEnable}"  ng-show="vm.showOther"><a><i class="fa fa-trash m-r-sm"></i>撤销部署</a></li>
+-->
+                            <li ng-class="{disabled: !item.isRejectEnable}" ng-click="vm.openInput('sm',item)" ><a><i class="fa fa-stop m-r-sm"></i>拒绝</a></li>
 
                         </ul>
                     </div>
@@ -116,4 +118,7 @@
 </div>
 <script type="text/ng-template" id="myModalContent.html">
     <div ng-include="'app/components/core/modal.html'"></div>
+</script>
+<script type="text/ng-template" id="myModalContentInput.html">
+    <div ng-include="'app/components/core/modal-input.html'"></div>
 </script>

@@ -109,12 +109,31 @@
                // console.log(vm.displayedCollection.length);
                 if(vm.displayedCollection) {
                     for (var i = 0; i < vm.displayedCollection.length; i++) {
-                        if (vm.displayedCollection[i].reviewStatus == 'pending' || vm.displayedCollection[i].reviewStatus == 'rejected') {
+                        if (vm.displayedCollection[i].reviewStatus == 'pending') {
+                            vm.displayedCollection[i].isAgreeEnable = true;
+                            vm.displayedCollection[i].isRejectEnable = true;
+
+                            vm.displayedCollection[i].isPubilsh = false;
+                            vm.displayedCollection[i].isUnPublish = false;
+
+                        } else if (vm.displayedCollection[i].reviewStatus == 'rejected') {
                             vm.displayedCollection[i].isAgreeEnable = true;
                             vm.displayedCollection[i].isRejectEnable = false;
+
+                            vm.displayedCollection[i].isPubilsh = false;
+                            vm.displayedCollection[i].isUnPublish = false;
+
                         } else {
                             vm.displayedCollection[i].isAgreeEnable = false;
                             vm.displayedCollection[i].isRejectEnable = true;
+                            if(vm.displayedCollection[i].published){
+                                vm.displayedCollection[i].isPubilsh = true;
+                                vm.displayedCollection[i].isUnPublish = false;
+
+                            }else{
+                                vm.displayedCollection[i].isPubilsh = false;
+                                vm.displayedCollection[i].isUnPublish = true;
+                            }
                         }
                     }
                 }
@@ -249,6 +268,58 @@
                 $log.info('Modal dismissed at: ' + new Date());
             });
         }
+
+
+
+
+
+
+
+        vm.tipsInfo = {
+            title:'审批拒绝',
+            content:'请填写拒绝理由'
+        };
+        vm.openInput = function (size,item) {
+            console.log(vm.tipsInfo);
+            var modalInstance = $uibModal.open({
+                templateUrl: 'myModalContentInput.html',
+                size: 'md',
+                controller:'ModalInstanceInputCtrl',
+                resolve: {
+                    tipsInfo: function () {
+                        return vm.tipsInfo;
+                    }
+                }
+            });
+            modalInstance.result.then(function (param) {
+                console.log(param);
+                var myreason={reason:param};
+                NetworkService.post(vm.reqPath +'/' +item.id +'/disapprove',myreason,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                });
+
+
+
+
+
+
+
+
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        }
+
+
+
+
+
+
+
+
 
 
         vm.tipsInfoReset = {title:i18n.t('profile.RESET_PWD'),content:i18n.t('profile.RESET_PWD_CONFIRM')};

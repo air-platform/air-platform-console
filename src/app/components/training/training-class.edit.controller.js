@@ -211,8 +211,11 @@
             }
             console.log(vm.user.clientManagers);
 
+            vm.user.enrollNum = parseInt(vm.user.enrollNum);
+            vm.user.price = parseInt(vm.user.price);
+            vm.user.totalNum = parseInt(vm.user.totalNum);
 
-            NetworkService.post(constdata.api.course.basePath+'?school='+vm.user.school.id,vm.user,function (response) {
+            NetworkService.post(constdata.api.course.basePath+'?school='+vm.user.school,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -225,7 +228,7 @@
            console.log(vm.user.school.id);
            if(vm.schools.length > 0){
                for(var i = 0; i < vm.schools.length;  i++){
-                   if(vm.schools[i].id == vm.user.school.id){
+                   if(vm.schools[i].id == vm.user.school){
                        vm.user.location = vm.schools[i].address;
                        return;
                    }
@@ -252,6 +255,16 @@
 
 
             console.log(vm.user.description);
+
+
+
+            vm.user.enrollNum = parseInt(vm.user.enrollNum);
+
+            vm.user.price = parseInt(vm.user.price);
+            vm.user.totalNum = parseInt(vm.user.totalNum);
+
+
+
             NetworkService.put(constdata.api.course.basePath+'/'+vm.user.id,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
@@ -318,10 +331,8 @@
                         if (!vm.user) {
                             vm.user = {};
                         }
-                        if (!vm.user.school) {
-                            vm.user.school = {};
-                        }
-                        vm.user.school.id = vm.schools[0].id;
+
+                        vm.user.school = vm.schools[0].id;
                         vm.user.location = vm.schools[0].address;
                     }
                 }

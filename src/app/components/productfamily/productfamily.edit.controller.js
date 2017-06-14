@@ -185,7 +185,7 @@
 
            // vm.user.items = [{title:'item1', image:'img1', link:'lnk1'}];
 
-            NetworkService.post(constdata.api.productFamily.basePath,vm.user,function (response) {
+            NetworkService.post(vm.reqPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {

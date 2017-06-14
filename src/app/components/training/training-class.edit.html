@@ -88,7 +88,7 @@
                                placeholder="{{'u.COURSESCHOOL' | translate}}" ng-model="vm.user.school.id" ng-disabled="vm.isDetail" >
 -->
 
-                        <select ng-change="vm.changeClassSite()" style="width: 100%;" class="form-control font-thin" ng-model="vm.user.school.id" ng-options="s.id as s.name for s in vm.schools" ng-disabled="vm.isDetail" ></select>
+                        <select ng-change="vm.changeClassSite()" style="width: 100%;" class="form-control font-thin" ng-model="vm.user.school" ng-options="s.id as s.name for s in vm.schools" ng-disabled="vm.isDetail" ></select>
 
 
 
@@ -273,6 +273,8 @@
                             <input class="form-control" type="text"
                                    placeholder="{{'u.CLIENTMNGEMAIL' | translate}}" ng-model="item.email" ng-disabled="vm.isDetail"  required>
                         </div>
+
+
 
                         <div class="col-sm-2">
                             <button ng-if="!vm.isDetail" ng-click="vm.removeClientManager(item)" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-minus"></i>{{'product.DELETE' | translate}}</button>

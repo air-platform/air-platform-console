@@ -58,7 +58,7 @@
             vm.reqPath2 = constdata.api.tenant.jetPath;
             vm.isAdmin = true;
         }
-
+        vm.subPath = 'fleets';
         vm.OperApp = OperApp;
         function OperApp(index, item) {
             if(index == 3){
@@ -108,19 +108,26 @@
         function getDatas() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
 
-            NetworkService.get(vm.reqPath + '/' + 'fleets',{page:vm.pageCurrent},function (response) {
+            NetworkService.get(vm.reqPath + '/' + vm.subPath,{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
                 vm.displayedCollection = [].concat(vm.items);
                 if(vm.displayedCollection) {
                     for (var i = 0; i < vm.displayedCollection.length; i++) {
-                        if (vm.displayedCollection[i].reviewStatus == 'pending' || vm.displayedCollection[i].reviewStatus == 'rejected') {
+                        if (vm.displayedCollection[i].reviewStatus == 'pending') {
+                            vm.displayedCollection[i].isAgreeEnable = true;
+                            vm.displayedCollection[i].isRejectEnable = true;
+
+                            vm.displayedCollection[i].isPubilsh = false;
+                            vm.displayedCollection[i].isUnPublish = false;
+
+                        } else if (vm.displayedCollection[i].reviewStatus == 'rejected') {
                             vm.displayedCollection[i].isAgreeEnable = true;
                             vm.displayedCollection[i].isRejectEnable = false;
 
                             vm.displayedCollection[i].isPubilsh = false;
                             vm.displayedCollection[i].isUnPublish = false;
 
-                        } else {
+                        }else {
                             vm.displayedCollection[i].isAgreeEnable = false;
                             vm.displayedCollection[i].isRejectEnable = true;
 
@@ -279,6 +286,38 @@
             });
         }
 
+
+
+
+        vm.openInput = function (size,item) {
+            console.log(vm.tipsInfo);
+            var modalInstance = $uibModal.open({
+                templateUrl: 'myModalContentInput.html',
+                size: 'md',
+                controller:'ModalInstanceInputCtrl',
+                resolve: {
+                    tipsInfo: function () {
+                        return vm.tipsInfo;
+                    }
+                }
+            });
+            modalInstance.result.then(function (param) {
+                console.log(param);
+                var myreason={reason:param};
+                NetworkService.post(vm.reqPath +'/' + vm.subPath +'/' +item.id +'/disapprove',myreason,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                });
+
+
+
+
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        }
 
         vm.tipsInfoReset = {title:i18n.t('profile.RESET_PWD'),content:i18n.t('profile.RESET_PWD_CONFIRM')};
         vm.resetAlert = function (size,model) {

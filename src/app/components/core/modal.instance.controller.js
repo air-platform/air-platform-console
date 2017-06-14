@@ -26,3 +26,36 @@
     }
 
 })();
+
+
+
+
+
+
+(function () {
+    'use strict';
+
+    angular
+        .module('iot')
+        .controller('ModalInstanceInputCtrl', ModalInstanceInputCtrl);
+
+    /** @ngInject */
+    function ModalInstanceInputCtrl($uibModalInstance,$scope,tipsInfo,i18n) {
+        /* jshint validthis: true */
+        // var vm = this;
+
+        $scope.tipsInfo = tipsInfo;
+        $scope.rejectReason = '';
+        $scope.ok = function () {
+            $scope.rejectReason = document.getElementById('reject_id').value;
+            console.log($scope.rejectReason);
+            $uibModalInstance.close($scope.rejectReason);
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss(i18n.t('u.CANCEL'));
+        };
+
+    }
+
+})();
