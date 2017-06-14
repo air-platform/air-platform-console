@@ -19,53 +19,7 @@
         <div class="m-l m-r m-t panel panel-default">
 
         <table  st-table="vm.displayedCollection" st-safe-src="vm.items" class="table table-bordered table-striped table-hover bg-white text-center">
-            <thead>
-            <tr>
-                <th colspan="7">
-                    <button ng-click="vm.goAddItem()" class="btn btn-sm btn-info btn-addon"><i class="fa fa-plus"></i>{{ 'u.ADD' | T }}</button>
-                    <input st-search="" class="form-control pull-right m-b-xs w-md" placeholder="{{'u.SEARCH' | T}}" type="text"/>
-                </th>
-            </tr>
-            <tr class="font-bold">
-               <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
-                <th class="text-center">{{'u.DATE' | T}}</th>
-                <th class="text-center">评论者</th>
-                <th class="text-center">评论内容</th>
-                <th class="text-center">评分</th>
-               <!-- <th class="text-center">回复对象</th>-->
 
-            </tr>
-
-            </thead>
-            <tbody class="">
-
-            <tr ng-repeat="item in vm.displayedCollection">
-              <!--  <td ng-click="vm.goDetail(item)">{{item.id}}</td>-->
-                <td ng-click="vm.goDetail(item)">{{item.date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.owner.name}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.content}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.rate}}</td>
-               <!-- <td ng-click="vm.goDetail(item)">{{item.replyTo}}</td>-->
-
-
-               <!-- <td ng-click="vm.goDetail(item)">
-                    {{item.enabled ? ('u.ACTIVITY'|T ):('u.UNACTIVITY'|T)}}
-                </td>-->
-                <td>
-
-<!--
-                    <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goDetail(item)"><i class="fa fa-eye"></i>{{'u.DETAIL'|T}}</button>
--->
-                    <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goComment(item)"><i class="fa fa-eye"></i>回复</button>
-
-<!--
-                    <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goEditItem(item)"><i class="fa fa-edit"></i>{{ 'u.EDIT' | T}}</button>
--->
-                    <button class="btn btn-sm btn-danger btn-addon" style="width: 80px"  ng-click="vm.openAlert('sm',item)"><i class="fa fa-trash-o"></i>{{'u.DELETE' | T}}</button>
-                </td>
-            </tr>
-
-            </tbody>
         </table>
         </div>
 
@@ -76,7 +30,7 @@
         <div class="m-l m-r m-t panel panel-default">
             <div class="panel b-a">
                 <div class="panel-heading b-b b-light">
-                    <span class="badge bg-warning pull-right">10</span>
+                  <!--  <span class="badge bg-warning pull-right">10</span>-->
                     <a href class="font-bold">Messages</a>
                 </div>
                 <ul class="list-group list-group-lg no-bg auto">
@@ -85,12 +39,17 @@
                           <img ng-src="{{item.owner.avatar}}"  alt="...">
                           <i class="on b-white bottom"></i>
                         </span>
+                        <span class="pull-right thumb-sm avatar" style="width:95px;">
+
+                            <button class="btn btn-sm"   ng-click="vm.replyComment(item)">回复</button>
+                            <button class="btn btn-sm"  ng-click="vm.openAlert('sm',item)">删除</button>
+
+                        </span>
                         <span class="clear">
                           <span>{{item.owner.name}}</span>
                           <small class="text-muted clear text-ellipsis">{{item.content}}</small>
                         </span>
                         <span class="clear">
-                        <span>{{item.owner.name}}</span>
                         <small class="pull-right text-muted clear text-ellipsis">{{item.date | date:'yyyy-MM-dd HH:mm:ss'}}</small>
                         </span>
                     </li>
@@ -130,15 +89,43 @@
             </span>
                     </li>-->
                 </ul>
-                <div class="clearfix panel-footer">
+                <!--<div class="clearfix panel-footer">
                     <div class="input-group">
                         <input type="text" class="form-control input-sm btn-rounded" placeholder="Search">
                         <span class="input-group-btn">
               <button type="submit" class="btn btn-default btn-sm btn-rounded"><i class="fa fa-search"></i></button>
             </span>
                     </div>
-                </div>
+                </div>-->
+
+
+
+                <button ng-click="vm.addComment()" ng-if="vm.showCommentButton" class="btn btn-sm btn-info btn-addon"><i class="fa fa-plus"></i>{{ 'u.ADD' | T }}</button>
+
+
+                <form class="m-b-none ng-pristine ng-valid" style="margin-top:35px;" ng-if="vm.showCommentInput">
+                    <div class="my-input-group">
+                        <span >
+                        <span ng-if="vm.showReplyTo" style="font-size: 17px;font-weight: bold;margin-right: 12px;top: -12px;position: relative;color: #23b7e5;">回复 {{vm.replyUserName}}:</span>
+                        <span ng-if="!vm.showReplyTo" style="font-size: 17px;font-weight: bold;margin-right: 12px;top: -12px;position: relative;color: #23b7e5;">发表评论:</span>
+
+                            <input type="text" ng-model="vm.commentContent"  class="my-control" placeholder="说点什么" style="width:80%; height:60px;">
+
+                        <span class="my-input-group-btn">
+                            <button class="btn btn-default" type="button" ng-click="vm.sendComment()">发送</button>
+                            <button class="btn btn-default" type="button" ng-click="vm.cancelComment()">取消</button>
+                        </span>
+
+                            </span>
+
+
+
+                    </div>
+                </form>
             </div>
+
+
+
         </div>
 
 

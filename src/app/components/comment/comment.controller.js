@@ -32,8 +32,29 @@
         vm.backAction = backAction;
         vm.userInfo = {};
         vm.subPath = 'airtaxis';
+        vm.showCommentInput = false;
+        vm.showReplyTo = false;
+        vm.replyUserName = 'test';
+        vm.showCommentButton = true;
+
         console.log($stateParams.args);
         var username = $stateParams.username;
+        vm.cancelComment = function (){
+            vm.showCommentInput=false;
+
+        }
+        vm.addComment = function (){
+            vm.showCommentInput=true;
+            vm.showReplyTo = false;
+        }
+
+        vm.replyComment = function (item){
+            vm.showCommentInput=true;
+            vm.showReplyTo = true;
+            vm.replyItem = item;
+            vm.replyUserName = vm.replyItem.owner.name;
+           // vm.showCommentButton = false;
+        }
         function getDatas() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
             var myid = vm.userInfo.id;
@@ -48,21 +69,81 @@
         }
 
 
+        vm.sendComment = function() {
+            vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+            console.log(vm.userInfo);
+
+            if(vm.showReplyTo){
+                var myRole = 'user';
+                vm.tuser={
+                    content:vm.commentContent,
+                    product:username,
+                    //owner:vm.userInfo,
+                    source:myRole,//vm.userInfo.role,
+                    //replyTo:vm.userInfo.id,
+                    rate:5
+
+                };
+                //user tenant
+                NetworkService.post(constdata.api.comment.basePath +'?sourceId='+ username+'&source='+myRole+'&replyTo='+vm.replyItem.owner.id,vm.tuser,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    vm.showCommentInput = false;
+                    vm.commentContent = '';
+                    getDatas();
+                },function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    console.log(vm.authError);
+                    vm.showCommentInput = false;
+                    vm.commentContent = '';
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+                });
+            }else{
+
+                var myRole = 'user';
+                vm.tuser={
+                    content:vm.commentContent,
+                    product:username,
+                    //owner:vm.userInfo,
+                    source:myRole,
+                    //replyTo:vm.userInfo.id,
+                    rate:5
+
+                };
+                //user tenant
+                NetworkService.post(constdata.api.comment.basePath +'?sourceId='+ username+'&source='+myRole+'&replyTo='+vm.userInfo.id,vm.tuser,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    vm.showCommentInput = false;
+                    vm.commentContent = '';
+                    getDatas();
+                },function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    console.log(vm.authError);
+                    vm.showCommentInput = false;
+                    vm.commentContent = '';
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+                });
+
+            }
+
+        };
+
+
         function goAddItem() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
-            var myid = vm.userInfo.id;
-            //$state.go('app.editairtaxi',{});
             console.log(vm.userInfo);
+
+            var myRole = 'user';
             vm.tuser={
-                content:'this is ok reply comment',
+                content:'this is a comment',
                 product:username,
                 //owner:vm.userInfo,
-                source:'user',
+                source:myRole,
                 //replyTo:vm.userInfo.id,
                 rate:5
 
             };
-            NetworkService.post(constdata.api.comment.basePath +'?sourceId='+ username+'&source=user&replyTo='+vm.userInfo.id,vm.tuser,function (response) {
+            //user tenant
+            NetworkService.post(constdata.api.comment.basePath +'?sourceId='+ username+'&source='+myRole+'&replyTo='+vm.userInfo.id,vm.tuser,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -71,11 +152,8 @@
                 toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
             });
 
-
-
-
-
         };
+
 
         function goEditItem(item) {
             $state.go('app.editairtaxi',{username:item.id, args:{type:'edit'}});
