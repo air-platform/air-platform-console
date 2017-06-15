@@ -47,6 +47,7 @@
                         </span>
                         <span class="clear">
                           <span>{{item.owner.name}}</span>
+                            <small class="  " ng-if="item.replyTo">回复给 {{item.replyTo.name}}：</small>
                           <small class="text-muted clear text-ellipsis">{{item.content}}</small>
                         </span>
                         <span class="clear">
@@ -100,7 +101,7 @@
 
 
 
-                <button ng-click="vm.addComment()" ng-if="vm.showCommentButton" class="btn btn-sm btn-info btn-addon"><i class="fa fa-plus"></i>{{ 'u.ADD' | T }}</button>
+                <button ng-click="vm.addComment()" ng-if="vm.showCommentButton" class="btn btn-sm btn-info btn-rounded" style="margin:10px;">{{ 'u.ADD' | T }}</button>
 
 
                 <form class="m-b-none ng-pristine ng-valid" style="margin-top:35px;" ng-if="vm.showCommentInput">

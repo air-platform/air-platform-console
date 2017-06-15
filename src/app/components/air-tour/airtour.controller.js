@@ -279,7 +279,14 @@
                 $log.info('Modal dismissed at: ' + new Date());
             });
         }
+        vm.goComment = function(item) {
+            $state.go('app.comment',{username:item.id, args:{type:'detail',prd:'airtaxi'}});
 
+        };
+        vm.tipsInfo = {
+            title:'审批拒绝',
+            content:'请填写拒绝理由'
+        };
         vm.openInput = function (size,item) {
             console.log(vm.tipsInfo);
             var modalInstance = $uibModal.open({

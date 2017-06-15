@@ -24,7 +24,6 @@
 
         vm.goAddItem = goAddItem;
         vm.goEditItem = goEditItem;
-        vm.goComment = goComment;
         vm.goDetail = goDetail;
         vm.resetPassword = resetPassword;
         vm.removeItem = removeItem;
@@ -170,7 +169,7 @@
 
         };
 
-        function goComment(item) {
+        vm.goComment = function(item) {
             $state.go('app.comment',{username:item.id, args:{type:'detail',prd:'airtaxi'}});
 
         };
@@ -288,7 +287,10 @@
 
 
 
-
+        vm.tipsInfo = {
+            title:'审批拒绝',
+            content:'请填写拒绝理由'
+        };
 
         vm.openInput = function (size,item) {
             console.log(vm.tipsInfo);

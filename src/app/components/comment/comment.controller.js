@@ -38,6 +38,19 @@
         vm.showCommentButton = true;
 
         console.log($stateParams.args);
+
+        vm.subPath = 'comments';
+        vm.reqPath =  constdata.api.tenant.basePath;
+
+        vm.isAdmin = false;
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath = constdata.api.admin.platPath;
+
+            vm.isAdmin = true;
+        }
+
+
         var username = $stateParams.username;
         vm.cancelComment = function (){
             vm.showCommentInput=false;
@@ -60,7 +73,7 @@
             var myid = vm.userInfo.id;
             console.log(vm.userInfo);
 
-            NetworkService.get(constdata.api.comment.basePath +'?product='+ username,{page:vm.pageCurrent, pageSize:10},function (response) {
+            NetworkService.get(vm.reqPath + '/'+vm.subPath +'?product='+ username,{page:vm.pageCurrent, pageSize:10},function (response) {
                 vm.items = response.data.content;
                 updatePagination(response.data);
             },function (response) {
@@ -77,15 +90,15 @@
                 var myRole = 'user';
                 vm.tuser={
                     content:vm.commentContent,
-                    product:username,
+                    //product:username,
                     //owner:vm.userInfo,
-                    source:myRole,//vm.userInfo.role,
+                    //source:myRole,//vm.userInfo.role,
                     //replyTo:vm.userInfo.id,
-                    rate:5
+                    //rate:5
 
                 };
                 //user tenant
-                NetworkService.post(constdata.api.comment.basePath +'?sourceId='+ username+'&source='+myRole+'&replyTo='+vm.replyItem.owner.id,vm.tuser,function (response) {
+                NetworkService.post(vm.reqPath + '/'+vm.subPath  +'?sourceId='+ username+'&source='+myRole+'&replyTo='+vm.replyItem.owner.id,vm.tuser,function (response) {
                     toastr.success(i18n.t('u.OPERATE_SUC'));
                     vm.showCommentInput = false;
                     vm.commentContent = '';
@@ -102,15 +115,15 @@
                 var myRole = 'user';
                 vm.tuser={
                     content:vm.commentContent,
-                    product:username,
+                    //product:username,
                     //owner:vm.userInfo,
-                    source:myRole,
+                    //source:myRole,//vm.userInfo.role,
                     //replyTo:vm.userInfo.id,
-                    rate:5
+                   // rate:5
 
                 };
                 //user tenant
-                NetworkService.post(constdata.api.comment.basePath +'?sourceId='+ username+'&source='+myRole+'&replyTo='+vm.userInfo.id,vm.tuser,function (response) {
+                NetworkService.post(vm.reqPath + '/'+vm.subPath  +'?sourceId='+ username+'&source='+myRole,vm.tuser,function (response) {
                     toastr.success(i18n.t('u.OPERATE_SUC'));
                     vm.showCommentInput = false;
                     vm.commentContent = '';
@@ -180,7 +193,7 @@
 
         function removeItem(item) {
             var myid = vm.userInfo.id;
-            NetworkService.delete(constdata.api.comment.basePath + '/'+ item.id,null,function success() {
+            NetworkService.delete(vm.reqPath + '/'+vm.subPath  + '/'+ item.id,null,function success() {
                 var index = vm.items.indexOf(item);
                 //vm.items.splice(index,1);
                 toastr.success(i18n.t('u.DELETE_SUC'));

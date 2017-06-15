@@ -21,7 +21,7 @@
                     "login":
                         {"authPath":"/api/v2/account/auth", "profilePath":"api/v2/account/profile"},
                     "tenant":
-                        {"listAllPath":"/api/v2/platform/accounts","addPath":"/api/v2/platform/accounts","fleetPath":"/api/v2/tenant","jetPath":"/api/v2"},
+                        {"basePath":"/api/v2/tenant","listAllPath":"/api/v2/platform/accounts","addPath":"/api/v2/platform/accounts","fleetPath":"/api/v2/tenant","jetPath":"/api/v2"},
                 "school":
                 {"basePath":"/api/v2/tenant/schools"},
                 "order":
