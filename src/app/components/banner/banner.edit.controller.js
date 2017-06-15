@@ -100,6 +100,9 @@
                 value:'usd'
             }
         ];
+
+
+
         var username = $stateParams.username;
         var type = $stateParams.args.type;
         vm.clientManagersArr = [];
@@ -115,6 +118,19 @@
         if(type && type=='detail'){
             vm.isDetail = true;
         }
+
+
+        vm.subPath = 'banners';
+        vm.reqPath =  constdata.api.tenant.basePath;
+
+        vm.isAdmin = false;
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath = constdata.api.admin.platPath;
+
+            vm.isAdmin = true;
+        }
+
         vm.addNewClientManager = function() {
 
             vm.clientManagersArr.push({
@@ -137,7 +153,7 @@
             console.log(username);
 
 
-            NetworkService.get(constdata.api.promotion.basePath +'/' +  '/'+ username,null,function (response) {
+            NetworkService.get(vm.reqPath + '/' + vm.subPath +'/' +  '/'+ username,null,function (response) {
                 vm.user = response.data;
                 console.log(vm.user);
                 if(vm.user.items){
@@ -162,7 +178,7 @@
 
            // vm.user.items = [{title:'item1', image:'img1', link:'lnk1'}];
 
-            NetworkService.post(constdata.api.promotion.basePath,vm.user,function (response) {
+            NetworkService.post(vm.reqPath + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -187,14 +203,14 @@
 
 
 
-        vm.uploadFile = function (item){
+        vm.uploadFile = function (){
             vm.showSpinner = true;
-            console.log(item.myUploadFile);
-            NetworkService.postForm(constdata.api.uploadFile.qiniuPath,item.myUploadFile,function (response) {
+            console.log(vm.myUploadFile);
+            NetworkService.postForm(constdata.api.uploadFile.qiniuPath,vm.myUploadFile,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.showSpinner = false;
                 console.log(response.data);
-                item.image = response.data.url;
+                vm.image = response.data.url;
                 //item.image = 'https://ss1.bdstatic.com/5aAHeD3nKgcUp2HgoI7O1ygwehsv/media/ch1000/png/ETpc170601_bg.png';
                 //vm.backAction();
             },function (response) {
@@ -216,7 +232,7 @@
 
 
 
-            NetworkService.put(constdata.api.promotion.basePath  + '/'+ username,vm.user,function (response) {
+            NetworkService.put(vm.reqPath + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {

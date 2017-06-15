@@ -31,6 +31,21 @@
         vm.backAction = backAction;
         vm.userInfo = {};
         vm.subPath = 'aircrafts';
+
+
+
+        vm.subPath = 'banners';
+        vm.reqPath =  constdata.api.tenant.basePath;
+
+        vm.isAdmin = false;
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath = constdata.api.admin.platPath;
+
+            vm.isAdmin = true;
+        }
+
+
         vm.categoryType = [
             {
                 title:'Air Jet',
@@ -54,8 +69,8 @@
             var myid = vm.userInfo.id;
             console.log(vm.userInfo);
 
-            NetworkService.get(constdata.api.promotion.basePath,{page:vm.pageCurrent},function (response) {
-                vm.items = response.data;
+            NetworkService.get(vm.reqPath + '/' + vm.subPath,{page:vm.pageCurrent},function (response) {
+                vm.items = response.data.content;
                 console.log(response.data);
                 vm.displayedCollection = [].concat(vm.items);
                 updatePagination(response.data);
@@ -66,15 +81,15 @@
 
 
         function goAddItem() {
-            $state.go('app.editpromotion',{});
+            $state.go('app.editbanner',{});
         };
 
         function goEditItem(item) {
-            $state.go('app.editpromotion',{username:item.id, args:{type:'edit'}});
+            $state.go('app.editbanner',{username:item.id, args:{type:'edit'}});
         };
 
         function goDetail(item) {
-            $state.go('app.editpromotion',{username:item.id, args:{type:'detail'}});
+            $state.go('app.editbanner',{username:item.id, args:{type:'detail'}});
 
         };
 
@@ -89,7 +104,7 @@
 
         function removeItem(item) {
             var myid = vm.userInfo.id;
-            NetworkService.delete(constdata.api.promotion.basePath + '/'+ item.id,null,function success() {
+            NetworkService.delete(vm.reqPath + '/' + vm.subPath + '/'+ item.id,null,function success() {
                 var index = vm.items.indexOf(item);
                 //vm.items.splice(index,1);
                 toastr.success(i18n.t('u.DELETE_SUC'));
