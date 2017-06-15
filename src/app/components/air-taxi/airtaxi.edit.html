@@ -81,6 +81,18 @@
                 </div>
 
                 <div  class="form-group">
+
+
+                    <div  ng-if="!vm.isDetail" class="form-group">
+                        <label class="col-sm-1 control-label m-l-lg font-bold" style="margin-left: 45px;">默认价格</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="text"
+                                   placeholder="默认价格" ng-model="vm.defaultPrice" ng-disabled="vm.isDetail" >
+                        </div>
+                        <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                    </div>
+                    <div  ng-if="!vm.isDetail" class="line line-dashed b-b line-lg"></div>
+
                     <div class="form-group" ng-repeat="item in vm.user.salesPackages">
                         <div  class="form-group"  style="margin-left:50px;">
                             <label class="col-sm-1 control-label  font-bold">套餐名</label>

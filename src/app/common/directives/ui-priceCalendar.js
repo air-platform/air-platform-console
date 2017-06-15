@@ -37,7 +37,7 @@
                     $scope.vm.airPrice.push(initPrices[i]);
                 }
                 for(var i = 0; i < 30 ; i ++){
-                    $scope.vm.events.push({title: $scope.vm.airPrice[i],start: new Date(y,m,d+i), editable:true, id:i});
+                    $scope.vm.events.push({title: ''+$scope.vm.airPrice[i],start: new Date(y,m,d+i), editable:true, id:i});
                 }
 
                 $scope.vm.eventSources = [$scope.vm.events];

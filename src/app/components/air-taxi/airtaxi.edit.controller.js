@@ -110,7 +110,7 @@
             vm.isAdmin = true;
         }
 
-
+        vm.defaultPrice = 0;
 
 
 
@@ -310,7 +310,7 @@
         vm.addNewCraftItem = function() {
             var pp = [];
             for(var i = 0; i < 30; i ++){
-               pp.push(2000);
+               pp.push(vm.defaultPrice);
             }
 
             vm.user.salesPackages.push({
