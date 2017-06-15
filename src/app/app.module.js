@@ -26,7 +26,8 @@
         'iot.ui.directives',
         'xeditable',
         'easypiechart',
-        'ui.calendar'
+        'ui.calendar',
+        'angularSpinner'
     ]);
 
 })();

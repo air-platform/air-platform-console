@@ -188,15 +188,17 @@
 
 
         vm.uploadFile = function (item){
+            vm.showSpinner = true;
             console.log(item.myUploadFile);
-            NetworkService.postForm(constant.api.uploadFile.qiniuPath,item.myUploadFile,function (response) {
+            NetworkService.postForm(constdata.api.uploadFile.qiniuPath,item.myUploadFile,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
-
+                vm.showSpinner = false;
                 console.log(response.data);
                 item.image = response.data.url;
                 //item.image = 'https://ss1.bdstatic.com/5aAHeD3nKgcUp2HgoI7O1ygwehsv/media/ch1000/png/ETpc170601_bg.png';
                 //vm.backAction();
             },function (response) {
+                vm.showSpinner = false;
                 vm.authError = response.statusText + '(' + response.status + ')';
                 console.log(vm.authError);
                 toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);

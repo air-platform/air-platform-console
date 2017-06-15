@@ -27,14 +27,16 @@
         getProfile();
 
         vm.uploadFile = function (){
+            vm.showSpinner = true;
             console.log(vm.myUploadFile);
-            NetworkService.postForm(constant.api.uploadFile.qiniuPath,vm.myUploadFile,function (response) {
+            NetworkService.postForm(constdata.api.uploadFile.qiniuPath,vm.myUploadFile,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
-
+                vm.showSpinner = false;
                 console.log(response.data);
                 vm.userinfo.avatar = response.data.url;
                 //vm.backAction();
             },function (response) {
+                vm.showSpinner = false;
                 vm.authError = response.statusText + '(' + response.status + ')';
                 console.log(vm.authError);
                 toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);

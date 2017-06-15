@@ -210,15 +210,17 @@
             });
         }
         vm.uploadFileItem = function (item){
+            vm.showSpinner = true;
             console.log(item.myUploadFile);
-            NetworkService.postForm(constant.api.uploadFile.qiniuPath,item.myUploadFile,function (response) {
+            NetworkService.postForm(constdata.api.uploadFile.qiniuPath,item.myUploadFile,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
-
+                vm.showSpinner = false;
                 console.log(response.data);
                 item.image = response.data.url;
                 console.log(vm.user.image);
                 //vm.backAction();
             },function (response) {
+                vm.showSpinner = false;
                 vm.authError = response.statusText + '(' + response.status + ')';
                 console.log(vm.authError);
                 toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
@@ -437,14 +439,16 @@
 
 
         vm.uploadFile = function (){
+            vm.showSpinner = true;
             console.log(vm.myUploadFile);
-            NetworkService.postForm(constant.api.uploadFile.qiniuPath,vm.myUploadFile,function (response) {
+            NetworkService.postForm(constdata.api.uploadFile.qiniuPath,vm.myUploadFile,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
-
+                vm.showSpinner = false;
                 console.log(response.data);
                 vm.user.image = response.data.url;
                 //vm.backAction();
             },function (response) {
+                vm.showSpinner = false;
                 vm.authError = response.statusText + '(' + response.status + ')';
                 console.log(vm.authError);
                 toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
@@ -454,7 +458,7 @@
         }
         vm.uploadFileApp = function (){
             console.log(vm.myUploadFile);
-            NetworkService.postForm(constant.api.uploadFile.qiniuPath,vm.myUploadFile,function (response) {
+            NetworkService.postForm(constdata.api.uploadFile.qiniuPath,vm.myUploadFile,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
 
                 console.log(response.data);
