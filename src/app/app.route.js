@@ -306,6 +306,19 @@
                   params : {args : {}},
                   templateUrl: 'app/components/training/training-class.edit.html'
               })
+
+
+              .state('app.trainingroom', {
+                  url: prefix + '/trainingroom',
+                  templateUrl: 'app/components/training/training-room.html'
+              })
+              .state('app.edittrainingroom', {
+                  url: prefix + '/trainingroom/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/training/training-room.edit.html'
+              })
+
+
               .state('app.airtaxi', {
                   url: prefix + '/airtaxi',
                   templateUrl: 'app/components/air-taxi/airtaxi.html'

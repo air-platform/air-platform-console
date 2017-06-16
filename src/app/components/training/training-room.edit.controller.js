@@ -6,7 +6,7 @@
 
     angular
         .module('iot')
-        .controller('BannerEditController', BannerEditController)
+        .controller('TraingRoomEditController', TraingRoomEditController)
         .filter('userType',function(i18n) {
         return function(input) {
             var out = '';
@@ -20,7 +20,7 @@
     });
 
     /** @ngInject */
-    function BannerEditController($scope, NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
+    function TraingRoomEditController($scope, NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -60,43 +60,8 @@
             }
         ];
 
-        vm.linkType = [
-            {
-                title:'产品',
-                value:'product'
-            },
-            {
-                title:'内容',
-                value:'content'
-            }
-        ];
 
-        vm.categoryType = [
-            {
-                title:'Air Jet',
-                value:'air_jet'
-            },
-            {
-                title:'Air Taxi',
-                value:'air_taxi'
-            },
-            {
-                title:'Air Trans',
-                value:'air_trans'
-            },
-            {
-                title:'Air Tour',
-                value:'air_tour'
-            },
-            {
-                title:'Air Train',
-                value:'air_training'
-            },
-            {
-                title:'其他',
-                value:'none'
-            }
-        ];
+
 
         vm.statusType = [
             {
@@ -139,7 +104,7 @@
         }
 
 
-        vm.subPath = 'banners';
+        vm.subPath = 'airclasses';
         vm.reqPath =  constdata.api.tenant.basePath;
 
         vm.isAdmin = false;
@@ -166,27 +131,6 @@
             var index = vm.clientManagersArr.indexOf(item);
             vm.clientManagersArr.splice(index, 1);
         }
-        function getProductsDatas() {
-
-
-            NetworkService.get(vm.reqPath  + '/product/summaries',{page:vm.pageCurrent,pageSize:200},function (response) {
-                vm.allProduct = response.data;
-                console.log(vm.allProduct);
-            },function (response) {
-                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
-            });
-
-
-            NetworkService.get(vm.reqPath  + '/product/categories',{page:vm.pageCurrent},function (response) {
-                vm.cats = response.data;
-                console.log(vm.cats);
-            },function (response) {
-                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
-            });
-        }
-        getProductsDatas();
-
-
 
         function getTenantItem() {
 
@@ -302,8 +246,7 @@
         if (!vm.isAdd){
             vm.getTenantItem();
         }else{
-            vm.user.currencyUnit = 'rmb';
-            vm.user.category = 'air_taxi';
+
         }
 
         function back() {

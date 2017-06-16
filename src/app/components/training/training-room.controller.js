@@ -6,10 +6,10 @@
 
     angular
         .module('iot')
-        .controller('PromotionController', PromotionController);
+        .controller('TraingRoomController', TraingRoomController);
 
     /** @ngInject */
-    function PromotionController(NetworkService,StorageService, constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
+    function TraingRoomController(NetworkService,StorageService, constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -30,37 +30,10 @@
         vm.curItem = {};
         vm.backAction = backAction;
         vm.userInfo = {};
-        vm.subPath = 'aircrafts';
-        vm.categoryType = [
-            {
-                title:'Air Jet',
-                value:'air_jet'
-            },
-            {
-                title:'Air Taxi',
-                value:'air_taxi'
-            },
-            {
-                title:'Air Trans',
-                value:'air_trans'
-            },
-            {
-                title:'Air Tour',
-                value:'air_tour'
-            },
-            {
-                title:'Air Train',
-                value:'air_training'
-            },
-            {
-                title:'其他',
-                value:'none'
-            }
-        ];
 
 
 
-        vm.subPath = 'promotions';
+        vm.subPath = 'airclasses';
         vm.reqPath =  constdata.api.tenant.basePath;
 
         vm.isAdmin = false;
@@ -76,7 +49,7 @@
         function getDatas() {
 
             NetworkService.get(vm.reqPath + '/' + vm.subPath,{page:vm.pageCurrent},function (response) {
-                vm.items = response.data;
+                vm.items = response.data.content;
                 console.log(response.data);
                 vm.displayedCollection = [].concat(vm.items);
                 updatePagination(response.data);
@@ -87,15 +60,15 @@
 
 
         function goAddItem() {
-            $state.go('app.editpromotion',{});
+            $state.go('app.edittrainingroom',{});
         };
 
         function goEditItem(item) {
-            $state.go('app.editpromotion',{username:item.id, args:{type:'edit'}});
+            $state.go('app.edittrainingroom',{username:item.id, args:{type:'edit'}});
         };
 
         function goDetail(item) {
-            $state.go('app.editpromotion',{username:item.id, args:{type:'detail'}});
+            $state.go('app.edittrainingroom',{username:item.id, args:{type:'detail'}});
 
         };
 

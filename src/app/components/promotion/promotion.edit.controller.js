@@ -155,7 +155,7 @@
         function getProductsDatas() {
 
 
-            NetworkService.get(vm.reqPath  + '/product/summaries',{page:vm.pageCurrent},function (response) {
+            NetworkService.get(vm.reqPath  + '/product/summaries',{page:vm.pageCurrent,pageSize:200},function (response) {
                 vm.allProduct = response.data;
                 console.log(vm.allProduct);
             },function (response) {
