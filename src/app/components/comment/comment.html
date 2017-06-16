@@ -105,10 +105,10 @@
 
 
                 <form class="m-b-none ng-pristine ng-valid" style="margin-top:35px;" ng-if="vm.showCommentInput">
-                    <div class="my-input-group">
+                    <div class="my-input-group" style="margin-bottom:10px;">
                         <span >
-                        <span ng-if="vm.showReplyTo" style="font-size: 17px;font-weight: bold;margin-right: 12px;top: -12px;position: relative;color: #23b7e5;">回复 {{vm.replyUserName}}:</span>
-                        <span ng-if="!vm.showReplyTo" style="font-size: 17px;font-weight: bold;margin-right: 12px;top: -12px;position: relative;color: #23b7e5;">发表评论:</span>
+                        <span ng-if="vm.showReplyTo" style="font-size: 17px;font-weight: bold;margin-right: 12px;position: relative;color: #23b7e5;">回复 {{vm.replyUserName}}:</span>
+                        <span ng-if="!vm.showReplyTo" style="font-size: 17px;font-weight: bold;margin-right: 12px;position: relative;color: #23b7e5;">发表评论:</span>
 
                             <input type="text" ng-model="vm.commentContent"  class="my-control" placeholder="说点什么" style="width:80%; height:60px;">
 

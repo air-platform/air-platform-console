@@ -67,8 +67,14 @@
                     <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goDetail(item)"><i class="fa fa-eye"></i>{{'u.DETAIL'|T}}</button>
 
                     <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goEditItem(item)"><i class="fa fa-edit"></i>{{ 'u.EDIT' | T}}</button>
-         <!--           <button class="btn btn-sm btn-danger btn-addon" style="width: 80px"  ng-click="vm.openAlert('sm',item)"><i class="fa fa-trash-o"></i>{{'u.DELETE' | T}}</button>
+<!--
+                    <button class="btn btn-sm btn-danger btn-addon" style="width: 80px"  ng-click="vm.openAlert('sm',item)"><i class="fa fa-trash-o"></i>{{'u.DELETE' | T}}</button>
 -->
+
+
+
+
+
 
 
                     <div class="btn-group " ng-if="vm.isAdmin">
@@ -83,6 +89,7 @@
                             <li ng-class="{disabled: !item.isRejectEnable}" ng-click="vm.OperApp(4, item)" ><a><i class="fa fa-stop m-r-sm"></i>拒绝</a></li>
 -->
                             <li ng-class="{disabled: !item.isRejectEnable}" ng-click="vm.openInput('md',item)" ><a><i class="fa fa-stop m-r-sm"></i>拒绝</a></li>
+                            <li  ng-click="vm.openAlert('sm',item)" ><a><i class="fa fa-trash-o m-r-sm"></i> {{'u.DELETE' | T}}</a></li>
                             <li  ng-click="vm.goComment(item)" ><a><i class="fa fa-commenting-o m-r-sm"></i>评论</a></li>
 
                         </ul>

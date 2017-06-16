@@ -266,8 +266,12 @@
 
         //Model
 
-        vm.tipsInfo = delmodaltip;
+
         vm.openAlert = function (size,model) {
+            vm.tipsInfo = {
+                title:'删除',
+                content:'确定删除吗？'
+            };
             var modalInstance = $uibModal.open({
                 templateUrl: 'myModalContent.html',
                 size: size,
@@ -287,12 +291,13 @@
 
 
 
-        vm.tipsInfo = {
-            title:'审批拒绝',
-            content:'请填写拒绝理由'
-        };
+
 
         vm.openInput = function (size,item) {
+            vm.tipsInfo = {
+                title:'审批拒绝',
+                content:'请填写拒绝理由'
+            };
             console.log(vm.tipsInfo);
             var modalInstance = $uibModal.open({
                 templateUrl: 'myModalContentInput.html',

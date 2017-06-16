@@ -75,6 +75,7 @@
                             <li ng-class="{disabled: !item.isRejectEnable}" ng-click="vm.OperApp(4, item)" ><a><i class="fa fa-stop m-r-sm"></i>拒绝</a></li>
 -->
                             <li ng-class="{disabled: !item.isRejectEnable}" ng-click="vm.openInput('sm',item)" ><a><i class="fa fa-stop m-r-sm"></i>拒绝</a></li>
+                            <li  ng-click="vm.openAlert('sm',item)" ><a><i class="fa fa-trash-o m-r-sm"></i> {{'u.DELETE' | T}}</a></li>
                             <li  ng-click="vm.goComment(item)" ><a><i class="fa fa-commenting-o m-r-sm"></i>评论</a></li>
 
                         </ul>
