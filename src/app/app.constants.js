@@ -28,12 +28,6 @@
                 {"airtaxi":"/api/v2/tenant/airtaxi/orders","airbookquick":"/api/v2/tenant/charter/orders?status=published", "airtour":"/api/v2/tenant/airtour/orders","airtrans":"/api/v2/tenant/airtransport/orders","airbook":"/api/v2/tenant/charter/orders","airflight":"/api/v2/tenant/ferryflight/orders","card":"/api/v2/tenant/jetcard/orders","course":"/api/v2/tenant/course/enrollments"},
                 "course":
                 {"basePath":"/api/v2/tenant/courses"},
-                "comment":
-                {"basePath":"/api/v2/comments"},
-                "promotion":
-                {"basePath":"/api/v2/promotions"},
-                "banner":
-                {"basePath":"/api/v2/platform/banners"},
                 "productFamily":
                 {"basePath":"/api/v2/tenant/product/families","adminPath":"/api/v2/platform/product/families"},
                 "uploadFile":

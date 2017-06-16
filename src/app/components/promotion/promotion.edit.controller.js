@@ -59,7 +59,16 @@
                 value:'user'
             }
         ];
-
+        vm.linkType = [
+            {
+                title:'产品',
+                value:'product'
+            },
+            {
+                title:'内容',
+                value:'content'
+            }
+        ];
         vm.categoryType = [
             {
                 title:'Air Jet',
@@ -74,8 +83,16 @@
                 value:'air_trans'
             },
             {
+                title:'Air Tour',
+                value:'air_tour'
+            },
+            {
                 title:'Air Train',
                 value:'air_training'
+            },
+            {
+                title:'其他',
+                value:'none'
             }
         ];
 
@@ -115,6 +132,48 @@
         if(type && type=='detail'){
             vm.isDetail = true;
         }
+
+
+
+
+        vm.subPath = 'promotions';
+        vm.reqPath =  constdata.api.tenant.basePath;
+
+        vm.isAdmin = false;
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath = constdata.api.admin.platPath;
+
+            vm.isAdmin = true;
+        }
+
+
+        vm.changeLink = function(item){
+            item.link = '';
+        }
+
+        function getProductsDatas() {
+
+
+            NetworkService.get(vm.reqPath  + '/product/summaries',{page:vm.pageCurrent},function (response) {
+                vm.allProduct = response.data;
+                console.log(vm.allProduct);
+            },function (response) {
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
+            });
+
+            NetworkService.get(vm.reqPath  + '/product/categories',{page:vm.pageCurrent},function (response) {
+                vm.cats = response.data;
+                console.log(vm.cats);
+            },function (response) {
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
+            });
+
+
+        }
+        getProductsDatas();
+
+
         vm.addNewClientManager = function() {
 
             vm.clientManagersArr.push({
@@ -137,7 +196,7 @@
             console.log(username);
 
 
-            NetworkService.get(constdata.api.promotion.basePath +'/' +  '/'+ username,null,function (response) {
+            NetworkService.get(vm.reqPath + '/' + vm.subPath +  '/'+ username,null,function (response) {
                 vm.user = response.data;
                 console.log(vm.user);
                 if(vm.user.items){
@@ -155,14 +214,14 @@
         function addItem() {
             var myid = vm.userInfo.id;
 
-            if(vm.clientManagersArr.length > 0) {
+            if(vm.clientManagersArr && vm.clientManagersArr.length >= 0) {
                 vm.user.items =  vm.clientManagersArr;
             }
 
 
            // vm.user.items = [{title:'item1', image:'img1', link:'lnk1'}];
 
-            NetworkService.post(constdata.api.promotion.basePath,vm.user,function (response) {
+            NetworkService.post(vm.reqPath + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -210,13 +269,13 @@
 
         function editItem() {
             var myid = vm.userInfo.id;
-            if(vm.clientManagersArr.length > 0) {
+            if(vm.clientManagersArr && vm.clientManagersArr.length >= 0) {
                 vm.user.items =  vm.clientManagersArr;
             }
 
 
 
-            NetworkService.put(constdata.api.promotion.basePath  + '/'+ username,vm.user,function (response) {
+            NetworkService.put(vm.reqPath + '/' + vm.subPath  + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {

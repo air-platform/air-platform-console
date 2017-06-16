@@ -45,16 +45,40 @@
                 value:'air_trans'
             },
             {
+                title:'Air Tour',
+                value:'air_tour'
+            },
+            {
                 title:'Air Train',
                 value:'air_training'
+            },
+            {
+                title:'其他',
+                value:'none'
             }
         ];
+
+
+
+        vm.subPath = 'promotions';
+        vm.reqPath =  constdata.api.tenant.basePath;
+
+        vm.isAdmin = false;
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath = constdata.api.admin.platPath;
+
+            vm.isAdmin = true;
+        }
+
+
+
         function getDatas() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
             var myid = vm.userInfo.id;
             console.log(vm.userInfo);
 
-            NetworkService.get(constdata.api.promotion.basePath,{page:vm.pageCurrent},function (response) {
+            NetworkService.get(vm.reqPath + '/' + vm.subPath,{page:vm.pageCurrent},function (response) {
                 vm.items = response.data;
                 console.log(response.data);
                 vm.displayedCollection = [].concat(vm.items);
@@ -89,7 +113,7 @@
 
         function removeItem(item) {
             var myid = vm.userInfo.id;
-            NetworkService.delete(constdata.api.promotion.basePath + '/'+ item.id,null,function success() {
+            NetworkService.delete(vm.reqPath + '/' + vm.subPath + '/'+ item.id,null,function success() {
                 var index = vm.items.indexOf(item);
                 //vm.items.splice(index,1);
                 toastr.success(i18n.t('u.DELETE_SUC'));

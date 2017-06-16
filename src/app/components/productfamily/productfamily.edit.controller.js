@@ -84,6 +84,10 @@
                 value:'air_trans'
             },
             {
+                title:'Air Tour',
+                value:'air_tour'
+            },
+            {
                 title:'Air Train',
                 value:'air_training'
             }
