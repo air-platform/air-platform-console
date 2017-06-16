@@ -44,6 +44,7 @@
         vm.backAction = backAction;
         vm.back = back;
         vm.addUser = {};
+        vm.defaultPrice = 0;
         vm.addUser.role='tenant';
         vm.subPath = 'airtransports';
         vm.user.clientManagersArr = [];
@@ -299,7 +300,7 @@
         vm.addNewCraftItem = function() {
             var pp = [];
             for(var i = 0; i < 30; i ++){
-                pp.push(2000);
+                pp.push(vm.defaultPrice);
             }
 
             vm.user.salesPackages.push({
