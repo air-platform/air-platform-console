@@ -424,8 +424,13 @@
                 for (var i = 0; i < vm.user.salesPackages.length; i++) {
                     var tmp = vm.user.salesPackages[i].aircraftId;
                     vm.user.salesPackages[i].aircraft = tmp;
+                    vm.user.salesPackages[i].passengers = parseInt(vm.user.salesPackages[i].passengers);
+                    vm.user.salesPackages[i].presalesDays = parseInt(vm.user.salesPackages[i].presalesDays);
+
                 }
             }
+            vm.user.distance = parseInt(vm.user.distance);
+            vm.user.duration = parseInt(vm.user.duration);
 
             vm.user.clientManagers = '';//JSON.stringify(vm.user.clientManagersArr);
             if(vm.user.clientManagersArr.length > 0) {
@@ -471,14 +476,18 @@
                 for (var i = 0; i < vm.user.salesPackages.length; i++) {
                     var tmp = vm.user.salesPackages[i].aircraftId;
                     vm.user.salesPackages[i].aircraft = tmp;
+                    vm.user.salesPackages[i].passengers = parseInt(vm.user.salesPackages[i].passengers);
+                    vm.user.salesPackages[i].presalesDays = parseInt(vm.user.salesPackages[i].presalesDays);
+
                 }
             }
-
+            vm.user.distance = parseInt(vm.user.distance);
+            vm.user.duration = parseInt(vm.user.duration);
 
 
             vm.user.clientManagers = '';//JSON.stringify(vm.user.clientManagersArr);
 
-            if(vm.user.clientManagersArr.length > 0) {
+            if(vm.user.clientManagersArr && vm.user.clientManagersArr.length > 0) {
                 vm.user.clientManagers  = vm.user.clientManagersArr[0].name + ':'+vm.user.clientManagersArr[0].email;
                 for (var i = 1; i < vm.user.clientManagersArr.length; i ++) {
                     vm.user.clientManagers  += ',' + vm.user.clientManagersArr[i].name + ':'+vm.user.clientManagersArr[i].email;

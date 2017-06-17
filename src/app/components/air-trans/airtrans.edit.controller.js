@@ -455,19 +455,18 @@
 
 
 
-            if(vm.user.salesPackages.length > 0) {
+            if(vm.user.salesPackages && vm.user.salesPackages.length > 0) {
                 for (var i = 0; i < vm.user.salesPackages.length; i++) {
                     var tmp = vm.user.salesPackages[i].aircraftId;
                     vm.user.salesPackages[i].aircraft = tmp;
-                }
-            }
+                    vm.user.salesPackages[i].passengers = parseInt(vm.user.salesPackages[i].passengers);
+                    vm.user.salesPackages[i].presalesDays = parseInt(vm.user.salesPackages[i].presalesDays);
 
-            if(vm.user.aircraftItems.length > 0) {
-                for (var i = 0; i < vm.user.aircraftItems.length; i++) {
-                    var tmp = vm.user.aircraftItems[i].aircraftId;
-                    vm.user.aircraftItems[i].aircraft = tmp;
                 }
             }
+            vm.user.timeEstimation = parseInt(vm.user.timeEstimation);
+
+
             vm.user.family = vm.productfamily[0];//vm.user.productfamilyId;// = vm.user.family.id;
             vm.user.clientManagers = '';//JSON.stringify(vm.user.clientManagersArr);
             if(vm.user.clientManagersArr.length > 0) {
@@ -476,11 +475,12 @@
                     vm.user.clientManagers  += ',' + vm.user.clientManagersArr[i].name + ':'+vm.user.clientManagersArr[i].email;
                 }
             }
+
             console.log(vm.user.clientManagers);
 
-            vm.user.salesPackages[0].passengers = parseInt(vm.user.salesPackages[0].passengers);
-            vm.user.salesPackages[0].presalesDays = parseInt(vm.user.salesPackages[0].presalesDays);
-            vm.user.timeEstimation = parseInt(vm.user.timeEstimation)
+           // vm.user.salesPackages[0].passengers = parseInt(vm.user.salesPackages[0].passengers);
+            //vm.user.salesPackages[0].presalesDays = parseInt(vm.user.salesPackages[0].presalesDays);
+            //vm.user.timeEstimation = parseInt(vm.user.timeEstimation)
             NetworkService.post(vm.reqPath  + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
 
@@ -507,25 +507,21 @@
 
 
 
-            if(vm.user.salesPackages.length > 0) {
+            if(vm.user.salesPackages && vm.user.salesPackages.length > 0) {
                 for (var i = 0; i < vm.user.salesPackages.length; i++) {
                     var tmp = vm.user.salesPackages[i].aircraftId;
                     vm.user.salesPackages[i].aircraft = tmp;
+                     vm.user.salesPackages[i].passengers = parseInt(vm.user.salesPackages[i].passengers);
+                    vm.user.salesPackages[i].presalesDays = parseInt(vm.user.salesPackages[i].presalesDays);
+
                 }
             }
+            vm.user.timeEstimation = parseInt(vm.user.timeEstimation);
 
-
-            if(vm.user.aircraftItems.length > 0) {
-                for (var i = 0; i < vm.user.aircraftItems.length; i++) {
-                    var tmp = vm.user.aircraftItems[i].aircraftId;
-                    vm.user.aircraftItems[i].aircraft = tmp;
-                }
-            }
-            console.log(vm.user.aircraftItems);
             vm.user.family = vm.user.productfamilyId;
 
             vm.user.clientManagers = '';//JSON.stringify(vm.user.clientManagersArr);
-            if(vm.user.clientManagersArr.length > 0) {
+            if(vm.user.clientManagersArr && vm.user.clientManagersArr.length > 0) {
                 vm.user.clientManagers  = vm.user.clientManagersArr[0].name + ':'+vm.user.clientManagersArr[0].email;
                 for (var i = 1; i < vm.user.clientManagersArr.length; i ++) {
                     vm.user.clientManagers  += ',' + vm.user.clientManagersArr[i].name + ':'+vm.user.clientManagersArr[i].email;
