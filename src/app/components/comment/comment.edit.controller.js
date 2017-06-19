@@ -120,7 +120,7 @@
 
 
 
-        var map = new BMap.Map("map-div");          // 创建地图实例
+        var map = new BMap.Map("map-div",{minZoom:8,maxZoom:8});          // 创建地图实例
         var point = new BMap.Point(116.404, 39.915);  // 创建点坐标
         var geoc = new BMap.Geocoder();
         map.centerAndZoom(point, 10);

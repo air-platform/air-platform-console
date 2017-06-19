@@ -91,7 +91,7 @@
                 value:'air_training'
             },
             {
-                title:'其他',
+                title:'首页',
                 value:'none'
             }
         ];

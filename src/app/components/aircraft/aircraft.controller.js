@@ -47,7 +47,7 @@
         vm.isAdmin = false;
         vm.userInfo = StorageService.get('iot.hnair.cloud.information');
         if(vm.userInfo.role != 'tenant'){
-            vm.reqPath = constdata.api.admin.basePath;
+            vm.reqPath = constdata.api.admin.platPath;
             vm.isAdmin = true;
         }
 

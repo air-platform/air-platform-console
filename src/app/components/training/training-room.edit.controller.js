@@ -156,7 +156,7 @@
 
         function addItem() {
             var myid = vm.userInfo.id;
-
+            vm.user.content = getMarkDownAction().markdown;
             if(vm.clientManagersArr.length > 0) {
                 vm.user.items =  vm.clientManagersArr;
             }
@@ -212,6 +212,7 @@
 
         function editItem() {
             var myid = vm.userInfo.id;
+            vm.user.content = getMarkDownAction().markdown;
             if(vm.clientManagersArr.length > 0) {
                 vm.user.items =  vm.clientManagersArr;
             }

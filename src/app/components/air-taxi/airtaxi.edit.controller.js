@@ -36,6 +36,10 @@
                 i18n.t('profile.ADMIN')
             ]
         };
+        vm.classFleet = [
+            '直升机',
+            '固定翼'
+        ];
         vm.isAdd = true;
         vm.isEdit = false;
         vm.isDetail = false;
@@ -83,6 +87,23 @@
                 value:'usd'
             }
         ];
+        vm.minOpt = [];
+        vm.secOpt = [];
+        vm.latDeg = [];
+        vm.lngDeg = [];
+        vm.latNS = ['北纬', '南纬'];
+        vm.lngEW = ['东经', '西经'];
+        for(var i = 0; i < 60; i ++){
+            vm.minOpt.push(parseInt(i/10) + '' + i%10);
+            vm.secOpt.push(parseInt(i/10) + '' + i%10);
+        }
+        for(var i = 0; i < 90; i ++){
+            vm.latDeg.push(parseInt(i/10) + '' + i%10);
+        }
+
+        for(var i = 0; i < 180; i ++){
+            vm.lngDeg.push(i + '');
+        }
 
 
 
@@ -136,7 +157,7 @@
 
 
 
-        var map = new BMap.Map("map-div");          // 创建地图实例
+        var map = new BMap.Map("map-div",{minZoom:3,maxZoom:15});          // 创建地图实例
         var point = new BMap.Point(116.404, 39.915);  // 创建点坐标
         var geoc = new BMap.Geocoder();
         map.centerAndZoom(point, 10);

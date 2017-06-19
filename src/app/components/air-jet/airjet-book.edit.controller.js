@@ -260,6 +260,7 @@
         }
         function addItem() {
             var myid = vm.userInfo.id;
+            vm.user.description = getMarkDownAction().markdown;
             vm.user.clientManagers = '';//JSON.stringify(vm.user.clientManagersArr);
             if(vm.user.clientManagersArr.length > 0) {
                 vm.user.clientManagers  = vm.user.clientManagersArr[0].name + ':'+vm.user.clientManagersArr[0].email;
@@ -293,6 +294,7 @@
 
         function editItem() {
             var myid = vm.userInfo.id;
+            vm.user.description = getMarkDownAction().markdown;
             vm.user.clientManagers = '';//JSON.stringify(vm.user.clientManagersArr);
             if(vm.user.clientManagersArr.length > 0) {
                 vm.user.clientManagers  = vm.user.clientManagersArr[0].name + ':'+vm.user.clientManagersArr[0].email;

@@ -39,8 +39,7 @@
         vm.isDetail = false;
         vm.getTenantItem = getTenantItem;
         vm.submitAction = submitAction;
-        vm.lockTenant = lockTenant;
-        vm.unlockTenant = unlockTenant;
+
         vm.backAction = backAction;
         vm.back = back;
         vm.addUser = {};
@@ -60,7 +59,10 @@
                 value:'user'
             }
         ];
-
+        vm.classFleet = [
+            '直升机',
+            '固定翼'
+        ];
         vm.statusType = [
             {
                 title:'已启用',
@@ -97,6 +99,16 @@
         if(type && type=='detail'){
             vm.isDetail = true;
         }
+
+
+        vm.reqPath =  constdata.api.tenant.fleetPath;
+        vm.isAdmin = false;
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath = constdata.api.admin.platPath;
+            vm.isAdmin = true;
+        }
+
         vm.addNewClientManager = function() {
 
             vm.user.clientManagersArr.push({
@@ -117,7 +129,7 @@
             console.log(username);
 
 
-            NetworkService.get(constdata.api.tenant.fleetPath +'/' + vm.subPath + '/'+ username,null,function (response) {
+            NetworkService.get(vm.reqPath  + '/' + vm.subPath + '/'+ username,null,function (response) {
                 vm.user = response.data;
                 vm.user.clientManagersArr = [];
 
@@ -149,7 +161,7 @@
 
         function addItem() {
             var myid = vm.userInfo.id;
-
+            vm.user.description = getMarkDownAction().markdown;
             if(vm.user.clientManagersArr.length > 0) {
                 vm.user.clientManagers  = vm.user.clientManagersArr[0].name + ':'+vm.user.clientManagersArr[0].email;
                 for (var i = 1; i < vm.user.clientManagersArr.length; i ++) {
@@ -160,7 +172,7 @@
 
 
 
-            NetworkService.post(constdata.api.tenant.fleetPath  + '/' + vm.subPath,vm.user,function (response) {
+            NetworkService.post(vm.reqPath  + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -207,6 +219,7 @@
 
         function editItem() {
             var myid = vm.userInfo.id;
+            vm.user.description = getMarkDownAction().markdown;
             if(vm.user.clientManagersArr.length > 0) {
                 vm.user.clientManagers  = vm.user.clientManagersArr[0].name + ':'+vm.user.clientManagersArr[0].email;
                 for (var i = 1; i < vm.user.clientManagersArr.length; i ++) {
@@ -215,7 +228,7 @@
             }
             console.log(vm.user.clientManagers);
 
-            NetworkService.put(constdata.api.tenant.fleetPath  + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
+            NetworkService.put(vm.reqPath  + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -231,24 +244,7 @@
             }
         }
 
-        function lockTenant() {
-            NetworkService.post(constdata.api.tenant.lockPath +'/'+ username + '/lock',null,function (response) {
-                toastr.success(i18n.t('u.OPERATE_SUC'));
-                vm.getTenantItem();
-            },function (response) {
-                vm.authError = response.statusText + '(' + response.status + ')';
-                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
-            });
-        }
-        function unlockTenant() {
-            NetworkService.post(constdata.api.tenant.lockPath +'/'+ username + '/unlock',null,function (response) {
-                toastr.success(i18n.t('u.OPERATE_SUC'));
-                vm.getTenantItem();
-            },function (response) {
-                vm.authError = response.statusText + '(' + response.status + ')';
-                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
-            });
-        }
+
 
         function backAction() {
             // $state.go('app.tenant');

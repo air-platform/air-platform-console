@@ -28,7 +28,7 @@
             <tr class="font-bold">
                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
                 <th class="text-center">{{'u.NAME' | T}}</th>
-                <th class="text-center">内容</th>
+                <!--<th class="text-center">内容</th>-->
                 <th class="text-center">创建时间</th>
 
 
@@ -41,7 +41,7 @@
             <tr ng-repeat="item in vm.displayedCollection">
               <!--  <td ng-click="vm.goDetail(item)">{{item.id}}</td>-->
                 <td ng-click="vm.goDetail(item)">{{item.title}}</td>
-                <td ng-click="vm.goDetail(item)"> {{item.content }}</td>
+                <!--<td ng-click="vm.goDetail(item)"> {{item.content }}</td>-->
                 <td ng-click="vm.goDetail(item)">{{item.creationDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
 
                 <td>
