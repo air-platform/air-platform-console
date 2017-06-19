@@ -132,6 +132,13 @@
         }
         vm.reqPath = constdata.api.order.airbook;
         vm.editPath = 'app.editorderairbook';
+
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath  =constdata.api.order.adminBase;
+            vm.isAdmin = true;
+        }
+
         function getTenantItem() {
 
             var myid = vm.userInfo.id;

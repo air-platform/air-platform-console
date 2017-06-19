@@ -65,6 +65,23 @@
 
 
                 <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">链接类别</label>
+                    <div class="col-sm-4">
+                        <!--<input class="form-control" type="text"
+                               placeholder="类别" ng-model="vm.user.category" ng-disabled="vm.isDetail" >
+-->
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.linkCategory" ng-options="s.value as s.title for s in vm.categoryType" ng-disabled="vm.isDetail" ></select>
+
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+                <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">链接类型</label>
                     <div class="col-sm-4">
                         <!--<input class="form-control" type="text"
