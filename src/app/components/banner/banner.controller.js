@@ -72,6 +72,30 @@
                 value:'none'
             }
         ];
+
+
+        vm.linkCategoryType = [
+            {
+                title:'Air Jet',
+                value:'air_jet'
+            },
+            {
+                title:'Air Taxi',
+                value:'air_taxi'
+            },
+            {
+                title:'Air Trans',
+                value:'air_trans'
+            },
+            {
+                title:'Air Tour',
+                value:'air_tour'
+            },
+            {
+                title:'Air Train',
+                value:'air_training'
+            }
+        ];
         function getDatas() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
             var myid = vm.userInfo.id;

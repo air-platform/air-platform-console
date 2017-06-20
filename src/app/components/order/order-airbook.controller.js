@@ -90,6 +90,7 @@
         vm.userInfo = StorageService.get('iot.hnair.cloud.information');
         if(vm.userInfo.role != 'tenant'){
              vm.reqPath  =constdata.api.order.adminBase+'?type=fleet';
+            vm.reqPath2  =constdata.api.order.adminBase;
             vm.isAdmin = true;
         }
         vm.subPath = 'fleets';
@@ -156,7 +157,7 @@
         vm.goOperItem = function (item,oper) {
 
             if(oper == 1) {
-                NetworkService.post(vm.reqPath + '/' + item.id + '/pay', null, function success() {
+                NetworkService.post(vm.reqPath2 + '/' + item.id + '/pay', null, function success() {
                     var index = vm.items.indexOf(item);
                     //vm.items.splice(index,1);
                     toastr.success(i18n.t('u.OPER_SUC'));
@@ -166,7 +167,7 @@
                     toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
                 });
             }else if(oper == 2){
-                NetworkService.post(vm.reqPath + '/' + item.id + '/finish', null, function success() {
+                NetworkService.post(vm.reqPath2 + '/' + item.id + '/finish', null, function success() {
                     var index = vm.items.indexOf(item);
                     //vm.items.splice(index,1);
                     toastr.success(i18n.t('u.OPER_SUC'));
