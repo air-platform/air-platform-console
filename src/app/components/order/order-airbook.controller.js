@@ -26,7 +26,7 @@
         vm.goEditItem = goEditItem;
         vm.goDetail = goDetail;
         vm.resetPassword = resetPassword;
-        //vm.removeItem = removeItem;
+        vm.removeItem = removeItem;
         vm.curItem = {};
         vm.backAction = backAction;
         vm.userInfo = {};
@@ -82,10 +82,11 @@
             "created":{'created':true}
 
         };
-        vm.reqPath = constdata.api.order.airbook;
+
         vm.editPath = 'app.editorderairbook';
 
-
+        vm.reqPath = constdata.api.order.airbook;
+        vm.reqPath2 = constdata.api.order.airbook;
         vm.isAdmin = false;
         vm.userInfo = StorageService.get('iot.hnair.cloud.information');
         if(vm.userInfo.role != 'tenant'){
@@ -93,7 +94,6 @@
             vm.reqPath2  =constdata.api.order.adminBase;
             vm.isAdmin = true;
         }
-        vm.subPath = 'fleets';
 
 
 
@@ -178,7 +178,19 @@
                 });
             }
         };
+        function removeItem(item) {
+            var myid = vm.userInfo.id;
+            NetworkService.delete(vm.reqPath2  + '/'+ item.id,null,function success() {
+                var index = vm.items.indexOf(item);
+                //vm.items.splice(index,1);
+                toastr.success(i18n.t('u.DELETE_SUC'));
+                getDatas();
+            },function (response) {
+                vm.authError = response.statusText + '(' + response.status + ')';
+                toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+            });
 
+        };
 
         function goDetail(item) {
             $state.go(vm.editPath,{username:item.id, args:{type:'detail'}});

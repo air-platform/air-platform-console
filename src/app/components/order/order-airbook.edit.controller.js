@@ -84,6 +84,10 @@
             {
                 title:'已发布',
                 value:'published'
+            },
+            {
+                title:'已创建',
+                value:'created'
             }
         ];
 
@@ -104,6 +108,7 @@
             'paid':'已付款',
             'cancelled':'已取消',
             'deleted':'已删除',
+            'created':'已创建',
             "published":"已发布"
 
         };
@@ -113,7 +118,8 @@
             'paid':{'paid':true},
             'cancelled':{'cancelled':true},
             'deleted':{'deleted':true},
-            "published":{'published':true}
+            "published":{'published':true},
+            "created":{'created':true}
 
         };
         var username = $stateParams.username;
@@ -131,11 +137,13 @@
             vm.isDetail = true;
         }
         vm.reqPath = constdata.api.order.airbook;
+        vm.reqPath2 = constdata.api.order.airbook;
         vm.editPath = 'app.editorderairbook';
 
         vm.userInfo = StorageService.get('iot.hnair.cloud.information');
         if(vm.userInfo.role != 'tenant'){
-            vm.reqPath  =constdata.api.order.adminBase;
+            vm.reqPath  =constdata.api.order.adminBase+'?type=fleet';
+            vm.reqPath2  =constdata.api.order.adminBase;
             vm.isAdmin = true;
         }
 
@@ -144,7 +152,7 @@
             var myid = vm.userInfo.id;
             console.log(myid);
             console.log(username);
-            NetworkService.get(vm.reqPath  + '/'  + username,null,function (response) {
+            NetworkService.get(vm.reqPath2  + '/'  + username,null,function (response) {
                 vm.user = response.data;
                 $rootScope.userNamePlacedTop = vm.user.nickName;
             },function (response) {
@@ -156,7 +164,7 @@
 
         function addItem() {
             var myid = vm.userInfo.id;
-            NetworkService.post(vm.reqPath,vm.user,function (response) {
+            NetworkService.post(vm.reqPath2,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -168,7 +176,7 @@
 
         function editItem() {
             var myid = vm.userInfo.id;
-            NetworkService.put(vm.reqPath  + '/'+ username,vm.user,function (response) {
+            NetworkService.put(vm.reqPath2  + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {

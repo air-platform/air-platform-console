@@ -25,7 +25,7 @@
                 "school":
                 {"basePath":"/api/v2/tenant/schools"},
                 "order":
-                {"adminBase":"/api/v2/platform/orders","airtaxi":"/api/v2/tenant/airtaxi/orders","airbookquick":"/api/v2/tenant/charter/orders?status=published", "airtour":"/api/v2/tenant/airtour/orders","airtrans":"/api/v2/tenant/airtransport/orders","airbook":"/api/v2/tenant/charter/orders","airflight":"/api/v2/tenant/ferryflight/orders","card":"/api/v2/tenant/jetcard/orders","course":"/api/v2/tenant/course/orders"},
+                {"adminBase":"/api/v2/platform/orders","airtaxi":"/api/v2/tenant/airtaxi/orders","airbookquick":"/api/v2/tenant/charter/orders?status=published", "airtour":"/api/v2/tenant/airtour/orders","airtrans":"/api/v2/tenant/airtransport/orders","airbook":"/api/v2/tenant/charter/orders","airflight":"/api/v2/tenant/ferryflight/orders","card":"/api/v2/tenant/jettravel/orders","course":"/api/v2/tenant/course/orders"},
                 "course":
                 {"basePath":"/api/v2/tenant/courses"},
                 "productFamily":

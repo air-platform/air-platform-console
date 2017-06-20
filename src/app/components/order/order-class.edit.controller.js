@@ -80,8 +80,36 @@
             {
                 title:'已删除',
                 value:'deleted'
+            },
+            {
+                title:'已发布',
+                value:'published'
+            },
+            {
+                title:'已创建',
+                value:'created'
             }
         ];
+        vm.statusMap={
+            'pending':'处理中',
+            'finished':'已完成',
+            'paid':'已付款',
+            'cancelled':'已取消',
+            'deleted':'已删除',
+            'created':'已创建',
+            "published":"已发布"
+
+        };
+        vm.classMap={
+            'pending':{'pending':true},
+            'finished':{'finished':true},
+            'paid':{'paid':true},
+            'cancelled':{'cancelled':true},
+            'deleted':{'deleted':true},
+            "published":{'published':true},
+            "created":{'created':true}
+
+        };
 
         vm.priceType = [
             {
@@ -93,24 +121,7 @@
                 value:'usd'
             }
         ];
-        vm.classMap={
-            'pending':{'pending':true},
-            'finished':{'finished':true},
-            'paid':{'paid':true},
-            'cancelled':{'cancelled':true},
-            'deleted':{'deleted':true},
-            "published":{'published':true}
 
-        };
-        vm.statusMap={
-            'pending':'处理中',
-            'finished':'已完成',
-            'paid':'已付款',
-            'cancelled':'已取消',
-            'deleted':'已删除',
-            "published":"已发布"
-
-        };
         var username = $stateParams.username;
         var type = $stateParams.args.type;
         console.log(type);
@@ -125,14 +136,26 @@
         if(type && type=='detail'){
             vm.isDetail = true;
         }
-        vm.reqPath = constdata.api.order.course;
+
         vm.editPath = 'app.editorderclass';
+
+        vm.reqPath = constdata.api.order.course;
+        vm.reqPath2 = constdata.api.order.course;
+
+        vm.isAdmin = false;
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath  =constdata.api.order.adminBase+'?type=course';
+            vm.reqPath2  =constdata.api.order.adminBase;
+            vm.isAdmin = true;
+        }
+
         function getTenantItem() {
 
             var myid = vm.userInfo.id;
             console.log(myid);
             console.log(username);
-            NetworkService.get(vm.reqPath  + '/'  + username,null,function (response) {
+            NetworkService.get(vm.reqPath2  + '/'  + username,null,function (response) {
                 vm.user = response.data;
                 $rootScope.userNamePlacedTop = vm.user.nickName;
             },function (response) {
@@ -144,7 +167,7 @@
 
         function addItem() {
             var myid = vm.userInfo.id;
-            NetworkService.post(vm.reqPath,vm.user,function (response) {
+            NetworkService.post(vm.reqPath2,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -156,7 +179,7 @@
 
         function editItem() {
             var myid = vm.userInfo.id;
-            NetworkService.put(vm.reqPath  + '/'+ username,vm.user,function (response) {
+            NetworkService.put(vm.reqPath2  + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {

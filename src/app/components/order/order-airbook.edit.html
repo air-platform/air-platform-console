@@ -53,7 +53,7 @@
 <!--
                         <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.status" ng-options="opt.value as opt.title for opt in vm.statusType" ng-disabled="vm.isDetail" ></select>
 -->
-                        <label ng-class="{'bg-info':vm.classMap['pending'][vm.user.status],'bg-warning':vm.classMap['cancelled'][vm.user.status], 'bg-dark':vm.classMap['deleted'][vm.user.status],'bg-finished':vm.classMap['finished'][vm.user.status],'bg-success':vm.classMap['paid'][vm.user.status], 'bg-published':vm.classMap['published'][vm.user.status]}" ng-bind="vm.statusMap[vm.user.status]" class="label"></label>
+                        <label ng-class="{'bg-info':vm.classMap['pending'][vm.user.status],'bg-created':vm.classMap['created'][vm.user.status],'bg-warning':vm.classMap['cancelled'][vm.user.status], 'bg-dark':vm.classMap['deleted'][vm.user.status],'bg-finished':vm.classMap['finished'][vm.user.status],'bg-success':vm.classMap['paid'][vm.user.status], 'bg-published':vm.classMap['published'][vm.user.status]}" ng-bind="vm.statusMap[vm.user.status]" class="label"></label>
 
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>

@@ -52,28 +52,50 @@
             {
                 title:'已删除',
                 value:'deleted'
+            },
+            {
+                title:'已发布',
+                value:'published'
+            },
+            {
+                title:'已创建',
+                value:'created'
             }
         ];
-        vm.classMap={
-            'pending':{'pending':true},
-            'finished':{'finished':true},
-            'paid':{'paid':true},
-            'cancelled':{'cancelled':true},
-            'deleted':{'deleted':true},
-            "published":{'published':true}
-
-        };
         vm.statusMap={
             'pending':'处理中',
             'finished':'已完成',
             'paid':'已付款',
             'cancelled':'已取消',
             'deleted':'已删除',
+            'created':'已创建',
             "published":"已发布"
 
         };
-        vm.reqPath = constdata.api.order.course;
+        vm.classMap={
+            'pending':{'pending':true},
+            'finished':{'finished':true},
+            'paid':{'paid':true},
+            'cancelled':{'cancelled':true},
+            'deleted':{'deleted':true},
+            "published":{'published':true},
+            "created":{'created':true}
+
+        };
+
         vm.editPath = 'app.editorderclass';
+
+        vm.reqPath = constdata.api.order.course;
+        vm.reqPath2 = constdata.api.order.course;
+
+        vm.isAdmin = false;
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath  =constdata.api.order.adminBase+'?type=course';
+            vm.reqPath2  =constdata.api.order.adminBase;
+            vm.isAdmin = true;
+        }
+
         function getDatas() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
             var myid = vm.userInfo.id;
@@ -135,7 +157,7 @@
         vm.goOperItem = function (item,oper) {
 
             if(oper == 1) {
-                NetworkService.post(vm.reqPath + '/' + item.id + '/pay', null, function success() {
+                NetworkService.post(vm.reqPath2 + '/' + item.id + '/pay', null, function success() {
                     var index = vm.items.indexOf(item);
                     //vm.items.splice(index,1);
                     toastr.success(i18n.t('u.OPER_SUC'));
@@ -145,7 +167,7 @@
                     toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
                 });
             }else if(oper == 2){
-                NetworkService.post(vm.reqPath + '/' + item.id + '/finish', null, function success() {
+                NetworkService.post(vm.reqPath2 + '/' + item.id + '/finish', null, function success() {
                     var index = vm.items.indexOf(item);
                     //vm.items.splice(index,1);
                     toastr.success(i18n.t('u.OPER_SUC'));
@@ -174,7 +196,7 @@
 
         function removeItem(item) {
             var myid = vm.userInfo.id;
-            NetworkService.delete(constdata.api.tenant.fleetPath  + '/' + vm.subPath + '/'+ item.id,null,function success() {
+            NetworkService.delete(vm.reqPath2 + '/'+ item.id,null,function success() {
                 var index = vm.items.indexOf(item);
                 //vm.items.splice(index,1);
                 toastr.success(i18n.t('u.DELETE_SUC'));

@@ -56,6 +56,10 @@
             {
                 title:'已发布',
                 value:'published'
+            },
+            {
+                title:'已创建',
+                value:'created'
             }
         ];
         vm.statusMap={
@@ -64,6 +68,7 @@
             'paid':'已付款',
             'cancelled':'已取消',
             'deleted':'已删除',
+            'created':'已创建',
             "published":"已发布"
 
         };
@@ -73,7 +78,8 @@
             'paid':{'paid':true},
             'cancelled':{'cancelled':true},
             'deleted':{'deleted':true},
-            "published":{'published':true}
+            "published":{'published':true},
+            "created":{'created':true}
 
         };
         vm.reqPath = constdata.api.order.airbookquick;

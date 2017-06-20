@@ -52,7 +52,7 @@
                     <select style="width: 100%;" class="form-control font-thin" ng-model="item.status" ng-options="opt.value as opt.title for opt in vm.statusType" ng-disabled=true ></select>
 -->
 
-                    <label ng-class="{'bg-info':vm.classMap['pending'][item.status],'bg-warning':vm.classMap['cancelled'][item.status], 'bg-dark':vm.classMap['deleted'][item.status],'bg-finished':vm.classMap['finished'][item.status],'bg-success':vm.classMap['paid'][item.status], 'bg-published':vm.classMap['published'][item.status]}" ng-bind="vm.statusMap[item.status]" class="label"></label>
+                    <label ng-class="{'bg-info':vm.classMap['pending'][item.status],'bg-created':vm.classMap['created'][item.status],'bg-warning':vm.classMap['cancelled'][item.status], 'bg-dark':vm.classMap['deleted'][item.status],'bg-finished':vm.classMap['finished'][item.status],'bg-success':vm.classMap['paid'][item.status], 'bg-published':vm.classMap['published'][item.status]}" ng-bind="vm.statusMap[item.status]" class="label"></label>
                 </td>
 
 
