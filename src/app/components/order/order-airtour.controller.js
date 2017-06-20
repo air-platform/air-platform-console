@@ -107,28 +107,69 @@
                 if(vm.items.length > 0){
 
                     for(var i = 0; i < vm.items.length; i ++) {
+                        vm.items[i].isOfferEnable = false;
+                        vm.items[i].isPriceEnable = false;
+                        //vm.items[i].isConfirmPriceEnable = false;
+                        vm.items[i].isConfirmOrderEnable = false;
+                        vm.items[i].isSignEnable = false;
+                        vm.items[i].isAcceptRefundEnable = false;
+                        vm.items[i].isRejectRefundEnable = false;
+                        vm.items[i].isReleaseTicketEnable = false;
+                        vm.items[i].isFinishEnable = false;
+                        vm.items[i].isCancelEnable = false;
+                        vm.items[i].isCloseEnable = false;
+                        vm.items[i].isDeleteEnable = false;
 
-                        if (vm.items[i].status == 'pending') {
-                            vm.items[i].isPaidEnable = true;
-                            vm.items[i].isFinishEnable = false;
-                            vm.items[i].isDeleteEnable = false;
 
-                        } else if (vm.items[i].status == 'finished') {
-                            vm.items[i].isPaidEnable = false;
-                            vm.items[i].isFinishEnable = false;
-                            vm.items[i].isDeleteEnable = false;
-                        } else if (vm.items[i].status == 'paid') {
-                            vm.items[i].isPaidEnable = false;
+
+
+
+                        if (vm.items[i].status == 'created') {
+                            vm.items[i].isCloseEnable = true;
+                            vm.items[i].isPriceEnable = true;
+                            vm.items[i].isConfirmOrderEnable = true;
+
+
+                        }else if (vm.items[i].status == 'confirmed') {
+                            vm.items[i].isCloseEnable = true;
+                            vm.items[i].isSignEnable = true;
+
+                        }else if (vm.items[i].status == 'contract_signed') {
+                            vm.items[i].isCloseEnable = true;
+
+
+                        }else if (vm.items[i].status == 'partial_paid') {
+                            vm.items[i].isCloseEnable = true;
                             vm.items[i].isFinishEnable = true;
-                            vm.items[i].isDeleteEnable = false;
-                        } else if (vm.items[i].status == 'cancelled') {
-                            vm.items[i].isPaidEnable = false;
-                            vm.items[i].isFinishEnable = false;
-                            vm.items[i].isDeleteEnable = false;
+
+                        }else if (vm.items[i].status == 'paid') {
+                            vm.items[i].isCloseEnable = true;
+                            vm.items[i].isFinishEnable = true;
+
+                        }else if (vm.items[i].status == 'ticket_released') {
+
+                        }else if (vm.items[i].status == 'refund_requested') {
+                            vm.items[i].isAcceptRefundEnable = true;
+                            vm.items[i].isRejectRefundEnable = true;
+
+                        }else if (vm.items[i].status == 'refunding') {
+
+                        }else if (vm.items[i].status == 'refunded') {
+                            vm.items[i].isCloseEnable = true;
+
+                        }else if (vm.items[i].status == 'refund_failed') {
+                            vm.items[i].isCloseEnable = true;
+
+                        }else if (vm.items[i].status == 'finished') {
+
+                        }else if (vm.items[i].status == 'closed') {
+
+                        }else if (vm.items[i].status == 'cancelled') {
+
+                        }else if (vm.items[i].status == 'deleted') {
+
                         }else{
-                            vm.items[i].isPaidEnable = false;
-                            vm.items[i].isFinishEnable = false;
-                            vm.items[i].isDeleteEnable = false;
+
                         }
                     }
                 }
@@ -156,8 +197,8 @@
 
         vm.goOperItem = function (item,oper) {
 
-            if(oper == 1) {
-                NetworkService.post(vm.reqPath2 + '/' + item.id + '/pay', null, function success() {
+            if(oper == 'confirm') {
+                NetworkService.post(vm.reqPath2 + '/' + item.id + '/confirm', null, function success() {
                     var index = vm.items.indexOf(item);
                     //vm.items.splice(index,1);
                     toastr.success(i18n.t('u.OPER_SUC'));
@@ -166,8 +207,78 @@
                     vm.authError = response.statusText + '(' + response.status + ')';
                     toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
                 });
-            }else if(oper == 2){
+            }else if(oper == 'contract_sign'){
+                NetworkService.post(vm.reqPath2 + '/' + item.id + '/sign-contract', null, function success() {
+                    var index = vm.items.indexOf(item);
+                    //vm.items.splice(index,1);
+                    toastr.success(i18n.t('u.OPER_SUC'));
+                    getDatas();
+                }, function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+                });
+            }else if(oper == 'refund_accept'){
+                NetworkService.post(vm.reqPath2 + '/' + item.id + '/refund/accept ', null, function success() {
+                    var index = vm.items.indexOf(item);
+                    //vm.items.splice(index,1);
+                    toastr.success(i18n.t('u.OPER_SUC'));
+                    getDatas();
+                }, function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+                });
+            }else if(oper == 'refund_reject'){
+                NetworkService.post(vm.reqPath2 + '/' + item.id + '/refund/reject', null, function success() {
+                    var index = vm.items.indexOf(item);
+                    //vm.items.splice(index,1);
+                    toastr.success(i18n.t('u.OPER_SUC'));
+                    getDatas();
+                }, function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+                });
+            }else if(oper == 'ticket_release'){
+                NetworkService.post(vm.reqPath2 + '/' + item.id + '/release-ticket', null, function success() {
+                    var index = vm.items.indexOf(item);
+                    //vm.items.splice(index,1);
+                    toastr.success(i18n.t('u.OPER_SUC'));
+                    getDatas();
+                }, function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+                });
+            }else if(oper == 'finish'){
                 NetworkService.post(vm.reqPath2 + '/' + item.id + '/finish', null, function success() {
+                    var index = vm.items.indexOf(item);
+                    //vm.items.splice(index,1);
+                    toastr.success(i18n.t('u.OPER_SUC'));
+                    getDatas();
+                }, function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+                });
+            }else if(oper == 'cancel'){
+                NetworkService.post(vm.reqPath2 + '/' + item.id + '/cancel', null, function success() {
+                    var index = vm.items.indexOf(item);
+                    //vm.items.splice(index,1);
+                    toastr.success(i18n.t('u.OPER_SUC'));
+                    getDatas();
+                }, function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+                });
+            }else if(oper == 'close'){
+                NetworkService.post(vm.reqPath2 + '/' + item.id + '/close', null, function success() {
+                    var index = vm.items.indexOf(item);
+                    //vm.items.splice(index,1);
+                    toastr.success(i18n.t('u.OPER_SUC'));
+                    getDatas();
+                }, function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+                });
+            }else if(oper == 'delete'){
+                NetworkService.post(vm.reqPath2 + '/' + item.id + '/delete', null, function success() {
                     var index = vm.items.indexOf(item);
                     //vm.items.splice(index,1);
                     toastr.success(i18n.t('u.OPER_SUC'));
@@ -275,11 +386,20 @@
         getDatas();
 
 
-        vm.tipsInfo = {
-            title:'修改订单',
-            content:'您确定对该订单执行此操作吗？更改后将不可撤销!'
-        };
+
         vm.openAlert = function (size,model, oper) {
+
+            if(oper == 'offer' || oper == 'price' || oper == 'refund_accept' || oper=='refund_reject'){
+                vm.openInput(size, model, oper);
+                return;
+            }
+
+
+
+            vm.tipsInfo = {
+                title:'修改订单',
+                content:'您确定对该订单执行此操作吗？更改后将不可撤销!'
+            };
             console.log(vm.tipsInfo);
             var modalInstance = $uibModal.open({
                 templateUrl: 'myModalContent.html',
@@ -297,6 +417,149 @@
                 $log.info('Modal dismissed at: ' + new Date());
             });
         }
+
+       // vm.openInput('sm',item)
+        vm.openInput = function (size,item, oper) {
+            var subPath = '';
+
+            if(oper == 'offer' ){
+                subPath = 'offer';
+                vm.tipsInfo = {
+                    title:'报价',
+                    content:'请填写报价',
+                    label:'报价'
+
+                };
+
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'myModalContentOrder.html',
+                    size: 'md',
+                    controller:'ModalInstanceOrderCtrl',
+                    resolve: {
+                        tipsInfo: function () {
+                            return vm.tipsInfo;
+                        }
+                    }
+                });
+                modalInstance.result.then(function (param) {
+                    console.log(param);
+                    var myparam={totalAmount:param};
+                    NetworkService.post(vm.reqPath2  +'/'+item.id +'/offer',myparam,function (response) {
+                        toastr.success(i18n.t('u.OPERATE_SUC'));
+                        getDatas();
+                    },function (response) {
+                        toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                    });
+                }, function () {
+                    $log.info('Modal dismissed at: ' + new Date());
+                });
+
+            }else if(oper == 'price'){
+                subPath = 'price';
+                vm.tipsInfo = {
+                    title:'修改价格',
+                    content:'请填写价格',
+                    label:'价格'
+                };
+
+
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'myModalContentOrder.html',
+                    size: 'md',
+                    controller:'ModalInstanceOrderCtrl',
+                    resolve: {
+                        tipsInfo: function () {
+                            return vm.tipsInfo;
+                        }
+                    }
+                });
+                modalInstance.result.then(function (param) {
+                    console.log(param);
+                    var myparam={price:param};
+                    NetworkService.post(vm.reqPath2  +'/'+item.id +'/price',myparam,function (response) {
+                        toastr.success(i18n.t('u.OPERATE_SUC'));
+                        getDatas();
+                    },function (response) {
+                        toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                    });
+                }, function () {
+                    $log.info('Modal dismissed at: ' + new Date());
+                });
+
+
+            }else  if(oper == 'refund_accept'){
+                subPath = 'refund/accept';
+                vm.tipsInfo = {
+                    title:'接收退款',
+                    content:'请填写退款金额',
+                    label:'金额'
+                };
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'myModalContentOrder.html',
+                    size: 'md',
+                    controller:'ModalInstanceOrderCtrl',
+                    resolve: {
+                        tipsInfo: function () {
+                            return vm.tipsInfo;
+                        }
+                    }
+                });
+                modalInstance.result.then(function (param) {
+                    console.log(param);
+                    var myparam={amount:param};
+                    NetworkService.post(vm.reqPath2  +'/'+item.id +'/refund/accept',myparam,function (response) {
+                        toastr.success(i18n.t('u.OPERATE_SUC'));
+                        getDatas();
+                    },function (response) {
+                        toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                    });
+                }, function () {
+                    $log.info('Modal dismissed at: ' + new Date());
+                });
+
+
+
+            }else if (oper=='refund_reject'){
+                subPath = 'refund/reject';
+                vm.tipsInfo = {
+                    title:'拒绝退款',
+                    content:'请填写拒绝理由',
+                    label:'理由'
+                };
+
+
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'myModalContentOrder.html',
+                    size: 'md',
+                    controller:'ModalInstanceOrderCtrl',
+                    resolve: {
+                        tipsInfo: function () {
+                            return vm.tipsInfo;
+                        }
+                    }
+                });
+                modalInstance.result.then(function (param) {
+                    console.log(param);
+                    var myparam={reason:param};
+                    NetworkService.post(vm.reqPath2  +'/'+item.id +'/refund/reject',myparam,function (response) {
+                        toastr.success(i18n.t('u.OPERATE_SUC'));
+                        getDatas();
+                    },function (response) {
+                        toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                    });
+                }, function () {
+                    $log.info('Modal dismissed at: ' + new Date());
+                });
+
+
+
+            }
+
+
+
+        }
+
+
 
 
         vm.tipsInfoReset = {title:i18n.t('profile.RESET_PWD'),content:i18n.t('profile.RESET_PWD_CONFIRM')};
