@@ -126,6 +126,11 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.ENTAVATAR' | translate}}</label>
 
                     <div class="col-sm-4">
+
+
+                        <input class="form-control" type="text" style="margin-bottom:10px;"
+                               placeholder="{{'u.IMAGE' | translate}}" ng-model="vm.user.avatar" ng-disabled="vm.isDetail" >
+
                     <div class="img-preview">
                         <img ng-src="{{vm.user.avatar}}" alt="">
                     </div>
