@@ -34,7 +34,6 @@
         function getDatas() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
             var myid = vm.userInfo.id;
-            console.log(vm.userInfo);
 
             NetworkService.get(constdata.api.course.basePath,{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
@@ -68,10 +67,7 @@
         }
 
         function removeItem(item) {
-            var myid = vm.userInfo.id;
             NetworkService.delete(constdata.api.course.basePath + '/'+ item.id,null,function success() {
-                var index = vm.items.indexOf(item);
-                //vm.items.splice(index,1);
                 toastr.success(i18n.t('u.DELETE_SUC'));
                 getDatas();
             },function (response) {

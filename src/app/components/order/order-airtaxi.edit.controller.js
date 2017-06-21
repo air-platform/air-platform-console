@@ -59,37 +59,24 @@
             }
         ];
 
-        vm.statusType = [
-            {
-                title:'处理中',
-                value:'pending'
-            },
-            {
-                title:'已完成',
-                value:'finished'
-            }
-            ,
-            {
-                title:'已付款',
-                value:'paid'
-            },
-            {
-                title:'已取消',
-                value:'cancelled'
-            },
-            {
-                title:'已删除',
-                value:'deleted'
-            },
-            {
-                title:'已发布',
-                value:'published'
-            },
-            {
-                title:'已创建',
-                value:'created'
-            }
-        ];
+        vm.labelClass = {
+            'pending':'bg-info',
+            'finished':'bg-finished',
+            'paid':'bg-success',
+            'cancelled':'bg-warning',
+            'deleted':'bg-dark',
+            'created':'bg-created',
+            'published':'bg-published',
+            'confirmed':'bg-info',
+            'contract_signed':'bg-info',
+            'partial_paid':'bg-info',
+            'ticket_released':'bg-info',
+            'refund_requested':'bg-info',
+            'refunding':'bg-info',
+            'refunded':'bg-info',
+            'refund_failed':'bg-info',
+            'closed':'bg-info'
+        };
         vm.statusMap={
             'pending':'处理中',
             'finished':'已完成',
@@ -97,19 +84,19 @@
             'cancelled':'已取消',
             'deleted':'已删除',
             'created':'已创建',
-            "published":"已发布"
+            "published":"已发布",
+            'confirmed':'已确认',
+            'contract_signed':'已签合同',
+            'partial_paid':'部分付款',
+            'ticket_released':'已出票',
+            'refund_requested':'请求退款',
+            'refunding':'退款中',
+            'refunded':'已退款',
+            'refund_failed':'退款失败',
+            'closed':'已关闭'
 
         };
-        vm.classMap={
-            'pending':{'pending':true},
-            'finished':{'finished':true},
-            'paid':{'paid':true},
-            'cancelled':{'cancelled':true},
-            'deleted':{'deleted':true},
-            "published":{'published':true},
-            "created":{'created':true}
 
-        };
 
         vm.priceType = [
             {

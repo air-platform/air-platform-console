@@ -49,7 +49,7 @@
 <!--
                     <select style="width: 100%;" class="form-control font-thin" ng-model="item.status" ng-options="opt.value as opt.title for opt in vm.statusType" ng-disabled=true ></select>
 -->
-                    <label ng-class="{'bg-info':vm.classMap['pending'][item.status],'bg-created':vm.classMap['created'][item.status],'bg-warning':vm.classMap['cancelled'][item.status], 'bg-dark':vm.classMap['deleted'][item.status],'bg-finished':vm.classMap['finished'][item.status],'bg-success':vm.classMap['paid'][item.status], 'bg-published':vm.classMap['published'][item.status]}" ng-bind="vm.statusMap[item.status]" class="label"></label>
+                    <label ng-class="vm.labelClass[item.status]" ng-bind="vm.statusMap[item.status]" class="label"></label>
 
                 </td>
 
@@ -70,12 +70,21 @@
                         </button>
                         <ul class="dropdown-menu style="overflow:visible; width:100px; z-index:5555;">
 
-                      <li ng-class="{disabled: !item.isOfferEnable}" ng-click="vm.openAlert('sm',item,'offer')" ><a ng-class="{'font-view-color': !item.isOfferEnable}"><i class="fa fa-money m-r-sm"></i>报价</a></li>
-                        <li ng-class="{disabled: !item.isPriceEnable}" ng-click="vm.openAlert('sm',item,'price')" ><a ng-class="{'font-view-color': true}"><i class="fa fa-bank m-r-sm"></i>修改价格</a></li>
+                        <li ng-class="{disabled: !item.isSignEnable}" ng-click="vm.openAlert('sm',item,'contract_sign')" ><a><i class="fa fa-book m-r-sm"></i>签合同</a></li>
+                        <li ng-class="{disabled: !item.isAcceptRefundEnable}" ng-click="vm.openAlert('sm',item,'refund_accept')" ><a><i class="fa fa-calendar-check-o m-r-sm"></i>退款</a></li>
+                        <li ng-class="{disabled: !item.isRejectRefundEnable}" ng-click="vm.openAlert('sm',item,'refund_reject')" ><a><i class="fa fa-calendar-times-o m-r-sm"></i>拒绝退款</a></li>
+
+                        <li ng-class="{disabled: !item.isReleaseTicketEnable}" ng-click="vm.openAlert('sm',item,'ticket_release')" ><a><i class="fa fa-ticket m-r-sm"></i>出票</a></li>
+                        <li ng-class="{disabled: !item.isFinishEnable}" ng-click="vm.openAlert('sm',item,'finish')" ><a><i class="fa fa-check-square m-r-sm"></i>完成订单</a></li>
+                        <li ng-class="{disabled: !item.isCloseEnable}" ng-click="vm.openAlert('sm',item,'close')" ><a><i class="fa fa-close  m-r-sm"></i>关闭交易</a></li>
+                        <li ng-if="vm.isAdmin" ng-class="{disabled: !item.isDeleteEnable}" ng-click="vm.openAlert('sm',item,'delete')" ><a><i class="fa fa-trash m-r-sm"></i>删除订单</a></li>
+
+
+                       <!-- <li ng-class="{disabled: !item.isPriceEnable}" ng-click="vm.openAlert('sm',item,'price')" ><a ng-class="{'font-view-color': true}"><i class="fa fa-bank m-r-sm"></i>修改价格</a></li>
                         <li ng-class="{disabled: !item.isConfirmOrderEnable}" ng-click="vm.openAlert('sm',item,'confirm')" ><a><i class="fa fa-check-square m-r-sm"></i>确认订单</a></li>
 
                         <li ng-class="{disabled: !item.isSignEnable}" ng-click="vm.openAlert('sm',item,'contract_sign')" ><a><i class="fa fa-book m-r-sm"></i>签合同</a></li>
-                        <li ng-class="{disabled: !item.isAcceptRefundEnable}" ng-click="vm.openAlert('sm',item,'refund_accept')" ><a><i class="fa fa-calendar-check-o m-r-sm"></i>接受退款</a></li>
+                        <li ng-class="{disabled: !item.isAcceptRefundEnable}" ng-click="vm.openAlert('sm',item,'refund_accept')" ><a><i class="fa fa-calendar-check-o m-r-sm"></i>退款</a></li>
                         <li ng-class="{disabled: !item.isRejectRefundEnable}" ng-click="vm.openAlert('sm',item,'refund_reject')" ><a><i class="fa fa-calendar-times-o m-r-sm"></i>拒绝退款</a></li>
 
                         <li ng-class="{disabled: !item.isReleaseTicketEnable}" ng-click="vm.openAlert('sm',item,'ticket_release')" ><a><i class="fa fa-ticket m-r-sm"></i>出票</a></li>
@@ -84,24 +93,10 @@
                         <li ng-class="{disabled: !item.isCancelEnable}" ng-click="vm.openAlert('sm',item,'cancel')" ><a><i class="fa fa-ban m-r-sm"></i>取消订单</a></li>
                         <li ng-class="{disabled: !item.isCloseEnable}" ng-click="vm.openAlert('sm',item,'close')" ><a><i class="fa fa-close  m-r-sm"></i>关闭交易</a></li>
                         <li ng-class="{disabled: !item.isDeleteEnable}" ng-click="vm.openAlert('sm',item,'delete')" ><a><i class="fa fa-trash m-r-sm"></i>删除订单</a></li>
-
-
-                        <!--<li ng-click="vm.openAlert('sm',item,'offer')" ><a ng-class="{'font-view-color': !item.isOfferEnable}"><i class="fa fa-check-square m-r-sm"></i>报价</a></li>
-                        <li  ng-click="vm.openAlert('sm',item,'price')" ><a ng-class="{'font-view-color': true}"><i class="fa fa-check-square m-r-sm"></i>改价</a></li>
-                        <li  ng-click="vm.openAlert('sm',item,'confirm')" ><a><i class="fa fa-check-square m-r-sm"></i>确认订单</a></li>
-
-                        <li ng-click="vm.openAlert('sm',item,'contract_sign')" ><a><i class="fa fa-check-square m-r-sm"></i>签合同</a></li>
-                        <li  ng-click="vm.openAlert('sm',item,'refund_accept')" ><a><i class="fa fa-check-square m-r-sm"></i>接受退款</a></li>
-                        <li ng-click="vm.openAlert('sm',item,'refund_reject')" ><a><i class="fa fa-check-square m-r-sm"></i>拒绝退款</a></li>
-
-                        <li  ng-click="vm.openAlert('sm',item,'ticket_release')" ><a><i class="fa fa-check-square m-r-sm"></i>出票</a></li>
-                        <li ng-click="vm.openAlert('sm',item,'finish')" ><a><i class="fa fa-check-square m-r-sm"></i>完成订单</a></li>
-
-                        <li  ng-click="vm.openAlert('sm',item,'cancel')" ><a><i class="fa fa-check-square m-r-sm"></i>取消订单</a></li>
-                        <li  ng-click="vm.openAlert('sm',item,'close')" ><a><i class="fa fa-check-square m-r-sm"></i>关闭交易</a></li>
-                        <li  ng-click="vm.openAlert('sm',item,'delete')" ><a><i class="fa fa-check-square m-r-sm"></i>删除订单</a></li>
-
 -->
+
+
+
 
                         </ul>
                     </div>

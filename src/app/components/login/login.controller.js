@@ -56,8 +56,6 @@
                 NetworkService.get(constdata.api.login.profilePath, {page: vm.pageCurrent}, function (response) {
                     // vm.items = response.data.content;
                     vm.userinfo = response.data;
-                    //updatePagination(response.data);
-                    console.log(vm.userinfo);
                 }, function (response) {
                     vm.authError = '服务器内部错误';
                    // toastr.error(i18n.t('u.GET_DATA_FAILED') + ' ' + response.status);

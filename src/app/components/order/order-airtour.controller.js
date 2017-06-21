@@ -31,37 +31,24 @@
         vm.backAction = backAction;
         vm.userInfo = {};
         vm.subPath = 'airbook';
-        vm.statusType = [
-            {
-                title:'处理中',
-                value:'pending'
-            },
-            {
-                title:'已完成',
-                value:'finished'
-            }
-            ,
-            {
-                title:'已付款',
-                value:'paid'
-            },
-            {
-                title:'已取消',
-                value:'cancelled'
-            },
-            {
-                title:'已删除',
-                value:'deleted'
-            },
-            {
-                title:'已发布',
-                value:'published'
-            },
-            {
-                title:'已创建',
-                value:'created'
-            }
-        ];
+        vm.labelClass = {
+            'pending':'bg-info',
+            'finished':'bg-finished',
+            'paid':'bg-success',
+            'cancelled':'bg-warning',
+            'deleted':'bg-dark',
+            'created':'bg-created',
+            'published':'bg-published',
+            'confirmed':'bg-info',
+            'contract_signed':'bg-info',
+            'partial_paid':'bg-info',
+            'ticket_released':'bg-info',
+            'refund_requested':'bg-info',
+            'refunding':'bg-info',
+            'refunded':'bg-info',
+            'refund_failed':'bg-info',
+            'closed':'bg-info'
+        };
         vm.statusMap={
             'pending':'处理中',
             'finished':'已完成',
@@ -69,19 +56,20 @@
             'cancelled':'已取消',
             'deleted':'已删除',
             'created':'已创建',
-            "published":"已发布"
+            "published":"已发布",
+            'confirmed':'已确认',
+            'contract_signed':'已签合同',
+            'partial_paid':'部分付款',
+            'ticket_released':'已出票',
+            'refund_requested':'请求退款',
+            'refunding':'退款中',
+            'refunded':'已退款',
+            'refund_failed':'退款失败',
+            'closed':'已关闭'
 
         };
-        vm.classMap={
-            'pending':{'pending':true},
-            'finished':{'finished':true},
-            'paid':{'paid':true},
-            'cancelled':{'cancelled':true},
-            'deleted':{'deleted':true},
-            "published":{'published':true},
-            "created":{'created':true}
 
-        };
+
         vm.editPath = 'app.editorderairtour';
 
         vm.reqPath = constdata.api.order.airtour;
@@ -121,13 +109,10 @@
                         vm.items[i].isDeleteEnable = false;
 
 
-
-
-
                         if (vm.items[i].status == 'created') {
                             vm.items[i].isCloseEnable = true;
-                            //vm.items[i].isPriceEnable = true;
-                            //vm.items[i].isConfirmOrderEnable = true;
+                           // vm.items[i].isPriceEnable = true;
+                           // vm.items[i].isConfirmOrderEnable = true;
 
 
                         }else if (vm.items[i].status == 'confirmed') {
@@ -143,10 +128,12 @@
                             vm.items[i].isFinishEnable = true;
 
                         }else if (vm.items[i].status == 'paid') {
-                            vm.items[i].isCloseEnable = true;
-                            vm.items[i].isFinishEnable = true;
+                            vm.items[i].isAcceptRefundEnable = true;
+                            vm.items[i].isReleaseTicketEnable = true;
+
 
                         }else if (vm.items[i].status == 'ticket_released') {
+                            vm.items[i].isFinishEnable = true;
 
                         }else if (vm.items[i].status == 'refund_requested') {
                             vm.items[i].isAcceptRefundEnable = true;
@@ -161,6 +148,7 @@
                             vm.items[i].isCloseEnable = true;
 
                         }else if (vm.items[i].status == 'finished') {
+                            vm.items[i].isCloseEnable = true;
 
                         }else if (vm.items[i].status == 'closed') {
 
@@ -169,7 +157,7 @@
                         }else if (vm.items[i].status == 'deleted') {
 
                         }else{
-
+                            console.log('undefind order status:'+vm.items[i].status);
                         }
                     }
                 }
@@ -199,8 +187,6 @@
 
             if(oper == 'confirm') {
                 NetworkService.post(vm.reqPath2 + '/' + item.id + '/confirm', null, function success() {
-                    var index = vm.items.indexOf(item);
-                    //vm.items.splice(index,1);
                     toastr.success(i18n.t('u.OPER_SUC'));
                     getDatas();
                 }, function (response) {
@@ -209,8 +195,6 @@
                 });
             }else if(oper == 'contract_sign'){
                 NetworkService.post(vm.reqPath2 + '/' + item.id + '/sign-contract', null, function success() {
-                    var index = vm.items.indexOf(item);
-                    //vm.items.splice(index,1);
                     toastr.success(i18n.t('u.OPER_SUC'));
                     getDatas();
                 }, function (response) {
@@ -219,8 +203,6 @@
                 });
             }else if(oper == 'refund_accept'){
                 NetworkService.post(vm.reqPath2 + '/' + item.id + '/refund/accept ', null, function success() {
-                    var index = vm.items.indexOf(item);
-                    //vm.items.splice(index,1);
                     toastr.success(i18n.t('u.OPER_SUC'));
                     getDatas();
                 }, function (response) {
@@ -229,8 +211,6 @@
                 });
             }else if(oper == 'refund_reject'){
                 NetworkService.post(vm.reqPath2 + '/' + item.id + '/refund/reject', null, function success() {
-                    var index = vm.items.indexOf(item);
-                    //vm.items.splice(index,1);
                     toastr.success(i18n.t('u.OPER_SUC'));
                     getDatas();
                 }, function (response) {
@@ -239,8 +219,6 @@
                 });
             }else if(oper == 'ticket_release'){
                 NetworkService.post(vm.reqPath2 + '/' + item.id + '/release-ticket', null, function success() {
-                    var index = vm.items.indexOf(item);
-                    //vm.items.splice(index,1);
                     toastr.success(i18n.t('u.OPER_SUC'));
                     getDatas();
                 }, function (response) {
@@ -249,8 +227,6 @@
                 });
             }else if(oper == 'finish'){
                 NetworkService.post(vm.reqPath2 + '/' + item.id + '/finish', null, function success() {
-                    var index = vm.items.indexOf(item);
-                    //vm.items.splice(index,1);
                     toastr.success(i18n.t('u.OPER_SUC'));
                     getDatas();
                 }, function (response) {
@@ -259,8 +235,6 @@
                 });
             }else if(oper == 'cancel'){
                 NetworkService.post(vm.reqPath2 + '/' + item.id + '/cancel', null, function success() {
-                    var index = vm.items.indexOf(item);
-                    //vm.items.splice(index,1);
                     toastr.success(i18n.t('u.OPER_SUC'));
                     getDatas();
                 }, function (response) {
@@ -269,8 +243,6 @@
                 });
             }else if(oper == 'close'){
                 NetworkService.post(vm.reqPath2 + '/' + item.id + '/close', null, function success() {
-                    var index = vm.items.indexOf(item);
-                    //vm.items.splice(index,1);
                     toastr.success(i18n.t('u.OPER_SUC'));
                     getDatas();
                 }, function (response) {
@@ -279,8 +251,6 @@
                 });
             }else if(oper == 'delete'){
                 NetworkService.post(vm.reqPath2 + '/' + item.id + '/delete', null, function success() {
-                    var index = vm.items.indexOf(item);
-                    //vm.items.splice(index,1);
                     toastr.success(i18n.t('u.OPER_SUC'));
                     getDatas();
                 }, function (response) {
@@ -323,7 +293,6 @@
             $rootScope.backPre();
         }
 
-        vm.displayedCollection = [].concat(vm.items);
 
 
         // 分页 Start
@@ -393,9 +362,6 @@
                 vm.openInput(size, model, oper);
                 return;
             }
-
-
-
             vm.tipsInfo = {
                 title:'修改订单',
                 content:'您确定对该订单执行此操作吗？更改后将不可撤销!'
@@ -531,8 +497,6 @@
                     content:'请填写拒绝理由',
                     label:'理由'
                 };
-
-
                 var modalInstance = $uibModal.open({
                     templateUrl: 'myModalContentOrder.html',
                     size: 'md',
@@ -555,13 +519,7 @@
                 }, function () {
                     $log.info('Modal dismissed at: ' + new Date());
                 });
-
-
-
             }
-
-
-
         }
 
 
