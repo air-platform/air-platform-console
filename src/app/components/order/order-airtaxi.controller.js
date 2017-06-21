@@ -368,7 +368,6 @@
                 title:'修改订单',
                 content:'您确定对该订单执行此操作吗？更改后将不可撤销!'
             };
-            console.log(vm.tipsInfo);
             var modalInstance = $uibModal.open({
                 templateUrl: 'myModalContent.html',
                 size: size,

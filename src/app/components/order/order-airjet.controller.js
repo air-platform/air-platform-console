@@ -85,10 +85,6 @@
 
 
         function getDatas() {
-            vm.userInfo = StorageService.get('iot.hnair.cloud.information');
-            var myid = vm.userInfo.id;
-            console.log(vm.userInfo);
-
             NetworkService.get(constdata.api.tenant.fleetPath  + '/' + vm.subPath,{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
                 updatePagination(response.data);

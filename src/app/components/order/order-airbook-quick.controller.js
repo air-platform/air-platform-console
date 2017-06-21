@@ -86,8 +86,6 @@
         vm.editPath = 'app.editorderairbookquick';
         function getDatas() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
-            var myid = vm.userInfo.id;
-            console.log(vm.userInfo);
 
             NetworkService.get(vm.reqPath,{page:vm.pageCurrent,pageSize:10},function (response) {
                 vm.items = response.data.content;
@@ -270,7 +268,7 @@
             content:'您确定对该订单执行此操作吗？更改后将不可撤销!'
         };
         vm.openAlert = function (size,model, oper) {
-            console.log(vm.tipsInfo);
+
             var modalInstance = $uibModal.open({
                 templateUrl: 'myModalContent.html',
                 size: size,

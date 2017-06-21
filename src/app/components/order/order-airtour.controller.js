@@ -85,9 +85,6 @@
 
 
         function getDatas() {
-            vm.userInfo = StorageService.get('iot.hnair.cloud.information');
-            var myid = vm.userInfo.id;
-            console.log(vm.userInfo);
 
             NetworkService.get(vm.reqPath,{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
@@ -366,7 +363,6 @@
                 title:'修改订单',
                 content:'您确定对该订单执行此操作吗？更改后将不可撤销!'
             };
-            console.log(vm.tipsInfo);
             var modalInstance = $uibModal.open({
                 templateUrl: 'myModalContent.html',
                 size: size,

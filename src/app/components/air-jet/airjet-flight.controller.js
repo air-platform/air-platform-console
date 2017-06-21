@@ -319,7 +319,6 @@
                 title:'审批拒绝',
                 content:'请填写拒绝理由'
             };
-            console.log(vm.tipsInfo);
             var modalInstance = $uibModal.open({
                 templateUrl: 'myModalContentInput.html',
                 size: 'md',

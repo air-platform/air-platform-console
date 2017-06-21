@@ -141,10 +141,6 @@
 
 
         function getTenantItem() {
-
-            var myid = vm.userInfo.id;
-            console.log(myid);
-            console.log(username);
             NetworkService.get(vm.reqPath2  + '/'  + username,null,function (response) {
                 vm.user = response.data;
                 $rootScope.userNamePlacedTop = vm.user.nickName;
@@ -156,7 +152,6 @@
 
 
         function addItem() {
-            var myid = vm.userInfo.id;
             NetworkService.post(vm.reqPath2,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
@@ -168,7 +163,6 @@
         }
 
         function editItem() {
-            var myid = vm.userInfo.id;
             NetworkService.put(vm.reqPath2 + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();

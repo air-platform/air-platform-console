@@ -69,9 +69,6 @@
            // vm.showCommentButton = false;
         }
         function getDatas() {
-            vm.userInfo = StorageService.get('iot.hnair.cloud.information');
-            var myid = vm.userInfo.id;
-            console.log(vm.userInfo);
 
             NetworkService.get(vm.reqPath + '/'+vm.subPath +'?product='+ username,{page:vm.pageCurrent, pageSize:10},function (response) {
                 vm.items = response.data.content;
@@ -84,7 +81,6 @@
 
         vm.sendComment = function() {
             vm.userInfo = StorageService.get('iot.hnair.cloud.information');
-            console.log(vm.userInfo);
 
             if(vm.showReplyTo){
                 var myRole = 'user';
@@ -142,8 +138,6 @@
 
 
         function goAddItem() {
-            vm.userInfo = StorageService.get('iot.hnair.cloud.information');
-            console.log(vm.userInfo);
 
             var myRole = 'user';
             vm.tuser={

@@ -149,9 +149,6 @@
 
         function getTenantItem() {
 
-            var myid = vm.userInfo.id;
-            console.log(myid);
-            console.log(username);
             NetworkService.get(vm.reqPath2  + '/'  + username,null,function (response) {
                 vm.user = response.data;
                 $rootScope.userNamePlacedTop = vm.user.nickName;

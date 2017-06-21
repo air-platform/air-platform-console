@@ -275,7 +275,6 @@
             content:'您确定对该订单执行此操作吗？更改后将不可撤销!'
         };
         vm.openAlert = function (size,model, oper) {
-            console.log(vm.tipsInfo);
             var modalInstance = $uibModal.open({
                 templateUrl: 'myModalContent.html',
                 size: size,
