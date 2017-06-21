@@ -115,13 +115,16 @@
                             vm.items[i].isCloseEnable = true;
                             // vm.items[i].isPriceEnable = true;
                             vm.items[i].isConfirmOrderEnable = true;
+                            vm.items[i].isPriceEnable = true;
 
                         }else if (vm.items[i].status == 'confirmed') {
                             vm.items[i].isSignEnable = true;
+                            vm.items[i].isPriceEnable = true;
 
                         }else if (vm.items[i].status == 'contract_signed') {
                             vm.items[i].isCloseEnable = true;
                             vm.items[i].isPayEnable = true;
+                            vm.items[i].isPriceEnable = true;
 
                         }else if (vm.items[i].status == 'partial_paid') {
                             vm.items[i].isCloseEnable = true;

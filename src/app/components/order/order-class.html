@@ -69,6 +69,8 @@
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu style="overflow:visible; width:100px;z-index:1010;">
+                        <li ng-class="{disabled: !item.isPriceEnable}" ng-click="vm.openAlert('sm',item,'price')" ><a><i class="fa fa-bank m-r-sm"></i>修改价格</a></li>
+
                         <li ng-class="{disabled: !item.isConfirmOrderEnable}" ng-click="vm.openAlert('sm',item,'confirm')" ><a><i class="fa fa-check-square m-r-sm"></i>确认订单</a></li>
                         <li ng-class="{disabled: !item.isSignEnable}" ng-click="vm.openAlert('sm',item,'contract_sign')" ><a><i class="fa fa-book m-r-sm"></i>签合同</a></li>
                         <li ng-class="{disabled: !item.isPayEnable}" ng-click="vm.openAlert('sm',item,'pay')" ><a><i class="fa fa-check-square m-r-sm"></i>付款</a></li>
