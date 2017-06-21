@@ -115,7 +115,8 @@
 
             NetworkService.get(vm.reqPath  + '/' + vm.subPath,{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
-                vm.displayedCollection = [].concat(vm.items);
+                vm.displayedCollection = (vm.items);
+
                 if(vm.displayedCollection) {
                     for (var i = 0; i < vm.displayedCollection.length; i++) {
                         if (vm.displayedCollection[i].reviewStatus == 'pending') {
@@ -137,7 +138,7 @@
                             vm.displayedCollection[i].isRejectEnable = true;
 
 
-                            if(vm.displayedCollection[i].published){
+                            if(vm.displayedCollection[i].published && vm.displayedCollection[i].published==true){
                                 vm.displayedCollection[i].isPubilsh = true;
                                 vm.displayedCollection[i].isUnPublish = false;
 
@@ -149,6 +150,7 @@
                         }
                     }
                 }
+                console.log(vm.displayedCollection);
                 updatePagination(response.data);
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
