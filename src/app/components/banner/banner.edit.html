@@ -113,7 +113,10 @@
                     <div class="col-sm-4">
                         <!--<input class="form-control" type="text"
                                placeholder="链接内容" ng-model="vm.user.link" ng-disabled="vm.isDetail" >-->
+<!--
                         <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.link" ng-options="s.id as s.name for s in vm.allProduct | filter: {category: vm.user.category}" ng-disabled="vm.isDetail" ></select>
+-->
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.link" ng-options="s.id as s.name for s in vm.allProduct | prdFilter:vm.user.category" ng-disabled="vm.isDetail" ></select>
 
 
                     </div>

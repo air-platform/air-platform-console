@@ -175,6 +175,9 @@
         vm.changeLink = function(){
             vm.user.link = '';
         }
+
+
+
         vm.addNewClientManager = function() {
 
             vm.clientManagersArr.push({
