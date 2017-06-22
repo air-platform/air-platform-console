@@ -92,7 +92,7 @@
             NetworkService.get(vm.reqPath,{page:vm.pageCurrent,pageSize:10},function (response) {
 
 
-             var monk =    [{
+            /* var monk =    [{
                     "id" : "7f000101-5cca-1c76-815c-cea67a7c00e1",
                     "orderNo" : "C2E865DAD000000",
                     "type" : "airtour",
@@ -116,13 +116,13 @@
                            id:'1',
                             name:'bbg',
                             status:'offered',
-                            totalCount:100
+                            amount:100
                         },
                         {
                             id:'2',
                             name:'bbk',
                             status:'offered',
-                            totalCount:200
+                            amount:200
                         }
 
                     ],
@@ -235,7 +235,7 @@
                         "traffic" : "无",
                         "tourRoute" : "芦笛景区-桃花江-南洲大桥-尧山--磨盘山-桃花江-大圩古镇-古东瀑布景区-芦笛景区  （30分钟）"
                 }
-                }];
+                }];*/
 
 
 
@@ -603,6 +603,7 @@
                     console.log(param);
                    // var fp = parseFloat(param);
                     //var myparam={totalAmount:fp};
+                    param.amount = parseFloat(param.amount);
                     NetworkService.post(vm.reqPath2  +'/'+item.id +'/price?candidate='+param.id,param,function (response) {
                         toastr.success(i18n.t('u.OPERATE_SUC'));
                         getDatas();

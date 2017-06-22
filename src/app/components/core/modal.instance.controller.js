@@ -126,7 +126,7 @@
                         //$scope.selItem = tipsInfo.order.fleetCandidates[i];
                         $scope.selItem.id = tipsInfo.order.fleetCandidates[i].id;
                         $scope.selItem.status = tipsInfo.order.fleetCandidates[i].status;
-                        $scope.selItem.totalCount = tipsInfo.order.fleetCandidates[i].totalCount;
+                        $scope.selItem.amount = tipsInfo.order.fleetCandidates[i].amount;
                         console.log('ok' + $scope.selItem.id);
                         break;
                     }
@@ -139,7 +139,7 @@
             //$scope.selItem = tipsInfo.order.fleetCandidates[0];
             $scope.selItem.id = tipsInfo.order.fleetCandidates[0].id;
             $scope.selItem.status = tipsInfo.order.fleetCandidates[0].status;
-            $scope.selItem.totalCount = tipsInfo.order.fleetCandidates[0].totalCount;
+            $scope.selItem.amount = tipsInfo.order.fleetCandidates[0].amount;
         }
         $scope.tipsInfo = tipsInfo;
         $scope.rejectReason = '';
