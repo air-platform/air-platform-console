@@ -1,0 +1,78 @@
+
+<div class="modal-header" style="background-color:#23B7E5;">
+    <div>
+        <h4 class="modal-title text-left font-bold text-white pull-left">{{tipsInfo.title}}</h4>
+        <a class="pull-right text-white h4 modal-title font-bold" ng-click="cancel()" href><i class="fa fa-close"></i></a>
+    </div>
+</div>
+<div class="col">
+<div class="panel panel-default m-l m-r m-t" >
+    <div class="panel-heading" style="margin-bottom:10px;">
+        <h3 class="panel-title">{{tipsInfo.content}}</h3>
+    </div>
+
+
+    <form name="form" class="form-horizontal form-validation" role="form">
+    <div  class="form-group">
+
+       <!-- <div class="form-group" style="" ng-repeat="item in tipsInfo.order.fleetCandidates">
+            <label class="col-sm-2 control-label  font-bold" >机型</label>
+            <div class="col-sm-2">
+                <input class="form-control" type="text"
+                       placeholder="机型" ng-model="item.name" required disabled>
+
+            </div>
+
+            <label class="col-sm-2 control-label  font-bold" style="margin-left:-50px;">状态</label>
+            <div class="col-sm-2">
+                <select style="width: 100%;" class="form-control font-thin" ng-model="item.status" ng-options="s.value as s.title for s in orderStatus"></select>
+            </div>
+
+            <label class="col-sm-2 control-label  font-bold" style="margin-left:-50px;">价格</label>
+            <div class="col-sm-2">
+                <input class="form-control" type="text"
+                       placeholder="价格" ng-model="item.totcalCount" required>
+            </div>
+        </div>-->
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label  font-bold" >机型</label>
+            <div class="col-sm-2">
+               <!-- <input class="form-control" type="text" placeholder="机型" ng-model="selItem.name" required>-->
+
+                <select style="width: 100%;" ng-change="changeFleetCandidate()" class="form-control font-thin" ng-model="selItem.id" ng-options="s.id as s.name for s in tipsInfo.order.fleetCandidates"></select>
+
+
+            </div>
+
+            <label class="col-sm-2 control-label  font-bold" style="margin-left:-50px;">状态</label>
+            <div class="col-sm-2">
+                <select   style="width: 100%;" class="form-control font-thin" ng-model="selItem.status" ng-options="s.value as s.title for s in orderStatus"></select>
+            </div>
+
+            <label class="col-sm-2 control-label  font-bold" style="margin-left:-50px;">价格</label>
+            <div class="col-sm-2">
+                <input class="form-control" type="text"
+                       placeholder="价格" ng-model="selItem.totalCount" required>
+            </div>
+        </div>
+
+
+
+
+    </div>
+        </form>
+
+
+
+
+</div>
+    </div>
+<div class="modal-footer">
+    <!-- 
+<button class="btn btn-default" ng-click="cancel()">取消</button>
+<button class="btn btn-primary" ng-click="ok()">确定</button> -->
+    <button ng-click="cancel()" class="btn btn-sm btn-default form-inline btn-addon bg-light"><i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}}</button>
+    <button class="btn btn-sm btn-info form-inline btn-addon" ng-click="ok()"><i class="fa fa-check-circle"></i>{{'product.CONFIRM' | translate}}</button>
+</div>
+

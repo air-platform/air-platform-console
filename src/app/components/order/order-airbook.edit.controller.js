@@ -75,7 +75,9 @@
             'refunding':'bg-info',
             'refunded':'bg-info',
             'refund_failed':'bg-info',
-            'closed':'bg-info'
+            'closed':'bg-info',
+            'customer_confirmed':'bg-info',
+            'offered':'bg-info'
         };
         vm.statusMap={
             'pending':'处理中',
@@ -93,7 +95,9 @@
             'refunding':'退款中',
             'refunded':'已退款',
             'refund_failed':'退款失败',
-            'closed':'已关闭'
+            'closed':'已关闭',
+            'customer_confirmed':'客户已选',
+            'offered':'已报价'
 
         };
 
