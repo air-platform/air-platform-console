@@ -420,7 +420,8 @@
                 });
                 modalInstance.result.then(function (param) {
                     console.log(param);
-                    var myparam={totalAmount:param};
+                    var fp = parseFloat(param);
+                    var myparam={totalAmount:fp};
                     NetworkService.post(vm.reqPath2  +'/'+item.id +'/offer',myparam,function (response) {
                         toastr.success(i18n.t('u.OPERATE_SUC'));
                         getDatas();
@@ -452,7 +453,8 @@
                 });
                 modalInstance.result.then(function (param) {
                     console.log(param);
-                    var myparam={price:param};
+                    var fp = parseFloat(param);
+                    var myparam={price:fp};
                     NetworkService.post(vm.reqPath2  +'/'+item.id +'/price',myparam,function (response) {
                         toastr.success(i18n.t('u.OPERATE_SUC'));
                         getDatas();
@@ -483,7 +485,8 @@
                 });
                 modalInstance.result.then(function (param) {
                     console.log(param);
-                    var myparam={amount:param};
+                    var fp = parseFloat(param);
+                    var myparam={amount:fp};
                     NetworkService.post(vm.reqPath2  +'/'+item.id +'/refund/accept',myparam,function (response) {
                         toastr.success(i18n.t('u.OPERATE_SUC'));
                         getDatas();

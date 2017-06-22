@@ -48,7 +48,10 @@
             'refunding':'bg-info',
             'refunded':'bg-info',
             'refund_failed':'bg-info',
-            'closed':'bg-info'
+            'closed':'bg-info',
+            'candidate':'bg-info',
+            'offered':'bg-info',
+            'selected':'bg-info'
         };
         vm.statusMap={
             'pending':'处理中',
@@ -66,7 +69,10 @@
             'refunding':'退款中',
             'refunded':'已退款',
             'refund_failed':'退款失败',
-            'closed':'已关闭'
+            'closed':'已关闭',
+            'candidate':'未报价',
+            'offered':'已报价',
+            'selected':'客户已选'
 
         };
 
@@ -105,10 +111,13 @@
                         vm.items[i].isDeleteEnable = false;
                         vm.items[i].isPayEnable = false;
 
+                        //vm.items[i].isCandidateEnable = false;
+
+
 
                         if (vm.items[i].status == 'created') {
                             vm.items[i].isCloseEnable = true;
-                             vm.items[i].isPriceEnable = true;
+                             //vm.items[i].isPriceEnable = true;
                             vm.items[i].isConfirmOrderEnable = true;
 
                         }else if (vm.items[i].status == 'confirmed') {
@@ -154,6 +163,13 @@
                         }else if (vm.items[i].status == 'cancelled') {
 
                         }else if (vm.items[i].status == 'deleted') {
+
+                        }else if (vm.items[i].status == 'candidate') {
+                            vm.items[i].isOfferEnable = true;
+
+                        }else if (vm.items[i].status == 'offered') {
+                            vm.items[i].isCandidateEnable = true;
+                        }else if (vm.items[i].status == 'selected') {
 
                         }else{
                             console.log('undefind order status:'+vm.items[i].status);
@@ -358,6 +374,14 @@
                     vm.authError = response.statusText + '(' + response.status + ')';
                     toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
                 });
+            }else if(oper == 'candidate'){
+                NetworkService.post(vm.reqPath2 + '/' + item.id + '/candidate', null, function success() {
+                    toastr.success(i18n.t('u.OPER_SUC'));
+                    getDatas();
+                }, function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+                });
             }
         };
 
@@ -415,7 +439,8 @@
                 });
                 modalInstance.result.then(function (param) {
                     console.log(param);
-                    var myparam={totalAmount:param};
+                    var fp = parseFloat(param);
+                    var myparam={totalAmount:fp};
                     NetworkService.post(vm.reqPath2  +'/'+item.id +'/offer',myparam,function (response) {
                         toastr.success(i18n.t('u.OPERATE_SUC'));
                         getDatas();
@@ -447,7 +472,8 @@
                 });
                 modalInstance.result.then(function (param) {
                     console.log(param);
-                    var myparam={price:param};
+                    var fp = parseFloat(param);
+                    var myparam={price:fp};
                     NetworkService.post(vm.reqPath2  +'/'+item.id +'/price',myparam,function (response) {
                         toastr.success(i18n.t('u.OPERATE_SUC'));
                         getDatas();
@@ -478,7 +504,8 @@
                 });
                 modalInstance.result.then(function (param) {
                     console.log(param);
-                    var myparam={amount:param};
+                    var fp = parseFloat(param);
+                    var myparam={amount:fp};
                     NetworkService.post(vm.reqPath2  +'/'+item.id +'/refund/accept',myparam,function (response) {
                         toastr.success(i18n.t('u.OPERATE_SUC'));
                         getDatas();

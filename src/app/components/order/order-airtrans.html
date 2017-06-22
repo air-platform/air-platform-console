@@ -32,6 +32,7 @@
                 <th class="text-center">{{'u.ORDERNO' | T}}</th>
                 <th class="text-center">{{'u.STATUS' | T}}</th>
                 <th class="text-center">{{'u.CONTACTNAME' | T}}</th>
+                <th class="text-center">价格</th>
                 <th class="text-center">{{'u.CTEATEIONDATE' | T}}</th>
                 <th class="text-center">{{'u.PAYMENTDATE' | T}}</th>
                 <th class="text-center">{{'u.FINISHEDDATE' | T}}</th>
@@ -57,6 +58,7 @@
 
 
                 <td ng-click="vm.goDetail(item)">{{item.contact.person}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.totalPrice}}</td>
 
                 <td ng-click="vm.goDetail(item)">{{item.creationDate |date:'yyyy-MM-dd HH:mm'}}</td>
                 <td ng-click="vm.goDetail(item)">{{item.paymentDate|date:'yyyy-MM-dd HH:mm'}}</td>
