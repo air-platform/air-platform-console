@@ -28,6 +28,8 @@
             <tr class="font-bold">
                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
                 <th class="text-center">{{'u.NAME' | T}}</th>
+                <th ng-if="vm.isAdmin" class="text-center">商户</th>
+                <th class="text-center">审批状态</th>
                 <th class="text-center">{{'u.PRICE' | T}}</th>
                 <th class="text-center">{{'u.STARTDATE' | T}}</th>
                 <th class="text-center">{{'u.ENDDATE' | T}}</th>
@@ -41,6 +43,9 @@
             <tr ng-repeat="item in vm.displayedCollection">
               <!--  <td ng-click="vm.goDetail(item)">{{item.id}}</td>-->
                 <td ng-click="vm.goDetail(item)">{{item.name}}</td>
+                <td ng-if="vm.isAdmin" ng-click="vm.goDetail(item)">{{item.vendor.name}}</td>
+                <td ng-click="vm.goDetail(item)"> <select style="width: 100%;" class="form-control font-thin" ng-model="item.reviewStatus" ng-options="s.value as s.title for s in vm.approveStatus" ng-disabled=true ></select>
+
                 <td ng-click="vm.goDetail(item)"> {{item.price }}</td>
                <td ng-click="vm.goDetail(item)">{{item.startDate}}</td>
                 <td ng-click="vm.goDetail(item)">{{item.endDate}}</td>
@@ -54,7 +59,45 @@
                     <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goDetail(item)"><i class="fa fa-eye"></i>{{'u.DETAIL'|T}}</button>
 
                     <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goEditItem(item)"><i class="fa fa-edit"></i>{{ 'u.EDIT' | T}}</button>
-                    <button class="btn btn-sm btn-danger btn-addon" style="width: 80px"  ng-click="vm.openAlert('sm',item)"><i class="fa fa-trash-o"></i>{{'u.DELETE' | T}}</button>
+                    <div class="btn-group " ng-if="vm.isAdmin">
+                        <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-sliders"></i>  操作</button>
+                        <button type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" style="overflow:visible; z-index:1010;width:100px;position:absolute;">
+                            <li ng-class="{disabled: !item.isAgreeEnable}" ng-click="vm.OperApp(3, item)" ><a><i class="fa fa-play m-r-sm"></i>同意</a></li>
+                            <!--
+                                                        <li ng-class="{disabled: !item.isRejectEnable}" ng-click="vm.OperApp(4, item)" ><a><i class="fa fa-stop m-r-sm"></i>拒绝</a></li>
+                            -->
+                            <li ng-class="{disabled: !item.isRejectEnable}" ng-click="vm.openInput('sm',item)" ><a><i class="fa fa-stop m-r-sm"></i>拒绝</a></li>
+                            <li  ng-click="vm.openAlert('sm',item)" ><a><i class="fa fa-trash-o m-r-sm"></i> {{'u.DELETE' | T}}</a></li>
+
+
+                            <li  ng-click="vm.goComment(item)" ><a><i class="fa fa-commenting-o m-r-sm"></i>评论</a></li>
+                            <li  ng-click="vm.goTop('sm',item)" ><a><i class="fa fa-arrow-up  m-r-sm"></i>置顶</a></li>
+
+                        </ul>
+                    </div>
+
+
+                    <div class="btn-group " ng-if="!vm.isAdmin">
+                        <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-sliders"></i>  操作</button>
+                        <button type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+
+                        <ul class="dropdown-menu" style="overflow:visible; z-index:1010;width:100px;position:absolute;">
+                            <li ng-class="{disabled: item.published}" ng-click="vm.OperApp(11, item)" ><a><i class="fa fa-arrow-up m-r-sm"></i>上线</a></li>
+                            <li ng-class="{disabled: !item.published}" ng-click="vm.OperApp(12, item)" ><a><i class="fa fa-arrow-down m-r-sm"></i>下线</a></li>
+                            <li  ng-click="vm.openAlert('sm',item)" ><a><i class="fa fa-trash-o m-r-sm"></i> {{'u.DELETE' | T}}</a></li>
+                            <li  ng-click="vm.goComment(item)" ><a><i class="fa fa-commenting-o m-r-sm"></i>评论</a></li>
+                            <li  ng-click="vm.goTop('sm',item)" ><a><i class="fa fa-arrow-up  m-r-sm"></i>置顶</a></li>
+
+                        </ul>
+                    </div>
+
                 </td>
             </tr>
 
@@ -73,4 +116,7 @@
 </div>
 <script type="text/ng-template" id="myModalContent.html">
     <div ng-include="'app/components/core/modal.html'"></div>
+</script>
+<script type="text/ng-template" id="myModalContentPrdTop.html">
+    <div ng-include="'app/components/core/modal-prd-top.html'"></div>
 </script>

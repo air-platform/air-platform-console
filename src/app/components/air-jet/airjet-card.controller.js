@@ -304,7 +304,40 @@
             $state.go('app.comment',{username:item.id, args:{type:'detail',prd:'airtaxi'}});
 
         };
+        vm.goTop = function (size,item) {
+            console.log(item.rank);
+            vm.tipsInfo = {
+                title:'产品置顶',
+                content:'请选择置顶级别（值越小产品排序越靠前）',
+                topValue:item.rank
+            };
+            var modalInstance = $uibModal.open({
+                templateUrl: 'myModalContentPrdTop.html',
+                size: 'sm',
+                controller:'ModalInstancePrdTopCtrl',
+                resolve: {
+                    tipsInfo: function () {
+                        return vm.tipsInfo;
+                    }
+                }
+            });
+            modalInstance.result.then(function (param) {
+                console.log(param);
+                var myreason={rank:param};
+                NetworkService.post(vm.reqPath +'/' + vm.subPath +'/'+item.id +'/rank',myreason,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                });
 
+
+
+
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
         vm.openInput = function (size,item) {
             vm.tipsInfo = {
                 title:'审批拒绝',

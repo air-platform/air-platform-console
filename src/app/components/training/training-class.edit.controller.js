@@ -39,8 +39,6 @@
         vm.isDetail = false;
         vm.getTenantItem = getTenantItem;
         vm.submitAction = submitAction;
-        vm.lockTenant = lockTenant;
-        vm.unlockTenant = unlockTenant;
         vm.backAction = backAction;
         vm.back = back;
         vm.addUser = {};
@@ -92,7 +90,17 @@
         vm.licenseType=[
             '私照',
             '商照'
-        ]
+        ];
+        vm.approveStatus=[{
+            value:'pending',
+            title:'未审批'
+        },{
+            value:'approved',
+            title:'审批通过'
+        },{
+            value:'rejected',
+            title:'审批拒绝'
+        }];
         var username = $stateParams.username;
         var type = $stateParams.args.type;
         console.log(type);
@@ -107,7 +115,16 @@
         if(type && type=='detail'){
             vm.isDetail = true;
         }
-
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        vm.reqPath =  constdata.api.tenant.fleetPath;
+        vm.reqPath2 = constdata.api.tenant.jetPath;
+        vm.isAdmin = false;
+        vm.subPath = 'courses';
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath = constdata.api.admin.basePath;
+            vm.reqPath2 = constdata.api.tenant.jetPath;
+            vm.isAdmin = true;
+        }
         vm.addNewClientManager = function() {
 
             vm.user.clientManagersArr.push({
@@ -144,12 +161,12 @@
             var myid = vm.userInfo.id;
             console.log(myid);
             console.log(username);
-            NetworkService.get(constdata.api.course.basePath + '/'+ username,null,function (response) {
+            NetworkService.get(vm.reqPath + '/'+ vm.subPath + '/'+ username,null,function (response) {
                 vm.user = response.data;
                 $rootScope.userNamePlacedTop = vm.user.nickName;
                 vm.sdt   =   new Date((vm.user.startDate));
                 vm.edt   =   new Date((vm.user.endDate));
-
+                vm.user.school = vm.user.school.id;
                 vm.user.clientManagersArr = [];
                 if(vm.user.clientManagers){
                     var uInfo = vm.user.clientManagers.split( "," );
@@ -217,7 +234,7 @@
             vm.user.price = parseInt(vm.user.price);
             vm.user.totalNum = parseInt(vm.user.totalNum);
 
-            NetworkService.post(constdata.api.course.basePath+'?school='+vm.user.school,vm.user,function (response) {
+            NetworkService.post(vm.reqPath + '/'+ vm.subPath+'?school='+vm.user.school,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -267,7 +284,7 @@
 
 
 
-            NetworkService.put(constdata.api.course.basePath+'/'+vm.user.id,vm.user,function (response) {
+            NetworkService.put(vm.reqPath + '/'+ vm.subPath+'/'+vm.user.id,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -283,24 +300,7 @@
             }
         }
 
-        function lockTenant() {
-            NetworkService.post(constdata.api.tenant.lockPath +'/'+ username + '/lock',null,function (response) {
-                toastr.success(i18n.t('u.OPERATE_SUC'));
-                vm.getTenantItem();
-            },function (response) {
-                vm.authError = response.statusText + '(' + response.status + ')';
-                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
-            });
-        }
-        function unlockTenant() {
-            NetworkService.post(constdata.api.tenant.lockPath +'/'+ username + '/unlock',null,function (response) {
-                toastr.success(i18n.t('u.OPERATE_SUC'));
-                vm.getTenantItem();
-            },function (response) {
-                vm.authError = response.statusText + '(' + response.status + ')';
-                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
-            });
-        }
+
 
         function backAction() {
             // $state.go('app.tenant');

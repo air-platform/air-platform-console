@@ -91,6 +91,7 @@
                             <li ng-class="{disabled: !item.isRejectEnable}" ng-click="vm.openInput('md',item)" ><a><i class="fa fa-stop m-r-sm"></i>拒绝</a></li>
                             <li  ng-click="vm.openAlert('sm',item)" ><a><i class="fa fa-trash-o m-r-sm"></i> {{'u.DELETE' | T}}</a></li>
                             <li  ng-click="vm.goComment(item)" ><a><i class="fa fa-commenting-o m-r-sm"></i>评论</a></li>
+                            <li  ng-click="vm.goTop('sm',item)" ><a><i class="fa fa-arrow-up  m-r-sm"></i>置顶</a></li>
 
                         </ul>
                     </div>
@@ -108,6 +109,7 @@
                             <li ng-class="{disabled: !item.published}" ng-click="vm.OperApp(12, item)" ><a><i class="fa fa-arrow-down m-r-sm"></i>下线</a></li>
                             <li  ng-click="vm.openAlert('sm',item)" ><a><i class="fa fa-trash-o m-r-sm"></i> {{'u.DELETE' | T}}</a></li>
                             <li  ng-click="vm.goComment(item)" ><a><i class="fa fa-commenting-o m-r-sm"></i>评论</a></li>
+                            <li  ng-click="vm.goTop('sm',item)" ><a><i class="fa fa-arrow-up  m-r-sm"></i>置顶</a></li>
 
 
                         </ul>
@@ -140,4 +142,7 @@
 </script>
 <script type="text/ng-template" id="myModalContentInput.html">
     <div ng-include="'app/components/core/modal-input.html'"></div>
+</script>
+<script type="text/ng-template" id="myModalContentPrdTop.html">
+    <div ng-include="'app/components/core/modal-prd-top.html'"></div>
 </script>

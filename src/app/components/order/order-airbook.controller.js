@@ -245,7 +245,7 @@
 
 
                 vm.items = response.data.content;
-                vm.items = monk;//response.data.content;
+               // vm.items = monk;//response.data.content;
 
                 if(vm.items.length > 0){
 

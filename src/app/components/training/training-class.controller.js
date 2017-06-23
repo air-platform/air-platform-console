@@ -30,13 +30,121 @@
         vm.curItem = {};
         vm.backAction = backAction;
         vm.userInfo = {};
-        //vm.subPath = 'ferryflights';
-        function getDatas() {
-            vm.userInfo = StorageService.get('iot.hnair.cloud.information');
-            var myid = vm.userInfo.id;
+        vm.displayedCollection = [];
+        vm.OperApp = OperApp;
 
-            NetworkService.get(constdata.api.course.basePath,{page:vm.pageCurrent},function (response) {
+
+
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        vm.reqPath =  constdata.api.tenant.fleetPath;
+        vm.reqPath2 = constdata.api.tenant.jetPath;
+        vm.isAdmin = false;
+        vm.subPath = 'courses';
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath = constdata.api.admin.basePath;
+            vm.reqPath2 = constdata.api.tenant.jetPath;
+            vm.isAdmin = true;
+        }
+        vm.approveStatus=[{
+            value:'pending',
+            title:'未审批'
+        },{
+            value:'approved',
+            title:'审批通过'
+        },{
+            value:'rejected',
+            title:'审批拒绝'
+        }];
+
+        vm.goComment = function(item) {
+            $state.go('app.comment',{username:item.id, args:{type:'detail',prd:'airtaxi'}});
+
+        };
+        function OperApp(index, item) {
+            if(index == 3){
+
+
+                //product/families/{productFamilyId}/approve
+                //$state.go('app.application', {applicationName:item.id, args:{selItem:item}});
+                NetworkService.post(vm.reqPath + '/'+ vm.subPath + '/' +item.id +'/approve',null,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+
+                },function (response) {
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                });
+
+            }else if(index == 4){
+                var myreason={reason:'invalid params'};
+                NetworkService.post(vm.reqPath + '/'+ vm.subPath + '/' +item.id +'/disapprove',myreason,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                });
+            }else if(index == 11){
+                var myreason={reason:'invalid params'};
+                NetworkService.post(vm.reqPath + '/'+ vm.subPath + '/' +item.id +'/publish',null,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                });
+            }else if(index == 12){
+                var myreason={reason:'invalid params'};
+                NetworkService.post(vm.reqPath + '/'+ vm.subPath + '/' +item.id +'/unpublish',null,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                });
+            }else{
+                console.log('error ops:'+index);
+            }
+
+            //$state.go('app.applicationedit');
+        };
+        function getDatas() {
+            NetworkService.get(vm.reqPath + '/'+ vm.subPath,{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
+                vm.displayedCollection = (vm.items);
+                if(vm.displayedCollection) {
+                    for (var i = 0; i < vm.displayedCollection.length; i++) {
+                        if (vm.displayedCollection[i].reviewStatus == 'pending') {
+                            vm.displayedCollection[i].isAgreeEnable = true;
+                            vm.displayedCollection[i].isRejectEnable = true;
+
+                            vm.displayedCollection[i].isPubilsh = false;
+                            vm.displayedCollection[i].isUnPublish = false;
+
+                        } else if (vm.displayedCollection[i].reviewStatus == 'rejected') {
+                            vm.displayedCollection[i].isAgreeEnable = true;
+                            vm.displayedCollection[i].isRejectEnable = false;
+
+                            vm.displayedCollection[i].isPubilsh = false;
+                            vm.displayedCollection[i].isUnPublish = false;
+
+                        } else {
+                            vm.displayedCollection[i].isAgreeEnable = false;
+                            vm.displayedCollection[i].isRejectEnable = true;
+
+
+                            if(vm.displayedCollection[i].published && vm.displayedCollection[i].published==true){
+                                vm.displayedCollection[i].isPubilsh = true;
+                                vm.displayedCollection[i].isUnPublish = false;
+
+                            }else{
+                                vm.displayedCollection[i].isPubilsh = false;
+                                vm.displayedCollection[i].isUnPublish = true;
+                            }
+
+                        }
+                    }
+                }
+
+
+
+
                 updatePagination(response.data);
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
@@ -67,7 +175,7 @@
         }
 
         function removeItem(item) {
-            NetworkService.delete(constdata.api.course.basePath + '/'+ item.id,null,function success() {
+            NetworkService.delete(vm.reqPath + '/'+ vm.subPath + '/'+ item.id,null,function success() {
                 toastr.success(i18n.t('u.DELETE_SUC'));
                 getDatas();
             },function (response) {
@@ -142,12 +250,11 @@
         }
 
         getDatas();
-
-
-        //Model
-
-        vm.tipsInfo = delmodaltip;
         vm.openAlert = function (size,model) {
+            vm.tipsInfo = {
+                title:'删除',
+                content:'确定删除吗？'
+            };
             var modalInstance = $uibModal.open({
                 templateUrl: 'myModalContent.html',
                 size: size,
@@ -160,6 +267,75 @@
             });
             modalInstance.result.then(function (param) {
                 vm.removeItem(model);
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        }
+
+        //Model
+        vm.goTop = function (size,item) {
+            console.log(item.rank);
+            vm.tipsInfo = {
+                title:'产品置顶',
+                content:'请选择置顶级别（值越小产品排序越靠前）',
+                topValue:item.rank
+            };
+            var modalInstance = $uibModal.open({
+                templateUrl: 'myModalContentPrdTop.html',
+                size: 'sm',
+                controller:'ModalInstancePrdTopCtrl',
+                resolve: {
+                    tipsInfo: function () {
+                        return vm.tipsInfo;
+                    }
+                }
+            });
+            modalInstance.result.then(function (param) {
+                console.log(param);
+                var myreason={rank:param};
+                NetworkService.post(vm.reqPath +'/' + vm.subPath +'/'+item.id +'/rank',myreason,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                });
+
+
+
+
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+        vm.tipsInfo = delmodaltip;
+        vm.openInput = function (size,item) {
+            vm.tipsInfo = {
+                title:'审批拒绝',
+                content:'请填写拒绝理由'
+            };
+            var modalInstance = $uibModal.open({
+                templateUrl: 'myModalContentInput.html',
+                size: 'md',
+                controller:'ModalInstanceInputCtrl',
+                resolve: {
+                    tipsInfo: function () {
+                        return vm.tipsInfo;
+                    }
+                }
+            });
+            modalInstance.result.then(function (param) {
+                console.log(param);
+                var myreason={reason:param};
+                NetworkService.post(vm.reqPath +'/' + vm.subPath +'/'+item.id +'/disapprove',myreason,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                });
+
+
+
+
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });

@@ -28,6 +28,7 @@
             <tr class="font-bold">
                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
                 <th class="text-center">{{'u.SCHOOLNAME' | T}}</th>
+                <th ng-if="vm.isAdmin" class="text-center">商户</th>
                 <th class="text-center">{{'u.ADDRESS' | T}}</th>
                 <th class="text-center">{{'u.CONTACT' | T}}</th>
                 <th class="text-center">{{'u.SCHOOLIMAGE' | T}}</th>
@@ -41,6 +42,7 @@
             <tr ng-repeat="item in vm.displayedCollection">
               <!--  <td ng-click="vm.goDetail(item)">{{item.id}}</td>-->
                 <td ng-click="vm.goDetail(item)">{{item.name}}</td>
+                <td ng-if="vm.isAdmin" ng-click="vm.goDetail(item)">{{item.vendor.name}}</td>
                 <td ng-click="vm.goDetail(item)"> {{item.address }}</td>
                <td ng-click="vm.goDetail(item)">{{item.contact}}</td>
                 <td ng-click="vm.goDetail(item)">

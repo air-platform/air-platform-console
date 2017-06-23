@@ -29,13 +29,20 @@
         vm.removeItem = removeItem;
         vm.curItem = {};
         vm.backAction = backAction;
-        vm.userInfo = {};
-        //vm.subPath = 'ferryflights';
+        vm.subPath = 'schools'
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        vm.reqPath =  constdata.api.tenant.fleetPath;
+        vm.reqPath2 = constdata.api.tenant.jetPath;
+        vm.isAdmin = false;
+        vm.subPath = 'schools';
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath = constdata.api.admin.platPath;
+            vm.reqPath2 = constdata.api.tenant.jetPath;
+            vm.isAdmin = true;
+        }
         function getDatas() {
-            vm.userInfo = StorageService.get('iot.hnair.cloud.information');
-            var myid = vm.userInfo.id;
 
-            NetworkService.get(constdata.api.school.basePath,{page:vm.pageCurrent},function (response) {
+            NetworkService.get(vm.reqPath + '/' + vm.subPath,{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
                 updatePagination(response.data);
             },function (response) {
@@ -67,7 +74,7 @@
         }
 
         function removeItem(item) {
-            NetworkService.delete(constdata.api.school.basePath + '/'+ item.id,null,function success() {
+            NetworkService.delete(vm.reqPath + '/' + vm.subPath + '/'+ item.id,null,function success() {
                 toastr.success(i18n.t('u.DELETE_SUC'));
                 getDatas();
             },function (response) {
