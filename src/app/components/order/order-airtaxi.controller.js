@@ -143,10 +143,10 @@
                         }else if (vm.items[i].status == 'refunding') {
 
                         }else if (vm.items[i].status == 'refunded') {
-                            vm.items[i].isCloseEnable = true;
+                            //vm.items[i].isCloseEnable = true;
 
                         }else if (vm.items[i].status == 'refund_failed') {
-                            vm.items[i].isCloseEnable = true;
+                            //vm.items[i].isCloseEnable = true;
 
                         }else if (vm.items[i].status == 'finished') {
                             vm.items[i].isCloseEnable = true;
@@ -447,7 +447,7 @@
                 modalInstance.result.then(function (param) {
                     console.log(param);
                     var fp = parseFloat(param);
-                    var myparam={price:fp};
+                    var myparam={amount:fp};
                     NetworkService.post(vm.reqPath2  +'/'+item.id +'/price',myparam,function (response) {
                         toastr.success(i18n.t('u.OPERATE_SUC'));
                         getDatas();
