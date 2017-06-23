@@ -76,9 +76,53 @@
 
 
 
+                <div class="form-group" ng-if="vm.isDetail">
+
+                        <label class="col-sm-1 control-label  m-l-lg font-bold">评分</label>
+                        <div class="col-sm-1">
+                            <input class="form-control" type="text"
+                                   placeholder="评分" ng-model="vm.user.score" ng-disabled="vm.isDetail"  required>
+                        </div>
+
+
+                        <label class="col-sm-1 control-label  font-bold">销售数</label>
+                        <div class="col-sm-1">
+                            <input class="form-control" type="text"
+                                   placeholder="销售数" ng-model="vm.user.totalSales" ng-disabled="vm.isDetail"  required>
+                        </div>
+
+
+                        <label class="col-sm-1 control-label  font-bold">置顶值</label>
+                        <div class="col-sm-1">
+                            <input class="form-control" type="text"
+                                   placeholder="置顶值" ng-model="vm.user.rank" ng-disabled="vm.isDetail"  required>
+                        </div>
+
+
+                        <label class="col-sm-1 control-label font-bold">发布状态</label>
+                        <div class="col-sm-2">
+                            <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.published" ng-options="opt.value as opt.title for opt in vm.pubStatus" ng-disabled="vm.isDetail" ></select>
+                        </div>
+
+                </div>
+
+                <div  ng-if="vm.isDetail" class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+
+
+
+
+
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CRAFTSELECT' | translate}}</label>
                 </div>
+
+
+
 
                 <div  class="form-group">
 

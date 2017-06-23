@@ -60,7 +60,16 @@
                 value:'user'
             }
         ];
-
+        vm.pubStatus = [
+            {
+                title:'已上线',
+                value: true
+            },
+            {
+                title:'已下线',
+                value: false
+            }
+        ];
         vm.statusType = [
             {
                 title:'已启用',

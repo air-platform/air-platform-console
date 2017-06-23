@@ -62,7 +62,16 @@
                 value:'user'
             }
         ];
-
+        vm.pubStatus = [
+            {
+                title:'已上线',
+                value: true
+            },
+            {
+                title:'已下线',
+                value: false
+            }
+        ];
         vm.statusType = [
             {
                 title:'已启用',
@@ -466,8 +475,13 @@
             }
             vm.user.timeEstimation = parseInt(vm.user.timeEstimation);
 
-
-            vm.user.family = vm.productfamily[0];//vm.user.productfamilyId;// = vm.user.family.id;
+            for(var i = 0; i < vm.productfamily.length; i ++){
+                if(vm.productfamily[i].id == vm.user.productfamilyId){
+                    vm.user.family = vm.productfamily[i];
+                    break;
+                }
+            }
+            //vm.user.family = vm.user.productfamilyId;// = vm.user.family.id;
             vm.user.clientManagers = '';//JSON.stringify(vm.user.clientManagersArr);
             if(vm.user.clientManagersArr.length > 0) {
                 vm.user.clientManagers  = vm.user.clientManagersArr[0].name + ':'+vm.user.clientManagersArr[0].email;
@@ -518,7 +532,13 @@
             }
             vm.user.timeEstimation = parseInt(vm.user.timeEstimation);
 
-            vm.user.family = vm.user.productfamilyId;
+           // vm.user.family = vm.user.productfamilyId;
+            for(var i = 0; i < vm.productfamily.length; i ++){
+                if(vm.productfamily[i].id == vm.user.productfamilyId){
+                    vm.user.family = vm.productfamily[i];
+                    break;
+                }
+            }
 
             vm.user.clientManagers = '';//JSON.stringify(vm.user.clientManagersArr);
             if(vm.user.clientManagersArr && vm.user.clientManagersArr.length > 0) {

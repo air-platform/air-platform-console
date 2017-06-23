@@ -71,7 +71,16 @@
                 value:'disabled'
             }
         ];
-
+        vm.pubStatus = [
+            {
+                title:'已上线',
+                value: true
+            },
+            {
+                title:'已下线',
+                value: false
+            }
+        ];
         vm.priceType = [
             {
                 title:'人民币',
