@@ -5,25 +5,53 @@
         <a class="pull-right text-white h4 modal-title font-bold" ng-click="cancel()" href><i class="fa fa-close"></i></a>
     </div>
 </div>
-<div class="panel panel-default m-l m-r m-t" style="height:127px;">
+
+
+<form name="form" class="form-horizontal form-validation" role="form">
+<div class="panel panel-default m-l m-r m-t" >
     <div class="panel-heading">
         <h3 class="panel-title">{{tipsInfo.content}}</h3>
     </div>
 
-    <div  class="form-group" style="position: relative;left: 16px;top: 16px;">
+    <div  class="form-group" style="margin-top:5px;">
 
-       <label class="col-sm-2 control-label  font-bold">{{tipsInfo.label}}</label>
+       <label class="col-sm-2 control-label  font-bold">{{tipsInfo.priceLabel}}</label>
         <div class="col-sm-8" >
-            <textarea class="form-control font-thin" ng-model="rejectReason" id="reject_id" rows="1" placeholder="{{tipsInfo.label}}" style="resize: none;"></textarea>
+            <input ng-if="tipsInfo.isDigit" class="form-control" id="price_id" type="number"
+                   placeholder="{{tipsInfo.priceLabel}}" ng-model="price"  required>
+        </div>
+
+    </div>
+    <div class="form-group" style="margin-left:57px;" ng-if="tipsInfo.isRefund && tipsInfo.isDigit">
+        <label  class="col-sm-6  font-bold"><i style="color:red;font-size:20px;">* </i><i style="font-style:normal; color:#999;">退款金额不能大于产品金额</i></label>
+    </div>
+    <div  class="form-group" ng-if="!tipsInfo.isDigit ||(tipsInfo.isDigit && tipsInfo.isRefund&&tipsInfo.refStatus!='refund_requested')">
+        <label class="col-sm-2 control-label  font-bold">{{tipsInfo.reasonLabel}}</label>
+        <div class="col-sm-8" >
+            <input style="margin-top:5px;"  class="form-control" id="reason_id" type="text"
+                   placeholder="{{tipsInfo.reasonLabel}}" ng-model="reason" required>
         </div>
     </div>
 
+
+
+
+
+
+
 </div>
+
+
+
+
+
 <div class="modal-footer">
     <!-- 
 <button class="btn btn-default" ng-click="cancel()">取消</button>
 <button class="btn btn-primary" ng-click="ok()">确定</button> -->
     <button ng-click="cancel()" class="btn btn-sm btn-default form-inline btn-addon bg-light"><i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}}</button>
-    <button class="btn btn-sm btn-info form-inline btn-addon" ng-click="ok()"><i class="fa fa-check-circle"></i>{{'product.CONFIRM' | translate}}</button>
+    <button class="btn btn-sm btn-info form-inline btn-addon" ng-click="ok()" ng-disabled='form.$invalid'><i class="fa fa-check-circle"></i>{{'product.CONFIRM' | translate}}</button>
 </div>
+    </form>
+
 

@@ -78,11 +78,19 @@
         // var vm = this;
 
         $scope.tipsInfo = tipsInfo;
-        $scope.rejectReason = '';
+        console.log(tipsInfo);
+        $scope.reason = '';
+        $scope.price = '';
+        var ret = {price:'', reason:''};
         $scope.ok = function () {
-            $scope.rejectReason = document.getElementById('reject_id').value;
-            console.log($scope.rejectReason);
-            $uibModalInstance.close($scope.rejectReason);
+            ret.price = document.getElementById('price_id').value;
+            console.log(ret.prcie);
+            if(document.getElementById('reason_id')) {
+                ret.reason = document.getElementById('reason_id').value;
+            }
+
+            console.log(ret);
+            $uibModalInstance.close(ret);
         };
 
         $scope.cancel = function () {
@@ -119,15 +127,16 @@
             }
         ];
         $scope.changeFleetCandidate = function(){
-            console.log('ddd'+$scope.selItem.id);
+            console.log('ddd'+$scope.selItem.candidate);
             if(tipsInfo.order.fleetCandidates && tipsInfo.order.fleetCandidates.length > 0) {
                 for(var i = 0; i < tipsInfo.order.fleetCandidates.length; i ++){
-                    if($scope.selItem.id == tipsInfo.order.fleetCandidates[i].id){
+                    if($scope.selItem.candidate == tipsInfo.order.fleetCandidates[i].id){
                         //$scope.selItem = tipsInfo.order.fleetCandidates[i];
-                        $scope.selItem.id = tipsInfo.order.fleetCandidates[i].id;
+                        $scope.selItem.candidate = tipsInfo.order.fleetCandidates[i].id;
                         $scope.selItem.status = tipsInfo.order.fleetCandidates[i].status;
-                        $scope.selItem.amount = tipsInfo.order.fleetCandidates[i].amount;
-                        console.log('ok' + $scope.selItem.id);
+                        $scope.selItem.amount = tipsInfo.order.fleetCandidates[i].offeredPrice;
+                        //$scope.selItem.name = tipsInfo.order.fleetCandidates[i].fleet.name;
+                        console.log('ok' + $scope.selItem.candidate);
                         break;
                     }
                 }
@@ -137,9 +146,10 @@
         $scope.selItem = {};
         if(tipsInfo.order.fleetCandidates && tipsInfo.order.fleetCandidates.length > 0) {
             //$scope.selItem = tipsInfo.order.fleetCandidates[0];
-            $scope.selItem.id = tipsInfo.order.fleetCandidates[0].id;
+            $scope.selItem.candidate = tipsInfo.order.fleetCandidates[0].id;
             $scope.selItem.status = tipsInfo.order.fleetCandidates[0].status;
-            $scope.selItem.amount = tipsInfo.order.fleetCandidates[0].amount;
+            $scope.selItem.amount = tipsInfo.order.fleetCandidates[0].offeredPrice;
+           // $scope.selItem.name = tipsInfo.order.fleetCandidates[0].fleet.name;
         }
         $scope.tipsInfo = tipsInfo;
         $scope.rejectReason = '';

@@ -50,7 +50,10 @@
             'refunding':'bg-info',
             'refunded':'bg-info',
             'refund_failed':'bg-info',
-            'closed':'bg-info'
+            'closed':'bg-info',
+            'customer_confirmed':'bg-info',
+            'offered':'bg-info',
+            'payment_in_process':'bg-info'
         };
         vm.statusMap={
             'pending':'处理中',
@@ -68,7 +71,10 @@
             'refunding':'退款中',
             'refunded':'已退款',
             'refund_failed':'退款失败',
-            'closed':'已关闭'
+            'closed':'已关闭',
+            'customer_confirmed':'客户已选',
+            'offered':'已报价',
+            'payment_in_process':'付款中'
 
         };
 
@@ -416,15 +422,17 @@
                 subPath = 'offer';
                 vm.tipsInfo = {
                     title:'报价',
-                    content:'请填写报价',
-                    label:'报价'
+                    content:'请选择机型并编辑报价状态',
+                    label:'报价',
+                    type:'offer',
+                    order:item
 
                 };
 
                 var modalInstance = $uibModal.open({
-                    templateUrl: 'myModalContentOrder.html',
+                    templateUrl: 'myModalContentOrderOffer.html',
                     size: 'md',
-                    controller:'ModalInstanceOrderCtrl',
+                    controller:'ModalInstanceOrderOfferCtrl',
                     resolve: {
                         tipsInfo: function () {
                             return vm.tipsInfo;
@@ -433,9 +441,10 @@
                 });
                 modalInstance.result.then(function (param) {
                     console.log(param);
-                    var fp = parseFloat(param);
-                    var myparam={totalAmount:fp};
-                    NetworkService.post(vm.reqPath2  +'/'+item.id +'/offer',myparam,function (response) {
+                    // var fp = parseFloat(param);
+                    //var myparam={totalAmount:fp};
+                    param.amount = parseFloat(param.amount);
+                    NetworkService.post(vm.reqPath2  +'/'+item.id +'/price',param,function (response) {
                         toastr.success(i18n.t('u.OPERATE_SUC'));
                         getDatas();
                     },function (response) {
@@ -450,7 +459,9 @@
                 vm.tipsInfo = {
                     title:'修改价格',
                     content:'请填写价格',
-                    label:'价格'
+                    priceLabel:'新价格',
+                    isDigit:true,
+                    isRefund:false
                 };
 
 
@@ -466,7 +477,7 @@
                 });
                 modalInstance.result.then(function (param) {
                     console.log(param);
-                    var fp = parseFloat(param);
+                    var fp = parseFloat(param.price);
 
                     var myparam={amount:fp};
                     NetworkService.post(vm.reqPath2  +'/'+item.id +'/price',myparam,function (response) {
@@ -481,37 +492,116 @@
 
 
             }else  if(oper == 'refund_accept'){
+
+
+
+
+
                 subPath = 'refund/accept';
-                vm.tipsInfo = {
-                    title:'接收退款',
-                    content:'请填写退款金额',
-                    label:'金额'
-                };
 
-                var modalInstance = $uibModal.open({
-                    templateUrl: 'myModalContentOrder.html',
-                    size: 'md',
-                    controller:'ModalInstanceOrderCtrl',
-                    resolve: {
-                        tipsInfo: function () {
-                            return vm.tipsInfo;
+
+                if(item.status == 'refund_requested') {
+                    vm.tipsInfo = {
+                        title: '接收退款',
+                        content: '请填写退款金额',
+                        priceLabel: '退款金额',
+                        isDigit: true,
+                        isRefund: true,
+                        refStatus: item.status
+
+                    };
+
+                    var modalInstance = $uibModal.open({
+                        templateUrl: 'myModalContentOrder.html',
+                        size: 'md',
+                        controller: 'ModalInstanceOrderCtrl',
+                        resolve: {
+                            tipsInfo: function () {
+                                return vm.tipsInfo;
+                            }
                         }
-                    }
-                });
-                modalInstance.result.then(function (param) {
-                    console.log(param);
-                    var fp = parseFloat(param);
-                    var myparam={amount:fp};
-                    NetworkService.post(vm.reqPath2  +'/'+item.id +'/refund/accept',myparam,function (response) {
-                        toastr.success(i18n.t('u.OPERATE_SUC'));
-                        getDatas();
-                    },function (response) {
-                        toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
                     });
-                }, function () {
-                    $log.info('Modal dismissed at: ' + new Date());
-                });
+                    modalInstance.result.then(function (param) {
+                        console.log(param);
+                        var fp = parseFloat(param.price);
+                        var myparam = {amount: fp};
+                        if (fp > item.totalPrice) {
+                            toastr.error('退款失败，退款金额' + fp + '大于订单价格' + item.totalPrice);
+                            return;
+                        }
+                        NetworkService.post(vm.reqPath2 + '/' + item.id + '/refund/accept', myparam, function (response) {
+                            toastr.success(i18n.t('u.OPERATE_SUC'));
+                            getDatas();
+                        }, function (response) {
+                            toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                        });
+                    }, function () {
+                        $log.info('Modal dismissed at: ' + new Date());
+                    });
+                }else  if(item.status != 'refund_requested') {
+                    vm.tipsInfo = {
+                        title:'商户退款',
+                        content:'客户没有申请退款，确认是否退款 ？'
+                    };
+                    var modalInstance = $uibModal.open({
+                        templateUrl: 'myModalContent.html',
+                        size: size,
+                        controller:'ModalInstanceCtrl',
+                        resolve: {
+                            tipsInfo: function () {
+                                return vm.tipsInfo;
+                            }
+                        }
+                    });
+                    modalInstance.result.then(function (param) {
 
+                        vm.tipsInfo = {
+                            title: '商户退款',
+                            content: '请填写退款金额',
+                            priceLabel: '退款金额',
+                            reasonLabel:'退款理由',
+                            isDigit: true,
+                            isRefund: true,
+                            refStatus: item.status
+
+                        };
+
+                        var modalInstance = $uibModal.open({
+                            templateUrl: 'myModalContentOrder.html',
+                            size: 'md',
+                            controller: 'ModalInstanceOrderCtrl',
+                            resolve: {
+                                tipsInfo: function () {
+                                    return vm.tipsInfo;
+                                }
+                            }
+                        });
+                        modalInstance.result.then(function (param) {
+                            console.log(param);
+                            var fp = parseFloat(param.price);
+                            var myparam = {amount: fp, reason:param.reason};
+                            if (fp > item.totalPrice) {
+                                toastr.error('退款失败，退款金额' + fp + '大于订单价格' + item.totalPrice);
+                                return;
+                            }
+                            NetworkService.post(vm.reqPath2 + '/' + item.id + '/refund/initiate', myparam, function (response) {
+                                toastr.success(i18n.t('u.OPERATE_SUC'));
+                                getDatas();
+                            }, function (response) {
+                                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                            });
+                        }, function () {
+                            $log.info('Modal dismissed at: ' + new Date());
+                        });
+
+
+
+                    }, function () {
+                        $log.info('Modal dismissed at: ' + new Date());
+                    });
+
+
+                }
 
 
             }else if (oper=='refund_reject'){
@@ -519,7 +609,10 @@
                 vm.tipsInfo = {
                     title:'拒绝退款',
                     content:'请填写拒绝理由',
-                    label:'理由'
+                    reasonLabel:'退款理由',
+                    isDigit:false,
+                    isRefund:true
+
                 };
                 var modalInstance = $uibModal.open({
                     templateUrl: 'myModalContentOrder.html',

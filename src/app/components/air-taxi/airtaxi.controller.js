@@ -293,7 +293,7 @@
             console.log(item.rank);
             vm.tipsInfo = {
                 title:'产品置顶',
-                content:'请选择置顶级别（值越小产品排序越靠前）',
+                content:'请选择置顶级别（值越大产品排序越靠前）',
                 topValue:item.rank
             };
             var modalInstance = $uibModal.open({
