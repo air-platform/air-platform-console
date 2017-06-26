@@ -193,6 +193,10 @@
 
         vm.tipsInfo = delmodaltip;
         vm.openAlert = function (size,model) {
+            vm.tipsInfo = {
+                title:'删除',
+                content:'确定删除吗？'
+            };
             var modalInstance = $uibModal.open({
                 templateUrl: 'myModalContent.html',
                 size: size,
