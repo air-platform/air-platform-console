@@ -14,7 +14,7 @@
         <div class="panel-body">
             <div class="form-group">
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" placeholder="价格" ng-model="vm.modifyPrice" ng-pattern="/^(-)[0-9\.]{1,20}$/" required>
+                    <input type="text" class="form-control" placeholder="价格" ng-model="vm.modifyPrice" ng-pattern="/^[-0-9\.]{1,20}$/" required>
                 </div>
                 <div class="col-sm-2">
                     <button ng-click="vm.updateEventPrice()" class="btn m-b-xs btn-sm btn-danger btn-addon" ng-disabled='form.$invalid'>修改</button>
