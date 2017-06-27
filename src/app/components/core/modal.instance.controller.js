@@ -83,8 +83,10 @@
         $scope.price = '';
         var ret = {price:'', reason:''};
         $scope.ok = function () {
-            ret.price = document.getElementById('price_id').value;
-            console.log(ret.prcie);
+            if(document.getElementById('price_id')) {
+                ret.price = document.getElementById('price_id').value;
+            }
+
             if(document.getElementById('reason_id')) {
                 ret.reason = document.getElementById('reason_id').value;
             }

@@ -626,7 +626,7 @@
                 });
                 modalInstance.result.then(function (param) {
                     console.log(param);
-                    var myparam={reason:param};
+                    var myparam={reason:param.reason};
                     NetworkService.post(vm.reqPath2  +'/'+item.id +'/refund/reject',myparam,function (response) {
                         toastr.success(i18n.t('u.OPERATE_SUC'));
                         getDatas();
