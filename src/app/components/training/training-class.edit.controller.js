@@ -126,12 +126,12 @@
         }
         vm.userInfo = StorageService.get('iot.hnair.cloud.information');
         vm.reqPath =  constdata.api.tenant.fleetPath;
-        vm.reqPath2 = constdata.api.tenant.jetPath;
+        vm.reqPath2 = constdata.api.tenant.fleetPath;
         vm.isAdmin = false;
         vm.subPath = 'courses';
         if(vm.userInfo.role != 'tenant'){
             vm.reqPath = constdata.api.admin.basePath;
-            vm.reqPath2 = constdata.api.tenant.jetPath;
+            vm.reqPath2 = constdata.api.admin.platPath;
             vm.isAdmin = true;
         }
         vm.addNewClientManager = function() {
@@ -334,7 +334,7 @@
         function getSchoolDatas() {
 
 
-            NetworkService.get(constdata.api.school.basePath,{page:vm.pageCurrent},function (response) {
+            NetworkService.get(vm.reqPath2+'/schools',{page:vm.pageCurrent},function (response) {
                 vm.schools = response.data.content;
                 console.log(vm.schools);
                 if(vm.schools.length > 0){

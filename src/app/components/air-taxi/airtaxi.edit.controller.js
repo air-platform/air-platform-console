@@ -132,12 +132,12 @@
             title:'审批拒绝'
         }];
         vm.reqPath =  constdata.api.tenant.fleetPath;
-        vm.reqPath2 = constdata.api.tenant.jetPath;
+        vm.reqPath2 = constdata.api.tenant.fleetPath;
         vm.isAdmin = false;
         vm.userInfo = StorageService.get('iot.hnair.cloud.information');
         if(vm.userInfo.role != 'tenant'){
             vm.reqPath = constdata.api.admin.basePath;
-            vm.reqPath2 = constdata.api.tenant.jetPath;
+            vm.reqPath2 = constdata.api.admin.platPath;
             vm.isAdmin = true;
         }
 
@@ -377,7 +377,7 @@
         function getAircraftsDatas() {
 
 
-            NetworkService.get(vm.reqPath  + '/aircrafts',{page:vm.pageCurrent},function (response) {
+            NetworkService.get(vm.reqPath2  + '/aircrafts',{page:vm.pageCurrent},function (response) {
                 vm.crafts = response.data.content;
 
             },function (response) {

@@ -71,7 +71,7 @@
             token = 'Bearer ' + token;
             var reg = RestService.one(path);
 
-            reg.customPOST(formdata, undefined, undefined, { 'Content-Type': undefined ,'Authorization':token}).then(
+            reg.withHttpConfig({transformRequest: angular.identity}).customPOST(formdata, undefined, undefined, {'Content-Type': undefined,'Authorization':token}).then(
                 successHandler,function (response) {
                     failedResponse(response,failedHandler,path);
                 }

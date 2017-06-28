@@ -17,11 +17,12 @@
 
         <div class="form-group">
             <label class="col-sm-4 control-label  font-bold" >置顶值</label>
-            <div class="col-sm-6">
+            <div class="col-sm-6" style="margin-top:5px;">
                <!-- <input class="form-control" type="text" placeholder="机型" ng-model="selItem.name" required>-->
 
-                <select style="width: 100%;" id='top-value' class="form-control font-thin" ng-model="selValue" ng-options="s as s for s in topValue"></select>
+                <select ng-show=false style="width: 100%;" id='top-value' class="form-control font-thin" ng-model="selValue" ng-options="s as s for s in topValue"></select>
 
+                <slider ng-model="selValue" id='top-valueee' min="0" step="1" max="100" value="selValue"></slider>
 
             </div>
 

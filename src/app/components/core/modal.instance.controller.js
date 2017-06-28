@@ -197,17 +197,16 @@
 
     /** @ngInject */
     function ModalInstancePrdTopCtrl($uibModalInstance,$scope,tipsInfo,i18n) {
-        /* jshint validthis: true */
-        // var vm = this;
-       // console.log(tipsInfo);
         $scope.topValue = [];
         for(var i = 0; i < 101; i ++){
             $scope.topValue.push(i);
         }
-
-        $scope.selValue = tipsInfo.topValue;
+        /* jshint validthis: true */
+        $scope.selValue = 0;
+        //$scope.selValue = tipsInfo.topValue;
        // console.log( $scope.selValue);
         $scope.tipsInfo = tipsInfo;
+        $scope.selValue = $scope.tipsInfo.topValue;
        /* $scope.changeFleetCandidate = function(){
             console.log('ddd'+$scope.selItem.id);
             if(tipsInfo.order.fleetCandidates && tipsInfo.order.fleetCandidates.length > 0) {
@@ -234,8 +233,9 @@
 
         $scope.rejectReason = '';*/
         $scope.ok = function () {
+           // console.log(document.getElementById('top-valueee').value);
+            //console.log($scope);
             $scope.selValue = parseInt(document.getElementById('top-value').value.split(':')[1]);
-            //console.log($scope.selValue);
             $uibModalInstance.close($scope.selValue);
         };
 

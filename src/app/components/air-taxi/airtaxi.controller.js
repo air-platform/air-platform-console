@@ -9,7 +9,7 @@
         .controller('AirtaxiController', AirtaxiController);
 
     /** @ngInject */
-    function AirtaxiController(NetworkService,StorageService, constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
+    function AirtaxiController(NetworkService,StorageService,$scope, constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
