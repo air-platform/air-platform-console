@@ -30,6 +30,7 @@
                 <th class="text-center">{{'u.NAME' | T}}</th>
                 <th ng-if="vm.isAdmin" class="text-center">商户</th>
                 <th class="text-center">审批状态</th>
+                <th class="text-center">发布状态</th>
                 <th class="text-center">{{'u.FAMILY' | T}}</th>
                 <th class="text-center">{{'u.TIMEESTI' | T}}</th>
                 <th class="text-center">{{'u.DEPARTURE' | T}}</th>
@@ -44,8 +45,12 @@
               <!--  <td ng-click="vm.goDetail(item)">{{item.id}}</td>-->
                 <td ng-click="vm.goDetail(item)">{{item.name}}</td>
                 <td ng-if="vm.isAdmin" ng-click="vm.goDetail(item)">{{item.vendor.name}}</td>
-                <td ng-click="vm.goDetail(item)"> <select style="width: 100%;" class="form-control font-thin" ng-model="item.reviewStatus" ng-options="s.value as s.title for s in vm.approveStatus" ng-disabled=true ></select>
-
+                <td ng-click="vm.goDetail(item)">
+                    <label ng-class="vm.labelColor[item.reviewStatus]" ng-bind="vm.labelContent[item.reviewStatus]" class="label"></label>
+                </td>
+                <td ng-click="vm.goDetail(item)">
+                    <label ng-class="vm.labelColor[item.published]" ng-bind="vm.labelContent[item.published]" class="label"></label>
+                </td>
                 <td ng-click="vm.goDetail(item)"> {{item.family.name }}</td>
                <td ng-click="vm.goDetail(item)">{{item.timeEstimation}}</td>
                 <td ng-click="vm.goDetail(item)">{{item.flightRoute.departure}}</td>

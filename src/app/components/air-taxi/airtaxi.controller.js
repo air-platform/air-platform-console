@@ -45,7 +45,32 @@
             value:'rejected',
             title:'审批拒绝'
         }];
+        vm.pubStatus = [
+            {
+                title:'已上线',
+                value: true
+            },
+            {
+                title:'已下线',
+                value: false
+            }
+        ];
 
+        vm.labelColor = {
+            true:'bg-success',
+            false:'bg-warning',
+            'pending':'bg-info',
+            'approved':'bg-success',
+            'rejected':'bg-warning'
+
+        };
+        vm.labelContent={
+            true:'已上线',
+            false:'已下线',
+            'pending':'未审批',
+            'approved':'审批通过',
+            'rejected':'审批拒绝'
+        };
 
         vm.reqPath =  constdata.api.tenant.fleetPath;
         vm.reqPath2 = constdata.api.tenant.jetPath;

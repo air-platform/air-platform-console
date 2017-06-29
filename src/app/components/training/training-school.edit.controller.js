@@ -141,9 +141,9 @@
         function addItem() {
             var myid = vm.userInfo.id;
             vm.user.description = getMarkDownAction().markdown;
-            vm.user.baseDesc = getMarkDownAction2().markdown;
+            vm.user.baseDescription = getMarkDownAction2().markdown;
             console.log(vm.user.description);
-            console.log(vm.user.baseDesc);
+            console.log(vm.user.baseDescription);
             NetworkService.post(vm.reqPath + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 //return;
@@ -158,9 +158,9 @@
         function editItem() {
             var myid = vm.userInfo.id;
             vm.user.description = getMarkDownAction().markdown;
-            vm.user.baseDesc = getMarkDownAction2().markdown;
+            vm.user.baseDescription = getMarkDownAction2().markdown;
             console.log(vm.user.description);
-            console.log(vm.user.baseDesc);
+            console.log(vm.user.baseDescription);
             NetworkService.put(vm.reqPath + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
