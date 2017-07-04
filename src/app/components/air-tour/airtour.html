@@ -36,6 +36,7 @@
                 <th class="text-center">{{'u.TOURDISTANCE' | T}}</th>
                 <th class="text-center">{{'u.TOURTIME' | T}}</th>
                 <th class="text-center">{{'u.BOARDINGLOC' | T}}</th>
+                <th class="text-center">置顶值</th>
 
 
             </tr>
@@ -57,6 +58,10 @@
                 <td ng-click="vm.goDetail(item)"> {{item.tourDistance}}</td>
                <td ng-click="vm.goDetail(item)">{{item.tourTime}}</td>
                 <td ng-click="vm.goDetail(item)">{{item.boardingLocation}}</td>
+
+                <td ng-click="vm.goDetail(item)">
+                    <label class="label bg-main" ng-bind="item.rank"></label>
+                </td>
 
 
 

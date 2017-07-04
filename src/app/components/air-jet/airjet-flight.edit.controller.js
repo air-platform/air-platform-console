@@ -46,6 +46,12 @@
         vm.subPath = 'ferryflights';
         vm.selTime = ['0:00','1:00','2:00','3:00','4:00','5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00',
                       '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
+
+
+        vm.selHour = ['0','1','2','3','4','5', '6', '7', '8', '9', '10', '11', '12',
+            '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
+        vm.selMin = ['00','05','10','15','20','25', '30', '35', '40', '45', '50', '55'];
+
         vm.userType = [
             {
                 title:'管理员',
@@ -177,7 +183,13 @@
                 vm.user = response.data;
 
                 var arrTime = vm.user.timeSlot.split("-");
-                vm.user.time = {start:arrTime[0], end:arrTime[1]};
+                vm.user.time = {start:arrTime[0],
+                                end:arrTime[1],
+                                startHour:arrTime[0].split(":")[0],
+                                startMin:arrTime[0].split(":")[1],
+                                endHour:arrTime[1].split(":")[0],
+                                endMin:arrTime[1].split(":")[1]
+                                };
                 if(vm.user.appearances){
                     var appArr = vm.user.appearances.split(',');
                     if(appArr.length > 0){
@@ -254,7 +266,8 @@
         }
         function addItem() {
             var myid = vm.userInfo.id;
-            vm.user.timeSlot=vm.user.time.start+'-'+vm.user.time.end;
+            //vm.user.timeSlot=vm.user.time.start+'-'+vm.user.time.end;
+            vm.user.timeSlot=vm.user.time.startHour + ':' +vm.user.time.startMin +'-'+vm.user.time.endHour+':'+vm.user.time.endMin;
             console.log(vm.user.timeSlot);
             vm.user.departureDate = dateToString(vm.dt);
 
@@ -296,7 +309,8 @@
             console.log(vm.user.description);
             //return;
             //vm.user.description = mdContent;
-            vm.user.timeSlot=vm.user.time.start+'-'+vm.user.time.end;
+           //vm.user.timeSlot=vm.user.time.start+'-'+vm.user.time.end;
+            vm.user.timeSlot=vm.user.time.startHour + ':' +vm.user.time.startMin +'-'+vm.user.time.endHour+':'+vm.user.time.endMin;
             vm.user.departureDate = dateToString(vm.dt);
 
             vm.user.clientManagers = '';//JSON.stringify(vm.user.clientManagersArr);
@@ -348,7 +362,12 @@
             vm.getTenantItem();
         }else{
             vm.user.currencyUnit = 'rmb';
-            vm.user.time = {'start':'9:00', 'end':'9.00'};
+            vm.user.time = {'start':'9:00',
+                            'end':'9.00',
+                            'startHour':'9',
+                            'startMin':'00',
+                            'endHour':'10',
+                            'endMin':'00'};
             vm.user.time.end = '10:00';
             vm.dt = new Date();
             console.log(vm.user.time);

@@ -35,6 +35,7 @@
                 <th class="text-center">{{'u.TIMEESTI' | T}}</th>
                 <th class="text-center">{{'u.DEPARTURE' | T}}</th>
                 <th class="text-center">{{'u.ARRIVAL' | T}}</th>
+                <th class="text-center">置顶值</th>
 
             </tr>
 
@@ -55,7 +56,9 @@
                <td ng-click="vm.goDetail(item)">{{item.timeEstimation}}</td>
                 <td ng-click="vm.goDetail(item)">{{item.flightRoute.departure}}</td>
                 <td ng-click="vm.goDetail(item)">{{item.flightRoute.arrival}}</td>
-
+                <td ng-click="vm.goDetail(item)">
+                    <label class="label bg-main" ng-bind="item.rank"></label>
+                </td>
 
                <!-- <td ng-click="vm.goDetail(item)">
                     {{item.enabled ? ('u.ACTIVITY'|T ):('u.UNACTIVITY'|T)}}

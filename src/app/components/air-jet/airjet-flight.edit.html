@@ -267,21 +267,38 @@
 
 
                 <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.TIMESLOT' | translate}}</label>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">起降时间</label>
 
-                    <div class="col-sm-2">
+                    <div class="col-sm-3" style="width:13%">
                         <!--<input class="form-control" type="text"
                                placeholder="{{'u.TIMESLOTSTART' | translate}}" ng-model="vm.user.time.start" ng-disabled="vm.isDetail" >
 -->
 
+<!--
                         <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.time.start" ng-options="s for s in vm.selTime" ng-disabled="vm.isDetail" ></select>
+-->
+                        <select  style="background-color: #fff;height: 34px;" class="font-thin" ng-model="vm.user.time.startHour" ng-options="s for s in vm.selHour" ng-disabled="vm.isDetail" ></select>
+                        <label class="font-bold" >时</label>
+                        <select  style="background-color: #fff;height: 34px;" class="font-thin" ng-model="vm.user.time.startMin" ng-options="s for s in vm.selMin" ng-disabled="vm.isDetail" ></select>
+                        <label class="font-bold" >分</label>
 
                     </div>
-                    <label class="font-bold" style="float:left;text-align:center; padding:0px 0px 0px 0px;">--</label>
-                    <div class="col-sm-2">
+                    <label class="font-bold" style="float:left;text-align:center; padding:0px 0px 0px 0px;">---</label>
+                    <div class="col-sm-3" style="width:13%">
                         <!--<input class="form-control" type="text"
                                placeholder="{{'u.TIMESLOTEND' | translate}}" ng-model="vm.user.time.end" ng-disabled="vm.isDetail" >-->
+<!--
                         <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.time.end" ng-options="s for s in vm.selTime" ng-disabled="vm.isDetail" ></select>
+-->
+
+                        <select  style="background-color: #fff;height: 34px;" class="font-thin" ng-model="vm.user.time.endHour" ng-options="s for s in vm.selHour" ng-disabled="vm.isDetail" ></select>
+                        <label class="font-bold" >时</label>
+                        <select  style="background-color: #fff;height: 34px;" class="font-thin" ng-model="vm.user.time.endMin" ng-options="s for s in vm.selMin" ng-disabled="vm.isDetail" ></select>
+                        <label class="font-bold" >分</label>
+
+
+
+
 
                     </div>
 

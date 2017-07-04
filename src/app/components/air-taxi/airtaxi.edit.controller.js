@@ -146,8 +146,10 @@
 
 
 
-
-
+        vm.isDegree = false;
+        vm.switchDegreeView = function (){
+            vm.isDegree = !vm.isDegree;
+        }
 
 
         vm.togglePriceCalendar = function(item)
