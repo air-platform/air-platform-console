@@ -51,7 +51,7 @@
                 //updatePagination(response.data);
             },function (response) {
                 vm.authError = i18n.t('login.LOGIN_FAILED');
-                toastr.error(i18n.t('u.GET_DATA_FAILED') + ' ' + response.status);
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + ' ' + response.status + ' ' + response.statusText);
             });
         };
 
@@ -68,7 +68,7 @@
                 $state.go('app.dashboard');
             },function (response) {
                 vm.authError = i18n.t('login.LOGIN_FAILED');
-                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status + ' ' + response.status)
+                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status + ' ' + response.statusText)
             });
 
 

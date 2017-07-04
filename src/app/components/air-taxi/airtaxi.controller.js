@@ -96,7 +96,7 @@
                     getDatas();
 
                 },function (response) {
-                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status + ' ' + response.statusText);
                 });
 
             }else if(index == 4){
@@ -105,7 +105,7 @@
                     toastr.success(i18n.t('u.OPERATE_SUC'));
                     getDatas();
                 },function (response) {
-                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status + ' ' + response.statusText);
                 });
             }else if(index == 11){
                 var myreason={reason:'invalid params'};
@@ -113,7 +113,8 @@
                     toastr.success(i18n.t('u.OPERATE_SUC'));
                     getDatas();
                 },function (response) {
-                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                    console.log(response);
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status + ' ' + response.statusText);
                 });
             }else if(index == 12){
                 var myreason={reason:'invalid params'};
@@ -121,7 +122,7 @@
                     toastr.success(i18n.t('u.OPERATE_SUC'));
                     getDatas();
                 },function (response) {
-                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status + ' ' + response.statusText);
                 });
             }else{
                 console.log('error ops:'+index);
@@ -176,7 +177,7 @@
                 console.log(vm.displayedCollection);
                 updatePagination(response.data);
             },function (response) {
-                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
             });
         }
 
@@ -338,7 +339,7 @@
                     toastr.success(i18n.t('u.OPERATE_SUC'));
                     getDatas();
                 },function (response) {
-                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status + ' ' + response.statusText);
                 });
 
 
@@ -376,7 +377,7 @@
                     toastr.success(i18n.t('u.OPERATE_SUC'));
                     getDatas();
                 },function (response) {
-                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status + ' ' + response.statusText);
                 });
 
 

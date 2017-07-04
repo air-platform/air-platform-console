@@ -199,7 +199,7 @@
                 vm.allProduct = response.data;
                 console.log(vm.allProduct);
             },function (response) {
-                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
             });
 
 
@@ -207,7 +207,7 @@
                 vm.cats = response.data;
                 console.log(vm.cats);
             },function (response) {
-                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
             });
         }
         getProductsDatas();
@@ -231,7 +231,7 @@
                 $rootScope.userNamePlacedTop = vm.user.nickName;
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
-                toastr.error(i18n.t('u.GET_DATA_FAILED'));
+                toastr.error(i18n.t('u.GET_DATA_FAILED')+vm.authError);
             });
         }
 
@@ -305,7 +305,7 @@
                 vm.backAction();
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
-                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
             });
         }
         function submitAction() {

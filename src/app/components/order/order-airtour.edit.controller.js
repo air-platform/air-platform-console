@@ -154,7 +154,7 @@
                 $rootScope.userNamePlacedTop = vm.user.nickName;
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
-                toastr.error(i18n.t('u.GET_DATA_FAILED'));
+                toastr.error(i18n.t('u.GET_DATA_FAILED')+vm.authError);
             });
         }
 
@@ -178,7 +178,7 @@
                 vm.backAction();
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
-                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status + ' ' + response.statusText);
             });
         }
         function submitAction() {

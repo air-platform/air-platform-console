@@ -103,7 +103,7 @@
                 vm.displayedCollection = [].concat(vm.items);
                 updatePagination(response.data);
             },function (response) {
-                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
             });
         }
 

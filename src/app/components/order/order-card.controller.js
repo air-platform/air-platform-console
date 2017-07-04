@@ -174,7 +174,7 @@
 
                 updatePagination(response.data);
             },function (response) {
-                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
             });
         }
 
@@ -429,7 +429,7 @@
                         toastr.success(i18n.t('u.OPERATE_SUC'));
                         getDatas();
                     },function (response) {
-                        toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                        toastr.error(i18n.t('u.OPERATE_FAILED') + response.status + ' ' + response.statusText);
                     });
                 }, function () {
                     $log.info('Modal dismissed at: ' + new Date());
@@ -465,7 +465,7 @@
                         toastr.success(i18n.t('u.OPERATE_SUC'));
                         getDatas();
                     },function (response) {
-                        toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                        toastr.error(i18n.t('u.OPERATE_FAILED') + response.status + ' ' + response.statusText);
                     });
                 }, function () {
                     $log.info('Modal dismissed at: ' + new Date());
@@ -514,7 +514,7 @@
                             toastr.success(i18n.t('u.OPERATE_SUC'));
                             getDatas();
                         }, function (response) {
-                            toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                            toastr.error(i18n.t('u.OPERATE_FAILED') + response.status + ' ' + response.statusText);
                         });
                     }, function () {
                         $log.info('Modal dismissed at: ' + new Date());
@@ -569,7 +569,7 @@
                                 toastr.success(i18n.t('u.OPERATE_SUC'));
                                 getDatas();
                             }, function (response) {
-                                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status + ' ' + response.statusText);
                             });
                         }, function () {
                             $log.info('Modal dismissed at: ' + new Date());
@@ -612,7 +612,7 @@
                         toastr.success(i18n.t('u.OPERATE_SUC'));
                         getDatas();
                     },function (response) {
-                        toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                        toastr.error(i18n.t('u.OPERATE_FAILED') + response.status + ' ' + response.statusText);
                     });
                 }, function () {
                     $log.info('Modal dismissed at: ' + new Date());
