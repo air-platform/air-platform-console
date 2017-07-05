@@ -21,10 +21,12 @@
             <thead>
             <tr>
                 <th colspan="7">
-<!--
-                    <button ng-disabled=true ng-click="vm.goAddItem()" class="btn btn-sm btn-info btn-addon"><i class="fa fa-plus"></i>{{ 'u.ADD' | T }}</button>
--->
-                    <input st-search="" class="form-control pull-right m-b-xs w-md" placeholder="{{'u.SEARCH' | T}}" type="text"/>
+                    <button  ng-click="vm.goSearchOrder()" class="btn btn-sm btn-info btn-addon pull-right" style="position: relative;top: 1px;margin-left: 4px;"><i class="fa fa-search"></i>{{ 'u.SEARCH' | T }}</button>
+
+                    <input ng-model="vm.searchOrder" class="form-control pull-right  w-md" placeholder="请输入订单号" type="text"/>
+
+
+
                 </th>
             </tr>
             <tr class="font-bold">

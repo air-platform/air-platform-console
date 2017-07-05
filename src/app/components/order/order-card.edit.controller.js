@@ -114,7 +114,11 @@
             }
         ];
 
-
+        vm.paymentMethodMap = {
+            'alipay':'支付宝',
+            'wechat':'微信',
+            'newpay':'新生支付'
+        }
 
 
         var username = $stateParams.username;

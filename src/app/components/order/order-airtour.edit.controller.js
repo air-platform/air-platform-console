@@ -103,7 +103,11 @@
             'payment_in_process':'付款中'
 
         };
-
+        vm.paymentMethodMap = {
+            'alipay':'支付宝',
+            'wechat':'微信',
+            'newpay':'新生支付'
+        }
         vm.priceType = [
             {
                 title:'人民币',
