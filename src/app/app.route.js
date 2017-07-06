@@ -211,20 +211,29 @@
                   url: prefix + 'tenant',
                   templateUrl: 'app/components/tenant/tenant.html'
               })
-              .state('app.customTenantDashboard', {
-                  url: prefix + '{t}/dashboard',
-                  templateUrl: 'app/components/dashboard/dashboard.tenant.custom.html',
-                  params:{args:{}}
-              })
               .state('app.edittenant', {
                   url: prefix + 'tenant/edit/:username',
                   params : {args : {}},
                   templateUrl: 'app/components/tenant/tenant.edit.html'
               })
               .state('app.tenantdetail', {
-              url: prefix + 'tenant/detail',
-              templateUrl: 'app/components/tenant/tenant.detail.html'
-                })
+                  url: prefix + 'tenant/detail',
+                  templateUrl: 'app/components/tenant/tenant.detail.html'
+              })
+              .state('app.user', {
+                  url: prefix + 'user',
+                  templateUrl: 'app/components/user/user.html'
+              })
+              .state('app.edituser', {
+                  url: prefix + 'user/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/user/user.edit.html'
+              })
+              .state('app.customTenantDashboard', {
+                  url: prefix + '{t}/dashboard',
+                  templateUrl: 'app/components/dashboard/dashboard.tenant.custom.html',
+                  params:{args:{}}
+              })
               .state('access', {
                   url: '/access',
                   template: '<div ui-view class="fade-in-right-big smooth"></div>'

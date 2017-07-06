@@ -1,0 +1,117 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="UserController as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+">
+    <!-- main -->
+    <div class="col">
+
+
+
+
+
+
+
+        <div role="tabpanel" class="tab-pane panel col-sm-12 active">
+
+            <div class="row panel" style="margin-bottom:0;">
+                <!-- main header -->
+                <div class="lter wrapper-md">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12">
+                            <h1 class="m-n font-thin h4 text-black">{{'u.TENANTDETAIL' | translate}}</h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- task -->
+                <div class="wrapper-md">
+                    <table class="table table-bordered bg-white text-center">
+
+                        <tbody class="font-bold">
+
+                        <tr style="border-bottom:1px dashed #ddd">
+                            <td colspan="2">
+                               <!-- <button ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-edit"></i>{{'product.EDIT' | translate}}</button>
+                                <button ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-danger btn-addon pull-left m-l"><i class="glyphicon glyphicon-trash"></i>{{'product.DELETE' | translate}}</button>
+-->
+                                <button ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
+
+
+
+
+                            </td>
+                        </tr>
+
+
+                        <tr style="border-bottom:1px dashed #ddd">
+                            <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'u.NAME' | translate}}</td>
+                            <td class="col-md-10" style="border:none;">
+                                <input style="width: 50%;" ng-model="vm.curItem.nickName" type="text" class="form-control pull-left font-thin" required disabled>
+                            </td>
+                        </tr>
+
+                        <tr style="border-bottom:1px dashed #ddd">
+                            <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.DESCRIPTION' | translate}}</td>
+                            <td class="col-md-10" style="border:none;">
+                                <!-- <input style="width: 50%;" ng-model="vm.modifiedProductInfo.description" type="text" class="form-control pull-left font-thin" required> -->
+                                <textarea style="width: 50%;resize:none" ng-model="vm.curItem.description" class="form-control font-thin pull-left" rows="3" cols="" required disabled></textarea>
+                            </td>
+                        </tr>
+
+
+
+                        <tr style="border-bottom:1px dashed #ddd">
+                            <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.LANGUAGE' | translate}}</td>
+                            <td class="col-md-10" style="border:none;">
+                                <input style="width: 50%;" ng-model="vm.curItem.lang" type="text" class="form-control pull-left font-thin" required disabled>
+                            </td>
+                        </tr>
+
+
+
+                        <tr style="border-bottom:1px dashed #ddd">
+                            <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.CREATEDDATE' | translate}}</td>
+                            <td class="col-md-10" style="border:none;">
+                                <input style="width: 50%;" ng-model="vm.curItem.createdTime" type="text" class="form-control pull-left font-thin" required disabled>
+                            </td>
+                        </tr>
+
+                        <tr style="border-bottom:1px dashed #ddd">
+                            <td class="text-right col-md-1" style="vertical-align: middle;border:none;">{{'product.CODE_ADDR' | translate}}</td>
+                            <td class="col-md-10" style="border:none;">
+                                <input style="width: 50%;" ng-model="vm.curItem.git" type="text" class="form-control pull-left font-thin" required disabled>
+                            </td>
+                        </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+</div>
+

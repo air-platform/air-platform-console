@@ -316,6 +316,7 @@
 
                         }else if (vm.items[i].status == 'refund_failed') {
                             //vm.items[i].isCloseEnable = true;
+                            vm.items[i].isAcceptRefundEnable = true;
 
                         }else if (vm.items[i].status == 'finished') {
                             vm.items[i].isCloseEnable = true;
@@ -700,7 +701,7 @@
                     }, function () {
                         $log.info('Modal dismissed at: ' + new Date());
                     });
-                }else  if(item.status != 'refund_requested') {
+                }else  if(item.status != 'refund_requested' || item.status=='refund_failed') {
                     vm.tipsInfo = {
                         title:'商户退款',
                         content:'客户没有申请退款，确认是否退款 ？'
