@@ -165,6 +165,21 @@
 
             //$rootScope.backPre();
         }
+
+
+        function getTenantDatas() {
+
+            NetworkService.get(constdata.api.tenant.listAllPath + '/' + '?role=tenant',{page:vm.pageCurrent},function (response) {
+                vm.tenants = response.data.content;
+            },function (response) {
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
+            });
+        }
+        vm.selTenant = ''
+        if(vm.isAdmin) {
+            getTenantDatas();
+
+        }
         function getTenantItem() {
 
             var myid = vm.userInfo.id;
@@ -176,6 +191,9 @@
                 vm.sdt   =   new Date((vm.user.startDate));
                 vm.edt   =   new Date((vm.user.endDate));
                 vm.user.school = vm.user.school.id;
+                if(vm.isAdmin){
+                    vm.selTenant = vm.user.vendor.id;
+                }
                 vm.user.clientManagersArr = [];
                 if(vm.user.clientManagers){
                     var uInfo = vm.user.clientManagers.split( "," );
@@ -243,7 +261,13 @@
             vm.user.price = parseInt(vm.user.price);
             vm.user.totalNum = parseInt(vm.user.totalNum);
 
-            NetworkService.post(vm.reqPath + '/'+ vm.subPath+'?school='+vm.user.school,vm.user,function (response) {
+            var refReq = vm.reqPath  + '/' + vm.subPath+'?school='+vm.user.school;
+            if(vm.isAdmin){
+                refReq += '&tenant='+vm.selTenant;
+            }
+            NetworkService.post(refReq,vm.user,function (response) {
+
+          //  NetworkService.post(vm.reqPath + '/'+ vm.subPath+'?school='+vm.user.school,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {

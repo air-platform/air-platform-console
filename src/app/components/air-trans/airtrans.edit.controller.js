@@ -344,6 +344,20 @@
         }
         getAircraftsDatas();
 
+        function getTenantDatas() {
+
+            NetworkService.get(constdata.api.tenant.listAllPath + '/' + '?role=tenant',{page:vm.pageCurrent},function (response) {
+                vm.tenants = response.data.content;
+            },function (response) {
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
+            });
+        }
+        vm.selTenant = ''
+        if(vm.isAdmin) {
+            getTenantDatas();
+
+        }
+
         vm.productfamily = [];
 
 
@@ -370,7 +384,9 @@
 
                 vm.user.clientManagersArr = [];
                 vm.user.aircraftItemsAdd = [];
-
+                if(vm.isAdmin){
+                    vm.selTenant = vm.user.vendor.id;
+                }
                 if(vm.user.salesPackages && vm.user.salesPackages.length > 0){
                     for (var i = 0; i < vm.user.salesPackages.length; i ++){
                         vm.user.salesPackages[i].aircraftId = vm.user.salesPackages[i].aircraft.id;
@@ -497,7 +513,12 @@
            // vm.user.salesPackages[0].passengers = parseInt(vm.user.salesPackages[0].passengers);
             //vm.user.salesPackages[0].presalesDays = parseInt(vm.user.salesPackages[0].presalesDays);
             //vm.user.timeEstimation = parseInt(vm.user.timeEstimation)
-            NetworkService.post(vm.reqPath  + '/' + vm.subPath,vm.user,function (response) {
+            var refReq = vm.reqPath  + '/' + vm.subPath;
+            if(vm.isAdmin){
+                refReq += '?tenant='+vm.selTenant;
+            }
+            NetworkService.post(refReq,vm.user,function (response) {
+           // NetworkService.post(vm.reqPath  + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
 
 

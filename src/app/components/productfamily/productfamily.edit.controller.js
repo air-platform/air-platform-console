@@ -118,15 +118,16 @@
         var type = $stateParams.args.type;
 
 
-
-        vm.reqPath = constdata.api.productFamily.basePath;
+        vm.subPath = 'families';
+        vm.reqPath =  constdata.api.tenant.prdPath;
+        vm.reqPath2 = constdata.api.tenant.prdPath;
         vm.isAdmin = false;
         vm.userInfo = StorageService.get('iot.hnair.cloud.information');
         if(vm.userInfo.role != 'tenant'){
-            vm.reqPath = constdata.api.productFamily.adminPath;
+            vm.reqPath = constdata.api.admin.basePath;
+            vm.reqPath2 = constdata.api.admin.platPath;
             vm.isAdmin = true;
         }
-
 
         vm.clientManagersArr = [];
         console.log(type);
@@ -157,16 +158,32 @@
             vm.clientManagersArr.splice(index, 1);
         }
 
-        function getTenantItem() {
+        function getTenantDatas() {
+
+            NetworkService.get(constdata.api.tenant.listAllPath + '/' + '?role=tenant',{page:vm.pageCurrent},function (response) {
+                vm.tenants = response.data.content;
+            },function (response) {
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
+            });
+        }
+        vm.selTenant = ''
+        if(vm.isAdmin) {
+            getTenantDatas();
+        }
+
+            function getTenantItem() {
 
             var myid = vm.userInfo.id;
             console.log(myid);
             console.log(username);
 
 
-            NetworkService.get(vm.reqPath +'/' +  '/'+ username,null,function (response) {
+            NetworkService.get( vm.reqPath  + '/' + vm.subPath+  '/'+ username,null,function (response) {
                 vm.user = response.data;
                 console.log(vm.user);
+                if(vm.isAdmin){
+                    vm.selTenant = vm.user.vendor.id;
+                }
                 if(vm.user.items){
                     vm.clientManagersArr = vm.user.items;
 
@@ -189,7 +206,12 @@
 
            // vm.user.items = [{title:'item1', image:'img1', link:'lnk1'}];
 
-            NetworkService.post(vm.reqPath,vm.user,function (response) {
+            var refReq = vm.reqPath  + '/' + vm.subPath;
+            if(vm.isAdmin){
+                refReq += '?tenant='+vm.selTenant;
+            }
+            NetworkService.post(refReq,vm.user,function (response) {
+            //NetworkService.post(vm.reqPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -242,7 +264,7 @@
 
 
 
-            NetworkService.put(vm.reqPath  + '/'+ username,vm.user,function (response) {
+            NetworkService.put( vm.reqPath  + '/' + vm.subPath  + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {

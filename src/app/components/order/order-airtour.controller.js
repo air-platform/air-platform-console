@@ -92,7 +92,7 @@
         vm.goSearchOrder = function()
         {
             //function getDatas() {
-            vm.reqPath = vm.reqPath+'/search?orderNo='+vm.searchOrder;
+            vm.reqPath = vm.reqPath2+'/search?orderNo='+vm.searchOrder;
                 NetworkService.get(vm.reqPath,{page:vm.pageCurrent},function (response) {
                     vm.items = response.data;
                     console.log(response.data);

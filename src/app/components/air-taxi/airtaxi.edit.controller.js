@@ -388,6 +388,24 @@
         }
         getAircraftsDatas();
 
+
+        function getTenantDatas() {
+
+            NetworkService.get(constdata.api.tenant.listAllPath + '/' + '?role=tenant',{page:vm.pageCurrent},function (response) {
+                vm.tenants = response.data.content;
+            },function (response) {
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
+            });
+        }
+        vm.selTenant = ''
+        if(vm.isAdmin) {
+            getTenantDatas();
+
+        }
+
+
+
+
         function getTenantItem() {
 
             var myid = vm.userInfo.id;
@@ -440,7 +458,9 @@
                     vm.arrivalInfo.lat = parseFloat(vm.user.flightRoute.arrivalLatitude);
 
                 }
-
+                if(vm.isAdmin){
+                    vm.selTenant = vm.user.vendor.id;
+                }
                 vm.initMap();
                 $rootScope.userNamePlacedTop = vm.user.nickName;
             },function (response) {
@@ -488,9 +508,12 @@
             vm.user.flightRoute.arrival = document.getElementById('arrival_area').value;
 
 
-
-
-            NetworkService.post(vm.reqPath  + '/' + vm.subPath,vm.user,function (response) {
+            var refReq = vm.reqPath  + '/' + vm.subPath;
+            if(vm.isAdmin){
+                refReq += '?tenant='+vm.selTenant;
+            }
+            NetworkService.post(refReq,vm.user,function (response) {
+            //NetworkService.post(vm.reqPath  + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {

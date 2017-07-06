@@ -174,14 +174,29 @@
             });
         }
         getAirjetsDatas();
-        function getTenantItem() {
+
+        function getTenantDatas() {
+
+            NetworkService.get(constdata.api.tenant.listAllPath + '/' + '?role=tenant',{page:vm.pageCurrent},function (response) {
+                vm.tenants = response.data.content;
+            },function (response) {
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
+            });
+        }
+        vm.selTenant = ''
+        if(vm.isAdmin) {
+            getTenantDatas();
+        }
+            function getTenantItem() {
 
             var myid = vm.userInfo.id;
             console.log(myid);
             console.log(username);
             NetworkService.get(vm.reqPath  + '/' + vm.subPath + '/'+ username,null,function (response) {
                 vm.user = response.data;
-
+                if(vm.isAdmin){
+                    vm.selTenant = vm.user.vendor.id;
+                }
                 var arrTime = vm.user.timeSlot.split("-");
                 vm.user.time = {start:arrTime[0],
                                 end:arrTime[1],
@@ -291,7 +306,12 @@
                     vm.user.appearances = vm.user.appearances.substr(0, vm.user.appearances.length-1);
                 }
             }
-            NetworkService.post(vm.reqPath + '/' + vm.subPath,vm.user,function (response) {
+            var refReq = vm.reqPath  + '/' + vm.subPath;
+            if(vm.isAdmin){
+                refReq += '?tenant='+vm.selTenant;
+            }
+            NetworkService.post(refReq,vm.user,function (response) {
+            //NetworkService.post(vm.reqPath + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
 
                 vm.backAction();

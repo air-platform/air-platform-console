@@ -121,7 +121,19 @@
             var index = vm.user.clientManagersArr.indexOf(item);
             vm.user.clientManagersArr.splice(index, 1);
         }
+        function getTenantDatas() {
 
+            NetworkService.get(constdata.api.tenant.listAllPath + '/' + '?role=tenant',{page:vm.pageCurrent},function (response) {
+                vm.tenants = response.data.content;
+            },function (response) {
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
+            });
+        }
+        vm.selTenant = ''
+        if(vm.isAdmin) {
+            getTenantDatas();
+
+        }
         function getTenantItem() {
 
             var myid = vm.userInfo.id;
@@ -131,6 +143,10 @@
 
             NetworkService.get(vm.reqPath  + '/' + vm.subPath + '/'+ username,null,function (response) {
                 vm.user = response.data;
+                if(vm.isAdmin){
+                    vm.selTenant = vm.user.vendor.id;
+                }
+
                 vm.user.clientManagersArr = [];
 
                 if(vm.user.clientManagers){
@@ -171,8 +187,12 @@
             console.log(vm.user.clientManagers);
 
 
-
-            NetworkService.post(vm.reqPath  + '/' + vm.subPath,vm.user,function (response) {
+            var refReq = vm.reqPath  + '/' + vm.subPath;
+            if(vm.isAdmin){
+                refReq += '?tenant='+vm.selTenant;
+            }
+            NetworkService.post(refReq,vm.user,function (response) {
+           // NetworkService.post(vm.reqPath  + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {

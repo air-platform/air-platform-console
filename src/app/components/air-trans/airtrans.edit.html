@@ -43,6 +43,21 @@
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
 
+                <div  ng-if="vm.isAdmin && !vm.isEdit" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">商户</label>
+                    <div class="col-sm-4">
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.selTenant" ng-options="s.id as s.nickName for s in vm.tenants" ng-disabled="vm.isDetail"></select>
+
+                    </div>
+
+                </div>
+                <div  ng-if="vm.isAdmin && !vm.isEdit" class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+
 
 
 
@@ -250,7 +265,10 @@
 -->
 
 
-                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.productfamilyId" ng-options="opt.id as opt.name for opt in vm.productfamily" ng-disabled="vm.isDetail" ></select>
+                        <select  style="width: 100%;" class="form-control font-thin" ng-model="vm.user.productfamilyId" ng-options="opt.id as opt.name for opt in vm.productfamily" ng-disabled="vm.isDetail" ></select>
+<!--
+                        <select ng-if="vm.isAdmin" style="width: 100%;" class="form-control font-thin" ng-model="vm.user.productfamilyId" ng-options="opt.id as opt.name for opt in vm.productfamily| filter: {id:vm.selTenant}" ng-disabled="vm.isDetail" ></select>
+-->
 
 
 
