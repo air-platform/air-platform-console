@@ -9,7 +9,7 @@
         .controller('UserController', UserController);
 
     /** @ngInject */
-    function UserController(NetworkService,constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
+    function UserController(NetworkService,StorageService,constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -29,10 +29,72 @@
         vm.removeItem = removeItem;
         vm.curItem = {};
         vm.backAction = backAction;
+        vm.displayedCollection = [];
+        vm.subPath = 'accounts';
+        vm.reqPath =  constdata.api.tenant.basePath;
+        vm.reqPath2 = constdata.api.tenant.jetPath;
+        vm.isAdmin = false;
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath = constdata.api.admin.platPath;
+            vm.reqPath2 = constdata.api.tenant.jetPath;
+            vm.isAdmin = true;
+        }
+
+        vm.OperApp = OperApp;
+        function OperApp(index, item) {
+            if(index == 3){
+
+                NetworkService.post(vm.reqPath + '/' + vm.subPath  +'/'+ item.id + '/lock',null,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    toastr.error(vm.authError);
+                });
+
+            }else if(index == 4){
+                NetworkService.post(vm.reqPath + '/' + vm.subPath  +'/'+ item.id + '/unlock',null,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    toastr.error(vm.authError);
+                });
+            }else if(index == 5){
+                NetworkService.post(vm.reqPath + '/' + vm.subPath  +'/'+ item.id + '/password/reset',null,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    toastr.error(vm.authError);
+                });
+            }else{
+                console.log('error ops:'+index);
+            }
+
+            //$state.go('app.applicationedit');
+        };
+
+
         function getDatas() {
 
             NetworkService.get(constdata.api.tenant.listAllPath + '/' + '?role=user',{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
+                vm.displayedCollection = (vm.items);
+                if(vm.displayedCollection) {
+                    for (var i = 0; i < vm.displayedCollection.length; i++) {
+                        if (vm.displayedCollection[i].status == 'enabled') {
+                            vm.displayedCollection[i].isLockEnable = true;
+                            vm.displayedCollection[i].isUnlockEnable = false;
+                        } else if (vm.displayedCollection[i].status == 'locked') {
+                            vm.displayedCollection[i].isLockEnable = false;
+                            vm.displayedCollection[i].isUnlockEnable = true;
+                        }
+                    }
+                }
+
+
                 updatePagination(response.data);
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
@@ -41,15 +103,15 @@
 
 
         function goAddItem() {
-            $state.go('app.edittenant',{});
+            $state.go('app.edituser',{});
         };
 
         function goEditItem(item) {
-            $state.go('app.edittenant',{username:item.id, args:{type:'edit'}});
+            $state.go('app.edituser',{username:item.id, args:{type:'edit'}});
         };
 
         function goDetail(item) {
-            $state.go('app.edittenant',{username:item.id, args:{type:'detail'}});
+            $state.go('app.edituser',{username:item.id, args:{type:'detail'}});
 
         };
 

@@ -20,7 +20,7 @@
     });
 
     /** @ngInject */
-    function UserEditController(NetworkService,constdata,i18n,$rootScope,$stateParams,toastr) {
+    function UserEditController(NetworkService,StorageService, constdata,i18n,$rootScope,$stateParams,toastr) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -44,7 +44,7 @@
         vm.backAction = backAction;
         vm.back = back;
         vm.addUser = {};
-        vm.addUser.role='tenant';
+        vm.addUser.role='user';
         vm.userType = [
             {
                 title:'管理员',
@@ -70,6 +70,17 @@
                 value:'disabled'
             }
         ];
+        vm.subPath = 'accounts';
+        vm.reqPath =  constdata.api.tenant.basePath;
+        vm.reqPath2 = constdata.api.tenant.jetPath;
+        vm.isAdmin = false;
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath = constdata.api.admin.platPath;
+            vm.reqPath2 = constdata.api.tenant.jetPath;
+            vm.isAdmin = true;
+        }
+
 
         var username = $stateParams.username;
         var type = $stateParams.args.type;
@@ -88,7 +99,7 @@
 
         function getTenantItem() {
 
-            NetworkService.get(constdata.api.tenant.listAllPath + '/' + username,null,function (response) {
+            NetworkService.get(vm.reqPath + '/' + vm.subPath +'/' + username,null,function (response) {
                 vm.user = response.data;
                 $rootScope.userNamePlacedTop = vm.user.nickName;
             },function (response) {
@@ -99,7 +110,7 @@
 
 
         function addItem() {
-            NetworkService.post(constdata.api.tenant.listAllPath,vm.addUser,function (response) {
+            NetworkService.post(vm.reqPath + '/' + vm.subPath,vm.addUser,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -110,7 +121,7 @@
         }
 
         function editItem() {
-            NetworkService.put(constdata.api.tenant.updatePath +'/'+ username,{nickName:vm.user.nickName,enabled:vm.user.enabled},function (response) {
+            NetworkService.put(vm.reqPath + '/' + vm.subPath +'/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -127,7 +138,7 @@
         }
 
         function lockTenant() {
-            NetworkService.post(constdata.api.tenant.lockPath +'/'+ username + '/lock',null,function (response) {
+            NetworkService.post(vm.reqPath + '/' + vm.subPath  +'/'+ username + '/lock',null,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.getTenantItem();
             },function (response) {
@@ -136,7 +147,7 @@
             });
         }
         function unlockTenant() {
-            NetworkService.post(constdata.api.tenant.lockPath +'/'+ username + '/unlock',null,function (response) {
+            NetworkService.post(vm.reqPath + '/' + vm.subPath +'/' + username + '/unlock',null,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.getTenantItem();
             },function (response) {

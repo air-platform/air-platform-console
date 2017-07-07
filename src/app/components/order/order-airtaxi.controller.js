@@ -33,7 +33,7 @@
         vm.subPath = 'airbook';
 
         vm.labelClass = {
-            'pending':'bg-info',
+            'member':'bg-info',
             'finished':'bg-finished',
             'paid':'bg-success',
             'cancelled':'bg-warning',

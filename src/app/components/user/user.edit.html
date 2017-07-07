@@ -28,21 +28,18 @@
             <br/>
             <form name="form" class="form-horizontal form-validation" role="form">
 
-
-
-
-                <div ng-if="vm.isAdd" class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.USERNAME' | translate}}</label>
+                <div  ng-if="vm.isAdd" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">用户名</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.USERNAME' | translate}}" ng-model="vm.addUser.username"  required>
+                               placeholder="用户名" ng-model="vm.addUser.username" ng-disabled="vm.isDetail" ng-pattern="/^[a-zA-Z0-9_\\-]{2,20}$/" required>
                     </div>
-                    <span><i style="color:red;font-size:20px;">* </i><i style="font-style:normal; color:#999;">{{'tenant.USERNAMETIP' | translate}}</i></span>
+                    <span ng-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i><i style="font-style:normal; color:#999;">{{'tenant.USERNAMETIP' | translate}}</i></span>
                 </div>
-                <div ng-if="vm.isAdd" class="line line-dashed b-b line-lg"></div>
+                <div  ng-if="vm.isAdd" class="line line-dashed b-b line-lg"></div>
 
 
-                <div ng-if="vm.isAdd" class="form-group">
+               <div  ng-if="vm.isAdd" class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.PASSWORD' | translate}}</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="password"
@@ -50,17 +47,23 @@
                     </div>
                     <span><i style="color:red;font-size:20px;">* </i><i style="font-style:normal; color:#999;">{{'tenant.PASSWORDTIP' | translate}}</i></span>
                 </div>
-                <div ng-if="vm.isAdd" class="line line-dashed b-b line-lg"></div>
+                <div  ng-if="vm.isAdd" class="line line-dashed b-b line-lg"></div>
 
 
 
 
+                <!--<div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.ROLE' | translate}}</label>
+                    <div class="col-sm-4">
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.role" ng-options="s.value as s.title for s in vm.userType" ng-disabled="vm.isDetail" ></select>
 
-
-
-
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+-->
                 <div ng-if="!vm.isAdd" class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.ENTNAME' | translate}}</label>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">用户名</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
                                placeholder="{{'u.NICKNAME' | translate}}" ng-model="vm.user.nickName" ng-disabled="vm.isDetail" ng-pattern="/^[a-zA-Z0-9_\\-]{2,20}$/" required>
@@ -73,24 +76,7 @@
 
 
 
-
-                <div ng-if="!vm.isAdd" class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.ROLE' | translate}}</label>
-                    <div class="col-sm-4">
-                       <!-- <input class="form-control" type="text"
-                               placeholder="{{'u.ROLE' | translate}}" ng-model="vm.user.role" ng-disabled="vm.isDetail" >-->
-
-                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.role" ng-options="s.value as s.title for s in vm.userType" ng-disabled="vm.isDetail" ></select>
-
-                    </div>
-                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
-                </div>
-                <div ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>
-
-
-
-
-                <div ng-if="!vm.isAdd" class="form-group">
+                <div  ng-if="vm.isDetail"  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.STATUS' | translate}}</label>
                     <div class="col-sm-4">
 
@@ -100,18 +86,27 @@
                         <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.status" ng-options="s.value as s.title for s in vm.statusType" ng-disabled="vm.isDetail" ></select>
 
                     </div>
-                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
-                <div ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>
+                <div  ng-if="vm.isDetail" class="line line-dashed b-b line-lg"></div>
 
 
-
-
-                <div ng-if="vm.isDetail" class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CREATEDATE' | translate}}</label>
+                <div  ng-if="vm.isDetail" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">积分</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.CREATEDATE' | translate}}" ng-model="vm.user.creationDate" ng-disabled="vm.isDetail" >
+                               placeholder="积分" ng-model="vm.user.points" ng-disabled="vm.isDetail">
+                    </div>
+
+                </div>
+                <div  ng-if="vm.isDetail" class="line line-dashed b-b line-lg"></div>
+
+
+
+                <div  ng-if="vm.isDetail" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">等级</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="等级" ng-model="vm.user.member" ng-disabled="vm.isDetail">
                     </div>
 
                 </div>
@@ -121,9 +116,8 @@
 
 
 
-
-                <div ng-if="!vm.isAdd" class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.ENTAVATAR' | translate}}</label>
+                <div  ng-if="!vm.isAdd" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">头像</label>
 
                     <div class="col-sm-4">
 
@@ -137,111 +131,166 @@
                     </div>
 
                 </div>
-                <div ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>
+                <div  ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>
 
 
-                <div ng-if="!vm.isAdd" class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.EMAIL' | translate}}</label>
+
+
+                <div  ng-if="!vm.isAdd" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">真实姓名</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.EMAIL' | translate}}" ng-model="vm.user.email" ng-disabled="vm.isDetail">
+                               placeholder="真实姓名" ng-model="vm.user.realName" ng-disabled="vm.isDetail">
                     </div>
 
                 </div>
-                <div ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>
+                <div  ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>
 
 
 
-                <div ng-if="!vm.isAdd" class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.WEBSITE' | translate}}</label>
+                <div  ng-if="!vm.isAdd" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">证件号</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.WEBSITE' | translate}}" ng-model="vm.user.website" ng-disabled="vm.isDetail">
+                               placeholder="证件号" ng-model="vm.user.identity" ng-disabled="vm.isDetail">
                     </div>
 
                 </div>
-                <div ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>
+                <div  ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>
 
 
-                <div ng-if="!vm.isAdd" class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.ADDRESS' | translate}}</label>
+
+
+
+                <div  ng-if="!vm.isAdd" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">性别</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.ADDRESS' | translate}}" ng-model="vm.user.address" ng-disabled="vm.isDetail">
+                               placeholder="性别" ng-model="vm.user.gender" ng-disabled="vm.isDetail">
                     </div>
 
                 </div>
-                <div ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>
+                <div  ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>
 
 
 
-
-
-
-
-
-
-                <div ng-if="!vm.isAdd" class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.HOTLINE' | translate}}</label>
+                <div  ng-if="!vm.isAdd" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">生日</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.HOTLINE' | translate}}" ng-model="vm.user.hotline" ng-disabled="vm.isDetail">
+                               placeholder="生日" ng-model="vm.user.birthday" ng-disabled="vm.isDetail">
                     </div>
 
                 </div>
-                <div ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>
+                <div  ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>
 
 
-                <div ng-if="!vm.isAdd" class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.DESCRIPTION' | translate}}</label>
+
+
+
+
+
+
+                <div  ng-if="!vm.isAdd" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">国家</label>
                     <div class="col-sm-4">
-
-                        <textarea class="form-control font-thin" ng-model="vm.user.description" rows="4" placeholder="{{'u.DESCRIPTION' | translate}}" style="resize: none;" ng-disabled="vm.isDetail"></textarea>
-
-
+                        <input class="form-control" type="text"
+                               placeholder="国家" ng-model="vm.user.country" ng-disabled="vm.isDetail">
                     </div>
 
                 </div>
-
-                <div ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>
-
+                <div  ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>
 
 
 
 
 
-                <!--   <div class="form-group">
-                       <label class="col-sm-1 control-label m-l-lg font-bold">{{'profile.MAILBOX' | translate}}</label>
-                       <div class="col-sm-4">
-                           <input class="form-control" type="email"
-                                  placeholder="{{'profile.MAILBOX' | translate}}" ng-model="vm.user.email" required>
-                       </div>
-                       <span style="color:red;font-size:20px;">*</span>
-                   </div>
+                <div ng-if="!vm.isAdd"  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">省</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="省" ng-model="vm.user.province" ng-disabled="vm.isDetail">
+                    </div>
 
-                   <div class="line line-dashed b-b line-lg"></div>
-                   <div class="form-group">
-                       <label class="col-sm-1 control-label m-l-lg font-bold">{{'tenant.ACTIVESTATUS' | translate}}</label>
-                       <div class="col-sm-1 checkbox" style="padding-top:0;">
+                </div>
+                <div  ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>
 
-                           <label>
-                                <input style="width:20px;height:20px;" type="checkbox" ng-model="vm.user.enabled" ng-disabled="!vm.isAdd">
-                           </label>
-                       </div>
-                       <div ng-if="!vm.isAdd" class="col-sm-2" style="padding-left:0;">
-                           <button ng-if="vm.user.enabled" class="btn btn-info btn-addon btn-sm pull-left" ng-click="vm.lockTenant()"><i class="fa fa-lock"></i>{{'tenant.LOCK' | translate}}</button>
-                           <button ng-if="!vm.user.enabled" class="btn btn-info btn-addon btn-sm pull-left" ng-click="vm.unlockTenant()"><i class="fa fa-unlock-alt"></i>{{'tenant.ACTIVE' | translate}}</button>
-                       </div>
-                   </div>
+                <div  ng-if="!vm.isAdd" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">市</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="市" ng-model="vm.user.city" ng-disabled="vm.isDetail">
+                    </div>
 
-                   <div class="line line-dashed b-b line-lg"></div>
-                  -->
+                </div>
+                <div  ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>
+
+
+                <div  ng-if="!vm.isAdd" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">爱好</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="爱好" ng-model="vm.user.hobbies" ng-disabled="vm.isDetail">
+                    </div>
+
+                </div>
+                <div  ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+                <div ng-if="vm.isDetail"  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CREATEDATE' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.CREATEDATE' | translate}}" ng-model="vm.user.creationDate" ng-disabled="vm.isDetail" >
+                    </div>
+
+                </div>
+                <div ng-if="vm.isDetail"  class="line line-dashed b-b line-lg"></div>
+
+                <div ng-if="vm.isDetail"  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">上次访问日期</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="上次访问日期" ng-model="vm.user.lastAccessedDate" ng-disabled="vm.isDetail" >
+                    </div>
+
+                </div>
+                <div ng-if="vm.isDetail"  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+                <div ng-if="vm.isDetail"  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">上次访问IP</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="上次访问IP" ng-model="vm.user.lastAccessedIp" ng-disabled="vm.isDetail" >
+                    </div>
+
+                </div>
+                <div ng-if="vm.isDetail"  class="line line-dashed b-b line-lg"></div>
+
+
+                <div  ng-if="vm.isDetail" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">每日签到</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="每日签到" ng-model="vm.user.dailySignin" ng-disabled="vm.isDetail">
+                    </div>
+
+                </div>
+                <div ng-if="vm.isDetail"  class="line line-dashed b-b line-lg"></div>
+
+
 
 
                 <div class="form-group">
                     <div class="col-sm-offset-1 col-sm-3">
                         <button ng-if="!vm.isDetail" class="btn btn-default btn-sm m-l-lg btn-addon bg-light" ng-click="vm.backAction()"> <i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}} </button>
-                        <button ng-if="!vm.isDetail" class="btn btn-sm btn-info btn-addon" type="submit" ng-click="vm.submitAction()" ng-disabled='form.$invalid'> <i class="fa fa-check-circle"></i>{{'product.CONFIRM' | T}} </button>
+                        <button ng-if="!vm.isDetail" class="btn btn-sm btn-info btn-addon" type="submit" ng-click="vm.submitAction()" > <i class="fa fa-check-circle"></i>{{'product.CONFIRM' | T}} </button>
                         <button ng-if="vm.isDetail" ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
 
                     </div>
