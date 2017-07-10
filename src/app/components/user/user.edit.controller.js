@@ -45,6 +45,24 @@
         vm.back = back;
         vm.addUser = {};
         vm.addUser.role='user';
+        vm.labelColor = {
+            enabled:'bg-success',
+            locked:'bg-danger',
+            'member':'bg-main',
+            'silver':'bg-main',
+            'gold':'bg-main',
+            'platinum':'bg-main',
+            'diamond':'bg-main'
+        };
+        vm.labelContent={
+            enabled:'已启用',
+            locked:'已锁定',
+            'member':'普通会员',
+            'silver':'白银会员',
+            'gold':'黄金会员',
+            'platinum':'铂金会员',
+            'diamond':'钻石会员'
+        };
         vm.userType = [
             {
                 title:'管理员',
@@ -70,6 +88,29 @@
                 value:'disabled'
             }
         ];
+
+        vm.encType = [
+            {
+                title:'是',
+                value:true
+            },
+            {
+                title:'否',
+                value:false
+            }
+        ];
+
+        vm.genderType = [
+            {
+                title:'男',
+                value:'male'
+            },
+            {
+                title:'女',
+                value:'female'
+            }
+        ];
+
         vm.subPath = 'accounts';
         vm.reqPath =  constdata.api.tenant.basePath;
         vm.reqPath2 = constdata.api.tenant.jetPath;
@@ -95,6 +136,26 @@
         }
         if(type && type=='detail'){
             vm.isDetail = true;
+        }
+
+        vm.uploadFile = function (){
+            console.log(vm.myUploadFile);
+            vm.showSpinner = true;
+            NetworkService.postForm(constdata.api.uploadFile.qiniuPath,vm.myUploadFile,function (response) {
+                toastr.success(i18n.t('u.OPERATE_SUC'));
+                vm.showSpinner = false;
+                console.log(response.data);
+                vm.user.avatar = response.data.url;
+
+                //vm.backAction();
+            },function (response) {
+                vm.authError = response.statusText + '(' + response.status + ')';
+                console.log(vm.authError);
+                toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+                vm.showSpinner = false;
+            });
+
+            //$rootScope.backPre();
         }
 
         function getTenantItem() {

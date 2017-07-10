@@ -83,7 +83,14 @@
                         <!--<input class="form-control" type="text"
                                placeholder="{{'u.STATUS' | translate}}" ng-model="vm.user.status" ng-disabled="vm.isDetail" >-->
 
+<!--
                         <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.status" ng-options="s.value as s.title for s in vm.statusType" ng-disabled="vm.isDetail" ></select>
+-->
+
+
+                        <label style="position: relative;top:4px;" ng-class="vm.labelColor[vm.user.status]" ng-bind="vm.labelContent[vm.user.status]" class="label"></label>
+
+
 
                     </div>
                 </div>
@@ -105,8 +112,13 @@
                 <div  ng-if="vm.isDetail" class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">等级</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="等级" ng-model="vm.user.member" ng-disabled="vm.isDetail">
+                        <!--<input class="form-control" type="text"
+                               placeholder="等级" ng-model="vm.user.rank" ng-disabled="vm.isDetail">
+-->
+
+                        <label style="position: relative;top:4px;" ng-class="vm.labelColor[vm.user.rank]" ng-bind="vm.labelContent[vm.user.rank]" class="label"></label>
+
+
                     </div>
 
                 </div>
@@ -122,13 +134,55 @@
                     <div class="col-sm-4">
 
 
-                        <input class="form-control" type="text" style="margin-bottom:10px;"
+                  <!--      <input class="form-control" type="text" style="margin-bottom:10px;"
                                placeholder="{{'u.IMAGE' | translate}}" ng-model="vm.user.avatar" ng-disabled="vm.isDetail" >
 
                     <div class="img-preview">
                         <img ng-src="{{vm.user.avatar}}" alt="">
+                    </div>-->
+
+
+
+
+                        <div class="beauty-upload">
+
+                            <div class="lcell span5" style="margin:5px 0px;">
+                                <div class="upload">
+                                    <input type="button" class="btn btn-default upload-btn" value="浏览文件"></input>
+                                    <!--<span  ng-bind="vm.myUploadFile.name">eee</span>-->
+                                    <label  ng-bind="vm.myUploadFile.name" class="label bg-finished"></label>
+                                    <input type="file" file-model = "vm.myUploadFile" class="upload-input-file" />
+                                    <button style="float:right;background:#23b7e5;border-radius:3px;" class="btn btn-default" ng-click="vm.uploadFile()"> <i class="fa fa-check-circle"></i> 上传 </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <input class="form-control" type="text" style="margin-bottom:10px;"
+                               placeholder="{{'u.IMAGE' | translate}}" ng-model="vm.user.avatar" ng-disabled="vm.isDetail" >
+
+                        <div class="img-preview">
+
+                            <img ng-src="{{vm.user.avatar}}" alt="">
+
+                        </div>
+
+
+
                     </div>
-                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 </div>
                 <div  ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>
@@ -165,8 +219,10 @@
                 <div  ng-if="!vm.isAdd" class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">性别</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="性别" ng-model="vm.user.gender" ng-disabled="vm.isDetail">
+                        <!--<input class="form-control" type="text"
+                               placeholder="性别" ng-model="vm.user.gender" ng-disabled="vm.isDetail">-->
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.gender" ng-options="s.value as s.title for s in vm.genderType" ng-disabled="vm.isDetail" ></select>
+
                     </div>
 
                 </div>
@@ -274,15 +330,30 @@
                 <div ng-if="vm.isDetail"  class="line line-dashed b-b line-lg"></div>
 
 
-                <div  ng-if="vm.isDetail" class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">每日签到</label>
-                    <div class="col-sm-4">
+                <div  ng-if="vm.isDetail && vm.user.dailySignin" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">连续签到天数</label>
+                    <div class="col-sm-1">
                         <input class="form-control" type="text"
-                               placeholder="每日签到" ng-model="vm.user.dailySignin" ng-disabled="vm.isDetail">
+                               placeholder="每日签到" ng-model="vm.user.dailySignin.consecutiveSignins" ng-disabled="vm.isDetail">
+                    </div>
+
+                    <label class="col-sm-1 control-label m-l-lg font-bold">上次签到时间</label>
+                    <div class="col-sm-3">
+                        <input class="form-control" type="text"
+                               placeholder="每日签到" ng-model="vm.user.dailySignin.lastSigninDate" ng-disabled="vm.isDetail">
+                    </div>
+
+                    <label class="col-sm-1 control-label m-l-lg font-bold">当前是否登陆</label>
+                    <div class="col-sm-1">
+                        <!--<input class="form-control" type="text"
+                               placeholder="每日签到" ng-model="vm.user.dailySignin.signin" ng-disabled="vm.isDetail">-->
+
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.dailySignin.signin" ng-options="s.value as s.title for s in vm.encType" ng-disabled="vm.isDetail" ></select>
+
                     </div>
 
                 </div>
-                <div ng-if="vm.isDetail"  class="line line-dashed b-b line-lg"></div>
+                <div ng-if="vm.isDetail && vm.user.dailySignin"  class="line line-dashed b-b line-lg"></div>
 
 
 

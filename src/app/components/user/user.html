@@ -42,8 +42,17 @@
             <tr ng-repeat="item in vm.displayedCollection">
               <!--  <td ng-click="vm.goDetail(item)">{{item.id}}</td>-->
                 <td ng-click="vm.goDetail(item)">{{item.nickName}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.rank}}</td>
-               <td ng-click="vm.goDetail(item)">{{item.status}}</td>
+       <!--         <td ng-click="vm.goDetail(item)">
+                    {{item.rank}}
+                </td>-->
+
+                <td ng-click="vm.goDetail(item)">
+                    <label ng-class="vm.labelColor[item.rank]" ng-bind="vm.labelContent[item.rank]" class="label"></label>
+                </td>
+               <!--<td ng-click="vm.goDetail(item)">{{item.status}}</td>-->
+                <td ng-click="vm.goDetail(item)">
+                    <label ng-class="vm.labelColor[item.status]" ng-bind="vm.labelContent[item.status]" class="label"></label>
+                </td>
                 <td ng-click="vm.goDetail(item)">{{item.points}}</td>
                 <td ng-click="vm.goDetail(item)">{{item.realName}}</td>
                 <!-- <td ng-click="vm.goDetail(item)">{{item.website}}</td>

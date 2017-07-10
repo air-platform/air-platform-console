@@ -28,7 +28,7 @@
             <tr class="font-bold">
                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
                 <th class="text-center">{{'u.ENTNAME' | T}}</th>
-                <th class="text-center">{{'u.ROLE' | T}}</th>
+                <th class="text-center">{{'u.STATUS' | T}}</th>
                 <th class="text-center">{{'u.EMAIL' | T}}</th>
                 <th class="text-center">{{'u.HOTLINE' | T}}</th>
                 <th class="text-center">{{'u.CREATEDATE' | T}}</th>
@@ -41,7 +41,13 @@
             <tr ng-repeat="item in vm.displayedCollection">
               <!--  <td ng-click="vm.goDetail(item)">{{item.id}}</td>-->
                 <td ng-click="vm.goDetail(item)">{{item.nickName}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.role}}</td>
+               <!-- <td ng-click="vm.goDetail(item)">{{item.role}}</td>-->
+
+                <td ng-click="vm.goDetail(item)">
+                    <label ng-class="vm.labelColor[item.status]" ng-bind="vm.labelContent[item.status]" class="label"></label>
+                </td>
+
+
                <td ng-click="vm.goDetail(item)">{{item.email}}</td>
                 <td ng-click="vm.goDetail(item)">{{item.hotline}}</td>
                 <!-- <td ng-click="vm.goDetail(item)">{{item.website}}</td>
@@ -54,12 +60,31 @@
                 </td>-->
                 <td>
                     <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goDetail(item)"><i class="fa fa-eye"></i>{{'u.DETAIL'|T}}</button>
-<!--
+
+
+
                     <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goEditItem(item)"><i class="fa fa-edit"></i>{{ 'u.EDIT' | T}}</button>
--->
-                 <!--  <button class="btn btn-sm btn-info btn-addon" style="width: 100px" ng-click="vm.resetAlert('',item)"><i class="fa fa-rotate-left"></i>{{'profile.RESET_PWD'|T}}</button>
-                    <button class="btn btn-sm btn-danger btn-addon" style="width: 80px"  ng-click="vm.openAlert('sm',item)"><i class="fa fa-trash-o"></i>{{'u.DELETE' | T}}</button>
--->
+                    <div class="btn-group " >
+                        <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-sliders"></i>  操作</button>
+                        <button type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" style="overflow:visible; z-index:1010;width:100px;position:absolute;">
+                            <!-- <li ng-click="vm.OperApp(3, item)" ><a><i class="fa fa-play m-r-sm"></i>锁定</a></li>
+                             <li  ng-click="vm.OperApp(4, item)" ><a><i class="fa fa-stop m-r-sm"></i>解锁</a></li>-->
+
+                            <li ng-class="{disabled: !item.isLockEnable}" ng-click="vm.OperApp(3, item)" ><a><i class="fa fa-play m-r-sm"></i>锁定</a></li>
+                            <li ng-class="{disabled: !item.isUnlockEnable}" ng-click="vm.OperApp(4, item)" ><a><i class="fa fa-stop m-r-sm"></i>解锁</a></li>
+
+                            <li  ng-click="vm.OperApp(5, item)" ><a><i class="fa fa-play m-r-sm"></i>重置密码</a></li>
+                            <li  ng-click="vm.openAlert('sm',item)" ><a><i class="fa fa-trash-o m-r-sm"></i> {{'u.DELETE' | T}}</a></li>
+
+                        </ul>
+                    </div>
+
+
+
 
 
                 </td>

@@ -9,7 +9,7 @@
         .controller('TenantController', TenantController);
 
     /** @ngInject */
-    function TenantController(NetworkService,constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
+    function TenantController(NetworkService,StorageService,constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -29,10 +29,96 @@
         vm.removeItem = removeItem;
         vm.curItem = {};
         vm.backAction = backAction;
+
+        vm.displayedCollection = [];
+        vm.subPath = 'accounts';
+        vm.reqPath =  constdata.api.tenant.basePath;
+        vm.reqPath2 = constdata.api.tenant.jetPath;
+        vm.isAdmin = false;
+
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath = constdata.api.admin.platPath;
+            vm.reqPath2 = constdata.api.tenant.jetPath;
+            vm.isAdmin = true;
+        }
+
+        vm.labelColor = {
+            enabled:'bg-success',
+            locked:'bg-danger',
+            'member':'bg-main',
+            'silver':'bg-main',
+            'gold':'bg-main',
+            'platinum':'bg-main',
+            'diamond':'bg-main'
+        };
+        vm.labelContent={
+            enabled:'已启用',
+            locked:'已锁定',
+            'member':'普通会员',
+            'silver':'白银会员',
+            'gold':'黄金会员',
+            'platinum':'铂金会员',
+            'diamond':'钻石会员'
+        };
+        vm.OperApp = OperApp;
+        function OperApp(index, item) {
+            if(index == 3){
+
+                NetworkService.post(vm.reqPath + '/' + vm.subPath  +'/'+ item.id + '/lock',null,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    toastr.error(vm.authError);
+                });
+
+            }else if(index == 4){
+                NetworkService.post(vm.reqPath + '/' + vm.subPath  +'/'+ item.id + '/unlock',null,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    toastr.error(vm.authError);
+                });
+            }else if(index == 5){
+                NetworkService.post(vm.reqPath + '/' + vm.subPath  +'/'+ item.id + '/password/reset',null,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    toastr.error(vm.authError);
+                });
+            }else{
+                console.log('error ops:'+index);
+            }
+
+            //$state.go('app.applicationedit');
+        };
+
+
+
+
+
         function getDatas() {
 
-            NetworkService.get(constdata.api.tenant.listAllPath + '/' + '?role=tenant',{page:vm.pageCurrent},function (response) {
+            NetworkService.get(vm.reqPath + '/' + vm.subPath + '/' + '?role=tenant',{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
+
+                vm.displayedCollection = (vm.items);
+                if(vm.displayedCollection) {
+                    for (var i = 0; i < vm.displayedCollection.length; i++) {
+                        if (vm.displayedCollection[i].status == 'enabled') {
+                            vm.displayedCollection[i].isLockEnable = true;
+                            vm.displayedCollection[i].isUnlockEnable = false;
+                        } else if (vm.displayedCollection[i].status == 'locked') {
+                            vm.displayedCollection[i].isLockEnable = false;
+                            vm.displayedCollection[i].isUnlockEnable = true;
+                        }
+                    }
+                }
+
+
                 updatePagination(response.data);
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
@@ -63,7 +149,7 @@
         }
 
         function removeItem(item) {
-            NetworkService.delete(constdata.api.tenant.listAllPath + '/' + item.id,null,function success() {
+            NetworkService.delete(vm.reqPath + '/' + vm.subPath + '/' + item.id,null,function success() {
                 var index = vm.items.indexOf(item);
                 //vm.items.splice(index,1);
                 toastr.success(i18n.t('u.DELETE_SUC'));

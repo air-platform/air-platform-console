@@ -20,7 +20,7 @@
     });
 
     /** @ngInject */
-    function EditTenantController(NetworkService,constdata,i18n,$rootScope,$stateParams,toastr) {
+    function EditTenantController(NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -39,8 +39,6 @@
         vm.isDetail = false;
         vm.getTenantItem = getTenantItem;
         vm.submitAction = submitAction;
-        vm.lockTenant = lockTenant;
-        vm.unlockTenant = unlockTenant;
         vm.backAction = backAction;
         vm.back = back;
         vm.addUser = {};
@@ -71,9 +69,32 @@
             }
         ];
 
+
+
+        vm.labelColor = {
+            enabled:'bg-success',
+            locked:'bg-danger',
+            'member':'bg-main',
+            'silver':'bg-main',
+            'gold':'bg-main',
+            'platinum':'bg-main',
+            'diamond':'bg-main'
+        };
+        vm.labelContent={
+            enabled:'已启用',
+            locked:'已锁定',
+            'member':'普通会员',
+            'silver':'白银会员',
+            'gold':'黄金会员',
+            'platinum':'铂金会员',
+            'diamond':'钻石会员'
+        };
+
         var username = $stateParams.username;
         var type = $stateParams.args.type;
         console.log(type);
+
+
         if (username){
             vm.isAdd = false;
             vm.title = i18n.t('profile.EDIT_T_INFO');
@@ -85,10 +106,40 @@
         if(type && type=='detail'){
             vm.isDetail = true;
         }
+        vm.subPath = 'accounts';
+        vm.reqPath =  constdata.api.tenant.basePath;
+        vm.reqPath2 = constdata.api.tenant.jetPath;
+        vm.isAdmin = false;
 
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath = constdata.api.admin.platPath;
+            vm.reqPath2 = constdata.api.tenant.jetPath;
+            vm.isAdmin = true;
+        }
+
+        vm.uploadFile = function (){
+            console.log(vm.myUploadFile);
+            vm.showSpinner = true;
+            NetworkService.postForm(constdata.api.uploadFile.qiniuPath,vm.myUploadFile,function (response) {
+                toastr.success(i18n.t('u.OPERATE_SUC'));
+                vm.showSpinner = false;
+                console.log(response.data);
+                vm.user.avatar = response.data.url;
+
+                //vm.backAction();
+            },function (response) {
+                vm.authError = response.statusText + '(' + response.status + ')';
+                console.log(vm.authError);
+                toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+                vm.showSpinner = false;
+            });
+
+            //$rootScope.backPre();
+        }
         function getTenantItem() {
 
-            NetworkService.get(constdata.api.tenant.listAllPath + '/' + username,null,function (response) {
+            NetworkService.get(vm.reqPath + '/' + vm.subPath + '/' + username,null,function (response) {
                 vm.user = response.data;
                 $rootScope.userNamePlacedTop = vm.user.nickName;
             },function (response) {
@@ -99,7 +150,7 @@
 
 
         function addItem() {
-            NetworkService.post(constdata.api.tenant.listAllPath,vm.addUser,function (response) {
+            NetworkService.post(vm.reqPath + '/' + vm.subPath,vm.addUser,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -110,7 +161,7 @@
         }
 
         function editItem() {
-            NetworkService.put(constdata.api.tenant.updatePath +'/'+ username,{nickName:vm.user.nickName,enabled:vm.user.enabled},function (response) {
+            NetworkService.put(vm.reqPath + '/' + vm.subPath +'/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -126,24 +177,6 @@
             }
         }
 
-        function lockTenant() {
-            NetworkService.post(constdata.api.tenant.lockPath +'/'+ username + '/lock',null,function (response) {
-                toastr.success(i18n.t('u.OPERATE_SUC'));
-                vm.getTenantItem();
-            },function (response) {
-                vm.authError = response.statusText + '(' + response.status + ')';
-                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status + ' ' + response.statusText);
-            });
-        }
-        function unlockTenant() {
-            NetworkService.post(constdata.api.tenant.lockPath +'/'+ username + '/unlock',null,function (response) {
-                toastr.success(i18n.t('u.OPERATE_SUC'));
-                vm.getTenantItem();
-            },function (response) {
-                vm.authError = response.statusText + '(' + response.status + ')';
-                toastr.error(i18n.t('u.OPERATE_FAILED') + response.status + ' ' + response.statusText);
-            });
-        }
 
         function backAction() {
             // $state.go('app.tenant');

@@ -30,10 +30,34 @@
         vm.curItem = {};
         vm.backAction = backAction;
         vm.displayedCollection = [];
+
+
+
+        vm.labelColor = {
+            enabled:'bg-success',
+            locked:'bg-danger',
+            'member':'bg-main',
+            'silver':'bg-main',
+            'gold':'bg-main',
+            'platinum':'bg-main',
+            'diamond':'bg-main'
+        };
+        vm.labelContent={
+            enabled:'已启用',
+            locked:'已锁定',
+            'member':'普通会员',
+            'silver':'白银会员',
+            'gold':'黄金会员',
+            'platinum':'铂金会员',
+            'diamond':'钻石会员'
+        };
+
+        vm.displayedCollection = [];
         vm.subPath = 'accounts';
         vm.reqPath =  constdata.api.tenant.basePath;
         vm.reqPath2 = constdata.api.tenant.jetPath;
         vm.isAdmin = false;
+
         vm.userInfo = StorageService.get('iot.hnair.cloud.information');
         if(vm.userInfo.role != 'tenant'){
             vm.reqPath = constdata.api.admin.platPath;
