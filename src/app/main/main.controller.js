@@ -164,9 +164,9 @@
         vm.pageRoutes = $rootScope.pageRoutes;
         vm.goSeperateState = function(index,item) {
             if(index == 1){
-                $state.go('app.tenant');
+                $state.go('app.dashboard');
             }else {
-                $state.go('app.orderairbook');
+                $state.go('app.dashboard');
             }
         }
         // vm.clearItems = function() {

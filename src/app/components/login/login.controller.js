@@ -113,9 +113,9 @@
                        // console.log(hnaInfo,vm.user);
                         //return;
                         if(vm.user.type == 'admin'){
-                            $state.go('app.tenant');
+                            $state.go('app.dashboard');
                         }else {
-                            $state.go('app.orderairbook');
+                            $state.go('app.dashboard');
                         }
 
                      },function (response) {

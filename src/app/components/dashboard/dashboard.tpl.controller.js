@@ -11,6 +11,486 @@
     function DashCtrl($stateParams,$state,StorageService,NetworkService,constdata,toastr,logger,i18n) {
         /* jshint validthis: true */
         var vm = this;
+
+
+
+        /*GET platform/account/metrics
+         GET /platform/product/metrics
+         GET /platform/trade/metrics
+         GET /platform/order/metrics
+
+         GET /tenant/product/metrics
+         GET /tenant/trade/metrics
+         GET /tenant/order/metrics
+         */
+
+
+
+        vm.accountPath = 'account/metrics';
+        vm.productPath = 'product/metrics';
+        vm.tradePath = 'trade/metrics';
+        vm.orderPath = 'order/metrics';
+
+        vm.reqPath =  constdata.api.tenant.basePath;
+        vm.isAdmin = false;
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        if(vm.userInfo.role != 'tenant'){
+            vm.reqPath = constdata.api.admin.platPath;
+            vm.isAdmin = true;
+        }
+
+
+        console.log(123);
+        vm.productOption = {};
+        vm.orderOption = {};
+        function getDatas() {
+            console.log(44);
+
+            if(vm.isAdmin) {
+                NetworkService.get(vm.reqPath + '/' + vm.accountPath, '', function (response) {
+                    vm.accountInfo = response.data;
+                    //console.log(vm.accountInfo);
+
+
+                    // updatePagination(response.data);
+                }, function (response) {
+                    toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
+                });
+            }
+
+
+            NetworkService.get(vm.reqPath + '/' + vm.productPath,'',function (response) {
+                vm.productInfo = response.data;
+                //console.log(vm.productInfo);
+
+                var onlinePrd = [];
+                var offlinePrd = [];
+                var approvedPrd = [];
+                var rejectedPrd = [];
+                var pendingPrd = [];
+
+                onlinePrd.push(vm.productInfo.details.fleet.publishedCount);
+                offlinePrd.push(vm.productInfo.details.fleet.unpublishedCount);
+                approvedPrd.push(vm.productInfo.details.fleet.reviewApprovedCount);
+                rejectedPrd.push(vm.productInfo.details.fleet.reviewRejectedCount);
+                pendingPrd.push(vm.productInfo.details.fleet.reviewPendingCount);
+
+
+                onlinePrd.push(vm.productInfo.details.ferryflight.publishedCount);
+                offlinePrd.push(vm.productInfo.details.ferryflight.unpublishedCount);
+                approvedPrd.push(vm.productInfo.details.ferryflight.reviewApprovedCount);
+                rejectedPrd.push(vm.productInfo.details.ferryflight.reviewRejectedCount);
+                pendingPrd.push(vm.productInfo.details.ferryflight.reviewPendingCount);
+
+
+                onlinePrd.push(vm.productInfo.details.jettravel.publishedCount);
+                offlinePrd.push(vm.productInfo.details.jettravel.unpublishedCount);
+                approvedPrd.push(vm.productInfo.details.jettravel.reviewApprovedCount);
+                rejectedPrd.push(vm.productInfo.details.jettravel.reviewRejectedCount);
+                pendingPrd.push(vm.productInfo.details.jettravel.reviewPendingCount);
+
+
+                onlinePrd.push(vm.productInfo.details.airtour.publishedCount);
+                offlinePrd.push(vm.productInfo.details.airtour.unpublishedCount);
+                approvedPrd.push(vm.productInfo.details.airtour.reviewApprovedCount);
+                rejectedPrd.push(vm.productInfo.details.airtour.reviewRejectedCount);
+                pendingPrd.push(vm.productInfo.details.airtour.reviewPendingCount);
+
+
+                onlinePrd.push(vm.productInfo.details.airtransport.publishedCount);
+                offlinePrd.push(vm.productInfo.details.airtransport.unpublishedCount);
+                approvedPrd.push(vm.productInfo.details.airtransport.reviewApprovedCount);
+                rejectedPrd.push(vm.productInfo.details.airtransport.reviewRejectedCount);
+                pendingPrd.push(vm.productInfo.details.airtransport.reviewPendingCount);
+
+
+                onlinePrd.push(vm.productInfo.details.course.publishedCount);
+                offlinePrd.push(vm.productInfo.details.course.unpublishedCount);
+                approvedPrd.push(vm.productInfo.details.course.reviewApprovedCount);
+                rejectedPrd.push(vm.productInfo.details.course.reviewRejectedCount);
+                pendingPrd.push(vm.productInfo.details.course.reviewPendingCount);
+
+
+                onlinePrd.push(vm.productInfo.details.airtaxi.publishedCount);
+                offlinePrd.push(vm.productInfo.details.airtaxi.unpublishedCount);
+                approvedPrd.push(vm.productInfo.details.airtaxi.reviewApprovedCount);
+                rejectedPrd.push(vm.productInfo.details.airtaxi.reviewRejectedCount);
+                pendingPrd.push(vm.productInfo.details.airtaxi.reviewPendingCount);
+
+
+                /*var mytitle = '产品总数:'+vm.productInfo.totalCount+' 上线:'+vm.productInfo.publishedCount+' 下线:'+vm.productInfo.unpublishedCount+' 审批通过:'+
+                    vm.productInfo.reviewApprovedCount+'待审批:'+vm.productInfo.reviewPendingCount+'审批拒绝:'+vm.productInfo.reviewRejectedCount+
+                    '航校数:'+vm.productInfo.schoolCount;*/
+
+                var mytitle = '产品总数:'+vm.productInfo.totalCount+' 上线:'+vm.productInfo.publishedCount+' 下线:'+vm.productInfo.unpublishedCount;
+                var mysubtitle = '审批通过:'+
+                    vm.productInfo.reviewApprovedCount+' 待审批:'+vm.productInfo.reviewPendingCount+' 审批拒绝:'+vm.productInfo.reviewRejectedCount+
+                    ' 航校数:'+vm.productInfo.schoolCount;
+                var option = {
+                    title : {
+                        text : mytitle,
+                        subtext:mysubtitle,
+                        textStyle: {
+                            color: '#23b7e5',
+                            fontSize: 14
+                            },
+                        subtextStyle: {
+                            color: '#aaa',          // 副标题文字颜色
+                            fontSize: 12
+                        }
+                    },
+                    tooltip : {
+                        trigger : 'axis',
+                        showDelay : 0, // 显示延迟，添加显示延迟可以避免频繁切换，单位ms
+                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    legend: {
+                        x: 'left',               // 水平安放位置，默认为全图居中，可选为：
+                        y: 'bottom',
+                        data:['上线产品数', '下线产品数','审批通过产品数','待审批产品数','审批拒绝产品数']
+                    },
+                    xAxis : [{
+                        type : 'category',
+                        data : ['包机预定', '缘梦飞行','高端出行','观光飞行','通勤航班','航校课程','Air Taxi'],
+                        axisLabel:{
+                            textStyle:{
+                                color:"#222"
+                            }
+                        }
+                    }],
+                    yAxis : [{
+                        type : 'value'
+                    }],
+                    series : [
+                        {
+                            name:'上线产品数',
+                            type:'bar',
+                            stack: '总量',
+                            itemStyle : { normal: {color:'#b6a2de'}},
+                            data:onlinePrd
+                        },
+                        {
+                            name:'下线产品数',
+                            type:'bar',
+                            stack: '总量',
+                            itemStyle : { normal: {color:'#2ec7c9'}},
+                            data:offlinePrd
+                        },
+                        {
+                            name:'审批通过产品数',
+                            type:'bar',
+                            stack: '总量2',
+                            itemStyle : { normal: {color:'#5ab1ef'}},
+                            data:approvedPrd
+                        },
+                        {
+                            name:'待审批产品数',
+                            type:'bar',
+                            stack: '总量2',
+                            itemStyle : { normal: {color:'#ffb980'}},
+                            data:pendingPrd
+                        },
+                        {
+                            name:'审批拒绝产品数',
+                            type:'bar',
+                            stack: '总量2',
+                            itemStyle : { normal: {color:'#e5cf0d'}},
+                            data:rejectedPrd
+                        },
+
+
+                    ]
+                };
+
+
+                vm.productOption = option;
+
+
+                // updatePagination(response.data);
+            },function (response) {
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
+            });
+
+
+
+            NetworkService.get(vm.reqPath + '/' + vm.orderPath,'',function (response) {
+                vm.orderInfo = response.data;
+               //console.log(vm.orderInfo);
+
+                var allOrder= [];
+                var monthOrder = [];
+                var dayOrder = [];
+
+
+                allOrder.push(vm.orderInfo.details.fleet.totalCount);
+                monthOrder.push(vm.orderInfo.details.fleet.countThisMonth);
+                dayOrder.push(vm.orderInfo.details.fleet.countToday);
+
+
+
+                allOrder.push(vm.orderInfo.details.ferryflight.totalCount);
+                monthOrder.push(vm.orderInfo.details.ferryflight.countThisMonth);
+                dayOrder.push(vm.orderInfo.details.ferryflight.countToday);
+
+
+                allOrder.push(vm.orderInfo.details.jettravel.totalCount);
+                monthOrder.push(vm.orderInfo.details.jettravel.countThisMonth);
+                dayOrder.push(vm.orderInfo.details.jettravel.countToday);
+
+
+                allOrder.push(vm.orderInfo.details.airtour.totalCount);
+                monthOrder.push(vm.orderInfo.details.airtour.countThisMonth);
+                dayOrder.push(vm.orderInfo.details.airtour.countToday);
+
+
+                allOrder.push(vm.orderInfo.details.airtransport.totalCount);
+                monthOrder.push(vm.orderInfo.details.airtransport.countThisMonth);
+                dayOrder.push(vm.orderInfo.details.airtransport.countToday);
+
+
+                allOrder.push(vm.orderInfo.details.course.totalCount);
+                monthOrder.push(vm.orderInfo.details.course.countThisMonth);
+                dayOrder.push(vm.orderInfo.details.course.countToday);
+
+
+                allOrder.push(vm.orderInfo.details.airtaxi.totalCount);
+                monthOrder.push(vm.orderInfo.details.airtaxi.countThisMonth);
+                dayOrder.push(vm.orderInfo.details.airtaxi.countToday);
+
+
+
+
+
+                var mytitle = '订单总数:'+vm.orderInfo.totalCount+' 本月订单:'+vm.orderInfo.countThisMonth+' 今日订单:'+vm.orderInfo.countToday;
+
+                var option = {
+                    title : {
+                        text : mytitle,
+
+                        textStyle: {
+                            color: '#23b7e5',
+                            fontSize: 14
+                        },
+                        subtextStyle: {
+                            color: '#aaa',          // 副标题文字颜色
+                            fontSize: 12
+                        }
+                    },
+                    tooltip : {
+                        trigger : 'axis',
+                        showDelay : 0, // 显示延迟，添加显示延迟可以避免频繁切换，单位ms
+                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    legend: {
+                        x: 'left',               // 水平安放位置，默认为全图居中，可选为：
+                        y: 'bottom',
+                        data:['订单总数', '本月订单数','今日订单数']
+                    },
+                    xAxis : [{
+                        type : 'category',
+                        data : ['包机预定', '缘梦飞行','高端出行','观光飞行','通勤航班','航校课程','Air Taxi'],
+                        axisLabel:{
+                            textStyle:{
+                                color:"#222"
+                            }
+                        }
+                    }],
+                    yAxis : [{
+                        type : 'value'
+                    }],
+                    series : [
+                        {
+                            name:'订单总数',
+                            type:'line',
+                            itemStyle : { normal: {color:'#b6a2de'}},
+                            data:allOrder
+                        },
+                        {
+                            name:'本月订单数',
+                            type:'bar',
+                            itemStyle : { normal: {color:'#2ec7c9'}},
+                            data:monthOrder
+                        },
+                        {
+                            name:'今日订单数',
+                            type:'bar',
+                            itemStyle : { normal: {color:'#5ab1ef'}},
+                            data:dayOrder
+                        }
+
+
+                    ]
+                };
+
+
+                vm.orderOption = option;
+                //vm.tradeOption = option;
+                // updatePagination(response.data);
+            },function (response) {
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
+            });
+
+
+
+
+            NetworkService.get(vm.reqPath + '/' + vm.tradePath,'',function (response) {
+                vm.tradeInfo = response.data;
+                //console.log(vm.orderInfo);
+
+                var revenueYearly= [];
+                var revenueQuarterly = [];
+                var revenueMonthly = [];
+
+                var expenseYearly= [];
+                var expenseQuarterly = [];
+                var expenseMonthly = [];
+
+
+                revenueYearly.push(vm.tradeInfo.details.wechat.revenueYearly);
+                revenueQuarterly.push(vm.tradeInfo.details.wechat.revenueQuarterly);
+                revenueMonthly.push(vm.tradeInfo.details.wechat.revenueMonthly);
+                expenseYearly.push(vm.tradeInfo.details.wechat.expenseYearly);
+                expenseQuarterly.push(vm.tradeInfo.details.wechat.expenseQuarterly);
+                expenseMonthly.push(vm.tradeInfo.details.wechat.expenseMonthly);
+
+
+
+                revenueYearly.push(vm.tradeInfo.details.newpay.revenueYearly);
+                revenueQuarterly.push(vm.tradeInfo.details.newpay.revenueQuarterly);
+                revenueMonthly.push(vm.tradeInfo.details.newpay.revenueMonthly);
+                expenseYearly.push(vm.tradeInfo.details.newpay.expenseYearly);
+                expenseQuarterly.push(vm.tradeInfo.details.newpay.expenseQuarterly);
+                expenseMonthly.push(vm.tradeInfo.details.newpay.expenseMonthly);
+
+
+
+                revenueYearly.push(vm.tradeInfo.details.alipay.revenueYearly);
+                revenueQuarterly.push(vm.tradeInfo.details.alipay.revenueQuarterly);
+                revenueMonthly.push(vm.tradeInfo.details.alipay.revenueMonthly);
+                expenseYearly.push(vm.tradeInfo.details.alipay.expenseYearly);
+                expenseQuarterly.push(vm.tradeInfo.details.alipay.expenseQuarterly);
+                expenseMonthly.push(vm.tradeInfo.details.alipay.expenseMonthly);
+
+
+
+
+
+                var mytitle = '本年度收入:'+vm.tradeInfo.revenueYearly+' 本季度收入:'+vm.tradeInfo.revenueQuarterly+' 本月收入:'+vm.tradeInfo.revenueMonthly;
+                var mysubtitle = '本年度支出:'+vm.tradeInfo.expenseYearly+' 本季度支出:'+vm.tradeInfo.expenseQuarterly+' 本月支出:'+vm.tradeInfo.expenseMonthly;
+
+                var option = {
+                    title : {
+                        text : mytitle,
+                        subtext:mysubtitle,
+                        textStyle: {
+                            color: '#23b7e5',
+                            fontSize: 14
+                        },
+                        subtextStyle: {
+                            color: '#aaa',          // 副标题文字颜色
+                            fontSize: 12
+                        }
+                    },
+                    tooltip : {
+                        trigger : 'axis',
+                        showDelay : 0, // 显示延迟，添加显示延迟可以避免频繁切换，单位ms
+                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    legend: {
+                        x: 'left',               // 水平安放位置，默认为全图居中，可选为：
+                        y: 'bottom',
+                        data:['本年度收入', '本季度收入','本月收入','本年度支出','本季度支出','本月支出']
+                    },
+                    xAxis : [{
+                        type : 'category',
+                        data : ['微信支付', '新生支付','支付宝'],
+                        axisLabel:{
+                            textStyle:{
+                                color:"#222"
+                            }
+                        }
+                    }],
+                    yAxis : [{
+                        type : 'value'
+                    }],
+                    series : [
+                        {
+                            name:'本年度收入',
+                            type:'line',
+                            stack: 'year',
+                            itemStyle : { normal: {color:'#b6a2de'}},
+                            /*itemStyle : { normal: {label : {show: true, position: 'insideTop',textStyle:{color:'#000'}}}},*/
+                            data:revenueYearly
+                        },
+                        {
+                            name:'本季度收入',
+                            type:'bar',
+                            stack: 'qurt',
+                            itemStyle : { normal: {color:'#2ec7c9'}},
+                            data:revenueQuarterly
+                        },
+                        {
+                            name:'本月收入',
+                            type:'bar',
+                            stack: 'month',
+                            itemStyle : { normal: {color:'#5ab1ef'}},
+                            data:revenueMonthly
+                        },
+                        {
+                            name:'本年度支出',
+                            type:'line',
+                            itemStyle : { normal: {color:'#ffb980'}},
+                            data:expenseYearly
+                        },
+                        {
+                            name:'本季度支出',
+                            type:'bar',
+                            itemStyle : { normal: {color:'#e5cf0d'}},
+                            data:expenseQuarterly
+                        },
+                        {
+                            name:'本月支出',
+                            type:'bar',
+                            itemStyle : { normal: {color:'#f2f2f2'}},
+                            data:expenseMonthly
+                        }
+
+
+                    ]
+                };
+
+
+               // vm.orderOption = option;
+                vm.tradeOption = option;
+                // updatePagination(response.data);
+            },function (response) {
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
+            });
+
+
+
+           /* NetworkService.get(vm.reqPath + '/' + vm.tradePath,'',function (response) {
+                vm.tradeInfo = response.data;
+                console.log(vm.tradeInfo);
+            },function (response) {
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
+            });*/
+
+
+
+
+        }
+        getDatas();
+
+
+
+
         if($stateParams){
             vm.hnaInfo = StorageService.get('iot.hnair.cloud.information');
 
@@ -32,7 +512,6 @@
             vm.back = function () {
                 $state.go('app.tenant');
             }
-            getDatas();
         }
         //判断是否为移动设备
         vm.isMobile = false;
@@ -146,28 +625,6 @@
             }, 10);
         }
 
-        function getDatas() {
-
-
-
-            vm.applicationNum = 72;//response.data.applicationsCount;
-            vm.productNum = 11;//response.data.productsCount;
-           /* NetworkService.get(constdata.api.dashboard.metrics,null,function (response) {
-                vm.applicationNum = 72;//response.data.applicationsCount;
-                vm.productNum = 11;//response.data.productsCount;
-                vm.eventNum = response.data.eventClassFamiliesCount;
-                vm.deviceNum = response.data.devicesCount;
-            },function (response) {
-                vm.authError = response.statusText + '(' + response.status + ')';
-                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
-            });*/
-        }
-        //
-        // if(!isAdminer()){
-        //
-        // }
-
-        getDatas();
 
         function isAdminer() {
             // "ADMIN"; "TENANT"; "USER";
