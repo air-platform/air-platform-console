@@ -80,7 +80,7 @@
                            <li ng-class="{disabled: !item.isLockEnable}" ng-click="vm.OperApp(3, item)" ><a><i class="fa fa-play m-r-sm"></i>锁定</a></li>
                             <li ng-class="{disabled: !item.isUnlockEnable}" ng-click="vm.OperApp(4, item)" ><a><i class="fa fa-stop m-r-sm"></i>解锁</a></li>
 
-                            <li  ng-click="vm.openInput('sm',item)" ><a><i class="fa fa-commenting-o m-r-sm"></i>修改积分</a></li>
+                            <li  ng-click="vm.goPoint('sm',item)" ><a><i class="fa fa-commenting-o m-r-sm"></i>修改积分</a></li>
                             <li  ng-click="vm.OperApp(5, item)" ><a><i class="fa fa-play m-r-sm"></i>重置密码</a></li>
 
                             <li  ng-click="vm.openAlert('sm',item)" ><a><i class="fa fa-trash-o m-r-sm"></i> {{'u.DELETE' | T}}</a></li>
@@ -106,4 +106,8 @@
 </div>
 <script type="text/ng-template" id="myModalContent.html">
     <div ng-include="'app/components/core/modal.html'"></div>
+</script>
+
+<script type="text/ng-template" id="myModalContentPrdPoint.html">
+    <div ng-include="'app/components/core/modal-prd-point.html'"></div>
 </script>

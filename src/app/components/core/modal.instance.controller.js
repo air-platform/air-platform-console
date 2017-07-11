@@ -246,3 +246,46 @@
     }
 
 })();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(function () {
+    'use strict';
+
+    angular
+        .module('iot')
+        .controller('ModalInstancePrdPointCtrl', ModalInstancePrdPointCtrl);
+
+    /** @ngInject */
+    function ModalInstancePrdPointCtrl($uibModalInstance,$scope,tipsInfo,i18n) {
+
+        /* jshint validthis: true */
+        $scope.selValue = 0;
+        $scope.tipsInfo = tipsInfo;
+        $scope.ok = function () {
+            // console.log(document.getElementById('top-valueee').value);
+            console.log(document.getElementById('top-value-point').value);
+            $scope.selValue = parseInt(document.getElementById('top-value-point').value);
+            $uibModalInstance.close($scope.selValue);
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss(i18n.t('u.CANCEL'));
+        };
+
+    }
+
+})();

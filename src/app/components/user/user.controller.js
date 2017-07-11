@@ -271,6 +271,47 @@
 
 
 
+        vm.goPoint = function (size,item) {
+            console.log(item.points);
+            vm.tipsInfo = {
+                title:'用户积分',
+                content:'请选择积分增量（增加或减少）',
+                topValue:item.points
+            };
+            var modalInstance = $uibModal.open({
+                templateUrl: 'myModalContentPrdPoint.html',
+                size: 'sm',
+                controller:'ModalInstancePrdPointCtrl',
+                resolve: {
+                    tipsInfo: function () {
+                        return vm.tipsInfo;
+                    }
+                }
+            });
+            modalInstance.result.then(function (param) {
+                console.log(param);
+                var myreason={points:param};
+                if(item.points + param < 0){
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + ' 修改后积分不能小于0');
+                    return;
+                }
+                NetworkService.post(vm.reqPath +'/' + vm.subPath +'/'+item.id +'/points',myreason,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status + ' ' + response.statusText);
+                });
+
+
+
+
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        }
+
+
+
     }
 
 })();
