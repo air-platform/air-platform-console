@@ -89,7 +89,104 @@
             vm.isAdmin = true;
         }
 
+        vm.goSearchOrder = function()
+        {
+            vm.reqPath = vm.reqPath2+'/search?orderNo='+vm.searchOrder;
+            NetworkService.get(vm.reqPath,{page:vm.pageCurrent},function (response) {
+                vm.items = response.data;
+                console.log(response.data);
+                if(vm.items.length > 0){
 
+                    for(var i = 0; i < vm.items.length; i ++) {
+                        vm.items[i].isOfferEnable = false;
+                        vm.items[i].isPriceEnable = false;
+                        //vm.items[i].isConfirmPriceEnable = false;
+                        vm.items[i].isConfirmOrderEnable = false;
+                        vm.items[i].isSignEnable = false;
+                        vm.items[i].isAcceptRefundEnable = false;
+                        vm.items[i].isRejectRefundEnable = false;
+                        vm.items[i].isReleaseTicketEnable = false;
+                        vm.items[i].isFinishEnable = false;
+                        vm.items[i].isCancelEnable = false;
+                        vm.items[i].isCloseEnable = false;
+                        vm.items[i].isDeleteEnable = false;
+
+
+                        if (vm.items[i].status == 'created') {
+                            vm.items[i].isCloseEnable = true;
+                            // vm.items[i].isPriceEnable = true;
+                            // vm.items[i].isConfirmOrderEnable = true;
+                            vm.items[i].isPriceEnable = true;
+
+
+                        }else if (vm.items[i].status == 'confirmed') {
+                            vm.items[i].isCloseEnable = true;
+                            vm.items[i].isSignEnable = true;
+                            vm.items[i].isPriceEnable = true;
+
+                        }else if (vm.items[i].status == 'contract_signed') {
+                            vm.items[i].isCloseEnable = true;
+                            vm.items[i].isPriceEnable = true;
+
+                        }else if (vm.items[i].status == 'partial_paid') {
+                            vm.items[i].isCloseEnable = true;
+                            vm.items[i].isFinishEnable = true;
+
+                        }else if (vm.items[i].status == 'paid') {
+                            vm.items[i].isAcceptRefundEnable = true;
+                            vm.items[i].isReleaseTicketEnable = true;
+
+
+                        }else if (vm.items[i].status == 'ticket_released') {
+                            vm.items[i].isFinishEnable = true;
+
+                        }else if (vm.items[i].status == 'refund_requested') {
+                            vm.items[i].isAcceptRefundEnable = true;
+                            vm.items[i].isRejectRefundEnable = true;
+
+                        }else if (vm.items[i].status == 'refunding') {
+
+                        }else if (vm.items[i].status == 'refunded') {
+                            //vm.items[i].isCloseEnable = true;
+
+                        }else if (vm.items[i].status == 'refund_failed') {
+                            // vm.items[i].isCloseEnable = true;
+                            vm.items[i].isAcceptRefundEnable = true;
+
+                        }else if (vm.items[i].status == 'finished') {
+                            vm.items[i].isCloseEnable = true;
+
+                        }else if (vm.items[i].status == 'closed') {
+
+                        }else if (vm.items[i].status == 'cancelled') {
+
+                        }else if (vm.items[i].status == 'deleted') {
+
+                        }else{
+                            console.log('undefind order status:'+vm.items[i].status);
+                        }
+                    }
+
+
+
+                    response.data.page = 1;
+                    response.data.totalPages = 1;
+
+                    response.data.hasNextPage = false;
+                    response.data.hasPreviousPage = false;
+
+
+                }
+                vm.displayedCollection = [].concat(vm.items);
+
+                var pageInfo = {page:1, totalPages:1,hasNextPage:false,hasPreviousPage:false,hasContent:true};
+
+                updatePagination(pageInfo);
+            },function (response) {
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
+            });
+            //}
+        }
         function getDatas() {
             NetworkService.get(vm.reqPath,{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;

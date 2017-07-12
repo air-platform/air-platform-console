@@ -88,162 +88,107 @@
             vm.isAdmin = true;
         }
 
+        vm.goSearchOrder = function()
+        {
+            vm.reqPath = vm.reqPath2+'/search?orderNo='+vm.searchOrder;
+            NetworkService.get(vm.reqPath,{page:vm.pageCurrent},function (response) {
+                vm.items = response.data;
+                console.log(response.data);
+                if(vm.items.length > 0){
 
+                    for(var i = 0; i < vm.items.length; i ++) {
+                        vm.items[i].isOfferEnable = false;
+                        vm.items[i].isPriceEnable = false;
+                        //vm.items[i].isConfirmPriceEnable = false;
+                        vm.items[i].isConfirmOrderEnable = false;
+                        vm.items[i].isSignEnable = false;
+                        vm.items[i].isAcceptRefundEnable = false;
+                        vm.items[i].isRejectRefundEnable = false;
+                        vm.items[i].isReleaseTicketEnable = false;
+                        vm.items[i].isFinishEnable = false;
+                        vm.items[i].isCancelEnable = false;
+                        vm.items[i].isCloseEnable = false;
+                        vm.items[i].isDeleteEnable = false;
+
+
+                        if (vm.items[i].status == 'created') {
+                            vm.items[i].isCloseEnable = true;
+                            // vm.items[i].isPriceEnable = true;
+                            // vm.items[i].isConfirmOrderEnable = true;
+                            vm.items[i].isPriceEnable = true;
+
+
+                        }else if (vm.items[i].status == 'confirmed') {
+                            vm.items[i].isCloseEnable = true;
+                            vm.items[i].isSignEnable = true;
+                            vm.items[i].isPriceEnable = true;
+
+                        }else if (vm.items[i].status == 'contract_signed') {
+                            vm.items[i].isCloseEnable = true;
+                            vm.items[i].isPriceEnable = true;
+
+                        }else if (vm.items[i].status == 'partial_paid') {
+                            vm.items[i].isCloseEnable = true;
+                            vm.items[i].isFinishEnable = true;
+
+                        }else if (vm.items[i].status == 'paid') {
+                            vm.items[i].isAcceptRefundEnable = true;
+                            vm.items[i].isReleaseTicketEnable = true;
+
+
+                        }else if (vm.items[i].status == 'ticket_released') {
+                            vm.items[i].isFinishEnable = true;
+
+                        }else if (vm.items[i].status == 'refund_requested') {
+                            vm.items[i].isAcceptRefundEnable = true;
+                            vm.items[i].isRejectRefundEnable = true;
+
+                        }else if (vm.items[i].status == 'refunding') {
+
+                        }else if (vm.items[i].status == 'refunded') {
+                            //vm.items[i].isCloseEnable = true;
+
+                        }else if (vm.items[i].status == 'refund_failed') {
+                            // vm.items[i].isCloseEnable = true;
+                            vm.items[i].isAcceptRefundEnable = true;
+
+                        }else if (vm.items[i].status == 'finished') {
+                            vm.items[i].isCloseEnable = true;
+
+                        }else if (vm.items[i].status == 'closed') {
+
+                        }else if (vm.items[i].status == 'cancelled') {
+
+                        }else if (vm.items[i].status == 'deleted') {
+
+                        }else{
+                            console.log('undefind order status:'+vm.items[i].status);
+                        }
+                    }
+
+
+
+                    response.data.page = 1;
+                    response.data.totalPages = 1;
+
+                    response.data.hasNextPage = false;
+                    response.data.hasPreviousPage = false;
+
+
+                }
+                vm.displayedCollection = [].concat(vm.items);
+
+                var pageInfo = {page:1, totalPages:1,hasNextPage:false,hasPreviousPage:false,hasContent:true};
+
+                updatePagination(pageInfo);
+            },function (response) {
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
+            });
+            //}
+        }
 
         function getDatas() {
             NetworkService.get(vm.reqPath,{page:vm.pageCurrent,pageSize:10},function (response) {
-
-
-            /* var monk =    [{
-                    "id" : "7f000101-5cca-1c76-815c-cea67a7c00e1",
-                    "orderNo" : "C2E865DAD000000",
-                    "type" : "airtour",
-                    "pointsUsed" : 0,
-                    "quantity" : 1,
-                    "totalPrice" : 2000.00,
-                    "originalTotalPrice" : 2000.00,
-                    "currencyUnit" : "usd",
-                    "status" : "created",
-                    "commented" : false,
-                    "creationDate" : "2017-06-22 15:13:55",
-                    "lastModifiedDate" : "2017-06-22 15:13:55",
-                    "paymentDate" : null,
-                    "refundedDate" : null,
-                    "finishedDate" : null,
-                    "closedDate" : null,
-                    "cancelledDate" : null,
-                    "deletedDate" : null,
-                    fleetCandidates:[
-                        {
-                           id:'1',
-                            name:'bbg',
-                            status:'offered',
-                            amount:100
-                        },
-                        {
-                            id:'2',
-                            name:'bbk',
-                            status:'offered',
-                            amount:200
-                        }
-
-                    ],
-                    "contact" : {
-                    "person" : "jamesk",
-                        "mobile" : "18392880716",
-                        "email" : ""
-                },
-                    "refundReason" : null,
-                    "refundFailureCause" : null,
-                    "cancelReason" : null,
-                    "closedReason" : null,
-                    "note" : null,
-                    "owner" : "7f000101-5c85-14fc-815c-863ef11c0029",
-                    "payment" : null,
-                    "refund" : null,
-                    "salesPackage" : {
-                    "id" : "7f000101-5ca5-1e64-815c-a64cca9d002b",
-                        "name" : "两人套餐",
-                        "passengers" : 2,
-                        "prices" : "2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0",
-                        "presalesDays" : 2,
-                        "currencyUnit" : "rmb",
-                        "description" : "des",
-                        "aircraft" : {
-                        "id" : "7f000101-5c81-1046-815c-855d1176000a",
-                            "flightNo" : "B-7186",
-                            "name" : "首航直升机H135 B-7186",
-                            "image" : null,
-                            "type" : "H135",
-                            "category" : "直升机",
-                            "seats" : 4,
-                            "minPassengers" : 4,
-                            "creationDate" : "2017-06-08T01:41:28.000+0000",
-                            "description" : null,
-                            "vendor" : {
-                            "name" : "bjch",
-                                "id" : "7f000101-5c80-17f4-815c-809ae1da0005",
-                                "avatar" : "http://ool5ftqf4.bkt.clouddn.com/HNA_Helicopter_Icon.png"
-                        }
-                    },
-                    "product" : "7f000101-5c8a-1d71-815c-8b4c4db40029"
-                },
-                    "salesPackagePrice" : 2000.00,
-                    "departureDate" : "2017-06-22",
-                    "timeSlot" : "15:00-17:00",
-                    "passengers" : [ {
-                    "id" : "7f000101-5cca-1c76-815c-cea67a7c00e2",
-                    "order" : "7f000101-5cca-1c76-815c-cea67a7c00e1",
-                    "passenger" : {
-                        "id" : null,
-                        "name" : "小三",
-                        "mobile" : "13520671119",
-                        "identity" : "110108198812081982",
-                        "owner" : null
-                    }
-                } ],
-                    "airTour" : {
-                    "id" : "7f000101-5c8a-1d71-815c-8b4c4db40029",
-                        "reviewStatus" : "approved",
-                        "rejectedReason" : null,
-                        "name" : "漓江尊享飞行",
-                        "category" : "air_tour",
-                        "image" : "http://ool5ftqf4.bkt.clouddn.com/guilin-005.png",
-                        "score" : 4.8,
-                        "totalSales" : 0,
-                        "rank" : 100,
-                        "published" : true,
-                        "creationDate" : "2017-06-09 13:20:52",
-                        "clientManagers" : "刘世玺:shix.liu@hnair.com",
-                        "description" : "漓江",
-                        "vendor" : {
-                        "name" : "bjch",
-                            "id" : "7f000101-5c80-17f4-815c-809ae1da0005",
-                            "avatar" : "http://ool5ftqf4.bkt.clouddn.com/HNA_Helicopter_Icon.png"
-                    },
-                    "salesPackages" : [ {
-                        "id" : "7f000101-5ca5-1e64-815c-a64cca9d002b",
-                        "name" : "两人套餐",
-                        "passengers" : 2,
-                        "prices" : "2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0,2000.0",
-                        "presalesDays" : 2,
-                        "currencyUnit" : "rmb",
-                        "description" : "des",
-                        "aircraft" : {
-                            "id" : "7f000101-5c81-1046-815c-855d1176000a",
-                            "flightNo" : "B-7186",
-                            "name" : "首航直升机H135 B-7186",
-                            "image" : null,
-                            "type" : "H135",
-                            "category" : "直升机",
-                            "seats" : 4,
-                            "minPassengers" : 4,
-                            "creationDate" : "2017-06-08T01:41:28.000+0000",
-                            "description" : null,
-                            "vendor" : {
-                                "name" : "bjch",
-                                "id" : "7f000101-5c80-17f4-815c-809ae1da0005",
-                                "avatar" : "http://ool5ftqf4.bkt.clouddn.com/HNA_Helicopter_Icon.png"
-                            }
-                        },
-                        "product" : "7f000101-5c8a-1d71-815c-8b4c4db40029"
-                    } ],
-                        "city" : "桂林",
-                        "tourDistance" : "40",
-                        "tourTime" : 35,
-                        "tourPoint" : "芦笛岩,110.273565,25.30411025;桃花江,115.118489,39.047105;南洲大桥,110.32333, 25.316806;古东瀑布景区,110.461771,25.113984",
-                        "tourShow" : "###尧山\n尧山位于桂林市东郊，距市中心8公里，主峰海拔909.3米，是桂林市最高的山因周唐时在山上建有尧帝庙而得名。尧山以变幻莫测、绚丽多彩的四时景致闻名于世，乘观光索道可直达尧山之顶，在山顶向东南方望去，您可以看到巨大的天然卧佛，犹如释迦牟尼睡卧在莲蓬之上，这是迄今发现的最大的天然卧佛。\n![](http://ool5ftqf4.bkt.clouddn.com/guilin-001.png)\n###古东瀑布景区\n古东森林瀑群旅游区位于大圩镇古东村蝴蝶山麓——草坪公路8公里处，漓江外事码头对岸，距桂林市25公里。古东瀑布溪水清澈，四季不枯，河水平均含沙量仅 0.1克/立方米，年平均流量5立方米/秒。瀑布共分13级，全程落差90米，平均宽度为20米。古东森林瀑群旅游区森林覆盖率达96%，占地面积约3000亩，其中原始生长林2000亩。林区古木参天，红枫诱人。藤缠树，树缠藤，野趣横生。景色秀丽，鸟语花香，空气清新。是距桂林市区最近、面积最宽、最具特色的一处森林公园，也是登山探险、森林寻幽之佳境。\n![](http://ool5ftqf4.bkt.clouddn.com/GuiLin09.png)\n###穿山景区\n穿山景区内绿草茵茵，苍松翠竹，山花烂漫，环境优雅。穿山隔着漓江与象鼻山相望，与江西岸的龟山，形如两只相斗的公鸡，合称斗鸡山。穿山前有塔山，峻峭的塔山上，明代建筑的一座七层六角实心的“寿佛塔”，巍然矗立，倒映江中，雅致清丽，“塔山清影”为桂林著名老八景之一。小东江自北而南，曲贯穿山与塔山之间，山倒影江中，更是景色尤佳。\n![](http://ool5ftqf4.bkt.clouddn.com/guilin-007.png)\n\n",
-                        "boardingLocation" : "宁波市奉化区溪口镇武岭西路39号宁波东海通航飞行基地",
-                        "traffic" : "无",
-                        "tourRoute" : "芦笛景区-桃花江-南洲大桥-尧山--磨盘山-桃花江-大圩古镇-古东瀑布景区-芦笛景区  （30分钟）"
-                }
-                }];*/
-
-
-
-
-
-
 
 
                 vm.items = response.data.content;
