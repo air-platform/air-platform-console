@@ -12,16 +12,17 @@
                         next,
                         backdrop = '.dropdown-backdrop';
                     //导航里除了第一个li，每个li下面加入一条黑色边框，仪表盘li还要加上上边框
-                    $('nav[ui-nav]>ul>li').eq(1).css({
+                    /*$('nav[ui-nav]>ul>li').eq(1).css({
                         'borderTop': '1px solid #1E2434'
                     });
                     $('nav[ui-nav]>ul>li').not(':first').each(function() {
                         $(this).css({
                             'borderBottom': '1px solid #1E2434'
                         });
-                    });
+                    });*/
                     //首先默认给‘仪表盘’添加蓝色细线
-                    var $blueLine = $('<div id="blueLine" style="width:4px;height:100%;background-color:#25A6F7;position:absolute;top:0;"></div>');
+                    var $blueLine = $('<div id="blueLine" style="width:4px;height:100%;background-color:#F89750;position:absolute;top:0;"></div>');
+
                     $( $('nav[ui-nav]>ul>li')[1] ).append( $blueLine );
                     // unfolded
                     el.on('click', 'a', function (e) {
