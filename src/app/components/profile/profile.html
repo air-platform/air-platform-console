@@ -29,7 +29,9 @@
                     <!-- fields -->
                     <!--<br/>-->
                     <div class="form-group">
-                        <label class="col-sm-1 m-l-lg font-bold control-label">{{'u.ENTNAME' | translate}}</label>
+
+                        <label ng-if="!vm.isAdmin" class="col-sm-1 m-l-lg font-bold control-label">{{'u.ENTNAME' | translate}}</label>
+                        <label ng-if="vm.isAdmin" class="col-sm-1 m-l-lg font-bold control-label">昵称</label>
                         <div class="col-sm-6">
                             <!--<p class="form-control-static">{{vm.userinfo.username}}</p>-->
                             <input type="text" class="form-control col-sm-5" placeholder="{{'u.ENTNAME' | translate}}" ng-model="vm.userinfo.nickName" >
@@ -50,7 +52,8 @@
 
 
                     <div  class="form-group">
-                        <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.ENTAVATAR' | translate}}</label>
+                        <label ng-if="!vm.isAdmin"  class="col-sm-1 control-label m-l-lg font-bold">{{'u.ENTAVATAR' | translate}}</label>
+                        <label ng-if="vm.isAdmin" class="col-sm-1 m-l-lg font-bold control-label">头像</label>
                         <div class="col-sm-6">
                             <!--<input class="form-control" type="text"
                                    placeholder="{{'u.ENTAVATAR' | translate}}" ng-model="vm.userinfo.avatar" ng-disabled="vm.isDetail" >
@@ -97,38 +100,38 @@
 
 
 
-                    <div class="form-group">
+                    <div ng-if="!vm.isAdmin" class="form-group">
                         <label class="col-sm-1 m-l-lg font-bold control-label">{{'profile.MAILBOX' | translate}}</label>
                         <div class="col-sm-6">
                             <!--<p class="form-control-static">{{vm.userinfo.email}}</p>-->
                             <input type="email" class="form-control col-sm-5" placeholder="{{'profile.MAILBOX' | translate}}" ng-model="vm.userinfo.email" required>
                         </div>
                     </div>
-                    <div class="line line-dashed b-b line-lg"></div>
+                    <div ng-if="!vm.isAdmin" class="line line-dashed b-b line-lg"></div>
 
 
 
 
-                    <div class="form-group">
+                    <div ng-if="!vm.isAdmin" class="form-group">
                         <label class="col-sm-1 m-l-lg font-bold control-label">{{'profile.WEBSITE' | translate}}</label>
                         <div class="col-sm-6">
                             <!--<p class="form-control-static">{{vm.userinfo.username}}</p>-->
                             <input type="text" class="form-control col-sm-5" placeholder="{{'profile.WEBSITE' | translate}}" ng-model="vm.userinfo.website" >
                         </div>
                     </div>
-                    <div class="line line-dashed b-b line-lg"></div>
+                    <div ng-if="!vm.isAdmin" class="line line-dashed b-b line-lg"></div>
 
 
 
 
-                    <div class="form-group">
+                    <div ng-if="!vm.isAdmin" class="form-group">
                         <label class="col-sm-1 m-l-lg font-bold control-label">{{'profile.ADDRESS' | translate}}</label>
                         <div class="col-sm-6">
                             <!--<p class="form-control-static">{{vm.userinfo.username}}</p>-->
                             <input type="text" class="form-control col-sm-5" placeholder="{{'profile.ADDRESS' | translate}}" ng-model="vm.userinfo.address" >
                         </div>
                     </div>
-                    <div class="line line-dashed b-b line-lg"></div>
+                    <div ng-if="!vm.isAdmin" class="line line-dashed b-b line-lg"></div>
 
 
 
@@ -136,19 +139,19 @@
 
 
 
-                    <div class="form-group">
+                    <div ng-if="!vm.isAdmin" class="form-group">
                         <label class="col-sm-1 m-l-lg font-bold control-label">{{'profile.HOTLINE' | translate}}</label>
                         <div class="col-sm-6">
                             <!--<p class="form-control-static">{{vm.userinfo.email}}</p>-->
                             <input type="phone" class="form-control col-sm-5" placeholder="{{'profile.HOTLINE' | translate}}" ng-model="vm.userinfo.hotline" required>
                         </div>
                     </div>
-                    <div class="line line-dashed b-b line-lg"></div>
+                    <div ng-if="!vm.isAdmin" class="line line-dashed b-b line-lg"></div>
 
 
 
 
-                    <div class="form-group">
+                    <div ng-if="!vm.isAdmin" class="form-group">
                         <label class="col-sm-1 m-l-lg font-bold control-label">{{'profile.DESCRIPTION' | translate}}</label>
                         <div class="col-sm-6">
 <!--
@@ -158,7 +161,7 @@
 
                         </div>
                     </div>
-                    <div class="line line-dashed b-b line-lg"></div>
+                    <div ng-if="!vm.isAdmin" class="line line-dashed b-b line-lg"></div>
 
 
 

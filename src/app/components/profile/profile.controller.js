@@ -23,6 +23,13 @@
         vm.doneEditing = doneEditing;
         vm.changePsd = changePsd;
 
+        vm.isAdmin = false;
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+        if(vm.userInfo.role != 'tenant'){
+            vm.isAdmin = true;
+        }
+
+
 
         getProfile();
 
