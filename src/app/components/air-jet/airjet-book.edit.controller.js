@@ -250,14 +250,16 @@
 
         vm.uploadFileItem = function (item){
             console.log(item.myUploadFile);
+            vm.showSpinner = true;
             NetworkService.postForm(constdata.api.uploadFile.qiniuPath,item.myUploadFile,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
-
+                vm.showSpinner = false;
                 console.log(response.data);
                 item.image = response.data.url;
                 console.log(vm.user.image);
                 //vm.backAction();
             },function (response) {
+                vm.showSpinner = false;
                 vm.authError = response.statusText + '(' + response.status + ')';
                 console.log(vm.authError);
                 toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
@@ -277,7 +279,7 @@
                 console.log(vm.user.image);
                 //vm.backAction();
             },function (response) {
-                vm.showSpinner = false
+                vm.showSpinner = false;
                 vm.authError = response.statusText + '(' + response.status + ')';
                 console.log(vm.authError);
                 toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
