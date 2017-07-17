@@ -295,29 +295,56 @@
                     <div class="form-group" style="margin-left:30px;" ng-repeat="item in vm.tourPointArr">
 
 
-                        <label class="col-sm-1 control-label  font-bold">{{item.locName}}</label>
+                        <label class="font-bold">{{item.locName}}</label>
 
-                        <label class="col-sm-1 control-label  font-bold">经纬度</label>
-                        <div class="col-sm-4">
-                            <input class="form-control" type="text"
-                                   placeholder="经纬度" ng-model="item.loc" id="tour-loc-{{$index}}" ng-disabled="vm.isDetail"  required>
+                        <label class="font-bold" style="margin-left:15px;">经度</label>
+                        <span class="" style="display: inline-block; position:relative; top: 8px;margin: 0px 5px;" >
+                            <degree-input    degree="item.loc.lng"  type="1" tips="" ng-if="item.loc.lng"></degree-input>
+                            <!--<span>{{vm.user.flightRoute.departureLongitude}}</span>-->
+                        </span>
 
-                        </div>
+                        <label class="font-bold" style="margin-left:15px;">纬度</label>
+                        <span class="" style="display: inline-block; position:relative; top: 8px;margin: 0px 5px;">
+                            <degree-input tips="" type="2" degree="item.loc.lat" ng-if="item.loc.lng"></degree-input>
+                        </span>
 
-                        <label class="col-sm-1 control-label  font-bold">景点名</label>
-                        <div class="col-sm-3">
+
+
+
+
+                        <label class="font-bold" style="margin-left:15px;">景点名</label>
+                        <span class="" style="display: inline-block">
                             <input class="form-control" type="text"
                                    placeholder="景点名" ng-model="item.name" ng-disabled="vm.isDetail"  required>
 
-                        </div>
+                        </span>
 
-                        <div class="col-sm-2">
+                        <span class="" style="display: inline-block; top: 14px;position: relative;margin-left: 10px;">
                             <button ng-if="!vm.isDetail"  ng-disabled="$index != vm.tourPointArr.length-1" ng-click="vm.removeTourPoint(item)" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-minus"></i>{{'product.DELETE' | translate}}</button>
 
-                        </div>
+                        </span>
 
 
                     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                     <div class="col-sm-4" >
                         <button ng-if="!vm.isDetail" ng-click="vm.addNewTourPoint()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-plus"></i>增加景点</button>

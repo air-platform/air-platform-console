@@ -22,7 +22,7 @@
     });
 
     /** @ngInject */
-    function AirtaxiEditController($scope,uiCalendarConfig, NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
+    function AirtaxiEditController($scope,uiCalendarConfig, NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr, $timeout) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -211,14 +211,25 @@
             if(desc == '出发地'){
                 vm.departureInfo.lng = pt.lng;
                 vm.departureInfo.lat = pt.lat;
-                document.getElementById('depature_loc_lng_taxi').value = vm.departureInfo.lng;
+                /*document.getElementById('depature_loc_lng_taxi').value = vm.departureInfo.lng;
                 document.getElementById('depature_loc_lat_taxi').value = vm.departureInfo.lat;
+*/
+                $timeout(function () {
+                    vm.user.flightRoute.departureLongitude = vm.departureInfo.lng;
+                    vm.user.flightRoute.departureLatitude = vm.departureInfo.lat;
+                });
+
                 console.log(ll+':'+desc);
             }else if(desc == '目的地'){
                 vm.arrivalInfo.lng = pt.lng;
                 vm.arrivalInfo.lat = pt.lat;
-                document.getElementById('arrival_loc_lng_taxi').value = vm.arrivalInfo.lng;
-                document.getElementById('arrival_loc_lat_taxi').value =  vm.arrivalInfo.lat;
+               /* document.getElementById('arrival_loc_lng_taxi').value = vm.arrivalInfo.lng;
+                document.getElementById('arrival_loc_lat_taxi').value =  vm.arrivalInfo.lat;*/
+
+                $timeout(function () {
+                    vm.user.flightRoute.arrivalLongitude = vm.arrivalInfo.lng;
+                    vm.user.flightRoute.arrivalLatitude = vm.arrivalInfo.lat;
+                });
                 console.log(ll+':'+desc);
             }
             createNewCurveLine();
@@ -229,9 +240,15 @@
                     var addComp = rs.addressComponents;
                     console.log(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
                     if (desc == '出发地') {
-                        document.getElementById('depature_area').value = addComp.city;
+                        //document.getElementById('depature_area').value = addComp.city;
+                        $timeout(function () {
+                            vm.user.flightRoute.departure = addComp.city;
+                        });
                     } else if (desc == '目的地') {
-                        document.getElementById('arrival_area').value = addComp.city;
+                        //document.getElementById('arrival_area').value = addComp.city;
+                        $timeout(function () {
+                            vm.user.flightRoute.arrival = addComp.city;
+                        });
                     }
                 }
             });
@@ -267,13 +284,25 @@
                     if(e.target.getLabel().content == '出发地'){
                         vm.departureInfo.lng = e.point.lng;
                         vm.departureInfo.lat = e.point.lat;
-                        document.getElementById('depature_loc_lng_taxi').value = vm.departureInfo.lng;
-                        document.getElementById('depature_loc_lat_taxi').value = vm.departureInfo.lat;
+                        //document.getElementById('depature_loc_lng_taxi').value = vm.departureInfo.lng;
+                        //document.getElementById('depature_loc_lat_taxi').value = vm.departureInfo.lat;
+                        $timeout(function () {
+                            vm.user.flightRoute.departureLongitude = vm.departureInfo.lng;
+                            vm.user.flightRoute.departureLatitude = vm.departureInfo.lat;
+                        });
+
+
+
                     }else if(e.target.getLabel().content == '目的地'){
                         vm.arrivalInfo.lng = e.point.lng;
                         vm.arrivalInfo.lat = e.point.lat;
-                        document.getElementById('arrival_loc_lng_taxi').value = vm.arrivalInfo.lng;
-                        document.getElementById('arrival_loc_lat_taxi').value =  vm.arrivalInfo.lat;
+                        //document.getElementById('arrival_loc_lng_taxi').value = vm.arrivalInfo.lng;
+                       // document.getElementById('arrival_loc_lat_taxi').value =  vm.arrivalInfo.lat;
+
+                        $timeout(function () {
+                            vm.user.flightRoute.arrivalLongitude = vm.arrivalInfo.lng;
+                            vm.user.flightRoute.arrivalLatitude = vm.arrivalInfo.lat;
+                        });
                     }
                     createNewCurveLine();
 
@@ -283,9 +312,15 @@
                         var addComp = rs.addressComponents;
                         console.log(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
                         if (e.target.getLabel().content == '出发地') {
-                            document.getElementById('depature_area').value = addComp.city;
+                            //document.getElementById('depature_area').value = addComp.city;
+                            $timeout(function () {
+                                vm.user.flightRoute.departure = addComp.city;
+                            });
                         } else if (e.target.getLabel().content == '目的地') {
-                            document.getElementById('arrival_area').value = addComp.city;
+                            //document.getElementById('arrival_area').value = addComp.city;
+                            $timeout(function () {
+                                vm.user.flightRoute.arrival = addComp.city;
+                            });
                         }
                     }
 
@@ -293,12 +328,20 @@
 
 
             });
+
+
+
+
+
+
             finalMarker = marker;
         }
 
 
         vm.initMap = function()
         {
+
+
             map.clearOverlays();
             var dep = new BMap.Point(vm.departureInfo.lng, vm.departureInfo.lat);
             var arr = new BMap.Point(vm.arrivalInfo.lng, vm.arrivalInfo.lat);
@@ -499,14 +542,14 @@
 
 
 
-            vm.user.flightRoute.departureLongitude = document.getElementById('depature_loc_lng_taxi').value;
+           /* vm.user.flightRoute.departureLongitude = document.getElementById('depature_loc_lng_taxi').value;
             vm.user.flightRoute.departureLatitude = document.getElementById('depature_loc_lat_taxi').value;
             vm.user.flightRoute.departure = document.getElementById('depature_area').value;
 
             vm.user.flightRoute.arrivalLongitude = document.getElementById('arrival_loc_lng_taxi').value;
             vm.user.flightRoute.arrivalLatitude = document.getElementById('arrival_loc_lat_taxi').value;
             vm.user.flightRoute.arrival = document.getElementById('arrival_area').value;
-
+*/
 
             var refReq = vm.reqPath  + '/' + vm.subPath;
             if(vm.isAdmin){
@@ -553,15 +596,19 @@
             console.log(vm.user.salesPackages);
 
 
-            vm.user.flightRoute.departureLongitude = document.getElementById('depature_loc_lng_taxi').value;
+           /* vm.user.flightRoute.departureLongitude = document.getElementById('depature_loc_lng_taxi').value;
             vm.user.flightRoute.departureLatitude = document.getElementById('depature_loc_lat_taxi').value;
             vm.user.flightRoute.departure = document.getElementById('depature_area').value;
 
             vm.user.flightRoute.arrivalLongitude = document.getElementById('arrival_loc_lng_taxi').value;
             vm.user.flightRoute.arrivalLatitude = document.getElementById('arrival_loc_lat_taxi').value;
             vm.user.flightRoute.arrival = document.getElementById('arrival_area').value;
+*/
 
-            NetworkService.put(vm.reqPath  + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
+
+
+           console.log(vm.user.flightRoute.departureLongitude);
+             NetworkService.put(vm.reqPath  + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
             },function (response) {
@@ -595,14 +642,21 @@
             vm.user.currencyUnit = 'rmb';
             vm.user.salesPackages = [];
             vm.initMap();
+            /*vm.departureInfo = {lng:116.404, lat:39.915, desc:'出发地'};
+            vm.arrivalInfo = {lng:117.204282,lat:39.134923, desc:'目的地'};
+            vm.user.flightRoute.departureLongitude = 116.404;
+            vm.user.flightRoute.departureLatitude = 39.915;
+            vm.user.flightRoute.arrivalLongitude = 117.204282;
+            vm.user.flightRoute.arrivalLatitude = 39.134923;*/
 
-            vm.user.flightRoute.departureLongitude = document.getElementById('depature_loc_lng_taxi').value;
+
+           /* vm.user.flightRoute.departureLongitude = document.getElementById('depature_loc_lng_taxi').value;
             vm.user.flightRoute.departureLatitude = document.getElementById('depature_loc_lat_taxi').value;
             vm.user.flightRoute.departure = document.getElementById('depature_area').value;
 
             vm.user.flightRoute.arrivalLongitude = document.getElementById('arrival_loc_lng_taxi').value;
             vm.user.flightRoute.arrivalLatitude = document.getElementById('arrival_loc_lat_taxi').value;
-            vm.user.flightRoute.arrival = document.getElementById('arrival_area').value;
+            vm.user.flightRoute.arrival = document.getElementById('arrival_area').value;*/
 
         }
 

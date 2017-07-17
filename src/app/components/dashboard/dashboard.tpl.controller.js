@@ -379,8 +379,8 @@
 
 
 
-                var mytitle = '本年度收入:'+vm.tradeInfo.revenueYearly+' 本季度收入:'+vm.tradeInfo.revenueQuarterly+' 本月收入:'+vm.tradeInfo.revenueMonthly;
-                var mysubtitle = '本年度支出:'+vm.tradeInfo.expenseYearly+' 本季度支出:'+vm.tradeInfo.expenseQuarterly+' 本月支出:'+vm.tradeInfo.expenseMonthly;
+                var mytitle = '本年度总收入:'+vm.tradeInfo.revenueYearly+' 本季度总收入:'+vm.tradeInfo.revenueQuarterly+' 本月总收入:'+vm.tradeInfo.revenueMonthly;
+                var mysubtitle = '本年度总支出:'+vm.tradeInfo.expenseYearly+' 本季度总支出:'+vm.tradeInfo.expenseQuarterly+' 本月总支出:'+vm.tradeInfo.expenseMonthly;
 
                 var option = {
                     title : {

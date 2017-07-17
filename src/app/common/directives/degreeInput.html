@@ -3,37 +3,37 @@
                                 <span style="padding:1px;">
                                 <button  type="button" ng-click="vm.switchDegreeView()"><i class="fa fa-exchange"></i></button>
                                 </span>
-    <input ng-if="!vm.isDegree" class="" type="text" style="height:34px;margin-left:-5px;"
-           placeholder=""  id='depature_area' ng-model="vm.mydegree" ng-disabled="vm.isDetail" >
+                            <input ng-if="!vm.isDegree" class="" type="text" style="height:34px;margin-left:-5px;"
+           placeholder=""   ng-model="vm.mydegree" ng-disabled="vm.isDetail" >
 
                             <span ng-if="vm.isDegree && type==1">
 
-                                <span style="padding:1px;"><select  class="" style="background-color: #fff; padding:0px;margin-left:-5px;width:55px; height:30px;border-radius:0px;" ng-model="vm.lngew" ng-options="s for s in vm.lngEW" ng-disabled="vm.isDetail" ></select>
+                                <span style="padding:1px;"><select  ng-change="vm.getDegreeView()" class="" style="background-color: #fff; padding:0px;margin-left:-5px;width:55px; height:30px;border-radius:0px;" ng-model="vm.lngew" ng-options="s for s in vm.lngEW" ng-disabled="vm.isDetail" ></select>
                                 </span>
-                                <span class="" style="padding:1px;">  <select  class="" style="background-color: #fff; height:30px;padding:0px;margin-left:-6px;width:40px; border-radius:0px;" ng-model="vm.lngDegree" ng-options="s for s in vm.lngDeg" ng-disabled="vm.isDetail" ></select>
+                                <span class="" style="padding:1px;">  <select  ng-change="vm.getDegreeView()" class="" style="background-color: #fff; height:30px;padding:0px;margin-left:-6px;width:48px; border-radius:0px;" ng-model="vm.lngDegree" ng-options="s for s in vm.lngDeg" ng-disabled="vm.isDetail" ></select>
                                </span>
                                 <span class="" style="padding:0px;margin-left:-5px;">度</span>
-                                <span class="" style="padding:1px;"><select  class="" style="background-color: #fff; height:30px; padding:0px;margin-left:-5px;width:40px;" ng-model="vm.lngMin" ng-options="s for s in vm.minOpt" ng-disabled="vm.isDetail" ></select>
+                                <span class="" style="padding:1px;"><select  ng-change="vm.getDegreeView()" class="" style="background-color: #fff; height:30px; padding:0px;margin-left:-5px;width:40px;" ng-model="vm.lngMin" ng-options="s for s in vm.minOpt" ng-disabled="vm.isDetail" ></select>
                                 </span>
-                                    <span class="" style="padding:0px;margin-left:-5px;">分</span>
+                                    <span class="" style="padding:0px;margin-left:-2px;">分</span>
 
-                                <span class="" style="padding:1px;"><select  class="" style="background-color: #fff; height:30px; padding:0px;margin-left:-5px;width:40px;" ng-model="vm.lngSec" ng-options="s for s in vm.secOpt" ng-disabled="vm.isDetail" ></select>
+                                <span class="" style="padding:1px;"><select  ng-change="vm.getDegreeView()" class="" style="background-color: #fff; height:30px; padding:0px;margin-left:-5px;width:42px;" ng-model="vm.lngSec" ng-options="s for s in vm.secOpt" ng-disabled="vm.isDetail" ></select>
                                 </span>
                                     <span class="" style="padding:0px;margin-left:-5px;">秒</span>
                                 </span>
 
                             <span ng-if="vm.isDegree && type==2">
 
-                                <span style="padding:1px;"><select  class="" style="background-color: #fff; padding:0px;margin-left:-5px;width:55px; height:30px;border-radius:0px;" ng-model="vm.lngns" ng-options="s for s in vm.latNS" ng-disabled="vm.isDetail" ></select>
+                                <span style="padding:1px;"><select  ng-change="vm.getDegreeView()" class="" style="background-color: #fff; padding:0px;margin-left:-5px;width:55px; height:30px;border-radius:0px;" ng-model="vm.latns" ng-options="s for s in vm.latNS" ng-disabled="vm.isDetail" ></select>
                                 </span>
-                                <span class="" style="padding:1px;">  <select  class="" style="background-color: #fff; height:30px;padding:0px;margin-left:-6px;width:40px; border-radius:0px;" ng-model="vm.depart.lngDegree" ng-options="s for s in vm.latDeg" ng-disabled="vm.isDetail" ></select>
+                                <span class="" style="padding:1px;">  <select ng-change="vm.getDegreeView()" class="" style="background-color: #fff; height:30px;padding:0px;margin-left:-6px;width:42px; border-radius:0px;" ng-model="vm.latDegree" ng-options="s for s in vm.latDeg" ng-disabled="vm.isDetail" ></select>
                                </span>
                                 <span class="" style="padding:0px;margin-left:-5px;">度</span>
-                                <span class="" style="padding:1px;"><select  class="" style="background-color: #fff; height:30px; padding:0px;margin-left:-5px;width:40px;" ng-model="vm.latMin" ng-options="s for s in vm.minOpt" ng-disabled="vm.isDetail" ></select>
+                                <span class="" style="padding:1px;"><select  ng-change="vm.getDegreeView()" class="" style="background-color: #fff; height:30px; padding:0px;margin-left:-5px;width:40px;" ng-model="vm.latMin" ng-options="s for s in vm.minOpt" ng-disabled="vm.isDetail" ></select>
                                 </span>
                                     <span class="" style="padding:0px;margin-left:-5px;">分</span>
 
-                                <span class="" style="padding:1px;"><select  class="" style="background-color: #fff; height:30px; padding:0px;margin-left:-5px;width:40px;" ng-model="vm.latSec" ng-options="s for s in vm.secOpt" ng-disabled="vm.isDetail" ></select>
+                                <span class="" style="padding:1px;"><select  ng-change="vm.getDegreeView()" class="" style="background-color: #fff; height:30px; padding:0px;margin-left:-5px;width:40px;" ng-model="vm.latSec" ng-options="s for s in vm.secOpt" ng-disabled="vm.isDetail" ></select>
                                 </span>
                                     <span class="" style="padding:0px;margin-left:-5px;">秒</span>
                                 </span>

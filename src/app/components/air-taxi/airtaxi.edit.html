@@ -238,7 +238,7 @@
                         <label class="col-sm-1 control-label  m-l-lg font-bold">航程信息</label>
                     </div>
 
-                    <div  class="form-group">
+                    <!--<div  class="form-group">
                         <label class="col-sm-1 control-label m-l-lg font-bold">出发地</label>
                         <div class="col-sm-2">
                             <input class="form-control" type="text"
@@ -261,36 +261,36 @@
 
                         </div>
 
-
                     </div>
 
 
 
+                                        <div  class="form-group">
+                                            <label class="col-sm-1 control-label m-l-lg font-bold">目的地</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" type="text"
+                                                       placeholder="{{'u.ARRIVAL' | translate}}" id='arrival_area' ng-model="vm.user.flightRoute.arrival" ng-disabled="vm.isDetail" >
+                                            </div>
+
+                                            <label class="col-sm-1 control-label m-l-lg font-bold">经度</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" type="text"
+                                                       placeholder="{{'u.ARRIVALLOC' | translate}}" id='arrival_loc_lng_taxi' ng-model="vm.user.flightRoute.arrivalLongitude" ng-disabled="vm.isDetail" >
+                                            </div>
+                                            <label class="col-sm-1 control-label m-l-lg font-bold">纬度</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" type="text"
+                                                       placeholder="{{'u.ARRIVALLOC' | translate}}" id='arrival_loc_lat_taxi' ng-model="vm.user.flightRoute.arrivalLatitude" ng-disabled="vm.isDetail" >
+                                            </div>
+
+
+
+                                        </div>
 
 
 
 
-
-
-
-                    <!--<div  class="form-group">
-                        <label class="col-sm-1 control-label m-l-lg font-bold">出发地</label>
-                        <div class="col-sm-2">
-                            <input class="form-control" type="text"
-                                   placeholder="{{'u.DEPARTURE' | translate}}"  ng-model="vm.user.flightRoute.departure" ng-disabled="vm.isDetail" >
-                        </div>
-
-                        <label class="col-sm-1 control-label m-l-lg font-bold" >经度</label>
-
-                        <div class="col-sm-3">
-                            <degree-input    degree="123"  id="gogo"  type="1" tips=""></degree-input>
-                        </div>
-
-                        <label class="col-sm-1 control-label font-bold" style="margin-left:-70px;">纬度</label>
-                        <div class="col-sm-3" >
-                            <degree-input tips="" type="2" degree="100" ></degree-input>
-                        </div>
-                    </div>-->
+                                        -->
 
 
 
@@ -302,26 +302,56 @@
 
 
                     <div  class="form-group">
+                        <label class="col-sm-1 control-label m-l-lg font-bold">出发地</label>
+                        <div class="col-sm-2">
+                            <input class="form-control" type="text"
+                                   placeholder="{{'u.DEPARTURE' | translate}}"  ng-model="vm.user.flightRoute.departure" ng-disabled="vm.isDetail" >
+                        </div>
+
+                        <label class="col-sm-1 control-label m-l-lg font-bold" >经度</label>
+
+                        <div class="col-sm-3">
+                            <degree-input    degree="vm.user.flightRoute.departureLongitude"  type="1" tips="" ng-if="vm.user.flightRoute.departureLongitude"></degree-input>
+                            <!--<span>{{vm.user.flightRoute.departureLongitude}}</span>-->
+                        </div>
+
+                        <label class="col-sm-1 control-label font-bold" >纬度</label>
+                        <div class="col-sm-3" >
+                            <degree-input tips="" type="2" degree="vm.user.flightRoute.departureLatitude" ng-if="vm.user.flightRoute.departureLatitude"></degree-input>
+                        </div>
+                    </div>
+
+
+                    <div  class="form-group">
                         <label class="col-sm-1 control-label m-l-lg font-bold">目的地</label>
                         <div class="col-sm-2">
                             <input class="form-control" type="text"
-                                   placeholder="{{'u.ARRIVAL' | translate}}" id='arrival_area' ng-model="vm.user.flightRoute.arrival" ng-disabled="vm.isDetail" >
+                                   placeholder="{{'u.DEPARTURE' | translate}}"  ng-model="vm.user.flightRoute.arrival" ng-disabled="vm.isDetail" >
                         </div>
 
-                        <label class="col-sm-1 control-label m-l-lg font-bold">经度</label>
-                        <div class="col-sm-2">
-                            <input class="form-control" type="text"
-                                   placeholder="{{'u.ARRIVALLOC' | translate}}" id='arrival_loc_lng_taxi' ng-model="vm.user.flightRoute.arrivalLongitude" ng-disabled="vm.isDetail" >
-                        </div>
-                        <label class="col-sm-1 control-label m-l-lg font-bold">纬度</label>
-                        <div class="col-sm-2">
-                            <input class="form-control" type="text"
-                                   placeholder="{{'u.ARRIVALLOC' | translate}}" id='arrival_loc_lat_taxi' ng-model="vm.user.flightRoute.arrivalLatitude" ng-disabled="vm.isDetail" >
+                        <label class="col-sm-1 control-label m-l-lg font-bold" >经度</label>
+
+                        <div class="col-sm-3">
+                            <degree-input    degree="vm.user.flightRoute.arrivalLongitude"   type="1" tips="" ng-if="vm.user.flightRoute.arrivalLongitude"></degree-input>
+                            <!--<span>{{vm.user.flightRoute.departureLongitude}}</span>-->
                         </div>
 
-
-
+                        <label class="col-sm-1 control-label font-bold" >纬度</label>
+                        <div class="col-sm-3" >
+                            <degree-input tips="" type="2" degree="vm.user.flightRoute.arrivalLatitude" ng-if="vm.user.flightRoute.arrivalLatitude"></degree-input>
+                        </div>
                     </div>
+
+
+
+
+
+
+
+
+
+
+
 
 
                     <div  class="form-group">

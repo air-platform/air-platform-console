@@ -20,7 +20,7 @@
     });
 
     /** @ngInject */
-    function AirtourEditController($scope, uiCalendarConfig,NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
+    function AirtourEditController($scope, uiCalendarConfig,NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr,$timeout) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -277,9 +277,24 @@
                 var ll = e.point.lng+","+e.point.lat;
                 console.log(ll);
                 console.log(info.index);
-                vm.tourPointArr[info.index].loc = ll;
+                vm.tourPointArr[info.index].loc.lng  = e.point.lng;
+                vm.tourPointArr[info.index].loc.lat  = e.point.lat;
                 console.log(vm.tourPointArr);
-                document.getElementById('tour-loc-'+info.index).value = ll;
+                /*document.getElementById('tour-loc-lng-'+info.index).value = e.point.lng;
+                document.getElementById('tour-loc-lat-'+info.index).value = e.point.lat;
+*/
+
+                $timeout(function () {
+                    vm.tourPointArr[info.index].loc.lng  = e.point.lng;
+                    vm.tourPointArr[info.index].loc.lat  = e.point.lat;
+                });
+
+
+
+
+
+
+
                 /*console.log(e.target.getLabel().content);
                 // if(e.target.getLabel().content)
                 if(e.target.getLabel().content == '出发地'){
@@ -455,7 +470,7 @@
             createNewMarker(e);
             vm.tourPointArr.push({
                 name:'景点'+(vm.tourPointArr.length+1),
-                loc:point.lng+','+point.lat,
+                loc:{lng:point.lng, lat:point.lat},
                 locName:e.desc
             });
 
@@ -541,11 +556,7 @@
                         var detailArr = tourArr[i].split(',');
                         if(detailArr.length > 0){
                             var name = detailArr[0];
-                            var loc = detailArr[1]+','+detailArr[2];
-
-
-
-
+                            var loc = {lng:detailArr[1], lat:detailArr[2]};
 
 
 
@@ -626,7 +637,7 @@
             if(vm.tourPointArr.length > 0){
                 vm.user.tourPoint  = '';
                 for(var i = 0; i < vm.tourPointArr.length; i ++){
-                    vm.user.tourPoint += vm.tourPointArr[i].name+','+ vm.tourPointArr[i].loc+';'
+                    vm.user.tourPoint += vm.tourPointArr[i].name+','+ vm.tourPointArr[i].loc.lng + ',' + vm.tourPointArr[i].loc.lat +';'
                 }
                 vm.user.tourPoint = vm.user.tourPoint.substr(0, vm.user.tourPoint.length-1);
             }
@@ -681,7 +692,7 @@
             if(vm.tourPointArr){
                 vm.user.tourPoint  = '';
                 for(var i = 0; i < vm.tourPointArr.length; i ++){
-                    vm.user.tourPoint += vm.tourPointArr[i].name+','+ vm.tourPointArr[i].loc+';'
+                    vm.user.tourPoint += vm.tourPointArr[i].name+','+ vm.tourPointArr[i].loc.lng + ',' + vm.tourPointArr[i].loc.lat +';'
                 }
                 vm.user.tourPoint = vm.user.tourPoint.substr(0, vm.user.tourPoint.length-1);
             }
