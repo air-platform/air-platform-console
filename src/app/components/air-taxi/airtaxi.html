@@ -33,7 +33,7 @@
                 <th class="text-center">发布状态</th>
                 <th class="text-center">{{'u.DEPARTURE' | T}}</th>
                 <th class="text-center">{{'u.ARRIVAL' | T}}</th>
-                <th class="text-center">{{'u.DESCRIPTION' | T}}</th>
+               <!-- <th class="text-center">{{'u.DESCRIPTION' | T}}</th>-->
                 <th class="text-center">置顶值</th>
 
             </tr>
@@ -54,7 +54,7 @@
 
                 <td ng-click="vm.goDetail(item)">{{item.flightRoute.departure}}</td>
                 <td ng-click="vm.goDetail(item)">{{item.flightRoute.arrival}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.description}}</td>
+                <!--<td ng-click="vm.goDetail(item)">{{item.description}}</td>-->
 
                 <td ng-click="vm.goDetail(item)">
                     <label class="label bg-main" ng-bind="item.rank"></label>
@@ -80,6 +80,7 @@
 
                             <li  ng-click="vm.goComment(item)" ><a><i class="fa fa-commenting-o m-r-sm"></i>评论</a></li>
                             <li  ng-click="vm.goTop('sm',item)" ><a><i class="fa fa-arrow-up  m-r-sm"></i>置顶</a></li>
+                            <li  ng-click="vm.goCopyItem(item)" ><a><i class="fa fa-copy  m-r-sm"></i>复制</a></li>
 
                         </ul>
                     </div>
@@ -97,6 +98,7 @@
                             <li ng-class="{disabled: !item.published}" ng-click="vm.OperApp(12, item)" ><a><i class="fa fa-arrow-down m-r-sm"></i>下线</a></li>
                             <li  ng-click="vm.openAlert('sm',item)" ><a><i class="fa fa-trash-o m-r-sm"></i> {{'u.DELETE' | T}}</a></li>
                             <li  ng-click="vm.goComment(item)" ><a><i class="fa fa-commenting-o m-r-sm"></i>评论</a></li>
+                            <li  ng-click="vm.goCopyItem(item)" ><a><i class="fa fa-copy  m-r-sm"></i>复制</a></li>
                             <!--<li  ng-click="vm.goTop('sm',item)" ><a><i class="fa fa-arrow-up  m-r-sm"></i>置顶</a></li>-->
 
                         </ul>

@@ -180,7 +180,9 @@
         function goAddItem() {
             $state.go('app.editairtour',{});
         };
-
+        vm.goCopyItem = function (item) {
+            $state.go('app.editairtour',{username:item.id, args:{type:'copy'}});
+        };
         function goEditItem(item) {
             $state.go('app.editairtour',{username:item.id, args:{type:'edit'}});
         };

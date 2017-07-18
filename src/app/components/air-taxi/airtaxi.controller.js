@@ -190,6 +190,11 @@
             $state.go('app.editairtaxi',{username:item.id, args:{type:'edit'}});
         };
 
+
+        vm.goCopyItem = function (item) {
+            $state.go('app.editairtaxi',{username:item.id, args:{type:'copy'}});
+        };
+
         function goDetail(item) {
             $state.go('app.editairtaxi',{username:item.id, args:{type:'detail'}});
 

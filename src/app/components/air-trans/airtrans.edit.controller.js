@@ -316,6 +316,10 @@
         }
 
 
+        if(type && type=='copy'){
+            vm.isCopy = true;
+        }
+
         vm.addNewClientManager = function() {
 
             vm.user.clientManagersArr.push({
@@ -616,8 +620,10 @@
         function submitAction() {
             if (vm.isAdd){
                 addItem();
-            }else{
+            }else if(vm.isEdit){
                 editItem();
+            }else if(vm.isCopy){
+                addItem();
             }
         }
 

@@ -180,7 +180,9 @@
         function goAddItem() {
             $state.go('app.edittrainingclass',{});
         };
-
+        vm.goCopyItem = function (item) {
+            $state.go('app.edittrainingclass',{username:item.id, args:{type:'copy'}});
+        };
         function goEditItem(item) {
             $state.go('app.edittrainingclass',{username:item.id, args:{type:'edit'}});
         };

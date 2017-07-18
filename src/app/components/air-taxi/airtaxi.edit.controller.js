@@ -386,6 +386,11 @@
         }
 
 
+        if(type && type=='copy'){
+            vm.isCopy = true;
+        }
+
+
 
 
 
@@ -634,8 +639,10 @@
         function submitAction() {
             if (vm.isAdd){
                 addItem();
-            }else{
+            }else if(vm.isEdit){
                 editItem();
+            }else if(vm.isCopy){
+                addItem();
             }
         }
 

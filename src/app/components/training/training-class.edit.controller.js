@@ -124,6 +124,10 @@
         if(type && type=='detail'){
             vm.isDetail = true;
         }
+
+        if(type && type=='copy'){
+            vm.isCopy = true;
+        }
         vm.userInfo = StorageService.get('iot.hnair.cloud.information');
         vm.reqPath =  constdata.api.tenant.fleetPath;
         vm.reqPath2 = constdata.api.tenant.fleetPath;
@@ -328,8 +332,10 @@
         function submitAction() {
             if (vm.isAdd){
                 addItem();
-            }else{
+            }else if(vm.isEdit){
                 editItem();
+            }else if(vm.isCopy){
+                addItem();
             }
         }
 
