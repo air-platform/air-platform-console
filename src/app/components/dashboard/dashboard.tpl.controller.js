@@ -411,7 +411,7 @@
                     legend: {
                         x: 'left',               // 水平安放位置，默认为全图居中，可选为：
                         y: 'bottom',
-                        data:['本年度收入', '本季度收入','本月收入','本年度支出','本季度支出','本月支出']
+                        data:['年度收入', '季度收入','月收入','年度支出','季度支出','月支出']
                     },
                     xAxis : [{
                         type : 'category',
@@ -427,7 +427,7 @@
                     }],
                     series : [
                         {
-                            name:'本年度收入',
+                            name:'年度收入',
                             type:'line',
                             stack: 'year',
                             itemStyle : { normal: {color:'#b6a2de'}},
@@ -435,33 +435,33 @@
                             data:revenueYearly
                         },
                         {
-                            name:'本季度收入',
+                            name:'季度收入',
                             type:'bar',
                             stack: 'qurt',
                             itemStyle : { normal: {color:'#2ec7c9'}},
                             data:revenueQuarterly
                         },
                         {
-                            name:'本月收入',
+                            name:'月收入',
                             type:'bar',
                             stack: 'month',
                             itemStyle : { normal: {color:'#5ab1ef'}},
                             data:revenueMonthly
                         },
                         {
-                            name:'本年度支出',
+                            name:'年度支出',
                             type:'line',
                             itemStyle : { normal: {color:'#ffb980'}},
                             data:expenseYearly
                         },
                         {
-                            name:'本季度支出',
+                            name:'季度支出',
                             type:'bar',
                             itemStyle : { normal: {color:'#e5cf0d'}},
                             data:expenseQuarterly
                         },
                         {
-                            name:'本月支出',
+                            name:'月支出',
                             type:'bar',
                             itemStyle : { normal: {color:'#f2f2f2'}},
                             data:expenseMonthly
