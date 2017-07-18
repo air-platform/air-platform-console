@@ -167,6 +167,10 @@
                 $timeout(function () {
                     vm.user.flightRoute.departureLongitude = vm.departureInfo.lng;
                     vm.user.flightRoute.departureLatitude = vm.departureInfo.lat;
+
+                    vm.user.flightRoute.departureLongitudeFlag = true;
+                    vm.user.flightRoute.departureLatitudeFlag = true;
+
                 });
                 console.log(ll+':'+desc);
             }else if(desc == '目的地'){
@@ -175,6 +179,8 @@
                 $timeout(function () {
                     vm.user.flightRoute.arrivalLongitude = vm.arrivalInfo.lng;
                     vm.user.flightRoute.arrivalLatitude = vm.arrivalInfo.lat;
+                    vm.user.flightRoute.arrivalLongitudeFlag = true;
+                    vm.user.flightRoute.arrivalLatitudeFlag = true;
                 });
                 console.log(ll+':'+desc);
             }
@@ -451,6 +457,15 @@
 
                         vm.arrivalInfo.lng = parseFloat(vm.user.flightRoute.arrivalLongitude);
                         vm.arrivalInfo.lat = parseFloat(vm.user.flightRoute.arrivalLatitude);
+
+
+
+                    vm.user.flightRoute.departureLongitudeFlag = true;
+                    vm.user.flightRoute.departureLatitudeFlag = true;
+
+
+                    vm.user.flightRoute.arrivalLongitudeFlag = true;
+                    vm.user.flightRoute.arrivalLatitudeFlag = true;
 
                 }
 

@@ -362,13 +362,13 @@
                         <label class="font-bold" style="display:inline-block; margin-left:30px;">经度</label>
 
                         <div class="" style="display:inline-block;margin-left:25px; position:relative; top:9px;">
-                            <degree-input    degree="vm.user.flightRoute.departureLongitude"  type="1" tips="" ng-if="vm.user.flightRoute.departureLongitude"></degree-input>
+                            <degree-input    degree="vm.user.flightRoute.departureLongitude"  type="1" tips="" ng-if="vm.user.flightRoute.departureLongitudeFlag"></degree-input>
                             <!--<span>{{vm.user.flightRoute.departureLongitude}}</span>-->
                         </div>
 
                         <label class="font-bold" style="display:inline-block;margin-left:30px;">纬度</label>
                         <div class="" style="display:inline-block;margin-left:25px;position:relative; top:9px;">
-                            <degree-input tips="" type="2" degree="vm.user.flightRoute.departureLatitude" ng-if="vm.user.flightRoute.departureLatitude"></degree-input>
+                            <degree-input tips="" type="2" degree="vm.user.flightRoute.departureLatitude" ng-if="vm.user.flightRoute.departureLatitudeFlag"></degree-input>
                         </div>
                     </div>
 
@@ -383,13 +383,13 @@
                         <label class="font-bold" style="display:inline-block; margin-left:30px;">经度</label>
 
                         <div class="" style="display:inline-block;margin-left:25px; position:relative; top:9px;">
-                            <degree-input    degree="vm.user.flightRoute.arrivalLongitude"  type="1" tips="" ng-if="vm.user.flightRoute.arrivalLongitude"></degree-input>
+                            <degree-input    degree="vm.user.flightRoute.arrivalLongitude"  type="1" tips="" ng-if="vm.user.flightRoute.arrivalLongitudeFlag"></degree-input>
                             <!--<span>{{vm.user.flightRoute.departureLongitude}}</span>-->
                         </div>
 
                         <label class="font-bold" style="display:inline-block;margin-left:30px;">纬度</label>
                         <div class="" style="display:inline-block;margin-left:25px;position:relative; top:9px;">
-                            <degree-input tips="" type="2" degree="vm.user.flightRoute.arrivalLatitude" ng-if="vm.user.flightRoute.arrivalLatitude"></degree-input>
+                            <degree-input tips="" type="2" degree="vm.user.flightRoute.arrivalLatitude" ng-if="vm.user.flightRoute.arrivalLatitudeFlag"></degree-input>
                         </div>
                     </div>
 

@@ -279,6 +279,9 @@
                 console.log(info.index);
                 vm.tourPointArr[info.index].loc.lng  = e.point.lng;
                 vm.tourPointArr[info.index].loc.lat  = e.point.lat;
+
+
+
                 console.log(vm.tourPointArr);
                 /*document.getElementById('tour-loc-lng-'+info.index).value = e.point.lng;
                 document.getElementById('tour-loc-lat-'+info.index).value = e.point.lat;
@@ -470,7 +473,7 @@
             createNewMarker(e);
             vm.tourPointArr.push({
                 name:'景点'+(vm.tourPointArr.length+1),
-                loc:{lng:point.lng, lat:point.lat},
+                loc:{lng:point.lng, lat:point.lat, lngFlag:true, latFlag:true},
                 locName:e.desc
             });
 
@@ -556,7 +559,7 @@
                         var detailArr = tourArr[i].split(',');
                         if(detailArr.length > 0){
                             var name = detailArr[0];
-                            var loc = {lng:detailArr[1], lat:detailArr[2]};
+                            var loc = {lng:detailArr[1], lat:detailArr[2],lngFlag:true, latFlag:true};
 
 
 

@@ -299,13 +299,13 @@
 
                         <label class="font-bold" style="margin-left:15px;">经度</label>
                         <span class="" style="display: inline-block; position:relative; top: 8px;margin: 0px 5px;" >
-                            <degree-input    degree="item.loc.lng"  type="1" tips="" ng-if="item.loc.lng"></degree-input>
+                            <degree-input    degree="item.loc.lng"  type="1" tips="" ng-if="item.loc.lngFlag"></degree-input>
                             <!--<span>{{vm.user.flightRoute.departureLongitude}}</span>-->
                         </span>
 
                         <label class="font-bold" style="margin-left:15px;">纬度</label>
                         <span class="" style="display: inline-block; position:relative; top: 8px;margin: 0px 5px;">
-                            <degree-input tips="" type="2" degree="item.loc.lat" ng-if="item.loc.lng"></degree-input>
+                            <degree-input tips="" type="2" degree="item.loc.lat" ng-if="item.loc.latFlag"></degree-input>
                         </span>
 
 

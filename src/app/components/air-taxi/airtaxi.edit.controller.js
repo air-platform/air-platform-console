@@ -169,7 +169,7 @@
 
 
 
-        var map = new BMap.Map("map-div",,{minZoom:8,maxZoom:8});          // 创建地图实例
+        var map = new BMap.Map("map-div",{minZoom:8,maxZoom:8});          // 创建地图实例
         var point = new BMap.Point(116.404, 39.915);  // 创建点坐标
         var geoc = new BMap.Geocoder();
         map.centerAndZoom(point, 10);
@@ -216,7 +216,10 @@
 */
                 $timeout(function () {
                     vm.user.flightRoute.departureLongitude = vm.departureInfo.lng;
+
                     vm.user.flightRoute.departureLatitude = vm.departureInfo.lat;
+                    vm.user.flightRoute.departureLongitudeFlag = true;
+                    vm.user.flightRoute.departureLatitudeFlag = true;
                 });
 
                 console.log(ll+':'+desc);
@@ -229,6 +232,8 @@
                 $timeout(function () {
                     vm.user.flightRoute.arrivalLongitude = vm.arrivalInfo.lng;
                     vm.user.flightRoute.arrivalLatitude = vm.arrivalInfo.lat;
+                    vm.user.flightRoute.arrivalLongitudeFlag = true;
+                    vm.user.flightRoute.arrivalLatitudeFlag = true;
                 });
                 console.log(ll+':'+desc);
             }
@@ -289,6 +294,7 @@
                         $timeout(function () {
                             vm.user.flightRoute.departureLongitude = vm.departureInfo.lng;
                             vm.user.flightRoute.departureLatitude = vm.departureInfo.lat;
+
                         });
 
 
@@ -499,6 +505,15 @@
 
                     vm.arrivalInfo.lng = parseFloat(vm.user.flightRoute.arrivalLongitude);
                     vm.arrivalInfo.lat = parseFloat(vm.user.flightRoute.arrivalLatitude);
+
+
+
+                    vm.user.flightRoute.departureLongitudeFlag = true;
+                    vm.user.flightRoute.departureLatitudeFlag = true;
+
+
+                    vm.user.flightRoute.arrivalLongitudeFlag = true;
+                    vm.user.flightRoute.arrivalLatitudeFlag = true;
 
                 }
                 if(vm.isAdmin){

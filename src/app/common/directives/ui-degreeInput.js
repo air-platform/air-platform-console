@@ -4,6 +4,7 @@
     angular.module('iot').directive( "degreeInput", [ "$parse", function( $parse ){
         return {
             restrict: "E",
+            replace: true,
             scope: {
                 degree: "=",
                 type: "=",
@@ -14,6 +15,7 @@
                 var d = date.getDate();
                 var m = date.getMonth();
                 var y = date.getFullYear();
+
                 $scope.vm = {};
 
                 console.log($scope.degree);
@@ -286,6 +288,14 @@
                     }
 
                 };
+
+                $scope.vm.switchDegreeView2 = function (){
+                    $scope.vm.isDegree = !$scope.vm.isDegree;
+
+                    $scope.vm.mydegree = 110;
+                    $scope.degree += 1;
+                }
+
                 $scope.vm.switchDegreeView = function (){
 
                     if($scope.type == '1') {
@@ -312,7 +322,7 @@
 
 
                         } else {
-                            var lng = $scope.vm.mydegree;
+                            var lng = $scope.degree;
                             lng = ForDight(lng,6);
                             $scope.degree = lng;
 
@@ -355,7 +365,7 @@
 
                             }
                         } else {
-                            var lat = $scope.vm.mydegree;
+                            var lat = $scope.degree;
                             lat = ForDight(lat,6);
                             $scope.degree = lat;
                             if(lat < 0){
