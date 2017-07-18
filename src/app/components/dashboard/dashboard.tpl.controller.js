@@ -131,12 +131,14 @@
                         text : mytitle,
                         subtext:mysubtitle,
                         textStyle: {
-                            color: '#23b7e5',
-                            fontSize: 14
-                            },
+                            color: '#e61e28',
+                            fontSize: 14,
+                            fontWeight:'bold'
+                        },
                         subtextStyle: {
-                            color: '#aaa',          // 副标题文字颜色
-                            fontSize: 12
+                            color: '#e61e28',          // 副标题文字颜色
+                            fontSize: 14,
+                            fontWeight:'bold'
                         }
                     },
                     tooltip : {
@@ -270,12 +272,14 @@
                         text : mytitle,
 
                         textStyle: {
-                            color: '#23b7e5',
-                            fontSize: 14
+                            color: '#e61e28',
+                            fontSize: 14,
+                            fontWeight:'bold'
                         },
                         subtextStyle: {
-                            color: '#aaa',          // 副标题文字颜色
-                            fontSize: 12
+                            color: '#e61e28',          // 副标题文字颜色
+                            fontSize: 14,
+                            fontWeight:'bold'
                         }
                     },
                     tooltip : {
@@ -387,12 +391,14 @@
                         text : mytitle,
                         subtext:mysubtitle,
                         textStyle: {
-                            color: '#23b7e5',
-                            fontSize: 14
+                            color: '#e61e28',
+                            fontSize: 14,
+                            fontWeight:'bold'
                         },
                         subtextStyle: {
-                            color: '#aaa',          // 副标题文字颜色
-                            fontSize: 12
+                            color: '#e61e28',          // 副标题文字颜色
+                            fontSize: 14,
+                            fontWeight:'bold'
                         }
                     },
                     tooltip : {
