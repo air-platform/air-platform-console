@@ -1,0 +1,142 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="ConfigEditController as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+">
+    <!-- main -->
+    <div class="col">
+        <span us-spinner spinner-on="vm.showSpinner"></span>
+        <!-- main header -->
+        <!-- <div class="bg-light lter b-b wrapper-md" ng-hide="isRoleAdmin">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="m-n font-thin h3 text-black">{{vm.title}}</h1>
+                    <small class="text-muted">HNA EcoTech Internet of Things</small>
+                </div>
+               
+            </div>
+        </div> -->
+
+        <!-- tasks -->
+
+
+
+        <div class="panel panel-default m-l m-r m-t">
+
+            <div class="panel-heading">
+                <h3 class="panel-title">{{'product.INFORMATION' | translate}}</h3>
+            </div>
+            <br/>
+            <form name="form" class="form-horizontal form-validation" role="form">
+
+
+
+
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.NAME' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.NAME' | translate}}" ng-model="vm.user.title" ng-disabled="vm.isDetail"  required>
+                    </div>
+                    <span ng-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i><i style="font-style:normal; color:#999;">{{'tenant.USERNAMETIP' | translate}}</i></span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+                <div class="form-group" >
+
+                    <label class="col-sm-1 control-label m-l-lg font-bold">内容</label>
+
+                    <div class="panel" style="background-color: #f2f2f2; width:80%; padding:0px 0px 0px 0px; margin:0px 0px 0px 30px;">
+                        <link rel="stylesheet" href="js_components/editor.md/css/editormd.min.css" />
+                        <div id="editormd" class="" style="margin: 0;padding: 0;border: 0;border-radius: 0;">
+                            <textarea style="display:none;" ng-model="vm.user.content" ng-disabled="vm.isDetail"></textarea>
+                        </div>
+                        <script src="js_components/editor.md/editormd.js"></script>
+                        <script type="text/javascript">
+                            var editor;
+                            var mdIndex = -1;
+                            $(function() {
+                                editor = editormd("editormd", {
+                                    height: 400,
+
+                                    imageUpload    : true,
+                                    imageFormats   : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                                    imageUploadURL : " api/v1/files",
+
+
+
+                                    path : "js_components/editor.md/lib/", // Autoload modules mode, codemirror, marked... dependents libs path
+                                    toolbarIcons : function() {
+                                        var simple = ["undo", "redo", "|",
+                                            "bold", "del", "italic", "quote", "|",
+                                            "h1", "h2", "h3", "h4", "h5", "h6", "|",
+                                            "list-ul", "list-ol", "hr", "|",
+                                            "code", "datetime", "pagebreak", "|",
+                                            "watch", "preview", "clear", "|", "helper", "image"];
+
+                                        return simple;
+                                    },
+                                    toolbarIconsClass : {
+                                        helper : "fa-question-circle"  // 指定一个FontAawsome的图标类
+                                    },
+                                    toolbarHandlers : {
+                                        /**
+                                         * @param {Object}      cm         CodeMirror对象
+                                         * @param {Object}      icon       图标按钮jQuery元素对象
+                                         * @param {Object}      cursor     CodeMirror的光标对象，可获取光标所在行和位置
+                                         * @param {String}      selection  编辑器选中的文本
+                                         */
+                                        helper : function(cm, icon, cursor, selection) {
+                                            window.open('https://guides.github.com/features/mastering-markdown/');
+                                        }
+                                    }
+                                });
+                            });
+                            function updateMarkdown(content,index) {
+                                mdIndex = index;
+                                editor.clear();
+                                editor.setMarkdown(content);
+                            }
+                            function getMarkDownAction() {
+                                var md = editor.getMarkdown();
+                                return {markdown:md,index:mdIndex};
+                            }
+                        </script>
+                    </div>
+
+                    <!-- <p>aaa</p>
+
+                     <p ng-bind="vm.user.description"></p>
+
+                     <p>bbb</p>-->
+
+                </div>
+
+
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-3">
+                        <button ng-if="!vm.isDetail" class="btn btn-default btn-sm m-l-lg btn-addon bg-light" ng-click="vm.backAction()"> <i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}} </button>
+                        <button ng-if="!vm.isDetail" class="btn btn-sm btn-info btn-addon" type="submit" ng-click="vm.submitAction()" ng-disabled='form.$invalid'> <i class="fa fa-check-circle"></i>{{'product.CONFIRM' | T}} </button>
+                        <button ng-if="vm.isDetail" ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
+
+                    </div>
+                </div>
+
+
+
+
+
+
+            </form>
+        </div>
+    </div>
+</div>
+

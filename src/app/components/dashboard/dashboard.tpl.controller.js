@@ -131,12 +131,12 @@
                         text : mytitle,
                         subtext:mysubtitle,
                         textStyle: {
-                            color: '#e61e28',
+                            color: '#5ab1ef',
                             fontSize: 14,
                             fontWeight:'bold'
                         },
                         subtextStyle: {
-                            color: '#e61e28',          // 副标题文字颜色
+                            color: '#5ab1ef',          // 副标题文字颜色
                             fontSize: 14,
                             fontWeight:'bold'
                         }
@@ -272,7 +272,7 @@
                         text : mytitle,
 
                         textStyle: {
-                            color: '#e61e28',
+                            color: '#5ab1ef',
                             fontSize: 14,
                             fontWeight:'bold'
                         },
@@ -391,7 +391,7 @@
                         text : mytitle,
                         subtext:mysubtitle,
                         textStyle: {
-                            color: '#e61e28',
+                            color: '#5ab1ef',
                             fontSize: 14,
                             fontWeight:'bold'
                         },

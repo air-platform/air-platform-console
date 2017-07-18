@@ -1,0 +1,28 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="ConfigController as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+">
+    <!-- main -->
+    <div class="config-platform">
+
+        <div >
+            <h4>Tabs</h4>
+            <p>Select a tab by setting active binding to true:</p>
+            <ui>
+                <li>平台客户经理</li>
+                <li>积分规则</li>
+            </ui>
+        </div>
+
+        <div class="btn-group pagination pull-right padder-lg">
+            <button type="button" class="btn btn-default" ng-click="vm.preAction()" ng-disabled= !vm.pagePreEnabled>Previous</button>
+            <button type="button" class="btn btn-default" ng-repeat="page in vm.pages" ng-click="vm.goPage(page)" ng-disabled= vm.pageCurrentState(page)>{{page}}</button>
+            <button type="button" class="btn btn-default" ng-click="vm.nextAction()" ng-disabled= !vm.pageNextEnabled>Next</button>
+        </div>
+
+        <!-- / tasks -->
+    </div>
+</div>
+<script type="text/ng-template" id="myModalContent.html">
+    <div ng-include="'app/components/core/modal.html'"></div>
+</script>

@@ -328,6 +328,17 @@
               })
 
 
+              .state('app.config', {
+                  url: prefix + '/config',
+                  templateUrl: 'app/components/config/config.html'
+              })
+              .state('app.editconfig', {
+                  url: prefix + '/config/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/config/config.edit.html'
+              })
+
+
               .state('app.airtaxi', {
                   url: prefix + '/airtaxi',
                   templateUrl: 'app/components/air-taxi/airtaxi.html'
