@@ -6,21 +6,208 @@
     <div class="config-platform">
 
         <div >
-            <h4>Tabs</h4>
-            <p>Select a tab by setting active binding to true:</p>
-            <ui>
-                <li>平台客户经理</li>
-                <li>积分规则</li>
-            </ui>
+
+            <ul>
+                <li ng-repeat="tab in vm.tabItem">
+                    <a href ng-click="vm.sel(tab.id)" ng-class="{'tab-active':tab.active}">{{tab.title}}</a>
+                </li>
+
+            </ul>
+
+
+            <div class="tab-container">
+
+                <div class="plat-mgr" ng-show="vm.tabItem[0].active">
+                    <!--<ul>
+                        <li ng-repeat="item in vm.platMgr">
+                            {{item.person}},{{item.email}},{{item.mobile}},
+
+                        </li>
+                    </ul>-->
+
+                    <div class="div-line div-label">平台客户经理</div>
+
+                    <div  class="div-zone">
+
+                        <div class="div-line"  ng-repeat="item in vm.platMgr">
+
+                            <div class="div-inline div-padding">姓名</div>
+                            <div class="div-inline div-padding">
+                                <input type="text"  class="div-input-w"
+                                       placeholder="姓名" ng-model="item.person" ng-disabled="!vm.isEdit"  required>
+                            </div>
+
+                           <!-- <div class="div-inline div-padding">电话</div>
+                            <div class="div-inline div-padding">
+                                <input type="text" class="div-input-w"
+                                       placeholder="电话" ng-model="item.mobile" ng-disabled="!vm.isEdit"  required>
+                            </div>-->
+
+
+                            <div class="div-inline div-padding">邮箱</div>
+                            <div class="div-inline div-padding">
+                                <input type="text" class="div-input-w"
+                                       placeholder="邮箱" ng-model="item.email" ng-disabled="!vm.isEdit"  required>
+                            </div>
+
+                            <div ng-if="vm.isEdit" class="div-inline ">
+                                <button ng-if="!vm.isDetail" ng-click="vm.removeClientManager(item)" class="btn btn-sm btn-addon"><i class="glyphicon glyphicon-minus"></i>{{'product.DELETE' | translate}}</button>
+
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+
+                    <div ng-if="vm.isEdit" class="div-zone">
+                        <div  class="div-inline div-padding">
+                        <button ng-if="!vm.isDetail" ng-click="vm.addNewClientManager()" class="btn btn-info btn-sm btn-addon"><i class="glyphicon glyphicon-plus"></i>{{'u.ADD' | translate}}</button>
+                        </div>
+                    </div>
+
+                    <div class="div-zone ">
+                        <div  class="div-inline div-padding">
+
+                            <button ng-disabled="!vm.isEdit" class="btn btn-sm btn-addon" ng-click="vm.cancelOper(11)"> <i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}} </button>
+                            <button class="btn btn-sm btn-info btn-addon" type="submit" ng-click="vm.editOper(11)" ng-disabled='form.$invalid'> <i class="fa fa-check-circle"></i>{{vm.editTitle}}</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="plat-mgr" ng-show="vm.tabItem[1].active">
+                    <!--<ul>
+                        <li ng-repeat="item in vm.platMgr">
+                            {{item.person}},{{item.email}},{{item.mobile}},
+
+                        </li>
+                    </ul>-->
+
+                    <div class="div-line div-label">积分基础设置</div>
+                    <div  class="div-zone">
+
+                        <div class="div-line">
+
+
+                            <div class="div-inline div-padding">积分兑换比率</div>
+                            <div class="div-inline div-padding">
+                                <input type="text"  class="div-input"
+                                       placeholder="积分兑换比率" ng-model="vm.pointBasic.exchangeRate" ng-disabled="!vm.isEditPointBasic"  required>
+                            </div>
+
+                            <div class="div-inline div-padding">积分使用比率</div>
+                            <div class="div-inline div-padding">
+                                <input type="text" class="div-input"
+                                       placeholder="积分使用比率" ng-model="vm.pointBasic.exchangePercent" ng-disabled="!vm.isEditPointBasic"  required>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="div-zone ">
+                        <div  class="div-inline div-padding">
+
+                            <button ng-disabled="!vm.isEditPointBasic" class="btn btn-sm btn-addon" ng-click="vm.cancelOper(12)"> <i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}} </button>
+                            <button class="btn btn-sm btn-info btn-addon" type="submit" ng-click="vm.editOper(12)" ng-disabled='form.$invalid'> <i class="fa fa-check-circle"></i>{{vm.editTitlePointBasic}}</button>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                    <div class="div-line div-label">积分规则</div>
+                    <div  class="div-zone">
+
+                        <div class="div-line" ng-repeat="item in vm.pointRule" ng-if="$index%3 == 0">
+
+
+                            <div class="div-width-3">
+                                <div class="div-inline div-padding div-width-7" >{{vm.ruleTitle[vm.pointRule[$index].name]}}</div>
+                                <div class="div-inline div-padding div-width-2">
+                                    <input type="text"  class="div-input"
+                                           placeholder="{{vm.ruleTitle[vm.pointRule[$index].name]}}" ng-model="vm.pointRule[$index].value" ng-disabled="!vm.isEditPointRule"  required>
+                                </div>
+                            </div>
+                            <div class="div-width-3">
+                                <div class="div-inline div-padding div-width-7" >{{vm.ruleTitle[vm.pointRule[$index+1].name]}}</div>
+                                <div class="div-inline div-padding div-width-2">
+                                    <input type="text"  class="div-input"
+                                           placeholder="{{vm.ruleTitle[vm.pointRule[$index+1].name]}}" ng-model="vm.pointRule[$index+1].value" ng-disabled="!vm.isEditPointRule"  required>
+                                </div>
+                            </div>
+
+                            <div class="div-width-3">
+                                <div class="div-inline div-padding div-width-7" >{{vm.ruleTitle[vm.pointRule[$index+2].name]}}</div>
+                                <div class="div-inline div-padding div-width-2">
+                                    <input type="text"  class="div-input"
+                                           placeholder="{{vm.ruleTitle[vm.pointRule[$index+2].name]}}" ng-model="vm.pointRule[$index+2].value" ng-disabled="!vm.isEditPointRule"  required>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+                       <!-- <div class="div-line">
+
+                            <div class="div-inline div-padding">连续签到1天获得积分数</div>
+                            <div class="div-inline div-padding">
+                                <input type="text"  class="div-input"
+                                       placeholder="连续签到1天获得积分数" ng-model="vm.pointRule.daily_signin_1" ng-disabled="!vm.isEditPointRule"  required>
+                            </div>
+
+                            <div class="div-inline div-padding">连续签到1天获得积分数</div>
+                            <div class="div-inline div-padding">
+                                <input type="text" class="div-input"
+                                       placeholder="连续签到5天获得积分数" ng-model="vm.pointRule.daily_signin_5" ng-disabled="!vm.isEditPointRule"  required>
+                            </div>
+
+                        </div>-->
+
+
+                    </div>
+
+                    <div class="div-zone ">
+                        <div  class="div-inline div-padding">
+
+                            <button ng-disabled="!vm.isEditPointRule" class="btn btn-sm btn-addon" ng-click="vm.cancelOper(13)"> <i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}} </button>
+                            <button class="btn btn-sm btn-info btn-addon" type="submit" ng-click="vm.editOper(13)" ng-disabled='form.$invalid'> <i class="fa fa-check-circle"></i>{{vm.editTitlePointRule}}</button>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+            </div>
         </div>
 
-        <div class="btn-group pagination pull-right padder-lg">
-            <button type="button" class="btn btn-default" ng-click="vm.preAction()" ng-disabled= !vm.pagePreEnabled>Previous</button>
-            <button type="button" class="btn btn-default" ng-repeat="page in vm.pages" ng-click="vm.goPage(page)" ng-disabled= vm.pageCurrentState(page)>{{page}}</button>
-            <button type="button" class="btn btn-default" ng-click="vm.nextAction()" ng-disabled= !vm.pageNextEnabled>Next</button>
-        </div>
-
-        <!-- / tasks -->
     </div>
 </div>
 <script type="text/ng-template" id="myModalContent.html">
