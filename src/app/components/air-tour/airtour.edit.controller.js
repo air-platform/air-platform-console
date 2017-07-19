@@ -381,6 +381,9 @@
 
             NetworkService.get(vm.reqPath2  + '/aircrafts',{page:vm.pageCurrent},function (response) {
                 vm.crafts = response.data.content;
+                for(var i = 0; i < vm.crafts.length; i ++){
+                    vm.crafts[i].selTitle = vm.crafts[i].name + ' ' + vm.crafts[i].flightNo + ' ' +  vm.crafts[i].type;
+                }
 
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
