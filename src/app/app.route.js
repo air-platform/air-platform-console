@@ -326,7 +326,15 @@
                   params : {args : {}},
                   templateUrl: 'app/components/training/training-room.edit.html'
               })
-
+              .state('app.apron', {
+                  url: prefix + '/apron',
+                  templateUrl: 'app/components/apron/apron.html'
+              })
+              .state('app.editapron', {
+                  url: prefix + '/apron/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/apron/apron.edit.html'
+              })
 
               .state('app.config', {
                   url: prefix + '/config',
