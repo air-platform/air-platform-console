@@ -58,7 +58,16 @@
         ];
 
 
-
+        vm.pubStatus = [
+            {
+                title:'已上线',
+                value: true
+            },
+            {
+                title:'已下线',
+                value: false
+            }
+        ];
 
         vm.statusType = [
             {
@@ -73,10 +82,10 @@
 
         vm.fleetSel=[{
             value:'helicopter',
-            title:'直升机'
+            title:'直升机起降点'
         },{
-            value:'fixedwing',
-            title:'固定翼'
+            value:'aerodrome',
+            title:'通用机场'
         }];
 
         vm.priceType = [

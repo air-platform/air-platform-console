@@ -28,9 +28,10 @@
             <tr class="font-bold">
                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
                 <th class="text-center">{{'u.NAME' | T}}</th>
-                <!--<th class="text-center">内容</th>-->
+                <th class="text-center">发布状态</th>
+                <th class="text-center">省份</th>
                 <th class="text-center">城市</th>
-                <th class="text-center">飞机类型</th>
+                <th class="text-center">类型</th>
                 <th class="text-center">创建时间</th>
 
 
@@ -42,6 +43,13 @@
 
             <tr ng-repeat="item in vm.displayedCollection">
                 <td ng-click="vm.goDetail(item)">{{item.name}}</td>
+
+                <td ng-click="vm.goDetail(item)">
+                    <label ng-class="vm.labelColor[item.published]" ng-bind="vm.labelContent[item.published]" class="label"></label>
+                </td>
+                <td ng-click="vm.goDetail(item)">{{item.province}}</td>
+
+
                 <td ng-click="vm.goDetail(item)">{{item.city}}</td>
 
                 <td ng-click="vm.goDetail(item)">
@@ -52,7 +60,26 @@
                     <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goDetail(item)"><i class="fa fa-eye"></i>{{'u.DETAIL'|T}}</button>
 
                     <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goEditItem(item)"><i class="fa fa-edit"></i>{{ 'u.EDIT' | T}}</button>
-                    <button class="btn btn-sm btn-danger btn-addon" style="width: 80px"  ng-click="vm.openAlert('sm',item)"><i class="fa fa-trash-o"></i>{{'u.DELETE' | T}}</button>
+
+                    <div class="btn-group " ng-if="vm.isAdmin">
+                        <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-sliders"></i>  操作</button>
+                        <button type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+
+                        <ul class="dropdown-menu" style="overflow:visible; z-index:1010;width:100px;position:absolute;">
+                            <li ng-class="{disabled: item.published}" ng-click="vm.OperApp(11, item)" ><a><i class="fa fa-arrow-up m-r-sm"></i>上线</a></li>
+                            <li ng-class="{disabled: !item.published}" ng-click="vm.OperApp(12, item)" ><a><i class="fa fa-arrow-down m-r-sm"></i>下线</a></li>
+                            <li  ng-click="vm.openAlert('sm',item)" ><a><i class="fa fa-trash-o m-r-sm"></i> {{'u.DELETE' | T}}</a></li>
+
+
+
+                        </ul>
+                    </div>
+
+
+
                 </td>
             </tr>
 

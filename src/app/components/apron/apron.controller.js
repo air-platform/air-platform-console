@@ -32,8 +32,35 @@
         vm.userInfo = {};
 
         vm.fleetType={
-            'helicopter':'直升机',
-            'fixedwing':'固定翼'
+            'helicopter':'直升机起降点',
+            'aerodrome':'通用机场'
+        };
+
+        vm.pubStatus = [
+            {
+                title:'已上线',
+                value: true
+            },
+            {
+                title:'已下线',
+                value: false
+            }
+        ];
+
+        vm.labelColor = {
+            true:'bg-success',
+            false:'bg-warning',
+            'pending':'bg-info',
+            'approved':'bg-success',
+            'rejected':'bg-warning'
+
+        };
+        vm.labelContent={
+            true:'已上线',
+            false:'已下线',
+            'pending':'未审批',
+            'approved':'审批通过',
+            'rejected':'审批拒绝'
         };
 
         vm.subPath = 'aprons';
@@ -47,6 +74,31 @@
         }
 
 
+        vm.OperApp = OperApp;
+        function OperApp(index, item) {
+             if(index == 11){
+                var myreason={reason:'invalid params'};
+                NetworkService.post(vm.reqPath + '/'+ vm.subPath + '/' +item.id +'/publish',null,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    console.log(response);
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status + ' ' + response.statusText);
+                });
+            }else if(index == 12){
+                var myreason={reason:'invalid params'};
+                NetworkService.post(vm.reqPath + '/'+ vm.subPath + '/' +item.id +'/unpublish',null,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status + ' ' + response.statusText);
+                });
+            }else{
+                console.log('error ops:'+index);
+            }
+
+            //$state.go('app.applicationedit');
+        };
 
         function getDatas() {
 

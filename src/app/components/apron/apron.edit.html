@@ -44,16 +44,36 @@
                 <div  class="line line-dashed b-b line-lg"></div>
 
 
+                <div class="form-group" ng-if="vm.isDetail">
+
+                    <label class="col-sm-1 control-label m-l-lg font-bold">发布状态</label>
+                    <div class="col-sm-2">
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.published" ng-options="opt.value as opt.title for opt in vm.pubStatus" ng-disabled="vm.isDetail" ></select>
+                    </div>
+
+                </div>
+
+                <div  ng-if="vm.isDetail" class="line line-dashed b-b line-lg"></div>
 
 
 
 
 
                 <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">省份</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="省份" ng-model="vm.user.province" ng-disabled="vm.isDetail" required>
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+
+                <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">城市</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="城市" ng-model="vm.user.city" ng-disabled="vm.isDetail" >
+                               placeholder="城市" ng-model="vm.user.city" ng-disabled="vm.isDetail" required>
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
@@ -61,10 +81,10 @@
 
 
                 <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">飞机类型</label>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">类型</label>
 
                         <div class="col-sm-4">
-                            <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.type" ng-options="s.value as s.title for s in vm.fleetSel" ng-disabled="vm.isDetail || !vm.isAdmin" ></select>
+                            <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.type" ng-options="s.value as s.title for s in vm.fleetSel" ng-disabled="vm.isDetail" required></select>
                         </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
@@ -168,6 +188,72 @@
 
 
                 <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+
+
+
+                <!--<div class="form-group" >
+
+                    <label class="col-sm-1 control-label m-l-lg font-bold">描述</label>
+
+                    <div class="panel" style="background-color: #f2f2f2; width:80%; padding:0px 0px 0px 0px; margin:0px 0px 0px 30px;">
+                        <link rel="stylesheet" href="js_components/editor.md/css/editormd.min.css" />
+                        <link href="js_components/quill/quill.snow.css" rel="stylesheet">
+
+
+                        <div id="toolbar">
+                            <button class="ql-bold">Bold</button>
+                            <button class="ql-italic">Italic</button>
+                        </div>
+                        <div id="editor" style="height:400px;">
+
+                        </div>
+                        <script src="js_components/quill/quill.js"></script>
+                        <script type="text/javascript">
+
+
+                            var editor = new Quill('#editor', {
+                                /*modules: { toolbar: '#toolbar' },*/
+
+                                modules: {
+                                    toolbar: [
+                                        [{ header: [1, 2, false] }],
+                                        ['bold', 'italic', 'underline'],
+                                        ['image', 'code-block']
+                                    ]
+                                },
+                                theme: 'snow'
+                            });
+                        </script>
+                    </div>
+
+                    &lt;!&ndash; <p>aaa</p>
+
+                     <p ng-bind="vm.user.description"></p>
+
+                     <p>bbb</p>&ndash;&gt;
+
+                </div>
+
+
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+-->
+
+
+
+
+
+
+
+
+
+
 
 
                 <div class="form-group">
