@@ -159,7 +159,7 @@
 
 
             NetworkService.get(vm.reqPath2  + '/airjets',{page:vm.pageCurrent},function (response) {
-                vm.jets = response.data;
+                vm.jets = response.data.content;
 
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
