@@ -433,7 +433,7 @@
         function getAircraftsDatas() {
 
 
-            NetworkService.get(vm.reqPath2  + '/aircrafts',{page:vm.pageCurrent},function (response) {
+            NetworkService.get(vm.reqPath2  + '/aircrafts',{page:vm.pageCurrent, pageSize:100},function (response) {
                 vm.crafts = response.data.content;
 
                 for(var i = 0; i < vm.crafts.length; i ++){

@@ -248,7 +248,31 @@
 
 
                 $scope.vm.getDegreeView = function (){
-                    console.log('eeeeee');
+
+                    //$scope.vm.lngDegree = parseInt($scope.vm.lngDegree);
+                    if($scope.vm.lngDegree ) {
+                        if ($scope.vm.lngDegree > 179) {
+                            $scope.vm.lngDegree = 179;
+                        }
+                    }else{
+                        return;
+                    }
+                    if($scope.vm.lngMin ) {
+                        if ($scope.vm.lngMin > 59) {
+                            $scope.vm.lngMin = 59;
+                        }
+                    }else{
+                        return;
+                    }
+                    if($scope.vm.lngSec ) {
+                        if($scope.vm.lngSec > 59){
+                            $scope.vm.lngSec = 59;
+                        }
+                    }else{
+                        return;
+                    }
+
+
                     if($scope.type == '1') {
                         var lng = $scope.vm.lngDegree + floatObj.divide($scope.vm.lngMin, 60, 6) + floatObj.divide($scope.vm.lngSec, 3600, 6);
                         lng = ForDight(lng,6);
@@ -270,6 +294,31 @@
 
 
                     }else{
+
+
+                        if($scope.vm.latDegree ) {
+                            if ($scope.vm.latDegree > 89) {
+                                $scope.vm.latDegree = 89;
+                            }
+                        }else{
+                            return;
+                        }
+                        if($scope.vm.latMin ) {
+                            if ($scope.vm.latMin > 59) {
+                                $scope.vm.latMin = 59;
+                            }
+                        }else{
+                            return;
+                        }
+                        if($scope.vm.latSec ) {
+                            if($scope.vm.latSec > 59){
+                                $scope.vm.latSec = 59;
+                            }
+                        }else{
+                            return;
+                        }
+
+
                         var lat = $scope.vm.latDegree + floatObj.divide($scope.vm.latMin, 60, 6) + floatObj.divide($scope.vm.latSec, 3600, 6);
                         lat = ForDight(lat,6);
 
