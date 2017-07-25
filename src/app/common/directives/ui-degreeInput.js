@@ -145,10 +145,10 @@
                 }();
 
 
-                $scope.vm.mydegree = $scope.degree;
-                //$scope.vm.mydegree = parseFloat($scope.degree);
+                //$scope.vm.mydegree = $scope.degree;
+                $scope.vm.mydegree = parseFloat($scope.degree);
                 //$scope.vm.mydegree = ForDight($scope.vm.mydegree,6);
-                //$scope.degree = $scope.vm.mydegree;
+                $scope.degree = $scope.vm.mydegree;
                 //$scope.vm.mydegree = -110.1010;
                 $scope.isNeg = false;
                 if($scope.vm.mydegree < 0){

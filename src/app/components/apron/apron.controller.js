@@ -100,6 +100,31 @@
             //$state.go('app.applicationedit');
         };
 
+
+
+        vm.goSearchApron = function()
+        {
+            NetworkService.get(vm.reqPath + '/' + vm.subPath + '?province=河南&type=aerodrome',{page:vm.pageCurrent},function (response) {
+                vm.items = response.data.content;
+                console.log(response.data);
+                vm.displayedCollection = [].concat(vm.items);
+                if(vm.items.length > 0){
+                    response.data.page = 1;
+                    response.data.totalPages = 1;
+
+                    response.data.hasNextPage = false;
+                    response.data.hasPreviousPage = false;
+                }
+
+
+                var pageInfo = {page:1, totalPages:1,hasNextPage:false,hasPreviousPage:false,hasContent:true};
+
+                updatePagination(pageInfo);
+            },function (response) {
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
+            });
+            //}
+        }
         function getDatas() {
 
             NetworkService.get(vm.reqPath + '/' + vm.subPath,{page:vm.pageCurrent},function (response) {

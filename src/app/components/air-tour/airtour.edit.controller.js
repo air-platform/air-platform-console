@@ -450,7 +450,7 @@
             vm.user.salesPackages.push({
                 name:'',
                 prices:pp.toString(),
-                description:'des',
+                description:'',
                 currencyUnit:'rmb',
                 aircraft:'',
                 showPriceCalendar:false,
