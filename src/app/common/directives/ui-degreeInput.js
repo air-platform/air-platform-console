@@ -21,14 +21,14 @@
                 console.log($scope.degree);
                 $scope.mdg = $scope.degree;
                 $scope.vm.lngew = '东经';
-                $scope.vm.lngDegree = '120';
-                $scope.vm.lngMin = '34';
-                $scope.vm.lngSec = '29';
+                $scope.vm.lngDegree = 120;
+                $scope.vm.lngMin = 34;
+                $scope.vm.lngSec = 29;
 
                 $scope.vm.latns = '北纬';
-                $scope.vm.latDegree = '34';
-                $scope.vm.latMin = '34';
-                $scope.vm.latSec = '29';
+                $scope.vm.latDegree = 34;
+                $scope.vm.latMin = 34;
+                $scope.vm.latSec = 29;
                 //$scope.degree = '150';
 
 
@@ -145,8 +145,10 @@
                 }();
 
 
-
                 $scope.vm.mydegree = $scope.degree;
+                //$scope.vm.mydegree = parseFloat($scope.degree);
+                //$scope.vm.mydegree = ForDight($scope.vm.mydegree,6);
+                //$scope.degree = $scope.vm.mydegree;
                 //$scope.vm.mydegree = -110.1010;
                 $scope.isNeg = false;
                 if($scope.vm.mydegree < 0){

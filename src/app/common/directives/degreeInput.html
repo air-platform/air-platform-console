@@ -1,10 +1,10 @@
-<div class="input-group">
+<div class="input-group degree-input-group">
 
                                 <span style="padding:1px;">
                                 <button  type="button" ng-click="vm.switchDegreeView()"><i class="fa fa-exchange"></i></button>
                                 </span>
-                            <input ng-show="!vm.isDegree" class="" type="text"
-           placeholder=""   ng-model="degree" ng-pattern="/^[-0-9\.]{1,10}$/" required>
+                            <input ng-show="!vm.isDegree" class="" type="number"
+           placeholder=""   ng-model="degree" ng-pattern="/^[-0-9\.]{1,15}$/" required>
 
                             <!--<span ng-if="vm.isDegree && type==1">
 
