@@ -36,6 +36,21 @@
             'aerodrome':'通用机场'
         };
 
+        vm.siteSel = [
+            '省份',
+            '城市'
+        ];
+        vm.fleetSelSearch=[{
+            value:'helicopter',
+            title:'直升机起降点'
+        },{
+            value:'aerodrome',
+            title:'通用机场'
+        },{
+            value:'all',
+            title:'所有类型'
+        }];
+
         vm.pubStatus = [
             {
                 title:'已上线',
@@ -99,13 +114,34 @@
 
             //$state.go('app.applicationedit');
         };
+        vm.isSearch = false;
 
-
-
+        vm.searchApronType = 'all';
+        vm.siteType = '省份';
+        vm.searchApronProvince = '';
+        vm.searchApronCity = '';
         vm.goSearchApron = function()
         {
-            NetworkService.get(vm.reqPath + '/' + vm.subPath + '?province=河南&type=aerodrome',{page:vm.pageCurrent},function (response) {
-                vm.items = response.data.content;
+
+            var cond = '?';
+            if(vm.siteType == '省份'){
+                if(!vm.searchApronProvince){
+                    return;
+                }
+                cond += 'province='+vm.searchApronProvince;
+            }else{
+                if(!vm.searchApronCity){
+                    return;
+                }
+                cond += 'city='+vm.searchApronCity;
+            }
+            if(vm.searchApronType == 'all'){
+
+            }else{
+                cond += '&type='+vm.searchApronType;
+            }
+            NetworkService.get(vm.reqPath + '/' + vm.subPath + cond,{page:vm.pageCurrent},function (response) {
+                vm.items = response.data;
                 console.log(response.data);
                 vm.displayedCollection = [].concat(vm.items);
                 if(vm.items.length > 0){
@@ -119,7 +155,7 @@
 
                 var pageInfo = {page:1, totalPages:1,hasNextPage:false,hasPreviousPage:false,hasContent:true};
 
-                updatePagination(pageInfo);
+                updatePagination(response.data);
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
             });
@@ -127,14 +163,15 @@
         }
         function getDatas() {
 
-            NetworkService.get(vm.reqPath + '/' + vm.subPath,{page:vm.pageCurrent},function (response) {
-                vm.items = response.data.content;
-                console.log(response.data);
-                vm.displayedCollection = [].concat(vm.items);
-                updatePagination(response.data);
-            },function (response) {
-                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
-            });
+
+                NetworkService.get(vm.reqPath + '/' + vm.subPath, {page: vm.pageCurrent}, function (response) {
+                    vm.items = response.data.content;
+                    console.log(response.data);
+                    vm.displayedCollection = [].concat(vm.items);
+                    updatePagination(response.data);
+                }, function (response) {
+                    toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
+                });
         }
 
 

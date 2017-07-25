@@ -20,9 +20,28 @@
         <table  st-table="vm.displayedCollection" st-safe-src="vm.items" class="table table-bordered table-striped table-hover bg-white text-center">
             <thead>
             <tr>
-                <th colspan="7">
-                    <button  ng-click="vm.goSearchApron()" class="btn btn-sm btn-info btn-addon pull-right" style="position: relative;top: 1px;margin-left: 4px;"><i class="fa fa-search"></i>{{ 'u.SEARCH' | T }}</button>
-                    <input ng-model="vm.searchApron" class="form-control pull-right  w-md" placeholder="请输入省份" type="text"/>
+                <th colspan="7" >
+
+
+                    <label class=" control-label font-bold m-r-sm">机场地点选择:</label>
+                    <select style="width: 70px;"  class="form-control input-inline  m-r-sm" ng-model="vm.siteType" ng-options="s as s for s in vm.siteSel" required></select>
+
+                    <div class="input-inline">
+                       <input ng-class="{hide: vm.siteType!='省份'}" style="width: 110px;" ng-model="vm.searchApronProvince" class="form-control  input-inline m-r-sm" placeholder="请输入省份" type="text"/>
+                        <input ng-class="{hide: vm.siteType!='城市'}"  style="width: 110px;" ng-model="vm.searchApronCity" class="form-control input-inline  m-r-sm" placeholder="请输入城市" type="text"/>
+                        <!--<input ng-if="vm.siteType=='省份'" ng-model="vm.searchApronProvince" class="form-control   w-md" placeholder="请输入省份" type="text"/>
+                        <input ng-if="vm.siteType=='城市'" ng-model="vm.searchApronCity" class="form-control   w-md" placeholder="请输入城市" type="text"/>
+-                       -->
+                    </div>
+
+                    <label class=" control-label font-bold m-r-sm">机场类型</label>
+                    <select style="width: 120px;" class="form-control input-inline  m-r-sm" ng-model="vm.searchApronType" ng-options="s.value as s.title for s in vm.fleetSelSearch" required></select>
+
+                    <button  ng-click="vm.goSearchApron()" class="btn btn-sm btn-info btn-addon" style="position: relative;top: 1px;margin-left: 4px;"><i class="fa fa-search"></i>{{ 'u.SEARCH' | T }}</button>
+
+
+
+
                 </th>
             </tr>
             <tr class="font-bold">
