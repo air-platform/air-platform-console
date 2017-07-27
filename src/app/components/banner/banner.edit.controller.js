@@ -278,7 +278,7 @@
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.showSpinner = false;
                 console.log(response.data);
-                vm.image = response.data.url;
+                vm.user.image = response.data.url;
                 //item.image = 'https://ss1.bdstatic.com/5aAHeD3nKgcUp2HgoI7O1ygwehsv/media/ch1000/png/ETpc170601_bg.png';
                 //vm.backAction();
             },function (response) {

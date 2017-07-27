@@ -155,7 +155,7 @@
 
                 var pageInfo = {page:1, totalPages:1,hasNextPage:false,hasPreviousPage:false,hasContent:true};
 
-                updatePagination(response.data);
+                updatePagination(pageInfo);
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
             });
