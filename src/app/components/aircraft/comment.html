@@ -1,0 +1,151 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="AirCraftCommentController as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+">
+    <!-- main -->
+    <div class="col">
+        <!-- main header -->
+        <!-- div class="bg-light lter b-b wrapper-md" ng-hide="isRoleAdmin">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="m-n font-thin h3 text-black">租户信息</h1>
+                    <small class="text-muted">HNA EcoTech Internet of Things</small>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- tasks -->
+
+        <div class="m-l m-r m-t panel panel-default">
+
+        <table  st-table="vm.displayedCollection" st-safe-src="vm.items" class="table table-bordered table-striped table-hover bg-white text-center">
+
+        </table>
+        </div>
+
+
+
+
+
+        <div class="m-l m-r m-t panel panel-default">
+            <div class="panel b-a">
+                <div class="panel-heading b-b b-light">
+                  <!--  <span class="badge bg-warning pull-right">10</span>-->
+                    <a href class="font-bold">Messages</a>
+                </div>
+                <ul class="list-group list-group-lg no-bg auto">
+                    <li class="list-group-item clearfix" style="margin-bottom:5px;" ng-repeat="item in vm.displayedCollection">
+                        <span class="pull-left thumb-sm avatar m-r">
+                          <img ng-src="{{item.owner.avatar}}"  alt="...">
+                          <i class="on b-white bottom"></i>
+                        </span>
+                        <span class="pull-right thumb-sm avatar" style="width:95px;">
+
+                            <button class="btn btn-sm"   ng-click="vm.replyComment(item)">回复</button>
+                            <button class="btn btn-sm"  ng-click="vm.openAlert('sm',item)">删除</button>
+
+                        </span>
+                        <span class="clear">
+                          <span>{{item.owner.name}}</span>
+                            <small class="  " ng-if="item.replyTo">回复给 {{item.replyTo.name}}：</small>
+                          <small class="text-muted clear text-ellipsis">{{item.content}}</small>
+                        </span>
+                        <span class="clear">
+                        <small class="pull-right text-muted clear text-ellipsis">{{item.date | date:'yyyy-MM-dd HH:mm:ss'}}</small>
+                        </span>
+                    </li>
+
+
+
+
+                    <!--
+                    <li class="list-group-item clearfix">
+                        <span class="pull-left thumb-sm avatar m-r">
+                          <img src="images/a0.jpg" alt="...">
+                          <i class="on b-white bottom"></i>
+                        </span>
+                                    <span class="clear">
+                          <span>Amanda Conlan</span>
+                          <small class="text-muted clear text-ellipsis">Come online and we need talk about the plans that we have discussed</small>
+                        </span>
+                    </li>
+                    <li class="list-group-item clearfix">
+            <span class="pull-left thumb-sm avatar m-r">
+              <img src="images/a0.jpg" alt="...">
+              <i class="busy b-white bottom"></i>
+            </span>
+                        <span class="clear">
+              <span>Dan Doorack</span>
+              <small class="text-muted clear text-ellipsis">Hey, Some good news</small>
+            </span>
+                    </li>
+                    <li class="list-group-item clearfix">
+            <span class="pull-left thumb-sm avatar m-r">
+              <img src="images/a0.jpg" alt="...">
+              <i class="away b-white bottom"></i>
+            </span>
+                        <span class="clear">
+              <span>Lauren Taylor</span>
+              <small class="text-muted clear text-ellipsis">Nice to talk with you.</small>
+            </span>
+                    </li>-->
+                </ul>
+                <!--<div class="clearfix panel-footer">
+                    <div class="input-group">
+                        <input type="text" class="form-control input-sm btn-rounded" placeholder="Search">
+                        <span class="input-group-btn">
+              <button type="submit" class="btn btn-default btn-sm btn-rounded"><i class="fa fa-search"></i></button>
+            </span>
+                    </div>
+                </div>-->
+
+
+
+                <button ng-click="vm.addComment()" ng-if="vm.showCommentButton" class="btn btn-sm btn-info btn-rounded" style="margin:10px;">{{ 'u.ADD' | T }}</button>
+
+
+                <form class="m-b-none ng-pristine ng-valid" style="margin-top:35px;" ng-if="vm.showCommentInput">
+                    <div class="my-input-group" style="margin-bottom:10px;">
+                        <span >
+                        <span ng-if="vm.showReplyTo" style="font-size: 17px;font-weight: bold;margin-right: 12px;position: relative;color: #23b7e5;">回复 {{vm.replyUserName}}:</span>
+                        <span ng-if="!vm.showReplyTo" style="font-size: 17px;font-weight: bold;margin-right: 12px;position: relative;color: #23b7e5;">发表评论:</span>
+
+                            <input type="text" ng-model="vm.commentContent"  class="my-control" placeholder="说点什么" style="width:80%; height:60px;">
+
+                        <span class="my-input-group-btn">
+                            <button class="btn btn-default" type="button" ng-click="vm.sendComment()">发送</button>
+                            <button class="btn btn-default" type="button" ng-click="vm.cancelComment()">取消</button>
+                        </span>
+
+                            </span>
+
+
+
+                    </div>
+                </form>
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+        <div class="btn-group pagination pull-right padder-lg">
+            <button type="button" class="btn btn-default" ng-click="vm.preAction()" ng-disabled= !vm.pagePreEnabled>Previous</button>
+            <button type="button" class="btn btn-default" ng-repeat="page in vm.pages" ng-click="vm.goPage(page)" ng-disabled= vm.pageCurrentState(page)>{{page}}</button>
+            <button type="button" class="btn btn-default" ng-click="vm.nextAction()" ng-disabled= !vm.pageNextEnabled>Next</button>
+        </div>
+
+        <!-- / tasks -->
+    </div>
+</div>
+<script type="text/ng-template" id="myModalContent.html">
+    <div ng-include="'app/components/core/modal.html'"></div>
+</script>

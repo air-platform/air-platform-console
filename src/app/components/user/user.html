@@ -28,6 +28,7 @@
             <tr class="font-bold">
                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
                 <th class="text-center">用户名</th>
+                <th class="text-center">角色</th>
                 <th class="text-center">会员等级</th>
                 <th class="text-center">{{'u.STATUS' | T}}</th>
                 <th class="text-center">积分</th>
@@ -45,7 +46,9 @@
        <!--         <td ng-click="vm.goDetail(item)">
                     {{item.rank}}
                 </td>-->
-
+                <td ng-click="vm.goDetail(item)">
+                    <label  ng-class="vm.labelColor[item.role]"  ng-bind="vm.labelRole[item.role]" class="label"></label>
+                </td>
                 <td ng-click="vm.goDetail(item)">
                     <label ng-class="vm.labelColor[item.rank]" ng-bind="vm.labelContent[item.rank]" class="label"></label>
                 </td>
@@ -73,17 +76,23 @@
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
-                        <ul class="dropdown-menu" style="overflow:visible; z-index:1010;width:100px;position:absolute;">
+                        <ul class="dropdown-menu" style="overflow:visible; z-index:1010;width:120px;position:absolute;">
                            <!-- <li ng-click="vm.OperApp(3, item)" ><a><i class="fa fa-play m-r-sm"></i>锁定</a></li>
                             <li  ng-click="vm.OperApp(4, item)" ><a><i class="fa fa-stop m-r-sm"></i>解锁</a></li>-->
 
-                           <li ng-class="{disabled: !item.isLockEnable}" ng-click="vm.OperApp(3, item)" ><a><i class="fa fa-play m-r-sm"></i>锁定</a></li>
-                            <li ng-class="{disabled: !item.isUnlockEnable}" ng-click="vm.OperApp(4, item)" ><a><i class="fa fa-stop m-r-sm"></i>解锁</a></li>
+                           <li ng-class="{disabled: !item.isLockEnable}" ng-click="vm.OperApp(3, item)" ><a><i class="fa fa-lock m-r-sm"></i>锁定</a></li>
+                            <li ng-class="{disabled: !item.isUnlockEnable}" ng-click="vm.OperApp(4, item)" ><a><i class="fa fa-unlock m-r-sm"></i>解锁</a></li>
 
                             <li  ng-click="vm.goPoint('sm',item)" ><a><i class="fa fa-commenting-o m-r-sm"></i>修改积分</a></li>
                             <li  ng-click="vm.OperApp(5, item)" ><a><i class="fa fa-play m-r-sm"></i>重置密码</a></li>
 
                             <li  ng-click="vm.openAlert('sm',item)" ><a><i class="fa fa-trash-o m-r-sm"></i> {{'u.DELETE' | T}}</a></li>
+
+                            <li ng-class="{disabled: !item.isAdminEnable}" ng-click="vm.OperApp(6, item)" ><a><i class="fa fa-user-secret m-r-sm"></i>改为管理员</a></li>
+                            <li ng-class="{disabled: !item.isUserEnable}" ng-click="vm.OperApp(7, item)" ><a><i class="fa fa-user m-r-sm"></i>改为用户</a></li>
+
+
+
 
                         </ul>
                     </div>

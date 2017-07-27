@@ -40,7 +40,9 @@
             'silver':'bg-main',
             'gold':'bg-main',
             'platinum':'bg-main',
-            'diamond':'bg-main'
+            'diamond':'bg-main',
+            'user':'bg-info',
+            'admin':'bg-danger'
         };
         vm.labelContent={
             enabled:'已启用',
@@ -51,6 +53,11 @@
             'platinum':'铂金会员',
             'diamond':'钻石会员'
         };
+
+        vm.labelRole = {
+            'user':'用户',
+            'admin':'管理员'
+        }
 
         vm.displayedCollection = [];
         vm.subPath = 'accounts';
@@ -93,6 +100,24 @@
                     vm.authError = response.statusText + '(' + response.status + ')';
                     toastr.error(vm.authError);
                 });
+            }else if(index == 6){
+                var info = { role: 'admin'};
+                NetworkService.post(vm.reqPath + '/' + vm.subPath  +'/'+ item.id + '/role',info,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    toastr.error(vm.authError);
+                });
+            }else if(index == 7){
+                var info = { role: 'user'};
+                NetworkService.post(vm.reqPath + '/' + vm.subPath  +'/'+ item.id + '/role',info,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    toastr.error(vm.authError);
+                });
             }else{
                 console.log('error ops:'+index);
             }
@@ -103,7 +128,7 @@
 
         function getDatas() {
 
-            NetworkService.get(constdata.api.tenant.listAllPath + '/' + '?role=user',{page:vm.pageCurrent},function (response) {
+            NetworkService.get(constdata.api.tenant.listAllPath + '/' + '?type=user',{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
                 vm.displayedCollection = (vm.items);
                 if(vm.displayedCollection) {
@@ -115,6 +140,15 @@
                             vm.displayedCollection[i].isLockEnable = false;
                             vm.displayedCollection[i].isUnlockEnable = true;
                         }
+
+                        if (vm.displayedCollection[i].role == 'user') {
+                            vm.displayedCollection[i].isAdminEnable = true;
+                            vm.displayedCollection[i].isUserEnable = false;
+                        } else if (vm.displayedCollection[i].role == 'admin') {
+                            vm.displayedCollection[i].isAdminEnable = false;
+                            vm.displayedCollection[i].isUserEnable = true;
+                        }
+
                     }
                 }
 

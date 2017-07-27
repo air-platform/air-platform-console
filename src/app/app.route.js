@@ -171,6 +171,8 @@
         //back button function called from back button's ng-click="backPre()"
         $rootScope.backPre = function() {//实现返回的函数
             $state.go($rootScope.previousState_name,$rootScope.previousState_params);
+            console.log($rootScope.previousState_name);
+            console.log($rootScope.previousState_params);
         };
     });
 
@@ -376,10 +378,18 @@
               })
 
               .state('app.aircraft', {
-                  url: prefix + '/aircraft',
+                  url: prefix + 'aircraft',
                   templateUrl: 'app/components/aircraft/aircraft.html'
 
               })
+
+              .state('app.aircraftcomment', {
+                  url: prefix + '/aircraft/comment/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/aircraft/comment.html'
+              })
+
+
               .state('app.editaircraft', {
                   url: prefix + '/aircraft/edit/:username',
                   params : {args : {}},

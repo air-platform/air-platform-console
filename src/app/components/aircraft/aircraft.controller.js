@@ -60,8 +60,10 @@
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
             });
         }
+        vm.goComment = function(item) {
+            $state.go('app.aircraftcomment',{username:item.id, args:{type:'detail',prd:'aircrafts'}});
 
-
+        };
         function goAddItem() {
             $state.go('app.editaircraft',{});
         };

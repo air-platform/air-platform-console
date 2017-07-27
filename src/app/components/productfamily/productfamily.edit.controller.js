@@ -160,7 +160,7 @@
 
         function getTenantDatas() {
 
-            NetworkService.get(constdata.api.tenant.listAllPath + '/' + '?role=tenant',{page:vm.pageCurrent},function (response) {
+            NetworkService.get(constdata.api.tenant.listAllPath + '/' + '?type=tenant',{page:vm.pageCurrent},function (response) {
                 vm.tenants = response.data.content;
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);

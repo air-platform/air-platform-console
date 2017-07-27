@@ -6,10 +6,10 @@
 
     angular
         .module('iot')
-        .controller('TenantController', TenantController);
+        .controller('AirCraftCommentController', AirCraftCommentController);
 
     /** @ngInject */
-    function TenantController(NetworkService,StorageService,constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
+    function AirCraftCommentController(NetworkService,StorageService, constdata,$state,$rootScope, $uibModal,$log,toastr,i18n,$stateParams, delmodaltip) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -24,118 +24,154 @@
 
         vm.goAddItem = goAddItem;
         vm.goEditItem = goEditItem;
+        vm.goComment = goComment;
         vm.goDetail = goDetail;
         vm.resetPassword = resetPassword;
         vm.removeItem = removeItem;
         vm.curItem = {};
         vm.backAction = backAction;
+        vm.userInfo = {};
+        vm.showCommentInput = false;
+        vm.showReplyTo = false;
+        vm.replyUserName = 'test';
+        vm.showCommentButton = true;
 
-        vm.displayedCollection = [];
-        vm.subPath = 'accounts';
-        vm.reqPath =  constdata.api.tenant.basePath;
-        vm.reqPath2 = constdata.api.tenant.jetPath;
+        console.log($stateParams.args);
+
+        vm.subPath = 'comments';
+        vm.reqPath =  constdata.api.tenant.basePath + '/aircrafts';
+
         vm.isAdmin = false;
-
         vm.userInfo = StorageService.get('iot.hnair.cloud.information');
         if(vm.userInfo.role != 'tenant'){
-            vm.reqPath = constdata.api.admin.platPath;
-            vm.reqPath2 = constdata.api.tenant.jetPath;
+            vm.reqPath = constdata.api.admin.platPath + '/aircrafts';
+
             vm.isAdmin = true;
         }
 
-        vm.labelColor = {
-            enabled:'bg-success',
-            locked:'bg-danger',
-            'member':'bg-main',
-            'silver':'bg-main',
-            'gold':'bg-main',
-            'platinum':'bg-main',
-            'diamond':'bg-main'
-        };
-        vm.labelContent={
-            enabled:'已启用',
-            locked:'已锁定',
-            'member':'普通会员',
-            'silver':'白银会员',
-            'gold':'黄金会员',
-            'platinum':'铂金会员',
-            'diamond':'钻石会员'
-        };
-        vm.OperApp = OperApp;
-        function OperApp(index, item) {
-            if(index == 3){
 
-                NetworkService.post(vm.reqPath + '/' + vm.subPath  +'/'+ item.id + '/lock',null,function (response) {
-                    toastr.success(i18n.t('u.OPERATE_SUC'));
-                    getDatas();
-                },function (response) {
-                    vm.authError = response.statusText + '(' + response.status + ')';
-                    toastr.error(vm.authError);
-                });
+        var username = $stateParams.username;
+        vm.cancelComment = function (){
+            vm.showCommentInput=false;
 
-            }else if(index == 4){
-                NetworkService.post(vm.reqPath + '/' + vm.subPath  +'/'+ item.id + '/unlock',null,function (response) {
-                    toastr.success(i18n.t('u.OPERATE_SUC'));
-                    getDatas();
-                },function (response) {
-                    vm.authError = response.statusText + '(' + response.status + ')';
-                    toastr.error(vm.authError);
-                });
-            }else if(index == 5){
-                NetworkService.post(vm.reqPath + '/' + vm.subPath  +'/'+ item.id + '/password/reset',null,function (response) {
-                    toastr.success(i18n.t('u.OPERATE_SUC'));
-                    getDatas();
-                },function (response) {
-                    vm.authError = response.statusText + '(' + response.status + ')';
-                    toastr.error(vm.authError);
-                });
-            }else{
-                console.log('error ops:'+index);
-            }
+        }
+        vm.addComment = function (){
+            vm.showCommentInput=true;
+            vm.showReplyTo = false;
+        }
 
-            //$state.go('app.applicationedit');
-        };
-
-
-
-
-
+        vm.replyComment = function (item){
+            vm.showCommentInput=true;
+            vm.showReplyTo = true;
+            vm.replyItem = item;
+            vm.replyUserName = vm.replyItem.owner.name;
+           // vm.showCommentButton = false;
+        }
         function getDatas() {
 
-            NetworkService.get(vm.reqPath + '/' + vm.subPath + '/' + '?type=tenant',{page:vm.pageCurrent},function (response) {
+            NetworkService.get(vm.reqPath + '/' + username + '/' + vm.subPath,{page:vm.pageCurrent, pageSize:10},function (response) {
                 vm.items = response.data.content;
-
-                vm.displayedCollection = (vm.items);
-                if(vm.displayedCollection) {
-                    for (var i = 0; i < vm.displayedCollection.length; i++) {
-                        if (vm.displayedCollection[i].status == 'enabled') {
-                            vm.displayedCollection[i].isLockEnable = true;
-                            vm.displayedCollection[i].isUnlockEnable = false;
-                        } else if (vm.displayedCollection[i].status == 'locked') {
-                            vm.displayedCollection[i].isLockEnable = false;
-                            vm.displayedCollection[i].isUnlockEnable = true;
-                        }
-                    }
-                }
-
-
                 updatePagination(response.data);
             },function (response) {
-                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
             });
         }
 
 
-        function goAddItem() {
-            $state.go('app.edittenant',{});
+        vm.sendComment = function() {
+            vm.userInfo = StorageService.get('iot.hnair.cloud.information');
+
+            if(vm.showReplyTo){
+                var myRole = 'user';
+                vm.tuser={
+                    content:vm.commentContent,
+                    //product:username,
+                    //owner:vm.userInfo,
+                    //source:myRole,//vm.userInfo.role,
+                    //replyTo:vm.userInfo.id,
+                    //rate:5
+
+                };
+                //user tenant
+                NetworkService.post(vm.reqPath + '/'+vm.subPath  +'?sourceId='+ username+'&source='+myRole+'&replyTo='+vm.replyItem.owner.id,vm.tuser,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    vm.showCommentInput = false;
+                    vm.commentContent = '';
+                    getDatas();
+                },function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    console.log(vm.authError);
+                    vm.showCommentInput = false;
+                    vm.commentContent = '';
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+                });
+            }else{
+
+                var myRole = 'user';
+                vm.tuser={
+                    content:vm.commentContent,
+                    //product:username,
+                    //owner:vm.userInfo,
+                    //source:myRole,//vm.userInfo.role,
+                    //replyTo:vm.userInfo.id,
+                   // rate:5
+
+                };
+                //user tenant
+                NetworkService.post(vm.reqPath + '/'+vm.subPath  +'?sourceId='+ username+'&source='+myRole,vm.tuser,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    vm.showCommentInput = false;
+                    vm.commentContent = '';
+                    getDatas();
+                },function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    console.log(vm.authError);
+                    vm.showCommentInput = false;
+                    vm.commentContent = '';
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+                });
+
+            }
+
         };
 
+
+        function goAddItem() {
+
+            var myRole = 'user';
+            vm.tuser={
+                content:'this is a comment',
+                product:username,
+                //owner:vm.userInfo,
+                source:myRole,
+                //replyTo:vm.userInfo.id,
+                rate:5
+
+            };
+            //user tenant
+            NetworkService.post(constdata.api.comment.basePath +'?sourceId='+ username+'&source='+myRole+'&replyTo='+vm.userInfo.id,vm.tuser,function (response) {
+                toastr.success(i18n.t('u.OPERATE_SUC'));
+                vm.backAction();
+            },function (response) {
+                vm.authError = response.statusText + '(' + response.status + ')';
+                console.log(vm.authError);
+                toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+            });
+
+        };
+
+
         function goEditItem(item) {
-            $state.go('app.edittenant',{username:item.id, args:{type:'edit'}});
+            $state.go('app.editairtaxi',{username:item.id, args:{type:'edit'}});
         };
 
         function goDetail(item) {
-            $state.go('app.edittenant',{username:item.id, args:{type:'detail'}});
+            $state.go('app.editairtaxi',{username:item.id, args:{type:'detail'}});
+
+        };
+
+        function goComment(item) {
+            $state.go('app.comment',{username:item.id, args:{type:'detail',prd:'airtaxi'}});
 
         };
 
@@ -149,7 +185,8 @@
         }
 
         function removeItem(item) {
-            NetworkService.delete(vm.reqPath + '/' + vm.subPath + '/' + item.id,null,function success() {
+            var myid = vm.userInfo.id;
+            NetworkService.delete(vm.reqPath + '/' + username + '/'+vm.subPath  + '/'+ item.id,null,function success() {
                 var index = vm.items.indexOf(item);
                 //vm.items.splice(index,1);
                 toastr.success(i18n.t('u.DELETE_SUC'));
