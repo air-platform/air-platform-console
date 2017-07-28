@@ -8,6 +8,8 @@
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
         $rootScope.pageRoutes = [];
+            $rootScope.pageInfo = {airtour:{isDetail:true, lastPage:1}, airtrans:{isDetail:true, lastPage:1}};
+
         var count = 0;
         // $rootScope.$on("$stateChangeStart",function(event, toState, toParams, fromState, fromParams) {
         //   if(toState.name == 'app.tenant') {
@@ -18,6 +20,7 @@
             // to be used for back button //won't work when page is reloaded.
             $rootScope.previousState_name = fromState.name;
             $rootScope.previousState_params = fromParams;
+            console.log(fromParams);
             var stateText = toState.name.replace(/\./g,'');
             var myUrl = eval("constdata.routeName."+stateText);
             //console.log(stateText);

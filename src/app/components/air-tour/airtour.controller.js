@@ -13,8 +13,12 @@
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
-
         vm.pageCurrent = 1;
+        if($rootScope.pageInfo.airtour.isDetail) {
+            vm.pageCurrent = $rootScope.pageInfo.airtour.lastPage;
+            $rootScope.pageInfo.airtour.isDetail = false;
+
+        }
         vm.pagePreEnabled = false;
         vm.pageNextEnabled = false;
         vm.pages = [];
@@ -182,13 +186,16 @@
         };
         vm.goCopyItem = function (item) {
             $state.go('app.editairtour',{username:item.id, args:{type:'copy'}});
+            $rootScope.pageInfo.airtour.isDetail = true;
         };
         function goEditItem(item) {
             $state.go('app.editairtour',{username:item.id, args:{type:'edit'}});
+            $rootScope.pageInfo.airtour.isDetail = true;
         };
 
         function goDetail(item) {
             $state.go('app.editairtour',{username:item.id, args:{type:'detail'}});
+            $rootScope.pageInfo.airtour.isDetail = true;
 
         };
 
@@ -223,15 +230,18 @@
         vm.preAction = function () {
             vm.pageCurrent --;
             if (vm.pageCurrent < 1) vm.pageCurrent = 1;
+            $rootScope.pageInfo.airtour.lastPage = vm.pageCurrent;
             getDatas();
         };
         vm.nextAction = function () {
             vm.pageCurrent ++;
+            $rootScope.pageInfo.airtour.lastPage = vm.pageCurrent;
             getDatas();
         };
         vm.goPage = function (page) {
             vm.pageCurrent = Number(page);
-            getDatas();
+            $rootScope.pageInfo.airtour.lastPage = vm.pageCurrent;
+                getDatas();
         };
         vm.pageCurrentState = function (page) {
             if (Number(page) == vm.pageCurrent)

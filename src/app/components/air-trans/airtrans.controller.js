@@ -15,6 +15,11 @@
         vm.authError = null;
 
         vm.pageCurrent = 1;
+        if($rootScope.pageInfo.airtrans.isDetail) {
+            vm.pageCurrent = $rootScope.pageInfo.airtrans.lastPage;
+            $rootScope.pageInfo.airtrans.isDetail = false;
+
+        }
         vm.pagePreEnabled = false;
         vm.pageNextEnabled = false;
         vm.pages = [];
@@ -181,13 +186,16 @@
         };
         vm.goCopyItem = function (item) {
             $state.go('app.editairtrans',{username:item.id, args:{type:'copy'}});
+            $rootScope.pageInfo.airtrans.isDetail = true;
         };
         function goEditItem(item) {
             $state.go('app.editairtrans',{username:item.id, args:{type:'edit'}});
+            $rootScope.pageInfo.airtrans.isDetail = true;
         };
 
         function goDetail(item) {
             $state.go('app.editairtrans',{username:item.id, args:{type:'detail'}});
+            $rootScope.pageInfo.airtrans.isDetail = true;
 
         };
 
@@ -225,14 +233,17 @@
         vm.preAction = function () {
             vm.pageCurrent --;
             if (vm.pageCurrent < 1) vm.pageCurrent = 1;
+            $rootScope.pageInfo.airtrans.lastPage = vm.pageCurrent;
             getDatas();
         };
         vm.nextAction = function () {
             vm.pageCurrent ++;
+            $rootScope.pageInfo.airtrans.lastPage = vm.pageCurrent;
             getDatas();
         };
         vm.goPage = function (page) {
             vm.pageCurrent = Number(page);
+            $rootScope.pageInfo.airtrans.lastPage = vm.pageCurrent;
             getDatas();
         };
         vm.pageCurrentState = function (page) {
