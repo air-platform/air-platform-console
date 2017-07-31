@@ -180,7 +180,7 @@
 
 
             NetworkService.get(vm.reqPath2  + '/airjets',{page:vm.pageCurrent},function (response) {
-                vm.jets = response.data.content;
+                vm.jets = response.data;
 
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
