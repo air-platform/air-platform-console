@@ -22,7 +22,7 @@
     /* 登录模块 */
     // 自动依赖注入
     /** @ngInject */
-    function LoginController(LoginService,NetworkService, StorageService,$timeout,$state,constdata,$rootScope,$cookies,$interval,$translate,i18n) {
+    function LoginController($scope, LoginService,NetworkService, ProfileService,StorageService,$timeout,$state,constdata,$rootScope,$cookies,$interval,$translate,i18n) {
        /* jshint validthis: true */
         var vm = this;// vm -> ViewModel
 
@@ -48,18 +48,22 @@
         var userLanguage = window.localStorage.userLanguage;
         var engine = null;
 
-
+        $rootScope.$on('to-profile', function(d,data) {
+            //console.log(data);
+            getProfile();        //父级能得到值
+        });
         checkCookie();
-        function getProfile () {
+        function getProfile() {
             var token = StorageService.get('iot.hnair.cloud.access_token');
             if(token) {
-                NetworkService.get(constdata.api.login.profilePath, {page: vm.pageCurrent}, function (response) {
-                    // vm.items = response.data.content;
+                ProfileService.getProfile(constdata.api.login.profilePath, function (response) {
                     vm.userinfo = response.data;
                 }, function (response) {
                     vm.authError = '服务器内部错误';
-                   // toastr.error(i18n.t('u.GET_DATA_FAILED') + ' ' + response.status);
+                    // toastr.error(i18n.t('u.GET_DATA_FAILED') + ' ' + response.status);
                 });
+
+
             }
         };
         getProfile();

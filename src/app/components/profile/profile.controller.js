@@ -7,7 +7,7 @@
     angular.module('iot').controller('ProfileController', ProfileController);
 
     /** @ngInject */
-    function ProfileController($rootScope,$stateParams,$state, LoginService,NetworkService,constdata,toastr,i18n,StorageService) {
+    function ProfileController($scope, $rootScope,$stateParams,$state, LoginService,NetworkService,constdata,toastr,i18n,StorageService) {
         /* jshint validthis: true */
         var vm = this;
 
@@ -72,6 +72,9 @@
 
             NetworkService.put(constdata.api.login.profilePath,vm.userinfo,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
+
+                //$rootScope.$broadcast('to-profile', 'child');
+                $rootScope.$emit('to-profile', 'parent');
                 $state.go('app.dashboard');
             },function (response) {
                 vm.authError = i18n.t('login.LOGIN_FAILED');

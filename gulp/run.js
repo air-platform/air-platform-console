@@ -40,7 +40,7 @@ function browserSyncInit(baseDir, browser) {
    */
   //var proxy_main = proxyMiddleware('/api/v2/**', {target: 'http://innertest.aircommunity.cn', changeOrigin: true});
   var proxy_main = proxyMiddleware('/api/v2/**', {target: 'http://aircommunity.net', changeOrigin: true});
-  //var proxy_main = proxyMiddleware('/api/v1/**', {target: 'http://localhost:8080', changeOrigin: true});
+  //var proxy_main = proxyMiddleware('/api/v2/**', {target: 'http://localhost:8080', changeOrigin: true});
   //var proxy_main = proxyMiddleware('/api/v1/**', {target: 'http://10.70.80.92', changeOrigin: true});
 
 
