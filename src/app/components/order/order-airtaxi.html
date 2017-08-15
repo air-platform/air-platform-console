@@ -41,7 +41,7 @@
             </thead>
             <tbody class="">
 
-            <tr ng-repeat="item in vm.displayedCollection">
+            <tr ng-repeat="item in vm.displayedCollection | filter:{ type:'airtaxi'}">
               <!--  <td ng-click="vm.goDetail(item)">{{item.id}}</td>-->
                 <td ng-click="vm.goDetail(item)">{{item.orderNo}}</td>
                 <td ng-click="vm.goDetail(item)">
