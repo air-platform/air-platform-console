@@ -80,12 +80,21 @@
             }
         ];
 
+
+
+
         vm.fleetSel=[{
             value:'helicopter',
             title:'直升机起降点'
         },{
             value:'aerodrome',
             title:'通用机场'
+        },{
+            value:'emergenct',
+            title:'医疗用机场'
+        },{
+            value:'private',
+            title:'私人机场'
         }];
 
         vm.priceType = [

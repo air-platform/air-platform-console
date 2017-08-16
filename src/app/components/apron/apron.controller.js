@@ -33,7 +33,9 @@
 
         vm.fleetType={
             'helicopter':'直升机起降点',
-            'aerodrome':'通用机场'
+            'aerodrome':'通用机场',
+            'emergenct':'医疗用机场',
+            'private':'私人机场'
         };
 
         vm.siteSel = [
@@ -46,6 +48,12 @@
         },{
             value:'aerodrome',
             title:'通用机场'
+        },{
+            value:'emergent',
+            title:'医疗用机场'
+        },{
+            value:'private',
+            title:'私人机场'
         },{
             value:'all',
             title:'所有类型'
