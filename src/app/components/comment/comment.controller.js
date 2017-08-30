@@ -15,6 +15,7 @@
         vm.authError = null;
 
         vm.pageCurrent = 1;
+        vm.targetPage = 1;
         vm.pagePreEnabled = false;
         vm.pageNextEnabled = false;
         vm.pages = [];
@@ -73,6 +74,7 @@
             NetworkService.get(vm.reqPath + '/'+vm.subPath +'?product='+ username,{page:vm.pageCurrent, pageSize:10},function (response) {
                 vm.items = response.data.content;
                 updatePagination(response.data);
+
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
             });
@@ -235,6 +237,7 @@
 
             var page = pageination.page;
             var toalPages = pageination.totalPages;
+            vm.totalPages = pageination.totalPages;
 
             vm.pageNextEnabled = pageination.hasNextPage;
             vm.pagePreEnabled = pageination.hasPreviousPage;

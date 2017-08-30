@@ -15,6 +15,7 @@
         vm.authError = null;
 
         vm.pageCurrent = 1;
+        vm.targetPage = 1;
         vm.pagePreEnabled = false;
         vm.pageNextEnabled = false;
         vm.pages = [];

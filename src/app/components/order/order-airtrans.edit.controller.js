@@ -77,7 +77,8 @@
             'closed':'bg-info',
             'customer_confirmed':'bg-info',
             'offered':'bg-info',
-            'payment_in_process':'bg-info'
+            'payment_in_process':'bg-info',
+            'payment_failed':'bg-info'
         };
         vm.statusMap={
             'pending':'处理中',
@@ -98,7 +99,8 @@
             'closed':'已关闭',
             'customer_confirmed':'客户已选',
             'offered':'已报价',
-            'payment_in_process':'付款中'
+            'payment_in_process':'付款中',
+            'payment_failed':'付款失败'
 
         };
 

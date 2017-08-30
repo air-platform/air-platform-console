@@ -93,12 +93,13 @@
         </table>
         </div>
 
-        <div class="btn-group pagination pull-right padder-lg">
-            <button type="button" class="btn btn-default" ng-click="vm.preAction()" ng-disabled= !vm.pagePreEnabled>Previous</button>
-            <button type="button" class="btn btn-default" ng-repeat="page in vm.pages" ng-click="vm.goPage(page)" ng-disabled= vm.pageCurrentState(page)>{{page}}</button>
-            <button type="button" class="btn btn-default" ng-click="vm.nextAction()" ng-disabled= !vm.pageNextEnabled>Next</button>
+        <!--<div class="btn-group pagination pull-right padder-lg">-->
+            <!--<button type="button" class="btn btn-default" ng-click="vm.preAction()" ng-disabled= !vm.pagePreEnabled>Previous</button>-->
+            <!--<button type="button" class="btn btn-default" ng-repeat="page in vm.pages" ng-click="vm.goPage(page)" ng-disabled= vm.pageCurrentState(page)>{{page}}</button>-->
+            <!--<button type="button" class="btn btn-default" ng-click="vm.nextAction()" ng-disabled= !vm.pageNextEnabled>Next</button>-->
+        <!--</div>-->
+        <div data-ng-include=" 'app/main/blocks/pageflip.html' " >
         </div>
-
         <!-- / tasks -->
     </div>
 </div>

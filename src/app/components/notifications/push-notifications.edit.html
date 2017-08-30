@@ -1,0 +1,103 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="PushNotificationsEditController as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+">
+    <!-- main -->
+    <div class="col">
+        <span us-spinner spinner-on="vm.showSpinner"></span>
+        <!-- main header -->
+        <!-- <div class="bg-light lter b-b wrapper-md" ng-hide="isRoleAdmin">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="m-n font-thin h3 text-black">{{vm.title}}</h1>
+                    <small class="text-muted">HNA EcoTech Internet of Things</small>
+                </div>
+
+            </div>
+        </div> -->
+
+        <!-- tasks -->
+
+
+
+        <div class="panel panel-default m-l m-r m-t">
+
+            <div class="panel-heading">
+                <h3 class="panel-title">{{'product.INFORMATION' | translate}}</h3>
+            </div>
+            <br/>
+            <form name="form" class="form-horizontal form-validation" role="form">
+
+
+
+
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">消息内容</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="消息内容" ng-model="vm.items.message" ng-disabled="vm.isDetail"  required>
+                    </div>
+                    <span ng-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i></span>
+                    <div ng-hide="vm.isAdd">
+
+                    <div  class="line line-dashed b-b line-lg"></div>
+                    <!--<label class="col-sm-1 control-label m-l-lg font-bold">链接</label>-->
+                    <!--<div class="col-sm-4">-->
+                        <!--<input class="form-control" type="text"-->
+                               <!--placeholder="链接" ng-model="vm.items.richTextLink" ng-disabled="vm.isDetail"  required>-->
+                    <!--</div>-->
+                    <!--<span ng-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i></span>-->
+
+                    <!--<div  class="line line-dashed b-b line-lg"></div>-->
+                    <!--<label class="col-sm-1 control-label m-l-lg font-bold">类别</label>-->
+                    <!--<div class="col-sm-4">-->
+                        <!--<input class="form-control" type="text"-->
+                               <!--placeholder="类别" ng-model="vm.items.type" ng-disabled="vm.isDetail"  required>-->
+                    <!--</div>-->
+                    <!--<span ng-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i></span>-->
+
+                    <!--<div  class="line line-dashed b-b line-lg"></div>-->
+                    <label class="col-sm-1 control-label m-l-lg font-bold" >状态</label>
+                    <div class="col-sm-4">
+
+
+                            <label ng-class="vm.labelClass[vm.items.status]" ng-bind="vm.statusMap[vm.items.status]" class="label"></label>
+
+
+                    </div>
+                    <!--<span ng-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i></span>-->
+
+                    <div  class="line line-dashed b-b line-lg"></div>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">创建时间</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="创建时间" ng-model="vm.items.creationDate" ng-disabled="true" >
+                    </div>
+                    <!--<spang-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i></span>n -->
+                    <div  class="line line-dashed b-b line-lg"></div>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">最近推送时间</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                              placeholder="最近推送时间" ng-model="vm.items.lastSendDate" ng-disabled="true" >
+                    </div>
+                    <!--<span ng-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i></span>-->
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-3">
+                        <button ng-if="!vm.isDetail" class="btn btn-default btn-sm m-l-lg btn-addon bg-light" ng-click="vm.backAction()"> <i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}} </button>
+                        <button ng-if="!vm.isDetail" class="btn btn-sm btn-info btn-addon" type="submit" ng-click="vm.submitAction()" ng-disabled='form.$invalid'> <i class="fa fa-check-circle"></i>{{'product.CONFIRM' | T}} </button>
+                        <button ng-if="vm.isDetail" ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
+
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+

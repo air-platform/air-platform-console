@@ -15,6 +15,7 @@
         vm.authError = null;
 
         vm.pageCurrent = 1;
+        vm.targetPage = 1;
         if($rootScope.pageInfo.airtrans.isDetail) {
             vm.pageCurrent = $rootScope.pageInfo.airtrans.lastPage;
             $rootScope.pageInfo.airtrans.isDetail = false;
@@ -175,6 +176,7 @@
 
 
                 updatePagination(response.data);
+
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
             });
@@ -261,6 +263,7 @@
 
             var page = pageination.page;
             var toalPages = pageination.totalPages;
+            vm.totalPages = pageination.totalPages;
 
             vm.pageNextEnabled = pageination.hasNextPage;
             vm.pagePreEnabled = pageination.hasPreviousPage;

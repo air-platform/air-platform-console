@@ -15,6 +15,7 @@
         vm.authError = null;
 
         vm.pageCurrent = 1;
+        vm.targetPage = 1;
         vm.pagePreEnabled = false;
         vm.pageNextEnabled = false;
         vm.pages = [];
@@ -50,7 +51,8 @@
             'closed':'bg-info',
             'customer_confirmed':'bg-info',
             'offered':'bg-info',
-            'payment_in_process':'bg-info'
+            'payment_in_process':'bg-info',
+            'payment_failed':'bg-info'
         };
         vm.statusMap={
             'pending':'处理中',
@@ -71,7 +73,8 @@
             'closed':'已关闭',
             'customer_confirmed':'客户已选',
             'offered':'已报价',
-            'payment_in_process':'付款中'
+            'payment_in_process':'付款中',
+            'payment_failed':'付款失败'
 
         };
 
@@ -182,6 +185,7 @@
                     var pageInfo = {page:1, totalPages:1,hasNextPage:false,hasPreviousPage:false,hasContent:true};
 
                     updatePagination(pageInfo);
+
                 },function (response) {
                     toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
                 });
@@ -427,6 +431,7 @@
 
             var page = pageination.page;
             var toalPages = pageination.totalPages;
+            vm.totalPages = pageination.totalPages;
 
             vm.pageNextEnabled = pageination.hasNextPage;
             vm.pagePreEnabled = pageination.hasPreviousPage;

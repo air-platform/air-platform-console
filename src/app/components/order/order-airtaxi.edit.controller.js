@@ -82,7 +82,8 @@
             'closed':'bg-info',
             'customer_confirmed':'bg-info',
             'offered':'bg-info',
-            'payment_in_process':'bg-info'
+            'payment_in_process':'bg-info',
+            'payment_failed':'bg-info'
         };
         vm.statusMap={
             'pending':'处理中',
@@ -91,7 +92,7 @@
             'cancelled':'已取消',
             'deleted':'已删除',
             'created':'已创建',
-            "published":"已发布",
+            'published':'已发布',
             'confirmed':'已确认',
             'contract_signed':'已签合同',
             'partial_paid':'部分付款',
@@ -103,7 +104,8 @@
             'closed':'已关闭',
             'customer_confirmed':'客户已选',
             'offered':'已报价',
-            'payment_in_process':'付款中'
+            'payment_in_process':'付款中',
+            'payment_failed':'付款失败'
 
         };
 

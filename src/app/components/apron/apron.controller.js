@@ -15,6 +15,7 @@
         vm.authError = null;
 
         vm.pageCurrent = 1;
+        vm.targetPage = 1;
         vm.pagePreEnabled = false;
         vm.pageNextEnabled = false;
         vm.pages = [];
@@ -164,6 +165,7 @@
                 var pageInfo = {page:1, totalPages:1,hasNextPage:false,hasPreviousPage:false,hasContent:true};
 
                 updatePagination(pageInfo);
+
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
             });
@@ -255,6 +257,7 @@
 
             var page = pageination.page;
             var toalPages = pageination.totalPages;
+            vm.totalPages = pageination.totalPages;
 
             vm.pageNextEnabled = pageination.hasNextPage;
             vm.pagePreEnabled = pageination.hasPreviousPage;

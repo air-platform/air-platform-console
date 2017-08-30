@@ -143,7 +143,7 @@
                     $location.path(ourl);
                 }
             }else{
- 
+
                 var prefix = UserInfoServer.tenantName();
                 var tp = toParams.hasOwnProperty('t');
 
@@ -320,7 +320,6 @@
                   params : {args : {}},
                   templateUrl: 'app/components/training/training-class.edit.html'
               })
-
 
               .state('app.trainingroom', {
                   url: prefix + '/trainingroom',
@@ -533,7 +532,16 @@
                   templateUrl: 'app/components/banner/banner.edit.html'
               })
 
+              .state('app.pushnotifications', {
+                  url: prefix + 'pushnotifications',
+                  templateUrl: 'app/components/notifications/push-notifications.html'
 
+              })
+              .state('app.editnotifications', {
+                  url: prefix + '/pushnotifications/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/notifications/push-notifications.edit.html'
+              })
 
               .state('app.productfamily', {
                   url: prefix + '/productfamily',

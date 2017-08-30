@@ -1,15 +1,15 @@
 /**
- * Created by Otherplayer on 16/7/25.
+ * Created by cqp.
  */
 (function () {
     'use strict';
 
     angular
         .module('iot')
-        .controller('TraingSchoolController', TraingSchoolController);
+        .controller('PushNotificationsController', PushNotificationsController);
 
     /** @ngInject */
-    function TraingSchoolController(NetworkService,StorageService, constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
+    function PushNotificationsController(NetworkService,StorageService, constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -30,22 +30,66 @@
         vm.removeItem = removeItem;
         vm.curItem = {};
         vm.backAction = backAction;
-        vm.subPath = 'schools'
-        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
-        vm.reqPath =  constdata.api.tenant.fleetPath;
-        vm.reqPath2 = constdata.api.tenant.jetPath;
+        vm.userInfo = {};
+
+        vm.subPath = 'pushnotifications';
+        vm.reqPath =  constdata.api.admin.platPath;
+
         vm.isAdmin = false;
-        vm.subPath = 'schools';
+        vm.userInfo = StorageService.get('iot.hnair.cloud.information');
         if(vm.userInfo.role != 'tenant'){
             vm.reqPath = constdata.api.admin.platPath;
-            vm.reqPath2 = constdata.api.tenant.jetPath;
+
             vm.isAdmin = true;
         }
-        function getDatas() {
+        vm.labelClass = {
+            'push_success':'bg-success',
+            'none_push':'bg-created',
+            'push_failed':'bg-info'
+        };
+        vm.statusMap={
+            'none_push':'未推送',
+            'push_success':'推送成功',
+            'push_failed':'推送失败'
+        };
 
+
+
+        function getDatas() {
             NetworkService.get(vm.reqPath + '/' + vm.subPath,{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
+                console.log(response.data);
+
+                if(vm.items.length > 0){
+
+                    for(var i = 0; i < vm.items.length; i ++) {
+                        vm.items[i].isEditEnable = false;
+                        vm.items[i].isSendEnable = false;
+                        vm.items[i].isDeleteEnable = false;
+
+
+                        if (vm.items[i].status === 'none_push') {
+                            vm.items[i].isEditEnable = true;
+                            vm.items[i].isSendEnable = true;
+                            vm.items[i].isDeleteEnable = true;
+
+
+
+                        }else if (vm.items[i].status === 'push_success') {
+                            // vm.items[i].isSignEnable = true;
+                            vm.items[i].isDeleteEnable = true;
+
+                        }else{
+                            console.log('undefined order status:'+vm.items[i].status);
+                        }
+                    }
+
+
+                }
+                vm.displayedCollection = [].concat(vm.items);
+                // console.log(vm.displayedCollection);
                 updatePagination(response.data);
+
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
             });
@@ -53,17 +97,18 @@
 
 
         function goAddItem() {
-            $state.go('app.edittrainingschool',{});
-        };
+            $state.go('app.editnotifications',{});
+        }
 
         function goEditItem(item) {
-            $state.go('app.edittrainingschool',{username:item.id, args:{type:'edit'}});
-        };
+            $state.go('app.editnotifications',{username:item.id, args:{type:'edit'}});
+        }
 
         function goDetail(item) {
-            $state.go('app.edittrainingschool',{username:item.id, args:{type:'detail'}});
+            $state.go('app.editnotifications',{username:item.id, args:{type:'detail'}});
+            // console.log(item.id);
 
-        };
+        }
 
         function resetPassword(item) {
             /*NetworkService.post(constdata.api.tenant.listAllPath + '/' + item.username + '/password/reset',null,function (response) {
@@ -83,13 +128,13 @@
                 toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
             });
 
-        };
+        }
         function backAction() {
             // $state.go('app.tenant');
             $rootScope.backPre();
         }
 
-        vm.displayedCollection = [].concat(vm.items);
+
 
 
         // 分页 Start
@@ -104,10 +149,11 @@
         };
         vm.goPage = function (page) {
             vm.pageCurrent = Number(page);
+            // vm.tagetPage = Number(page);
             getDatas();
         };
         vm.pageCurrentState = function (page) {
-            if (Number(page) == vm.pageCurrent)
+            if (Number(page) === vm.pageCurrent)
                 return true;
             return false;
         };
@@ -129,6 +175,7 @@
 
             if (toalPages < 2){
                 vm.pages = ['1'];
+                // vm.pages.currentPage = 1;
             }else{
                 vm.pages = [];
                 var pageControl = 5;
@@ -156,43 +203,31 @@
         //Model
 
         vm.tipsInfo = delmodaltip;
-        vm.openAlert = function (size,model) {
-            var modalInstance = $uibModal.open({
-                templateUrl: 'myModalContent.html',
-                size: size,
-                controller:'ModalInstanceCtrl',
-                resolve: {
-                    tipsInfo: function () {
-                        return vm.tipsInfo;
-                    }
-                }
-            });
-            modalInstance.result.then(function (param) {
-                vm.removeItem(model);
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
-            });
-        }
+        vm.operations = function (item, oper) {
 
+            if(oper === 'Edit' ){
+                vm.goEditItem(item);
 
-        vm.tipsInfoReset = {title:i18n.t('profile.RESET_PWD'),content:i18n.t('profile.RESET_PWD_CONFIRM')};
-        vm.resetAlert = function (size,model) {
-            var modalInstance = $uibModal.open({
-                templateUrl: 'myModalContent.html',
-                size: size,
-                controller:'ModalInstanceCtrl',
-                resolve: {
-                    tipsInfo: function () {
-                        return vm.tipsInfoReset;
-                    }
-                }
-            });
-            modalInstance.result.then(function (param) {
-                vm.resetPassword(model);
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
-            });
-        }
+            }else if(oper === 'Send'){
+               NetworkService.post(vm.reqPath + '/' + vm.subPath + '/' + item.id + '/send',null,function success() {
+                   toastr.success('推送成功');
+                   getDatas();},function (response) {
+                   vm.authError = response.statusText + '(' + response.status + ')';
+                   toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+               });
+
+            }else  if(oper === 'Delete'){
+
+                NetworkService.delete(vm.reqPath + '/' + vm.subPath + '/' + item.id,null,function success() {
+                    toastr.success(i18n.t('u.DELETE_SUC'));
+                    getDatas();} ,function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+                });
+
+            }
+        };
+
 
 
 

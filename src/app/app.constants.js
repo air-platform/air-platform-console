@@ -19,8 +19,7 @@
 			tenant:'hna-tenant',
             api:{
                     "login":
-                        {"authPath":"/api/v2/account/auth/mgt\
-                        ", "profilePath":"api/v2/account/profile"},
+                        {"authPath":"/api/v2/account/auth/mgt", "profilePath":"api/v2/account/profile"},
                     "tenant":
                         {"basePath":"/api/v2/tenant","listAllPath":"/api/v2/platform/accounts","addPath":"/api/v2/platform/accounts","fleetPath":"/api/v2/tenant","prdPath":"/api/v2/tenant/product","jetPath":"/api/v2"},
                 "school":
