@@ -192,16 +192,64 @@
 
 
 
-
-
-
-
-
-
                 </div>
 
 
+                <div class="plat-mgr" ng-show="vm.tabItem[2].active">
+                    <!--<ul>
+                        <li ng-repeat="item in vm.platMgr">
+                            {{item.person}},{{item.email}},{{item.mobile}},
 
+                        </li>
+                    </ul>-->
+
+                    <div class="div-line div-label">飞的设置</div>
+
+                    <div  class="div-zone">
+
+
+
+                            <div class="div-inline div-padding">飞行航速（公里／分钟）</div>
+                            <div class="div-inline div-padding">
+                                <input type="number"  class="div-input-w"
+                                       placeholder="飞行航速" ng-model="vm.QFRule.speed" ng-disabled="!vm.isEditQFRule"  required>
+                            </div>
+                            <div  class="line line-dashed b-b line-lg"></div>
+                            <!-- <div class="div-inline div-padding">电话</div>
+                             <div class="div-inline div-padding">
+                                 <input type="text" class="div-input-w"
+                                        placeholder="电话" ng-model="item.mobile" ng-disabled="!vm.isEdit"  required>
+                             </div>-->
+
+
+                            <div class="div-inline div-padding">飞行单价（元／分钟)</div>
+                            <div class="div-inline div-padding">
+                                <input type="number" class="div-input-w"
+                                       placeholder="飞行单价" ng-model="vm.QFRule.unitTimePrice" ng-disabled="!vm.isEditQFRule"  required>
+                            </div>
+                            <div  class="line line-dashed b-b line-lg"></div>
+                            <div class="div-inline div-padding">预约期限（提前几天）</div>
+                        <div class="div-inline div-padding">
+                            <input type="number" class="div-input-w"
+                                   placeholder="提前几天预约" ng-model="vm.QFRule.departureTimeInAdvance" ng-disabled="!vm.isEditQFRule"  required>
+                        </div>
+
+
+
+
+
+
+                    </div>
+
+
+                    <div class="div-zone ">
+                        <div  class="div-inline div-padding">
+
+                            <button ng-disabled="!vm.isEditQFRule" class="btn btn-sm btn-addon" ng-click="vm.cancelOper(14)"> <i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}} </button>
+                            <button class="btn btn-sm btn-info btn-addon" type="submit" ng-click="vm.editOper(14)" ng-disabled='form.$invalid'> <i class="fa fa-check-circle"></i>{{vm.editQuickFlightRule}}</button>
+                        </div>
+                    </div>
+                </div>
 
 
 

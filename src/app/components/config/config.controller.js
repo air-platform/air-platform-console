@@ -22,7 +22,14 @@
 
         vm.items = [];
         vm.showItems = [];
+        vm.QFRule = [];
 
+        // vm.QFRule.push({
+        //     speed:'',
+        //     unitTimePrice:'',
+        //     departureTimeInAdvance:''
+        //
+        // })
         vm.goAddItem = goAddItem;
         vm.goEditItem = goEditItem;
         vm.goDetail = goDetail;
@@ -49,6 +56,7 @@
         }
 
         vm.subPath = 'client-managers';
+        vm.subPathQuickFlight ='application-params/quickflight';
         vm.subPathPointBasic = 'point/basics';
         vm.subPathPointRule = 'point/rules';
         vm.reqPath =  constdata.api.tenant.platPath+'/settings';
@@ -69,17 +77,25 @@
         vm.isEditPointRule = false;
         vm.editTitlePointRule = '编辑';
 
+        vm.isEditQFRule = false;
+        vm.editQuickFlightRule = '编辑';
+
         vm.tabItem =
             [{
                 title:'平台客户经理',
                 active:true,
                 id:1
 
-            },
-            {
+            }, {
                 title:'积分规则',
                 active:false,
                     id:2
+            }, {
+
+                title:'飞的设置',
+                active:false,
+                id:3
+
             }/*,
             {
                 title:'其他',
@@ -104,6 +120,8 @@
             }else if(oper == 2){
                 getPointBasic();
                 getPointRule();
+            }else if(oper == 3){
+                getQuickFlightRule();
             }
 
         }
@@ -196,7 +214,34 @@
         }
 
 
+        function getQuickFlightRule() {
 
+            NetworkService.get(constdata.api.tenant.jetPath + '/' + vm.subPathQuickFlight,null,function (response) {
+                // vm.items = response.data.content;
+                //vm.platMgr = [{person:'aa',email:'aa@qq.com', mobile:'13223232321'},{person:'bb',email:'bb@qq.com', mobile:'13323232322'}];
+                vm.QFRule = response.data;
+                // console.log(vm.QFRule);
+                // vm.displayedCollection = [].concat(vm.items);
+                //updatePagination(response.data);
+            },function (response) {
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
+            });
+        }
+
+
+        function addQuickFlightRule() {
+            // console.log(vm.QFRule);
+
+            vm.QFRule = {'speed': vm.QFRule.speed,'unitTimePrice': vm.QFRule.unitTimePrice,'departureTimeInAdvance': vm.QFRule.departureTimeInAdvance};
+            NetworkService.put(constdata.api.tenant.jetPath + '/' + vm.subPathQuickFlight,vm.QFRule,function (response) {
+                toastr.success(i18n.t('u.OPERATE_SUC'));
+                getQuickFlightRule();
+            },function (response) {
+                vm.authError = response.statusText + '(' + response.status + ')';
+                console.log(vm.authError);
+                toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+            });
+        }
 
         vm.editOper = function(operId){
             if(operId == 11) {
@@ -226,6 +271,15 @@
                     vm.editTitlePointRule = '编辑';
                     addPointRule();
                 }
+            }else if(operId == 14){
+                if(!vm.isEditQFRule){
+                    vm.isEditQFRule = true;
+                    vm.editQuickFlightRule = '保存';
+                }else{
+                    vm.isEditQFRule = false;
+                    vm.editQuickFlightRule = '编辑';
+                    addQuickFlightRule();
+                }
             }
 
         }
@@ -244,6 +298,9 @@
                 vm.isEditPointRule = false;
                 vm.editTitlePointRule = '编辑';
                 getPointRule();
+            }else if(operId == 14){
+                vm.isEditQFRule = false;
+                vm.editQuickFlightRule = '编辑';
             }
 
 
