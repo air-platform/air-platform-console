@@ -24,12 +24,6 @@
         vm.showItems = [];
         vm.QFRule = [];
 
-        // vm.QFRule.push({
-        //     speed:'',
-        //     unitTimePrice:'',
-        //     departureTimeInAdvance:''
-        //
-        // })
         vm.goAddItem = goAddItem;
         vm.goEditItem = goEditItem;
         vm.goDetail = goDetail;

@@ -103,6 +103,7 @@
                     </div>
 
 
+
                     <label class="col-sm-1 control-label  font-bold">置顶值</label>
                     <div class="col-sm-1">
                         <input class="form-control" type="text"
@@ -130,6 +131,15 @@
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
 
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">库存数</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="number"
+                               placeholder="库存数" ng-model="vm.user.stock" ng-disabled="vm.isDetail" >
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
 
 
                 <!--<div  class="form-group">
@@ -146,12 +156,11 @@
                 </div>
 
 
-
-
+                <!--<div  ng-if="!vm.isDetail" class="line line-dashed b-b line-lg"></div>-->
 
                 <div  class="form-group">
 
-
+                    <div  ng-if="!vm.isDetail" class="line line-dashed b-b line-lg"></div>
 
                     <div  ng-if="!vm.isDetail" class="form-group">
                         <label class="col-sm-1 control-label m-l-lg font-bold" style="margin-left: 45px;">默认价格</label>
@@ -160,6 +169,8 @@
                                    placeholder="默认价格" ng-model="vm.defaultPrice" ng-disabled="vm.isDetail" >
                         </div>
                         <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+
+
                     </div>
                     <div  ng-if="!vm.isDetail" class="line line-dashed b-b line-lg"></div>
 

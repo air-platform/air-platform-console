@@ -56,12 +56,6 @@
 
 
 
-
-
-
-
-
-
                 <div  ng-if="vm.isDetail" class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">审批状态</label>
                     <div class="col-sm-4">
@@ -84,6 +78,15 @@
 
                 <div  ng-if="vm.user.reviewStatus=='rejected' && vm.isDetail" class="line line-dashed b-b line-lg"></div>
 
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">库存数</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="number"
+                               placeholder="库存数" ng-model="vm.user.stock" ng-disabled="vm.isDetail"  required>
+                    </div>
+                    <span ng-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
 
                 <div class="form-group" ng-if="vm.isDetail">
 
@@ -116,11 +119,6 @@
                 </div>
 
                 <div  ng-if="vm.isDetail" class="line line-dashed b-b line-lg"></div>
-
-
-
-
-
 
 
 

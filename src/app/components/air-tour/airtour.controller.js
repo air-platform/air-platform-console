@@ -141,6 +141,7 @@
         function getDatas() {
             NetworkService.get(vm.reqPath  + '/' + vm.subPath,{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
+                console.log(vm.items);
                 vm.displayedCollection = [].concat(vm.items);
                 if(vm.displayedCollection) {
                     for (var i = 0; i < vm.displayedCollection.length; i++) {

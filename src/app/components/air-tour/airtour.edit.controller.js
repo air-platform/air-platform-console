@@ -381,6 +381,7 @@
 
             NetworkService.get(vm.reqPath2  + '/aircrafts',{page:vm.pageCurrent, pageSize:100},function (response) {
                 vm.crafts = response.data.content;
+                console.log(response.data);
                 for(var i = 0; i < vm.crafts.length; i ++){
                     vm.crafts[i].selTitle = vm.crafts[i].name + ' ' + vm.crafts[i].flightNo + ' ' +  vm.crafts[i].type;
                 }
@@ -707,6 +708,7 @@
                 }
                 vm.user.tourPoint = vm.user.tourPoint.substr(0, vm.user.tourPoint.length-1);
             }
+            console.log(vm.user);
             NetworkService.put(vm.reqPath   + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
