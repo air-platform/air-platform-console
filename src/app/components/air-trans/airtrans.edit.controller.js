@@ -410,7 +410,7 @@
             console.log(username);
             NetworkService.get(vm.reqPath  + '/' + vm.subPath + '/'+ username,null,function (response) {
                 vm.user = response.data;
-
+                console.log(vm.user);
                 vm.user.clientManagersArr = [];
                 vm.user.aircraftItemsAdd = [];
                 if(vm.isAdmin){

@@ -92,9 +92,23 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">库存数</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="number"
-                               placeholder="库存数" ng-model="vm.user.stock" ng-disabled="vm.isDetail"  required>
+                               placeholder="库存数" ng-model="vm.user.stock" ng-disabled="vm.isDetail" >
                     </div>
-                    <span ng-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div class="form-group">
+                    <div  class="line line-dashed b-b line-lg"></div>
+                    <label class="col-sm-1 control-label  m-l-lg font-bold">原价</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="number"
+                               placeholder="原价" ng-model="vm.user.originalPrice" ng-disabled="vm.isDetail"  required>
+                    </div>
+
+                    <label class="col-sm-1 control-label  m-l-lg font-bold">优惠价</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="number"
+                               placeholder="优惠价" ng-model="vm.user.specialPrice" ng-disabled="vm.isDetail" >
+                    </div>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
 
