@@ -202,7 +202,7 @@
                   url: '/',
                   controller: 'MainController',
                   controllerAs: 'main',
-                  templateUrl: 'app/main/main.html',
+                  templateUrl: 'app/main/main.html'
               })
               .state('app.dashboard', {
                   url: prefix + 'dashboard',
@@ -350,7 +350,33 @@
                   templateUrl: 'app/components/config/config.edit.html'
               })
 
-
+              .state('app.venuetemplate', {
+                  url: prefix + '/venuetemplate',
+                  templateUrl: 'app/components/venue/venue.template.html'
+              })
+              .state('app.editvenuetemplate', {
+                  url: prefix + '/venuetemplates/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/venue/venue.template.edit.html'
+              })
+              .state('app.venueinfo', {
+                  url: prefix + '/venueinfo',
+                  templateUrl: 'app/components/venue/venue.info.html'
+              })
+              .state('app.editvenueinfo', {
+                  url: prefix + '/venueinfos/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/venue/venue.info.edit.html'
+              })
+              .state('app.venuecategory', {
+                  url: prefix + '/venuecategory',
+                  templateUrl: 'app/components/venue/venue.category.html'
+              })
+              .state('app.editvenuecategory', {
+                  url: prefix + '/venuecategory/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/venue/venue.category.edit.html'
+              })
               .state('app.airtaxi', {
                   url: prefix + '/airtaxi',
                   templateUrl: 'app/components/air-taxi/airtaxi.html'

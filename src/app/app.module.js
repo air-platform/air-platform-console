@@ -28,7 +28,7 @@
         'easypiechart',
         'ui.calendar',
         'angularSpinner',
-            'ui.bootstrap-slider'
+        'ui.bootstrap-slider'
     ]);
 
 })();

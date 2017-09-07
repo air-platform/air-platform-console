@@ -1,0 +1,171 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="VenueCategoryEditController as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+">
+    <!-- main -->
+    <div class="col">
+        <span us-spinner spinner-on="vm.showSpinner"></span>
+
+
+        <div class="panel panel-default m-l m-r m-t">
+
+            <div class="panel-heading">
+                <h3 class="panel-title">{{'product.INFORMATION' | translate}}</h3>
+            </div>
+            <br/>
+            <form name="form" class="form-horizontal form-validation" role="form">
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.NAME' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.NAME' | translate}}" ng-model="vm.categories.name" ng-disabled="vm.isDetail"  required>
+                    </div>
+                    <span ng-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i><i style="font-style:normal; color:#999;">{{'tenant.USERNAMETIP' | translate}}</i></span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+                <div   class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">所属会场</label>
+                    <div class="col-sm-4">
+                        <!--<select style="width: 100%;" class="form-control font-thin" ng-model="vm.categories.venueInfo" ng-options="i.id as i.name for i in vm.infos" ng-disabled="vm.isDetail"></select>-->
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.categories.venueInfo" ng-options="t.id as t.name for t in vm.infos" ng-disabled="vm.isDetail"></select>
+
+                    </div>
+                    <!--<div class="col-sm-4">-->
+                        <!--<input class="form-control" type="text"-->
+                               <!--placeholder="venueInfo" ng-model="vm.categories.venueInfo" ng-disabled="vm.isDetail"  required>-->
+                    <!--</div>-->
+
+                </div>
+                <div   class="line line-dashed b-b line-lg"></div>
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.IMAGE' | translate}}</label>
+                    <div class="col-sm-6">
+                        <!-- <input class="form-control" type="text"
+                                placeholder="{{'u.IMAGE' | translate}}" ng-model="vm.user.image" ng-disabled="vm.isDetail" >
+
+                         <input type="file"  file-model = "vm.myUploadFile" name="uploadPic" id="myfileId"/>
+                         <button  class="btn btn-default" ng-click="vm.uploadFile()"> <i class="fa fa-check-circle"></i> 上传 </button>
+ -->
+                        <div class="beauty-upload">
+
+                            <div class="lcell span5" style="margin:5px 0px;">
+                                <div class="upload">
+                                    <input type="button" class="btn btn-default upload-btn" value="浏览文件" />
+                                    <!--<span  ng-bind="vm.myUploadFile.name">eee</span>-->
+                                    <label  ng-bind="vm.myUploadFile.name" class="label bg-finished"></label>
+                                    <input type="file" file-model = "vm.myUploadFile" class="upload-input-file" />
+                                    <button style="float:right;background:#23b7e5;border-radius:3px;" class="btn btn-default" ng-click="vm.uploadFile()"> <i class="fa fa-check-circle"></i> 上传 </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <input class="form-control" type="text" style="margin-bottom:10px;"
+                               placeholder="{{'u.IMAGE' | translate}}" ng-model="vm.categories.picture" ng-disabled="vm.isDetail" >
+
+                        <div class="img-preview">
+                            <img ng-src="{{vm.categories.picture}}" alt="">
+                        </div>
+
+
+
+
+
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">产品添加</label>
+                </div>
+
+                <div  class="form-group">
+
+                    <div class="form-group" style="margin-left:30px;" ng-repeat="item in vm.venueCategoryProductsArr">
+
+
+                        <div  class="form-group">
+                            <label class="col-sm-1 control-label m-l-lg font-bold">类别</label>
+                            <div class="col-sm-4">
+
+                                <select style="width: 100%;" class="form-control font-thin" ng-model="item.type" ng-options="c.value as c.title for c in vm.CategoryType" ng-disabled="vm.isDetail" ></select>
+
+                            </div>
+                            <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+
+                            <label class="col-sm-1 control-label m-l-lg font-bold">产品名称</label>
+                            <div class="col-sm-4">
+
+                                <select style="width: 100%;" class="form-control font-thin" ng-model="item.product" ng-options="p.id as p.name for p in vm.allProduct | prdFilter:item.type"  ng-disabled="vm.isDetail" ></select>
+
+
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="col-sm-2">
+                            <button ng-if="!vm.isDetail" ng-click="vm.removeCategoryProduct(item)" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-minus"></i>{{'product.DELETE' | translate}}</button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-sm-4" style="margin-left:30px;">
+                        <button ng-if="!vm.isDetail" ng-click="vm.addNewCategoryProduct()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-plus"></i>{{'u.ADD' | translate}}</button>
+
+                    </div>
+
+                </div>
+
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">描述</label>
+                    <div class="col-sm-4">
+
+                        <input class="form-control font-thin" ng-model="vm.categories.description" rows="4" placeholder="描述" style="resize: none;" ng-disabled="vm.isDetail">
+
+                    </div>
+
+                </div>
+
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-3">
+                        <button ng-if="!vm.isDetail" class="btn btn-default btn-sm m-l-lg btn-addon bg-light" ng-click="vm.backAction()"> <i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}} </button>
+                        <button ng-if="!vm.isDetail" class="btn btn-sm btn-info btn-addon" type="submit" ng-click="vm.submitAction()" ng-disabled='form.$invalid'> <i class="fa fa-check-circle"></i>{{'product.CONFIRM' | T}} </button>
+                        <button ng-if="vm.isDetail" ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
+
+                    </div>
+                </div>
+
+
+
+
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
