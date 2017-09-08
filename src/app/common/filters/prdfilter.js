@@ -17,14 +17,18 @@
     function prdFilter() {
     	return function(input,label) {
             var out = [];
+            console.log(input,label);
             if(label == 'none'){
                 out = input;
             }else{
-                for(var i = 0; i < input.length; i ++){
-                    if(input[i].category == label){
-                        out.push(input[i]);
+                if (input && input != undefined) {
+                    for(var i = 0; i < input.length; i ++){
+                        if(input[i].category == label){
+                            out.push(input[i]);
+                        }
                     }
                 }
+
             }
             return out;
         }
