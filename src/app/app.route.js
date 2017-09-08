@@ -433,6 +433,16 @@
                   templateUrl: 'app/components/order/order-airbook.edit.html'
               })
 
+              .state('app.orderquickflight', {
+                  url: prefix + '/orderquickflight',
+                  templateUrl: 'app/components/order/order-quickflight.html'
+
+              })
+              .state('app.editorderquickflight', {
+                  url: prefix + '/orderquickflight/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/order/order-quickflight.edit.html'
+              })
 
 
               .state('app.orderairbookquick', {

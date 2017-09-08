@@ -1,0 +1,406 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="OrderQuickflightEditController as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+">
+    <!-- main -->
+    <div class="col">
+        <!-- main header -->
+        <!-- <div class="bg-light lter b-b wrapper-md" ng-hide="isRoleAdmin">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="m-n font-thin h3 text-black">{{vm.title}}</h1>
+                    <small class="text-muted">HNA EcoTech Internet of Things</small>
+                </div>
+               
+            </div>
+        </div> -->
+
+        <!-- tasks -->
+
+
+
+        <div class="panel panel-default m-l m-r m-t">
+
+            <div class="panel-heading">
+                <h3 class="panel-title">{{'product.INFORMATION' | translate}}</h3>
+            </div>
+            <br/>
+            <form name="form" class="form-horizontal form-validation" role="form">
+
+
+
+
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.ORDERNO' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.ORDERNO' | translate}}" ng-model="vm.user.orderNo" ng-disabled=true  required>
+                    </div>
+                    <span ng-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i><i style="font-style:normal; color:#999;">{{'tenant.USERNAMETIP' | translate}}</i></span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.STATUS' | translate}}</label>
+                    <div class="col-sm-4" style="top:4px;">
+
+<!--
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.status" ng-options="opt.value as opt.title for opt in vm.statusType" ng-disabled="vm.isDetail" ></select>
+-->
+                        <label ng-class="vm.labelClass[vm.user.status]" ng-bind="vm.statusMap[vm.user.status]" class="label"></label>
+
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+                <div  ng-if="vm.user.paymentFailureCause" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">付款失败原因</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" type="text"
+                               placeholder="付款失败原因" ng-model="vm.user.paymentFailureCause" ng-disabled=true  required>
+                    </div>
+                </div>
+                <div  ng-if="vm.user.paymentFailureCause" class="line line-dashed b-b line-lg"></div>
+
+
+                <div  ng-if="vm.user.refundReason" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">退款原因</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" type="text"
+                               placeholder="退款原因" ng-model="vm.user.refundReason" ng-disabled=true  required>
+                    </div>
+                </div>
+                <div  ng-if="vm.user.refundReason" class="line line-dashed b-b line-lg"></div>
+
+
+                <div  ng-if="vm.user.refundFailureCause" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">退款失败原因</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" type="text"
+                               placeholder="退款失败原因" ng-model="vm.user.refundFailureCause" ng-disabled=true  required>
+                    </div>
+                </div>
+                <div  ng-if="vm.user.refundFailureCause" class="line line-dashed b-b line-lg"></div>
+
+
+
+                <div  ng-if="vm.user.cancelReason" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">取消原因</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" type="text"
+                               placeholder="取消原因" ng-model="vm.user.cancelReason" ng-disabled=true  required>
+                    </div>
+                </div>
+                <div  ng-if="vm.user.cancelReason" class="line line-dashed b-b line-lg"></div>
+
+
+
+                <div  ng-if="vm.user.closedReason" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">关闭原因</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" type="text"
+                               placeholder="关闭原因" ng-model="vm.user.closedReason" ng-disabled=true  required>
+                    </div>
+                </div>
+                <div  ng-if="vm.user.closedReason" class="line line-dashed b-b line-lg"></div>
+
+
+
+                <div class="form-group" ng-if="vm.user.payment">
+
+                    <label class="col-sm-1 control-label  m-l-lg font-bold">付款流水号</label>
+                    <div class="col-sm-3">
+                        <input class="form-control" type="text"
+                               placeholder="交易流水号" ng-model="vm.user.payment.tradeNo" ng-disabled="vm.isDetail"  required>
+                    </div>
+
+
+                    <label class="col-sm-1 control-label  font-bold">付款方式</label>
+                    <div class="col-sm-1">
+                        <!--<input class="form-control" type="text"
+                               placeholder="支付方式" ng-model="vm.user.payment.method" ng-disabled="vm.isDetail"  required>-->
+
+                        <label style="position: relative;top:6px;" class="label bg-main" ng-bind="vm.paymentMethodMap[vm.user.payment.method]" class="label"></label>
+
+                    </div>
+
+
+                    <label class="col-sm-1 control-label  font-bold">付款金额</label>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="text"
+                               placeholder="支付金额" ng-model="vm.user.payment.amount" ng-disabled="vm.isDetail"  required>
+                    </div>
+
+                </div>
+
+                <div  ng-if="vm.user.payment" class="line line-dashed b-b line-lg"></div>
+
+
+                <div class="form-group" ng-if="vm.user.refund">
+
+                    <label class="col-sm-1 control-label  m-l-lg font-bold">退款流水号</label>
+                    <div class="col-sm-3">
+                        <input class="form-control" type="text"
+                               placeholder="退款流水号" ng-model="vm.user.refund.tradeNo" ng-disabled="vm.isDetail"  required>
+                    </div>
+
+
+                    <label class="col-sm-1 control-label  font-bold">退款方式</label>
+                    <div class="col-sm-1">
+                        <!--<input class="form-control" type="text"
+                               placeholder="退款方式" ng-model="vm.user.refund.method" ng-disabled="vm.isDetail"  required>
+                    -->
+                        <label style="position: relative;top:6px;" class="label bg-main" ng-bind="vm.paymentMethodMap[vm.user.refund.method]" class="label"></label>
+
+
+                    </div>
+
+
+                    <label class="col-sm-1 control-label  font-bold">退款金额</label>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="text"
+                               placeholder="退款金额" ng-model="vm.user.refund.amount" ng-disabled="vm.isDetail"  required>
+
+                    </div>
+
+                </div>
+
+                <div  ng-if="vm.user.refund" class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+
+
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CONTACTNAME' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.CONTACTNAME' | translate}}" ng-model="vm.user.contact.person" ng-disabled=true >
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CONTACTPHONE' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.CONTACTPHONE' | translate}}" ng-model="vm.user.contact.mobile" ng-disabled=true >
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CONTACTMAIL' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.CONTACTMAIL' | translate}}" ng-model="vm.user.contact.email" ng-disabled=true >
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+<!--
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FLEETNAME' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.FLEETNAME' | translate}}" ng-model="vm.user.fleetCandidates[0].fleet.name" ng-disabled=true >
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+-->
+
+
+
+
+
+
+
+                <div  class="form-group">
+                    <div style="display:block;" class="col-sm-6  m-l-lg font-bold">{{'u.FLIGHTINFO' | translate}}</div>
+                </div>
+
+
+
+                <div class="form-group" ng-repeat="item in vm.user.flightLegs">
+
+
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.DEPARTURE' | translate}}</label>
+                    <div class="col-sm-1">
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.DEPARTURE' | translate}}" ng-model="item.departure" ng-disabled=true >
+                    </div>
+
+
+
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.ARRIVAL' | translate}}</label>
+                    <div class="col-sm-1">
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.ARRIVAL' | translate}}" ng-model="vm.user.flightLegs[0].arrival" ng-disabled=true >
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+
+
+
+
+
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FLIGHTDATE' | translate}}</label>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.FLIGHTDATE' | translate}}" ng-model="vm.user.flightLegs[0].date" ng-disabled=true >
+                    </div>
+
+
+
+
+
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.PASSENGERNUM' | translate}}</label>
+                    <div class="col-sm-1">
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.PASSENGERNUM' | translate}}" ng-model="vm.user.flightLegs[0].passengers" ng-disabled=true >
+                    </div>
+
+
+
+                </div>
+
+
+
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CTEATEIONDATE' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                                ng-model="vm.user.creationDate" ng-disabled=true >
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+                <div  ng-if="vm.user.paymentDate" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.PAYMENTDATE' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               ng-model="vm.user.paymentDate" ng-disabled=true>
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  ng-if="vm.user.paymentDate" class="line line-dashed b-b line-lg"></div>
+
+
+
+
+                <div  ng-if="vm.user.refundedDate" class="form-group" >
+                    <label class="col-sm-1 control-label m-l-lg font-bold">退款日期</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               ng-model="vm.user.refundedDate" ng-disabled=true >
+                    </div>
+                </div>
+                <div  ng-if="vm.user.refundedDate" class="line line-dashed b-b line-lg"></div>
+
+
+                <div  ng-if="vm.user.cancelledDate" class="form-group" >
+                    <label class="col-sm-1 control-label m-l-lg font-bold">取消日期</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               ng-model="vm.user.cancelledDate" ng-disabled=true >
+                    </div>
+                </div>
+                <div  ng-if="vm.user.cancelledDate" class="line line-dashed b-b line-lg"></div>
+
+                <div  ng-if="vm.user.closedDate" class="form-group" >
+                    <label class="col-sm-1 control-label m-l-lg font-bold">关闭日期</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               ng-model="vm.user.closedDate" ng-disabled=true >
+                    </div>
+                </div>
+                <div  ng-if="vm.user.closedDate" class="line line-dashed b-b line-lg"></div>
+
+                <div  ng-if="vm.user.deletedDate" class="form-group" >
+                    <label class="col-sm-1 control-label m-l-lg font-bold">删除日期</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               ng-model="vm.user.deletedDate" ng-disabled=true >
+                    </div>
+                </div>
+                <div  ng-if="vm.user.deletedDate" class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+                <div ng-if="vm.user.finishedDate" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FINISHEDDATE' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                                ng-model="vm.user.finishedDate" ng-disabled=true >
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  ng-if="vm.user.finishedDate" class="line line-dashed b-b line-lg"></div>
+
+
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.NOTE' | translate}}</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                                ng-model="vm.user.note" ng-disabled=true >
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-3">
+                        <button ng-if="!vm.isDetail" class="btn btn-default btn-sm m-l-lg btn-addon bg-light" ng-click="vm.backAction()"> <i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}} </button>
+                        <button ng-if="!vm.isDetail" class="btn btn-sm btn-info btn-addon" type="submit" ng-click="vm.submitAction()" ng-disabled='form.$invalid'> <i class="fa fa-check-circle"></i>{{'product.CONFIRM' | T}} </button>
+                        <button ng-if="vm.isDetail" ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
+
+                    </div>
+                </div>
+
+
+
+
+
+
+            </form>
+        </div>
+    </div>
+</div>
+

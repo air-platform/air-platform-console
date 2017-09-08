@@ -128,30 +128,105 @@
                 value:'candidate'
             }
         ];
+        console.log(tipsInfo.order.type);
+
+        $scope.selItem = {};
+        $scope.tipsInfo = tipsInfo;
+        $scope.rejectReason = '';
+        if(tipsInfo.order.type == 'quickflight'){
+            $scope.candidates = tipsInfo.order.aircraftCandidates;
+        }else{
+            $scope.candidates = tipsInfo.order.fleetCandidates;
+        }
+        console.log($scope.candidates);
         $scope.changeFleetCandidate = function(){
-            console.log('ddd'+$scope.selItem.candidate);
-            if(tipsInfo.order.fleetCandidates && tipsInfo.order.fleetCandidates.length > 0) {
-                for(var i = 0; i < tipsInfo.order.fleetCandidates.length; i ++){
-                    if($scope.selItem.candidate == tipsInfo.order.fleetCandidates[i].id){
-                        //$scope.selItem = tipsInfo.order.fleetCandidates[i];
-                        $scope.selItem.candidate = tipsInfo.order.fleetCandidates[i].id;
-                        $scope.selItem.status = tipsInfo.order.fleetCandidates[i].status;
-                        $scope.selItem.amount = tipsInfo.order.fleetCandidates[i].offeredPrice;
-                        //$scope.selItem.name = tipsInfo.order.fleetCandidates[i].fleet.name;
-                        console.log('ok' + $scope.selItem.candidate);
+            //console.log('ddd'+$scope.selItem.candidate);
+            if($scope.candidates && $scope.candidates.length > 0) {
+                for(var i = 0; i < $scope.candidates.length; i ++){
+                    if($scope.selItem.candidate == $scope.candidates[i].id){
+                        $scope.selItem.candidate = $scope.candidates[i].id;
+                        $scope.selItem.status = $scope.candidates[i].status;
+                        $scope.selItem.amount = $scope.candidates[i].offeredPrice;
                         break;
                     }
                 }
 
             }
         }
-        $scope.selItem = {};
-        if(tipsInfo.order.fleetCandidates && tipsInfo.order.fleetCandidates.length > 0) {
+
+        if($scope.candidates && $scope.candidates.length > 0) {
+            $scope.selItem.candidate = $scope.candidates[0].id;
+            $scope.selItem.status = $scope.candidates[0].status;
+            $scope.selItem.amount = $scope.candidates[0].offeredPrice;
+        }
+
+        $scope.ok = function () {
+            $uibModalInstance.close($scope.selItem);
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss(i18n.t('u.CANCEL'));
+        };
+
+    }
+
+})();
+
+
+
+
+(function () {
+    'use strict';
+
+    angular
+        .module('iot')
+        .controller('ModalInstanceOrderInitiateCtrl', ModalInstanceOrderInitiateCtrl);
+
+    /** @ngInject */
+    function ModalInstanceOrderInitiateCtrl($uibModalInstance,$scope,tipsInfo,i18n) {
+        /* jshint validthis: true */
+        // var vm = this;
+
+        $scope.selItem = new Array();
+        $scope.addCandidate = function() {
+
+            $scope.selItem.push({
+                aircraft:$scope.tipsInfo.order.crafts[0].id,
+                order:tipsInfo.order.id,
+                status:'candidate'
+                //offeredPrice:,
+                //vendor:$scope.tipsInfo.order.crafts[0].vendor.id
+            })
+        }
+
+        $scope.removeCandidate = function(item) {
+            var index = $scope.selItem.indexOf(item);
+            $scope.selItem.splice(index, 1);
+        }
+
+
+        $scope.orderStatus = [
+            {
+                title:'已报价',
+                value:'offered'
+            },
+            {
+                title:'未报价',
+                value:'candidate'
+            }
+        ];
+        console.log(tipsInfo.order.aircraftCandidates);
+        if(tipsInfo.order.aircraftCandidates && tipsInfo.order.aircraftCandidates.length > 0) {
             //$scope.selItem = tipsInfo.order.fleetCandidates[0];
-            $scope.selItem.candidate = tipsInfo.order.fleetCandidates[0].id;
-            $scope.selItem.status = tipsInfo.order.fleetCandidates[0].status;
-            $scope.selItem.amount = tipsInfo.order.fleetCandidates[0].offeredPrice;
-           // $scope.selItem.name = tipsInfo.order.fleetCandidates[0].fleet.name;
+            for(var i = 0; i < tipsInfo.order.aircraftCandidates.length; i ++) {
+                $scope.selItem[i] = {};
+                $scope.selItem[i].aircraft = tipsInfo.order.aircraftCandidates[i].aircraft.id;
+                $scope.selItem[i].order = tipsInfo.order.id;
+                $scope.selItem[i].status = tipsInfo.order.aircraftCandidates[i].status;
+                $scope.selItem[i].offeredPrice = tipsInfo.order.aircraftCandidates[i].offeredPrice;
+               // $scope.selItem[i].vendor.id = tipsInfo.order.aircraftCandidates[i].vendor;
+            }
+            // $scope.selItem.name = tipsInfo.order.aircraftCandidates[0].fleet.name;
         }
         $scope.tipsInfo = tipsInfo;
         $scope.rejectReason = '';
@@ -168,11 +243,6 @@
     }
 
 })();
-
-
-
-
-
 
 
 

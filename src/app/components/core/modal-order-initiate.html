@@ -36,19 +36,58 @@
         </div>-->
 
         <div class="form-group">
-            <label style="margin-left:-20px;" class="col-sm-2 control-label  font-bold" >机型</label>
-            <div class="col-sm-3" style="margin-left:-10px;">
-               <!-- <input class="form-control" type="text" placeholder="机型" ng-model="selItem.name" required>-->
 
 
-                <select  ng-if="tipsInfo.order.type!='quickflight'" ng-change="changeFleetCandidate()" class="form-control font-thin" ng-model="selItem.candidate" ng-options="s.id as s.fleet.name for s in tipsInfo.order.fleetCandidates"></select>
 
-                <select  ng-if="tipsInfo.order.type=='quickflight'" ng-change="changeFleetCandidate()" class="form-control font-thin" ng-model="selItem.candidate" ng-options="s.id as s.aircraft.name for s in tipsInfo.order.aircraftCandidates"></select>
 
+            <div  class="form-group">
+
+                <div class="form-group" style="margin-left:40px;" ng-repeat="item in selItem">
+
+                    <label class="col-sm-2 control-label  font-bold">机型</label>
+                   <!-- <div class="col-sm-2">
+                        <input class="form-control" type="text"
+                               placeholder="机型" ng-model="item.aircraft.id" ng-disabled="vm.isDetail"  required>
+
+                    </div>-->
+
+                    <div class="col-sm-6" style="margin-left:-10px;">
+                        <select  class="form-control font-thin" ng-model="item.aircraft" ng-options="s.id as s.selTitle for s in tipsInfo.order.crafts"></select>
+                    </div>
+
+                    <!--<label class="col-sm-1 control-label  font-bold">状态</label>
+                    <div class="col-sm-3">
+                        <input class="form-control" type="text"
+                               placeholder="状态" ng-model="item.status" ng-disabled="vm.isDetail"  >
+                    </div>
+
+                    <label class="col-sm-1 control-label  font-bold">价格</label>
+                    <div class="col-sm-3">
+                        <input class="form-control" type="text"
+                               placeholder="价格" ng-model="item.offeredPrice" ng-disabled="vm.isDetail"  >
+                    </div>-->
+
+
+                    <div class="col-sm-2">
+                        <button ng-if="!vm.isDetail" ng-click="removeCandidate(item)" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-minus"></i>{{'product.DELETE' | translate}}</button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-sm-4" style="margin-left:85px;">
+                    <button ng-if="!vm.isDetail" ng-click="addCandidate()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-plus"></i>{{'u.ADD' | translate}}</button>
+
+                </div>
 
             </div>
 
-            <label style="margin-left:-50px;" class="col-sm-2 control-label  font-bold">状态</label>
+
+
+
+
+           <!-- <label style="margin-left:-50px;" class="col-sm-2 control-label  font-bold">状态</label>
             <div class="col-sm-3" style="margin-left:-10px;" >
                 <select   style="width: 100%;" class="form-control font-thin" ng-model="selItem.status" ng-options="s.value as s.title for s in orderStatus"></select>
             </div>
@@ -57,7 +96,9 @@
             <div class="col-sm-2">
                 <input class="form-control" type="number"
                        placeholder="价格" ng-model="selItem.amount"  required>
-            </div>
+            </div>-->
+
+
         </div>
 
 
