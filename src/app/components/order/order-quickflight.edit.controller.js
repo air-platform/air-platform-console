@@ -44,6 +44,16 @@
         vm.addUser = {};
         vm.addUser.role='tenant';
         vm.subPath = 'ferryflights';
+        vm.orderStatus = [
+            {
+                title:'已报价',
+                value:'offered'
+            },
+            {
+                title:'未报价',
+                value:'candidate'
+            }
+        ];
         vm.userType = [
             {
                 title:'管理员',

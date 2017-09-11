@@ -239,56 +239,109 @@
 
 
                 <div  class="form-group">
-                    <div style="display:block;" class="col-sm-6  m-l-lg font-bold">{{'u.FLIGHTINFO' | translate}}</div>
+                    <div style="display:block;" class="col-sm-6  m-l-lg font-bold">航程信息</div>
                 </div>
+                <div class="form-group" >
 
-
-
-                <div class="form-group" ng-repeat="item in vm.user.flightLegs">
-
-
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.DEPARTURE' | translate}}</label>
-                    <div class="col-sm-1">
+                    <label class="col-sm-1 control-label font-bold">{{'u.DEPARTURE' | translate}}</label>
+                    <div class="col-sm-2">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.DEPARTURE' | translate}}" ng-model="item.departure" ng-disabled=true >
+                               placeholder="{{'u.DEPARTURE' | translate}}" ng-model="vm.user.departure.name" ng-disabled=true >
                     </div>
 
 
 
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.ARRIVAL' | translate}}</label>
+                    <label class="col-sm-1 control-label  font-bold">{{'u.ARRIVAL' | translate}}</label>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.ARRIVAL' | translate}}" ng-model="vm.user.arrival.name" ng-disabled=true >
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+
+
+                    <label class="col-sm-1 control-label font-bold">{{'u.FLIGHTDATE' | translate}}</label>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="text"
+                               placeholder="{{'u.FLIGHTDATE' | translate}}" ng-model="vm.user.departureDate" ng-disabled=true >
+                    </div>
+
+                    <label class="col-sm-1 control-label  font-bold">{{'u.PASSENGERNUM' | translate}}</label>
                     <div class="col-sm-1">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.ARRIVAL' | translate}}" ng-model="vm.user.flightLegs[0].arrival" ng-disabled=true >
+                               placeholder="{{'u.PASSENGERNUM' | translate}}" ng-model="vm.user.passengerNum" ng-disabled=true >
+                    </div>
+                </div>
+
+
+
+                <div  class="line line-dashed b-b line-lg"></div>
+
+                <div  class="form-group">
+                    <div style="display:block;" class="col-sm-6  m-l-lg font-bold">停机坪信息</div>
+                </div>
+                    <div class="form-group" >
+
+                        <label class="col-sm-2  control-label font-bold">起飞停机坪</label>
+                        <div class="col-sm-2">
+                            <input class="form-control" type="text"
+                                   placeholder="起飞停机坪" ng-model="vm.user.departureApron.name" ng-disabled=true >
+                        </div>
+
+                        <label class="col-sm-2 m-l-lg control-label font-bold">降落停机坪</label>
+                        <div class="col-sm-2">
+                            <input class="form-control" type="text"
+                                   placeholder="降落停机坪" ng-model="vm.user.arrivalApron.name" ng-disabled=true >
+                        </div>
+
+
+                    </div>
+
+                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+                <div  class="form-group">
+                    <div style="display:block;" class="col-sm-6  m-l-lg font-bold">选择机型信息</div>
+                </div>
+
+
+
+                <div class="form-group" ng-repeat="item in vm.user.aircraftCandidates">
+
+
+                    <label class="col-sm-1 m-l-lg control-label  font-bold">名称</label>
+                    <div class="col-sm-3">
+                        <input class="form-control" type="text"
+                               placeholder="名称" ng-model="item.aircraft.name" ng-disabled=true >
+                    </div>
+
+
+
+                    <label class="col-sm-1 control-label  font-bold">状态</label>
+                    <div class="col-sm-2">
+
+                        <select   ng-disabled=true style="width: 100%;" class="form-control font-thin" ng-model="item.status" ng-options="s.value as s.title for s in vm.orderStatus"></select>
+
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
 
 
 
-
-
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FLIGHTDATE' | translate}}</label>
+                    <label class="col-sm-1 control-label  font-bold">报价</label>
                     <div class="col-sm-2">
                         <input class="form-control" type="text"
-                               placeholder="{{'u.FLIGHTDATE' | translate}}" ng-model="vm.user.flightLegs[0].date" ng-disabled=true >
+                               placeholder="报价" ng-model="item.offeredPrice" ng-disabled=true >
                     </div>
-
-
-
-
-
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.PASSENGERNUM' | translate}}</label>
-                    <div class="col-sm-1">
-                        <input class="form-control" type="text"
-                               placeholder="{{'u.PASSENGERNUM' | translate}}" ng-model="vm.user.flightLegs[0].passengers" ng-disabled=true >
-                    </div>
-
-
 
                 </div>
 
 
 
                 <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
 
 
 
