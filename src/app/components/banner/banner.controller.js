@@ -75,7 +75,7 @@
         ];
 
 
-        vm.linkCategoryType = [
+        vm.linkCategoryTypeAll = [
             {
                 title:'Air Jet',
                 value:'air_jet'
@@ -95,6 +95,10 @@
             {
                 title:'Air Train',
                 value:'air_training'
+            },
+            {
+                title:'Air Venue',
+                value:'air_venue'
             }
         ];
         function getDatas() {

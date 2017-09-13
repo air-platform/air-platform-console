@@ -98,6 +98,32 @@
             }
         ];
 
+        vm.linkCategoryTypeAll = [
+            {
+                title:'Air Jet',
+                value:'air_jet'
+            },
+            {
+                title:'Air Taxi',
+                value:'air_taxi'
+            },
+            {
+                title:'Air Trans',
+                value:'air_trans'
+            },
+            {
+                title:'Air Tour',
+                value:'air_tour'
+            },
+            {
+                title:'Air Train',
+                value:'air_training'
+            },
+            {
+                title:'Air Venue',
+                value:'air_venue'
+            }
+        ];
         vm.linkCategoryType = [
             {
                 title:'Air Jet',
@@ -195,7 +221,7 @@
         function getProductsDatas() {
 
 
-            NetworkService.get(vm.reqPath  + '/product/summaries',{page:vm.pageCurrent,pageSize:200},function (response) {
+            NetworkService.get(vm.reqPath  + '/product/summaries',{page:vm.pageCurrent,pageSize:2000},function (response) {
                 vm.allProduct = response.data;
                 console.log(vm.allProduct);
             },function (response) {
@@ -206,6 +232,13 @@
             NetworkService.get(vm.reqPath  + '/product/categories',{page:vm.pageCurrent},function (response) {
                 vm.cats = response.data;
                 console.log(vm.cats);
+            },function (response) {
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
+            });
+
+            NetworkService.get(constdata.api.tenant.jetPath + '/venue-templates',null,function (response) {
+                vm.venueTemplates = response.data.content;
+                console.log(vm.venueTemplates);
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
             });
