@@ -428,31 +428,32 @@
 
         vm.goOperItem = function (item,oper) {
 
-            if(oper == 'confirm') {
-                NetworkService.post(vm.reqPath2 + '/' + item.id + '/confirm', null, function success() {
-                    toastr.success(i18n.t('u.OPER_SUC'));
-                    getDatas();
-                }, function (response) {
-                    vm.authError = response.statusText + '(' + response.status + ')';
-                    toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
-                });
-            }else if(oper == 'contract_sign'){
-                NetworkService.post(vm.reqPath2 + '/' + item.id + '/sign-contract', null, function success() {
-                    toastr.success(i18n.t('u.OPER_SUC'));
-                    getDatas();
-                }, function (response) {
-                    vm.authError = response.statusText + '(' + response.status + ')';
-                    toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
-                });
-            }else if(oper == 'pay'){
-                NetworkService.post(vm.reqPath2 + '/' + item.id + '/pay', null, function success() {
-                    toastr.success(i18n.t('u.OPER_SUC'));
-                    getDatas();
-                }, function (response) {
-                    vm.authError = response.statusText + '(' + response.status + ')';
-                    toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
-                });
-            }else if(oper == 'refund_accept'){
+            // if(oper == 'confirm') {
+            //     NetworkService.post(vm.reqPath2 + '/' + item.id + '/confirm', null, function success() {
+            //         toastr.success(i18n.t('u.OPER_SUC'));
+            //         getDatas();
+            //     }, function (response) {
+            //         vm.authError = response.statusText + '(' + response.status + ')';
+            //         toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+            //     });
+            // }else if(oper == 'contract_sign'){
+            //     NetworkService.post(vm.reqPath2 + '/' + item.id + '/sign-contract', null, function success() {
+            //         toastr.success(i18n.t('u.OPER_SUC'));
+            //         getDatas();
+            //     }, function (response) {
+            //         vm.authError = response.statusText + '(' + response.status + ')';
+            //         toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+            //     });
+            // }else if(oper == 'pay'){
+            //     NetworkService.post(vm.reqPath2 + '/' + item.id + '/pay', null, function success() {
+            //         toastr.success(i18n.t('u.OPER_SUC'));
+            //         getDatas();
+            //     }, function (response) {
+            //         vm.authError = response.statusText + '(' + response.status + ')';
+            //         toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
+            //     });
+            // }else
+                if(oper == 'refund_accept'){
                 NetworkService.post(vm.reqPath2 + '/' + item.id + '/refund/accept ', null, function success() {
                     toastr.success(i18n.t('u.OPER_SUC'));
                     getDatas();

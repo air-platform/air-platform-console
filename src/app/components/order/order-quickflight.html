@@ -84,11 +84,6 @@
                         <li ng-class="{disabled: !item.isOfferEnable}" ng-click="vm.openAlert('sm',item,'initiate')" ><a><i class="fa fa-book m-r-sm"></i>增加机型</a></li>
                         <li ng-class="{disabled: !item.isOfferEnable}" ng-click="vm.openAlert('sm',item,'offer')" ><a><i class="fa fa-check-square m-r-sm"></i>报价</a></li>
                         <li ng-class="{disabled: !item.isPriceEnable}" ng-click="vm.openAlert('sm',item,'price')" ><a><i class="fa fa-bank m-r-sm"></i>修改价格</a></li>
-                        <li ng-class="{disabled: !item.isConfirmOrderEnable}" ng-click="vm.openAlert('sm',item,'confirm')" ><a><i class="fa fa-check-square m-r-sm"></i>确认订单</a></li>
-                        <li ng-class="{disabled: !item.isSignEnable}" ng-click="vm.openAlert('sm',item,'contract_sign')" ><a><i class="fa fa-book m-r-sm"></i>签合同</a></li>
-
-                        <li ng-class="{disabled: !item.isPayEnable}" ng-click="vm.openAlert('sm',item,'pay')" ><a><i class="fa fa-check-square m-r-sm"></i>付款</a></li>
-
                         <li ng-class="{disabled: !item.isAcceptRefundEnable}" ng-click="vm.openAlert('sm',item,'refund_accept')" ><a><i class="fa fa-calendar-check-o m-r-sm"></i>退款</a></li>
                         <li ng-class="{disabled: !item.isRejectRefundEnable}" ng-click="vm.openAlert('sm',item,'refund_reject')" ><a><i class="fa fa-calendar-times-o m-r-sm"></i>拒绝退款</a></li>
                         <li ng-class="{disabled: !item.isFinishEnable}" ng-click="vm.openAlert('sm',item,'finish')" ><a><i class="fa fa-check-square m-r-sm"></i>完成订单</a></li>
@@ -97,9 +92,6 @@
 
                         </ul>
                     </div>
-
-
-
                 </td>
             </tr>
 
@@ -107,11 +99,6 @@
         </table>
         </div>
 
-        <!--<div class="btn-group pagination pull-right padder-lg">-->
-            <!--<button type="button" class="btn btn-default" ng-click="vm.preAction()" ng-disabled= !vm.pagePreEnabled>Previous</button>-->
-            <!--<button type="button" class="btn btn-default" ng-repeat="page in vm.pages" ng-click="vm.goPage(page)" ng-disabled= vm.pageCurrentState(page)>{{page}}</button>-->
-            <!--<button type="button" class="btn btn-default" ng-click="vm.nextAction()" ng-disabled= !vm.pageNextEnabled>Next</button>-->
-        <!--</div>-->
         <div data-ng-include=" 'app/main/blocks/pageflip.html' " >
         </div>
         <!-- / tasks -->

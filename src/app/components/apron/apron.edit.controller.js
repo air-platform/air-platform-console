@@ -169,6 +169,7 @@
                 }
                 vm.user.location.longitudeFlag = true;
                 vm.user.location.latitudeFlag = true;
+                setUEContent(vm.user.description);
 
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
@@ -179,7 +180,8 @@
 
         function addItem() {
             var myid = vm.userInfo.id;
-            vm.user.description = getMarkDownAction().markdown;
+            // vm.user.description = getMarkDownAction().markdown;
+            vm.user.description = getUEContent();
             if(vm.clientManagersArr.length > 0) {
                 vm.user.items =  vm.clientManagersArr;
             }
@@ -235,7 +237,8 @@
 
         function editItem() {
             var myid = vm.userInfo.id;
-            vm.user.description = getMarkDownAction().markdown;
+            // vm.user.description = getMarkDownAction().markdown;
+            vm.user.description = getUEContent();
             if(vm.clientManagersArr.length > 0) {
                 vm.user.items =  vm.clientManagersArr;
             }
