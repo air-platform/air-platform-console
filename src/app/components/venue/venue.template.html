@@ -4,16 +4,6 @@
 ">
     <!-- main -->
     <div class="col">
-        <!-- main header -->
-        <!-- div class="bg-light lter b-b wrapper-md" ng-hide="isRoleAdmin">
-            <div class="row">
-                <div class="col-sm-6 col-xs-12">
-                    <h1 class="m-n font-thin h3 text-black">租户信息</h1>
-                    <small class="text-muted">HNA EcoTech Internet of Things</small>
-                </div>
-            </div>
-        </div> -->
-
         <!-- tasks -->
 
         <div class="m-l m-r m-t panel panel-default">
@@ -30,6 +20,7 @@
                     <th class="text-center">{{'u.NAME' | T}}</th>
                     <th class="text-center">背景图片</th>
                     <th class="text-center">背景颜色</th>
+                    <th class="text-center">状态</th>
                     <th class="text-center">描述</th>
                     <th class="text-center">操作</th>
 
@@ -49,13 +40,31 @@
                     </td>
 
                     <td ng-click="vm.goDetail(item)">{{item.backgroundColor}}</td>
+
+                    <td ng-click="vm.goDetail(item)">
+                        <label ng-class="vm.publishColor[item.published]" ng-bind="vm.publishType[item.published]" class="label"></label>
+                    </td>
                     <td ng-click="vm.goDetail(item)"> {{item.description}}</td>
 
 
                     <td>
                         <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goDetail(item)"><i class="fa fa-eye"></i>{{'u.DETAIL'|T}}</button>
                         <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goEditItem(item)"><i class="fa fa-edit"></i>{{ 'u.EDIT' | T}}</button>
-                        <button class="btn btn-sm btn-danger btn-addon" style="width: 80px"  ng-click="vm.openAlert('sm',item)"><i class="fa fa-trash-o"></i>{{'u.DELETE' | T}}</button>
+
+                        <div class="btn-group " >
+                            <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-sliders"></i>  操作</button>
+                            <button type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only"></span>
+                            </button>
+                            <ul class="dropdown-menu" style="overflow:visible; z-index:1010;width:100px;position:absolute;">
+                                <li ng-class="{disabled: !item.isPublishEnable}" ng-click="vm.OperApp('publish', item)" ><a><i class="fa fa-lock m-r-sm"></i>上线</a></li>
+                                <li ng-class="{disabled: !item.isUnPublishEnable}" ng-click="vm.OperApp('unpublish', item)" ><a><i class="fa fa-unlock m-r-sm"></i>下线</a></li>
+                                <li  ng-click="vm.openAlert('sm',item)" ><a><i class="fa fa-trash-o m-r-sm"></i> {{'u.DELETE' | T}}</a></li>
+
+                            </ul>
+                        </div>
+
                     </td>
                 </tr>
 
@@ -63,11 +72,6 @@
             </table>
         </div>
 
-        <!--<div class="btn-group pagination pull-right padder-lg">-->
-        <!--<button type="button" class="btn btn-default" ng-click="vm.preAction()" ng-disabled= !vm.pagePreEnabled>Previous</button>-->
-        <!--<button type="button" class="btn btn-default" ng-repeat="page in vm.pages" ng-click="vm.goPage(page)" ng-disabled= vm.pageCurrentState(page)>{{page}}</button>-->
-        <!--<button type="button" class="btn btn-default" ng-click="vm.nextAction()" ng-disabled= !vm.pageNextEnabled>Next</button>-->
-        <!--</div>-->
         <div data-ng-include=" 'app/main/blocks/pageflip.html' " >
         </div>
         <!-- / tasks -->

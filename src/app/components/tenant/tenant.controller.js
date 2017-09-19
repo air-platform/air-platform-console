@@ -95,7 +95,7 @@
             }
 
             //$state.go('app.applicationedit');
-        };
+        }
 
 
 
@@ -269,7 +269,7 @@
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
-        }
+        };
 
 
 

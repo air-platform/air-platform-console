@@ -112,57 +112,29 @@
 
 
 
-
-
-
-                <!--<div  class="form-group">-->
-                    <!--<label class="col-sm-1 control-label m-l-lg font-bold">{{'u.SCHOOLIMAGE' | translate}}</label>-->
-                    <!--<div class="col-sm-6">-->
-                        <!--&lt;!&ndash;<input class="form-control" type="text"-->
-                               <!--placeholder="{{'u.SCHOOLIMAGE' | translate}}" ng-model="vm.user.image" ng-disabled="vm.isDetail" >-->
-
-                        <!--<input type="file"  file-model = "vm.myUploadFile" name="uploadPic" id="myfileId"/>-->
-                        <!--<button  class="btn btn-default" ng-click="vm.uploadFile()"> <i class="fa fa-check-circle"></i> 上传 </button>-->
-<!--&ndash;&gt;-->
-
-                        <!--<div class="beauty-upload">-->
-
-                            <!--<div class="lcell span5" style="margin:5px 0px;">-->
-                                <!--<div class="upload">-->
-                                    <!--<input type="button" class="btn btn-default upload-btn" value="浏览文件" />-->
-                                    <!--&lt;!&ndash;<span  ng-bind="vm.myUploadFile.name">eee</span>&ndash;&gt;-->
-                                    <!--<label  ng-bind="vm.myUploadFile.name" class="label bg-finished"></label>-->
-                                    <!--<input type="file" file-model = "vm.myUploadFile" class="upload-input-file" />-->
-                                    <!--<button style="float:right;background:#23b7e5;border-radius:3px;" class="btn btn-default" ng-click="vm.uploadFile()"> <i class="fa fa-check-circle"></i> 上传 </button>-->
-                                <!--</div>-->
-                            <!--</div>-->
-
-                        <!--</div>-->
-                        <!--<input class="form-control" type="text" style="margin-bottom:10px;"-->
-                               <!--placeholder="{{'u.IMAGE' | translate}}" ng-model="vm.user.image" ng-disabled="vm.isDetail" >-->
-
-                        <!--<div class="img-preview">-->
-                            <!--<img ng-src="{{vm.user.image}}" alt="">-->
-                        <!--</div>-->
-
-
-                    <!--</div>-->
-                    <!--<span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>-->
-                <!--</div>-->
-
-
-
-
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
                 <div class="form-group" >
+                    <label class="col-sm-1 control-label m-l-lg font-bold">积分券面值</label>
 
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="每张面值" ng-model="vm.user.pointsPerCoupon" ng-disabled="vm.isDetail"  required>
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                    <div  class="line line-dashed b-b line-lg"></div>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">积分券总数</label>
+
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="总张数" ng-model="vm.user.couponTotalNum" ng-disabled="vm.isDetail"  required>
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+
+                    <div  class="line line-dashed b-b line-lg"></div>
                     <label class="col-sm-1 control-label m-l-lg font-bold">描述</label>
 
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="名称" ng-model="vm.user.description" ng-disabled="vm.isDetail"  required>
+                               placeholder="描述" ng-model="vm.user.description" ng-disabled="vm.isDetail"  required>
                     </div>
 
                 </div>

@@ -127,10 +127,9 @@
         function addItem() {
             var myid = vm.userInfo.id;
 
-            console.log(vm.user.description);
+            // console.log(vm.user.description);
 
-
-
+            vm.user.couponRemainNum = vm.user.couponTotalNum;
             var refReq = vm.reqPath  + '/' + vm.subPath;
             // if(vm.isAdmin){
             //     refReq += '?tenant='+vm.selTenant;

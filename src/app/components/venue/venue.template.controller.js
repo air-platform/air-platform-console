@@ -35,15 +35,58 @@
         vm.reqPath =  constdata.api.tenant.jetPath;
         // vm.reqPath2 = constdata.api.tenant.jetPath;
         vm.isAdmin = false;
-        // if(vm.userInfo.role != 'tenant'){
-        //     vm.reqPath = constdata.api.admin.platPath;
-        //     vm.reqPath2 = constdata.api.tenant.jetPath;
-        //     vm.isAdmin = true;
-        // }
+        vm.publishColor = {
+          true:"bg-success",
+          false:"bg-danger"
+        };
+
+        vm.publishType={
+            true:'已上线',
+            false:'已下线'
+        };
+        vm.OperApp = OperApp;
+        function OperApp(index, item) {
+            if(index === 'publish'){
+
+                NetworkService.post(vm.reqPath + '/' + vm.subPath  +'/'+ item.id + '/publish',null,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    toastr.error(vm.authError);
+                });
+
+            }else if(index === "unpublish"){
+                NetworkService.post(vm.reqPath + '/' + vm.subPath  +'/'+ item.id + '/unpublish',null,function (response) {
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    vm.authError = response.statusText + '(' + response.status + ')';
+                    toastr.error(vm.authError);
+                });
+            }else{
+                console.log('error ops:'+index);
+            }
+
+            //$state.go('app.applicationedit');
+        };
         function getDatas() {
 
             NetworkService.get(vm.reqPath + '/' + vm.subPath,{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
+                vm.displayedCollection = [].concat(vm.items);
+                if(vm.displayedCollection) {
+                    for (var i = 0; i < vm.displayedCollection.length; i++) {
+                        if (vm.displayedCollection[i].published === true) {
+                            vm.displayedCollection[i].isPublishEnable = false;
+                            vm.displayedCollection[i].isUnPublishEnable = true;
+                        } else {
+                            vm.displayedCollection[i].isPublishEnable = true;
+                            vm.displayedCollection[i].isUnPublishEnable = false;
+                        }
+                    }
+                }
+                console.log(vm.displayedCollection);
                 updatePagination(response.data);
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
@@ -85,7 +128,7 @@
             $rootScope.backPre();
         }
 
-        vm.displayedCollection = [].concat(vm.items);
+
 
 
         // 分页 Start
@@ -188,7 +231,7 @@
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
-        }
+        };
 
 
 
