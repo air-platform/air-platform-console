@@ -50,11 +50,11 @@
 
             <label style="margin-left:-50px;" class="col-sm-2 control-label  font-bold">状态</label>
             <div class="col-sm-3" style="margin-left:-10px;" >
-                <select   style="width: 100%;" class="form-control font-thin" ng-model="selItem.status" ng-options="s.value as s.title for s in orderStatus"></select>
+                <select   style="width: 70%;" class="form-control font-thin" ng-model="selItem.status" ng-options="s.value as s.title for s in orderStatus"></select>
             </div>
 
-            <label class="col-sm-2 control-label  font-bold" style="margin-left:-50px;">价格</label>
-            <div class="col-sm-2">
+            <label class="col-sm-2 control-label  font-bold" style="margin-left:-90px;">价格</label>
+            <div class="col-sm-3">
                 <input class="form-control" type="number"
                        placeholder="价格" ng-model="selItem.amount"  required>
             </div>
