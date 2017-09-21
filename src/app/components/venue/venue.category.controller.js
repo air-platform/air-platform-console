@@ -34,30 +34,41 @@
         vm.userInfo = StorageService.get('iot.hnair.cloud.information');
         vm.reqPath =  constdata.api.tenant.jetPath;
 
+        function getInfos() {
+            NetworkService.get(vm.reqPath + '/' + 'venue-infos',{page:vm.pageCurrent},function (response){
+                vm.venueInfos = response.data.content;
+            },function (response){
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
+            });
+        }
+
         function getDatas() {
 
+            getInfos();
             NetworkService.get(vm.reqPath + '/' + vm.subPath,{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
-
+                vm.displayedCollection = [].concat(vm.items);
                 updatePagination(response.data);
+
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
             });
         }
 
 
+
         function goAddItem() {
             $state.go('app.editvenuecategory',{});
-        };
+        }
 
         function goEditItem(item) {
             $state.go('app.editvenuecategory',{username:item.id, args:{type:'edit'}});
-        };
+        }
 
         function goDetail(item) {
             $state.go('app.editvenuecategory',{username:item.id, args:{type:'detail'}});
 
-        };
+        }
 
         function resetPassword(item) {
 
@@ -74,14 +85,11 @@
                 toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
             });
 
-        };
+        }
         function backAction() {
             // $state.go('app.tenant');
             $rootScope.backPre();
         }
-
-        vm.displayedCollection = [].concat(vm.items);
-
 
         // 分页 Start
         vm.preAction = function () {

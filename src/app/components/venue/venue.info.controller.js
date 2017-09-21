@@ -40,30 +40,46 @@
         //     vm.reqPath2 = constdata.api.tenant.jetPath;
         //     vm.isAdmin = true;
         // }
-        function getDatas() {
 
-            NetworkService.get(vm.reqPath + '/' + vm.subPath,{page:vm.pageCurrent},function (response) {
-                vm.items = response.data.content;
-
-                updatePagination(response.data);
+        function getTemplates() {
+            NetworkService.get(vm.reqPath+'/'+"venue-templates",{page:vm.pageCurrent},function (response) {
+                vm.venueTemplates = response.data.content;
+                // console.log(response.data);
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
             });
         }
+        function getDatas() {
+
+            getTemplates();
+            NetworkService.get(vm.reqPath + '/' + vm.subPath,{page:vm.pageCurrent},function (response) {
+                vm.items = response.data.content;
+
+                vm.displayedCollection = [].concat(vm.items);
+
+                console.log(vm.displayedCollection);
+                updatePagination(response.data);
+            },function (response) {
+                toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
+            });
+
+        }
+
+
 
 
         function goAddItem() {
             $state.go('app.editvenueinfo',{});
-        };
+        }
 
         function goEditItem(item) {
             $state.go('app.editvenueinfo',{username:item.id, args:{type:'edit'}});
-        };
+        }
 
         function goDetail(item) {
             $state.go('app.editvenueinfo',{username:item.id, args:{type:'detail'}});
 
-        };
+        }
 
         function resetPassword(item) {
 
@@ -80,13 +96,11 @@
                 toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
             });
 
-        };
+        }
         function backAction() {
             // $state.go('app.tenant');
             $rootScope.backPre();
         }
-
-        vm.displayedCollection = [].concat(vm.items);
 
 
         // 分页 Start
@@ -104,8 +118,10 @@
             getDatas();
         };
         vm.pageCurrentState = function (page) {
-            if (Number(page) == vm.pageCurrent)
+            if (Number(page) == vm.pageCurrent){
                 return true;
+            }
+
             return false;
         };
 
@@ -148,6 +164,7 @@
         }
 
         getDatas();
+        // getTemplates();
 
 
         //Model
@@ -189,7 +206,7 @@
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
-        }
+        };
 
 
 

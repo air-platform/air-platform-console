@@ -124,7 +124,7 @@
                 title:'',
                 link:'',
                 myUploadFile:''
-            })
+            });
         }
 
         vm.removeClientManager = function(item) {
@@ -146,6 +146,7 @@
                     vm.clientManagersArr = vm.user.items;
 
                 }
+                setUEContent(vm.user.htmlContent);
                 $rootScope.userNamePlacedTop = vm.user.nickName;
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
@@ -157,6 +158,7 @@
         function addItem() {
             var myid = vm.userInfo.id;
             vm.user.content = getMarkDownAction().markdown;
+            vm.user.htmlContent = getUEContent();
             if(vm.clientManagersArr.length > 0) {
                 vm.user.items =  vm.clientManagersArr;
             }
@@ -173,19 +175,6 @@
                 toastr.error(i18n.t('u.OPERATE_FAILED') + vm.authError);
             });
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -213,11 +202,10 @@
         function editItem() {
             var myid = vm.userInfo.id;
             vm.user.content = getMarkDownAction().markdown;
+            vm.user.htmlContent = getUEContent();
             if(vm.clientManagersArr.length > 0) {
                 vm.user.items =  vm.clientManagersArr;
             }
-
-
 
             NetworkService.put(vm.reqPath + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
@@ -246,9 +234,8 @@
 
         if (!vm.isAdd){
             vm.getTenantItem();
-        }else{
-
         }
+
 
         function back() {
             // history.back();

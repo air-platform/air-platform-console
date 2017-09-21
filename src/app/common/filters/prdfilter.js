@@ -17,7 +17,7 @@
     function prdFilter() {
     	return function(input,label) {
             var out = [];
-            console.log(input,label);
+            // console.log(input,label);
             if(label == 'none'){
                 out = input;
             }else{

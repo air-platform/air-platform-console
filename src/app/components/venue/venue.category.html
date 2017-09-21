@@ -48,9 +48,11 @@
 
                     </td>
 
-                    <td ng-click="vm.goDetail(item)"> {{item.description}}</td>
+                    <td ng-click="vm.goDetail(item)">{{item.description}}</td>
 
-                    <td ng-click="vm.goDetail(item)">{{item.venueInfo.name}}</td>
+                    <td ng-click="vm.goDetail(item)">
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="item.venueInfo" ng-options="i.id as i.name for i in vm.venueInfos" ng-disabled=true ></select>
+                    </td>
 
                     <td>
                         <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goDetail(item)"><i class="fa fa-eye"></i>{{'u.DETAIL'|T}}</button>

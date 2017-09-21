@@ -128,8 +128,8 @@
             NetworkService.get(vm.reqPath + '/' + vm.subPath + '/'+ username,null,function (response) {
                 vm.user = response.data;
 
-                vm.user.venueTemplate = vm.user.venueTemplate.id;
-                console.log(vm.user.venueTemplate);
+                // vm.user.venueTemplate = vm.user.venueTemplate.id;
+                console.log(vm.user);
 
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';

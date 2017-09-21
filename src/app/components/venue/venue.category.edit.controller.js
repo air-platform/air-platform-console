@@ -93,12 +93,13 @@
 
         function getCategoryDatas() {
 
+
             console.log(username);
             NetworkService.get(vm.reqPath  + '/'+vm.subPath+'/'+username,null,function (response) {
                 vm.categories = response.data;
                 // vm.venueCategoryProductsArr = vm.categories.venueCategoryProducts;
                 // console.log(vm.categories);
-                vm.categories.venueInfo = vm.categories.venueInfo.id;
+                // vm.categories.venueInfo = vm.categories.venueInfo.id;
 
                 if(vm.categories.venueCategoryProducts.length>0){
 
@@ -109,7 +110,7 @@
                             });
 
                         });
-                        console.log(vm.venueCategoryProductsArr)
+                        console.log(vm.venueCategoryProductsArr);
 
                 }
                 // console.log(vm.categories.venueInfo);
@@ -120,6 +121,9 @@
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
             });
         }
+
+        getVenueInfoDatas();
+        getProductsDatas();
 
         if(!vm.isAdd){
             getCategoryDatas();
@@ -151,7 +155,7 @@
             vm.venueCategoryProductsArr.push({
                 product:'',
                 type:''
-            })
+            });
         }
 
         vm.removeCategoryProduct = function(item) {
@@ -163,23 +167,18 @@
         function getVenueInfoDatas() {
 
             NetworkService.get(constdata.api.tenant.jetPath + '/venue-infos',{page:vm.pageCurrent},function (response) {
-                vm.infos = response.data.content;
+                vm.venueInfos = response.data.content;
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
             });
         }
 
-        // if(vm.isAdmin) {
-        getVenueInfoDatas();
-
-        // }
 
         function getProductsDatas() {
 
-
-            NetworkService.get(constdata.api.admin.platPath  + '/product/summaries',{page:vm.pageCurrent,pageSize:200},function (response) {
+            NetworkService.get(constdata.api.admin.platPath  + '/product/summaries',{page:vm.pageCurrent,pageSize:2000},function (response) {
                 vm.allProduct = response.data;
-                console.log(vm.allProduct);
+                // console.log(vm.allProduct);
             },function (response) {
                 toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
             });
@@ -211,8 +210,9 @@
         }
 
         function editItem() {
-            var myid = vm.userInfo.id;
+            // var myid = vm.userInfo.id;
 
+            console.log(vm.categories);
             NetworkService.put(vm.reqPath   + '/' + vm.subPath + '/'+ username,vm.categories,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();

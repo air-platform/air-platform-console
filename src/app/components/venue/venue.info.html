@@ -30,6 +30,7 @@
                     <th class="text-center">{{'u.NAME' | T}}</th>
                     <th class="text-center">会场图片</th>
                     <th class="text-center">描述</th>
+                    <th class="text-center">背景颜色</th>
                     <th class="text-center">会场模板</th>
                     <th class="text-center">操作</th>
 
@@ -50,7 +51,13 @@
 
                     <td ng-click="vm.goDetail(item)"> {{item.description}}</td>
 
-                    <td ng-click="vm.goDetail(item)">{{item.venueTemplate.name}}</td>
+                    <td ng-click="vm.goDetail(item)">
+                        <color>{{item.backgroundColor}}</color>
+                    </td>
+
+                    <td ng-click="vm.goDetail(item)">
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="item.venueTemplate" ng-options="t.id as t.name for t in vm.venueTemplates" ng-disabled=true ></select>
+                    </td>
 
                     <td>
                         <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goDetail(item)"><i class="fa fa-eye"></i>{{'u.DETAIL'|T}}</button>
