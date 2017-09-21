@@ -11,9 +11,9 @@
             return function(input) {
                 var out = '';
                 if(input=='admin') {
-                    out = i18n.t('profile.ADMIN')
+                    out = i18n.t('profile.ADMIN');
                 } else if(input=='tenant') {
-                    out = i18n.t('profile.TENANT')
+                    out = i18n.t('profile.TENANT');
                 }
                 return out;
             }
@@ -46,6 +46,7 @@
         vm.addUser.role='tenant';
         vm.subPath = 'venue-templates';
         vm.myUploadFile = {};
+        vm.edt = new Date();
         vm.userType = [
             {
                 title:'管理员',
@@ -81,13 +82,20 @@
         // vm.reqPath =  constdata.api.tenant.fleetPath;
         vm.reqPath = constdata.api.tenant.jetPath;
         vm.isAdmin = false;
-        // if(vm.userInfo.role != 'tenant'){
-        //     vm.reqPath = constdata.api.admin.platPath;
-        //     vm.reqPath2 = constdata.api.tenant.jetPath;
-        //     vm.isAdmin = true;
-        // }
 
 
+        function padStr(i) {
+            return (i < 10) ? "0" + i : "" + i;
+        }
+        function dateToString(temp) {
+            var dateStr = padStr(temp.getFullYear()) + '-' +
+                padStr(1 + temp.getMonth()) + '-' +
+                padStr(temp.getDate()) + ' ' +
+                padStr(23) + ':' +
+                padStr(59) + ":" +
+                padStr(59);
+            return dateStr;
+        }
         vm.uploadFile = function (){
             vm.showSpinner = true;
             console.log(vm.myUploadFile);
@@ -112,9 +120,9 @@
 
             NetworkService.get(vm.reqPath + '/' + vm.subPath + '/'+ username,null,function (response) {
                 vm.user = response.data;
-                if(vm.isAdmin){
-                    vm.selTenant = vm.user.vendor.id;
-                }
+                var date = vm.user.couponExpiredDate.substr(0,10);
+                vm.edt   =   new Date(date);
+                console.log(vm.edt);
                 $rootScope.userNamePlacedTop = vm.user.nickName;
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
@@ -127,13 +135,12 @@
         function addItem() {
             var myid = vm.userInfo.id;
 
-            // console.log(vm.user.description);
 
             vm.user.couponRemainNum = vm.user.couponTotalNum;
+            vm.user.couponExpiredDate = dateToString(vm.edt);
+
             var refReq = vm.reqPath  + '/' + vm.subPath;
-            // if(vm.isAdmin){
-            //     refReq += '?tenant='+vm.selTenant;
-            // }
+
             NetworkService.post(refReq,vm.user,function (response) {
                 //NetworkService.post(vm.reqPath + '/' + vm.subPath,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
@@ -149,8 +156,10 @@
         function editItem() {
             var myid = vm.userInfo.id;
 
-            console.log(vm.user.description);
+            // console.log(vm.user.description);
+            vm.user.couponExpiredDate = dateToString(vm.edt);
 
+            console.log(vm.user.couponExpiredDate);
             NetworkService.put(vm.reqPath + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
                 vm.backAction();
@@ -187,6 +196,24 @@
             vm.backAction();
         }
 
+        vm.open = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            vm.opened = true;
+        };
+        vm.clear = function () {
+
+            vm.edt = null;
+
+        };
+        vm.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1,
+            class: 'datepicker'
+        };
+        vm.initDate = new Date('2017-1-20');
+        vm.format = 'yyyy-MM-dd';
 
 
 
