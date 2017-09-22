@@ -142,15 +142,21 @@
                 <div class="form-group">
                     <div  class="line line-dashed b-b line-lg"></div>
                     <label class="col-sm-1 control-label  m-l-lg font-bold">原价</label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <input class="form-control" type="number"
                                placeholder="原价" ng-model="vm.user.originalPrice" ng-disabled="vm.isDetail"  required>
                     </div>
 
                     <label class="col-sm-1 control-label  m-l-lg font-bold">优惠价</label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <input class="form-control" type="number"
                                placeholder="优惠价" ng-model="vm.user.specialPrice" ng-disabled="vm.isDetail" >
+                    </div>
+
+                    <label class="col-sm-1 control-label  font-bold">{{'u.PRICEUNIT' | translate}}</label>
+                    <div class="col-sm-1">
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.currencyUnit" ng-options="u.value as u.title for u in vm.priceType" ng-disabled="vm.isDetail" ></select>
+
                     </div>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>

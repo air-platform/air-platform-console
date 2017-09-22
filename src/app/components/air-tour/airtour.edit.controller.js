@@ -519,6 +519,7 @@
             console.log(username);
             NetworkService.get(vm.reqPath  +'/' + vm.subPath + '/'+ username,null,function (response) {
                 vm.user = response.data;
+                console.log(vm.user);
                 vm.user.aircraftItemsAdd = [];
                 vm.user.clientManagersArr = [];
 
@@ -622,7 +623,7 @@
         function addItem() {
             var myid = vm.userInfo.id;
             vm.user.tourShow = getMarkDownAction().markdown;
-            console.log(vm.user.tourShow);
+            // console.log(vm.user);
 
             if(vm.user.salesPackages && vm.user.salesPackages.length > 0) {
                 for (var i = 0; i < vm.user.salesPackages.length; i++) {

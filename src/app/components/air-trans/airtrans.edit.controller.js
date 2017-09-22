@@ -608,9 +608,7 @@
                     vm.user.clientManagers  += ',' + vm.user.clientManagersArr[i].name + ':'+vm.user.clientManagersArr[i].email;
                 }
             }
-            console.log(vm.user.clientManagers);
-
-
+            // console.log(vm.user);
 
             NetworkService.put(vm.reqPath + '/' + vm.subPath + '/'+ username,vm.user,function (response) {
                 toastr.success(i18n.t('u.OPERATE_SUC'));
