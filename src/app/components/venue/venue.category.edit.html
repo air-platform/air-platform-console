@@ -75,10 +75,6 @@
                             <img ng-src="{{vm.categories.picture}}" alt="">
                         </div>
 
-
-
-
-
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
@@ -113,16 +109,12 @@
                             </div>
                         </div>
 
-
-
-
                         <div class="col-sm-2">
                             <button ng-if="!vm.isDetail" ng-click="vm.removeCategoryProduct(item)" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-minus"></i>{{'product.DELETE' | translate}}</button>
 
                         </div>
 
                     </div>
-
 
                     <div class="col-sm-4" style="margin-left:30px;">
                         <button ng-if="!vm.isDetail" ng-click="vm.addNewCategoryProduct()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-plus"></i>{{'u.ADD' | translate}}</button>
@@ -138,9 +130,7 @@
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">描述</label>
                     <div class="col-sm-4">
-
-                        <input class="form-control font-thin" ng-model="vm.categories.description" rows="4" placeholder="描述" style="resize: none;" ng-disabled="vm.isDetail">
-
+                        <textarea class="form-control font-thin" ng-model="vm.user.description" rows="4" placeholder="{{'u.DESCRIPTION' | translate}}" style="resize: none;" ng-disabled="vm.isDetail"></textarea>
                     </div>
 
                 </div>

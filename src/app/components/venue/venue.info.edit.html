@@ -73,8 +73,7 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">描述</label>
 
                     <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="描述" ng-model="vm.user.description" ng-disabled="vm.isDetail"  required>
+                        <textarea class="form-control font-thin" ng-model="vm.user.description" rows="4" placeholder="{{'u.DESCRIPTION' | translate}}" style="resize: none;" ng-disabled="vm.isDetail"></textarea>
                     </div>
 
                 </div>
