@@ -17,8 +17,6 @@
 
         <!-- tasks -->
 
-
-
         <div class="panel panel-default m-l m-r m-t">
 
             <div class="panel-heading">
@@ -26,11 +24,6 @@
             </div>
             <br/>
             <form name="form" class="form-horizontal form-validation" role="form">
-
-
-
-
-
 
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.ORDERNO' | translate}}</label>
@@ -41,10 +34,6 @@
                     <span ng-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i><i style="font-style:normal; color:#999;">{{'tenant.USERNAMETIP' | translate}}</i></span>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-
 
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.STATUS' | translate}}</label>
@@ -59,9 +48,6 @@
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
-
-
-
 
                 <div  ng-if="vm.user.paymentFailureCause" class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">付款失败原因</label>
@@ -82,7 +68,6 @@
                 </div>
                 <div  ng-if="vm.user.refundReason" class="line line-dashed b-b line-lg"></div>
 
-
                 <div  ng-if="vm.user.refundFailureCause" class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">退款失败原因</label>
                     <div class="col-sm-6">
@@ -91,8 +76,6 @@
                     </div>
                 </div>
                 <div  ng-if="vm.user.refundFailureCause" class="line line-dashed b-b line-lg"></div>
-
-
 
                 <div  ng-if="vm.user.cancelReason" class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">取消原因</label>
@@ -103,8 +86,6 @@
                 </div>
                 <div  ng-if="vm.user.cancelReason" class="line line-dashed b-b line-lg"></div>
 
-
-
                 <div  ng-if="vm.user.closedReason" class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">关闭原因</label>
                     <div class="col-sm-6">
@@ -113,8 +94,6 @@
                     </div>
                 </div>
                 <div  ng-if="vm.user.closedReason" class="line line-dashed b-b line-lg"></div>
-
-
 
                 <div class="form-group" ng-if="vm.user.payment">
 
@@ -154,17 +133,13 @@
                                placeholder="退款流水号" ng-model="vm.user.refund.tradeNo" ng-disabled="vm.isDetail"  required>
                     </div>
 
-
                     <label class="col-sm-1 control-label  font-bold">退款方式</label>
                     <div class="col-sm-1">
                         <!--<input class="form-control" type="text"
                                placeholder="退款方式" ng-model="vm.user.refund.method" ng-disabled="vm.isDetail"  required>
                     -->
                         <label style="position: relative;top:6px;" class="label bg-main" ng-bind="vm.paymentMethodMap[vm.user.refund.method]" class="label"></label>
-
-
                     </div>
-
 
                     <label class="col-sm-1 control-label  font-bold">退款金额</label>
                     <div class="col-sm-2">
@@ -177,14 +152,6 @@
 
                 <div  ng-if="vm.user.refund" class="line line-dashed b-b line-lg"></div>
 
-
-
-
-
-
-
-
-
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CONTACTNAME' | translate}}</label>
                     <div class="col-sm-4">
@@ -194,7 +161,6 @@
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
-
 
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CONTACTPHONE' | translate}}</label>
@@ -206,8 +172,6 @@
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
 
-
-
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CONTACTMAIL' | translate}}</label>
                     <div class="col-sm-4">
@@ -217,26 +181,6 @@
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
-
-
-<!--
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FLEETNAME' | translate}}</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="{{'u.FLEETNAME' | translate}}" ng-model="vm.user.fleetCandidates[0].fleet.name" ng-disabled=true >
-                    </div>
-                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
--->
-
-
-
-
-
-
 
                 <div  class="form-group">
                     <div style="display:block;" class="col-sm-6  m-l-lg font-bold">航程信息</div>
@@ -248,8 +192,6 @@
                         <input class="form-control" type="text"
                                placeholder="{{'u.DEPARTURE' | translate}}" ng-model="vm.user.departure.name" ng-disabled=true >
                     </div>
-
-
 
                     <label class="col-sm-1 control-label  font-bold">{{'u.ARRIVAL' | translate}}</label>
                     <div class="col-sm-2">
@@ -272,8 +214,6 @@
                     </div>
                 </div>
 
-
-
                 <div  class="line line-dashed b-b line-lg"></div>
 
                 <div  class="form-group">
@@ -293,59 +233,43 @@
                                    placeholder="降落停机坪" ng-model="vm.user.arrivalApron.name" ng-disabled=true >
                         </div>
 
-
                     </div>
 
                 <div  class="line line-dashed b-b line-lg"></div>
-
-
 
                 <div  class="form-group">
                     <div style="display:block;" class="col-sm-6  m-l-lg font-bold">选择机型信息</div>
                 </div>
+                <div class=" col-sm-10 col-lg-offset-1">
+                <table  class="table table-bordered table-striped table-hover bg-white text-center">
+                    <thead>
+                    <tr class="font-bold">
+                        <th class="text-center">名称</th>
+                        <th class="text-center">型号</th>
+                        <th class="text-center">状态</th>
+                        <th class="text-center">报价</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
+                    <tr ng-repeat="item in vm.user.aircraftCandidates">
 
+                        <td >{{item.aircraft.name}}</td>
+                        <td >{{item.aircraft.flightNo}}</td>
+                        <td>
+                            <select   ng-disabled=true style="width: 100%;" class="form-control font-thin" ng-model="item.status" ng-options="s.value as s.title for s in vm.orderStatus"></select>
+                        </td>
+                        <td>
+                            <input class="form-control" type="text"
+                             placeholder="报价" ng-model="item.offeredPrice" ng-disabled=true >
+                        </td>
 
-                <div class="form-group" ng-repeat="item in vm.user.aircraftCandidates">
-
-
-                    <label class="col-sm-1 m-l-lg control-label  font-bold">名称</label>
-                    <div class="col-sm-3">
-                        <input class="form-control" type="text"
-                               placeholder="名称" ng-model="item.aircraft.name" ng-disabled=true >
-                    </div>
-
-
-
-                    <label class="col-sm-1 control-label  font-bold">状态</label>
-                    <div class="col-sm-2">
-
-                        <select   ng-disabled=true style="width: 100%;" class="form-control font-thin" ng-model="item.status" ng-options="s.value as s.title for s in vm.orderStatus"></select>
-
-                    </div>
-                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
-
-
-
-                    <label class="col-sm-1 control-label  font-bold">报价</label>
-                    <div class="col-sm-2">
-                        <input class="form-control" type="text"
-                               placeholder="报价" ng-model="item.offeredPrice" ng-disabled=true >
-                    </div>
-
+                     </tr>
+                    </tbody>
+                 </table>
                 </div>
 
-
-
                 <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-
-
-
-
-
 
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.CTEATEIONDATE' | translate}}</label>
@@ -357,8 +281,6 @@
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
 
-
-
                 <div  ng-if="vm.user.paymentDate" class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.PAYMENTDATE' | translate}}</label>
                     <div class="col-sm-4">
@@ -369,9 +291,6 @@
                 </div>
                 <div  ng-if="vm.user.paymentDate" class="line line-dashed b-b line-lg"></div>
 
-
-
-
                 <div  ng-if="vm.user.refundedDate" class="form-group" >
                     <label class="col-sm-1 control-label m-l-lg font-bold">退款日期</label>
                     <div class="col-sm-4">
@@ -380,7 +299,6 @@
                     </div>
                 </div>
                 <div  ng-if="vm.user.refundedDate" class="line line-dashed b-b line-lg"></div>
-
 
                 <div  ng-if="vm.user.cancelledDate" class="form-group" >
                     <label class="col-sm-1 control-label m-l-lg font-bold">取消日期</label>
@@ -409,10 +327,6 @@
                 </div>
                 <div  ng-if="vm.user.deletedDate" class="line line-dashed b-b line-lg"></div>
 
-
-
-
-
                 <div ng-if="vm.user.finishedDate" class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.FINISHEDDATE' | translate}}</label>
                     <div class="col-sm-4">
@@ -422,8 +336,6 @@
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
                 <div  ng-if="vm.user.finishedDate" class="line line-dashed b-b line-lg"></div>
-
-
 
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.NOTE' | translate}}</label>
@@ -435,9 +347,6 @@
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
 
-
-
-
                 <div class="form-group">
                     <div class="col-sm-offset-1 col-sm-3">
                         <button ng-if="!vm.isDetail" class="btn btn-default btn-sm m-l-lg btn-addon bg-light" ng-click="vm.backAction()"> <i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}} </button>
@@ -446,11 +355,6 @@
 
                     </div>
                 </div>
-
-
-
-
-
 
             </form>
         </div>
