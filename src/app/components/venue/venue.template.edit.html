@@ -99,7 +99,7 @@
 
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="每张面值" ng-model="vm.user.pointsPerCoupon" ng-disabled="vm.isDetail"  required>
+                               placeholder="每张面值" ng-model="vm.user.pointsPerCoupon" ng-disabled="vm.isDetail||vm.user.published"  required>
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
 
@@ -109,7 +109,7 @@
 
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="总张数" ng-model="vm.user.couponTotalNum" ng-disabled="vm.isDetail"  required>
+                               placeholder="总张数" ng-model="vm.user.couponTotalNum" ng-disabled="vm.isDetail||vm.user.published"  required>
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
 
