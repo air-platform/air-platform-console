@@ -340,6 +340,16 @@
                   templateUrl: 'app/components/apron/apron.edit.html'
               })
 
+              .state('app.customlandingpoints',{
+                  url: prefix + '/customlandingpoints',
+                  templateUrl: 'app/components/customlandingpoints/custom-landing-points.html'
+              })
+              .state('app.editcustomlandingpoints',{
+                  url:prefix + '/editcustomlandingpoints/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/customlandingpoints/custom-landing-points.edit.html'
+              })
+
               .state('app.config', {
                   url: prefix + '/config',
                   templateUrl: 'app/components/config/config.html'

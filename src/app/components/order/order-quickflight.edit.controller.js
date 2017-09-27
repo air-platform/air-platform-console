@@ -52,6 +52,10 @@
             {
                 title:'未报价',
                 value:'candidate'
+            },
+            {
+                title:'已选中',
+                value:'selected'
             }
         ];
         vm.userType = [

@@ -38,28 +38,28 @@
         vm.userInfo = {};
         vm.subPath = 'airtransports';
 
+        //
+        // vm.approveStatus=[{
+        //     value:'pending',
+        //     title:'未审批'
+        // },{
+        //     value:'approved',
+        //     title:'审批通过'
+        // },{
+        //     value:'rejected',
+        //     title:'审批拒绝'
+        // }];
 
-        vm.approveStatus=[{
-            value:'pending',
-            title:'未审批'
-        },{
-            value:'approved',
-            title:'审批通过'
-        },{
-            value:'rejected',
-            title:'审批拒绝'
-        }];
-
-        vm.pubStatus = [
-            {
-                title:'已上线',
-                value: true
-            },
-            {
-                title:'已下线',
-                value: false
-            }
-        ];
+        // vm.pubStatus = [
+        //     {
+        //         title:'已上线',
+        //         value: true
+        //     },
+        //     {
+        //         title:'已下线',
+        //         value: false
+        //     }
+        // ];
 
         vm.labelColor = {
             true:'bg-success',

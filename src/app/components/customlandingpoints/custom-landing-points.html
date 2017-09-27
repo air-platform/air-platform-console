@@ -1,0 +1,67 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="CustomLandingPointsController as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+">
+    <!-- main -->
+    <div class="col">
+
+        <div class="m-l m-r m-t panel panel-default">
+            <table  st-table="vm.displayedCollection" st-safe-src="vm.items" class="table table-bordered table-striped table-hover bg-white text-center">
+                <thead>
+
+                <tr class="font-bold">
+                    <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
+                    <th class="text-center">{{'u.NAME' | T}}</th>
+                    <th class="text-center">审核状态</th>
+                    <th class="text-center">地址</th>
+                    <th class="text-center">图片</th>
+                    <th class="text-center">提交者</th>
+                </tr>
+
+                </thead>
+                <tbody class="">
+
+                <tr ng-repeat="item in vm.displayedCollection">
+                    <td ng-click="vm.goDetail(item)">{{item.name}}</td>
+
+                    <td ng-click="vm.goDetail(item)">
+                        <label ng-class="vm.approveColor[item.reviewStatus]" ng-bind="vm.approveStatus[item.reviewStatus]" class="label"></label>
+                    </td>
+                    <td ng-click="vm.goDetail(item)">{{item.address}}</td>
+
+                    <td ng-click="vm.goDetail(item)">图片</td>
+
+                    <td ng-click="vm.goDetail(item)">{{item.user.nickName}}</td>
+
+                    <td>
+                        <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goDetail(item)"><i class="fa fa-eye"></i>{{'u.DETAIL'|T}}</button>
+                        <!--<button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goEditItem(item)"><i class="fa fa-edit"></i>{{ 'u.EDIT' | T}}</button>-->
+                        <div class="btn-group ">
+                            <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-sliders"></i>  操作</button>
+                            <button type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+
+                            <ul class="dropdown-menu" style="overflow:visible; z-index:1010;width:100px;position:absolute;">
+                                <li ng-class="{disabled: item.reviewStatus!='pending'}" ng-click="vm.OperApp(1, item)" ><a><i class="fa fa-play m-r-sm"></i>通过</a></li>
+                                <!--<li ng-class="{disabled: item.reviewStatus!='pending'}" ng-click="vm.OperApp(2, item)" ><a><i class="fa fa-stop m-r-sm"></i>拒绝</a></li>-->
+                                <li ng-class="{disabled: item.reviewStatus!='pending'}" ng-click="vm.openInput('sm',item)" ><a><i class="fa fa-stop m-r-sm"></i>拒绝</a></li>
+                                <!--<li  ng-click="vm.openAlert('sm',item)" ><a><i class="fa fa-trash-o m-r-sm"></i> {{'u.DELETE' | T}}</a></li>-->
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div data-ng-include=" 'app/main/blocks/pageflip.html' " >
+        </div>
+        <!-- / tasks -->
+    </div>
+</div>
+<script type="text/ng-template" id="myModalContent.html">
+    <div ng-include="'app/components/core/modal.html'"></div>
+</script>
