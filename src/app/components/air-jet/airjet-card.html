@@ -35,7 +35,6 @@
                 <th class="text-center">{{'u.PRICE' | T}}</th>
                 <th class="text-center">{{'u.PRICEUNIT' | T}}</th>
                 <th class="text-center">置顶值</th>
-                <th class="text-center">操作</th>
 
             </tr>
 
@@ -55,7 +54,6 @@
 
                 <td ng-click="vm.goDetail(item)"> {{item.price }}</td>
                <td ng-click="vm.goDetail(item)">{{item.currencyUnit == 'rmb' ? ('人民币'):('美元')}}</td>
-
                 <td ng-click="vm.goDetail(item)">
                     <label class="label bg-main" ng-bind="item.rank"></label>
                 </td>
