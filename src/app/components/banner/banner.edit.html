@@ -64,7 +64,7 @@
 
 
 
-                <div  class="form-group" ng-if="vm.user.category!='none'">
+                <div  class="form-group" ng-if="vm.user.category!='none'&&vm.user.category!='popup_ads'">
                     <label class="col-sm-1 control-label m-l-lg font-bold">链接类别</label>
                     <div class="col-sm-4">
                         <!--<select ng-show="vm.user.category == 'none'" style="width: 100%;" class="form-control font-thin" ng-model="vm.user.linkCategory" ng-options="s.value as s.title for s in vm.linkCategoryTypeAll" ng-disabled="vm.isDetail" ></select>-->
@@ -73,10 +73,10 @@
                     </div>
                     <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
                 </div>
-                <div  class="form-group" ng-if="vm.user.category=='none'">
+                <div  class="form-group" ng-if="vm.user.category=='none'||vm.user.category=='popup_ads'">
                     <label class="col-sm-1 control-label m-l-lg font-bold">链接类别</label>
                     <div class="col-sm-4">
-                        <select ng-show="vm.user.category == 'none'" style="width: 100%;" class="form-control font-thin" ng-model="vm.user.linkCategory" ng-options="s.value as s.title for s in vm.linkCategoryTypeAll" ng-disabled="vm.isDetail" ></select>
+                        <select ng-show="vm.user.category == 'none'||vm.user.category=='popup_ads'" style="width: 100%;" class="form-control font-thin" ng-model="vm.user.linkCategory" ng-options="s.value as s.title for s in vm.linkCategoryTypeAll" ng-disabled="vm.isDetail" ></select>
                         <!--<select ng-show="vm.user.category !== 'none'" style="width: 100%;" class="form-control font-thin" ng-model="vm.user.linkCategory" ng-options="s.value as s.title for s in vm.linkCategoryType" ng-disabled="vm.isDetail" ></select>-->
 
                     </div>

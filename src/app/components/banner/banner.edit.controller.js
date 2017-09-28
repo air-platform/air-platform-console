@@ -95,6 +95,10 @@
             {
                 title:'首页',
                 value:'none'
+            },
+            {
+                title:'引导页',
+                value:'popup_ads'
             }
         ];
 
