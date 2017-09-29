@@ -539,9 +539,15 @@
                   params : {args : {}},
                   templateUrl: 'app/components/order/order-airjet.edit.html'
               })
-
-
-
+              .state('app.activitymessages',{
+                  url: prefix + '/activitymessages',
+                  templateUrl: 'app/components/message/activity-message.html'
+              })
+              .state('app.editactivitymessages',{
+                  url: prefix + '/editactivitymessages/edit/:username',
+                  params : {args : {}},
+                  templateUrl: 'app/components/message/activity-message.edit.html'
+              })
               .state('app.orderflight', {
                   url: prefix + '/orderflight',
                   templateUrl: 'app/components/order/order-flight.html'

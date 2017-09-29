@@ -1,0 +1,155 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="ActivityMessagesEditController as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+">
+
+    <!-- main -->
+    <div class="col">
+        <span us-spinner spinner-on="vm.showSpinner"></span>
+
+        <div class="panel panel-default m-l m-r m-t">
+
+            <div class="panel-heading">
+                <h3 class="panel-title">{{'product.INFORMATION' | translate}}</h3>
+            </div>
+            <br/>
+            <form name="form" class="form-horizontal form-validation" role="form">
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">主题</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="主题" ng-model="vm.user.title" ng-disabled="vm.isDetail"  required>
+                    </div>
+                    <span ng-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i><i style="font-style:normal; color:#999;">{{'tenant.USERNAMETIP' | translate}}</i></span>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
+
+                <div  ng-if="vm.isAdmin && !vm.isEdit" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">商户</label>
+                    <div class="col-sm-4">
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.vendor.id" ng-options="s.id as s.nickName for s in vm.tenants" ng-disabled="vm.isDetail"></select>
+
+                    </div>
+
+                </div>
+                <div  ng-if="vm.isAdmin && !vm.isEdit" class="line line-dashed b-b line-lg"></div>
+
+                <div  ng-if="vm.isDetail" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">审批状态</label>
+                    <div class="col-sm-4">
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.reviewStatus" ng-options="s.value as s.title for s in vm.approveStatus" ng-disabled="vm.isDetail || !vm.isAdmin" ></select>
+
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+                <div  ng-if="vm.isDetail"  class="line line-dashed b-b line-lg"></div>
+
+                <div  ng-if="vm.user.reviewStatus=='rejected' && vm.isDetail" class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">审批拒绝原因</label>
+                    <div class="col-sm-4">
+                        <textarea class="form-control font-thin" ng-model="vm.user.rejectedReason" rows="4" placeholder="审批拒绝原因" style="resize: none;" ng-disabled="vm.isDetail || !vm.isAdmin"></textarea>
+                    </div>
+
+                </div>
+
+                <div  ng-if="vm.user.reviewStatus=='rejected' && vm.isDetail" class="line line-dashed b-b line-lg"></div>
+
+
+                <div class="form-group" ng-if="vm.isDetail">
+
+                    <label class="col-sm-1 control-label m-l-lg font-bold">发布状态</label>
+                    <div class="col-sm-2">
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.published" ng-options="opt.value as opt.title for opt in vm.pubStatus" ng-disabled="vm.isDetail" ></select>
+                    </div>
+
+                </div>
+
+                <div  ng-if="vm.isDetail"  class="line line-dashed b-b line-lg"></div>
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">标题</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="标题" ng-model="vm.user.headings" ng-disabled="vm.isDetail" >
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+
+                <div  ng-if="vm.isDetail" class="line line-dashed b-b line-lg"></div>
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">缩略图</label>
+                    <div class="col-sm-6">
+                        <div class="beauty-upload">
+
+                            <div class="lcell span5" style="margin:5px 0px;">
+                                <div class="upload">
+                                    <input type="button" class="btn btn-default upload-btn" value="浏览文件" />
+                                    <label  ng-bind="vm.myUploadFile.name" class="label bg-finished"></label>
+                                    <input type="file" file-model = "vm.myUploadFile" class="upload-input-file" />
+                                    <button style="float:right;background:#23b7e5;border-radius:3px;" class="btn btn-default" ng-click="vm.uploadFile()"> <i class="fa fa-check-circle"></i> 上传 </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <input class="form-control" type="text" style="margin-bottom:10px;"
+                               placeholder="{{'u.IMAGE' | translate}}" ng-model="vm.user.thumbnails" ng-disabled="vm.isDetail" >
+                        <div class="img-preview">
+                            <img ng-src="{{vm.user.thumbnails}}" alt="">
+                        </div>
+
+                    </div>
+                    <span  ng-if="!vm.isDetail" style="color:red;font-size:20px;">*</span>
+                </div>
+
+                <div  class="line line-dashed b-b line-lg"></div>
+
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">描述</label>
+                </div>
+
+                <div class="form-group" >
+
+                    <div class="panel" style="background-color: #f2f2f2; width:80%; padding:0px 0px 0px 0px; margin:0px 0px 0px 100px;">
+
+                            <div>
+                                <script id="richtexteditor" type="text/plain"  ></script>
+                            </div>
+
+                    </div>
+                </div>
+
+
+                    <script type="text/javascript" charset="utf-8" src="js_components/ueditor/ueditor.config.js"></script>
+                    <script type="text/javascript" charset="utf-8" src="js_components/ueditor/ueditor.all.min.js"> </script>
+                    <script type="text/javascript" charset="utf-8" src="js_components/ueditor/lang/zh-cn/zh-cn.js"></script>
+                    <script type="text/javascript">
+                        var ue = UE.getEditor('richtexteditor');
+
+                        function getUEContent(){
+                            return ue.getContent();
+                        }
+                        function setUEContent(cont){
+                            //return ue.setContent(cont);
+                            ue.ready(function() {
+                                ue.setContent(cont);
+                            });
+                        }
+                    </script>
+
+                <div  class="line line-dashed b-b line-lg"></div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-3">
+                        <button ng-if="!vm.isDetail" class="btn btn-default btn-sm m-l-lg btn-addon bg-light" ng-click="vm.backAction()"> <i class="fa fa-ban text-danger"></i>{{'product.CANCEL' | translate}} </button>
+                        <button ng-if="!vm.isDetail" class="btn btn-sm btn-info btn-addon" type="submit" ng-click="vm.submitAction()" ng-disabled='form.$invalid'> <i class="fa fa-check-circle"></i>{{'product.CONFIRM' | T}} </button>
+                        <button ng-if="vm.isDetail" ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-arrow-left"></i>{{'product.BACK' | translate}}</button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
