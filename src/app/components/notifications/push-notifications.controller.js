@@ -58,7 +58,7 @@
         function getDatas() {
             NetworkService.get(vm.reqPath + '/' + vm.subPath,{page:vm.pageCurrent},function (response) {
                 vm.items = response.data.content;
-                console.log(response.data);
+                console.log(response.data.content);
 
                 if(vm.items.length > 0){
 

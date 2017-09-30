@@ -264,6 +264,38 @@
         getDatas();
 
 
+        vm.openMessageS = function (size,model) {
+
+            // console.log(vm.tipsInfo);
+            vm.tipsInfo = {
+                title:'创建个人消息推送',
+                content:'请填写推送消息内容'
+            };
+            var modalInstance = $uibModal.open({
+                templateUrl: 'ModalMessage.html',
+                size: size,
+                controller:'ModalMessageSendCtrl',
+                resolve: {
+                    tipsInfo: function () {
+                        return vm.tipsInfo;
+                    }
+                }
+            });
+            modalInstance.result.then(function (param) {
+                // var messages=param;
+                vm.Notifications = {message:param, type:'plain_text'};
+
+                NetworkService.post('/api/v2/platform/pushnotifications?user='+ model.id,vm.Notifications,function (response) {
+
+                    toastr.success(i18n.t('u.OPERATE_SUC'));
+                    getDatas();
+                },function (response) {
+                    toastr.error(i18n.t('u.OPERATE_FAILED') + response.status);
+                });
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        }
         //Model
 
         vm.tipsInfo = delmodaltip;

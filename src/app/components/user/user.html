@@ -85,6 +85,7 @@
 
                             <li  ng-click="vm.goPoint('sm',item)" ><a><i class="fa fa-commenting-o m-r-sm"></i>修改积分</a></li>
                             <li  ng-click="vm.OperApp(5, item)" ><a><i class="fa fa-play m-r-sm"></i>重置密码</a></li>
+                            <li  ng-click="vm.openMessageS('md',item)" ><a><i class="fa fa-play m-r-sm"></i>推送消息</a></li>
 
                             <li  ng-click="vm.openAlert('sm',item)" ><a><i class="fa fa-trash-o m-r-sm"></i> {{'u.DELETE' | T}}</a></li>
 
@@ -116,6 +117,10 @@
 </div>
 <script type="text/ng-template" id="myModalContent.html">
     <div ng-include="'app/components/core/modal.html'"></div>
+</script>
+
+<script type="text/ng-template" id="ModalMessage.html">
+    <div ng-include="'app/components/core/modal-message.html'"></div>
 </script>
 
 <script type="text/ng-template" id="myModalContentPrdPoint.html">

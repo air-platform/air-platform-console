@@ -359,3 +359,32 @@
     }
 
 })();
+
+
+(function () {
+    'use strict';
+
+    angular
+        .module('iot')
+        .controller('ModalMessageSendCtrl', ModalMessageSendCtrl);
+
+    /** @ngInject */
+    function ModalMessageSendCtrl($uibModalInstance,$scope,tipsInfo,i18n) {
+        /* jshint validthis: true */
+        // var vm = this;
+
+        $scope.tipsInfo = tipsInfo;
+        $scope.messageSend = '';
+        $scope.ok = function () {
+            $scope.messageSend = document.getElementById('message_content').value;
+
+            $uibModalInstance.close($scope.messageSend);
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss(i18n.t('u.CANCEL'));
+        };
+
+    }
+
+})();

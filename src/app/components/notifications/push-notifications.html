@@ -20,6 +20,7 @@
                     <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
                     <th class="text-center">消息内容</th>
                     <!--<th class="text-center">类别</th>-->
+                    <th class="text-center">接收者</th>
                     <th class="text-center">推送状态</th>
                     <th class="text-center">创建时间</th>
 
@@ -35,7 +36,7 @@
 
                     <td ng-click="vm.goDetail(item)">{{item.message}}</td>
 
-                    <!--<td ng-click="vm.goDetail(item)">{{item.type}}</td>-->
+                    <td ng-click="vm.goDetail(item)">{{item.owner.nickName}}</td>
                     <!--<td ng-click="vm.goDetail(item)">{{item.status}}</td>-->
                     <td ng-click="vm.goDetail(item)">
                         <!--

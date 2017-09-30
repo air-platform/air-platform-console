@@ -29,10 +29,6 @@
             <form name="form" class="form-horizontal form-validation" role="form">
 
 
-
-
-
-
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">消息内容</label>
                     <div class="col-sm-4">
@@ -40,25 +36,12 @@
                                placeholder="消息内容" ng-model="vm.items.message" ng-disabled="vm.isDetail"  required>
                     </div>
                     <span ng-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i></span>
-                    <div ng-hide="vm.isAdd">
 
                     <div  class="line line-dashed b-b line-lg"></div>
-                    <!--<label class="col-sm-1 control-label m-l-lg font-bold">链接</label>-->
-                    <!--<div class="col-sm-4">-->
-                        <!--<input class="form-control" type="text"-->
-                               <!--placeholder="链接" ng-model="vm.items.richTextLink" ng-disabled="vm.isDetail"  required>-->
-                    <!--</div>-->
-                    <!--<span ng-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i></span>-->
 
-                    <!--<div  class="line line-dashed b-b line-lg"></div>-->
-                    <!--<label class="col-sm-1 control-label m-l-lg font-bold">类别</label>-->
-                    <!--<div class="col-sm-4">-->
-                        <!--<input class="form-control" type="text"-->
-                               <!--placeholder="类别" ng-model="vm.items.type" ng-disabled="vm.isDetail"  required>-->
-                    <!--</div>-->
-                    <!--<span ng-if="!vm.isDetail"><i style="color:red;font-size:20px;">* </i></span>-->
+                    <div ng-hide="vm.isAdd">
 
-                    <!--<div  class="line line-dashed b-b line-lg"></div>-->
+
                     <label class="col-sm-1 control-label m-l-lg font-bold" >状态</label>
                     <div class="col-sm-4">
 

@@ -115,18 +115,15 @@
 
                 NetworkService.get(vm.reqPath + '/' + vm.subPath+ '/' + username,null,function (response) {
                     vm.items = response.data;
-                    // if(vm.items){
-                    //     vm.Notifications.message = vm.items.message;
-                    //     vm.Notifications.type = vm.items.type;
-                    //
-                    // }
-                    console.log(vm.items);
+                    console.log(vm.items.owner.id);
+                    vm.user = vm.items.owner.id;
                 },function (response) {
                     toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status + ' ' + response.statusText);
                 });
 
         }
         getProductsDatas();
+
 
         function addItem() {
 
